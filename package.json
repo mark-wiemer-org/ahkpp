@@ -1,0 +1,45 @@
+{
+	"name": "vscode-autohotkey",
+	"displayName": "AutoHotkey",
+	"description": "AutoHotkey language support for VS Code",
+	"version": "0.0.1",
+	"publisher": "slevesque",
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"categories": [
+		"Languages"
+	],
+	"license": "SEE LICENSE IN LICENSE.md",
+	"icon": "icon.png",
+	"bugs": {
+		"url": "https://github.com/stef-levesque/vscode-autohotkey/issues"
+	},
+	"homepage": "https://github.com/stef-levesque/vscode-autohotkey/blob/master/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stef-levesque/vscode-autohotkey.git"
+	},
+	"galleryBanner": {
+		"color": "#5c2d91",
+		"theme": "dark"
+	},
+	"keywords": [
+		"vscode",
+		"autohotkey",
+		"ahk"
+	],
+	"contributes": {
+		"languages": [{
+			"id": "ahk",
+			"aliases": ["AutoHotkey", "autohotkey", "ahk"],
+			"extensions": [".ahk"],
+			"configuration": "./ahk.configuration.json"
+		}],
+		"grammars": [{
+			"language": "ahk",
+			"scopeName": "source.ahk",
+			"path": "./syntaxes/ahk.tmLanguage"
+		}]
+	}
+}
