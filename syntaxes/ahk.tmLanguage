@@ -118,6 +118,12 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>\b(?!MsgBox)([\w]+)(?=\()</string>
+			<key>name</key>
+			<string>support.function.ahk</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>^MsgBox</string>
 			<key>name</key>
 			<string>support.function.msgbox.ahk</string>
