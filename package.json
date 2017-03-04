@@ -8,7 +8,8 @@
 		"vscode": "^0.10.1"
 	},
 	"categories": [
-		"Languages"
+		"Languages",
+		"Snippets"
 	],
 	"license": "SEE LICENSE IN LICENSE.md",
 	"icon": "icon.png",
@@ -40,6 +41,10 @@
 			"language": "ahk",
 			"scopeName": "source.ahk",
 			"path": "./syntaxes/ahk.tmLanguage"
+		}],
+		"snippets": [{
+			"language": "ahk",
+			"path": "./snippets/ahk.json"
 		}]
 	}
 }
