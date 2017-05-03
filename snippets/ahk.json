@@ -1,0 +1,4115 @@
+{
+  ".source.ahk": {
+    "#AllowSameLineComments": {
+      "prefix": "#AllowSameLineComments",
+      "body": "#AllowSameLineComments"
+    },
+    "#ClipboardTimeout": {
+      "prefix": "#ClipboardTimeout",
+      "body": "#ClipboardTimeout, ${1:Milliseconds}"
+    },
+    "#CommentFlag": {
+      "prefix": "#CommentFlag",
+      "body": "#CommentFlag, ${1:NewString}"
+    },
+    "#ErrorStdOut": {
+      "prefix": "#ErrorStdOut",
+      "body": "#ErrorStdOut"
+    },
+    "#EscapeChar": {
+      "prefix": "#EscapeChar",
+      "body": "#EscapeChar, ${1:NewChar}"
+    },
+    "#HotkeyInterval": {
+      "prefix": "#HotkeyInterval",
+      "body": "#HotkeyInterval, ${1:Milliseconds}"
+    },
+    "#HotkeyModifierTimeout": {
+      "prefix": "#HotkeyModifierTimeout",
+      "body": "#HotkeyModifierTimeout, ${1:Milliseconds}"
+    },
+    "#Hotstring": {
+      "prefix": "#Hotstring",
+      "body": "#Hotstring, ${1:NewOptions}"
+    },
+    "#If": {
+      "prefix": "#If",
+      "body": "#If, ${1:[Expression]}"
+    },
+    "#IfTimeout": {
+      "prefix": "#IfTimeout",
+      "body": "#IfTimeout, ${1:Timeout}"
+    },
+    "#IfWinActive": {
+      "prefix": "#IfWinActive",
+      "body": "#IfWinActive, ${1:[ WinTitle}, ${2:WinText]}"
+    },
+    "#IfWinExist": {
+      "prefix": "#IfWinExist",
+      "body": "#IfWinExist, ${1:[ WinTitle}, ${2:WinText]}"
+    },
+    "#IfWinNotActive": {
+      "prefix": "#IfWinNotActive",
+      "body": "#IfWinNotActive, ${1:[ WinTitle}, ${2:WinText]}"
+    },
+    "#IfWinNotExist": {
+      "prefix": "#IfWinNotExist",
+      "body": "#IfWinNotExist, ${1:[ WinTitle}, ${2:WinText]}"
+    },
+    "#Include": {
+      "prefix": "#Include",
+      "body": "#Include, ${1:FileOrDirName}"
+    },
+    "#IncludeAgain": {
+      "prefix": "#IncludeAgain",
+      "body": "#IncludeAgain, ${1:FileOrDirName}"
+    },
+    "#InputLevel": {
+      "prefix": "#InputLevel",
+      "body": "#InputLevel, ${1:[Level]}"
+    },
+    "#InstallKeybdHook": {
+      "prefix": "#InstallKeybdHook",
+      "body": "#InstallKeybdHook"
+    },
+    "#InstallMouseHook": {
+      "prefix": "#InstallMouseHook",
+      "body": "#InstallMouseHook"
+    },
+    "#KeyHistory": {
+      "prefix": "#KeyHistory",
+      "body": "#KeyHistory, ${1:MaxEvents}"
+    },
+    "#LTrim": {
+      "prefix": "#LTrim",
+      "body": "#LTrim, ${1:On|Off}"
+    },
+    "#MaxHotkeysPerInterval": {
+      "prefix": "#MaxHotkeysPerInterval",
+      "body": "#MaxHotkeysPerInterval, ${1:Value}"
+    },
+    "#MaxMem": {
+      "prefix": "#MaxMem",
+      "body": "#MaxMem, ${1:Megabytes}"
+    },
+    "#MaxThreads": {
+      "prefix": "#MaxThreads",
+      "body": "#MaxThreads, ${1:Value}"
+    },
+    "#MaxThreadsBuffer": {
+      "prefix": "#MaxThreadsBuffer",
+      "body": "#MaxThreadsBuffer, ${1:On|Off}"
+    },
+    "#MaxThreadsPerHotkey": {
+      "prefix": "#MaxThreadsPerHotkey",
+      "body": "#MaxThreadsPerHotkey, ${1:Value}"
+    },
+    "#MenuMaskKey": {
+      "prefix": "#MenuMaskKey",
+      "body": "#MenuMaskKey, ${1:KeyName}"
+    },
+    "#NoEnv": {
+      "prefix": "#NoEnv",
+      "body": "#NoEnv"
+    },
+    "#NoTrayIcon": {
+      "prefix": "#NoTrayIcon",
+      "body": "#NoTrayIcon"
+    },
+    "#Persistent": {
+      "prefix": "#Persistent",
+      "body": "#Persistent"
+    },
+    "#SingleInstance": {
+      "prefix": "#SingleInstance",
+      "body": "#SingleInstance, ${1:[force|ignore|off]}"
+    },
+    "#UseHook": {
+      "prefix": "#UseHook",
+      "body": "#UseHook, ${1:[On|Off]}"
+    },
+    "#Warn": {
+      "prefix": "#Warn",
+      "body": "#Warn, ${1:[WarningType}, ${2:WarningMode]}"
+    },
+    "#WinActivateForce": {
+      "prefix": "#WinActivateForce",
+      "body": "#WinActivateForce"
+    },
+    "AutoTrim": {
+      "prefix": "AutoTrim",
+      "body": "AutoTrim, ${1:On|Off}"
+    },
+    "BlockInput": {
+      "prefix": "BlockInput",
+      "body": "BlockInput, ${1:On|Off|Send|Mouse|SendAndMouse|Default|MouseMove|MouseMoveOff}"
+    },
+    "Break": {
+      "prefix": "Break",
+      "body": "Break"
+    },
+    "Catch": {
+      "prefix": "Catch",
+      "body": "Catch, ${1:[OutputVar]}"
+    },
+    "Click": {
+      "prefix": "Click",
+      "body": "Click"
+    },
+    "ClipWait": {
+      "prefix": "ClipWait",
+      "body": "ClipWait, ${1:[ SecondsToWait}, ${2:1]}"
+    },
+    "Continue": {
+      "prefix": "Continue",
+      "body": "Continue"
+    },
+    "Control": {
+      "prefix": "Control",
+      "body": "Control, ${1:Cmd [}, ${2:Value}, ${3:Control}, ${4:WinTitle}, ${5:WinText}, ${6:ExcludeTitle}, ${7:ExcludeText]}"
+    },
+    "ControlClick": {
+      "prefix": "ControlClick",
+      "body": "ControlClick, ${1:[Control-or-Pos}, ${2:WinTitle}, ${3:WinText}, ${4:WhichButton}, ${5:ClickCount}, ${6:Options}, ${7:ExcludeTitle}, ${8:ExcludeText]}"
+    },
+    "ControlFocus": {
+      "prefix": "ControlFocus",
+      "body": "ControlFocus, ${1:[ Control}, ${2:WinTitle}, ${3:WinText}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "ControlGet": {
+      "prefix": "ControlGet",
+      "body": "ControlGet, ${1:OutputVar}, ${2:Cmd}, ${3:[Value}, ${4:Control}, ${5:WinTitle}, ${6:WinText}, ${7:ExcludeTitle}, ${8:ExcludeText}"
+    },
+    "ControlGetFocus": {
+      "prefix": "ControlGetFocus",
+      "body": "ControlGetFocus, ${1:OutputVar}, ${2:[WinTitle}, ${3:WinText}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "ControlGetPos": {
+      "prefix": "ControlGetPos",
+      "body": "ControlGetPos, ${1:[ X}, ${2:Y}, ${3:Width}, ${4:Height}, ${5:Control}, ${6:WinTitle}, ${7:WinText}, ${8:ExcludeTitle}"
+    },
+    "ControlGetText": {
+      "prefix": "ControlGetText",
+      "body": "ControlGetText, ${1:OutputVar [}, ${2:Control}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+    },
+    "ControlMove": {
+      "prefix": "ControlMove",
+      "body": "ControlMove, ${1:Control}, ${2:X}, ${3:Y}, ${4:Width}, ${5:Height [}, ${6:WinTitle}, ${7:WinText}, ${8:ExcludeTitle}"
+    },
+    "ControlSend": {
+      "prefix": "ControlSend",
+      "body": "ControlSend, ${1:[ Control}, ${2:Keys}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+    },
+    "ControlSendRaw": {
+      "prefix": "ControlSendRaw",
+      "body": "ControlSendRaw, ${1:[ Control}, ${2:Keys}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+    },
+    "ControlSetText": {
+      "prefix": "ControlSetText",
+      "body": "ControlSetText, ${1:Control}, ${2:NewText [}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+    },
+    "CoordMode": {
+      "prefix": "CoordMode",
+      "body": "CoordMode, ${1:ToolTip|Pixel|Mouse [}, ${2:Screen|Relative]}"
+    },
+    "Critical": {
+      "prefix": "Critical",
+      "body": "Critical, ${1:[ Off]}"
+    },
+    "DetectHiddenText": {
+      "prefix": "DetectHiddenText",
+      "body": "DetectHiddenText, ${1:On|Off}"
+    },
+    "DetectHiddenWindows": {
+      "prefix": "DetectHiddenWindows",
+      "body": "DetectHiddenWindows, ${1:On|Off}"
+    },
+    "Drive": {
+      "prefix": "Drive",
+      "body": "Drive, ${1:Sub-command [}, ${2:Drive}, ${3:Value]}"
+    },
+    "DriveGet": {
+      "prefix": "DriveGet",
+      "body": "DriveGet, ${1:OutputVar}, ${2:Cmd [}, ${3:Value]}"
+    },
+    "DriveSpaceFree": {
+      "prefix": "DriveSpaceFree",
+      "body": "DriveSpaceFree, ${1:OutputVar}, ${2:C:\\}"
+    },
+    "Edit": {
+      "prefix": "Edit",
+      "body": "Edit"
+    },
+    "Else": {
+      "prefix": "Else",
+      "body": "Else"
+    },
+    "EnvAdd": {
+      "prefix": "EnvAdd",
+      "body": "EnvAdd, ${1:Var}, ${2:Value [}, ${3:TimeUnits]}"
+    },
+    "EnvDiv": {
+      "prefix": "EnvDiv",
+      "body": "EnvDiv, ${1:Var}, ${2:Value}"
+    },
+    "EnvGet": {
+      "prefix": "EnvGet",
+      "body": "EnvGet, ${1:OutputVar}, ${2:EnvVarName}"
+    },
+    "EnvMult": {
+      "prefix": "EnvMult",
+      "body": "EnvMult, ${1:Var}, ${2:Value}"
+    },
+    "EnvSet": {
+      "prefix": "EnvSet",
+      "body": "EnvSet, ${1:EnvVar}, ${2:Value}"
+    },
+    "EnvSub": {
+      "prefix": "EnvSub",
+      "body": "EnvSub, ${1:Var}, ${2:Value [}, ${3:TimeUnits]}"
+    },
+    "EnvUpdate": {
+      "prefix": "EnvUpdate",
+      "body": "EnvUpdate"
+    },
+    "Exit": {
+      "prefix": "Exit",
+      "body": "Exit, ${1:[ ExitCode]}"
+    },
+    "ExitApp": {
+      "prefix": "ExitApp",
+      "body": "ExitApp, ${1:[ ExitCode]}"
+    },
+    "FileAppend": {
+      "prefix": "FileAppend",
+      "body": "FileAppend, ${1:[ Text}, ${2:Filename]}"
+    },
+    "FileCopy": {
+      "prefix": "FileCopy",
+      "body": "FileCopy, ${1:Source}, ${2:Dest [}, ${3:Flag (1 = overwrite)]}"
+    },
+    "FileCopyDir": {
+      "prefix": "FileCopyDir",
+      "body": "FileCopyDir, ${1:Source}, ${2:Dest [}, ${3:Flag]}"
+    },
+    "FileCreateDir": {
+      "prefix": "FileCreateDir",
+      "body": "FileCreateDir, ${1:Path}"
+    },
+    "FileCreateShortcut": {
+      "prefix": "FileCreateShortcut",
+      "body": "FileCreateShortcut, ${1:Target}, ${2:C:\\My Shortcut.lnk [}, ${3:WorkingDir}, ${4:Args}, ${5:Description}, ${6:IconFile}, ${7:ShortcutKey}, ${8:IconNumber}"
+    },
+    "FileDelete": {
+      "prefix": "FileDelete",
+      "body": "FileDelete, ${1:FilePattern}"
+    },
+    "FileEncoding": {
+      "prefix": "FileEncoding",
+      "body": "FileEncoding, ${1:[Encoding]}"
+    },
+    "FileGetAttrib": {
+      "prefix": "FileGetAttrib",
+      "body": "FileGetAttrib, ${1:OutputVar(RASHNDOCT) [}, ${2:Filename]}"
+    },
+    "FileGetShortcut": {
+      "prefix": "FileGetShortcut",
+      "body": "FileGetShortcut, ${1:LinkFile [}, ${2:OutTarget}, ${3:OutDir}, ${4:OutArgs}, ${5:OutDescription}, ${6:OutIcon}, ${7:OutIconNum}, ${8:OutRunState]}"
+    },
+    "FileGetSize": {
+      "prefix": "FileGetSize",
+      "body": "FileGetSize, ${1:OutputVar [}, ${2:Filename}, ${3:Units]}"
+    },
+    "FileGetTime": {
+      "prefix": "FileGetTime",
+      "body": "FileGetTime, ${1:OutputVar [}, ${2:Filename}, ${3:WhichTime (M}, ${4:C}, ${5:or A -- default is M)]}"
+    },
+    "FileGetVersion": {
+      "prefix": "FileGetVersion",
+      "body": "FileGetVersion, ${1:OutputVar [}, ${2:Filename]}"
+    },
+    "FileInstall": {
+      "prefix": "FileInstall",
+      "body": "FileInstall, ${1:Source}, ${2:Dest [}, ${3:Flag (1 = overwrite)]}"
+    },
+    "FileMove": {
+      "prefix": "FileMove",
+      "body": "FileMove, ${1:Source}, ${2:Dest [}, ${3:Flag (1 = overwrite)]}"
+    },
+    "FileMoveDir": {
+      "prefix": "FileMoveDir",
+      "body": "FileMoveDir, ${1:Source}, ${2:Dest [}, ${3:Flag (2 = overwrite)]}"
+    },
+    "FileRead": {
+      "prefix": "FileRead",
+      "body": "FileRead, ${1:OutputVar}, ${2:Filename}"
+    },
+    "FileReadLine": {
+      "prefix": "FileReadLine",
+      "body": "FileReadLine, ${1:OutputVar}, ${2:Filename}, ${3:LineNum}"
+    },
+    "FileRecycle": {
+      "prefix": "FileRecycle",
+      "body": "FileRecycle, ${1:FilePattern}"
+    },
+    "FileRecycleEmpty": {
+      "prefix": "FileRecycleEmpty",
+      "body": "FileRecycleEmpty, ${1:[ C:\\]}"
+    },
+    "FileRemoveDir": {
+      "prefix": "FileRemoveDir",
+      "body": "FileRemoveDir, ${1:Path [}, ${2:Recurse? (1 = yes)]}"
+    },
+    "FileSelectFile": {
+      "prefix": "FileSelectFile",
+      "body": "FileSelectFile, ${1:OutputVar [}, ${2:Options}, ${3:RootDir[\\DefaultFilename]}, ${4:Prompt}, ${5:Filter]}"
+    },
+    "FileSelectFolder": {
+      "prefix": "FileSelectFolder",
+      "body": "FileSelectFolder, ${1:OutputVar [}, ${2:*StartingFolder}, ${3:Options}, ${4:Prompt]}"
+    },
+    "FileSetAttrib": {
+      "prefix": "FileSetAttrib",
+      "body": "FileSetAttrib, ${1:Attributes(+-^RASHNOT) [}, ${2:FilePattern}, ${3:OperateOnFolders?}, ${4:Recurse?]}"
+    },
+    "FileSetTime": {
+      "prefix": "FileSetTime",
+      "body": "FileSetTime, ${1:[ YYYYMMDDHH24MISS}, ${2:FilePattern}, ${3:WhichTime (M|C|A)}, ${4:OperateOnFolders?}, ${5:Recurse?]}"
+    },
+    "Finally": {
+      "prefix": "Finally",
+      "body": "Finally ${1:Statement}"
+    },
+    "For": {
+      "prefix": "For",
+      "body": "For ${1:Key}, ${2:[Value]} in ${3:Expression}"
+    },
+    "FormatTime": {
+      "prefix": "FormatTime",
+      "body": "FormatTime, ${1:OutputVar [}, ${2:YYYYMMDDHH24MISS}, ${3:Format]}"
+    },
+    "GetKeyState": {
+      "prefix": "GetKeyState",
+      "body": "GetKeyState, ${1:OutputVar}, ${2:WhichKey [}, ${3:Mode (P|T)]}"
+    },
+    "Gosub": {
+      "prefix": "Gosub",
+      "body": "Gosub, ${1:Label}"
+    },
+    "Goto": {
+      "prefix": "Goto",
+      "body": "Goto, ${1:Label}"
+    },
+    "GroupActivate": {
+      "prefix": "GroupActivate",
+      "body": "GroupActivate, ${1:GroupName [}, ${2:R]}"
+    },
+    "GroupAdd": {
+      "prefix": "GroupAdd",
+      "body": "GroupAdd, ${1:GroupName}, ${2:WinTitle [}, ${3:WinText}, ${4:Label}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+    },
+    "GroupClose": {
+      "prefix": "GroupClose",
+      "body": "GroupClose, ${1:GroupName [}, ${2:A|R]}"
+    },
+    "GroupDeactivate": {
+      "prefix": "GroupDeactivate",
+      "body": "GroupDeactivate, ${1:GroupName [}, ${2:R]}"
+    },
+    "Gui": {
+      "prefix": "Gui",
+      "body": "Gui, ${1:sub-command [}, ${2:Param2}, ${3:Param3}, ${4:Param4]}"
+    },
+    "GuiControl": {
+      "prefix": "GuiControl",
+      "body": "GuiControl, ${1:Sub-command}, ${2:ControlID [}, ${3:Param3]}"
+    },
+    "GuiControlGet": {
+      "prefix": "GuiControlGet",
+      "body": "GuiControlGet, ${1:OutputVar [}, ${2:Sub-command}, ${3:ControlID}, ${4:Param4]}"
+    },
+    "Hotkey": {
+      "prefix": "Hotkey",
+      "body": "Hotkey, ${1:KeyName [}, ${2:Label}, ${3:Options]}"
+    },
+    "If": {
+      "prefix": "If",
+      "body": "If (${1:expression})"
+    },
+    "If Between": {
+      "prefix": "If Between",
+      "body": "If ${1:Var} between ${2:Low} and ${3:High}"
+    },
+    "If Contains": {
+      "prefix": "If Contains",
+      "body": "If ${1:Var} [not] contains ${2:Value, Value2}"
+    },
+    "If In": {
+      "prefix": "If In",
+      "body": "If ${1:Var} in ${2:Value, Value2}"
+    },
+    "If Is": {
+      "prefix": "If Is",
+      "body": "If ${1:Var} is ${2:integer|float|number|digit|xdigit|alpha|upper|lower|alnum|space|time}"
+    },
+    "IfEqual": {
+      "prefix": "IfEqual",
+      "body": "IfEqual, ${1:Var}, ${2:Value}"
+    },
+    "IfExist": {
+      "prefix": "IfExist",
+      "body": "IfExist, ${1:File|Dir|Pattern}"
+    },
+    "IfGreater": {
+      "prefix": "IfGreater",
+      "body": "IfGreater, ${1:Var}, ${2:Value}"
+    },
+    "IfGreaterOrEqual": {
+      "prefix": "IfGreaterOrEqual",
+      "body": "IfGreaterOrEqual, ${1:Var}, ${2:Value}"
+    },
+    "IfInString": {
+      "prefix": "IfInString",
+      "body": "IfInString, ${1:Var}, ${2:SearchString}"
+    },
+    "IfLess": {
+      "prefix": "IfLess",
+      "body": "IfLess, ${1:Var}, ${2:Value}"
+    },
+    "IfLessOrEqual": {
+      "prefix": "IfLessOrEqual",
+      "body": "IfLessOrEqual, ${1:Var}, ${2:Value}"
+    },
+    "IfMsgBox": {
+      "prefix": "IfMsgBox",
+      "body": "IfMsgBox, ${1:Yes|No|OK|Cancel|Abort|Ignore|Retry|Timeout}"
+    },
+    "IfNotEqual": {
+      "prefix": "IfNotEqual",
+      "body": "IfNotEqual, ${1:Var}, ${2:Value}"
+    },
+    "IfNotExist": {
+      "prefix": "IfNotExist",
+      "body": "IfNotExist, ${1:File|Dir|Pattern}"
+    },
+    "IfNotInString": {
+      "prefix": "IfNotInString",
+      "body": "IfNotInString, ${1:Var}, ${2:SearchString}"
+    },
+    "IfWinActive": {
+      "prefix": "IfWinActive",
+      "body": "IfWinActive, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "IfWinExist": {
+      "prefix": "IfWinExist",
+      "body": "IfWinExist, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "IfWinNotActive": {
+      "prefix": "IfWinNotActive",
+      "body": "IfWinNotActive, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "IfWinNotExist": {
+      "prefix": "IfWinNotExist",
+      "body": "IfWinNotExist, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "ImageSearch": {
+      "prefix": "ImageSearch",
+      "body": "ImageSearch, ${1:OutputVarX}, ${2:OutputVarY}, ${3:X1}, ${4:Y1}, ${5:X2}, ${6:Y2}, ${7:ImageFile}"
+    },
+    "IniDelete": {
+      "prefix": "IniDelete",
+      "body": "IniDelete, ${1:Filename}, ${2:Section [}, ${3:Key]}"
+    },
+    "IniRead": {
+      "prefix": "IniRead",
+      "body": "IniRead, ${1:OutputVar}, ${2:Filename}, ${3:Section}, ${4:Key [}, ${5:Default]}"
+    },
+    "IniWrite": {
+      "prefix": "IniWrite",
+      "body": "IniWrite, ${1:Value}, ${2:Filename}, ${3:Section}, ${4:Key}"
+    },
+    "Input": {
+      "prefix": "Input",
+      "body": "Input, ${1:[ OutputVar}, ${2:Options}, ${3:EndKeys}, ${4:MatchList]}"
+    },
+    "InputBox": {
+      "prefix": "InputBox",
+      "body": "InputBox, ${1:OutputVar [}, ${2:Title}, ${3:Prompt}, ${4:HIDE}, ${5:Width}, ${6:Height}, ${7:X}, ${8:Y}, ${9:Font}, ${10:Timeout}"
+    },
+    "KeyHistory": {
+      "prefix": "KeyHistory",
+      "body": "KeyHistory"
+    },
+    "KeyWait": {
+      "prefix": "KeyWait",
+      "body": "KeyWait, ${1:KeyName [}, ${2:Options]}"
+    },
+    "ListHotkeys": {
+      "prefix": "ListHotkeys",
+      "body": "ListHotkeys"
+    },
+    "ListLines": {
+      "prefix": "ListLines",
+      "body": "ListLines, ${1:[ On|Off]}"
+    },
+    "ListVars": {
+      "prefix": "ListVars",
+      "body": "ListVars"
+    },
+    "Loop": {
+      "prefix": "Loop",
+      "body": "Loop, ${1:[ Count]}"
+    },
+    "Loop <file>": {
+      "prefix": "Loop <file>",
+      "body": "Loop, ${1:FilePattern [}, ${2:IncludeFolders?}, ${3:Recurse?]}"
+    },
+    "Loop parse": {
+      "prefix": "Loop parse",
+      "body": "Loop, ${1:Parse}, ${2:InputVar [}, ${3:Delimiters|CSV}, ${4:OmitChars]}"
+    },
+    "Loop read": {
+      "prefix": "Loop read",
+      "body": "Loop, ${1:Read}, ${2:InputFile [}, ${3:OutputFile]}"
+    },
+    "Loop reg": {
+      "prefix": "Loop reg",
+      "body": "Loop, ${1:HKLM|HKU|HKCU|HKCR|HKCC [}, ${2:Key}, ${3:IncludeSubkeys?}, ${4:Recurse?]}"
+    },
+    "Menu": {
+      "prefix": "Menu",
+      "body": "Menu, ${1:MenuName}, ${2:Cmd [}, ${3:P3}, ${4:P4}, ${5:P5]}"
+    },
+    "MouseClick": {
+      "prefix": "MouseClick",
+      "body": "MouseClick, ${1:WhichButton [}, ${2:X}, ${3:Y}, ${4:ClickCount}, ${5:Speed}, ${6:D|U}, ${7:R]}"
+    },
+    "MouseClickDrag": {
+      "prefix": "MouseClickDrag",
+      "body": "MouseClickDrag, ${1:WhichButton}, ${2:X1}, ${3:Y1}, ${4:X2}, ${5:Y2 [}, ${6:Speed}, ${7:R]}"
+    },
+    "MouseGetPos": {
+      "prefix": "MouseGetPos",
+      "body": "MouseGetPos, ${1:[ OutputVarX}, ${2:OutputVarY}, ${3:OutputVarWin}, ${4:OutputVarControl}, ${5:1|2|3]}"
+    },
+    "MouseMove": {
+      "prefix": "MouseMove",
+      "body": "MouseMove, ${1:X}, ${2:Y [}, ${3:Speed}, ${4:R]}"
+    },
+    "MsgBox": {
+      "prefix": "MsgBox",
+      "body": "MsgBox, ${1:[ Options}, ${2:Title}, ${3:Text}, ${4:Timeout]}"
+    },
+    "OnExit": {
+      "prefix": "OnExit",
+      "body": "OnExit, ${1:[ Label]}"
+    },
+    "OutputDebug": {
+      "prefix": "OutputDebug",
+      "body": "OutputDebug${1:, Text}${2: % }$3"
+    },
+    "Pause": {
+      "prefix": "Pause",
+      "body": "Pause, ${1:[ On|Off|Toggle}, ${2:OperateOnUnderlyingThread?]}"
+    },
+    "PixelGetColor": {
+      "prefix": "PixelGetColor",
+      "body": "PixelGetColor, ${1:OutputVar}, ${2:X}, ${3:Y [}, ${4:Alt|Slow|RGB]}"
+    },
+    "PixelSearch": {
+      "prefix": "PixelSearch",
+      "body": "PixelSearch, ${1:OutputVarX}, ${2:OutputVarY}, ${3:X1}, ${4:Y1}, ${5:X2}, ${6:Y2}, ${7:ColorID [}, ${8:Variation}"
+    },
+    "PostMessage": {
+      "prefix": "PostMessage",
+      "body": "PostMessage, ${1:Msg}, ${2:[wParam}, ${3:lParam}, ${4:Control}, ${5:WinTitle}, ${6:WinText}, ${7:ExcludeTitle}, ${8:ExcludeText]}"
+    },
+    "Process": {
+      "prefix": "Process",
+      "body": "Process, ${1:Cmd}, ${2:PID-or-Name [}, ${3:Param3]}"
+    },
+    "Progress": {
+      "prefix": "Progress",
+      "body": "Progress, ${1:Param1 [}, ${2:SubText}, ${3:MainText}, ${4:WinTitle}, ${5:FontName]}"
+    },
+    "Random": {
+      "prefix": "Random",
+      "body": "Random, ${1:OutputVar [}, ${2:Min}, ${3:Max]}"
+    },
+    "RegDelete": {
+      "prefix": "RegDelete",
+      "body": "RegDelete, ${1:HKLM|HKU|HKCU|HKCR|HKCC}, ${2:SubKey [}, ${3:ValueName]}"
+    },
+    "RegRead": {
+      "prefix": "RegRead",
+      "body": "RegRead, ${1:OutputVar}, ${2:HKLM|HKU|HKCU|HKCR|HKCC}, ${3:SubKey [}, ${4:ValueName]}"
+    },
+    "RegWrite": {
+      "prefix": "RegWrite",
+      "body": "RegWrite, ${1:REG_SZ|REG_EXPAND_SZ|REG_MULTI_SZ|REG_DWORD|REG_BINARY}, ${2:HKLM|HKU|HKCU|HKCR|HKCC}, ${3:SubKey [}, ${4:ValueName}, ${5:Value]}"
+    },
+    "Reload": {
+      "prefix": "Reload",
+      "body": "Reload"
+    },
+    "Return": {
+      "prefix": "Return",
+      "body": "Return"
+    },
+    "Run": {
+      "prefix": "Run",
+      "body": "Run, ${1:Target [}, ${2:WorkingDir}, ${3:Max|Min|Hide|UseErrorLevel}, ${4:OutputVarPID]}"
+    },
+    "RunAs": {
+      "prefix": "RunAs",
+      "body": "RunAs, ${1:[ User}, ${2:Password}, ${3:Domain]}"
+    },
+    "RunWait": {
+      "prefix": "RunWait",
+      "body": "RunWait, ${1:Target [}, ${2:WorkingDir}, ${3:Max|Min|Hide|UseErrorLevel}, ${4:OutputVarPID]}"
+    },
+    "Send": {
+      "prefix": "Send",
+      "body": "Send, ${1:Keys}"
+    },
+    "SendEvent": {
+      "prefix": "SendEvent",
+      "body": "SendEvent, ${1:Keys}"
+    },
+    "SendInput": {
+      "prefix": "SendInput",
+      "body": "SendInput, ${1:Keys}"
+    },
+    "SendLevel": {
+      "prefix": "SendLevel",
+      "body": "SendLevel, ${1:Level}"
+    },
+    "SendMessage": {
+      "prefix": "SendMessage",
+      "body": "SendMessage, ${1:Msg}, ${2:[wParam}, ${3:lParam}, ${4:Control}, ${5:WinTitle}, ${6:WinText}, ${7:ExcludeTitle}, ${8:ExcludeText}, ${9:Timeout]}"
+    },
+    "SendMode": {
+      "prefix": "SendMode",
+      "body": "SendMode, ${1:Event|Play|Input|InputThenPlay}"
+    },
+    "SendPlay": {
+      "prefix": "SendPlay",
+      "body": "SendPlay, ${1:Keys}"
+    },
+    "SendRaw": {
+      "prefix": "SendRaw",
+      "body": "SendRaw, ${1:Keys}"
+    },
+    "SetBatchLines": {
+      "prefix": "SetBatchLines",
+      "body": "SetBatchLines, ${1:-1 | 20ms | LineCount}"
+    },
+    "SetCapsLockState": {
+      "prefix": "SetCapsLockState",
+      "body": "SetCapsLockState, ${1:On|Off|AlwaysOn|AlwaysOff}"
+    },
+    "SetControlDelay": {
+      "prefix": "SetControlDelay",
+      "body": "SetControlDelay, ${1:Delay}"
+    },
+    "SetDefaultMouseSpeed": {
+      "prefix": "SetDefaultMouseSpeed",
+      "body": "SetDefaultMouseSpeed, ${1:Speed}"
+    },
+    "SetEnv": {
+      "prefix": "SetEnv",
+      "body": "SetEnv, ${1:Var}, ${2:Value}"
+    },
+    "SetFormat": {
+      "prefix": "SetFormat",
+      "body": "SetFormat, ${1:float|integer}, ${2:TotalWidth.DecimalPlaces|hex|d}"
+    },
+    "SetKeyDelay": {
+      "prefix": "SetKeyDelay",
+      "body": "SetKeyDelay, ${1:[ Delay}, ${2:PressDuration]}"
+    },
+    "SetMouseDelay": {
+      "prefix": "SetMouseDelay",
+      "body": "SetMouseDelay, ${1:Delay}"
+    },
+    "SetNumLockState": {
+      "prefix": "SetNumLockState",
+      "body": "SetNumLockState, ${1:On|Off|AlwaysOn|AlwaysOff}"
+    },
+    "SetScrollLockState": {
+      "prefix": "SetScrollLockState",
+      "body": "SetScrollLockState, ${1:On|Off|AlwaysOn|AlwaysOff}"
+    },
+    "SetStoreCapslockMode": {
+      "prefix": "SetStoreCapslockMode",
+      "body": "SetStoreCapslockMode, ${1:On|Off}"
+    },
+    "SetRegView": {
+      "prefix": "SetRegView",
+      "body": "SetRegView, ${1:RegView}"
+    },
+    "SetTimer": {
+      "prefix": "SetTimer",
+      "body": "SetTimer, ${1:Label [}, ${2:Period|On|Off]}"
+    },
+    "SetTitleMatchMode": {
+      "prefix": "SetTitleMatchMode",
+      "body": "SetTitleMatchMode, ${1:Fast|Slow|RegEx|1|2|3}"
+    },
+    "SetWinDelay": {
+      "prefix": "SetWinDelay",
+      "body": "SetWinDelay, ${1:Delay}"
+    },
+    "SetWorkingDir": {
+      "prefix": "SetWorkingDir",
+      "body": "SetWorkingDir, ${1:DirName}"
+    },
+    "Shutdown": {
+      "prefix": "Shutdown",
+      "body": "Shutdown, ${1:Code}"
+    },
+    "Sleep": {
+      "prefix": "Sleep",
+      "body": "Sleep, ${1:Delay}"
+    },
+    "Sort": {
+      "prefix": "Sort",
+      "body": "Sort, ${1:VarName [}, ${2:Options]}"
+    },
+    "SoundBeep": {
+      "prefix": "SoundBeep",
+      "body": "SoundBeep, ${1:[ Frequency}, ${2:Duration]}"
+    },
+    "SoundGet": {
+      "prefix": "SoundGet",
+      "body": "SoundGet, ${1:OutputVar [}, ${2:ComponentType}, ${3:ControlType}, ${4:DeviceNumber]}"
+    },
+    "SoundGetWaveVolume": {
+      "prefix": "SoundGetWaveVolume",
+      "body": "SoundGetWaveVolume, ${1:OutputVar [}, ${2:DeviceNumber]}"
+    },
+    "SoundPlay": {
+      "prefix": "SoundPlay",
+      "body": "SoundPlay, ${1:Filename [}, ${2:wait]}"
+    },
+    "SoundSet": {
+      "prefix": "SoundSet",
+      "body": "SoundSet, ${1:NewSetting}, ${2:[ComponentType}, ${3:ControlType}, ${4:DeviceNumber]}"
+    },
+    "SoundSetWaveVolume": {
+      "prefix": "SoundSetWaveVolume",
+      "body": "SoundSetWaveVolume, ${1:Percent [}, ${2:DeviceNumber]}"
+    },
+    "SplashImage": {
+      "prefix": "SplashImage",
+      "body": "SplashImage, ${1:[ ImageFile}, ${2:Options}, ${3:SubText}, ${4:MainText}, ${5:WinTitle}, ${6:FontName]}"
+    },
+    "SplashTextOff": {
+      "prefix": "SplashTextOff",
+      "body": "SplashTextOff"
+    },
+    "SplashTextOn": {
+      "prefix": "SplashTextOn",
+      "body": "SplashTextOn, ${1:[ Width}, ${2:Height}, ${3:Title}, ${4:Text]}"
+    },
+    "SplitPath": {
+      "prefix": "SplitPath",
+      "body": "SplitPath, ${1:InputVar [}, ${2:OutFileName}, ${3:OutDir}, ${4:OutExtension}, ${5:OutNameNoExt}, ${6:OutDrive]}"
+    },
+    "StatusBarGetText": {
+      "prefix": "StatusBarGetText",
+      "body": "StatusBarGetText, ${1:OutputVar [}, ${2:Part#}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+    },
+    "StatusBarWait": {
+      "prefix": "StatusBarWait",
+      "body": "StatusBarWait, ${1:[BarText}, ${2:Seconds}, ${3:Part#}, ${4:WinTitle}, ${5:WinText}, ${6:Interval}, ${7:ExcludeTitle}, ${8:ExcludeText]}"
+    },
+    "StringCaseSense": {
+      "prefix": "StringCaseSense",
+      "body": "StringCaseSense, ${1:On|Off|Locale}"
+    },
+    "StringGetPos": {
+      "prefix": "StringGetPos",
+      "body": "StringGetPos, ${1:OutputVar}, ${2:InputVar}, ${3:SearchText [}, ${4:L#|R#}, ${5:Offset]}"
+    },
+    "StringLeft": {
+      "prefix": "StringLeft",
+      "body": "StringLeft, ${1:OutputVar}, ${2:InputVar}, ${3:Count}"
+    },
+    "StringLen": {
+      "prefix": "StringLen",
+      "body": "StringLen, ${1:OutputVar}, ${2:InputVar}"
+    },
+    "StringLower": {
+      "prefix": "StringLower",
+      "body": "StringLower, ${1:OutputVar}, ${2:InputVar [}, ${3:T]}"
+    },
+    "StringMid": {
+      "prefix": "StringMid",
+      "body": "StringMid, ${1:OutputVar}, ${2:InputVar}, ${3:StartChar [}, ${4:Count}, ${5:L]}"
+    },
+    "StringReplace": {
+      "prefix": "StringReplace",
+      "body": "StringReplace, ${1:OutputVar}, ${2:InputVar}, ${3:SearchText [}, ${4:ReplaceText}, ${5:All]}"
+    },
+    "StringRight": {
+      "prefix": "StringRight",
+      "body": "StringRight, ${1:OutputVar}, ${2:InputVar}, ${3:Count}"
+    },
+    "StringSplit": {
+      "prefix": "StringSplit",
+      "body": "StringSplit, ${1:OutputArray}, ${2:InputVar [}, ${3:Delimiters}, ${4:OmitChars]}"
+    },
+    "StringTrimLeft": {
+      "prefix": "StringTrimLeft",
+      "body": "StringTrimLeft, ${1:OutputVar}, ${2:InputVar}, ${3:Count}"
+    },
+    "StringTrimRight": {
+      "prefix": "StringTrimRight",
+      "body": "StringTrimRight, ${1:OutputVar}, ${2:InputVar}, ${3:Count}"
+    },
+    "StringUpper": {
+      "prefix": "StringUpper",
+      "body": "StringUpper, ${1:OutputVar}, ${2:InputVar [}, ${3:T]}"
+    },
+    "Suspend": {
+      "prefix": "Suspend",
+      "body": "Suspend, ${1:[ On|Off|Toggle|Permit]}"
+    },
+    "SysGet": {
+      "prefix": "SysGet",
+      "body": "SysGet, ${1:OutputVar}, ${2:Sub-command [}, ${3:Param3]}"
+    },
+    "Thread": {
+      "prefix": "Thread",
+      "body": "Thread, ${1:NoTimers|Priority|Interrupt}"
+    },
+    "Throw": {
+      "prefix": "Throw",
+      "body": "Throw, ${1:[Expression]}"
+    },
+    "ToolTip": {
+      "prefix": "ToolTip",
+      "body": "ToolTip, ${1:[ Text}, ${2:X}, ${3:Y}, ${4:WhichToolTip]}"
+    },
+    "Transform": {
+      "prefix": "Transform",
+      "body": "Transform, ${1:OutputVar}, ${2:Cmd}, ${3:Value1 [}, ${4:Value2]}"
+    },
+    "TrayTip": {
+      "prefix": "TrayTip",
+      "body": "TrayTip, ${1:[ Title}, ${2:Text}, ${3:Seconds}, ${4:Options]}"
+    },
+    "Try": {
+      "prefix": "Try",
+      "body": "Try ${1:Statement}"
+    },
+    "Until": {
+      "prefix": "Until",
+      "body": "Until ${1:Expression}"
+    },
+    "UrlDownloadToFile": {
+      "prefix": "UrlDownloadToFile",
+      "body": "UrlDownloadToFile, ${1:URL}, ${2:Filename}"
+    },
+    "While": {
+      "prefix": "While",
+      "body": "While, ${1:Expression}"
+    },
+    "WinActivate": {
+      "prefix": "WinActivate",
+      "body": "WinActivate, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "WinActivateBottom": {
+      "prefix": "WinActivateBottom",
+      "body": "WinActivateBottom, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "WinClose": {
+      "prefix": "WinClose",
+      "body": "WinClose, ${1:[ WinTitle}, ${2:WinText}, ${3:SecondsToWait}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "WinGet": {
+      "prefix": "WinGet",
+      "body": "WinGet, ${1:OutputVar [}, ${2:Cmd}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+    },
+    "WinGetActiveStats": {
+      "prefix": "WinGetActiveStats",
+      "body": "WinGetActiveStats, ${1:Title}, ${2:Width}, ${3:Height}, ${4:X}, ${5:Y}"
+    },
+    "WinGetActiveTitle": {
+      "prefix": "WinGetActiveTitle",
+      "body": "WinGetActiveTitle, ${1:OutputVar}"
+    },
+    "WinGetClass": {
+      "prefix": "WinGetClass",
+      "body": "WinGetClass, ${1:OutputVar [}, ${2:WinTitle}, ${3:WinText}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "WinGetPos": {
+      "prefix": "WinGetPos",
+      "body": "WinGetPos, ${1:[X}, ${2:Y}, ${3:Width}, ${4:Height}, ${5:WinTitle}, ${6:WinText}, ${7:ExcludeTitle}, ${8:ExcludeText]}"
+    },
+    "WinGetText": {
+      "prefix": "WinGetText",
+      "body": "WinGetText, ${1:OutputVar [}, ${2:WinTitle}, ${3:WinText}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "WinGetTitle": {
+      "prefix": "WinGetTitle",
+      "body": "WinGetTitle, ${1:OutputVar [}, ${2:WinTitle}, ${3:WinText}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "WinHide": {
+      "prefix": "WinHide",
+      "body": "WinHide,${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "WinKill": {
+      "prefix": "WinKill",
+      "body": "WinKill,${1:[ WinTitle}, ${2:WinText}, ${3:SecondsToWait}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "WinMaximize": {
+      "prefix": "WinMaximize",
+      "body": "WinMaximize, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "WinMenuSelectItem": {
+      "prefix": "WinMenuSelectItem",
+      "body": "WinMenuSelectItem, ${1:WinTitle}, ${2:WinText}, ${3:Menu [}, ${4:SubMenu1}, ${5:SubMenu2}, ${6:SubMenu3}, ${7:SubMenu4}, ${8:SubMenu5}, ${9:SubMenu6}, ${10:ExcludeTitle}"
+    },
+    "WinMinimize": {
+      "prefix": "WinMinimize",
+      "body": "WinMinimize, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "WinMinimizeAll": {
+      "prefix": "WinMinimizeAll",
+      "body": "WinMinimizeAll"
+    },
+    "WinMinimizeAllUndo": {
+      "prefix": "WinMinimizeAllUndo",
+      "body": "WinMinimizeAllUndo"
+    },
+    "WinMove": {
+      "prefix": "WinMove",
+      "body": "WinMove, ${1:WinTitle}, ${2:WinText}, ${3:X}, ${4:Y}, ${5:[Width}, ${6:Height}, ${7:ExcludeTitle}, ${8:ExcludeText]}"
+    },
+    "WinRestore": {
+      "prefix": "WinRestore",
+      "body": "WinRestore, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "WinSet": {
+      "prefix": "WinSet",
+      "body": "WinSet, ${1:AlwaysOnTop|Trans}, ${2:On|Off|Toggle|Value(0-255) [}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+    },
+    "WinSetTitle": {
+      "prefix": "WinSetTitle",
+      "body": "WinSetTitle, ${1:WinTitle}, ${2:WinText}, ${3:NewTitle [}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "WinShow": {
+      "prefix": "WinShow",
+      "body": "WinShow, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+    },
+    "WinWait": {
+      "prefix": "WinWait",
+      "body": "WinWait, ${1:WinTitle}, ${2:WinText}, ${3:Seconds [}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "WinWaitActive": {
+      "prefix": "WinWaitActive",
+      "body": "WinWaitActive, ${1:[ WinTitle}, ${2:WinText}, ${3:Seconds}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "WinWaitClose": {
+      "prefix": "WinWaitClose",
+      "body": "WinWaitClose, ${1:WinTitle}, ${2:WinText}, ${3:Seconds [}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "WinWaitNotActive": {
+      "prefix": "WinWaitNotActive",
+      "body": "WinWaitNotActive, ${1:[ WinTitle}, ${2:WinText}, ${3:Seconds}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+    },
+    "Abs()": {
+      "prefix": "Abs()",
+      "body": "Abs(${1:Number})"
+    },
+    "ACos()": {
+      "prefix": "ACos()",
+      "body": "ACos(${1:Number})"
+    },
+    "Asc()": {
+      "prefix": "Asc()",
+      "body": "Asc(${1:String})"
+    },
+    "ASin()": {
+      "prefix": "ASin()",
+      "body": "ASin(${1:Number})"
+    },
+    "ATan()": {
+      "prefix": "ATan()",
+      "body": "ATan(${1:Number})"
+    },
+    "Ceil()": {
+      "prefix": "Ceil()",
+      "body": "Ceil(${1:Number})"
+    },
+    "Chr()": {
+      "prefix": "Chr()",
+      "body": "Chr(${1:Number})"
+    },
+    "Cos()": {
+      "prefix": "Cos()",
+      "body": "Cos(${1:Number})"
+    },
+    "ComObjCreate()": {
+      "prefix": "ComObjCreate()",
+      "body": "ComObjCreate(${1:CLSID} [, ${2:IID}])"
+    },
+    "ComObjActive()": {
+      "prefix": "ComObjActive()",
+      "body": "ComObjActive(${1:CLSID})"
+    },
+    "ComObjArray()": {
+      "prefix": "ComObjArray()",
+      "body": "ComObjArray(${1:VarType}, ${2:Count1} [, ${3:Count2, ... Count8}])"
+    },
+    "ComObjConnect()": {
+      "prefix": "ComObjConnect()",
+      "body": "ComObjConnect(${1:ComObject} [, ${2:Prefix}])"
+    },
+    "ComObjEnwrap()": {
+      "prefix": "ComObjEnwrap()",
+      "body": "ComObjEnwrap(${1:DispPtr})"
+    },
+    "ComObjError()": {
+      "prefix": "ComObjError()",
+      "body": "ComObjError(${1:[Enable]})"
+    },
+    "ComObjFlags()": {
+      "prefix": "ComObjFlags()",
+      "body": "ComObjFlags(${1:ComObject} [, ${2:NewFlags}, ${3:Mask}])"
+    },
+    "ComObjGet()": {
+      "prefix": "ComObjGet()",
+      "body": "ComObjGet(${1:Name})"
+    },
+    "ComObjMissing()": {
+      "prefix": "ComObjMissing()",
+      "body": "ComObjMissing()"
+    },
+    "ComObjParameter()": {
+      "prefix": "ComObjParameter()",
+      "body": "ComObjParameter(${1:VarType}, ${2:Value} [, ${3:Flags}])"
+    },
+    "ComObjQuery()": {
+      "prefix": "ComObjQuery()",
+      "body": "ComObjQuery(${1:ComObject}, [${2:SID},] ${3:IID})"
+    },
+    "ComObjType()": {
+      "prefix": "ComObjType()",
+      "body": "ComObjType(${1:ComObject}, \"${2:Name|IID}\")"
+    },
+    "ComObjUnwrap()": {
+      "prefix": "ComObjUnwrap()",
+      "body": "ComObjUnwrap(${1:ComObject})"
+    },
+    "ComObjValue()": {
+      "prefix": "ComObjValue()",
+      "body": "ComObjValue(${1:ComObject})"
+    },
+    "DllCall()": {
+      "prefix": "DllCall()",
+      "body": "DllCall(\"${1:[DllFile\\]Function}\",${2:[ Type1}, ${3:Arg1}, ${4:Type2}, ${5:Arg2}, ${6:\"Cdecl ReturnType\"]})"
+    },
+    "Exp()": {
+      "prefix": "Exp()",
+      "body": "Exp(${1:Number})"
+    },
+    "FileExist()": {
+      "prefix": "FileExist()",
+      "body": "FileExist(\"${1:FilePattern}\")"
+    },
+    "FileOpen()": {
+      "prefix": "FileOpen()",
+      "body": "FileOpen(${1:Filename}, ${2:Flags}, ${3:[Encoding]})"
+    },
+    "Floor()": {
+      "prefix": "Floor()",
+      "body": "Floor(${1:Number})"
+    },
+    "Format()": {
+      "prefix": "Format()",
+      "body": "Format(${1:FormatStr [}, ${2:Values...]})"
+    },
+    "Func()": {
+      "prefix": "Func()",
+      "body": "Func(${1:FunctionName})"
+    },
+    "GetKeyName()": {
+      "prefix": "GetKeyName()",
+      "body": "GetKeyName(${1:Key})"
+    },
+    "GetKeyVK()": {
+      "prefix": "GetKeyVK()",
+      "body": "GetKeyVK(${1:Key})"
+    },
+    "GetKeySC()": {
+      "prefix": "GetKeySC()",
+      "body": "GetKeySC(${1:Key})"
+    },
+    "GetKeyState()": {
+      "prefix": "GetKeyState()",
+      "body": "GetKeyState(${1:KeyName [}, ${2:\"P\" or \"T\"]})"
+    },
+    "IL_Add()": {
+      "prefix": "IL_Add()",
+      "body": "IL_Add(${1:ImageListID}, ${2:Filename [}, ${3:IconNumber}, ${4:ResizeNonIcon?]})"
+    },
+    "IL_Create()": {
+      "prefix": "IL_Create()",
+      "body": "IL_Create(${1:[InitialCount}, ${2:GrowCount}, ${3:LargeIcons?]})"
+    },
+    "IL_Destroy()": {
+      "prefix": "IL_Destroy()",
+      "body": "IL_Destroy(${1:ImageListID})"
+    },
+    "InStr()": {
+      "prefix": "InStr()",
+      "body": "InStr(${1:Haystack}, ${2:Needle [}, ${3:CaseSensitive?}, ${4:StartingPos]})"
+    },
+    "IsByRef()": {
+      "prefix": "IsByRef()",
+      "body": "IsByRef(${1:Var})"
+    },
+    "IsFunc()": {
+      "prefix": "IsFunc()",
+      "body": "IsFunc(${1:FunctionName})"
+    },
+    "IsLabel()": {
+      "prefix": "IsLabel()",
+      "body": "IsLabel(${1:LabelName})"
+    },
+    "IsObject()": {
+      "prefix": "IsObject()",
+      "body": "IsObject(${1:Object})"
+    },
+    "Ln()": {
+      "prefix": "Ln()",
+      "body": "Ln(${1:Number})"
+    },
+    "Log()": {
+      "prefix": "Log()",
+      "body": "Log(${1:Number})"
+    },
+    "LTrim()": {
+      "prefix": "LTrim()",
+      "body": "LTrim(${1:String}, ${2:OmitChars = \" `t\"})"
+    },
+    "LV_Add()": {
+      "prefix": "LV_Add()",
+      "body": "LV_Add(${1:[Options}, ${2:Col1}, ${3:Col2}, ${4:...]})"
+    },
+    "LV_Delete()": {
+      "prefix": "LV_Delete()",
+      "body": "LV_Delete(${1:[RowNumber]})"
+    },
+    "LV_DeleteCol()": {
+      "prefix": "LV_DeleteCol()",
+      "body": "LV_DeleteCol(${1:ColumnNumber})"
+    },
+    "LV_GetCount()": {
+      "prefix": "LV_GetCount()",
+      "body": "LV_GetCount(${1:[\"S\"]})"
+    },
+    "LV_GetNext()": {
+      "prefix": "LV_GetNext()",
+      "body": "LV_GetNext(${1:[StartingRowNumber}, ${2:\"C|F\"]})"
+    },
+    "LV_GetText()": {
+      "prefix": "LV_GetText()",
+      "body": "LV_GetText(${1:OutputVar}, ${2:RowNumber [}, ${3:ColumnNumber]})"
+    },
+    "LV_Insert()": {
+      "prefix": "LV_Insert()",
+      "body": "LV_Insert(${1:RowNumber [}, ${2:Options}, ${3:Col1}, ${4:Col2}, ${5:...]})"
+    },
+    "LV_InsertCol()": {
+      "prefix": "LV_InsertCol()",
+      "body": "LV_InsertCol(${1:ColumnNumber [}, ${2:Options}, ${3:ColumnTitle]})"
+    },
+    "LV_Modify()": {
+      "prefix": "LV_Modify()",
+      "body": "LV_Modify(${1:RowNumber}, ${2:Options [}, ${3:NewCol1}, ${4:NewCol2}, ${5:...]})"
+    },
+    "LV_ModifyCol()": {
+      "prefix": "LV_ModifyCol()",
+      "body": "LV_ModifyCol(${1:[ColumnNumber}, ${2:Options}, ${3:ColumnTitle]})"
+    },
+    "LV_SetImageList()": {
+      "prefix": "LV_SetImageList()",
+      "body": "LV_SetImageList(${1:ImageListID} [, ${2:0|1|2]})"
+    },
+    "Mod()": {
+      "prefix": "Mod()",
+      "body": "Mod(${1:Dividend}, ${2:Divisor})"
+    },
+    "NumGet() [": {
+      "prefix": "NumGet() [",
+      "body": "NumGet(${1:VarOrAddress [}, ${2:Offset = 0}, ${3:Type = \"UInt\"]})"
+    },
+    "NumPut()": {
+      "prefix": "NumPut()",
+      "body": "NumPut(${1:Number}, ${2:VarOrAddress [}, ${3:Offset = 0}, ${4:Type = \"UInt\"]})"
+    },
+    "OnMessage() [": {
+      "prefix": "OnMessage() [",
+      "body": "OnMessage(${1:MsgNumber [}, ${2:\"FunctionName\"]})"
+    },
+    "RegExMatch()": {
+      "prefix": "RegExMatch()",
+      "body": "RegExMatch(${1:Haystack}, ${2:NeedleRegEx [}, ${3:UnquotedOutputVar = \"\"}, ${4:StartingPos = 1]})"
+    },
+    "RegExReplace()": {
+      "prefix": "RegExReplace()",
+      "body": "RegExReplace(${1:Haystack}, ${2:NeedleRegEx [}, ${3:Replacement = \"\"}, ${4:OutputVarCount = \"\"}, ${5:Limit = -1}, ${6:StartingPos = 1]})"
+    },
+    "RegisterCallback()": {
+      "prefix": "RegisterCallback()",
+      "body": "RegisterCallback(\"${1:Functionname}\" [, ${2:Options = \"\"}, ${3:ParamCount = FormalCount}, ${4:EventInfo = Address]})"
+    },
+    "Round()": {
+      "prefix": "Round()",
+      "body": "Round(${1:Number [}, ${2:Places]})"
+    },
+    "RTrim()": {
+      "prefix": "RTrim()",
+      "body": "RTrim(${1:String}, ${2:OmitChars = \" `t\"})"
+    },
+    "SB_SetIcon()": {
+      "prefix": "SB_SetIcon()",
+      "body": "SB_SetIcon(${1:Filename [}, ${2:IconNumber}, ${3:PartNumber]})"
+    },
+    "SB_SetParts()": {
+      "prefix": "SB_SetParts()",
+      "body": "SB_SetParts(${1:[Width}, ${2:Width2}, ${3:... Width255]})"
+    },
+    "SB_SetText()": {
+      "prefix": "SB_SetText()",
+      "body": "SB_SetText(${1:NewText [}, ${2:PartNumber}, ${3:Style]})"
+    },
+    "Sin()": {
+      "prefix": "Sin()",
+      "body": "Sin(${1:Number})"
+    },
+    "Sqrt()": {
+      "prefix": "Sqrt()",
+      "body": "Sqrt(${1:Number})"
+    },
+    "StrGet()": {
+      "prefix": "StrGet()",
+      "body": "StrGet(${1:Address}, ${2:[Length]}, ${3:[Encoding = None]})"
+    },
+    "StrLen()": {
+      "prefix": "StrLen()",
+      "body": "StrLen(${1:String})"
+    },
+    "StrPut()": {
+      "prefix": "StrPut()",
+      "body": "StrPut(${1:String}, ${2:Address}, ${3:[Length]}, ${4:[Encoding = None]})"
+    },
+    "StrSplit()": {
+      "prefix": "StrSplit()",
+      "body": "StrSplit(${1:String}, ${2:[Delimiters}, ${3:OmitChars]})"
+    },
+    "StrReplace()": {
+      "prefix": "StrReplace()",
+      "body": "StrReplace(${1:Haystack}, ${2:SearchText [}, ${3:ReplaceText}, ${4:OutputVarCount}, ${5:Limit := -1]})"
+    },
+    "SubStr()": {
+      "prefix": "SubStr()",
+      "body": "SubStr(${1:String}, ${2:StartingPos [}, ${3:Length]})"
+    },
+    "Tan(Number)": {
+      "prefix": "Tan(Number)",
+      "body": "Tan(${1:Number})"
+    },
+    "Trim()": {
+      "prefix": "Trim()",
+      "body": "Trim(${1:String}, ${2:OmitChars = \" `t\"})"
+    },
+    "TV_Add()": {
+      "prefix": "TV_Add()",
+      "body": "TV_Add(${1:Name}, ${2:[ParentItemID}, ${3:Options]})"
+    },
+    "TV_Delete()": {
+      "prefix": "TV_Delete()",
+      "body": "TV_Delete(${1:[ItemID]})"
+    },
+    "TV_GetChild()": {
+      "prefix": "TV_GetChild()",
+      "body": "TV_GetChild(${1:ParentItemID})"
+    },
+    "TV_GetCount()": {
+      "prefix": "TV_GetCount()",
+      "body": "TV_GetCount()"
+    },
+    "TV_GetNext()": {
+      "prefix": "TV_GetNext()",
+      "body": "TV_GetNext(${1:[ItemID}, ${2:\"Checked | Full\"]})"
+    },
+    "TV_Get()": {
+      "prefix": "TV_Get()",
+      "body": "TV_Get(${1:ItemID}, ${2:\"Expand | Check | Bold\"})"
+    },
+    "TV_GetParent()": {
+      "prefix": "TV_GetParent()",
+      "body": "TV_GetParent(${1:ItemID})"
+    },
+    "TV_GetPrev()": {
+      "prefix": "TV_GetPrev()",
+      "body": "TV_GetPrev(${1:ItemID})"
+    },
+    "TV_GetSelection()": {
+      "prefix": "TV_GetSelection()",
+      "body": "TV_GetSelection()"
+    },
+    "TV_GetText()": {
+      "prefix": "TV_GetText()",
+      "body": "TV_GetText(${1:OutputVar}, ${2:ItemID})"
+    },
+    "TV_Modify()": {
+      "prefix": "TV_Modify()",
+      "body": "TV_Modify(${1:ItemID [}, ${2:Options}, ${3:NewName]})"
+    },
+    "VarSetCapacity()": {
+      "prefix": "VarSetCapacity()",
+      "body": "VarSetCapacity(${1:Var [}, ${2:RequestedCapacity}, ${3:FillByte]})"
+    },
+    "WinActive()": {
+      "prefix": "WinActive()",
+      "body": "WinActive(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText]}\")"
+    },
+    "WinExist()": {
+      "prefix": "WinExist()",
+      "body": "WinExist(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText]}\")"
+    },
+    ".Read()": {
+      "prefix": ".Read()",
+      "body": "Read(${1:[Characters]})"
+    },
+    ".Write()": {
+      "prefix": ".Write()",
+      "body": "Write(${1:String})"
+    },
+    ".ReadLine()": {
+      "prefix": ".ReadLine()",
+      "body": "ReadLine()"
+    },
+    ".WriteLine()": {
+      "prefix": ".WriteLine()",
+      "body": "WriteLine(${1:[String]})"
+    },
+    ".ReadUInt()": {
+      "prefix": ".ReadUInt()",
+      "body": "ReadUInt()"
+    },
+    ".ReadInt()": {
+      "prefix": ".ReadInt()",
+      "body": "ReadInt()"
+    },
+    ".ReadInt64()": {
+      "prefix": ".ReadInt64()",
+      "body": "ReadInt64()"
+    },
+    ".ReadShort()": {
+      "prefix": ".ReadShort()",
+      "body": "ReadShort()"
+    },
+    ".ReadUShort()": {
+      "prefix": ".ReadUShort()",
+      "body": "ReadUShort()"
+    },
+    ".ReadChar()": {
+      "prefix": ".ReadChar()",
+      "body": "ReadChar()"
+    },
+    ".ReadUChar()": {
+      "prefix": ".ReadUChar()",
+      "body": "ReadUChar()"
+    },
+    ".ReadDouble()": {
+      "prefix": ".ReadDouble()",
+      "body": "ReadDouble()"
+    },
+    ".ReadFloat()": {
+      "prefix": ".ReadFloat()",
+      "body": "ReadFloat()"
+    },
+    ".WriteUInt()": {
+      "prefix": ".WriteUInt()",
+      "body": "WriteUInt(${1:Num})"
+    },
+    ".WriteInt()": {
+      "prefix": ".WriteInt()",
+      "body": "WriteInt(${1:Num})"
+    },
+    ".WriteInt64()": {
+      "prefix": ".WriteInt64()",
+      "body": "WriteInt64(${1:Num})"
+    },
+    ".WriteShort()": {
+      "prefix": ".WriteShort()",
+      "body": "WriteShort(${1:Num})"
+    },
+    ".WriteUShort()": {
+      "prefix": ".WriteUShort()",
+      "body": "WriteUShort(${1:Num})"
+    },
+    ".WriteChar()": {
+      "prefix": ".WriteChar()",
+      "body": "WriteChar(${1:Num})"
+    },
+    ".WriteUChar()": {
+      "prefix": ".WriteUChar()",
+      "body": "WriteUChar(${1:Num})"
+    },
+    ".WriteDouble()": {
+      "prefix": ".WriteDouble()",
+      "body": "WriteDouble(${1:Num})"
+    },
+    ".WriteFloat()": {
+      "prefix": ".WriteFloat()",
+      "body": "WriteFloat(${1:Num})"
+    },
+    ".RawRead()": {
+      "prefix": ".RawRead()",
+      "body": "RawRead(${1:VarOrAddress}, ${2:Bytes})"
+    },
+    ".RawWrite()": {
+      "prefix": ".RawWrite()",
+      "body": "RawWrite(${1:VarOrAddress}, ${2:Bytes})"
+    },
+    ".Seek()": {
+      "prefix": ".Seek()",
+      "body": "Seek(${1:Distance}, ${2:[Origin = 0]})"
+    },
+    ".Tell()": {
+      "prefix": ".Tell()",
+      "body": "Tell()"
+    },
+    ".Close()": {
+      "prefix": ".Close()",
+      "body": "Close()"
+    },
+    ".Insert()": {
+      "prefix": ".Insert()",
+      "body": "Insert(${1:Key}, ${2:Value})"
+    },
+    ".Remove()": {
+      "prefix": ".Remove()",
+      "body": "Remove(${1:Key})"
+    },
+    ".MinIndex()": {
+      "prefix": ".MinIndex()",
+      "body": "MinIndex()"
+    },
+    ".MaxIndex()": {
+      "prefix": ".MaxIndex()",
+      "body": "MaxIndex()"
+    },
+    ".SetCapacity()": {
+      "prefix": ".SetCapacity()",
+      "body": "SetCapacity(${1:MaxItems})"
+    },
+    ".GetCapacity()": {
+      "prefix": ".GetCapacity()",
+      "body": "GetCapacity()"
+    },
+    ".GetAddress()": {
+      "prefix": ".GetAddress()",
+      "body": "GetAddress(${1:Key})"
+    },
+    ".NewEnum()": {
+      "prefix": ".NewEnum()",
+      "body": "_NewEnum()"
+    },
+    ".HasKey()": {
+      "prefix": ".HasKey()",
+      "body": "HasKey(${1:Key})"
+    },
+    ".Clone()": {
+      "prefix": ".Clone()",
+      "body": "Clone()"
+    },
+    ".IsByRef()": {
+      "prefix": ".IsByRef()",
+      "body": "IsByRef(${1:ParamIndex})"
+    },
+    ".IsOptional()": {
+      "prefix": ".IsOptional()",
+      "body": "IsOptional(${1:ParamIndex})"
+    },
+    ".__Get()": {
+      "prefix": ".__Get()",
+      "body": "__Get(${1:[Key}, ${2:Key2}, ${3:...]})"
+    },
+    ".__Set()": {
+      "prefix": ".__Set()",
+      "body": "__Set(${1:[Key}, ${2:Key2}, ${3:...]}, ${4:Value})"
+    },
+    ".__Call()": {
+      "prefix": ".__Call()",
+      "body": "__Call(${1:Name}, ${2:[Params...]})"
+    },
+    ".__New()": {
+      "prefix": ".__New()",
+      "body": "__New(${1:})"
+    },
+    ".__Delete()": {
+      "prefix": ".__Delete()",
+      "body": "__Delete(${1:})"
+    },
+    ".Length": {
+      "prefix": ".Length",
+      "body": ".Length"
+    },
+    ".AtEOF": {
+      "prefix": ".AtEOF",
+      "body": ".AtEOF"
+    },
+    ".Encoding": {
+      "prefix": ".Encoding",
+      "body": ".Encoding"
+    },
+    ".__Handle": {
+      "prefix": ".__Handle",
+      "body": ".__Handle"
+    },
+    ".Name": {
+      "prefix": ".Name",
+      "body": ".Name"
+    },
+    ".IsBuiltIn": {
+      "prefix": ".IsBuiltIn",
+      "body": ".IsBuiltIn"
+    },
+    ".IsVariadic": {
+      "prefix": ".IsVariadic",
+      "body": ".IsVariadic"
+    },
+    ".MinParams": {
+      "prefix": ".MinParams",
+      "body": ".MinParams"
+    },
+    ".MaxParams": {
+      "prefix": ".MaxParams",
+      "body": ".MaxParams"
+    },
+    ".Pos": {
+      "prefix": ".Pos",
+      "body": ".Pos"
+    },
+    ".Position": {
+      "prefix": ".Position",
+      "body": ".Position"
+    },
+    "A_AhkPath": {
+      "prefix": "A_AhkPath",
+      "body": "A_AhkPath"
+    },
+    "A_AhkVersion": {
+      "prefix": "A_AhkVersion",
+      "body": "A_AhkVersion"
+    },
+    "A_AppData": {
+      "prefix": "A_AppData",
+      "body": "A_AppData"
+    },
+    "A_AppDataCommon": {
+      "prefix": "A_AppDataCommon",
+      "body": "A_AppDataCommon"
+    },
+    "A_AutoTrim": {
+      "prefix": "A_AutoTrim",
+      "body": "A_AutoTrim"
+    },
+    "A_BatchLines": {
+      "prefix": "A_BatchLines",
+      "body": "A_BatchLines"
+    },
+    "A_CaretX": {
+      "prefix": "A_CaretX",
+      "body": "A_CaretX"
+    },
+    "A_CaretY": {
+      "prefix": "A_CaretY",
+      "body": "A_CaretY"
+    },
+    "A_ComputerName": {
+      "prefix": "A_ComputerName",
+      "body": "A_ComputerName"
+    },
+    "A_ControlDelay": {
+      "prefix": "A_ControlDelay",
+      "body": "A_ControlDelay"
+    },
+    "A_Cursor": {
+      "prefix": "A_Cursor",
+      "body": "A_Cursor"
+    },
+    "A_DD": {
+      "prefix": "A_DD",
+      "body": "A_DD"
+    },
+    "A_DDD": {
+      "prefix": "A_DDD",
+      "body": "A_DDD"
+    },
+    "A_DDDD": {
+      "prefix": "A_DDDD",
+      "body": "A_DDDD"
+    },
+    "A_DefaultMouseSpeed": {
+      "prefix": "A_DefaultMouseSpeed",
+      "body": "A_DefaultMouseSpeed"
+    },
+    "A_Desktop": {
+      "prefix": "A_Desktop",
+      "body": "A_Desktop"
+    },
+    "A_DesktopCommon": {
+      "prefix": "A_DesktopCommon",
+      "body": "A_DesktopCommon"
+    },
+    "A_DetectHiddenText": {
+      "prefix": "A_DetectHiddenText",
+      "body": "A_DetectHiddenText"
+    },
+    "A_DetectHiddenWindows": {
+      "prefix": "A_DetectHiddenWindows",
+      "body": "A_DetectHiddenWindows"
+    },
+    "A_EndChar": {
+      "prefix": "A_EndChar",
+      "body": "A_EndChar"
+    },
+    "A_EventInfo": {
+      "prefix": "A_EventInfo",
+      "body": "A_EventInfo"
+    },
+    "A_ExitReason": {
+      "prefix": "A_ExitReason",
+      "body": "A_ExitReason"
+    },
+    "A_FileEncoding": {
+      "prefix": "A_FileEncoding",
+      "body": "A_FileEncoding"
+    },
+    "A_FormatFloat": {
+      "prefix": "A_FormatFloat",
+      "body": "A_FormatFloat"
+    },
+    "A_FormatInteger": {
+      "prefix": "A_FormatInteger",
+      "body": "A_FormatInteger"
+    },
+    "A_Gui": {
+      "prefix": "A_Gui",
+      "body": "A_Gui"
+    },
+    "A_GuiEvent": {
+      "prefix": "A_GuiEvent",
+      "body": "A_GuiEvent"
+    },
+    "A_GuiControl": {
+      "prefix": "A_GuiControl",
+      "body": "A_GuiControl"
+    },
+    "A_GuiControlEvent": {
+      "prefix": "A_GuiControlEvent",
+      "body": "A_GuiControlEvent"
+    },
+    "A_GuiHeight": {
+      "prefix": "A_GuiHeight",
+      "body": "A_GuiHeight"
+    },
+    "A_GuiWidth": {
+      "prefix": "A_GuiWidth",
+      "body": "A_GuiWidth"
+    },
+    "A_GuiX": {
+      "prefix": "A_GuiX",
+      "body": "A_GuiX"
+    },
+    "A_GuiY": {
+      "prefix": "A_GuiY",
+      "body": "A_GuiY"
+    },
+    "A_Hour": {
+      "prefix": "A_Hour",
+      "body": "A_Hour"
+    },
+    "A_IconFile": {
+      "prefix": "A_IconFile",
+      "body": "A_IconFile"
+    },
+    "A_IconHidden": {
+      "prefix": "A_IconHidden",
+      "body": "A_IconHidden"
+    },
+    "A_IconNumber": {
+      "prefix": "A_IconNumber",
+      "body": "A_IconNumber"
+    },
+    "A_IconTip": {
+      "prefix": "A_IconTip",
+      "body": "A_IconTip"
+    },
+    "A_Index": {
+      "prefix": "A_Index",
+      "body": "A_Index"
+    },
+    "A_IPAddress1": {
+      "prefix": "A_IPAddress1",
+      "body": "A_IPAddress1"
+    },
+    "A_IPAddress2": {
+      "prefix": "A_IPAddress2",
+      "body": "A_IPAddress2"
+    },
+    "A_IPAddress3": {
+      "prefix": "A_IPAddress3",
+      "body": "A_IPAddress3"
+    },
+    "A_IPAddress4": {
+      "prefix": "A_IPAddress4",
+      "body": "A_IPAddress4"
+    },
+    "A_Is64bitOS": {
+      "prefix": "A_Is64bitOS",
+      "body": "A_Is64bitOS"
+    },
+    "A_IsAdmin": {
+      "prefix": "A_IsAdmin",
+      "body": "A_IsAdmin"
+    },
+    "A_IsCompiled": {
+      "prefix": "A_IsCompiled",
+      "body": "A_IsCompiled"
+    },
+    "A_IsCritical": {
+      "prefix": "A_IsCritical",
+      "body": "A_IsCritical"
+    },
+    "A_IsPaused": {
+      "prefix": "A_IsPaused",
+      "body": "A_IsPaused"
+    },
+    "A_IsSuspended": {
+      "prefix": "A_IsSuspended",
+      "body": "A_IsSuspended"
+    },
+    "A_IsUnicode": {
+      "prefix": "A_IsUnicode",
+      "body": "A_IsUnicode"
+    },
+    "A_KeyDelay": {
+      "prefix": "A_KeyDelay",
+      "body": "A_KeyDelay"
+    },
+    "A_Language": {
+      "prefix": "A_Language",
+      "body": "A_Language"
+    },
+    "A_LastError": {
+      "prefix": "A_LastError",
+      "body": "A_LastError"
+    },
+    "A_LineFile": {
+      "prefix": "A_LineFile",
+      "body": "A_LineFile"
+    },
+    "A_LineNumber": {
+      "prefix": "A_LineNumber",
+      "body": "A_LineNumber"
+    },
+    "A_LoopField": {
+      "prefix": "A_LoopField",
+      "body": "A_LoopField"
+    },
+    "A_LoopFileAttrib": {
+      "prefix": "A_LoopFileAttrib",
+      "body": "A_LoopFileAttrib"
+    },
+    "A_LoopFileDir": {
+      "prefix": "A_LoopFileDir",
+      "body": "A_LoopFileDir"
+    },
+    "A_LoopFileExt": {
+      "prefix": "A_LoopFileExt",
+      "body": "A_LoopFileExt"
+    },
+    "A_LoopFileFullPath": {
+      "prefix": "A_LoopFileFullPath",
+      "body": "A_LoopFileFullPath"
+    },
+    "A_LoopFileLongPath": {
+      "prefix": "A_LoopFileLongPath",
+      "body": "A_LoopFileLongPath"
+    },
+    "A_LoopFileName": {
+      "prefix": "A_LoopFileName",
+      "body": "A_LoopFileName"
+    },
+    "A_LoopFileShortName": {
+      "prefix": "A_LoopFileShortName",
+      "body": "A_LoopFileShortName"
+    },
+    "A_LoopFileShortPath": {
+      "prefix": "A_LoopFileShortPath",
+      "body": "A_LoopFileShortPath"
+    },
+    "A_LoopFileSize": {
+      "prefix": "A_LoopFileSize",
+      "body": "A_LoopFileSize"
+    },
+    "A_LoopFileSizeKB": {
+      "prefix": "A_LoopFileSizeKB",
+      "body": "A_LoopFileSizeKB"
+    },
+    "A_LoopFileSizeMB": {
+      "prefix": "A_LoopFileSizeMB",
+      "body": "A_LoopFileSizeMB"
+    },
+    "A_LoopFileTimeAccessed": {
+      "prefix": "A_LoopFileTimeAccessed",
+      "body": "A_LoopFileTimeAccessed"
+    },
+    "A_LoopFileTimeCreated": {
+      "prefix": "A_LoopFileTimeCreated",
+      "body": "A_LoopFileTimeCreated"
+    },
+    "A_LoopFileTimeModified": {
+      "prefix": "A_LoopFileTimeModified",
+      "body": "A_LoopFileTimeModified"
+    },
+    "A_LoopReadLine": {
+      "prefix": "A_LoopReadLine",
+      "body": "A_LoopReadLine"
+    },
+    "A_LoopRegKey": {
+      "prefix": "A_LoopRegKey",
+      "body": "A_LoopRegKey"
+    },
+    "A_LoopRegName": {
+      "prefix": "A_LoopRegName",
+      "body": "A_LoopRegName"
+    },
+    "A_LoopRegSubkey": {
+      "prefix": "A_LoopRegSubkey",
+      "body": "A_LoopRegSubkey"
+    },
+    "A_LoopRegTimeModified": {
+      "prefix": "A_LoopRegTimeModified",
+      "body": "A_LoopRegTimeModified"
+    },
+    "A_LoopRegType": {
+      "prefix": "A_LoopRegType",
+      "body": "A_LoopRegType"
+    },
+    "A_MDay": {
+      "prefix": "A_MDay",
+      "body": "A_MDay"
+    },
+    "A_Min": {
+      "prefix": "A_Min",
+      "body": "A_Min"
+    },
+    "A_MM": {
+      "prefix": "A_MM",
+      "body": "A_MM"
+    },
+    "A_MMM": {
+      "prefix": "A_MMM",
+      "body": "A_MMM"
+    },
+    "A_MMMM": {
+      "prefix": "A_MMMM",
+      "body": "A_MMMM"
+    },
+    "A_Mon": {
+      "prefix": "A_Mon",
+      "body": "A_Mon"
+    },
+    "A_MouseDelay": {
+      "prefix": "A_MouseDelay",
+      "body": "A_MouseDelay"
+    },
+    "A_MSec": {
+      "prefix": "A_MSec",
+      "body": "A_MSec"
+    },
+    "A_MyDocuments": {
+      "prefix": "A_MyDocuments",
+      "body": "A_MyDocuments"
+    },
+    "A_Now": {
+      "prefix": "A_Now",
+      "body": "A_Now"
+    },
+    "A_NowUTC": {
+      "prefix": "A_NowUTC",
+      "body": "A_NowUTC"
+    },
+    "A_NumBatchLines": {
+      "prefix": "A_NumBatchLines",
+      "body": "A_NumBatchLines"
+    },
+    "A_OSType": {
+      "prefix": "A_OSType",
+      "body": "A_OSType"
+    },
+    "A_OSVersion": {
+      "prefix": "A_OSVersion",
+      "body": "A_OSVersion"
+    },
+    "A_PriorHotkey": {
+      "prefix": "A_PriorHotkey",
+      "body": "A_PriorHotkey"
+    },
+    "A_PriorKey": {
+      "prefix": "A_PriorKey",
+      "body": "A_PriorKey"
+    },
+    "A_ProgramFiles": {
+      "prefix": "A_ProgramFiles",
+      "body": "A_ProgramFiles"
+    },
+    "A_Programs": {
+      "prefix": "A_Programs",
+      "body": "A_Programs"
+    },
+    "A_ProgramsCommon": {
+      "prefix": "A_ProgramsCommon",
+      "body": "A_ProgramsCommon"
+    },
+    "A_PtrSize": {
+      "prefix": "A_PtrSize",
+      "body": "A_PtrSize"
+    },
+    "A_RegView": {
+      "prefix": "A_RegView",
+      "body": "A_RegView"
+    },
+    "A_ScreenDPI": {
+      "prefix": "A_ScreenDPI",
+      "body": "A_ScreenDPI"
+    },
+    "A_ScreenHeight": {
+      "prefix": "A_ScreenHeight",
+      "body": "A_ScreenHeight"
+    },
+    "A_ScreenWidth": {
+      "prefix": "A_ScreenWidth",
+      "body": "A_ScreenWidth"
+    },
+    "A_ScriptDir": {
+      "prefix": "A_ScriptDir",
+      "body": "A_ScriptDir"
+    },
+    "A_ScriptFullPath": {
+      "prefix": "A_ScriptFullPath",
+      "body": "A_ScriptFullPath"
+    },
+    "A_ScriptHwnd": {
+      "prefix": "A_ScriptHwnd",
+      "body": "A_ScriptHwnd"
+    },
+    "A_ScriptName": {
+      "prefix": "A_ScriptName",
+      "body": "A_ScriptName"
+    },
+    "A_Sec": {
+      "prefix": "A_Sec",
+      "body": "A_Sec"
+    },
+    "A_Space": {
+      "prefix": "A_Space",
+      "body": "A_Space"
+    },
+    "A_StartMenu": {
+      "prefix": "A_StartMenu",
+      "body": "A_StartMenu"
+    },
+    "A_StartMenuCommon": {
+      "prefix": "A_StartMenuCommon",
+      "body": "A_StartMenuCommon"
+    },
+    "A_Startup": {
+      "prefix": "A_Startup",
+      "body": "A_Startup"
+    },
+    "A_StartupCommon": {
+      "prefix": "A_StartupCommon",
+      "body": "A_StartupCommon"
+    },
+    "A_StringCaseSense": {
+      "prefix": "A_StringCaseSense",
+      "body": "A_StringCaseSense"
+    },
+    "A_Tab": {
+      "prefix": "A_Tab",
+      "body": "A_Tab"
+    },
+    "A_Temp": {
+      "prefix": "A_Temp",
+      "body": "A_Temp"
+    },
+    "A_ThisFunc": {
+      "prefix": "A_ThisFunc",
+      "body": "A_ThisFunc"
+    },
+    "A_ThisHotkey": {
+      "prefix": "A_ThisHotkey",
+      "body": "A_ThisHotkey"
+    },
+    "A_ThisLabel": {
+      "prefix": "A_ThisLabel",
+      "body": "A_ThisLabel"
+    },
+    "A_ThisMenu": {
+      "prefix": "A_ThisMenu",
+      "body": "A_ThisMenu"
+    },
+    "A_ThisMenuItem": {
+      "prefix": "A_ThisMenuItem",
+      "body": "A_ThisMenuItem"
+    },
+    "A_ThisMenuItemPos": {
+      "prefix": "A_ThisMenuItemPos",
+      "body": "A_ThisMenuItemPos"
+    },
+    "A_TickCount": {
+      "prefix": "A_TickCount",
+      "body": "A_TickCount"
+    },
+    "A_TimeIdle": {
+      "prefix": "A_TimeIdle",
+      "body": "A_TimeIdle"
+    },
+    "A_TimeIdlePhysical": {
+      "prefix": "A_TimeIdlePhysical",
+      "body": "A_TimeIdlePhysical"
+    },
+    "A_TimeSincePriorHotkey": {
+      "prefix": "A_TimeSincePriorHotkey",
+      "body": "A_TimeSincePriorHotkey"
+    },
+    "A_TimeSinceThisHotkey": {
+      "prefix": "A_TimeSinceThisHotkey",
+      "body": "A_TimeSinceThisHotkey"
+    },
+    "A_TitleMatchMode": {
+      "prefix": "A_TitleMatchMode",
+      "body": "A_TitleMatchMode"
+    },
+    "A_TitleMatchModeSpeed": {
+      "prefix": "A_TitleMatchModeSpeed",
+      "body": "A_TitleMatchModeSpeed"
+    },
+    "A_UserName": {
+      "prefix": "A_UserName",
+      "body": "A_UserName"
+    },
+    "A_WDay": {
+      "prefix": "A_WDay",
+      "body": "A_WDay"
+    },
+    "A_WinDelay": {
+      "prefix": "A_WinDelay",
+      "body": "A_WinDelay"
+    },
+    "A_WinDir": {
+      "prefix": "A_WinDir",
+      "body": "A_WinDir"
+    },
+    "A_WorkingDir": {
+      "prefix": "A_WorkingDir",
+      "body": "A_WorkingDir"
+    },
+    "A_YDay": {
+      "prefix": "A_YDay",
+      "body": "A_YDay"
+    },
+    "A_Year": {
+      "prefix": "A_Year",
+      "body": "A_Year"
+    },
+    "A_YWeek": {
+      "prefix": "A_YWeek",
+      "body": "A_YWeek"
+    },
+    "A_YYYY": {
+      "prefix": "A_YYYY",
+      "body": "A_YYYY"
+    },
+    "Clipboard": {
+      "prefix": "Clipboard",
+      "body": "Clipboard"
+    },
+    "ClipboardAll": {
+      "prefix": "ClipboardAll",
+      "body": "ClipboardAll"
+    },
+    "ComSpec": {
+      "prefix": "ComSpec",
+      "body": "ComSpec"
+    },
+    "ErrorLevel": {
+      "prefix": "ErrorLevel",
+      "body": "ErrorLevel"
+    },
+    "ProgramFiles": {
+      "prefix": "ProgramFiles",
+      "body": "ProgramFiles"
+    },
+    "True": {
+      "prefix": "True",
+      "body": "True"
+    },
+    "False": {
+      "prefix": "False",
+      "body": "False"
+    },
+    "Shift": {
+      "prefix": "Shift",
+      "body": "Shift"
+    },
+    "LShift": {
+      "prefix": "LShift",
+      "body": "LShift"
+    },
+    "RShift": {
+      "prefix": "RShift",
+      "body": "RShift"
+    },
+    "Alt": {
+      "prefix": "Alt",
+      "body": "Alt"
+    },
+    "LAlt": {
+      "prefix": "LAlt",
+      "body": "LAlt"
+    },
+    "RAlt": {
+      "prefix": "RAlt",
+      "body": "RAlt"
+    },
+    "Control": {
+      "prefix": "Control",
+      "body": "Control"
+    },
+    "LControl": {
+      "prefix": "LControl",
+      "body": "LControl"
+    },
+    "RControl": {
+      "prefix": "RControl",
+      "body": "RControl"
+    },
+    "Ctrl": {
+      "prefix": "Ctrl",
+      "body": "Ctrl"
+    },
+    "LCtrl": {
+      "prefix": "LCtrl",
+      "body": "LCtrl"
+    },
+    "RCtrl": {
+      "prefix": "RCtrl",
+      "body": "RCtrl"
+    },
+    "LWin": {
+      "prefix": "LWin",
+      "body": "LWin"
+    },
+    "RWin": {
+      "prefix": "RWin",
+      "body": "RWin"
+    },
+    "AppsKey": {
+      "prefix": "AppsKey",
+      "body": "AppsKey"
+    },
+    "AltDown": {
+      "prefix": "AltDown",
+      "body": "AltDown"
+    },
+    "AltUp": {
+      "prefix": "AltUp",
+      "body": "AltUp"
+    },
+    "ShiftDown": {
+      "prefix": "ShiftDown",
+      "body": "ShiftDown"
+    },
+    "ShiftUp": {
+      "prefix": "ShiftUp",
+      "body": "ShiftUp"
+    },
+    "CtrlDown": {
+      "prefix": "CtrlDown",
+      "body": "CtrlDown"
+    },
+    "CtrlUp": {
+      "prefix": "CtrlUp",
+      "body": "CtrlUp"
+    },
+    "LWinDown": {
+      "prefix": "LWinDown",
+      "body": "LWinDown"
+    },
+    "LWinUp": {
+      "prefix": "LWinUp",
+      "body": "LWinUp"
+    },
+    "RWinDown": {
+      "prefix": "RWinDown",
+      "body": "RWinDown"
+    },
+    "RWinUp": {
+      "prefix": "RWinUp",
+      "body": "RWinUp"
+    },
+    "LButton": {
+      "prefix": "LButton",
+      "body": "LButton"
+    },
+    "RButton": {
+      "prefix": "RButton",
+      "body": "RButton"
+    },
+    "MButton": {
+      "prefix": "MButton",
+      "body": "MButton"
+    },
+    "WheelUp": {
+      "prefix": "WheelUp",
+      "body": "WheelUp"
+    },
+    "WheelDown": {
+      "prefix": "WheelDown",
+      "body": "WheelDown"
+    },
+    "WheelLeft": {
+      "prefix": "WheelLeft",
+      "body": "WheelLeft"
+    },
+    "WheelRight": {
+      "prefix": "WheelRight",
+      "body": "WheelRight"
+    },
+    "XButton1": {
+      "prefix": "XButton1",
+      "body": "XButton1"
+    },
+    "XButton2": {
+      "prefix": "XButton2",
+      "body": "XButton2"
+    },
+    "Joy1": {
+      "prefix": "Joy1",
+      "body": "Joy1"
+    },
+    "Joy2": {
+      "prefix": "Joy2",
+      "body": "Joy2"
+    },
+    "Joy3": {
+      "prefix": "Joy3",
+      "body": "Joy3"
+    },
+    "Joy4": {
+      "prefix": "Joy4",
+      "body": "Joy4"
+    },
+    "Joy5": {
+      "prefix": "Joy5",
+      "body": "Joy5"
+    },
+    "Joy6": {
+      "prefix": "Joy6",
+      "body": "Joy6"
+    },
+    "Joy7": {
+      "prefix": "Joy7",
+      "body": "Joy7"
+    },
+    "Joy8": {
+      "prefix": "Joy8",
+      "body": "Joy8"
+    },
+    "Joy9": {
+      "prefix": "Joy9",
+      "body": "Joy9"
+    },
+    "Joy10": {
+      "prefix": "Joy10",
+      "body": "Joy10"
+    },
+    "Joy11": {
+      "prefix": "Joy11",
+      "body": "Joy11"
+    },
+    "Joy12": {
+      "prefix": "Joy12",
+      "body": "Joy12"
+    },
+    "Joy13": {
+      "prefix": "Joy13",
+      "body": "Joy13"
+    },
+    "Joy14": {
+      "prefix": "Joy14",
+      "body": "Joy14"
+    },
+    "Joy15": {
+      "prefix": "Joy15",
+      "body": "Joy15"
+    },
+    "Joy16": {
+      "prefix": "Joy16",
+      "body": "Joy16"
+    },
+    "Joy17": {
+      "prefix": "Joy17",
+      "body": "Joy17"
+    },
+    "Joy18": {
+      "prefix": "Joy18",
+      "body": "Joy18"
+    },
+    "Joy19": {
+      "prefix": "Joy19",
+      "body": "Joy19"
+    },
+    "Joy20": {
+      "prefix": "Joy20",
+      "body": "Joy20"
+    },
+    "Joy21": {
+      "prefix": "Joy21",
+      "body": "Joy21"
+    },
+    "Joy22": {
+      "prefix": "Joy22",
+      "body": "Joy22"
+    },
+    "Joy23": {
+      "prefix": "Joy23",
+      "body": "Joy23"
+    },
+    "Joy24": {
+      "prefix": "Joy24",
+      "body": "Joy24"
+    },
+    "Joy25": {
+      "prefix": "Joy25",
+      "body": "Joy25"
+    },
+    "Joy26": {
+      "prefix": "Joy26",
+      "body": "Joy26"
+    },
+    "Joy27": {
+      "prefix": "Joy27",
+      "body": "Joy27"
+    },
+    "Joy28": {
+      "prefix": "Joy28",
+      "body": "Joy28"
+    },
+    "Joy29": {
+      "prefix": "Joy29",
+      "body": "Joy29"
+    },
+    "Joy30": {
+      "prefix": "Joy30",
+      "body": "Joy30"
+    },
+    "Joy31": {
+      "prefix": "Joy31",
+      "body": "Joy31"
+    },
+    "Joy32": {
+      "prefix": "Joy32",
+      "body": "Joy32"
+    },
+    "JoyX": {
+      "prefix": "JoyX",
+      "body": "JoyX"
+    },
+    "JoyY": {
+      "prefix": "JoyY",
+      "body": "JoyY"
+    },
+    "JoyZ": {
+      "prefix": "JoyZ",
+      "body": "JoyZ"
+    },
+    "JoyR": {
+      "prefix": "JoyR",
+      "body": "JoyR"
+    },
+    "JoyU": {
+      "prefix": "JoyU",
+      "body": "JoyU"
+    },
+    "JoyV": {
+      "prefix": "JoyV",
+      "body": "JoyV"
+    },
+    "JoyPOV": {
+      "prefix": "JoyPOV",
+      "body": "JoyPOV"
+    },
+    "JoyName": {
+      "prefix": "JoyName",
+      "body": "JoyName"
+    },
+    "JoyButtons": {
+      "prefix": "JoyButtons",
+      "body": "JoyButtons"
+    },
+    "JoyAxes": {
+      "prefix": "JoyAxes",
+      "body": "JoyAxes"
+    },
+    "JoyInfo": {
+      "prefix": "JoyInfo",
+      "body": "JoyInfo"
+    },
+    "Space": {
+      "prefix": "Space",
+      "body": "Space"
+    },
+    "Tab": {
+      "prefix": "Tab",
+      "body": "Tab"
+    },
+    "Enter": {
+      "prefix": "Enter",
+      "body": "Enter"
+    },
+    "Escape": {
+      "prefix": "Escape",
+      "body": "Escape"
+    },
+    "Esc": {
+      "prefix": "Esc",
+      "body": "Esc"
+    },
+    "BackSpace": {
+      "prefix": "BackSpace",
+      "body": "BackSpace"
+    },
+    "BS": {
+      "prefix": "BS",
+      "body": "BS"
+    },
+    "Delete": {
+      "prefix": "Delete",
+      "body": "Delete"
+    },
+    "Del": {
+      "prefix": "Del",
+      "body": "Del"
+    },
+    "Insert": {
+      "prefix": "Insert",
+      "body": "Insert"
+    },
+    "Ins": {
+      "prefix": "Ins",
+      "body": "Ins"
+    },
+    "PgUp": {
+      "prefix": "PgUp",
+      "body": "PgUp"
+    },
+    "PgDn": {
+      "prefix": "PgDn",
+      "body": "PgDn"
+    },
+    "Home": {
+      "prefix": "Home",
+      "body": "Home"
+    },
+    "End": {
+      "prefix": "End",
+      "body": "End"
+    },
+    "Up": {
+      "prefix": "Up",
+      "body": "Up"
+    },
+    "Down": {
+      "prefix": "Down",
+      "body": "Down"
+    },
+    "Left": {
+      "prefix": "Left",
+      "body": "Left"
+    },
+    "Right": {
+      "prefix": "Right",
+      "body": "Right"
+    },
+    "PrintScreen": {
+      "prefix": "PrintScreen",
+      "body": "PrintScreen"
+    },
+    "CtrlBreak": {
+      "prefix": "CtrlBreak",
+      "body": "CtrlBreak"
+    },
+    "Pause": {
+      "prefix": "Pause",
+      "body": "Pause"
+    },
+    "ScrollLock": {
+      "prefix": "ScrollLock",
+      "body": "ScrollLock"
+    },
+    "CapsLock": {
+      "prefix": "CapsLock",
+      "body": "CapsLock"
+    },
+    "NumLock": {
+      "prefix": "NumLock",
+      "body": "NumLock"
+    },
+    "Numpad0": {
+      "prefix": "Numpad0",
+      "body": "Numpad0"
+    },
+    "Numpad1": {
+      "prefix": "Numpad1",
+      "body": "Numpad1"
+    },
+    "Numpad2": {
+      "prefix": "Numpad2",
+      "body": "Numpad2"
+    },
+    "Numpad3": {
+      "prefix": "Numpad3",
+      "body": "Numpad3"
+    },
+    "Numpad4": {
+      "prefix": "Numpad4",
+      "body": "Numpad4"
+    },
+    "Numpad5": {
+      "prefix": "Numpad5",
+      "body": "Numpad5"
+    },
+    "Numpad6": {
+      "prefix": "Numpad6",
+      "body": "Numpad6"
+    },
+    "Numpad7": {
+      "prefix": "Numpad7",
+      "body": "Numpad7"
+    },
+    "Numpad8": {
+      "prefix": "Numpad8",
+      "body": "Numpad8"
+    },
+    "Numpad9": {
+      "prefix": "Numpad9",
+      "body": "Numpad9"
+    },
+    "NumpadMult": {
+      "prefix": "NumpadMult",
+      "body": "NumpadMult"
+    },
+    "NumpadAdd": {
+      "prefix": "NumpadAdd",
+      "body": "NumpadAdd"
+    },
+    "NumpadSub": {
+      "prefix": "NumpadSub",
+      "body": "NumpadSub"
+    },
+    "NumpadDiv": {
+      "prefix": "NumpadDiv",
+      "body": "NumpadDiv"
+    },
+    "NumpadDot": {
+      "prefix": "NumpadDot",
+      "body": "NumpadDot"
+    },
+    "NumpadDel": {
+      "prefix": "NumpadDel",
+      "body": "NumpadDel"
+    },
+    "NumpadIns": {
+      "prefix": "NumpadIns",
+      "body": "NumpadIns"
+    },
+    "NumpadClear": {
+      "prefix": "NumpadClear",
+      "body": "NumpadClear"
+    },
+    "NumpadUp": {
+      "prefix": "NumpadUp",
+      "body": "NumpadUp"
+    },
+    "NumpadDown": {
+      "prefix": "NumpadDown",
+      "body": "NumpadDown"
+    },
+    "NumpadLeft": {
+      "prefix": "NumpadLeft",
+      "body": "NumpadLeft"
+    },
+    "NumpadRight": {
+      "prefix": "NumpadRight",
+      "body": "NumpadRight"
+    },
+    "NumpadHome": {
+      "prefix": "NumpadHome",
+      "body": "NumpadHome"
+    },
+    "NumpadEnd": {
+      "prefix": "NumpadEnd",
+      "body": "NumpadEnd"
+    },
+    "NumpadPgup": {
+      "prefix": "NumpadPgup",
+      "body": "NumpadPgup"
+    },
+    "NumpadPgdn": {
+      "prefix": "NumpadPgdn",
+      "body": "NumpadPgdn"
+    },
+    "NumpadEnter": {
+      "prefix": "NumpadEnter",
+      "body": "NumpadEnter"
+    },
+    "F1": {
+      "prefix": "F1",
+      "body": "F1"
+    },
+    "F2": {
+      "prefix": "F2",
+      "body": "F2"
+    },
+    "F3": {
+      "prefix": "F3",
+      "body": "F3"
+    },
+    "F4": {
+      "prefix": "F4",
+      "body": "F4"
+    },
+    "F5": {
+      "prefix": "F5",
+      "body": "F5"
+    },
+    "F6": {
+      "prefix": "F6",
+      "body": "F6"
+    },
+    "F7": {
+      "prefix": "F7",
+      "body": "F7"
+    },
+    "F8": {
+      "prefix": "F8",
+      "body": "F8"
+    },
+    "F9": {
+      "prefix": "F9",
+      "body": "F9"
+    },
+    "F10": {
+      "prefix": "F10",
+      "body": "F10"
+    },
+    "F11": {
+      "prefix": "F11",
+      "body": "F11"
+    },
+    "F12": {
+      "prefix": "F12",
+      "body": "F12"
+    },
+    "F13": {
+      "prefix": "F13",
+      "body": "F13"
+    },
+    "F14": {
+      "prefix": "F14",
+      "body": "F14"
+    },
+    "F15": {
+      "prefix": "F15",
+      "body": "F15"
+    },
+    "F16": {
+      "prefix": "F16",
+      "body": "F16"
+    },
+    "F17": {
+      "prefix": "F17",
+      "body": "F17"
+    },
+    "F18": {
+      "prefix": "F18",
+      "body": "F18"
+    },
+    "F19": {
+      "prefix": "F19",
+      "body": "F19"
+    },
+    "F20": {
+      "prefix": "F20",
+      "body": "F20"
+    },
+    "F21": {
+      "prefix": "F21",
+      "body": "F21"
+    },
+    "F22": {
+      "prefix": "F22",
+      "body": "F22"
+    },
+    "F23": {
+      "prefix": "F23",
+      "body": "F23"
+    },
+    "F24": {
+      "prefix": "F24",
+      "body": "F24"
+    },
+    "Browser_Back": {
+      "prefix": "Browser_Back",
+      "body": "Browser_Back"
+    },
+    "Browser_Forward": {
+      "prefix": "Browser_Forward",
+      "body": "Browser_Forward"
+    },
+    "Browser_Refresh": {
+      "prefix": "Browser_Refresh",
+      "body": "Browser_Refresh"
+    },
+    "Browser_Stop": {
+      "prefix": "Browser_Stop",
+      "body": "Browser_Stop"
+    },
+    "Browser_Search": {
+      "prefix": "Browser_Search",
+      "body": "Browser_Search"
+    },
+    "Browser_Favorites": {
+      "prefix": "Browser_Favorites",
+      "body": "Browser_Favorites"
+    },
+    "Browser_Home": {
+      "prefix": "Browser_Home",
+      "body": "Browser_Home"
+    },
+    "Volume_Mute": {
+      "prefix": "Volume_Mute",
+      "body": "Volume_Mute"
+    },
+    "Volume_Down": {
+      "prefix": "Volume_Down",
+      "body": "Volume_Down"
+    },
+    "Volume_Up": {
+      "prefix": "Volume_Up",
+      "body": "Volume_Up"
+    },
+    "Media_Next": {
+      "prefix": "Media_Next",
+      "body": "Media_Next"
+    },
+    "Media_Prev": {
+      "prefix": "Media_Prev",
+      "body": "Media_Prev"
+    },
+    "Media_Stop": {
+      "prefix": "Media_Stop",
+      "body": "Media_Stop"
+    },
+    "Media_Play_Pause": {
+      "prefix": "Media_Play_Pause",
+      "body": "Media_Play_Pause"
+    },
+    "Launch_Mail": {
+      "prefix": "Launch_Mail",
+      "body": "Launch_Mail"
+    },
+    "Launch_Media": {
+      "prefix": "Launch_Media",
+      "body": "Launch_Media"
+    },
+    "Launch_App1": {
+      "prefix": "Launch_App1",
+      "body": "Launch_App1"
+    },
+    "Launch_App2": {
+      "prefix": "Launch_App2",
+      "body": "Launch_App2"
+    },
+    "Pixel": {
+      "prefix": "Pixel",
+      "body": "Pixel"
+    },
+    "Mouse": {
+      "prefix": "Mouse",
+      "body": "Mouse"
+    },
+    "Screen": {
+      "prefix": "Screen",
+      "body": "Screen"
+    },
+    "Relative": {
+      "prefix": "Relative",
+      "body": "Relative"
+    },
+    "RGB": {
+      "prefix": "RGB",
+      "body": "RGB"
+    },
+    "LTrim": {
+      "prefix": "LTrim",
+      "body": "LTrim"
+    },
+    "RTrim": {
+      "prefix": "RTrim",
+      "body": "RTrim"
+    },
+    "Join": {
+      "prefix": "Join",
+      "body": "Join"
+    },
+    "Low": {
+      "prefix": "Low",
+      "body": "Low"
+    },
+    "BelowNormal": {
+      "prefix": "BelowNormal",
+      "body": "BelowNormal"
+    },
+    "Normal": {
+      "prefix": "Normal",
+      "body": "Normal"
+    },
+    "AboveNormal": {
+      "prefix": "AboveNormal",
+      "body": "AboveNormal"
+    },
+    "High": {
+      "prefix": "High",
+      "body": "High"
+    },
+    "Realtime": {
+      "prefix": "Realtime",
+      "body": "Realtime"
+    },
+    "ahk_id": {
+      "prefix": "ahk_id",
+      "body": "ahk_id"
+    },
+    "ahk_pid": {
+      "prefix": "ahk_pid",
+      "body": "ahk_pid"
+    },
+    "ahk_class": {
+      "prefix": "ahk_class",
+      "body": "ahk_class"
+    },
+    "ahk_group": {
+      "prefix": "ahk_group",
+      "body": "ahk_group"
+    },
+    "ahk_exe": {
+      "prefix": "ahk_exe",
+      "body": "ahk_exe"
+    },
+    "Between": {
+      "prefix": "Between",
+      "body": "Between"
+    },
+    "Contains": {
+      "prefix": "Contains",
+      "body": "Contains"
+    },
+    "In": {
+      "prefix": "In",
+      "body": "In"
+    },
+    "Is": {
+      "prefix": "Is",
+      "body": "Is"
+    },
+    "Integer": {
+      "prefix": "Integer",
+      "body": "Integer"
+    },
+    "Float": {
+      "prefix": "Float",
+      "body": "Float"
+    },
+    "IntegerFast": {
+      "prefix": "IntegerFast",
+      "body": "IntegerFast"
+    },
+    "FloatFast": {
+      "prefix": "FloatFast",
+      "body": "FloatFast"
+    },
+    "Number": {
+      "prefix": "Number",
+      "body": "Number"
+    },
+    "Digit": {
+      "prefix": "Digit",
+      "body": "Digit"
+    },
+    "Xdigit": {
+      "prefix": "Xdigit",
+      "body": "Xdigit"
+    },
+    "Alpha": {
+      "prefix": "Alpha",
+      "body": "Alpha"
+    },
+    "Upper": {
+      "prefix": "Upper",
+      "body": "Upper"
+    },
+    "Lower": {
+      "prefix": "Lower",
+      "body": "Lower"
+    },
+    "Alnum": {
+      "prefix": "Alnum",
+      "body": "Alnum"
+    },
+    "Time": {
+      "prefix": "Time",
+      "body": "Time"
+    },
+    "Date": {
+      "prefix": "Date",
+      "body": "Date"
+    },
+    "Not": {
+      "prefix": "Not",
+      "body": "Not"
+    },
+    "Or": {
+      "prefix": "Or",
+      "body": "Or"
+    },
+    "And": {
+      "prefix": "And",
+      "body": "And"
+    },
+    "AlwaysOnTop": {
+      "prefix": "AlwaysOnTop",
+      "body": "AlwaysOnTop"
+    },
+    "Topmost": {
+      "prefix": "Topmost",
+      "body": "Topmost"
+    },
+    "Top": {
+      "prefix": "Top",
+      "body": "Top"
+    },
+    "Bottom": {
+      "prefix": "Bottom",
+      "body": "Bottom"
+    },
+    "Transparent": {
+      "prefix": "Transparent",
+      "body": "Transparent"
+    },
+    "TransColor": {
+      "prefix": "TransColor",
+      "body": "TransColor"
+    },
+    "Redraw": {
+      "prefix": "Redraw",
+      "body": "Redraw"
+    },
+    "Region": {
+      "prefix": "Region",
+      "body": "Region"
+    },
+    "ID": {
+      "prefix": "ID",
+      "body": "ID"
+    },
+    "IDLast": {
+      "prefix": "IDLast",
+      "body": "IDLast"
+    },
+    "ProcessName": {
+      "prefix": "ProcessName",
+      "body": "ProcessName"
+    },
+    "MinMax": {
+      "prefix": "MinMax",
+      "body": "MinMax"
+    },
+    "ControlList": {
+      "prefix": "ControlList",
+      "body": "ControlList"
+    },
+    "Count": {
+      "prefix": "Count",
+      "body": "Count"
+    },
+    "List": {
+      "prefix": "List",
+      "body": "List"
+    },
+    "Capacity": {
+      "prefix": "Capacity",
+      "body": "Capacity"
+    },
+    "StatusCD": {
+      "prefix": "StatusCD",
+      "body": "StatusCD"
+    },
+    "Eject": {
+      "prefix": "Eject",
+      "body": "Eject"
+    },
+    "Lock": {
+      "prefix": "Lock",
+      "body": "Lock"
+    },
+    "Unlock": {
+      "prefix": "Unlock",
+      "body": "Unlock"
+    },
+    "Label": {
+      "prefix": "Label",
+      "body": "Label"
+    },
+    "FileSystem": {
+      "prefix": "FileSystem",
+      "body": "FileSystem"
+    },
+    "Label": {
+      "prefix": "Label",
+      "body": "Label"
+    },
+    "SetLabel": {
+      "prefix": "SetLabel",
+      "body": "SetLabel"
+    },
+    "Serial": {
+      "prefix": "Serial",
+      "body": "Serial"
+    },
+    "Type": {
+      "prefix": "Type",
+      "body": "Type"
+    },
+    "Status": {
+      "prefix": "Status",
+      "body": "Status"
+    },
+    "static": {
+      "prefix": "static",
+      "body": "static"
+    },
+    "global": {
+      "prefix": "global",
+      "body": "global"
+    },
+    "local": {
+      "prefix": "local",
+      "body": "local"
+    },
+    "ByRef": {
+      "prefix": "ByRef",
+      "body": "ByRef"
+    },
+    "Seconds": {
+      "prefix": "Seconds",
+      "body": "Seconds"
+    },
+    "Minutes": {
+      "prefix": "Minutes",
+      "body": "Minutes"
+    },
+    "Hours": {
+      "prefix": "Hours",
+      "body": "Hours"
+    },
+    "Days": {
+      "prefix": "Days",
+      "body": "Days"
+    },
+    "Read": {
+      "prefix": "Read",
+      "body": "Read"
+    },
+    "Parse": {
+      "prefix": "Parse",
+      "body": "Parse"
+    },
+    "Logoff": {
+      "prefix": "Logoff",
+      "body": "Logoff"
+    },
+    "Close": {
+      "prefix": "Close",
+      "body": "Close"
+    },
+    "Error": {
+      "prefix": "Error",
+      "body": "Error"
+    },
+    "Single": {
+      "prefix": "Single",
+      "body": "Single"
+    },
+    "Tray": {
+      "prefix": "Tray",
+      "body": "Tray"
+    },
+    "Add": {
+      "prefix": "Add",
+      "body": "Add"
+    },
+    "Rename": {
+      "prefix": "Rename",
+      "body": "Rename"
+    },
+    "Check": {
+      "prefix": "Check",
+      "body": "Check"
+    },
+    "UnCheck": {
+      "prefix": "UnCheck",
+      "body": "UnCheck"
+    },
+    "ToggleCheck": {
+      "prefix": "ToggleCheck",
+      "body": "ToggleCheck"
+    },
+    "Enable": {
+      "prefix": "Enable",
+      "body": "Enable"
+    },
+    "Disable": {
+      "prefix": "Disable",
+      "body": "Disable"
+    },
+    "ToggleEnable": {
+      "prefix": "ToggleEnable",
+      "body": "ToggleEnable"
+    },
+    "Default": {
+      "prefix": "Default",
+      "body": "Default"
+    },
+    "NoDefault": {
+      "prefix": "NoDefault",
+      "body": "NoDefault"
+    },
+    "Standard": {
+      "prefix": "Standard",
+      "body": "Standard"
+    },
+    "NoStandard": {
+      "prefix": "NoStandard",
+      "body": "NoStandard"
+    },
+    "Color": {
+      "prefix": "Color",
+      "body": "Color"
+    },
+    "Delete": {
+      "prefix": "Delete",
+      "body": "Delete"
+    },
+    "DeleteAll": {
+      "prefix": "DeleteAll",
+      "body": "DeleteAll"
+    },
+    "Icon": {
+      "prefix": "Icon",
+      "body": "Icon"
+    },
+    "NoIcon": {
+      "prefix": "NoIcon",
+      "body": "NoIcon"
+    },
+    "Tip": {
+      "prefix": "Tip",
+      "body": "Tip"
+    },
+    "Click": {
+      "prefix": "Click",
+      "body": "Click"
+    },
+    "Show": {
+      "prefix": "Show",
+      "body": "Show"
+    },
+    "MainWindow": {
+      "prefix": "MainWindow",
+      "body": "MainWindow"
+    },
+    "NoMainWindow": {
+      "prefix": "NoMainWindow",
+      "body": "NoMainWindow"
+    },
+    "UseErrorLevel": {
+      "prefix": "UseErrorLevel",
+      "body": "UseErrorLevel"
+    },
+    "Text": {
+      "prefix": "Text",
+      "body": "Text"
+    },
+    "Picture": {
+      "prefix": "Picture",
+      "body": "Picture"
+    },
+    "Pic": {
+      "prefix": "Pic",
+      "body": "Pic"
+    },
+    "GroupBox": {
+      "prefix": "GroupBox",
+      "body": "GroupBox"
+    },
+    "Button": {
+      "prefix": "Button",
+      "body": "Button"
+    },
+    "Checkbox": {
+      "prefix": "Checkbox",
+      "body": "Checkbox"
+    },
+    "Radio": {
+      "prefix": "Radio",
+      "body": "Radio"
+    },
+    "DropDownList": {
+      "prefix": "DropDownList",
+      "body": "DropDownList"
+    },
+    "DDL": {
+      "prefix": "DDL",
+      "body": "DDL"
+    },
+    "ComboBox": {
+      "prefix": "ComboBox",
+      "body": "ComboBox"
+    },
+    "ListBox": {
+      "prefix": "ListBox",
+      "body": "ListBox"
+    },
+    "ListView": {
+      "prefix": "ListView",
+      "body": "ListView"
+    },
+    "DateTime": {
+      "prefix": "DateTime",
+      "body": "DateTime"
+    },
+    "MonthCal": {
+      "prefix": "MonthCal",
+      "body": "MonthCal"
+    },
+    "Slider": {
+      "prefix": "Slider",
+      "body": "Slider"
+    },
+    "StatusBar": {
+      "prefix": "StatusBar",
+      "body": "StatusBar"
+    },
+    "Tab": {
+      "prefix": "Tab",
+      "body": "Tab"
+    },
+    "Tab2": {
+      "prefix": "Tab2",
+      "body": "Tab2"
+    },
+    "TreeView": {
+      "prefix": "TreeView",
+      "body": "TreeView"
+    },
+    "UpDown": {
+      "prefix": "UpDown",
+      "body": "UpDown"
+    },
+    "IconSmall": {
+      "prefix": "IconSmall",
+      "body": "IconSmall"
+    },
+    "Tile": {
+      "prefix": "Tile",
+      "body": "Tile"
+    },
+    "Report": {
+      "prefix": "Report",
+      "body": "Report"
+    },
+    "SortDesc": {
+      "prefix": "SortDesc",
+      "body": "SortDesc"
+    },
+    "NoSort": {
+      "prefix": "NoSort",
+      "body": "NoSort"
+    },
+    "NoSortHdr": {
+      "prefix": "NoSortHdr",
+      "body": "NoSortHdr"
+    },
+    "Grid": {
+      "prefix": "Grid",
+      "body": "Grid"
+    },
+    "Hdr": {
+      "prefix": "Hdr",
+      "body": "Hdr"
+    },
+    "AutoSize": {
+      "prefix": "AutoSize",
+      "body": "AutoSize"
+    },
+    "Range": {
+      "prefix": "Range",
+      "body": "Range"
+    },
+    "xm": {
+      "prefix": "xm",
+      "body": "xm"
+    },
+    "ym": {
+      "prefix": "ym",
+      "body": "ym"
+    },
+    "ys": {
+      "prefix": "ys",
+      "body": "ys"
+    },
+    "xs": {
+      "prefix": "xs",
+      "body": "xs"
+    },
+    "xp": {
+      "prefix": "xp",
+      "body": "xp"
+    },
+    "yp": {
+      "prefix": "yp",
+      "body": "yp"
+    },
+    "Font": {
+      "prefix": "Font",
+      "body": "Font"
+    },
+    "Resize": {
+      "prefix": "Resize",
+      "body": "Resize"
+    },
+    "Owner": {
+      "prefix": "Owner",
+      "body": "Owner"
+    },
+    "Submit": {
+      "prefix": "Submit",
+      "body": "Submit"
+    },
+    "NoHide": {
+      "prefix": "NoHide",
+      "body": "NoHide"
+    },
+    "Minimize": {
+      "prefix": "Minimize",
+      "body": "Minimize"
+    },
+    "Maximize": {
+      "prefix": "Maximize",
+      "body": "Maximize"
+    },
+    "Restore": {
+      "prefix": "Restore",
+      "body": "Restore"
+    },
+    "NoActivate": {
+      "prefix": "NoActivate",
+      "body": "NoActivate"
+    },
+    "NA": {
+      "prefix": "NA",
+      "body": "NA"
+    },
+    "Cancel": {
+      "prefix": "Cancel",
+      "body": "Cancel"
+    },
+    "Destroy": {
+      "prefix": "Destroy",
+      "body": "Destroy"
+    },
+    "Center": {
+      "prefix": "Center",
+      "body": "Center"
+    },
+    "Margin": {
+      "prefix": "Margin",
+      "body": "Margin"
+    },
+    "MaxSize": {
+      "prefix": "MaxSize",
+      "body": "MaxSize"
+    },
+    "MinSize": {
+      "prefix": "MinSize",
+      "body": "MinSize"
+    },
+    "OwnDialogs": {
+      "prefix": "OwnDialogs",
+      "body": "OwnDialogs"
+    },
+    "GuiEscape": {
+      "prefix": "GuiEscape",
+      "body": "GuiEscape"
+    },
+    "GuiClose": {
+      "prefix": "GuiClose",
+      "body": "GuiClose"
+    },
+    "GuiSize": {
+      "prefix": "GuiSize",
+      "body": "GuiSize"
+    },
+    "GuiContextMenu": {
+      "prefix": "GuiContextMenu",
+      "body": "GuiContextMenu"
+    },
+    "GuiDropFiles": {
+      "prefix": "GuiDropFiles",
+      "body": "GuiDropFiles"
+    },
+    "TabStop": {
+      "prefix": "TabStop",
+      "body": "TabStop"
+    },
+    "Section": {
+      "prefix": "Section",
+      "body": "Section"
+    },
+    "AltSubmit": {
+      "prefix": "AltSubmit",
+      "body": "AltSubmit"
+    },
+    "Wrap": {
+      "prefix": "Wrap",
+      "body": "Wrap"
+    },
+    "HScroll": {
+      "prefix": "HScroll",
+      "body": "HScroll"
+    },
+    "VScroll": {
+      "prefix": "VScroll",
+      "body": "VScroll"
+    },
+    "Border": {
+      "prefix": "Border",
+      "body": "Border"
+    },
+    "Top": {
+      "prefix": "Top",
+      "body": "Top"
+    },
+    "Bottom": {
+      "prefix": "Bottom",
+      "body": "Bottom"
+    },
+    "Buttons": {
+      "prefix": "Buttons",
+      "body": "Buttons"
+    },
+    "Expand": {
+      "prefix": "Expand",
+      "body": "Expand"
+    },
+    "First": {
+      "prefix": "First",
+      "body": "First"
+    },
+    "ImageList": {
+      "prefix": "ImageList",
+      "body": "ImageList"
+    },
+    "Lines": {
+      "prefix": "Lines",
+      "body": "Lines"
+    },
+    "WantCtrlA": {
+      "prefix": "WantCtrlA",
+      "body": "WantCtrlA"
+    },
+    "WantF2": {
+      "prefix": "WantF2",
+      "body": "WantF2"
+    },
+    "Vis": {
+      "prefix": "Vis",
+      "body": "Vis"
+    },
+    "VisFirst": {
+      "prefix": "VisFirst",
+      "body": "VisFirst"
+    },
+    "Number": {
+      "prefix": "Number",
+      "body": "Number"
+    },
+    "Uppercase": {
+      "prefix": "Uppercase",
+      "body": "Uppercase"
+    },
+    "Lowercase": {
+      "prefix": "Lowercase",
+      "body": "Lowercase"
+    },
+    "Limit": {
+      "prefix": "Limit",
+      "body": "Limit"
+    },
+    "Password": {
+      "prefix": "Password",
+      "body": "Password"
+    },
+    "Multi": {
+      "prefix": "Multi",
+      "body": "Multi"
+    },
+    "WantReturn": {
+      "prefix": "WantReturn",
+      "body": "WantReturn"
+    },
+    "Group": {
+      "prefix": "Group",
+      "body": "Group"
+    },
+    "Background": {
+      "prefix": "Background",
+      "body": "Background"
+    },
+    "bold": {
+      "prefix": "bold",
+      "body": "bold"
+    },
+    "italic": {
+      "prefix": "italic",
+      "body": "italic"
+    },
+    "strike": {
+      "prefix": "strike",
+      "body": "strike"
+    },
+    "underline": {
+      "prefix": "underline",
+      "body": "underline"
+    },
+    "norm": {
+      "prefix": "norm",
+      "body": "norm"
+    },
+    "BackgroundTrans": {
+      "prefix": "BackgroundTrans",
+      "body": "BackgroundTrans"
+    },
+    "Theme": {
+      "prefix": "Theme",
+      "body": "Theme"
+    },
+    "Caption": {
+      "prefix": "Caption",
+      "body": "Caption"
+    },
+    "Delimiter": {
+      "prefix": "Delimiter",
+      "body": "Delimiter"
+    },
+    "MinimizeBox": {
+      "prefix": "MinimizeBox",
+      "body": "MinimizeBox"
+    },
+    "MaximizeBox": {
+      "prefix": "MaximizeBox",
+      "body": "MaximizeBox"
+    },
+    "SysMenu": {
+      "prefix": "SysMenu",
+      "body": "SysMenu"
+    },
+    "ToolWindow": {
+      "prefix": "ToolWindow",
+      "body": "ToolWindow"
+    },
+    "Flash": {
+      "prefix": "Flash",
+      "body": "Flash"
+    },
+    "Style": {
+      "prefix": "Style",
+      "body": "Style"
+    },
+    "ExStyle": {
+      "prefix": "ExStyle",
+      "body": "ExStyle"
+    },
+    "Check3": {
+      "prefix": "Check3",
+      "body": "Check3"
+    },
+    "Checked": {
+      "prefix": "Checked",
+      "body": "Checked"
+    },
+    "CheckedGray": {
+      "prefix": "CheckedGray",
+      "body": "CheckedGray"
+    },
+    "ReadOnly": {
+      "prefix": "ReadOnly",
+      "body": "ReadOnly"
+    },
+    "Password": {
+      "prefix": "Password",
+      "body": "Password"
+    },
+    "Hidden": {
+      "prefix": "Hidden",
+      "body": "Hidden"
+    },
+    "Left": {
+      "prefix": "Left",
+      "body": "Left"
+    },
+    "Right": {
+      "prefix": "Right",
+      "body": "Right"
+    },
+    "Center": {
+      "prefix": "Center",
+      "body": "Center"
+    },
+    "NoTab": {
+      "prefix": "NoTab",
+      "body": "NoTab"
+    },
+    "Section": {
+      "prefix": "Section",
+      "body": "Section"
+    },
+    "Move": {
+      "prefix": "Move",
+      "body": "Move"
+    },
+    "Focus": {
+      "prefix": "Focus",
+      "body": "Focus"
+    },
+    "Hide": {
+      "prefix": "Hide",
+      "body": "Hide"
+    },
+    "Choose": {
+      "prefix": "Choose",
+      "body": "Choose"
+    },
+    "ChooseString": {
+      "prefix": "ChooseString",
+      "body": "ChooseString"
+    },
+    "Text": {
+      "prefix": "Text",
+      "body": "Text"
+    },
+    "Pos": {
+      "prefix": "Pos",
+      "body": "Pos"
+    },
+    "Enabled": {
+      "prefix": "Enabled",
+      "body": "Enabled"
+    },
+    "Disabled": {
+      "prefix": "Disabled",
+      "body": "Disabled"
+    },
+    "Visible": {
+      "prefix": "Visible",
+      "body": "Visible"
+    },
+    "LastFound": {
+      "prefix": "LastFound",
+      "body": "LastFound"
+    },
+    "LastFoundExist": {
+      "prefix": "LastFoundExist",
+      "body": "LastFoundExist"
+    },
+    "AltTab": {
+      "prefix": "AltTab",
+      "body": "AltTab"
+    },
+    "ShiftAltTab": {
+      "prefix": "ShiftAltTab",
+      "body": "ShiftAltTab"
+    },
+    "AltTabMenu": {
+      "prefix": "AltTabMenu",
+      "body": "AltTabMenu"
+    },
+    "AltTabAndMenu": {
+      "prefix": "AltTabAndMenu",
+      "body": "AltTabAndMenu"
+    },
+    "AltTabMenuDismiss": {
+      "prefix": "AltTabMenuDismiss",
+      "body": "AltTabMenuDismiss"
+    },
+    "NoTimers": {
+      "prefix": "NoTimers",
+      "body": "NoTimers"
+    },
+    "Interrupt": {
+      "prefix": "Interrupt",
+      "body": "Interrupt"
+    },
+    "Priority": {
+      "prefix": "Priority",
+      "body": "Priority"
+    },
+    "WaitClose": {
+      "prefix": "WaitClose",
+      "body": "WaitClose"
+    },
+    "Wait": {
+      "prefix": "Wait",
+      "body": "Wait"
+    },
+    "Exist": {
+      "prefix": "Exist",
+      "body": "Exist"
+    },
+    "Close": {
+      "prefix": "Close",
+      "body": "Close"
+    },
+    "{Blind}": {
+      "prefix": "{Blind}",
+      "body": "{Blind}"
+    },
+    "{Click}": {
+      "prefix": "{Click}",
+      "body": "{Click}"
+    },
+    "{Raw}": {
+      "prefix": "{Raw}",
+      "body": "{Raw}"
+    },
+    "{AltDown}": {
+      "prefix": "{AltDown}",
+      "body": "{AltDown}"
+    },
+    "{AltUp}": {
+      "prefix": "{AltUp}",
+      "body": "{AltUp}"
+    },
+    "{ShiftDown}": {
+      "prefix": "{ShiftDown}",
+      "body": "{ShiftDown}"
+    },
+    "{ShiftUp}": {
+      "prefix": "{ShiftUp}",
+      "body": "{ShiftUp}"
+    },
+    "{CtrlDown}": {
+      "prefix": "{CtrlDown}",
+      "body": "{CtrlDown}"
+    },
+    "{CtrlUp}": {
+      "prefix": "{CtrlUp}",
+      "body": "{CtrlUp}"
+    },
+    "{LWinDown}": {
+      "prefix": "{LWinDown}",
+      "body": "{LWinDown}"
+    },
+    "{LWinUp}": {
+      "prefix": "{LWinUp}",
+      "body": "{LWinUp}"
+    },
+    "{RWinDown}": {
+      "prefix": "{RWinDown}",
+      "body": "{RWinDown}"
+    },
+    "{RWinUp}": {
+      "prefix": "{RWinUp}",
+      "body": "{RWinUp}"
+    },
+    "Unicode": {
+      "prefix": "Unicode",
+      "body": "Unicode"
+    },
+    "Asc": {
+      "prefix": "Asc",
+      "body": "Asc"
+    },
+    "Chr": {
+      "prefix": "Chr",
+      "body": "Chr"
+    },
+    "Deref": {
+      "prefix": "Deref",
+      "body": "Deref"
+    },
+    "Mod": {
+      "prefix": "Mod",
+      "body": "Mod"
+    },
+    "Pow": {
+      "prefix": "Pow",
+      "body": "Pow"
+    },
+    "Exp": {
+      "prefix": "Exp",
+      "body": "Exp"
+    },
+    "Sqrt": {
+      "prefix": "Sqrt",
+      "body": "Sqrt"
+    },
+    "Log": {
+      "prefix": "Log",
+      "body": "Log"
+    },
+    "Ln": {
+      "prefix": "Ln",
+      "body": "Ln"
+    },
+    "Round": {
+      "prefix": "Round",
+      "body": "Round"
+    },
+    "Ceil": {
+      "prefix": "Ceil",
+      "body": "Ceil"
+    },
+    "Floor": {
+      "prefix": "Floor",
+      "body": "Floor"
+    },
+    "Abs": {
+      "prefix": "Abs",
+      "body": "Abs"
+    },
+    "Sin": {
+      "prefix": "Sin",
+      "body": "Sin"
+    },
+    "Cos": {
+      "prefix": "Cos",
+      "body": "Cos"
+    },
+    "Tan": {
+      "prefix": "Tan",
+      "body": "Tan"
+    },
+    "ASin": {
+      "prefix": "ASin",
+      "body": "ASin"
+    },
+    "ACos": {
+      "prefix": "ACos",
+      "body": "ACos"
+    },
+    "ATan": {
+      "prefix": "ATan",
+      "body": "ATan"
+    },
+    "BitNot": {
+      "prefix": "BitNot",
+      "body": "BitNot"
+    },
+    "BitAnd": {
+      "prefix": "BitAnd",
+      "body": "BitAnd"
+    },
+    "BitOr": {
+      "prefix": "BitOr",
+      "body": "BitOr"
+    },
+    "BitXOr": {
+      "prefix": "BitXOr",
+      "body": "BitXOr"
+    },
+    "BitShiftLeft": {
+      "prefix": "BitShiftLeft",
+      "body": "BitShiftLeft"
+    },
+    "BitShiftRight": {
+      "prefix": "BitShiftRight",
+      "body": "BitShiftRight"
+    },
+    "Yes": {
+      "prefix": "Yes",
+      "body": "Yes"
+    },
+    "No": {
+      "prefix": "No",
+      "body": "No"
+    },
+    "Ok": {
+      "prefix": "Ok",
+      "body": "Ok"
+    },
+    "Cancel": {
+      "prefix": "Cancel",
+      "body": "Cancel"
+    },
+    "Abort": {
+      "prefix": "Abort",
+      "body": "Abort"
+    },
+    "Retry": {
+      "prefix": "Retry",
+      "body": "Retry"
+    },
+    "Ignore":
+    {
+      "trigger": "Ignore",
+      "contents": "Ignore"
+    },
+    "TryAgain":
+    {
+      "trigger": "TryAgain",
+      "contents": "TryAgain"
+    },
+    "On":
+    {
+      "trigger": "On",
+      "contents": "On"
+    },
+    "Off":
+    {
+      "trigger": "Off",
+      "contents": "Off"
+    },
+    "All":
+    {
+      "trigger": "All",
+      "contents": "All"
+    },
+    "HKEY_LOCAL_MACHINE":
+    {
+      "trigger": "HKEY_LOCAL_MACHINE",
+      "contents": "HKEY_LOCAL_MACHINE"
+    },
+    "HKEY_USERS":
+    {
+      "trigger": "HKEY_USERS",
+      "contents": "HKEY_USERS"
+    },
+    "HKEY_CURRENT_USER":
+    {
+      "trigger": "HKEY_CURRENT_USER",
+      "contents": "HKEY_CURRENT_USER"
+    },
+    "HKEY_CLASSES_ROOT":
+    {
+      "trigger": "HKEY_CLASSES_ROOT",
+      "contents": "HKEY_CLASSES_ROOT"
+    },
+    "HKEY_CURRENT_CONFIG":
+    {
+      "trigger": "HKEY_CURRENT_CONFIG",
+      "contents": "HKEY_CURRENT_CONFIG"
+    },
+    "HKLM":
+    {
+      "trigger": "HKLM",
+      "contents": "HKLM"
+    },
+    "HKU":
+    {
+      "trigger": "HKU",
+      "contents": "HKU"
+    },
+    "HKCU":
+    {
+      "trigger": "HKCU",
+      "contents": "HKCU"
+    },
+    "HKCR":
+    {
+      "trigger": "HKCR",
+      "contents": "HKCR"
+    },
+    "HKCC":
+    {
+      "trigger": "HKCC",
+      "contents": "HKCC"
+    },
+    "REG_SZ":
+    {
+      "trigger": "REG_SZ",
+      "contents": "REG_SZ"
+    },
+    "REG_EXPAND_SZ":
+    {
+      "trigger": "REG_EXPAND_SZ",
+      "contents": "REG_EXPAND_SZ"
+    },
+    "REG_MULTI_SZ":
+    {
+      "trigger": "REG_MULTI_SZ",
+      "contents": "REG_MULTI_SZ"
+    },
+    "REG_DWORD":
+    {
+      "trigger": "REG_DWORD",
+      "contents": "REG_DWORD"
+    },
+    "REG_BINARY":
+    {
+      "trigger": "REG_BINARY",
+      "contents": "REG_BINARY"
+    },
+    "DPIScale":
+    {
+      "trigger": "DPIScale",
+      "contents": "DPIScale"
+    },
+    "Hwnd":
+    {
+      "trigger": "Hwnd",
+      "contents": "Hwnd"
+    },
+    "Parent":
+    {
+      "trigger": "Parent",
+      "contents": "Parent"
+    }
+  }
+}
