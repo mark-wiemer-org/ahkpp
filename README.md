@@ -3,14 +3,16 @@
 AutoHotKey language support for VS Code
 * Color Syntax
 * Comment blocks
-* Snippets (coming soon)
+* Snippets (thanks @denolfe)
 
 ## Installation
 
-Simply copy the files to your vscode **extensions** folder
-* **Windows** `%USERPROFILE%\.vscode\extensions`
-* **Mac** `$HOME/.vscode/extensions`
-* **Linux** `$HOME/.vscode/extensions`
+1. Install *Visual Studio Code* (1.0.0 or higher)
+2. Launch *Code*
+3. From the command palette `Ctrl-Shift-P` (Windows, Linux) or `Cmd-Shift-P` (OSX)
+4. Select `Install Extension`
+5. Choose the extension `AutoHotkey`
+6. Reload *Visual Studio Code*
 
 ## Contributing
 
@@ -22,7 +24,7 @@ Simply copy the files to your vscode **extensions** folder
 
 ## Requirements
 
-Visual Studio Code v0.10.x (November 2015)
+Visual Studio Code v1.0.0
 
 ## Credits
 

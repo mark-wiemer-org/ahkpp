@@ -2,10 +2,10 @@
 	"name": "vscode-autohotkey",
 	"displayName": "AutoHotkey",
 	"description": "AutoHotkey language support for VS Code",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"publisher": "slevesque",
 	"engines": {
-		"vscode": "^0.10.1"
+		"vscode": "^1.0.0"
 	},
 	"categories": [
 		"Languages",
