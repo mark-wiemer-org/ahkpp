@@ -20,7 +20,21 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(;).*</string>
+			<string>\s(;).*</string>
+			<key>name</key>
+			<string>comment.line.semicolon.ahk</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.ahk</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>^(;).*</string>
 			<key>name</key>
 			<string>comment.line.semicolon.ahk</string>
 		</dict>
