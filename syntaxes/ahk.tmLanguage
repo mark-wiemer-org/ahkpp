@@ -79,11 +79,30 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>entity.name.function.label.ahk</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.equals.colon</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>^\s*(.+)(::)</string>
+			<key>name</key>
+			<string>hotkeyline.ahk</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
 					<string>string.parameter.import.ahk</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>#\b(?i:include|include-once)\b(.*)$</string>
+			<string>#\b(?i:include|includeagain)\b(.*)$</string>
 			<key>name</key>
 			<string>keyword.control.import.ahk</string>
 		</dict>
@@ -102,7 +121,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>#\b(?i:allowsamelinecomments|clipboardtimeout|commentflag|errorstdout|escapechar|hotkeyinterval|hotkeymodifiertimeout|hotstring|if|iftimeout|ifwinactive|ifwinexist|ifwinnotactive|ifwinnotexist|include|includeagain|inputlevel|installkeybdhook|installmousehook|keyhistory|ltrim|maxhotkeysperinterval|maxmem|maxthreads|maxthreadsbuffer|maxthreadsperhotkey|menumaskkey|noenv|notrayicon|persistent|singleinstance|usehook|warn|winactivateforce)\b([^;]*)(;.*)?$</string>
+			<string>#\b(?i:allowsamelinecomments|clipboardtimeout|commentflag|errorstdout|escapechar|hotkeyinterval|hotkeymodifiertimeout|hotstring|if|iftimeout|ifwinactive|ifwinexist|ifwinnotactive|ifwinnotexist|inputlevel|installkeybdhook|installmousehook|keyhistory|ltrim|maxhotkeysperinterval|maxmem|maxthreads|maxthreadsbuffer|maxthreadsperhotkey|menumaskkey|noenv|notrayicon|persistent|singleinstance|usehook|warn|winactivateforce)\b([^;]*)(;.*)?$</string>
 			<key>name</key>
 			<string>keyword.control.directives.ahk</string>
 		</dict>
