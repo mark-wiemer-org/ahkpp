@@ -44,13 +44,25 @@
       "prefix": "#IfWinActive",
       "body": "#IfWinActive, ${1:[ WinTitle}, ${2:WinText]}"
     },
+    "#IfWinActiveClose": {
+      "prefix": "#IfWinActive",
+      "body": "#IfWinActive"
+    },
     "#IfWinExist": {
       "prefix": "#IfWinExist",
       "body": "#IfWinExist, ${1:[ WinTitle}, ${2:WinText]}"
     },
+    "#IfWinExistClose": {
+      "prefix": "#IfWinExist",
+      "body": "#IfWinExist"
+    },
     "#IfWinNotActive": {
       "prefix": "#IfWinNotActive",
       "body": "#IfWinNotActive, ${1:[ WinTitle}, ${2:WinText]}"
+    },
+    "#IfWinNotActiveClose": {
+      "prefix": "#IfWinNotActive",
+      "body": "#IfWinNotActive"
     },
     "#IfWinNotExist": {
       "prefix": "#IfWinNotExist",
