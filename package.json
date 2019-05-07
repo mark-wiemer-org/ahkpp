@@ -1,11 +1,11 @@
 {
-	"name": "vscode-autohotkey",
+	"name": "vscode-autohotkey-plus",
 	"displayName": "AutoHotkey",
 	"description": "AutoHotkey language support for VS Code",
-	"version": "0.2.2",
-	"publisher": "slevesque",
+	"version": "1.0.0",
+	"publisher": "cweijan",
 	"engines": {
-		"vscode": "^1.0.0"
+		"vscode": "^1.30.0"
 	},
 	"activationEvents": [
 		"*"
@@ -18,12 +18,12 @@
 	"license": "SEE LICENSE IN LICENSE.md",
 	"icon": "icon.png",
 	"bugs": {
-		"url": "https://github.com/stef-levesque/vscode-autohotkey/issues"
+		"url": "https://github.com/cweijan/vscode-autohotkey/issues"
 	},
-	"homepage": "https://github.com/stef-levesque/vscode-autohotkey/blob/master/README.md",
+	"homepage": "https://github.com/cweijan/vscode-autohotkey/blob/master/README.md",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stef-levesque/vscode-autohotkey.git"
+		"url": "https://github.com/cweijan/vscode-autohotkey.git"
 	},
 	"galleryBanner": {
 		"color": "#5c2d91",
