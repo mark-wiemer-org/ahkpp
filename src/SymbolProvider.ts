@@ -16,7 +16,7 @@ function getRemark(document: vscode.TextDocument, line: number){
 export function getSymbolForLine(document: vscode.TextDocument, line: number): vscode.SymbolInformation {
     const {text} = document.lineAt(line);
     
-    const methodMatch = text.match(/(\w+\([\w\s,]*\)){/);
+    const methodMatch = text.match(/([\w_]+\([\w\s,:"=]*\))\s*{/);
     if (methodMatch) {
         return new vscode.SymbolInformation(methodMatch[1], vscode.SymbolKind.Method, getRemark(document,line-1),new vscode.Location(document.uri, new vscode.Position(line, 0)));
     }

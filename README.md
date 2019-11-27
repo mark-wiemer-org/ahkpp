@@ -8,3 +8,7 @@ AutoHotKey language support for VS Code
 * Snippets
 * Method symbol
 * Code format (Mayby unsuited for you code)
+
+## Change Log
+
+- 2.0.2: Enhance method symbol detection.
