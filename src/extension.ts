@@ -5,7 +5,9 @@ import { FormatProvider } from "./FormatProvider";
 
 export function activate(context: vscode.ExtensionContext) {
     
-    vscode.languages.registerDocumentSymbolProvider({ language: 'ahk' }, new SymBolProvider())
-    vscode.languages.registerDocumentFormattingEditProvider({ language: 'ahk' },new FormatProvider())
+    const symbolProvider=vscode.languages.registerDocumentSymbolProvider({ language: 'ahk' }, new SymBolProvider())
+    const formatProvider=vscode.languages.registerDocumentFormattingEditProvider({ language: 'ahk' },new FormatProvider())
+
+    context.subscriptions.push(symbolProvider,formatProvider)
 
 }
