@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 function getRemark(document: vscode.TextDocument, line: number){
     if(line>=0){
         const {text} = document.lineAt(line);
-        const markMatch=text.match(/^;(.+)/);
+        const markMatch=text.match(/^\s*;(.+)/);
         if(markMatch){
             return markMatch[1]
         }
@@ -17,7 +17,8 @@ export function getSymbolForLine(document: vscode.TextDocument, line: number): v
     const {text} = document.lineAt(line);
     
     const methodMatch = text.match(/([\w_]+\([\w\s,:"=]*\))\s*{/);
-    if (methodMatch) {
+    const keywordMatch=text.match(/\b(if|While)\b/ig)
+    if (methodMatch && !keywordMatch) {
         return new vscode.SymbolInformation(methodMatch[1], vscode.SymbolKind.Method, getRemark(document,line-1),new vscode.Location(document.uri, new vscode.Position(line, 0)));
     }
 
