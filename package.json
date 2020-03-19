@@ -50,11 +50,46 @@
 				"configuration": "./ahk.configuration.json"
 			}
 		],
+		
 		"grammars": [
 			{
 				"language": "ahk",
 				"scopeName": "source.ahk",
 				"path": "./syntaxes/ahk.tmLanguage"
+			}
+		],
+		"commands": [
+			{
+				"command": "run.ahk",
+				"title": "Run Ahk Script",
+				"category": "MySQL",
+				"icon": {
+					"light": "image/run.png",
+					"dark": "image/run.png"
+				}
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "run.ahk",
+					"when": "editorLangId == ahk",
+					"group": "navigation"
+				}
+			],
+			"editor/title": [
+				{
+					"command": "run.ahk",
+					"when": "editorLangId == ahk",
+					"group": "navigation"
+				}
+			]
+		},
+		"keybindings": [
+			{
+				"command": "run.ahk",
+				"key": "f9",
+				"when": "editorLangId == ahk"
 			}
 		],
 		"snippets": [

@@ -1,4 +1,13 @@
 {
+  "AhkTemplate": {
+    "prefix": "#TEMPLATE",
+    "body": [
+      "#SingleInstance, Force",
+      "SendMode Input",
+      "",
+      ""
+    ]
+  },
   ".source.ahk": {
     "#AllowSameLineComments": {
       "prefix": "#AllowSameLineComments",
@@ -4008,118 +4017,95 @@
       "prefix": "Retry",
       "body": "Retry"
     },
-    "Ignore":
-    {
+    "Ignore": {
       "trigger": "Ignore",
       "contents": "Ignore"
     },
-    "TryAgain":
-    {
+    "TryAgain": {
       "trigger": "TryAgain",
       "contents": "TryAgain"
     },
-    "On":
-    {
+    "On": {
       "trigger": "On",
       "contents": "On"
     },
-    "Off":
-    {
+    "Off": {
       "trigger": "Off",
       "contents": "Off"
     },
-    "All":
-    {
+    "All": {
       "trigger": "All",
       "contents": "All"
     },
-    "HKEY_LOCAL_MACHINE":
-    {
+    "HKEY_LOCAL_MACHINE": {
       "trigger": "HKEY_LOCAL_MACHINE",
       "contents": "HKEY_LOCAL_MACHINE"
     },
-    "HKEY_USERS":
-    {
+    "HKEY_USERS": {
       "trigger": "HKEY_USERS",
       "contents": "HKEY_USERS"
     },
-    "HKEY_CURRENT_USER":
-    {
+    "HKEY_CURRENT_USER": {
       "trigger": "HKEY_CURRENT_USER",
       "contents": "HKEY_CURRENT_USER"
     },
-    "HKEY_CLASSES_ROOT":
-    {
+    "HKEY_CLASSES_ROOT": {
       "trigger": "HKEY_CLASSES_ROOT",
       "contents": "HKEY_CLASSES_ROOT"
     },
-    "HKEY_CURRENT_CONFIG":
-    {
+    "HKEY_CURRENT_CONFIG": {
       "trigger": "HKEY_CURRENT_CONFIG",
       "contents": "HKEY_CURRENT_CONFIG"
     },
-    "HKLM":
-    {
+    "HKLM": {
       "trigger": "HKLM",
       "contents": "HKLM"
     },
-    "HKU":
-    {
+    "HKU": {
       "trigger": "HKU",
       "contents": "HKU"
     },
-    "HKCU":
-    {
+    "HKCU": {
       "trigger": "HKCU",
       "contents": "HKCU"
     },
-    "HKCR":
-    {
+    "HKCR": {
       "trigger": "HKCR",
       "contents": "HKCR"
     },
-    "HKCC":
-    {
+    "HKCC": {
       "trigger": "HKCC",
       "contents": "HKCC"
     },
-    "REG_SZ":
-    {
+    "REG_SZ": {
       "trigger": "REG_SZ",
       "contents": "REG_SZ"
     },
-    "REG_EXPAND_SZ":
-    {
+    "REG_EXPAND_SZ": {
       "trigger": "REG_EXPAND_SZ",
       "contents": "REG_EXPAND_SZ"
     },
-    "REG_MULTI_SZ":
-    {
+    "REG_MULTI_SZ": {
       "trigger": "REG_MULTI_SZ",
       "contents": "REG_MULTI_SZ"
     },
-    "REG_DWORD":
-    {
+    "REG_DWORD": {
       "trigger": "REG_DWORD",
       "contents": "REG_DWORD"
     },
-    "REG_BINARY":
-    {
+    "REG_BINARY": {
       "trigger": "REG_BINARY",
       "contents": "REG_BINARY"
     },
-    "DPIScale":
-    {
+    "DPIScale": {
       "trigger": "DPIScale",
       "contents": "DPIScale"
     },
-    "Hwnd":
-    {
+    "Hwnd": {
       "trigger": "Hwnd",
       "contents": "Hwnd"
     },
-    "Parent":
-    {
+    "Parent": {
       "trigger": "Parent",
       "contents": "Parent"
     }

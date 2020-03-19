@@ -1,19 +1,24 @@
 
 import * as vscode from "vscode";
-import { SymBolProvider } from "./provider/SymbolProvider";
-import { FormatProvider } from "./provider/FormatProvider";
+import { ScriptRunner } from "./core/ScriptRunner";
 import { CompletionProvider } from "./provider/CompletionProvider";
 import { DefProvider } from "./provider/DefProvider";
+import { FormatProvider } from "./provider/FormatProvider";
+import { SymBolProvider } from "./provider/SymbolProvider";
+import { FileProvider } from "./provider/FileProvider";
 
 export function activate(context: vscode.ExtensionContext) {
 
     const language = { language: 'ahk' }
-    const complectionProvider = vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", ".")
-    const definitionProvider = vscode.languages.registerDefinitionProvider(language, new DefProvider())
-    const symbolProvider = vscode.languages.registerDocumentSymbolProvider(language, new SymBolProvider())
-    const formatProvider = vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider())
-    vscode.workspace.registerFileSystemProvider
-
-    // context.subscriptions.push(complectionProvider, definitionProvider, symbolProvider, formatProvider)
+    context.subscriptions.push(
+        vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
+        vscode.languages.registerDefinitionProvider(language, new DefProvider()),
+        vscode.languages.registerDocumentSymbolProvider(language, new SymBolProvider()),
+        vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
+        FileProvider.createEditorListenr(),
+        vscode.commands.registerCommand("run.ahk", () => {
+            ScriptRunner.run()
+        })
+    )
 
 }
