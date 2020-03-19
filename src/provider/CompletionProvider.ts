@@ -12,16 +12,16 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
 
     provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): vscode.ProviderResult<vscode.CompletionItem[] | vscode.CompletionList> {
 
-        const lineCount = Math.min(document.lineCount, 10000);
         const result: vscode.CompletionItem[] = [];
-        for (let line = 0; line < lineCount; line++) {
-            var method = Detecter.getMethodByLine(document, line)
-            if (method) {
-                result.push(new vscode.CompletionItem(method.name, vscode.CompletionItemKind.Method))
-            }
-        }
+        Detecter.getMethodList(document,true).forEach(method=>{
+            var completionItem=new vscode.CompletionItem(method.name+"()", vscode.CompletionItemKind.Method)
+            completionItem.detail=method.comnent
+            result.push(completionItem)
+        })
+
         return this.keywordComplectionItems.concat(result);
     }
+
     resolveCompletionItem?(item: vscode.CompletionItem): vscode.ProviderResult<vscode.CompletionItem> {
         return item;
     }
