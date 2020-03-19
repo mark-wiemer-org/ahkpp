@@ -4,6 +4,7 @@ export class Detecter {
 
     private static documentMethodMap = {}
     private static methodPattern = /(([\w_]+)\s*\([\w\s,:"=]*\))\s*\{/;
+    private static methodSecondPattern = /(([\w_]+)\s*\([\w\s,:"=]*\))\s*/;
     private static keywordPattern = /\b(if|While)\b/ig;
 
     /**
@@ -34,12 +35,15 @@ export class Detecter {
      * @param line 
      */
     static getMethodByLine(document: vscode.TextDocument, line: number) {
-        const { text } = document.lineAt(line);
+        let text = document.lineAt(line).text ;
+        if(line+1<document.lineCount && text.match(this.methodSecondPattern)){
+            text+=document.lineAt(line+1).text
+        }
 
         const methodMatch = text.match(this.methodPattern);
         const keywordMatch = text.match(this.keywordPattern)
         if (methodMatch && !keywordMatch) {
-            return new Method(methodMatch[1],methodMatch[2], line, Detecter.getRemarkByLine(document, line - 1))
+            return new Method(methodMatch[1], methodMatch[2], line, Detecter.getRemarkByLine(document, line - 1))
         }
     }
 
@@ -58,9 +62,9 @@ export class Detecter {
 }
 
 export class Method {
-    constructor(public full:string,public name: string, public line: number, public comnent: string) { }
+    constructor(public full: string, public name: string, public line: number, public comnent: string) { }
 }
 
-export class FileChangeProvider{
+export class FileChangeProvider {
 
 }
