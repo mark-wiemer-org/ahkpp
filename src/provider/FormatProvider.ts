@@ -70,7 +70,7 @@ export class FormatProvider implements vscode.DocumentRangeFormattingEditProvide
                 if (temp > 0) simpleCode = false
             }
 
-            if (includeRegexAfterStr(text, ":") || includeRegexAfterStr(text, "::")) {
+            if ((includeRegexAfterStr(text, ":") || includeRegexAfterStr(text, "::"))&& !text.includes(":=") ) {
                 if (tagDeep > 0 && tagDeep == deep) {
                     deep--; simpleCode = false
                 }
@@ -109,7 +109,7 @@ export class FormatProvider implements vscode.DocumentRangeFormattingEditProvide
                 if (temp > 0) simpleCode = false
             }
 
-            if (includeRegexAfterStr(text, ":") || includeRegexAfterStr(text, "::")) {
+            if ((includeRegexAfterStr(text, ":") || includeRegexAfterStr(text, "::"))&& !text.includes(":=")) {
                 deep++;
                 tagDeep = deep;
                 simpleCode = false
