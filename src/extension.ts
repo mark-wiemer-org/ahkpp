@@ -11,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     const language = { language: 'ahk' }
     context.subscriptions.push(
-        vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
+        // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
         vscode.languages.registerDefinitionProvider(language, new DefProvider()),
         vscode.languages.registerDocumentSymbolProvider(language, new SymBolProvider()),
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
