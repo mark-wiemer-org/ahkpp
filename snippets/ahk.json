@@ -164,10 +164,6 @@
       "prefix": "Catch",
       "body": "Catch, ${1:[OutputVar]}"
     },
-    "Click": {
-      "prefix": "Click",
-      "body": "Click"
-    },
     "ClipWait": {
       "prefix": "ClipWait",
       "body": "ClipWait, ${1:[ SecondsToWait}, ${2:1]}"
@@ -2232,10 +2228,6 @@
       "prefix": "RAlt",
       "body": "RAlt"
     },
-    "Control": {
-      "prefix": "Control",
-      "body": "Control"
-    },
     "LControl": {
       "prefix": "LControl",
       "body": "LControl"
@@ -2520,10 +2512,6 @@
       "prefix": "Space",
       "body": "Space"
     },
-    "Tab": {
-      "prefix": "Tab",
-      "body": "Tab"
-    },
     "Enter": {
       "prefix": "Enter",
       "body": "Enter"
@@ -2599,10 +2587,6 @@
     "CtrlBreak": {
       "prefix": "CtrlBreak",
       "body": "CtrlBreak"
-    },
-    "Pause": {
-      "prefix": "Pause",
-      "body": "Pause"
     },
     "ScrollLock": {
       "prefix": "ScrollLock",
@@ -3128,10 +3112,6 @@
       "prefix": "Unlock",
       "body": "Unlock"
     },
-    "Label": {
-      "prefix": "Label",
-      "body": "Label"
-    },
     "FileSystem": {
       "prefix": "FileSystem",
       "body": "FileSystem"
@@ -3267,10 +3247,6 @@
     "Color": {
       "prefix": "Color",
       "body": "Color"
-    },
-    "Delete": {
-      "prefix": "Delete",
-      "body": "Delete"
     },
     "DeleteAll": {
       "prefix": "DeleteAll",
@@ -3492,10 +3468,6 @@
       "prefix": "NA",
       "body": "NA"
     },
-    "Cancel": {
-      "prefix": "Cancel",
-      "body": "Cancel"
-    },
     "Destroy": {
       "prefix": "Destroy",
       "body": "Destroy"
@@ -3544,10 +3516,6 @@
       "prefix": "TabStop",
       "body": "TabStop"
     },
-    "Section": {
-      "prefix": "Section",
-      "body": "Section"
-    },
     "AltSubmit": {
       "prefix": "AltSubmit",
       "body": "AltSubmit"
@@ -3567,14 +3535,6 @@
     "Border": {
       "prefix": "Border",
       "body": "Border"
-    },
-    "Top": {
-      "prefix": "Top",
-      "body": "Top"
-    },
-    "Bottom": {
-      "prefix": "Bottom",
-      "body": "Bottom"
     },
     "Buttons": {
       "prefix": "Buttons",
@@ -3612,10 +3572,6 @@
       "prefix": "VisFirst",
       "body": "VisFirst"
     },
-    "Number": {
-      "prefix": "Number",
-      "body": "Number"
-    },
     "Uppercase": {
       "prefix": "Uppercase",
       "body": "Uppercase"
@@ -3627,10 +3583,6 @@
     "Limit": {
       "prefix": "Limit",
       "body": "Limit"
-    },
-    "Password": {
-      "prefix": "Password",
-      "body": "Password"
     },
     "Multi": {
       "prefix": "Multi",
@@ -3736,18 +3688,6 @@
       "prefix": "Hidden",
       "body": "Hidden"
     },
-    "Left": {
-      "prefix": "Left",
-      "body": "Left"
-    },
-    "Right": {
-      "prefix": "Right",
-      "body": "Right"
-    },
-    "Center": {
-      "prefix": "Center",
-      "body": "Center"
-    },
     "NoTab": {
       "prefix": "NoTab",
       "body": "NoTab"
@@ -3775,10 +3715,6 @@
     "ChooseString": {
       "prefix": "ChooseString",
       "body": "ChooseString"
-    },
-    "Text": {
-      "prefix": "Text",
-      "body": "Text"
     },
     "Pos": {
       "prefix": "Pos",
@@ -3847,10 +3783,6 @@
     "Exist": {
       "prefix": "Exist",
       "body": "Exist"
-    },
-    "Close": {
-      "prefix": "Close",
-      "body": "Close"
     },
     "{Blind}": {
       "prefix": "{Blind}",
