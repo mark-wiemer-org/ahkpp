@@ -1504,13 +1504,21 @@
       "prefix": ".Close()",
       "body": ".Close()"
     },
+    ".Count()": {
+      "prefix": ".Count()",
+      "body": ".Count()"
+    },
+    ".Delete()": {
+      "prefix": ".Delete()",
+      "body": ".Delete()"
+    },
     ".Insert()": {
       "prefix": ".Insert()",
       "body": ".Insert(${1:Key}, ${2:Value})"
     },
-    ".Remove()": {
-      "prefix": ".Remove()",
-      "body": ".Remove(${1:Key})"
+    ".InsertAt()": {
+      "prefix": ".InsertAt()",
+      "body": ".InsertAt(${1:Key}, ${2:Value})"
     },
     ".MinIndex()": {
       "prefix": ".MinIndex()",
@@ -1523,6 +1531,14 @@
     ".SetCapacity()": {
       "prefix": ".SetCapacity()",
       "body": ".SetCapacity(${1:MaxItems})"
+    },
+    ".Remove()": {
+      "prefix": ".Remove()",
+      "body": ".Remove(${1:Key})"
+    },
+    ".RemoveAt()": {
+      "prefix": ".RemoveAt()",
+      "body": ".RemoveAt(${1:Pos}, ${2:Length})"
     },
     ".GetCapacity()": {
       "prefix": ".GetCapacity()",
@@ -1551,6 +1567,14 @@
     ".IsOptional()": {
       "prefix": ".IsOptional()",
       "body": ".IsOptional(${1:ParamIndex})"
+    },
+    ".Push": {
+      "prefix": ".Push",
+      "body": ".Push(${1:Value})"
+    },
+    ".Pop": {
+      "prefix": ".Pop()",
+      "body": ".Pop()"
     },
     ".__Get()": {
       "prefix": ".__Get()",
