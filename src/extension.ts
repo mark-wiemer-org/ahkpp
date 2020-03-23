@@ -11,6 +11,7 @@ import { Detecter } from "./core/Detecter";
 export function activate(context: vscode.ExtensionContext) {
 
     const language = { language: 'ahk' }
+
     Detecter.buildByPath(vscode.workspace.rootPath)
     context.subscriptions.push(
         // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
@@ -19,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
         FileProvider.createEditorListenr(),
         vscode.commands.registerCommand("run.ahk", () => {
-            ScriptRunner.run()
+            ScriptRunner.run(context)
         })
     )
 
