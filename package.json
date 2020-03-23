@@ -2,7 +2,7 @@
 	"name": "vscode-autohotkey-plus",
 	"displayName": "AutoHotkeyPlus",
 	"description": "AutoHotkey language support for VS Code",
-	"version": "2.1.2",
+	"version": "2.1.3",
 	"publisher": "cweijan",
 	"engines": {
 		"vscode": "^1.30.0"
@@ -65,7 +65,7 @@
 				"category": "MySQL",
 				"icon": {
 					"light": "image/run.png",
-					"dark": "image/run.png"
+					"dark": "image/run-dark.png"
 				}
 			}
 		],
