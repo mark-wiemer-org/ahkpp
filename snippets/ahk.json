@@ -1661,6 +1661,86 @@
       "prefix": "A_AppDataCommon",
       "body": "A_AppDataCommon"
     },
+    "A_Args": {
+      "prefix": "A_Args",
+      "body": "A_Args",
+      "description": "Read/write: Contains an array of command line parameters. For details, see Passing Command Line Parameters to a Script."
+    },
+    "A_ListLines": {
+      "prefix": "A_ListLines",
+      "body": "A_ListLines",
+      "description": "Contains 1 if `ListLines` is enabled. Otherwise it contains 0."
+    },
+    "A_SendMode": {
+      "prefix": "A_SendMode",
+      "body": "A_SendMode",
+      "description": "The current mode (Event, Input, Play or InputThenPlay) set by SendMode."
+    },
+    "A_SendLevel": {
+      "prefix": "A_SendLevel",
+      "body": "A_SendLevel",
+      "description": "The current SendLevel setting (an integer between 0 and 100, inclusive)."
+    },
+    "A_StoreCapsLockMode": {
+      "prefix": "A_StoreCapsLockMode",
+      "body": "A_StoreCapsLockMode",
+      "description": "The current mode (On or Off) set by SetStoreCapsLockMode."
+    },
+    "A_CoordModeToolTip": {
+      "prefix": "A_CoordModeToolTip",
+      "body": "A_CoordModeToolTip",
+      "description": "The current mode (Window, Client or Screen) set by CoordMode."
+    },
+    "A_CoordModePixel": {
+      "prefix": "A_CoordModePixel",
+      "body": "A_CoordModePixel",
+      "description": "The current mode (Window, Client or Screen) set by CoordMode."
+    },
+    "A_CoordModeMouse": {
+      "prefix": "A_CoordModeMouse",
+      "body": "A_CoordModeMouse",
+      "description": "The current mode (Window, Client or Screen) set by CoordMode."
+    },
+    "A_CoordModeCaret": {
+      "prefix": "A_CoordModeCaret",
+      "body": "A_CoordModeCaret",
+      "description": "The current mode (Window, Client or Screen) set by CoordMode."
+    },
+    "A_CoordModeMenu": {
+      "prefix": "A_CoordModeMenu",
+      "body": "A_CoordModeMenu",
+      "description": "The current mode (Window, Client or Screen) set by CoordMode."
+    },
+    "A_TimeIdleKeyboard": {
+      "prefix": "A_TimeIdleKeyboard",
+      "body": "A_TimeIdleKeyboard",
+      "description": "If the keyboard hook is installed, this is the number of milliseconds that have elapsed since the system last received physical keyboard input. Otherwise, this variable is equivalent to A_TimeIdle."
+    },
+    "A_TimeIdleMouse": {
+      "prefix": "A_TimeIdleMouse",
+      "body": "A_TimeIdleMouse",
+      "description": "If the mouse hook is installed, this is the number of milliseconds that have elapsed since the system last received physical mouse input. Otherwise, this variable is equivalent to A_TimeIdle."
+    },
+    "A_DefaultGui": {
+      "prefix": "A_DefaultGui",
+      "body": "A_DefaultGui",
+      "description": "The name or number of the current thread's default GUI."
+    },
+    "A_DefaultListView": {
+      "prefix": "A_DefaultListView",
+      "body": "A_DefaultListView",
+      "description": "The variable name or HWND of the ListView control upon which the ListView functions operate. If the default GUI lacks a ListView, this variable is blank."
+    },
+    "A_DefaultTreeView ": {
+      "prefix": "A_DefaultTreeView ",
+      "body": "A_DefaultTreeView ",
+      "description": "The variable name or HWND of the TreeView control upon which the TreeView functions operate. If the default GUI lacks a TreeView, this variable is blank."
+    },
+    "A_ComSpec ": {
+      "prefix": "A_ComSpec ",
+      "body": "A_ComSpec ",
+      "description": "Contains the same string as the environment's ComSpec variable. Often used with Run/RunWait. For example: \n\n C:\\Windows\\system32\\cmd.exe"
+    },
     "A_AutoTrim": {
       "prefix": "A_AutoTrim",
       "body": "A_AutoTrim"
