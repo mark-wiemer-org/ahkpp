@@ -1,3 +1,7 @@
+## 2.1.6 (2020/3/23)
+- Find definition in whole workspace.
+- Try go to include script in workspce.
+
 ## 2.1.2 (2020/3/22)
 - Update snippets
 
