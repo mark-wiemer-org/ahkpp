@@ -11,163 +11,203 @@
   ".source.ahk": {
     "#AllowSameLineComments": {
       "prefix": "#AllowSameLineComments",
-      "body": "#AllowSameLineComments"
+      "body": "#AllowSameLineComments",
+      "description": "Deprecated ❓"
     },
     "#ClipboardTimeout": {
       "prefix": "#ClipboardTimeout",
-      "body": "#ClipboardTimeout, ${1:Milliseconds}"
+      "body": "#ClipboardTimeout, ${1:Milliseconds}",
+      "description": "Changes how long the script keeps trying to access the clipboard when the first attempt fails."
     },
     "#CommentFlag": {
       "prefix": "#CommentFlag",
-      "body": "#CommentFlag, ${1:NewString}"
+      "body": "#CommentFlag ${1:NewString}",
+      "description": "Changes the script's comment symbol from semicolon to some other string.\n⚠Note: This directive is not recommended for use in new scripts because a) it does more harm than good and b) it is no longer available in AutoHotkey v2."
     },
     "#ErrorStdOut": {
       "prefix": "#ErrorStdOut",
-      "body": "#ErrorStdOut"
+      "body": "#ErrorStdOut",
+      "description": "Sends any syntax error that prevents a script from launching to stderr rather than displaying a dialog."
     },
     "#EscapeChar": {
       "prefix": "#EscapeChar",
-      "body": "#EscapeChar, ${1:NewChar}"
+      "body": "#EscapeChar, ${1:NewChar}",
+      "description": "Changes the script's escape character (e.g. accent vs. backslash).\n⚠Note: This directive is not recommended for use in new scripts because a) it does more harm than good and b) it is no longer available in AutoHotkey v2."
     },
     "#HotkeyInterval": {
       "prefix": "#HotkeyInterval",
-      "body": "#HotkeyInterval, ${1:Milliseconds}"
+      "body": "#HotkeyInterval, ${1:Milliseconds}",
+      "description": "Along with `#MaxHotkeysPerInterval`, specifies the rate of hotkey activations beyond which a warning dialog will be displayed."
     },
     "#HotkeyModifierTimeout": {
       "prefix": "#HotkeyModifierTimeout",
-      "body": "#HotkeyModifierTimeout, ${1:Milliseconds}"
+      "body": "#HotkeyModifierTimeout, ${1:Milliseconds}",
+      "description": "Affects the behavior of hotkey modifiers: `Ctrl`, `Alt`, `Win`, and `Shift`."
     },
     "#Hotstring": {
       "prefix": "#Hotstring",
-      "body": "#Hotstring, ${1:NewOptions}"
+      "body": "#Hotstring, ${1:NewOptions}",
+      "description": "Changes hotstring options or ending characters."
     },
     "#If": {
       "prefix": "#If",
-      "body": "#If, ${1:[Expression]}"
+      "body": "#If, ${1:[Expression]}",
+      "description": "Creates context-sensitive hotkeys and hotstrings. Such hotkeys perform a different action (or none at all) depending on the result of an expression."
     },
     "#IfTimeout": {
       "prefix": "#IfTimeout",
-      "body": "#IfTimeout, ${1:Timeout}"
+      "body": "#IfTimeout, ${1:Timeout}",
+      "description": "Sets the maximum time that may be spent evaluating a single #If expression."
     },
     "#IfWinActive": {
       "prefix": "#IfWinActive",
-      "body": "#IfWinActive, ${1:[ WinTitle}, ${2:WinText]}"
+      "body": "#IfWinActive, ${1:[ WinTitle}, ${2:WinText]}",
+      "description": "Creates context-sensitive hotkeys and hotstrings. Such hotkeys perform a different action (or none at all) depending on the type of window that is active or exists.\nThe #IfWin directives are positional: they affect all hotkeys and hotstrings physically beneath them in the script."
     },
     "#IfWinActiveClose": {
       "prefix": "#IfWinActive",
-      "body": "#IfWinActive"
+      "body": "#IfWinActive",
+      "description": "To turn off context sensitivity, specify any #IfWin directive but omit all of its parameters."
     },
     "#IfWinExist": {
       "prefix": "#IfWinExist",
-      "body": "#IfWinExist, ${1:[ WinTitle}, ${2:WinText]}"
+      "body": "#IfWinExist, ${1:[ WinTitle}, ${2:WinText]}",
+      "description": "Creates context-sensitive hotkeys and hotstrings. Such hotkeys perform a different action (or none at all) depending on the type of window that is active or exists."
     },
     "#IfWinExistClose": {
       "prefix": "#IfWinExist",
-      "body": "#IfWinExist"
+      "body": "#IfWinExist",
+      "description": "To turn off context sensitivity, specify any #IfWin directive but omit all of its parameters."
     },
     "#IfWinNotActive": {
       "prefix": "#IfWinNotActive",
-      "body": "#IfWinNotActive, ${1:[ WinTitle}, ${2:WinText]}"
+      "body": "#IfWinNotActive, ${1:[ WinTitle}, ${2:WinText]}",
+      "description": "Creates context-sensitive hotkeys and hotstrings. Such hotkeys perform a different action (or none at all) depending on the type of window that is active or exists."
     },
     "#IfWinNotActiveClose": {
       "prefix": "#IfWinNotActive",
-      "body": "#IfWinNotActive"
+      "body": "#IfWinNotActive",
+      "description": "To turn off context sensitivity, specify any #IfWin directive but omit all of its parameters."
     },
     "#IfWinNotExist": {
       "prefix": "#IfWinNotExist",
-      "body": "#IfWinNotExist, ${1:[ WinTitle}, ${2:WinText]}"
+      "body": "#IfWinNotExist, ${1:[ WinTitle}, ${2:WinText]}",
+      "description": "Creates context-sensitive hotkeys and hotstrings. Such hotkeys perform a different action (or none at all) depending on the type of window that is active or exists."
     },
     "#Include": {
       "prefix": "#Include",
-      "body": "#Include, ${1:FileOrDirName}"
+      "body": "#Include, ${1:FileOrDirName}",
+      "description": "Causes the script to behave as though the specified file's contents are present at this exact position.\n#Include ensures that FileName is included only once, even if multiple inclusions are encountered for it"
     },
     "#IncludeAgain": {
       "prefix": "#IncludeAgain",
-      "body": "#IncludeAgain, ${1:FileOrDirName}"
+      "body": "#IncludeAgain, ${1:FileOrDirName}",
+      "description": "Causes the script to behave as though the specified file's contents are present at this exact position.\n#IncludeAgain allows multiple inclusions of the same file, while being the same as #Include in all other respects."
     },
     "#InputLevel": {
       "prefix": "#InputLevel",
-      "body": "#InputLevel, ${1:[Level]}"
+      "body": "#InputLevel, ${1:[Level]}",
+      "description": "Controls which artificial keyboard and mouse events are ignored by hotkeys and hotstrings. [Level] - An integer between 0 and 100. If omitted, it defaults to 0."
     },
     "#InstallKeybdHook": {
       "prefix": "#InstallKeybdHook",
-      "body": "#InstallKeybdHook"
+      "body": "#InstallKeybdHook",
+      "description": "Forces the unconditional installation of the keyboard hook."
     },
     "#InstallMouseHook": {
       "prefix": "#InstallMouseHook",
-      "body": "#InstallMouseHook"
+      "body": "#InstallMouseHook",
+      "description": "Forces the unconditional installation of the mouse hook."
     },
     "#KeyHistory": {
       "prefix": "#KeyHistory",
-      "body": "#KeyHistory, ${1:MaxEvents}"
+      "body": "#KeyHistory, ${1:MaxEvents}",
+      "description": "Sets the maximum number of keyboard and mouse events displayed by the KeyHistory window. You can set it to 0 to disable key history."
     },
     "#LTrim": {
       "prefix": "#LTrim",
-      "body": "#LTrim, ${1:On|Off}"
+      "body": "#LTrim, ${1:On|Off}",
+      "description": "LTrim: Omits spaces and tabs at the beginning of each line. This is primarily used to allow the continuation section to be indented. Also, this option may be turned on for multiple continuation sections by specifying #LTrim on a line by itself. #LTrim is positional: it affects all continuation sections physically beneath it. The setting may be turned off via #LTrim Off."
     },
     "#MaxHotkeysPerInterval": {
       "prefix": "#MaxHotkeysPerInterval",
-      "body": "#MaxHotkeysPerInterval, ${1:Value}"
+      "body": "#MaxHotkeysPerInterval, ${1:Value}",
+      "description": "Along with #HotkeyInterval, specifies the rate of hotkey activations beyond which a warning dialog will be displayed."
     },
     "#MaxMem": {
       "prefix": "#MaxMem",
-      "body": "#MaxMem, ${1:Megabytes}"
+      "body": "#MaxMem, ${1:Megabytes}",
+      "description": "Sets the maximum capacity of each variable to the specified number of megabytes."
     },
     "#MaxThreads": {
       "prefix": "#MaxThreads",
-      "body": "#MaxThreads, ${1:Value}"
+      "body": "#MaxThreads, ${1:Value}",
+      "description": "Sets the maximum number of simultaneous threads."
     },
     "#MaxThreadsBuffer": {
       "prefix": "#MaxThreadsBuffer",
-      "body": "#MaxThreadsBuffer, ${1:On|Off}"
+      "body": "#MaxThreadsBuffer, ${1:On|Off}",
+      "description": "Causes some or all hotkeys to buffer rather than ignore keypresses when their #MaxThreadsPerHotkey limit has been reached."
     },
     "#MaxThreadsPerHotkey": {
       "prefix": "#MaxThreadsPerHotkey",
-      "body": "#MaxThreadsPerHotkey, ${1:Value}"
+      "body": "#MaxThreadsPerHotkey, ${1:Value}",
+      "description": "Sets the maximum number of simultaneous threads per hotkey or hotstring."
     },
     "#MenuMaskKey": {
       "prefix": "#MenuMaskKey",
-      "body": "#MenuMaskKey, ${1:KeyName}"
+      "body": "#MenuMaskKey, ${1:KeyName}",
+      "description": "Changes which key is used to mask `Win` or `Alt` keyup events."
     },
     "#NoEnv": {
       "prefix": "#NoEnv",
-      "body": "#NoEnv"
+      "body": "#NoEnv",
+      "description": "Avoids checking empty variables to see if they are environment variables (recommended for all new scripts)."
     },
     "#NoTrayIcon": {
       "prefix": "#NoTrayIcon",
-      "body": "#NoTrayIcon"
+      "body": "#NoTrayIcon",
+      "description": "Disables the showing of a tray icon."
     },
     "#Persistent": {
       "prefix": "#Persistent",
-      "body": "#Persistent"
+      "body": "#Persistent",
+      "description": "Keeps a script permanently running (that is, until the user closes it or ExitApp is encountered)."
     },
     "#SingleInstance": {
       "prefix": "#SingleInstance",
-      "body": "#SingleInstance, ${1:[force|ignore|off]}"
+      "body": "#SingleInstance, ${1:[force|ignore|prompt|off]}",
+      "description": "Determines whether a script is allowed to run again when it is already running."
     },
     "#UseHook": {
       "prefix": "#UseHook",
-      "body": "#UseHook, ${1:[On|Off]}"
+      "body": "#UseHook, ${1:[On|Off]}",
+      "description": "Forces the use of the hook to implement all or some keyboard hotkeys."
     },
     "#Warn": {
       "prefix": "#Warn",
-      "body": "#Warn, ${1:[WarningType}, ${2:WarningMode]}"
+      "body": "#Warn, ${1:[WarningType}, ${2:WarningMode]}",
+      "description": "Enables or disables warnings for specific conditions which may indicate an error, such as a typo or missing \"global\" declaration."
     },
     "#WinActivateForce": {
       "prefix": "#WinActivateForce",
-      "body": "#WinActivateForce"
+      "body": "#WinActivateForce",
+      "description": "Skips the gentle method of activating a window and goes straight to the forceful method."
     },
     "AutoTrim": {
       "prefix": "AutoTrim",
-      "body": "AutoTrim, ${1:On|Off}"
+      "body": "AutoTrim, ${1:On|Off}",
+      "description": "Determines whether traditional assignments like Var1 = %Var2% omit spaces and tabs from the beginning and end of Var2."
     },
     "BlockInput": {
       "prefix": "BlockInput",
-      "body": "BlockInput, ${1:On|Off|Send|Mouse|SendAndMouse|Default|MouseMove|MouseMoveOff}"
+      "body": "BlockInput, ${1:On|Off|Send|Mouse|SendAndMouse|Default|MouseMove|MouseMoveOff}",
+      "description": "Disables or enables the user's ability to interact with the computer via keyboard and mouse."
     },
     "Break": {
       "prefix": "Break",
-      "body": "Break"
+      "body": "Break",
+      "description": "Exits (terminates) any type of loop statement."
     },
     "Catch": {
       "prefix": "Catch",
