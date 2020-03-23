@@ -10,12 +10,12 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
         this.initKeywordComplectionItem()
     }
 
-    provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): vscode.ProviderResult<vscode.CompletionItem[] | vscode.CompletionList> {
+    async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
 
         const result: vscode.CompletionItem[] = [];
-        Detecter.getMethodList(document,true).forEach(method=>{
-            var completionItem=new vscode.CompletionItem(method.name+"()", vscode.CompletionItemKind.Method)
-            completionItem.detail=method.comnent
+        (await Detecter.getMethodList(document, true)).forEach(method => {
+            var completionItem = new vscode.CompletionItem(method.name + "()", vscode.CompletionItemKind.Method)
+            completionItem.detail = method.comnent
             result.push(completionItem)
         })
 

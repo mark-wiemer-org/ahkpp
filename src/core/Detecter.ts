@@ -1,21 +1,58 @@
+import * as fs from 'fs';
 import * as vscode from "vscode";
+
+export class Method {
+    constructor(public full: string, public name: string, public line: number, public comnent: string) { }
+}
+
 
 export class Detecter {
 
-    private static documentMethodMap = {}
+    private static documentMethodMap = { key: String, methodList: Array<Method>() }
     private static methodPattern = /(([\w_]+)\s*\([\w\s,:"=]*\))\s*\{/;
     private static methodSecondPattern = /(([\w_]+)\s*\([\w\s,:"=]*\))\s*/;
     private static keywordPattern = /\b(if|While)\b/ig;
+
+    static getCacheFile(): string[] {
+        return Object.keys(this.documentMethodMap).filter(key => key.match(/\b(ahk|ext)$/) && this.documentMethodMap[key]['length'] > 0)
+    }
+
+    /**
+     * load method list by path
+     * @param buildPath 
+     */
+    static async buildByPath(buildPath: string) {
+        if (fs.statSync(buildPath).isDirectory()) {
+            fs.readdir(buildPath, (err, files) => {
+                for (const file of files) {
+                    if (file.match(/(\.git|\.svn|out|target)/)) {
+                        continue;
+                    }
+                    this.buildByPath(buildPath + "/" + file)
+                }
+            })
+        } else if (buildPath.match(/\b(ahk|ext)$/)) {
+            this.getMethodList(vscode.Uri.file(buildPath))
+        }
+
+    }
 
     /**
      * detect method list by document
      * @param document 
      */
-    static getMethodList(document: vscode.TextDocument, usingCache = false): Method[] {
+    static async getMethodList(docId: vscode.TextDocument | vscode.Uri, usingCache = false): Promise<Method[]> {
 
-        // if (usingCache && null != this.documentMethodMap[document.uri.path]) {
-        //     return this.documentMethodMap[document.uri.path];
-        // }
+        let document: vscode.TextDocument;
+        if (docId instanceof vscode.Uri) {
+            document = await vscode.workspace.openTextDocument(docId as vscode.Uri)
+        } else {
+            document = docId as vscode.TextDocument
+        }
+
+        if (usingCache && null != this.documentMethodMap[document.uri.path]) {
+            return this.documentMethodMap[document.uri.path];
+        }
 
         let methodList: Method[] = [];
         const lineCount = Math.min(document.lineCount, 10000);
@@ -25,7 +62,8 @@ export class Detecter {
                 methodList.push(method)
             }
         }
-        // this.documentMethodMap[document.uri.path] = methodList
+        let path = document.uri ? document.uri.path : document['path'];
+        this.documentMethodMap[path] = methodList
         return methodList;
     }
 
@@ -35,9 +73,9 @@ export class Detecter {
      * @param line 
      */
     static getMethodByLine(document: vscode.TextDocument, line: number) {
-        let text = document.lineAt(line).text ;
-        if(line+1<document.lineCount && text.match(this.methodSecondPattern)){
-            text+=document.lineAt(line+1).text
+        let text = document.lineAt(line).text;
+        if (line + 1 < document.lineCount && text.match(this.methodSecondPattern)) {
+            text += document.lineAt(line + 1).text
         }
 
         const methodMatch = text.match(this.methodPattern);
@@ -61,9 +99,6 @@ export class Detecter {
 
 }
 
-export class Method {
-    constructor(public full: string, public name: string, public line: number, public comnent: string) { }
-}
 
 export class FileChangeProvider {
 
