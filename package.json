@@ -8,7 +8,7 @@
 		"vscode": "^1.30.0"
 	},
 	"activationEvents": [
-		"*"
+		"onLanguage:ahk"
 	],
 	"main": "./out/extension",
 	"categories": [
