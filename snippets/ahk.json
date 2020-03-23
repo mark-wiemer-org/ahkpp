@@ -211,387 +211,483 @@
     },
     "Catch": {
       "prefix": "Catch",
-      "body": "Catch, ${1:[OutputVar]}"
+      "body": "Catch, ${1:[OutputVar]}",
+      "description": "Specifies the code to execute if an exception is raised during execution of a try statement."
     },
     "ClipWait": {
       "prefix": "ClipWait",
-      "body": "ClipWait, ${1:[ SecondsToWait}, ${2:1]}"
+      "body": "ClipWait, ${1:[ SecondsToWait}, ${2:1]}",
+      "description": "Waits until the clipboard contains data."
     },
     "Continue": {
       "prefix": "Continue",
-      "body": "Continue"
+      "body": "Continue",
+      "description": "Skips the rest of a loop statement's current iteration and begins a new one."
     },
     "Control": {
       "prefix": "Control",
-      "body": "Control, ${1:Cmd [}, ${2:Value}, ${3:Control}, ${4:WinTitle}, ${5:WinText}, ${6:ExcludeTitle}, ${7:ExcludeText]}"
+      "body": "Control, ${1:Cmd [}, ${2:Value}, ${3:Control}, ${4:WinTitle}, ${5:WinText}, ${6:ExcludeTitle}, ${7:ExcludeText]}",
+      "description": "Makes a variety of changes to a control."
     },
     "ControlClick": {
       "prefix": "ControlClick",
-      "body": "ControlClick, ${1:[Control-or-Pos}, ${2:WinTitle}, ${3:WinText}, ${4:WhichButton}, ${5:ClickCount}, ${6:Options}, ${7:ExcludeTitle}, ${8:ExcludeText]}"
+      "body": "ControlClick, ${1:[Control-or-Pos}, ${2:WinTitle}, ${3:WinText}, ${4:WhichButton}, ${5:ClickCount}, ${6:Options}, ${7:ExcludeTitle}, ${8:ExcludeText]}",
+      "description": "Sends a mouse button or mouse wheel event to a control."
     },
     "ControlFocus": {
       "prefix": "ControlFocus",
-      "body": "ControlFocus, ${1:[ Control}, ${2:WinTitle}, ${3:WinText}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+      "body": "ControlFocus, ${1:[ Control}, ${2:WinTitle}, ${3:WinText}, ${4:ExcludeTitle}, ${5:ExcludeText]}",
+      "description": "Sets input focus to a given control on a window."
     },
     "ControlGet": {
       "prefix": "ControlGet",
-      "body": "ControlGet, ${1:OutputVar}, ${2:Cmd}, ${3:[Value}, ${4:Control}, ${5:WinTitle}, ${6:WinText}, ${7:ExcludeTitle}, ${8:ExcludeText}"
+      "body": "ControlGet, ${1:OutputVar}, ${2:Cmd}, ${3:[Value}, ${4:Control}, ${5:WinTitle}, ${6:WinText}, ${7:ExcludeTitle}, ${8:ExcludeText}",
+      "description": "Retrieves various types of information about a control."
     },
     "ControlGetFocus": {
       "prefix": "ControlGetFocus",
-      "body": "ControlGetFocus, ${1:OutputVar}, ${2:[WinTitle}, ${3:WinText}, ${4:ExcludeTitle}, ${5:ExcludeText]}"
+      "body": "ControlGetFocus, ${1:OutputVar}, ${2:[WinTitle}, ${3:WinText}, ${4:ExcludeTitle}, ${5:ExcludeText]}",
+      "description": "Retrieves which control of the target window has input focus, if any."
     },
     "ControlGetPos": {
       "prefix": "ControlGetPos",
-      "body": "ControlGetPos, ${1:[ X}, ${2:Y}, ${3:Width}, ${4:Height}, ${5:Control}, ${6:WinTitle}, ${7:WinText}, ${8:ExcludeTitle}"
+      "body": "ControlGetPos, ${1:[ X}, ${2:Y}, ${3:Width}, ${4:Height}, ${5:Control}, ${6:WinTitle}, ${7:WinText}, ${8:ExcludeTitle}",
+      "description": "Retrieves the position and size of a control."
     },
     "ControlGetText": {
       "prefix": "ControlGetText",
-      "body": "ControlGetText, ${1:OutputVar [}, ${2:Control}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+      "body": "ControlGetText, ${1:OutputVar [}, ${2:Control}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}",
+      "description": "Retrieves text from a control."
     },
     "ControlMove": {
       "prefix": "ControlMove",
-      "body": "ControlMove, ${1:Control}, ${2:X}, ${3:Y}, ${4:Width}, ${5:Height [}, ${6:WinTitle}, ${7:WinText}, ${8:ExcludeTitle}"
+      "body": "ControlMove, ${1:Control}, ${2:X}, ${3:Y}, ${4:Width}, ${5:Height [}, ${6:WinTitle}, ${7:WinText}, ${8:ExcludeTitle}",
+      "description": "Moves or resizes a control."
     },
     "ControlSend": {
       "prefix": "ControlSend",
-      "body": "ControlSend, ${1:[ Control}, ${2:Keys}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+      "body": "ControlSend, ${1:[ Control}, ${2:Keys}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}",
+      "description": "Sends simulated keystrokes to a window or control."
     },
     "ControlSendRaw": {
       "prefix": "ControlSendRaw",
-      "body": "ControlSendRaw, ${1:[ Control}, ${2:Keys}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+      "body": "ControlSendRaw, ${1:[ Control}, ${2:Keys}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}",
+      "description": "Sends simulated keystrokes to a window or control. ControlSendRaw sends the keystrokes in the Keys parameter without translating {Enter} to Enter, ^c to Control+C, etc."
     },
     "ControlSetText": {
       "prefix": "ControlSetText",
-      "body": "ControlSetText, ${1:Control}, ${2:NewText [}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+      "body": "ControlSetText, ${1:Control}, ${2:NewText [}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}",
+      "description": "Changes the text of a control."
     },
     "CoordMode": {
       "prefix": "CoordMode",
-      "body": "CoordMode, ${1:ToolTip|Pixel|Mouse [}, ${2:Screen|Relative]}"
+      "body": "CoordMode, ${1:ToolTip|Pixel|Mouse [}, ${2:Screen|Relative]}",
+      "description": "Sets coordinate mode for various commands to be relative to either the active window or the screen."
     },
     "Critical": {
       "prefix": "Critical",
-      "body": "Critical, ${1:[ Off]}"
+      "body": "Critical, ${1|Off,On|}",
+      "description": "Prevents the current thread from being interrupted by other threads, or enables it to be interrupted."
     },
     "DetectHiddenText": {
       "prefix": "DetectHiddenText",
-      "body": "DetectHiddenText, ${1:On|Off}"
+      "body": "DetectHiddenText, ${1:On|Off}",
+      "description": "Determines whether invisible text in a window is \"seen\" for the purpose of finding the window. This affects commands such as IfWinExist and WinActivate."
     },
     "DetectHiddenWindows": {
       "prefix": "DetectHiddenWindows",
-      "body": "DetectHiddenWindows, ${1:On|Off}"
+      "body": "DetectHiddenWindows, ${1:On|Off}",
+      "description": "Determines whether invisible windows are \"seen\" by the script."
     },
     "Drive": {
       "prefix": "Drive",
-      "body": "Drive, ${1:Sub-command [}, ${2:Drive}, ${3:Value]}"
+      "body": "Drive, ${1:Sub-command [}, ${2:Drive}, ${3:Value]}",
+      "description": "Ejects/retracts the tray in a CD or DVD drive, or sets a drive's volume label."
     },
     "DriveGet": {
       "prefix": "DriveGet",
-      "body": "DriveGet, ${1:OutputVar}, ${2:Cmd [}, ${3:Value]}"
+      "body": "DriveGet, ${1:OutputVar}, ${2:Cmd [}, ${3:Value]}",
+      "description": "Retrieves various types of information about the computer's drive(s)."
     },
     "DriveSpaceFree": {
       "prefix": "DriveSpaceFree",
-      "body": "DriveSpaceFree, ${1:OutputVar}, ${2:C:\\}"
+      "body": "DriveSpaceFree, ${1:OutputVar}, ${2:C:\\}",
+      "description": "Retrieves the free disk space of a drive, in Megabytes."
     },
     "Edit": {
       "prefix": "Edit",
-      "body": "Edit"
+      "body": "Edit",
+      "description": "Opens the current script for editing in the associated editor."
     },
     "Else": {
       "prefix": "Else",
-      "body": "Else"
+      "body": "Else",
+      "description": "Specifies one or more statements to execute if an If statement evaluates to false."
     },
     "EnvAdd": {
       "prefix": "EnvAdd",
-      "body": "EnvAdd, ${1:Var}, ${2:Value [}, ${3:TimeUnits]}"
+      "body": "EnvAdd, ${1:Var}, ${2:Value [}, ${3:TimeUnits]}",
+      "description": "Sets a variable to the sum of itself plus the given value (can also add or subtract time from a date-time value). Synonymous with: var += value."
     },
     "EnvDiv": {
       "prefix": "EnvDiv",
-      "body": "EnvDiv, ${1:Var}, ${2:Value}"
+      "body": "EnvDiv, ${1:Var}, ${2:Value}",
+      "description": "Sets a variable to itself divided by the given value.\n⚠Deprecated: This command is not recommended for use in new scripts. Use Var := Var / Value or Var /= Value instead."
     },
     "EnvGet": {
       "prefix": "EnvGet",
-      "body": "EnvGet, ${1:OutputVar}, ${2:EnvVarName}"
+      "body": "EnvGet, ${1:OutputVar}, ${2:EnvVarName}",
+      "description": "Retrieves an environment variable."
     },
     "EnvMult": {
       "prefix": "EnvMult",
-      "body": "EnvMult, ${1:Var}, ${2:Value}"
+      "body": "EnvMult, ${1:Var}, ${2:Value}",
+      "description": "Sets a variable to itself times the given value.\n⚠Deprecated: This command is not recommended for use in new scripts. Use Var := Var * Value or Var *= Value instead."
     },
     "EnvSet": {
       "prefix": "EnvSet",
-      "body": "EnvSet, ${1:EnvVar}, ${2:Value}"
+      "body": "EnvSet, ${1:EnvVar}, ${2:Value}",
+      "description": "Writes a value to a variable contained in the environment."
     },
     "EnvSub": {
       "prefix": "EnvSub",
-      "body": "EnvSub, ${1:Var}, ${2:Value [}, ${3:TimeUnits]}"
+      "body": "EnvSub, ${1:Var}, ${2:Value [}, ${3:TimeUnits]}",
+      "description": "Sets a variable to itself minus the given value (can also compare date-time values). Synonymous with: Var -= Value."
     },
     "EnvUpdate": {
       "prefix": "EnvUpdate",
-      "body": "EnvUpdate"
+      "body": "EnvUpdate",
+      "description": "Notifies the OS and all running applications that environment variable(s) have changed."
     },
     "Exit": {
       "prefix": "Exit",
-      "body": "Exit, ${1:[ ExitCode]}"
+      "body": "Exit, ${1:[ ExitCode]}",
+      "description": "Exits the current thread or (if the script is not persistent and contains no hotkeys) the entire script."
     },
     "ExitApp": {
       "prefix": "ExitApp",
-      "body": "ExitApp, ${1:[ ExitCode]}"
+      "body": "ExitApp, ${1:[ ExitCode]}",
+      "description": "Terminates the script unconditionally."
     },
     "FileAppend": {
       "prefix": "FileAppend",
-      "body": "FileAppend, ${1:[ Text}, ${2:Filename]}"
+      "body": "FileAppend, ${1:[ Text}, ${2:Filename]}",
+      "description": "Writes text to the end of a file (first creating the file, if necessary)."
     },
     "FileCopy": {
       "prefix": "FileCopy",
-      "body": "FileCopy, ${1:Source}, ${2:Dest [}, ${3:Flag (1 = overwrite)]}"
+      "body": "FileCopy, ${1:Source}, ${2:Dest [}, ${3:Flag (1 = overwrite)]}",
+      "description": "Copies one or more files."
     },
     "FileCopyDir": {
       "prefix": "FileCopyDir",
-      "body": "FileCopyDir, ${1:Source}, ${2:Dest [}, ${3:Flag]}"
+      "body": "FileCopyDir, ${1:Source}, ${2:Dest [}, ${3:Flag]}",
+      "description": "Copies a folder along with all its sub-folders and files (similar to xcopy)."
     },
     "FileCreateDir": {
       "prefix": "FileCreateDir",
-      "body": "FileCreateDir, ${1:Path}"
+      "body": "FileCreateDir, ${1:Path}",
+      "description": "Creates a directory/folder."
     },
     "FileCreateShortcut": {
       "prefix": "FileCreateShortcut",
-      "body": "FileCreateShortcut, ${1:Target}, ${2:C:\\My Shortcut.lnk [}, ${3:WorkingDir}, ${4:Args}, ${5:Description}, ${6:IconFile}, ${7:ShortcutKey}, ${8:IconNumber}"
+      "body": "FileCreateShortcut, ${1:Target}, ${2:C:\\My Shortcut.lnk [}, ${3:WorkingDir}, ${4:Args}, ${5:Description}, ${6:IconFile}, ${7:ShortcutKey}, ${8:IconNumber}",
+      "description": "Creates a shortcut (.lnk) file."
     },
     "FileDelete": {
       "prefix": "FileDelete",
-      "body": "FileDelete, ${1:FilePattern}"
+      "body": "FileDelete, ${1:FilePattern}",
+      "description": "Deletes one or more files."
     },
     "FileEncoding": {
       "prefix": "FileEncoding",
-      "body": "FileEncoding, ${1:[Encoding]}"
+      "body": "FileEncoding, ${1:[Encoding]}",
+      "description": "Sets the default encoding for FileRead, FileReadLine, Loop Read, FileAppend, and FileOpen()."
     },
     "FileGetAttrib": {
       "prefix": "FileGetAttrib",
-      "body": "FileGetAttrib, ${1:OutputVar(RASHNDOCT) [}, ${2:Filename]}"
+      "body": "FileGetAttrib, ${1:OutputVar(RASHNDOCT) [}, ${2:Filename]}",
+      "description": "Reports whether a file or folder is read-only, hidden, etc."
     },
     "FileGetShortcut": {
       "prefix": "FileGetShortcut",
-      "body": "FileGetShortcut, ${1:LinkFile [}, ${2:OutTarget}, ${3:OutDir}, ${4:OutArgs}, ${5:OutDescription}, ${6:OutIcon}, ${7:OutIconNum}, ${8:OutRunState]}"
+      "body": "FileGetShortcut, ${1:LinkFile [}, ${2:OutTarget}, ${3:OutDir}, ${4:OutArgs}, ${5:OutDescription}, ${6:OutIcon}, ${7:OutIconNum}, ${8:OutRunState]}",
+      "description": "Retrieves information about a shortcut (.lnk) file, such as its target file."
     },
     "FileGetSize": {
       "prefix": "FileGetSize",
-      "body": "FileGetSize, ${1:OutputVar [}, ${2:Filename}, ${3:Units]}"
+      "body": "FileGetSize, ${1:OutputVar [}, ${2:Filename}, ${3:Units]}",
+      "description": "Retrieves the size of a file."
     },
     "FileGetTime": {
       "prefix": "FileGetTime",
-      "body": "FileGetTime, ${1:OutputVar [}, ${2:Filename}, ${3:WhichTime (M}, ${4:C}, ${5:or A -- default is M)]}"
+      "body": "FileGetTime, ${1:OutputVar [}, ${2:Filename}, ${3:WhichTime (M}, ${4:C}, ${5:or A -- default is M)]}",
+      "description": "Retrieves the datetime stamp of a file or folder."
     },
     "FileGetVersion": {
       "prefix": "FileGetVersion",
-      "body": "FileGetVersion, ${1:OutputVar [}, ${2:Filename]}"
+      "body": "FileGetVersion, ${1:OutputVar [}, ${2:Filename]}",
+      "description": "Retrieves the version of a file."
     },
     "FileInstall": {
       "prefix": "FileInstall",
-      "body": "FileInstall, ${1:Source}, ${2:Dest [}, ${3:Flag (1 = overwrite)]}"
+      "body": "FileInstall, ${1:Source}, ${2:Dest [}, ${3:Flag (1 = overwrite)]}",
+      "description": "Includes the specified file inside the compiled version of the script."
     },
     "FileMove": {
       "prefix": "FileMove",
-      "body": "FileMove, ${1:Source}, ${2:Dest [}, ${3:Flag (1 = overwrite)]}"
+      "body": "FileMove, ${1:Source}, ${2:Dest [}, ${3:Flag (1 = overwrite)]}",
+      "description": "Moves or renames one or more files."
     },
     "FileMoveDir": {
       "prefix": "FileMoveDir",
-      "body": "FileMoveDir, ${1:Source}, ${2:Dest [}, ${3:Flag (2 = overwrite)]}"
+      "body": "FileMoveDir, ${1:Source}, ${2:Dest [}, ${3:Flag (2 = overwrite)]}",
+      "description": "Moves a folder along with all its sub-folders and files. It can also rename a folder."
     },
     "FileRead": {
       "prefix": "FileRead",
-      "body": "FileRead, ${1:OutputVar}, ${2:Filename}"
+      "body": "FileRead, ${1:OutputVar}, ${2:Filename}",
+      "description": "Reads a file's contents into a variable."
     },
     "FileReadLine": {
       "prefix": "FileReadLine",
-      "body": "FileReadLine, ${1:OutputVar}, ${2:Filename}, ${3:LineNum}"
+      "body": "FileReadLine, ${1:OutputVar}, ${2:Filename}, ${3:LineNum}",
+      "description": "Reads the specified line from a file and stores the text in a variable."
     },
     "FileRecycle": {
       "prefix": "FileRecycle",
-      "body": "FileRecycle, ${1:FilePattern}"
+      "body": "FileRecycle, ${1:FilePattern}",
+      "description": "Sends a file or directory to the recycle bin if possible, or permanently deletes it."
     },
     "FileRecycleEmpty": {
       "prefix": "FileRecycleEmpty",
-      "body": "FileRecycleEmpty, ${1:[ C:\\]}"
+      "body": "FileRecycleEmpty, ${1:[ C:\\]}",
+      "description": "Empties the recycle bin."
     },
     "FileRemoveDir": {
       "prefix": "FileRemoveDir",
-      "body": "FileRemoveDir, ${1:Path [}, ${2:Recurse? (1 = yes)]}"
+      "body": "FileRemoveDir, ${1:Path [}, ${2:Recurse? (1 = yes)]}",
+      "description": "Deletes a folder."
     },
     "FileSelectFile": {
       "prefix": "FileSelectFile",
-      "body": "FileSelectFile, ${1:OutputVar [}, ${2:Options}, ${3:RootDir[\\DefaultFilename]}, ${4:Prompt}, ${5:Filter]}"
+      "body": "FileSelectFile, ${1:OutputVar [}, ${2:Options}, ${3:RootDir[\\DefaultFilename]}, ${4:Prompt}, ${5:Filter]}",
+      "description": "Displays a standard dialog that allows the user to open or save file(s)."
     },
     "FileSelectFolder": {
       "prefix": "FileSelectFolder",
-      "body": "FileSelectFolder, ${1:OutputVar [}, ${2:*StartingFolder}, ${3:Options}, ${4:Prompt]}"
+      "body": "FileSelectFolder, ${1:OutputVar [}, ${2:*StartingFolder}, ${3:Options}, ${4:Prompt]}",
+      "description": "Displays a standard dialog that allows the user to select a folder."
     },
     "FileSetAttrib": {
       "prefix": "FileSetAttrib",
-      "body": "FileSetAttrib, ${1:Attributes(+-^RASHNOT) [}, ${2:FilePattern}, ${3:OperateOnFolders?}, ${4:Recurse?]}"
+      "body": "FileSetAttrib, ${1:Attributes(+-^RASHNOT) [}, ${2:FilePattern}, ${3:OperateOnFolders?}, ${4:Recurse?]}",
+      "description": "Changes the attributes of one or more files or folders. Wildcards are supported."
     },
     "FileSetTime": {
       "prefix": "FileSetTime",
-      "body": "FileSetTime, ${1:[ YYYYMMDDHH24MISS}, ${2:FilePattern}, ${3:WhichTime (M|C|A)}, ${4:OperateOnFolders?}, ${5:Recurse?]}"
+      "body": "FileSetTime, ${1:[ YYYYMMDDHH24MISS}, ${2:FilePattern}, ${3:WhichTime (M|C|A)}, ${4:OperateOnFolders?}, ${5:Recurse?]}",
+      "description": "Changes the datetime stamp of one or more files or folders. Wildcards are supported."
     },
     "Finally": {
       "prefix": "Finally",
-      "body": "Finally ${1:Statement}"
+      "body": "Finally ${1:Statement}",
+      "description": "Ensures that one or more statements (commands or expressions) are always executed after the execution of a try statement."
     },
     "For": {
       "prefix": "For",
-      "body": "For ${1:Key}, ${2:[Value]} in ${3:Expression}"
+      "body": "For ${1:Key}, ${2:[Value]} in ${3:Expression}",
+      "description": "Repeats a series of commands once for each key-value pair in an object."
     },
     "FormatTime": {
       "prefix": "FormatTime",
-      "body": "FormatTime, ${1:OutputVar [}, ${2:YYYYMMDDHH24MISS}, ${3:Format]}"
+      "body": "FormatTime, ${1:OutputVar [}, ${2:YYYYMMDDHH24MISS}, ${3:Format]}",
+      "description": "Transforms a YYYYMMDDHH24MISS timestamp into the specified date/time format."
     },
     "GetKeyState": {
       "prefix": "GetKeyState",
-      "body": "GetKeyState, ${1:OutputVar}, ${2:WhichKey [}, ${3:Mode (P|T)]}"
+      "body": "GetKeyState, ${1:OutputVar}, ${2:WhichKey [}, ${3:Mode (P|T)]}",
+      "description": "Checks if a keyboard key or mouse/joystick button is down or up. Also retrieves joystick status."
     },
     "Gosub": {
       "prefix": "Gosub",
-      "body": "Gosub, ${1:Label}"
+      "body": "Gosub, ${1:Label}",
+      "description": "Jumps to the specified label and continues execution until Return is encountered."
     },
     "Goto": {
       "prefix": "Goto",
-      "body": "Goto, ${1:Label}"
+      "body": "Goto, ${1:Label}",
+      "description": "Jumps to the specified label and continues execution."
     },
     "GroupActivate": {
       "prefix": "GroupActivate",
-      "body": "GroupActivate, ${1:GroupName [}, ${2:R]}"
+      "body": "GroupActivate, ${1:GroupName [}, ${2:R]}",
+      "description": "Activates the next window in a window group that was defined with GroupAdd."
     },
     "GroupAdd": {
       "prefix": "GroupAdd",
-      "body": "GroupAdd, ${1:GroupName}, ${2:WinTitle [}, ${3:WinText}, ${4:Label}, ${5:ExcludeTitle}, ${6:ExcludeText]}"
+      "body": "GroupAdd, ${1:GroupName}, ${2:WinTitle [}, ${3:WinText}, ${4:Label}, ${5:ExcludeTitle}, ${6:ExcludeText]}",
+      "description": "Adds a window specification to a window group, creating the group if necessary."
     },
     "GroupClose": {
       "prefix": "GroupClose",
-      "body": "GroupClose, ${1:GroupName [}, ${2:A|R]}"
+      "body": "GroupClose, ${1:GroupName [}, ${2:A|R]}",
+      "description": "Closes the active window if it was just activated by GroupActivate or GroupDeactivate. It then activates the next window in the series. It can also close all windows in a group."
     },
     "GroupDeactivate": {
       "prefix": "GroupDeactivate",
-      "body": "GroupDeactivate, ${1:GroupName [}, ${2:R]}"
+      "body": "GroupDeactivate, ${1:GroupName [}, ${2:R]}",
+      "description": "Similar to GroupActivate except activates the next window not in the group."
     },
     "Gui": {
       "prefix": "Gui",
-      "body": "Gui, ${1:sub-command [}, ${2:Param2}, ${3:Param3}, ${4:Param4]}"
+      "body": "Gui, ${1:sub-command [}, ${2:Param2}, ${3:Param3}, ${4:Param4]}",
+      "description": "Creates and manages windows and controls. Such windows can be used as data entry forms or custom user interfaces."
     },
     "GuiControl": {
       "prefix": "GuiControl",
-      "body": "GuiControl, ${1:Sub-command}, ${2:ControlID [}, ${3:Param3]}"
+      "body": "GuiControl, ${1:Sub-command}, ${2:ControlID [}, ${3:Param3]}",
+      "description": "Makes a variety of changes to a control in a GUI window."
     },
     "GuiControlGet": {
       "prefix": "GuiControlGet",
-      "body": "GuiControlGet, ${1:OutputVar [}, ${2:Sub-command}, ${3:ControlID}, ${4:Param4]}"
+      "body": "GuiControlGet, ${1:OutputVar [}, ${2:Sub-command}, ${3:ControlID}, ${4:Param4]}",
+      "description": "Retrieves various types of information about a control in a GUI window."
     },
     "Hotkey": {
       "prefix": "Hotkey",
-      "body": "Hotkey, ${1:KeyName [}, ${2:Label}, ${3:Options]}"
+      "body": "Hotkey, ${1:KeyName [}, ${2:Label}, ${3:Options]}",
+      "description": "Creates, modifies, enables, or disables a hotkey while the script is running."
     },
     "If": {
       "prefix": "If",
-      "body": "If (${1:expression})"
+      "body": "If (${1:expression})",
+      "description": "Specifies one or more statements to execute if an expression evaluates to true."
     },
     "If Between": {
       "prefix": "If Between",
-      "body": "If ${1:Var} between ${2:Low} and ${3:High}"
+      "body": "If ${1:Var} between ${2:Low} and ${3:High}",
+      "description": "Checks whether a variable's contents are numerically or alphabetically between two values (inclusive)."
     },
     "If Contains": {
       "prefix": "If Contains",
-      "body": "If ${1:Var} [not] contains ${2:Value, Value2}"
+      "body": "If ${1:Var} [not] contains ${2:Value, Value2}",
+      "description": "Checks whether a variable's contents match one of the items in a list."
     },
     "If In": {
       "prefix": "If In",
-      "body": "If ${1:Var} in ${2:Value, Value2}"
+      "body": "If ${1:Var} in ${2:Value, Value2}",
+      "description": "Checks whether a variable's contents match one of the items in a list."
     },
     "If Is": {
       "prefix": "If Is",
-      "body": "If ${1:Var} is ${2:integer|float|number|digit|xdigit|alpha|upper|lower|alnum|space|time}"
+      "body": "If ${1:Var} is ${2:integer|float|number|digit|xdigit|alpha|upper|lower|alnum|space|time}",
+      "description": "Checks whether a variable's contents are numeric, uppercase, etc."
     },
     "IfEqual": {
       "prefix": "IfEqual",
-      "body": "IfEqual, ${1:Var}, ${2:Value}"
+      "body": "IfEqual, ${1:Var}, ${2:Value}",
+      "description": "⚠Deprecated: Legacy If statements are not recommended for use in new scripts."
     },
     "IfExist": {
       "prefix": "IfExist",
-      "body": "IfExist, ${1:File|Dir|Pattern}"
+      "body": "IfExist, ${1:File|Dir|Pattern}",
+      "description": "Checks for the existence of a file or folder.⚠ Deprecated: These commands are not recommended for use in new scripts. Use the FileExist function instead."
     },
     "IfGreater": {
       "prefix": "IfGreater",
-      "body": "IfGreater, ${1:Var}, ${2:Value}"
+      "body": "IfGreater, ${1:Var}, ${2:Value}",
+      "description": "⚠Deprecated: Legacy If statements are not recommended for use in new scripts."
     },
     "IfGreaterOrEqual": {
       "prefix": "IfGreaterOrEqual",
-      "body": "IfGreaterOrEqual, ${1:Var}, ${2:Value}"
+      "body": "IfGreaterOrEqual, ${1:Var}, ${2:Value}",
+      "description": "⚠Deprecated: Legacy If statements are not recommended for use in new scripts."
     },
     "IfInString": {
       "prefix": "IfInString",
-      "body": "IfInString, ${1:Var}, ${2:SearchString}"
+      "body": "IfInString, ${1:Var}, ${2:SearchString}",
+      "description": "⚠Deprecated: Legacy If statements are not recommended for use in new scripts. Use the InStr function instead."
     },
     "IfLess": {
       "prefix": "IfLess",
-      "body": "IfLess, ${1:Var}, ${2:Value}"
+      "body": "IfLess, ${1:Var}, ${2:Value}",
+      "description": "⚠Deprecated: Legacy If statements are not recommended for use in new scripts."
     },
     "IfLessOrEqual": {
       "prefix": "IfLessOrEqual",
-      "body": "IfLessOrEqual, ${1:Var}, ${2:Value}"
+      "body": "IfLessOrEqual, ${1:Var}, ${2:Value}",
+      "description": "⚠Deprecated: Legacy If statements are not recommended for use in new scripts."
     },
     "IfMsgBox": {
       "prefix": "IfMsgBox",
-      "body": "IfMsgBox, ${1:Yes|No|OK|Cancel|Abort|Ignore|Retry|Timeout}"
+      "body": "IfMsgBox, ${1:Yes|No|OK|Cancel|Abort|Ignore|Retry|Timeout}",
+      "description": "Checks which button was pushed by the user during the most recent MsgBox command."
     },
     "IfNotEqual": {
       "prefix": "IfNotEqual",
-      "body": "IfNotEqual, ${1:Var}, ${2:Value}"
+      "body": "IfNotEqual, ${1:Var}, ${2:Value}",
+      "description": "⚠Deprecated: Legacy If statements are not recommended for use in new scripts."
     },
     "IfNotExist": {
       "prefix": "IfNotExist",
-      "body": "IfNotExist, ${1:File|Dir|Pattern}"
+      "body": "IfNotExist, ${1:File|Dir|Pattern}",
+      "description": "Checks for the existence of a file or folder.⚠Deprecated: These commands are not recommended for use in new scripts. Use the FileExist function instead."
     },
     "IfNotInString": {
       "prefix": "IfNotInString",
-      "body": "IfNotInString, ${1:Var}, ${2:SearchString}"
+      "body": "IfNotInString, ${1:Var}, ${2:SearchString}",
+      "description": "Checks if a variable contains the specified string.⚠Deprecated: These commands are not recommended for use in new scripts. Use the InStr function instead."
     },
     "IfWinActive": {
       "prefix": "IfWinActive",
-      "body": "IfWinActive, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+      "body": "IfWinActive, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}",
+      "description": "Checks if the specified window exists and is currently active (foremost). If it is, WinActive() returns its Unique ID (HWND)."
     },
     "IfWinExist": {
       "prefix": "IfWinExist",
-      "body": "IfWinExist, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+      "body": "IfWinExist, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}",
+      "description": "Checks if a matching window exists. If it is, WinExist() returns the Unique ID (HWND) of the first matching window."
     },
     "IfWinNotActive": {
       "prefix": "IfWinNotActive",
-      "body": "IfWinNotActive, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+      "body": "IfWinNotActive, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}",
+      "description": "Checks if the specified window exists and is currently active (foremost). If it is, WinActive() returns its Unique ID (HWND)."
     },
     "IfWinNotExist": {
       "prefix": "IfWinNotExist",
-      "body": "IfWinNotExist, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}"
+      "body": "IfWinNotExist, ${1:[ WinTitle}, ${2:WinText}, ${3:ExcludeTitle}, ${4:ExcludeText]}",
+      "description": "Checks if a matching window exists. If it is, WinExist() returns the Unique ID (HWND) of the first matching window."
     },
     "ImageSearch": {
       "prefix": "ImageSearch",
-      "body": "ImageSearch, ${1:OutputVarX}, ${2:OutputVarY}, ${3:X1}, ${4:Y1}, ${5:X2}, ${6:Y2}, ${7:ImageFile}"
+      "body": "ImageSearch, ${1:OutputVarX}, ${2:OutputVarY}, ${3:X1}, ${4:Y1}, ${5:X2}, ${6:Y2}, ${7:ImageFile}",
+      "description": "Searches a region of the screen for an image."
     },
     "IniDelete": {
       "prefix": "IniDelete",
-      "body": "IniDelete, ${1:Filename}, ${2:Section [}, ${3:Key]}"
+      "body": "IniDelete, ${1:Filename}, ${2:Section [}, ${3:Key]}",
+      "description": "Deletes a value from a standard format .ini file."
     },
     "IniRead": {
       "prefix": "IniRead",
-      "body": "IniRead, ${1:OutputVar}, ${2:Filename}, ${3:Section}, ${4:Key [}, ${5:Default]}"
+      "body": "IniRead, ${1:OutputVar}, ${2:Filename}, ${3:Section}, ${4:Key [}, ${5:Default]}",
+      "description": "Reads a value, section or list of section names from a standard format .ini file."
     },
     "IniWrite": {
       "prefix": "IniWrite",
-      "body": "IniWrite, ${1:Value}, ${2:Filename}, ${3:Section}, ${4:Key}"
+      "body": "IniWrite, ${1:Value}, ${2:Filename}, ${3:Section}, ${4:Key}",
+      "description": "Writes a value or section to a standard format .ini file."
     },
     "Input": {
       "prefix": "Input",
-      "body": "Input, ${1:[ OutputVar}, ${2:Options}, ${3:EndKeys}, ${4:MatchList]}"
+      "body": "Input, ${1:[ OutputVar}, ${2:Options}, ${3:EndKeys}, ${4:MatchList]}",
+      "description": "Waits for the user to type a string."
     },
     "InputBox": {
       "prefix": "InputBox",
-      "body": "InputBox, ${1:OutputVar [}, ${2:Title}, ${3:Prompt}, ${4:HIDE}, ${5:Width}, ${6:Height}, ${7:X}, ${8:Y}, ${9:Font}, ${10:Timeout}"
+      "body": "InputBox, ${1:OutputVar [}, ${2:Title}, ${3:Prompt}, ${4:HIDE}, ${5:Width}, ${6:Height}, ${7:X}, ${8:Y}, ${9:Font}, ${10:Timeout}",
+      "description": "Displays an input box to ask the user to enter a string."
     },
     "KeyHistory": {
       "prefix": "KeyHistory",
