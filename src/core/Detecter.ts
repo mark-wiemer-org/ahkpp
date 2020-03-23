@@ -14,7 +14,7 @@ export class Detecter {
     private static keywordPattern = /\b(if|While)\b/ig;
 
     static getCacheFile(): string[] {
-        return Object.keys(this.documentMethodMap).filter(key => key.match(/\b(ahk|ext)$/) && this.documentMethodMap[key]['length'] > 0)
+        return Object.keys(this.documentMethodMap).filter(key => key.match(/\b(ahk|ext)$/i) && this.documentMethodMap[key]['length'] > 0)
     }
 
     /**
@@ -31,7 +31,7 @@ export class Detecter {
                     this.buildByPath(buildPath + "/" + file)
                 }
             })
-        } else if (buildPath.match(/\b(ahk|ext)$/)) {
+        } else if (buildPath.match(/\b(ahk|ext)$/i)) {
             this.getMethodList(vscode.Uri.file(buildPath))
         }
 
