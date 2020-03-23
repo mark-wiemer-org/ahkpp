@@ -691,135 +691,168 @@
     },
     "KeyHistory": {
       "prefix": "KeyHistory",
-      "body": "KeyHistory"
+      "body": "KeyHistory",
+      "description": "Displays script info and a history of the most recent keystrokes and mouse clicks."
     },
     "KeyWait": {
       "prefix": "KeyWait",
-      "body": "KeyWait, ${1:KeyName [}, ${2:Options]}"
+      "body": "KeyWait, ${1:KeyName [}, ${2:Options]}",
+      "description": "Waits for a key or mouse/joystick button to be released or pressed down."
     },
     "ListHotkeys": {
       "prefix": "ListHotkeys",
-      "body": "ListHotkeys"
+      "body": "ListHotkeys",
+      "description": "Displays the hotkeys in use by the current script, whether their subroutines are currently running, and whether or not they use the keyboard or mouse hook."
     },
     "ListLines": {
       "prefix": "ListLines",
-      "body": "ListLines, ${1:[ On|Off]}"
+      "body": "ListLines, ${1:[ On|Off]}",
+      "description": "Displays the script lines most recently executed."
     },
     "ListVars": {
       "prefix": "ListVars",
-      "body": "ListVars"
+      "body": "ListVars",
+      "description": "Displays the script's variables: their names and current contents."
     },
     "Loop": {
       "prefix": "Loop",
-      "body": "Loop, ${1:[ Count]}"
+      "body": "Loop, ${1:[ Count]}",
+      "description": "Performs a series of commands repeatedly: either the specified number of times or until break is encountered."
     },
     "Loop <file>": {
       "prefix": "Loop <file>",
-      "body": "Loop, ${1:FilePattern [}, ${2:IncludeFolders?}, ${3:Recurse?]}"
+      "body": "Loop, ${1:FilePattern [}, ${2:IncludeFolders?}, ${3:Recurse?]}",
+      "description": "Retrieves the specified files or folders, one at a time."
     },
     "Loop parse": {
       "prefix": "Loop parse",
-      "body": "Loop, ${1:Parse}, ${2:InputVar [}, ${3:Delimiters|CSV}, ${4:OmitChars]}"
+      "body": "Loop, ${1:Parse}, ${2:InputVar [}, ${3:Delimiters|CSV}, ${4:OmitChars]}",
+      "description": "Retrieves substrings (fields) from a string, one at a time."
     },
     "Loop read": {
       "prefix": "Loop read",
-      "body": "Loop, ${1:Read}, ${2:InputFile [}, ${3:OutputFile]}"
+      "body": "Loop, ${1:Read}, ${2:InputFile [}, ${3:OutputFile]}",
+      "description": "Retrieves the lines in a text file, one at a time (performs better than FileReadLine)."
     },
     "Loop reg": {
       "prefix": "Loop reg",
-      "body": "Loop, ${1:HKLM|HKU|HKCU|HKCR|HKCC [}, ${2:Key}, ${3:IncludeSubkeys?}, ${4:Recurse?]}"
+      "body": "Loop, ${1:HKLM|HKU|HKCU|HKCR|HKCC [}, ${2:Key}, ${3:IncludeSubkeys?}, ${4:Recurse?]}",
+      "description": "Retrieves the contents of the specified registry subkey, one item at a time."
     },
     "Menu": {
       "prefix": "Menu",
-      "body": "Menu, ${1:MenuName}, ${2:Cmd [}, ${3:P3}, ${4:P4}, ${5:P5]}"
+      "body": "Menu, ${1:MenuName}, ${2:Cmd [}, ${3:P3}, ${4:P4}, ${5:P5]}",
+      "description": "Creates, deletes, modifies and displays menus and menu items. Changes the tray icon and its tooltip. Controls whether the main window of a compiled script can be opened."
     },
     "MouseClick": {
       "prefix": "MouseClick",
-      "body": "MouseClick, ${1:WhichButton [}, ${2:X}, ${3:Y}, ${4:ClickCount}, ${5:Speed}, ${6:D|U}, ${7:R]}"
+      "body": "MouseClick, ${1:WhichButton [}, ${2:X}, ${3:Y}, ${4:ClickCount}, ${5:Speed}, ${6:D|U}, ${7:R]}",
+      "description": "Clicks or holds down a mouse button, or turns the mouse wheel. NOTE: The Click command is generally more flexible and easier to use."
     },
     "MouseClickDrag": {
       "prefix": "MouseClickDrag",
-      "body": "MouseClickDrag, ${1:WhichButton}, ${2:X1}, ${3:Y1}, ${4:X2}, ${5:Y2 [}, ${6:Speed}, ${7:R]}"
+      "body": "MouseClickDrag, ${1:WhichButton}, ${2:X1}, ${3:Y1}, ${4:X2}, ${5:Y2 [}, ${6:Speed}, ${7:R]}",
+      "description": "Clicks and holds the specified mouse button, moves the mouse to the destination coordinates, then releases the button."
     },
     "MouseGetPos": {
       "prefix": "MouseGetPos",
-      "body": "MouseGetPos, ${1:[ OutputVarX}, ${2:OutputVarY}, ${3:OutputVarWin}, ${4:OutputVarControl}, ${5:1|2|3]}"
+      "body": "MouseGetPos, ${1:[ OutputVarX}, ${2:OutputVarY}, ${3:OutputVarWin}, ${4:OutputVarControl}, ${5:1|2|3]}",
+      "description": "Retrieves the current position of the mouse cursor, and optionally which window and control it is hovering over."
     },
     "MouseMove": {
       "prefix": "MouseMove",
-      "body": "MouseMove, ${1:X}, ${2:Y [}, ${3:Speed}, ${4:R]}"
+      "body": "MouseMove, ${1:X}, ${2:Y [}, ${3:Speed}, ${4:R]}",
+      "description": "Moves the mouse cursor."
     },
     "MsgBox": {
       "prefix": "MsgBox",
-      "body": "MsgBox, ${1:[ Options}, ${2:Title}, ${3:Text}, ${4:Timeout]}"
+      "body": "MsgBox, ${1:[ Options}, ${2:Title}, ${3:Text}, ${4:Timeout]}",
+      "description": "Displays the specified text in a small window containing one or more buttons (such as Yes and No)."
     },
     "OnExit": {
       "prefix": "OnExit",
-      "body": "OnExit, ${1:[ Label]}"
+      "body": "OnExit, ${1:[ Label]}",
+      "description": "Specifies a callback function or subroutine to run automatically when the script exits."
     },
     "OutputDebug": {
       "prefix": "OutputDebug",
-      "body": "OutputDebug${1:, Text}${2: % }$3"
+      "body": "OutputDebug${1:, Text}${2: % }$3",
+      "description": "Sends a string to the debugger (if any) for display."
     },
     "Pause": {
       "prefix": "Pause",
-      "body": "Pause, ${1:[ On|Off|Toggle}, ${2:OperateOnUnderlyingThread?]}"
+      "body": "Pause, ${1:[ On|Off|Toggle}, ${2:OperateOnUnderlyingThread?]}",
+      "description": "Pauses the script's current thread."
     },
     "PixelGetColor": {
       "prefix": "PixelGetColor",
-      "body": "PixelGetColor, ${1:OutputVar}, ${2:X}, ${3:Y [}, ${4:Alt|Slow|RGB]}"
+      "body": "PixelGetColor, ${1:OutputVar}, ${2:X}, ${3:Y [}, ${4:Alt|Slow|RGB]}",
+      "description": "Retrieves the color of the pixel at the specified x,y coordinates."
     },
     "PixelSearch": {
       "prefix": "PixelSearch",
-      "body": "PixelSearch, ${1:OutputVarX}, ${2:OutputVarY}, ${3:X1}, ${4:Y1}, ${5:X2}, ${6:Y2}, ${7:ColorID [}, ${8:Variation}"
+      "body": "PixelSearch, ${1:OutputVarX}, ${2:OutputVarY}, ${3:X1}, ${4:Y1}, ${5:X2}, ${6:Y2}, ${7:ColorID [}, ${8:Variation}",
+      "description": "Searches a region of the screen for a pixel of the specified color."
     },
     "PostMessage": {
       "prefix": "PostMessage",
-      "body": "PostMessage, ${1:Msg}, ${2:[wParam}, ${3:lParam}, ${4:Control}, ${5:WinTitle}, ${6:WinText}, ${7:ExcludeTitle}, ${8:ExcludeText]}"
+      "body": "PostMessage, ${1:Msg}, ${2:[wParam}, ${3:lParam}, ${4:Control}, ${5:WinTitle}, ${6:WinText}, ${7:ExcludeTitle}, ${8:ExcludeText]}",
+      "description": "Sends a message to a window or control (SendMessage additionally waits for acknowledgement)."
     },
     "Process": {
       "prefix": "Process",
-      "body": "Process, ${1:Cmd}, ${2:PID-or-Name [}, ${3:Param3]}"
+      "body": "Process, ${1:Cmd}, ${2:PID-or-Name [}, ${3:Param3]}",
+      "description": "Performs one of the following operations on a process: checks if it exists; changes its priority; closes it; waits for it to close."
     },
     "Progress": {
       "prefix": "Progress",
-      "body": "Progress, ${1:Param1 [}, ${2:SubText}, ${3:MainText}, ${4:WinTitle}, ${5:FontName]}"
+      "body": "Progress, ${1:Param1 [}, ${2:SubText}, ${3:MainText}, ${4:WinTitle}, ${5:FontName]}",
+      "description": "Creates or updates a window containing a progress bar or an image."
     },
     "Random": {
       "prefix": "Random",
-      "body": "Random, ${1:OutputVar [}, ${2:Min}, ${3:Max]}"
+      "body": "Random, ${1:OutputVar [}, ${2:Min}, ${3:Max]}",
+      "description": "Generates a pseudo-random number."
     },
     "RegDelete": {
       "prefix": "RegDelete",
-      "body": "RegDelete, ${1:HKLM|HKU|HKCU|HKCR|HKCC}, ${2:SubKey [}, ${3:ValueName]}"
+      "body": "RegDelete, ${1:HKLM|HKU|HKCU|HKCR|HKCC}, ${2:SubKey [}, ${3:ValueName]}",
+      "description": "Deletes a subkey or value from the registry."
     },
     "RegRead": {
       "prefix": "RegRead",
-      "body": "RegRead, ${1:OutputVar}, ${2:HKLM|HKU|HKCU|HKCR|HKCC}, ${3:SubKey [}, ${4:ValueName]}"
+      "body": "RegRead, ${1:OutputVar}, ${2:HKLM|HKU|HKCU|HKCR|HKCC}, ${3:SubKey [}, ${4:ValueName]}",
+      "description": "Reads a value from the registry."
     },
     "RegWrite": {
       "prefix": "RegWrite",
-      "body": "RegWrite, ${1:REG_SZ|REG_EXPAND_SZ|REG_MULTI_SZ|REG_DWORD|REG_BINARY}, ${2:HKLM|HKU|HKCU|HKCR|HKCC}, ${3:SubKey [}, ${4:ValueName}, ${5:Value]}"
+      "body": "RegWrite, ${1:REG_SZ|REG_EXPAND_SZ|REG_MULTI_SZ|REG_DWORD|REG_BINARY}, ${2:HKLM|HKU|HKCU|HKCR|HKCC}, ${3:SubKey [}, ${4:ValueName}, ${5:Value]}",
+      "description": "Writes a value to the registry."
     },
     "Reload": {
       "prefix": "Reload",
-      "body": "Reload"
+      "body": "Reload",
+      "description": "Replaces the currently running instance of the script with a new one."
     },
     "Return": {
       "prefix": "Return",
-      "body": "Return"
+      "body": "Return",
+      "description": "Returns from a subroutine to which execution had previously jumped via function-call, Gosub, Hotkey activation, GroupActivate, or other means."
     },
     "Run": {
       "prefix": "Run",
-      "body": "Run, ${1:Target [}, ${2:WorkingDir}, ${3:Max|Min|Hide|UseErrorLevel}, ${4:OutputVarPID]}"
+      "body": "Run, ${1:Target [}, ${2:WorkingDir}, ${3:Max|Min|Hide|UseErrorLevel}, ${4:OutputVarPID]}",
+      "description": "Runs an external program."
     },
     "RunAs": {
       "prefix": "RunAs",
-      "body": "RunAs, ${1:[ User}, ${2:Password}, ${3:Domain]}"
+      "body": "RunAs, ${1:[ User}, ${2:Password}, ${3:Domain]}",
+      "description": "Specifies a set of user credentials to use for all subsequent uses of Run and RunWait."
     },
     "RunWait": {
       "prefix": "RunWait",
-      "body": "RunWait, ${1:Target [}, ${2:WorkingDir}, ${3:Max|Min|Hide|UseErrorLevel}, ${4:OutputVarPID]}"
+      "body": "RunWait, ${1:Target [}, ${2:WorkingDir}, ${3:Max|Min|Hide|UseErrorLevel}, ${4:OutputVarPID]}",
+      "description": "Unlike Run, RunWait will wait until the program finishes before continuing."
     },
     "Send": {
       "prefix": "Send",
