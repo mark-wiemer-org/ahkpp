@@ -1,3 +1,6 @@
+## 2.1.7 (2020/3/24)
+- Support change defualt ahk execute path.
+
 ## 2.1.6 (2020/3/23)
 - Find definition in whole workspace.
 - Try go to include script in workspce.
@@ -6,7 +9,7 @@
 - Update snippets
 
 ## 2.1.0 (2020/3/19)
-- Suport Run Script
+- Support Run Script
 
 ## 2.0.3 (2020/3/10)
 - Fix if and while block as methods

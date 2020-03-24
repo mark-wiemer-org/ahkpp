@@ -1,4 +1,3 @@
-
 import * as vscode from "vscode";
 import { ScriptRunner } from "./core/ScriptRunner";
 import { CompletionProvider } from "./provider/CompletionProvider";
@@ -11,6 +10,7 @@ import { Detecter } from "./core/Detecter";
 export function activate(context: vscode.ExtensionContext) {
 
     const language = { language: 'ahk' }
+    let scriptRunner = new ScriptRunner(context)
 
     Detecter.buildByPath(vscode.workspace.rootPath)
     context.subscriptions.push(
@@ -20,7 +20,10 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
         FileProvider.createEditorListenr(),
         vscode.commands.registerCommand("run.ahk", () => {
-            ScriptRunner.run(context)
+            scriptRunner.run()
+        }),
+        vscode.commands.registerCommand("run.ahk.config", () => {
+            scriptRunner.reqConfigPath()
         })
     )
 

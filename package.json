@@ -61,12 +61,16 @@
 		"commands": [
 			{
 				"command": "run.ahk",
-				"title": "Run Ahk Script",
-				"category": "MySQL",
+				"title": "Run Ahk Script.",
+				"category": "AHK",
 				"icon": {
 					"light": "image/run.png",
 					"dark": "image/run-dark.png"
 				}
+			},
+			{
+				"command": "run.ahk.config",
+				"title": "Config Ahk Execute Bin Path."
 			}
 		],
 		"menus": {

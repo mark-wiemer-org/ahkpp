@@ -16,8 +16,13 @@ AutoHotKey language support for VS Code
 
 ## Run Script
 1. Click run button
-2. Press F9
+2. Or press F9
 ![runScript](image/runScript.jpg)
+
+**Change Default Execute Path:**
+1. Press "Ctrl+Shift+P" to open command palette.
+2. Input "Config Ahk" to select config command.
+![runConfig](image/runConfig.jpg)
 
 ## Method Symbol
 1. Detech source method as symbol
