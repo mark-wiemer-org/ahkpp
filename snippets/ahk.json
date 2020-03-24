@@ -1082,7 +1082,7 @@
     "StringReplace": {
       "prefix": "StringReplace",
       "body": "StringReplace, ${1:OutputVar}, ${2:InputVar}, ${3:SearchText [}, ${4:ReplaceText}, ${5:All]}",
-      "description": "Replaces the specified substring with a new string."
+      "description": "Replaces the specified substring with a new string.\n⚠Deprecated: Use the StrReplace function instead."
     },
     "StringRight": {
       "prefix": "StringRight",
