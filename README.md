@@ -39,3 +39,8 @@ AutoHotKey language support for VS Code
 
 1. Press ctrl and move the mouse coordinates to the calling code 
 ![gotoDefinition](image/gotoDefinition.jpg)
+
+## Code Format
+1. Right click then click format document.
+- Formatter follows my coding habits, so it may not work for you.
+![codeFormat](image/codeFormat.jpg)
