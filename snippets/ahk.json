@@ -1067,7 +1067,7 @@
     "StringLen": {
       "prefix": "StringLen",
       "body": "StringLen, ${1:OutputVar}, ${2:InputVar}",
-      "description": "Retrieves the count of how many characters are in a string."
+      "description": "Retrieves the count of how many characters are in a string.\n⚠Deprecated: Use the StrLen function instead."
     },
     "StringLower": {
       "prefix": "StringLower",
