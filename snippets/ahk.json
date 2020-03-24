@@ -4352,96 +4352,96 @@
       "body": "Retry"
     },
     "Ignore": {
-      "trigger": "Ignore",
-      "contents": "Ignore"
+      "prefix": "Ignore",
+      "body": "Ignore"
     },
     "TryAgain": {
-      "trigger": "TryAgain",
-      "contents": "TryAgain"
+      "prefix": "TryAgain",
+      "body": "TryAgain"
     },
     "On": {
-      "trigger": "On",
-      "contents": "On"
+      "prefix": "On",
+      "body": "On"
     },
     "Off": {
-      "trigger": "Off",
-      "contents": "Off"
+      "prefix": "Off",
+      "body": "Off"
     },
     "All": {
-      "trigger": "All",
-      "contents": "All"
+      "prefix": "All",
+      "body": "All"
     },
     "HKEY_LOCAL_MACHINE": {
-      "trigger": "HKEY_LOCAL_MACHINE",
-      "contents": "HKEY_LOCAL_MACHINE"
+      "prefix": "HKEY_LOCAL_MACHINE",
+      "body": "HKEY_LOCAL_MACHINE"
     },
     "HKEY_USERS": {
-      "trigger": "HKEY_USERS",
-      "contents": "HKEY_USERS"
+      "prefix": "HKEY_USERS",
+      "body": "HKEY_USERS"
     },
     "HKEY_CURRENT_USER": {
-      "trigger": "HKEY_CURRENT_USER",
-      "contents": "HKEY_CURRENT_USER"
+      "prefix": "HKEY_CURRENT_USER",
+      "body": "HKEY_CURRENT_USER"
     },
     "HKEY_CLASSES_ROOT": {
-      "trigger": "HKEY_CLASSES_ROOT",
-      "contents": "HKEY_CLASSES_ROOT"
+      "prefix": "HKEY_CLASSES_ROOT",
+      "body": "HKEY_CLASSES_ROOT"
     },
     "HKEY_CURRENT_CONFIG": {
-      "trigger": "HKEY_CURRENT_CONFIG",
-      "contents": "HKEY_CURRENT_CONFIG"
+      "prefix": "HKEY_CURRENT_CONFIG",
+      "body": "HKEY_CURRENT_CONFIG"
     },
     "HKLM": {
-      "trigger": "HKLM",
-      "contents": "HKLM"
+      "prefix": "HKLM",
+      "body": "HKLM"
     },
     "HKU": {
-      "trigger": "HKU",
-      "contents": "HKU"
+      "prefix": "HKU",
+      "body": "HKU"
     },
     "HKCU": {
-      "trigger": "HKCU",
-      "contents": "HKCU"
+      "prefix": "HKCU",
+      "body": "HKCU"
     },
     "HKCR": {
-      "trigger": "HKCR",
-      "contents": "HKCR"
+      "prefix": "HKCR",
+      "body": "HKCR"
     },
     "HKCC": {
-      "trigger": "HKCC",
-      "contents": "HKCC"
+      "prefix": "HKCC",
+      "body": "HKCC"
     },
     "REG_SZ": {
-      "trigger": "REG_SZ",
-      "contents": "REG_SZ"
+      "prefix": "REG_SZ",
+      "body": "REG_SZ"
     },
     "REG_EXPAND_SZ": {
-      "trigger": "REG_EXPAND_SZ",
-      "contents": "REG_EXPAND_SZ"
+      "prefix": "REG_EXPAND_SZ",
+      "body": "REG_EXPAND_SZ"
     },
     "REG_MULTI_SZ": {
-      "trigger": "REG_MULTI_SZ",
-      "contents": "REG_MULTI_SZ"
+      "prefix": "REG_MULTI_SZ",
+      "body": "REG_MULTI_SZ"
     },
     "REG_DWORD": {
-      "trigger": "REG_DWORD",
-      "contents": "REG_DWORD"
+      "prefix": "REG_DWORD",
+      "body": "REG_DWORD"
     },
     "REG_BINARY": {
-      "trigger": "REG_BINARY",
-      "contents": "REG_BINARY"
+      "prefix": "REG_BINARY",
+      "body": "REG_BINARY"
     },
     "DPIScale": {
-      "trigger": "DPIScale",
-      "contents": "DPIScale"
+      "prefix": "DPIScale",
+      "body": "DPIScale"
     },
     "Hwnd": {
-      "trigger": "Hwnd",
-      "contents": "Hwnd"
+      "prefix": "Hwnd",
+      "body": "Hwnd"
     },
     "Parent": {
-      "trigger": "Parent",
-      "contents": "Parent"
+      "prefix": "Parent",
+      "body": "Parent"
     }
   }
 }
