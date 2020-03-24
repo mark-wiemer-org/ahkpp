@@ -62,9 +62,7 @@ export class Detecter {
                 methodList.push(method);
             }
         }
-        // tslint:disable-next-line: no-string-literal
-        const path = document.uri ? document.uri.path : document["path"]; // TODO: path does not exist on vscode.TextDocument
-        this.documentMethodMap[path] = methodList;
+        this.documentMethodMap[document.uri.path] = methodList;
         return methodList;
     }
 
