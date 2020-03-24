@@ -1501,203 +1501,253 @@
     },
     "Ln()": {
       "prefix": "Ln()",
-      "body": "Ln(${1:Number})"
+      "body": "Ln(${1:Number})",
+      "description": "Returns the natural logarithm (base e) of Number."
     },
     "Log()": {
       "prefix": "Log()",
-      "body": "Log(${1:Number})"
+      "body": "Log(${1:Number})",
+      "description": "Returns the logarithm (base 10) of Number."
     },
     "LTrim()": {
       "prefix": "LTrim()",
-      "body": "LTrim(${1:String}, ${2:OmitChars = \" `t\"})"
+      "body": "LTrim(${1:String}, ${2:OmitChars = \" `t\"})",
+      "description": "Trims characters from the beginning and/or end of a string."
     },
     "LV_Add()": {
       "prefix": "LV_Add()",
-      "body": "LV_Add(${1:[Options}, ${2:Col1}, ${3:Col2}, ${4:...]})"
+      "body": "LV_Add(${1:[Options}, ${2:Col1}, ${3:Col2}, ${4:...]})",
+      "description": "Adds a new row to the bottom of the list."
     },
     "LV_Delete()": {
       "prefix": "LV_Delete()",
-      "body": "LV_Delete(${1:[RowNumber]})"
+      "body": "LV_Delete(${1:[RowNumber]})",
+      "description": "Deletes the specified row or all rows."
     },
     "LV_DeleteCol()": {
       "prefix": "LV_DeleteCol()",
-      "body": "LV_DeleteCol(${1:ColumnNumber})"
+      "body": "LV_DeleteCol(${1:ColumnNumber})",
+      "description": "Deletes the specified column and all of the contents beneath it."
     },
     "LV_GetCount()": {
       "prefix": "LV_GetCount()",
-      "body": "LV_GetCount(${1:[\"S\"]})"
+      "body": "LV_GetCount(${1:[\"S\"]})",
+      "description": "Returns the total number of rows or columns, or the number of selected rows only."
     },
     "LV_GetNext()": {
       "prefix": "LV_GetNext()",
-      "body": "LV_GetNext(${1:[StartingRowNumber}, ${2:\"C|F\"]})"
+      "body": "LV_GetNext(${1:[StartingRowNumber}, ${2:\"C|F\"]})",
+      "description": "Returns the row number of the next selected, checked, or focused row."
     },
     "LV_GetText()": {
       "prefix": "LV_GetText()",
-      "body": "LV_GetText(${1:OutputVar}, ${2:RowNumber [}, ${3:ColumnNumber]})"
+      "body": "LV_GetText(${1:OutputVar}, ${2:RowNumber [}, ${3:ColumnNumber]})",
+      "description": "Retrieves the text at the specified RowNumber and ColumnNumber and stores it in OutputVar."
     },
     "LV_Insert()": {
       "prefix": "LV_Insert()",
-      "body": "LV_Insert(${1:RowNumber [}, ${2:Options}, ${3:Col1}, ${4:Col2}, ${5:...]})"
+      "body": "LV_Insert(${1:RowNumber [}, ${2:Options}, ${3:Col1}, ${4:Col2}, ${5:...]})",
+      "description": "Inserts a new row before the specified row."
     },
     "LV_InsertCol()": {
       "prefix": "LV_InsertCol()",
-      "body": "LV_InsertCol(${1:ColumnNumber [}, ${2:Options}, ${3:ColumnTitle]})"
+      "body": "LV_InsertCol(${1:ColumnNumber [}, ${2:Options}, ${3:ColumnTitle]})",
+      "description": "Inserts a new column before the specified column."
     },
     "LV_Modify()": {
       "prefix": "LV_Modify()",
-      "body": "LV_Modify(${1:RowNumber}, ${2:Options [}, ${3:NewCol1}, ${4:NewCol2}, ${5:...]})"
+      "body": "LV_Modify(${1:RowNumber}, ${2:Options [}, ${3:NewCol1}, ${4:NewCol2}, ${5:...]})",
+      "description": "Modifies the attributes and/or text of a row."
     },
     "LV_ModifyCol()": {
       "prefix": "LV_ModifyCol()",
-      "body": "LV_ModifyCol(${1:[ColumnNumber}, ${2:Options}, ${3:ColumnTitle]})"
+      "body": "LV_ModifyCol(${1:[ColumnNumber}, ${2:Options}, ${3:ColumnTitle]})",
+      "description": "Modifies the attributes and/or text of the specified column and its header."
     },
     "LV_SetImageList()": {
       "prefix": "LV_SetImageList()",
-      "body": "LV_SetImageList(${1:ImageListID} [, ${2:0|1|2]})"
+      "body": "LV_SetImageList(${1:ImageListID} [, ${2:0|1|2]})",
+      "description": "Sets or replaces the ListView's ImageList."
     },
     "Mod()": {
       "prefix": "Mod()",
-      "body": "Mod(${1:Dividend}, ${2:Divisor})"
+      "body": "Mod(${1:Dividend}, ${2:Divisor})",
+      "description": "Returns the remainder when Dividend is divided by Divisor."
     },
     "NumGet() [": {
       "prefix": "NumGet() [",
-      "body": "NumGet(${1:VarOrAddress [}, ${2:Offset = 0}, ${3:Type = \"UInt\"]})"
+      "body": "NumGet(${1:VarOrAddress [}, ${2:Offset = 0}, ${3:Type = \"UInt\"]})",
+      "description": "Returns the binary number stored at the specified address+offset."
     },
     "NumPut()": {
       "prefix": "NumPut()",
-      "body": "NumPut(${1:Number}, ${2:VarOrAddress [}, ${3:Offset = 0}, ${4:Type = \"UInt\"]})"
+      "body": "NumPut(${1:Number}, ${2:VarOrAddress [}, ${3:Offset = 0}, ${4:Type = \"UInt\"]})",
+      "description": "Stores a number in binary format at the specified address+offset."
     },
     "OnMessage() [": {
       "prefix": "OnMessage() [",
-      "body": "OnMessage(${1:MsgNumber [}, ${2:\"FunctionName\"]})"
+      "body": "OnMessage(${1:MsgNumber [}, ${2:\"FunctionName\"]})",
+      "description": "Specifies a function or function object to call automatically when the script receives the specified message."
     },
     "RegExMatch()": {
       "prefix": "RegExMatch()",
-      "body": "RegExMatch(${1:Haystack}, ${2:NeedleRegEx [}, ${3:UnquotedOutputVar = \"\"}, ${4:StartingPos = 1]})"
+      "body": "RegExMatch(${1:Haystack}, ${2:NeedleRegEx [}, ${3:UnquotedOutputVar = \"\"}, ${4:StartingPos = 1]})",
+      "description": "Determines whether a string contains a pattern (regular expression)."
     },
     "RegExReplace()": {
       "prefix": "RegExReplace()",
-      "body": "RegExReplace(${1:Haystack}, ${2:NeedleRegEx [}, ${3:Replacement = \"\"}, ${4:OutputVarCount = \"\"}, ${5:Limit = -1}, ${6:StartingPos = 1]})"
+      "body": "RegExReplace(${1:Haystack}, ${2:NeedleRegEx [}, ${3:Replacement = \"\"}, ${4:OutputVarCount = \"\"}, ${5:Limit = -1}, ${6:StartingPos = 1]})",
+      "description": "Replaces occurrences of a pattern (regular expression) inside a string."
     },
     "RegisterCallback()": {
       "prefix": "RegisterCallback()",
-      "body": "RegisterCallback(\"${1:Functionname}\" [, ${2:Options = \"\"}, ${3:ParamCount = FormalCount}, ${4:EventInfo = Address]})"
+      "body": "RegisterCallback(\"${1:Functionname}\" [, ${2:Options = \"\"}, ${3:ParamCount = FormalCount}, ${4:EventInfo = Address]})",
+      "description": "Creates a machine-code address that when called, redirects the call to a function in the script."
     },
     "Round()": {
       "prefix": "Round()",
-      "body": "Round(${1:Number [}, ${2:Places]})"
+      "body": "Round(${1:Number [}, ${2:Places]})",
+      "description": "Returns Number rounded to N decimal places."
     },
     "RTrim()": {
       "prefix": "RTrim()",
-      "body": "RTrim(${1:String}, ${2:OmitChars = \" `t\"})"
+      "body": "RTrim(${1:String}, ${2:OmitChars = \" `t\"})",
+      "description": "Trims characters from the end of a string."
     },
     "SB_SetIcon()": {
       "prefix": "SB_SetIcon()",
-      "body": "SB_SetIcon(${1:Filename [}, ${2:IconNumber}, ${3:PartNumber]})"
+      "body": "SB_SetIcon(${1:Filename [}, ${2:IconNumber}, ${3:PartNumber]})",
+      "description": "Displays a small icon to the left of the text in the specified part."
     },
     "SB_SetParts()": {
       "prefix": "SB_SetParts()",
-      "body": "SB_SetParts(${1:[Width}, ${2:Width2}, ${3:... Width255]})"
+      "body": "SB_SetParts(${1:[Width}, ${2:Width2}, ${3:... Width255]})",
+      "description": "Divides the bar into multiple sections according to the specified widths (in pixels)."
     },
     "SB_SetText()": {
       "prefix": "SB_SetText()",
-      "body": "SB_SetText(${1:NewText [}, ${2:PartNumber}, ${3:Style]})"
+      "body": "SB_SetText(${1:NewText [}, ${2:PartNumber}, ${3:Style]})",
+      "description": "Displays NewText in the specified part of the status bar."
     },
     "Sin()": {
       "prefix": "Sin()",
-      "body": "Sin(${1:Number})"
+      "body": "Sin(${1:Number})",
+      "description": "Returns the trigonometric sine of Number."
     },
     "Sqrt()": {
       "prefix": "Sqrt()",
-      "body": "Sqrt(${1:Number})"
+      "body": "Sqrt(${1:Number})",
+      "description": "Returns the square root of Number."
     },
     "StrGet()": {
       "prefix": "StrGet()",
-      "body": "StrGet(${1:Address}, ${2:[Length]}, ${3:[Encoding = None]})"
+      "body": "StrGet(${1:Address}, ${2:[Length]}, ${3:[Encoding = None]})",
+      "description": "Copies a string from a memory address, optionally converting it from a given code page."
     },
     "StrLen()": {
       "prefix": "StrLen()",
-      "body": "StrLen(${1:String})"
+      "body": "StrLen(${1:String})",
+      "description": "Retrieves the count of how many characters are in a string."
     },
     "StrPut()": {
       "prefix": "StrPut()",
-      "body": "StrPut(${1:String}, ${2:Address}, ${3:[Length]}, ${4:[Encoding = None]})"
+      "body": "StrPut(${1:String}, ${2:Address}, ${3:[Length]}, ${4:[Encoding = None]})",
+      "description": "Copies a string to a memory address, optionally converting it to a given code page."
     },
     "StrSplit()": {
       "prefix": "StrSplit()",
-      "body": "StrSplit(${1:String}, ${2:[Delimiters}, ${3:OmitChars]})"
+      "body": "StrSplit(${1:String}, ${2:[Delimiters}, ${3:OmitChars]})",
+      "description": "Separates a string into an array of substrings using the specified delimiters.⚠Deprecated: Use the StrSplit function instead."
     },
     "StrReplace()": {
       "prefix": "StrReplace()",
-      "body": "StrReplace(${1:Haystack}, ${2:SearchText [}, ${3:ReplaceText}, ${4:OutputVarCount}, ${5:Limit := -1]})"
+      "body": "StrReplace(${1:Haystack}, ${2:SearchText [}, ${3:ReplaceText}, ${4:OutputVarCount}, ${5:Limit := -1]})",
+      "description": "Replaces the specified substring with a new string."
     },
     "SubStr()": {
       "prefix": "SubStr()",
-      "body": "SubStr(${1:String}, ${2:StartingPos [}, ${3:Length]})"
+      "body": "SubStr(${1:String}, ${2:StartingPos [}, ${3:Length]})",
+      "description": "Retrieves one or more characters from the specified position in a string."
     },
     "Tan(Number)": {
       "prefix": "Tan(Number)",
-      "body": "Tan(${1:Number})"
+      "body": "Tan(${1:Number})",
+      "description": "Returns the trigonometric tangent of Number."
     },
     "Trim()": {
       "prefix": "Trim()",
-      "body": "Trim(${1:String}, ${2:OmitChars = \" `t\"})"
+      "body": "Trim(${1:String}, ${2:OmitChars = \" `t\"})",
+      "description": "Trims characters from the beginning and end of a string."
     },
     "TV_Add()": {
       "prefix": "TV_Add()",
-      "body": "TV_Add(${1:Name}, ${2:[ParentItemID}, ${3:Options]})"
+      "body": "TV_Add(${1:Name}, ${2:[ParentItemID}, ${3:Options]})",
+      "description": "Adds a new item to the TreeView and returns its unique Item ID number (or 0 upon failure)."
     },
     "TV_Delete()": {
       "prefix": "TV_Delete()",
-      "body": "TV_Delete(${1:[ItemID]})"
+      "body": "TV_Delete(${1:[ItemID]})",
+      "description": "Deletes the specified item or all items."
     },
     "TV_GetChild()": {
       "prefix": "TV_GetChild()",
-      "body": "TV_GetChild(${1:ParentItemID})"
+      "body": "TV_GetChild(${1:ParentItemID})",
+      "description": "Returns the ID number of the specified item's first/top child (or 0 if none)."
     },
     "TV_GetCount()": {
       "prefix": "TV_GetCount()",
-      "body": "TV_GetCount()"
+      "body": "TV_GetCount()",
+      "description": "Returns the total number of items in the control."
     },
     "TV_GetNext()": {
       "prefix": "TV_GetNext()",
-      "body": "TV_GetNext(${1:[ItemID}, ${2:\"Checked | Full\"]})"
+      "body": "TV_GetNext(${1:[ItemID}, ${2:\"Checked | Full\"]})",
+      "description": "Returns the ID number of the next item below the specified item (or 0 if none)."
     },
     "TV_Get()": {
       "prefix": "TV_Get()",
-      "body": "TV_Get(${1:ItemID}, ${2:\"Expand | Check | Bold\"})"
+      "body": "TV_Get(${1:ItemID}, ${2:\"Expand | Check | Bold\"})",
+      "description": "Returns the ID number of the specified item if it has the specified attribute."
     },
     "TV_GetParent()": {
       "prefix": "TV_GetParent()",
-      "body": "TV_GetParent(${1:ItemID})"
+      "body": "TV_GetParent(${1:ItemID})",
+      "description": "Returns the specified item's parent as an item ID."
     },
     "TV_GetPrev()": {
       "prefix": "TV_GetPrev()",
-      "body": "TV_GetPrev(${1:ItemID})"
+      "body": "TV_GetPrev(${1:ItemID})",
+      "description": "Returns the ID number of the sibling above the specified item (or 0 if none)."
     },
     "TV_GetSelection()": {
       "prefix": "TV_GetSelection()",
-      "body": "TV_GetSelection()"
+      "body": "TV_GetSelection()",
+      "description": "Returns the selected item's ID number."
     },
     "TV_GetText()": {
       "prefix": "TV_GetText()",
-      "body": "TV_GetText(${1:OutputVar}, ${2:ItemID})"
+      "body": "TV_GetText(${1:OutputVar}, ${2:ItemID})",
+      "description": "Retrieves the text/name of the specified ItemID and stores it in OutputVar."
     },
     "TV_Modify()": {
       "prefix": "TV_Modify()",
-      "body": "TV_Modify(${1:ItemID [}, ${2:Options}, ${3:NewName]})"
+      "body": "TV_Modify(${1:ItemID [}, ${2:Options}, ${3:NewName]})",
+      "description": "Modifies the attributes and/or name of an item."
     },
     "VarSetCapacity()": {
       "prefix": "VarSetCapacity()",
-      "body": "VarSetCapacity(${1:Var [}, ${2:RequestedCapacity}, ${3:FillByte]})"
+      "body": "VarSetCapacity(${1:Var [}, ${2:RequestedCapacity}, ${3:FillByte]})",
+      "description": "Enlarges a variable's holding capacity or frees its memory. Normally, this is necessary only for unusual circumstances such as DllCall()."
     },
     "WinActive()": {
       "prefix": "WinActive()",
-      "body": "WinActive(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText]}\")"
+      "body": "WinActive(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText]}\")",
+      "description": "Checks if the specified window exists and is currently active (foremost). If it is, WinActive() returns its Unique ID (HWND)."
     },
     "WinExist()": {
       "prefix": "WinExist()",
-      "body": "WinExist(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText]}\")"
+      "body": "WinExist(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText]}\")",
+      "description": "Checks if a matching window exists. If it is, WinExist() returns the Unique ID (HWND) of the first matching window."
     },
     ".Read()": {
       "prefix": ".Read()",
