@@ -1296,167 +1296,208 @@
     },
     "Abs()": {
       "prefix": "Abs()",
-      "body": "Abs(${1:Number})"
+      "body": "Abs(${1:Number})",
+      "description": "Returns the absolute value of Number."
     },
     "ACos()": {
       "prefix": "ACos()",
-      "body": "ACos(${1:Number})"
+      "body": "ACos(${1:Number})",
+      "description": "Returns the arccosine (the number whose cosine is Number) in radians."
     },
     "Asc()": {
       "prefix": "Asc()",
-      "body": "Asc(${1:String})"
+      "body": "Asc(${1:String})",
+      "description": "Returns the numeric value of the first byte or UTF-16 code unit in the specified string."
     },
     "ASin()": {
       "prefix": "ASin()",
-      "body": "ASin(${1:Number})"
+      "body": "ASin(${1:Number})",
+      "description": "Returns the arcsine (the number whose sine is Number) in radians."
     },
     "ATan()": {
       "prefix": "ATan()",
-      "body": "ATan(${1:Number})"
+      "body": "ATan(${1:Number})",
+      "description": "Returns the arctangent (the number whose tangent is Number) in radians."
     },
     "Ceil()": {
       "prefix": "Ceil()",
-      "body": "Ceil(${1:Number})"
+      "body": "Ceil(${1:Number})",
+      "description": "Returns Number rounded up to the nearest integer (without any .00 suffix)."
     },
     "Chr()": {
       "prefix": "Chr()",
-      "body": "Chr(${1:Number})"
+      "body": "Chr(${1:Number})",
+      "description": "Returns the string (usually a single character) corresponding to the character code indicated by the specified number."
     },
     "Cos()": {
       "prefix": "Cos()",
-      "body": "Cos(${1:Number})"
+      "body": "Cos(${1:Number})",
+      "description": "Returns the trigonometric cosine of Number."
     },
     "ComObjCreate()": {
       "prefix": "ComObjCreate()",
-      "body": "ComObjCreate(${1:CLSID} [, ${2:IID}])"
+      "body": "ComObjCreate(${1:CLSID} [, ${2:IID}])",
+      "description": "Creates a COM object."
     },
     "ComObjActive()": {
       "prefix": "ComObjActive()",
-      "body": "ComObjActive(${1:CLSID})"
+      "body": "ComObjActive(${1:CLSID})",
+      "description": "Retrieves a running object that has been registered with OLE."
     },
     "ComObjArray()": {
       "prefix": "ComObjArray()",
-      "body": "ComObjArray(${1:VarType}, ${2:Count1} [, ${3:Count2, ... Count8}])"
+      "body": "ComObjArray(${1:VarType}, ${2:Count1} [, ${3:Count2, ... Count8}])",
+      "description": "Creates a SafeArray for use with COM."
     },
     "ComObjConnect()": {
       "prefix": "ComObjConnect()",
-      "body": "ComObjConnect(${1:ComObject} [, ${2:Prefix}])"
+      "body": "ComObjConnect(${1:ComObject} [, ${2:Prefix}])",
+      "description": "Connects the object's event sources to functions with a given prefix."
     },
     "ComObjEnwrap()": {
       "prefix": "ComObjEnwrap()",
-      "body": "ComObjEnwrap(${1:DispPtr})"
+      "body": "ComObjEnwrap(${1:DispPtr})",
+      "description": "Wraps a raw IDispatch pointer in a usable object and automatically calls AddRef.\n⚠Deprecated"
     },
     "ComObjError()": {
       "prefix": "ComObjError()",
-      "body": "ComObjError(${1:[Enable]})"
+      "body": "ComObjError(${1:[Enable]})",
+      "description": "Enables or disables notification of COM errors."
     },
     "ComObjFlags()": {
       "prefix": "ComObjFlags()",
-      "body": "ComObjFlags(${1:ComObject} [, ${2:NewFlags}, ${3:Mask}])"
+      "body": "ComObjFlags(${1:ComObject} [, ${2:NewFlags}, ${3:Mask}])",
+      "description": "Retrieves or changes flags which control a COM wrapper object's behaviour."
     },
     "ComObjGet()": {
       "prefix": "ComObjGet()",
-      "body": "ComObjGet(${1:Name})"
+      "body": "ComObjGet(${1:Name})",
+      "description": "Returns a reference to an object provided by a COM component."
     },
     "ComObjMissing()": {
       "prefix": "ComObjMissing()",
-      "body": "ComObjMissing()"
+      "body": "ComObjMissing()",
+      "description": "Creates an object which may be used in place of an optional parameter's default value when calling a method of a COM object.\n⚠Deprecated"
     },
     "ComObjParameter()": {
       "prefix": "ComObjParameter()",
-      "body": "ComObjParameter(${1:VarType}, ${2:Value} [, ${3:Flags}])"
+      "body": "ComObjParameter(${1:VarType}, ${2:Value} [, ${3:Flags}])",
+      "description": "❓"
     },
     "ComObjQuery()": {
       "prefix": "ComObjQuery()",
-      "body": "ComObjQuery(${1:ComObject}, [${2:SID},] ${3:IID})"
+      "body": "ComObjQuery(${1:ComObject}, [${2:SID},] ${3:IID})",
+      "description": "Queries a COM object for an interface or service."
     },
     "ComObjType()": {
       "prefix": "ComObjType()",
-      "body": "ComObjType(${1:ComObject}, \"${2:Name|IID}\")"
+      "body": "ComObjType(${1:ComObject}, \"${2:Name|IID}\")",
+      "description": "Retrieves type information from a COM object."
     },
     "ComObjUnwrap()": {
       "prefix": "ComObjUnwrap()",
-      "body": "ComObjUnwrap(${1:ComObject})"
+      "body": "ComObjUnwrap(${1:ComObject})",
+      "description": "Unwraps a raw IDispatch pointer in a usable object and automatically calls AddRef.\n⚠Deprecated"
     },
     "ComObjValue()": {
       "prefix": "ComObjValue()",
-      "body": "ComObjValue(${1:ComObject})"
+      "body": "ComObjValue(${1:ComObject})",
+      "description": "Retrieves the value or pointer stored in a COM wrapper object."
     },
     "DllCall()": {
       "prefix": "DllCall()",
-      "body": "DllCall(\"${1:[DllFile\\]Function}\",${2:[ Type1}, ${3:Arg1}, ${4:Type2}, ${5:Arg2}, ${6:\"Cdecl ReturnType\"]})"
+      "body": "DllCall(\"${1:[DllFile\\]Function}\",${2:[ Type1}, ${3:Arg1}, ${4:Type2}, ${5:Arg2}, ${6:\"Cdecl ReturnType\"]})",
+      "description": "Calls a function inside a DLL, such as a standard Windows API function."
     },
     "Exp()": {
       "prefix": "Exp()",
-      "body": "Exp(${1:Number})"
+      "body": "Exp(${1:Number})",
+      "description": "Returns e (which is approximately 2.71828182845905) raised to the Nth power."
     },
     "FileExist()": {
       "prefix": "FileExist()",
-      "body": "FileExist(\"${1:FilePattern}\")"
+      "body": "FileExist(\"${1:FilePattern}\")",
+      "description": "Checks for the existence of a file or folder and returns its attributes."
     },
     "FileOpen()": {
       "prefix": "FileOpen()",
-      "body": "FileOpen(${1:Filename}, ${2:Flags}, ${3:[Encoding]})"
+      "body": "FileOpen(${1:Filename}, ${2:Flags}, ${3:[Encoding]})",
+      "description": "Opens a file to read specific content from it and/or to write new content into it."
     },
     "Floor()": {
       "prefix": "Floor()",
-      "body": "Floor(${1:Number})"
+      "body": "Floor(${1:Number})",
+      "description": "Returns Number rounded down to the nearest integer (without any .00 suffix)."
     },
     "Format()": {
       "prefix": "Format()",
-      "body": "Format(${1:FormatStr [}, ${2:Values...]})"
+      "body": "Format(${1:FormatStr [}, ${2:Values...]})",
+      "description": "Formats a variable number of input values according to a format string."
     },
     "Func()": {
       "prefix": "Func()",
-      "body": "Func(${1:FunctionName})"
+      "body": "Func(${1:FunctionName})",
+      "description": "Retrieves a reference to the specified function."
     },
     "GetKeyName()": {
       "prefix": "GetKeyName()",
-      "body": "GetKeyName(${1:Key})"
+      "body": "GetKeyName(${1:Key})",
+      "description": "Retrieves the name/text of a key."
     },
     "GetKeyVK()": {
       "prefix": "GetKeyVK()",
-      "body": "GetKeyVK(${1:Key})"
+      "body": "GetKeyVK(${1:Key})",
+      "description": "Retrieves the virtual key code of a key."
     },
     "GetKeySC()": {
       "prefix": "GetKeySC()",
-      "body": "GetKeySC(${1:Key})"
+      "body": "GetKeySC(${1:Key})",
+      "description": "Retrieves the scan code of a key."
     },
     "GetKeyState()": {
       "prefix": "GetKeyState()",
-      "body": "GetKeyState(${1:KeyName [}, ${2:\"P\" or \"T\"]})"
+      "body": "GetKeyState(${1:KeyName [}, ${2:\"P\" or \"T\"]})",
+      "description": "Checks if a keyboard key or mouse/joystick button is down or up. Also retrieves joystick status."
     },
     "IL_Add()": {
       "prefix": "IL_Add()",
-      "body": "IL_Add(${1:ImageListID}, ${2:Filename [}, ${3:IconNumber}, ${4:ResizeNonIcon?]})"
+      "body": "IL_Add(${1:ImageListID}, ${2:Filename [}, ${3:IconNumber}, ${4:ResizeNonIcon?]})",
+      "description": "Adds an icon or picture to the specified ImageListID and returns the new icon's index (1 is the first icon, 2 is the second, and so on)."
     },
     "IL_Create()": {
       "prefix": "IL_Create()",
-      "body": "IL_Create(${1:[InitialCount}, ${2:GrowCount}, ${3:LargeIcons?]})"
+      "body": "IL_Create(${1:[InitialCount}, ${2:GrowCount}, ${3:LargeIcons?]})",
+      "description": "Creates a new ImageList, initially empty, and returns the unique ID of the ImageList (or 0 upon failure)."
     },
     "IL_Destroy()": {
       "prefix": "IL_Destroy()",
-      "body": "IL_Destroy(${1:ImageListID})"
+      "body": "IL_Destroy(${1:ImageListID})",
+      "description": "Deletes the specified ImageList and returns 1 upon success and 0 upon failure."
     },
     "InStr()": {
       "prefix": "InStr()",
-      "body": "InStr(${1:Haystack}, ${2:Needle [}, ${3:CaseSensitive?}, ${4:StartingPos]})"
+      "body": "InStr(${1:Haystack}, ${2:Needle [}, ${3:CaseSensitive?}, ${4:StartingPos]})",
+      "description": "Searches for a given occurrence of a string, from the left or the right."
     },
     "IsByRef()": {
       "prefix": "IsByRef()",
-      "body": "IsByRef(${1:Var})"
+      "body": "IsByRef(${1:Var})",
+      "description": "Returns a non-zero number if the specified ByRef parameter was supplied with a variable."
     },
     "IsFunc()": {
       "prefix": "IsFunc()",
-      "body": "IsFunc(${1:FunctionName})"
+      "body": "IsFunc(${1:FunctionName})",
+      "description": "Returns a non-zero number if the specified function exists in the script."
     },
     "IsLabel()": {
       "prefix": "IsLabel()",
-      "body": "IsLabel(${1:LabelName})"
+      "body": "IsLabel(${1:LabelName})",
+      "description": "Returns a non-zero number if the specified label exists in the script."
     },
     "IsObject()": {
       "prefix": "IsObject()",
-      "body": "IsObject(${1:Object})"
+      "body": "IsObject(${1:Object})",
+      "description": "Returns a non-zero number if the specified value is an object."
     },
     "Ln()": {
       "prefix": "Ln()",
