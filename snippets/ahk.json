@@ -1382,7 +1382,7 @@
     "ComObjParameter()": {
       "prefix": "ComObjParameter()",
       "body": "ComObjParameter(${1:VarType}, ${2:Value} [, ${3:Flags}])",
-      "description": "❓"
+      "description": "⚠Deprecated. Use ComObject() instead."
     },
     "ComObjQuery()": {
       "prefix": "ComObjQuery()",
