@@ -9,11 +9,6 @@
     ]
   },
   ".source.ahk": {
-    "#AllowSameLineComments": {
-      "prefix": "#AllowSameLineComments",
-      "body": "#AllowSameLineComments",
-      "description": "Deprecated ❓"
-    },
     "#ClipboardTimeout": {
       "prefix": "#ClipboardTimeout",
       "body": "#ClipboardTimeout, ${1:Milliseconds}",
