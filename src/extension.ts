@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
         FileProvider.createEditorListenr(),
         vscode.debug.registerDebugAdapterDescriptorFactory('ahk', new InlineDebugAdapterFactory()),
         vscode.commands.registerCommand("run.ahk", () => {
-            scriptRunner.run();
+            scriptRunner.startDebugger()
         }),
         vscode.commands.registerCommand("run.ahk.config", () => {
             scriptRunner.reqConfigPath();

@@ -9,8 +9,10 @@ class Setting {
 export class ScriptRunner {
     private defaultPath = "\"C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe\"";
     private settingPath: string;
+    public static instance: ScriptRunner;
 
     constructor(private context: vscode.ExtensionContext) {
+        ScriptRunner.instance = this
         let extPath = this.context['globalStoragePath'];
         this.settingPath = extPath + '/setting.json'
         if (!fs.existsSync(extPath)) {
@@ -18,7 +20,16 @@ export class ScriptRunner {
         }
     }
 
-    async run() {
+    startDebugger() {
+        vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(vscode.window.activeTextEditor.document.uri), {
+            type: "ahk",
+            request: "launch",
+            name: "Autohotkey Debugger",
+            program: "${file}"
+        })
+    }
+
+    async run(path: string = null, debug: boolean = false) {
 
         if (fs.existsSync(this.settingPath)) {
             try {
@@ -29,7 +40,7 @@ export class ScriptRunner {
                     return;
                 }
                 vscode.window.activeTextEditor.document.save().then(() => {
-                    child_process.exec(`${setting.executePath} ${vscode.window.activeTextEditor.document.fileName}`)
+                    child_process.exec(`${setting.executePath}${debug ? ' /debug' : ''} ${path ? path : vscode.window.activeTextEditor.document.fileName}`)
                 })
             } catch (err) {
                 vscode.window.showErrorMessage(err)
