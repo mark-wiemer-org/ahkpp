@@ -1,7 +1,8 @@
 import * as vscode from "vscode";
+import { ProviderResult } from "vscode";
 import { Detecter } from "./core/Detecter";
 import { ScriptRunner } from "./core/ScriptRunner";
-import { CompletionProvider } from "./provider/CompletionProvider";
+import { AhkDebugSession } from "./debugger/AhkDebug";
 import { DefProvider } from "./provider/DefProvider";
 import { FileProvider } from "./provider/FileProvider";
 import { FormatProvider } from "./provider/FormatProvider";
@@ -18,6 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerDocumentSymbolProvider(language, new SymBolProvider()),
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
         FileProvider.createEditorListenr(),
+        vscode.debug.registerDebugAdapterDescriptorFactory('ahk', new InlineDebugAdapterFactory()),
         vscode.commands.registerCommand("run.ahk", () => {
             scriptRunner.run();
         }),
@@ -25,5 +27,13 @@ export function activate(context: vscode.ExtensionContext) {
             scriptRunner.reqConfigPath();
         })
     )
+
+}
+
+class InlineDebugAdapterFactory implements vscode.DebugAdapterDescriptorFactory {
+
+    createDebugAdapterDescriptor(_session: vscode.DebugSession): ProviderResult<vscode.DebugAdapterDescriptor> {
+        return new vscode.DebugAdapterInlineImplementation(new AhkDebugSession());
+    }
 
 }
