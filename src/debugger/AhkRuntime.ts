@@ -10,7 +10,6 @@ export interface AhkBreakpoint {
 	id: number;
 	line: number;
 	verified: boolean;
-	transId: number;
 	source: string;
 }
 
@@ -201,8 +200,10 @@ export class AhkRuntime extends EventEmitter {
 			this._breakPoints.set(path, bps);
 		}
 		bps.push(bp);
-
 		this.verifyBreakpoints(path);
+		if (this.connection && bp.verified) {
+			this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp)
+		}
 
 		return bp;
 	}
@@ -227,6 +228,13 @@ export class AhkRuntime extends EventEmitter {
 	 * Clear all breakpoints for file.
 	 */
 	public clearBreakpoints(path: string): void {
+
+		let bps: AhkBreakpoint[]
+		if (this.connection && (bps = this._breakPoints.get(path))) {
+			for (const bp of bps) {
+				this.sendComand(`breakpoint_remove -d ${bp.id}`)
+			}
+		}
 		this._breakPoints.delete(path);
 	}
 
@@ -352,7 +360,7 @@ export class AhkRuntime extends EventEmitter {
 	private processBreakpointSet(xml: any) {
 		let transId = xml.response.attributes.transaction_id;
 		let bp = this.getBreakpointByTransId(transId)
-		bp.id == xml.response.attributes.id
+		bp.id = xml.response.attributes.id
 		bp.verified = true;
 		this.sendEvent('breakpointValidated', bp);
 	}
