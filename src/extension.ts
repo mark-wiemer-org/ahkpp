@@ -1,18 +1,17 @@
 import * as vscode from "vscode";
+import { Detecter } from "./core/Detecter";
 import { ScriptRunner } from "./core/ScriptRunner";
 import { CompletionProvider } from "./provider/CompletionProvider";
 import { DefProvider } from "./provider/DefProvider";
+import { FileProvider } from "./provider/FileProvider";
 import { FormatProvider } from "./provider/FormatProvider";
 import { SymBolProvider } from "./provider/SymbolProvider";
-import { FileProvider } from "./provider/FileProvider";
-import { Detecter } from "./core/Detecter";
 
 export function activate(context: vscode.ExtensionContext) {
 
-    const language = { language: 'ahk' }
-    let scriptRunner = new ScriptRunner(context)
-
-    Detecter.buildByPath(vscode.workspace.rootPath)
+    const language = { language: "ahk" };
+    Detecter.buildByPath(vscode.workspace.rootPath);
+    let scriptRunner = new ScriptRunner(context);
     context.subscriptions.push(
         // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
         vscode.languages.registerDefinitionProvider(language, new DefProvider()),
@@ -20,10 +19,10 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
         FileProvider.createEditorListenr(),
         vscode.commands.registerCommand("run.ahk", () => {
-            scriptRunner.run()
+            scriptRunner.run();
         }),
         vscode.commands.registerCommand("run.ahk.config", () => {
-            scriptRunner.reqConfigPath()
+            scriptRunner.reqConfigPath();
         })
     )
 
