@@ -8,11 +8,11 @@
             "allow-pascal-case",
             "allow-leading-underscore"
         ],
-        "max-line-length": [
-            true,
-            200
-        ],
+        "max-line-length": false,
         "no-empty": false,
-        "object-literal-sort-keys": false
+        "object-literal-sort-keys": false,
+        "max-classes-per-file": false,
+        "no-consecutive-blank-lines": false,
+        "member-ordering": false
     }
 }
