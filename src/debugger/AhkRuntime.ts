@@ -1,21 +1,25 @@
-/*---------------------------------------------------------
- * Copyright (C) Microsoft Corporation. All rights reserved.
- *--------------------------------------------------------*/
-
-import { readFileSync } from 'fs';
+import * as child_process from 'child_process';
 import { EventEmitter } from 'events';
-const Net = require('net');
+import { readFileSync } from 'fs';
+import { Variable } from 'vscode-debugadapter';
+import { AhkDebugSession } from './AhkDebug';
+import Net = require('net');
+var xml2js = require('xml2js');
+
 
 export interface MockBreakpoint {
 	id: number;
 	line: number;
 	verified: boolean;
+	transId: number;
 }
 
 /**
  * A Mock runtime with minimal debugger functionality.
  */
 export class AhkRuntime extends EventEmitter {
+
+
 
 	// the initial (and one and only) file we are 'debugging'
 	private _sourceFile: string;
@@ -36,10 +40,20 @@ export class AhkRuntime extends EventEmitter {
 	// so that the frontend can match events with breakpoints.
 	private _breakpointId = 1;
 
+	private connection: Net.Socket;
+	private transId = 1;
+	private commandPromise = {}
+	private netIns: Net.Server;
+
 	private _breakAddresses = new Set<string>();
 
-	constructor() {
+	constructor(private session: AhkDebugSession) {
 		super();
+	}
+
+	public stop() {
+		this.sendComand('stop')
+		this.netIns.close()
 	}
 
 	/**
@@ -49,55 +63,113 @@ export class AhkRuntime extends EventEmitter {
 
 		this.loadSource(program);
 		this._currentLine = -1;
-		new Net.Server().listen(9000)
+		let completeData = '';
 
-		this.verifyBreakpoints(this._sourceFile);
+		this.netIns = new Net.Server().listen(9000).on('connection', (socket: Net.Socket) => {
+			this.connection = socket;
+			socket.on('data', (chunk) => {
+				let temp = chunk.toString();
+				if (temp.includes("/>")) {
+					this.process(completeData += temp)
+					completeData = ''
+				} else {
+					completeData += temp;
+				}
 
-		if (stopOnEntry) {
-			// we step once
-			this.step(false, 'stopOnEntry');
-		} else {
-			// we just start to run until we hit a breakpoint or an exception
-			this.continue();
+			});
+		}).on("error", (err: Error) => {
+			console.log(err.message)
+		})
+		child_process.exec(`D:\\git\\autoHotkey\\AutoHotkey.exe /debug  ${program}`)
+	}
+	createPoints(_sourceFile: string) {
+		let bps = this._breakPoints.get(_sourceFile)
+		if (bps) {
+			bps.forEach(bp => {
+				bp.transId = this.sendComand(`breakpoint_set -t line -f ${_sourceFile} -n ${bp.line + 1}`)
+			})
 		}
+	}
+
+	public sendComand(command: string): number {
+		if (!this.connection) {
+			return;
+		}
+		this.transId++;
+		this.connection.write(`${command} -i ${this.transId}\x00`)
+		return this.transId;
 	}
 
 	/**
 	 * Continue execution to the end/beginning.
 	 */
-	public continue(reverse = false) {
-		this.run(reverse, undefined);
+	public continue() {
+		this.sendComand('run')
 	}
 
 	/**
 	 * Step to the next/previous non empty line.
 	 */
-	public step(reverse = false, event = 'stopOnStep') {
-		this.run(reverse, event);
+	public step() {
+		this.sendComand('step_over')
+	}
+
+	public stepOut() {
+		this.sendComand('step_out')
+	}
+	public stepIn() {
+		this.sendComand('step_into')
+	}
+
+	variables(scope: string): Promise<Array<Variable>> {
+		let transId = this.sendComand(`context_get -c ${scope == "Local" ? 0 : 1}`)
+		return new Promise(resolve => {
+			this.commandPromise[transId] = (response: any) => {
+				let propertyList = response.match(/<property (.|\s|\n)+?<\/property>/ig)
+				if (!propertyList) {
+					resolve([]);
+					return;
+				};
+				const properties = new Array<Variable>();
+				for (let i = 0; i < propertyList.length; i++) {
+					let property = propertyList[i]
+					properties.push({
+						name: `${property.match(/name="(.+?)"/i)[1]}`,
+						value: `${Buffer.from(property.match(/>(.*?)</i)[1], 'base64').toString()}`,
+						variablesReference: 0
+					});
+				}
+				resolve(properties);
+			}
+		});
 	}
 
 	/**
 	 * Returns a fake 'stacktrace' where every 'stackframe' is a word from the current line.
 	 */
 	public stack(startFrame: number, endFrame: number): any {
+		let transId = this.sendComand(`stack_get`)
+		return new Promise(resolve => {
+			this.commandPromise[transId] = (response: any) => {
+				let stackList = response.match(/<stack(.|\s|\n)+?\/>/ig)
+				if (stackList) {
+					const frames = new Array<any>();
+					for (let i = startFrame; i < Math.min(endFrame, stackList.length); i++) {
+						let stack = stackList[i]
+						frames.push({
+							index: i,
+							name: `${stack.match(/where="(.+?)"/i)[1]}`,
+							file: `${stack.match(/filename="(.+?)"/i)[1]}`,
+							line: parseInt(`${stack.match(/lineno="(.+?)"/i)[1]}`) - 1
+						});
+					}
+					resolve({ frames, count: stackList.length });
+				} else {
+					resolve({ frames: [{ index: startFrame, name: this._sourceFile, file: this._sourceFile, line: 1 }], count: 1 });
+				}
+			}
+		})
 
-		const words = this._sourceLines[this._currentLine].trim().split(/\s+/);
-
-		const frames = new Array<any>();
-		// every word of the current line becomes a stack frame.
-		for (let i = startFrame; i < Math.min(endFrame, words.length); i++) {
-			const name = words[i];	// use a word of the line as the stackframe name
-			frames.push({
-				index: i,
-				name: `${name}(${i})`,
-				file: this._sourceFile,
-				line: this._currentLine
-			});
-		}
-		return {
-			frames: frames,
-			count: words.length
-		};
 	}
 
 	public getBreakpoints(path: string, line: number): number[] {
@@ -123,9 +195,9 @@ export class AhkRuntime extends EventEmitter {
 	/*
 	 * Set breakpoint in file with given line.
 	 */
-	public setBreakPoint(path: string, line: number) : MockBreakpoint {
+	public setBreakPoint(path: string, line: number): MockBreakpoint {
 
-		const bp = <MockBreakpoint> { verified: false, line, id: this._breakpointId++ };
+		const bp = <MockBreakpoint>{ verified: false, line, id: null, transId: null };
 		let bps = this._breakPoints.get(path);
 		if (!bps) {
 			bps = new Array<MockBreakpoint>();
@@ -141,7 +213,7 @@ export class AhkRuntime extends EventEmitter {
 	/*
 	 * Clear breakpoint in file with given line.
 	 */
-	public clearBreakPoint(path: string, line: number) : MockBreakpoint | undefined {
+	public clearBreakPoint(path: string, line: number): MockBreakpoint | undefined {
 		let bps = this._breakPoints.get(path);
 		if (bps) {
 			const index = bps.findIndex(bp => bp.line === line);
@@ -188,52 +260,14 @@ export class AhkRuntime extends EventEmitter {
 		}
 	}
 
-	/**
-	 * Run through the file.
-	 * If stepEvent is specified only run a single step and emit the stepEvent.
-	 */
-	private run(reverse = false, stepEvent?: string) {
-		if (reverse) {
-			for (let ln = this._currentLine-1; ln >= 0; ln--) {
-				if (this.fireEventsForLine(ln, stepEvent)) {
-					this._currentLine = ln;
-					return;
-				}
-			}
-			// no more lines: stop at first line
-			this._currentLine = 0;
-			this.sendEvent('stopOnEntry');
-		} else {
-			for (let ln = this._currentLine+1; ln < this._sourceLines.length; ln++) {
-				if (this.fireEventsForLine(ln, stepEvent)) {
-					this._currentLine = ln;
-					return true;
-				}
-			}
-			// no more lines: run to end
-			this.sendEvent('end');
-		}
-	}
-
-	private verifyBreakpoints(path: string) : void {
+	private verifyBreakpoints(path: string): void {
 		let bps = this._breakPoints.get(path);
 		if (bps) {
 			this.loadSource(path);
 			bps.forEach(bp => {
 				if (!bp.verified && bp.line < this._sourceLines.length) {
 					const srcLine = this._sourceLines[bp.line].trim();
-
-					// if a line is empty or starts with '+' we don't allow to set a breakpoint but move the breakpoint down
-					if (srcLine.length === 0 || srcLine.indexOf('+') === 0) {
-						bp.line++;
-					}
-					// if a line starts with '-' we don't allow to set a breakpoint but move the breakpoint up
-					if (srcLine.indexOf('-') === 0) {
-						bp.line--;
-					}
-					// don't set 'verified' to true if the line contains the word 'lazy'
-					// in this case the breakpoint will be verified 'lazy' after hitting it once.
-					if (srcLine.indexOf('lazy') < 0) {
+					if (srcLine.trim().charAt(0) != ';') {
 						bp.verified = true;
 						this.sendEvent('breakpointValidated', bp);
 					}
@@ -242,67 +276,111 @@ export class AhkRuntime extends EventEmitter {
 		}
 	}
 
-	/**
-	 * Fire events if line has a breakpoint or the word 'exception' is found.
-	 * Returns true is execution needs to stop.
-	 */
-	private fireEventsForLine(ln: number, stepEvent?: string): boolean {
-
-		const line = this._sourceLines[ln].trim();
-
-		// if 'log(...)' found in source -> send argument to debug console
-		const matches = /log\((.*)\)/.exec(line);
-		if (matches && matches.length === 2) {
-			this.sendEvent('output', matches[1], this._sourceFile, ln, matches.index)
-		}
-
-		// if a word in a line matches a data breakpoint, fire a 'dataBreakpoint' event
-		const words = line.split(" ");
-		for (let word of words) {
-			if (this._breakAddresses.has(word)) {
-				this.sendEvent('stopOnDataBreakpoint');
-				return true;
-			}
-		}
-
-		// if word 'exception' found in source -> throw exception
-		if (line.indexOf('exception') >= 0) {
-			this.sendEvent('stopOnException');
-			return true;
-		}
-
-		// is there a breakpoint?
-		const breakpoints = this._breakPoints.get(this._sourceFile);
-		if (breakpoints) {
-			const bps = breakpoints.filter(bp => bp.line === ln);
-			if (bps.length > 0) {
-
-				// send 'stopped' event
-				this.sendEvent('stopOnBreakpoint');
-
-				// the following shows the use of 'breakpoint' events to update properties of a breakpoint in the UI
-				// if breakpoint is not yet verified, verify it now and send a 'breakpoint' update event
-				if (!bps[0].verified) {
-					bps[0].verified = true;
-					this.sendEvent('breakpointValidated', bps[0]);
-				}
-				return true;
-			}
-		}
-
-		// non-empty line
-		if (stepEvent && line.length > 0) {
-			this.sendEvent(stepEvent);
-			return true;
-		}
-
-		// nothing interesting found -> continue
-		return false;
-	}
-
-	private sendEvent(event: string, ... args: any[]) {
+	private sendEvent(event: string, ...args: any[]) {
 		setImmediate(_ => {
 			this.emit(event, ...args);
 		});
 	}
+
+	private header = `<?xml version="1.0" encoding="UTF-8"?>`;
+	private parser = new xml2js.Parser({
+		attrkey: 'attributes',
+		explicitChildren: true,
+		childkey: 'children',
+		charsAsChildren: false,
+		charkey: 'content',
+		explicitCharkey: true,
+		explicitArray: false
+	});
+	// https://github.com/wesleylancel/node-dbgp
+	process(data: string) {
+		var that = this;
+
+		// Strip everything before the xml tag
+		data = data.substr(data.indexOf('<?xml'));
+
+		if (data.indexOf(this.header) == -1) {
+			data = this.header + data;
+		}
+		for (const part of data.split(this.header)) {
+			if (null == part || part.trim() == "") continue;
+			let s = this.header + part;
+			this.parser.parseString(s, function (err, xml) {
+				if (err)
+					return;
+
+				if (xml.init) {
+					that.createPoints(that._sourceFile)
+					return that.sendComand('run');
+				}
+
+
+				if (xml.response) {
+					if (xml.response.attributes.command) {
+						let transId = parseInt(xml.response.attributes.transaction_id);
+						switch (xml.response.attributes.command) {
+							case 'breakpoint_set':
+								that.processBreakpointSet(xml);
+								break;
+							case 'stack_get':
+								if (that.commandPromise[transId]) that.commandPromise[transId](part)
+								break;
+							case 'run':
+							case 'step_into':
+							case 'step_over':
+							case 'step_out':
+								that.processRunResponse(xml);
+								break;
+							case 'context_get':
+								if (that.commandPromise[transId]) that.commandPromise[transId](part)
+								break;
+							case 'stop':
+								that.processStopResponse(xml);
+								break;
+
+							default:
+								break;
+						}
+					}
+				}
+			});
+		}
+
+	}
+
+	private getBreakpointByTransId(path: string, transId: number) {
+		for (const bp of this._breakPoints.get(path))
+			if (transId == bp.transId) return bp;
+	}
+
+	private processBreakpointSet(xml: any) {
+		let transId = xml.response.attributes.transaction_id;
+		let bp = this.getBreakpointByTransId(this._sourceFile, transId)
+		bp.id == xml.response.attributes.id
+		bp.verified = true;
+		this.sendEvent('breakpointValidated', bp);
+	}
+	private processStopResponse(result: any) {
+		this.sendEvent('end');
+		this.connection.end()
+	}
+	private processContextResponse(result: any) {
+		throw new Error("Method not implemented.");
+	}
+	processRunResponse(response: any) {
+		// Run command returns a status
+		switch (response.response.attributes.status) {
+			case 'break':
+				this.sendEvent('stopOnStep');
+				break;
+			case 'stopping':
+			case 'stopped':
+				this.sendEvent('end');
+				this.connection.end()
+				break;
+			default:
+				break;
+		}
+	}
+
 }

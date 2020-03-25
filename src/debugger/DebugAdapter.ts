@@ -1,7 +1,3 @@
-/*---------------------------------------------------------
- * Copyright (C) Microsoft Corporation. All rights reserved.
- *--------------------------------------------------------*/
+import { AhkDebugSession } from './AhkDebug';
 
- import { AhkDebugSession } from './AhkDebug';
-
- AhkDebugSession.run(AhkDebugSession);
+AhkDebugSession.run(AhkDebugSession);
