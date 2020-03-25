@@ -1,10 +1,8 @@
-import * as child_process from 'child_process';
 import { EventEmitter } from 'events';
 import { readFileSync } from 'fs';
 import { Variable } from 'vscode-debugadapter';
-import { AhkDebugSession } from './AhkDebug';
-import Net = require('net');
 import { ScriptRunner } from '../core/ScriptRunner';
+import Net = require('net');
 var xml2js = require('xml2js');
 
 
@@ -64,19 +62,16 @@ export class AhkRuntime extends EventEmitter {
 
 		this.loadSource(program);
 		this._currentLine = -1;
-		let completeData = '';
+		let tempData = '';
 
 		this.netIns = new Net.Server().listen(9000).on('connection', (socket: Net.Socket) => {
 			this.connection = socket;
 			socket.on('data', (chunk) => {
-				let temp = chunk.toString();
-				if (temp.includes("/>")) {
-					this.process(completeData += temp)
-					completeData = ''
-				} else {
-					completeData += temp;
+				tempData += chunk.toString();
+				if (tempData.match(/<\?xml version="1.0" encoding="UTF-8"\?>\s*</)) {
+					this.process(tempData)
+					tempData = ''
 				}
-
 			});
 		}).on("error", (err: Error) => {
 			console.log(err.message)

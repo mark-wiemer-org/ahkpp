@@ -14,10 +14,10 @@ AutoHotKey language support for VS Code
 * Run Script
 * Code format (Mayby unsuited for you code)
 
-## Run Script
-1. Click run button
-2. Or press F9
-![runScript](image/runScript.jpg)
+## Debug Script
+1. Click run button or press f9
+2. Support breakpoint、stacktrace、variable
+![run](image/run.jpg)
 
 **Change Default Execute Path:**
 1. Press "Ctrl+Shift+P" to open command palette.

@@ -1,5 +1,6 @@
-## 2.1.7 (2020/3/24)
+## 2.2.0 (2020/3/25)
 - Support change defualt ahk execute path.
+- Support simple debug.
 
 ## 2.1.6 (2020/3/23)
 - Find definition in whole workspace.
