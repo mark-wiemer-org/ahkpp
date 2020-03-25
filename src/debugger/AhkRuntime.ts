@@ -6,11 +6,12 @@ import Net = require('net');
 var xml2js = require('xml2js');
 
 
-export interface MockBreakpoint {
+export interface AhkBreakpoint {
 	id: number;
 	line: number;
 	verified: boolean;
 	transId: number;
+	source: string;
 }
 
 /**
@@ -33,7 +34,8 @@ export class AhkRuntime extends EventEmitter {
 	private _currentLine = 0;
 
 	// maps from sourceFile to array of Mock breakpoints
-	private _breakPoints = new Map<string, MockBreakpoint[]>();
+	private _breakPoints = new Map<string, AhkBreakpoint[]>();
+	private _transBreakPoints = new Map<number, AhkBreakpoint>();
 
 	// since we want to send breakpoint events, we will assign an id to every event
 	// so that the frontend can match events with breakpoints.
@@ -78,12 +80,11 @@ export class AhkRuntime extends EventEmitter {
 		})
 		ScriptRunner.instance.run(program, true)
 	}
-	createPoints(_sourceFile: string) {
-		let bps = this._breakPoints.get(_sourceFile)
-		if (bps) {
-			bps.forEach(bp => {
-				bp.transId = this.sendComand(`breakpoint_set -t line -f ${_sourceFile} -n ${bp.line + 1}`)
-			})
+	createPoints() {
+		for (const key of this._breakPoints.keys()) {
+			for (const bp of this._breakPoints.get(key)) {
+				this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp)
+			}
 		}
 	}
 
@@ -191,12 +192,12 @@ export class AhkRuntime extends EventEmitter {
 	/*
 	 * Set breakpoint in file with given line.
 	 */
-	public setBreakPoint(path: string, line: number): MockBreakpoint {
+	public setBreakPoint(path: string, line: number): AhkBreakpoint {
 
-		const bp = <MockBreakpoint>{ verified: false, line, id: null, transId: null };
+		const bp = <AhkBreakpoint>{ verified: false, line, id: null, transId: null, source: path };
 		let bps = this._breakPoints.get(path);
 		if (!bps) {
-			bps = new Array<MockBreakpoint>();
+			bps = new Array<AhkBreakpoint>();
 			this._breakPoints.set(path, bps);
 		}
 		bps.push(bp);
@@ -209,7 +210,7 @@ export class AhkRuntime extends EventEmitter {
 	/*
 	 * Clear breakpoint in file with given line.
 	 */
-	public clearBreakPoint(path: string, line: number): MockBreakpoint | undefined {
+	public clearBreakPoint(path: string, line: number): AhkBreakpoint | undefined {
 		let bps = this._breakPoints.get(path);
 		if (bps) {
 			const index = bps.findIndex(bp => bp.line === line);
@@ -306,7 +307,7 @@ export class AhkRuntime extends EventEmitter {
 					return;
 
 				if (xml.init) {
-					that.createPoints(that._sourceFile)
+					that.createPoints()
 					return that.sendComand('run');
 				}
 
@@ -344,14 +345,13 @@ export class AhkRuntime extends EventEmitter {
 
 	}
 
-	private getBreakpointByTransId(path: string, transId: number) {
-		for (const bp of this._breakPoints.get(path))
-			if (transId == bp.transId) return bp;
+	private getBreakpointByTransId(transId: string) {
+		return this._transBreakPoints.get(parseInt(transId));;
 	}
 
 	private processBreakpointSet(xml: any) {
 		let transId = xml.response.attributes.transaction_id;
-		let bp = this.getBreakpointByTransId(this._sourceFile, transId)
+		let bp = this.getBreakpointByTransId(transId)
 		bp.id == xml.response.attributes.id
 		bp.verified = true;
 		this.sendEvent('breakpointValidated', bp);

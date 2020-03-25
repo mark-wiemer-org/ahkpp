@@ -1,7 +1,7 @@
 import { basename } from 'path';
 import { Breakpoint, BreakpointEvent, Handles, InitializedEvent, Logger, logger, LoggingDebugSession, OutputEvent, Scope, Source, StackFrame, StoppedEvent, TerminatedEvent, Thread } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
-import { AhkRuntime, MockBreakpoint } from './AhkRuntime';
+import { AhkRuntime, AhkBreakpoint } from './AhkRuntime';
 const { Subject } = require('await-notify');
 
 function timeout(ms: number) {
@@ -72,7 +72,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this._runtime.on('stopOnException', () => {
 			this.sendEvent(new StoppedEvent('exception', AhkDebugSession.THREAD_ID));
 		});
-		this._runtime.on('breakpointValidated', (bp: MockBreakpoint) => {
+		this._runtime.on('breakpointValidated', (bp: AhkBreakpoint) => {
 			this.sendEvent(new BreakpointEvent('changed', <DebugProtocol.Breakpoint>{ verified: bp.verified, id: bp.id }));
 		});
 		this._runtime.on('output', (text, filePath, line, column) => {

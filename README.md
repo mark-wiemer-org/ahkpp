@@ -20,8 +20,9 @@ AutoHotKey language support for VS Code
 ![run](image/run.jpg)
 
 **Change Default Execute Path:**
-1. Press "Ctrl+Shift+P" to open command palette.
-2. Input "Config Ahk" to select config command.
+1. The default is C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe
+2. Press "Ctrl+Shift+P" to open command palette.
+3. Input "Config Ahk" to select config command.
 ![runConfig](image/runConfig.jpg)
 
 ## Method Symbol
