@@ -54,7 +54,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.setDebuggerLinesStartAt1(false);
 		this.setDebuggerColumnsStartAt1(false);
 
-		this._runtime = new AhkRuntime(this);
+		this._runtime = new AhkRuntime();
 
 		// setup event handlers
 		this._runtime.on('stopOnEntry', () => {

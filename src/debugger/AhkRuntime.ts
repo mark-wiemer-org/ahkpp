@@ -4,6 +4,7 @@ import { readFileSync } from 'fs';
 import { Variable } from 'vscode-debugadapter';
 import { AhkDebugSession } from './AhkDebug';
 import Net = require('net');
+import { ScriptRunner } from '../core/ScriptRunner';
 var xml2js = require('xml2js');
 
 
@@ -47,7 +48,7 @@ export class AhkRuntime extends EventEmitter {
 
 	private _breakAddresses = new Set<string>();
 
-	constructor(private session: AhkDebugSession) {
+	constructor() {
 		super();
 	}
 
@@ -80,7 +81,7 @@ export class AhkRuntime extends EventEmitter {
 		}).on("error", (err: Error) => {
 			console.log(err.message)
 		})
-		child_process.exec(`D:\\git\\autoHotkey\\AutoHotkey.exe /debug  ${program}`)
+		ScriptRunner.instance.run(program, true)
 	}
 	createPoints(_sourceFile: string) {
 		let bps = this._breakPoints.get(_sourceFile)
@@ -292,7 +293,7 @@ export class AhkRuntime extends EventEmitter {
 		explicitCharkey: true,
 		explicitArray: false
 	});
-	// https://github.com/wesleylancel/node-dbgp
+	// refrence: https://github.com/wesleylancel/node-dbgp
 	process(data: string) {
 		var that = this;
 
