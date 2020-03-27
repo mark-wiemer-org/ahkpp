@@ -25,8 +25,7 @@ export class ScriptRunner {
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(vscode.window.activeTextEditor.document.uri), {
             type: "ahk",
             request: "launch",
-            name: "Autohotkey Debugger",
-            program: "${file}"
+            name: "Autohotkey Debugger"
         })
     }
 
@@ -41,7 +40,7 @@ export class ScriptRunner {
                     return;
                 }
                 vscode.window.activeTextEditor.document.save().then(() => {
-                    child_process.exec(`${setting.executePath}${debug ? ' /debug=localhost:'+debugPort : ''} ${path ? path : vscode.window.activeTextEditor.document.fileName}`)
+                    child_process.exec(`\"${setting.executePath}\"${debug ? ' /debug=localhost:'+debugPort : ''} \"${path ? path : vscode.window.activeTextEditor.document.fileName}\"`)
                 })
             } catch (err) {
                 Out.log(err)

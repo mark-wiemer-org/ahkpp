@@ -1,3 +1,6 @@
+## 2.2.2 (2020/3/27)
+- Fix path with space error.
+
 ## 2.2.0 (2020/3/25)
 - Support change defualt ahk execute path.
 - Support simple debug.

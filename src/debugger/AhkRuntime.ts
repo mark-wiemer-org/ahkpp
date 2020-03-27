@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import { readFileSync } from 'fs';
+import * as vscode from 'vscode';
 import { Variable } from 'vscode-debugadapter';
 import { ScriptRunner } from '../core/ScriptRunner';
 import Net = require('net');
@@ -62,6 +63,7 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public async start(program: string, stopOnEntry: boolean) {
 
+		program=vscode.window.activeTextEditor.document.uri.fsPath
 		this.loadSource(program);
 		this._currentLine = -1;
 		let tempData = '';
