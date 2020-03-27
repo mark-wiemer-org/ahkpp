@@ -11,13 +11,13 @@ AutoHotKey language support for VS Code
 * Code assistant
 * Code and Method symbol
 * Find definition
-* Run Script
+* Run/Debug Script
 * Code format (Mayby unsuited for you code)
 
 ## Debug Script
 1. Click run button or press f9
 2. Support breakpoint、stacktrace、variable
-![run](image/run.jpg)
+![debug](image/debug.gif)
 
 **Change Default Execute Path:**
 1. The default is C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe

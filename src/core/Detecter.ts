@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
+import { Out } from "../common/out";
 
 export class Method {
     constructor(public full: string, public name: string, public line: number, public comnent: string) { }
@@ -24,6 +25,10 @@ export class Detecter {
     public static async buildByPath(buildPath: string) {
         if (fs.statSync(buildPath).isDirectory()) {
             fs.readdir(buildPath, (err, files) => {
+                if (err) {
+                    Out.log(err)
+                    return;
+                }
                 for (const file of files) {
                     if (file.match(/(\.git|\.svn|out|target)/)) {
                         continue;

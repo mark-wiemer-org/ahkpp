@@ -1,6 +1,7 @@
 import * as child_process from 'child_process';
 import * as fs from 'fs';
 import * as vscode from 'vscode';
+import { Out } from '../common/out';
 
 class Setting {
     executePath: string;
@@ -29,7 +30,7 @@ export class ScriptRunner {
         })
     }
 
-    async run(path: string = null, debug: boolean = false) {
+    async run(path: string = null, debug: boolean = false,debugPort=9000) {
 
         if (fs.existsSync(this.settingPath)) {
             try {
@@ -40,10 +41,10 @@ export class ScriptRunner {
                     return;
                 }
                 vscode.window.activeTextEditor.document.save().then(() => {
-                    child_process.exec(`${setting.executePath}${debug ? ' /debug' : ''} ${path ? path : vscode.window.activeTextEditor.document.fileName}`)
+                    child_process.exec(`${setting.executePath}${debug ? ' /debug=localhost:'+debugPort : ''} ${path ? path : vscode.window.activeTextEditor.document.fileName}`)
                 })
             } catch (err) {
-                vscode.window.showErrorMessage(err)
+                Out.log(err)
                 fs.unlinkSync(this.settingPath)
             }
             return;

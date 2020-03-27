@@ -3,8 +3,9 @@ import { readFileSync } from 'fs';
 import { Variable } from 'vscode-debugadapter';
 import { ScriptRunner } from '../core/ScriptRunner';
 import Net = require('net');
-var xml2js = require('xml2js');
-
+import { Out } from '../common/out';
+const xml2js = require('xml2js');
+const getPort = require('get-port');
 
 export interface AhkBreakpoint {
 	id: number;
@@ -59,13 +60,13 @@ export class AhkRuntime extends EventEmitter {
 	/**
 	 * Start executing the given program.
 	 */
-	public start(program: string, stopOnEntry: boolean) {
+	public async start(program: string, stopOnEntry: boolean) {
 
 		this.loadSource(program);
 		this._currentLine = -1;
 		let tempData = '';
-
-		this.netIns = new Net.Server().listen(9000).on('connection', (socket: Net.Socket) => {
+		let port=await getPort({port: getPort.makeRange(9000, 9100)});
+		this.netIns = new Net.Server().listen(port).on('connection', (socket: Net.Socket) => {
 			this.connection = socket;
 			socket.on('data', (chunk) => {
 				tempData += chunk.toString();
@@ -75,9 +76,9 @@ export class AhkRuntime extends EventEmitter {
 				}
 			});
 		}).on("error", (err: Error) => {
-			console.log(err.message)
+			Out.log(err.message)
 		})
-		ScriptRunner.instance.run(program, true)
+		ScriptRunner.instance.run(program, true,port)
 	}
 	createPoints() {
 		for (const key of this._breakPoints.keys()) {
@@ -311,8 +312,10 @@ export class AhkRuntime extends EventEmitter {
 			if (null == part || part.trim() == "") continue;
 			let s = this.header + part;
 			this.parser.parseString(s, function (err, xml) {
-				if (err)
+				if (err){
+					Out.log(err)
 					return;
+				}
 
 				if (xml.init) {
 					that.createPoints()
