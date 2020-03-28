@@ -20,12 +20,9 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
         FileProvider.createEditorListenr(),
         vscode.debug.registerDebugAdapterDescriptorFactory('ahk', new InlineDebugAdapterFactory()),
-        vscode.commands.registerCommand("run.ahk", () => {
-            scriptRunner.startDebugger()
-        }),
-        vscode.commands.registerCommand("run.ahk.config", () => {
-            scriptRunner.reqConfigPath();
-        })
+        vscode.commands.registerCommand("run.ahk", () => scriptRunner.startDebugger()),
+        vscode.commands.registerCommand("compile.ahk", () => scriptRunner.compile()),
+        vscode.commands.registerCommand("run.ahk.config", () => scriptRunner.reqConfigPath())
     )
 
 }

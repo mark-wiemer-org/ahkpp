@@ -8,13 +8,13 @@
 
 
 AutoHotKey language support for VS Code
-* Code assistant
-* Code and Method symbol
-* Find definition
-* Run/Debug Script
-* Code format (Mayby unsuited for you code)
+* Code Assistant
+* [Code Symbol](#CodeSymbol) and [Method Symbol](#MethodSymbol)
+* [Goto Definition](#GotoDefinition)
+* Run/[Debug](#Debug)/Compile Script
+* [Code Format](#CodeFormat)
 
-## Debug Script
+## Debug
 1. Click run button or press f9
 2. Support breakpoint、stacktrace、variable
 ![debug](image/debug.gif)
@@ -25,23 +25,23 @@ AutoHotKey language support for VS Code
 3. Input "Config Ahk" to select config command.
 ![runConfig](image/runConfig.jpg)
 
-## Method Symbol
+## MethodSymbol
 1. Detech source method as symbol
 2. You can add a comment to the method using a semicolon on the previous line of the method
 
 ![methodSymbol](image/methodSymbol.jpg)
 
-## Code Symbol
+## CodeSymbol
 
 1. You can add two semicolon to comment code block
 ![codeSymbole](image/codeSymbol.jpg)
 
-## Goto Definition
+## GotoDefinition
 
 1. Press ctrl and move the mouse coordinates to the calling code 
 ![gotoDefinition](image/gotoDefinition.jpg)
 
-## Code Format
+## CodeFormat
 1. Right click then click format document.
-- Formatter follows my coding habits, so it may not work for you.
+- **Formatter follows my coding habits, so it may not unsuited for you**.
 ![codeFormat](image/codeFormat.jpg)

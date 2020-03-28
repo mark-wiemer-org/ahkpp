@@ -8,7 +8,10 @@
 		"vscode": "^1.30.0"
 	},
 	"activationEvents": [
-		"onLanguage:ahk"
+		"onLanguage:ahk",
+		"onCommand:run.ahk",
+		"onCommand:run.ahk.config",
+		"onCommand:run.ahk.configrun.ahk.config"
 	],
 	"main": "./out/extension",
 	"categories": [
@@ -117,17 +120,24 @@
 		],
 		"commands": [
 			{
+				"command": "compile.ahk",
+				"title": "Compile Script",
+				"category": "AHK",
+				"icon": "./image/build.svg"
+			},
+			{
 				"command": "run.ahk",
-				"title": "Run Ahk Script.",
+				"title": "Run Ahk Script",
 				"category": "AHK",
 				"icon": {
-					"light": "image/run.png",
-					"dark": "image/run-dark.png"
+					"light": "./image/run.png",
+					"dark": "./image/run-dark.png"
 				}
 			},
 			{
 				"command": "run.ahk.config",
-				"title": "Config Ahk Execute Bin Path."
+				"title": "Config Ahk Execute Bin Path",
+				"category": "AHK"
 			}
 		],
 		"menus": {
@@ -142,7 +152,12 @@
 				{
 					"command": "run.ahk",
 					"when": "editorLangId == ahk",
-					"group": "navigation"
+					"group": "navigation@1"
+				},
+				{
+					"when": "editorLangId == ahk",
+					"command": "compile.ahk",
+					"group": "navigation@2"
 				}
 			]
 		},

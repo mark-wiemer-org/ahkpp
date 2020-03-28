@@ -2,10 +2,10 @@
   "AhkTemplate": {
     "prefix": "#TEMPLATE",
     "body": [
-      "#SingleInstance, Force",
-      "SendMode Input",
-      "",
-      ""
+        "#SingleInstance, Force",
+        "SendMode Input",
+        "SetWorkingDir, %A_ScriptDir%",
+        ""
     ]
   },
   "#ClipboardTimeout": {

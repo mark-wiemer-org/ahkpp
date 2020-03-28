@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import { readFileSync } from 'fs';
 import * as vscode from 'vscode';
-import { Variable } from 'vscode-debugadapter';
+import { Variable, TerminatedEvent } from 'vscode-debugadapter';
 import { ScriptRunner } from '../core/ScriptRunner';
 import Net = require('net');
 import { Out } from '../common/out';
@@ -63,11 +63,11 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public async start(program: string, stopOnEntry: boolean) {
 
-		program=vscode.window.activeTextEditor.document.uri.fsPath
+		program = vscode.window.activeTextEditor.document.uri.fsPath
 		this.loadSource(program);
 		this._currentLine = -1;
 		let tempData = '';
-		let port=await getPort({port: getPort.makeRange(9000, 9100)});
+		let port = await getPort({ port: getPort.makeRange(9000, 9100) });
 		this.netIns = new Net.Server().listen(port).on('connection', (socket: Net.Socket) => {
 			this.connection = socket;
 			socket.on('data', (chunk) => {
@@ -80,7 +80,10 @@ export class AhkRuntime extends EventEmitter {
 		}).on("error", (err: Error) => {
 			Out.log(err.message)
 		})
-		ScriptRunner.instance.run(program, true,port)
+		if (!(await ScriptRunner.instance.run(program, true, port))) {
+			this.stop()
+			this.sendEvent('end')
+		}
 	}
 	createPoints() {
 		for (const key of this._breakPoints.keys()) {
@@ -314,7 +317,7 @@ export class AhkRuntime extends EventEmitter {
 			if (null == part || part.trim() == "") continue;
 			let s = this.header + part;
 			this.parser.parseString(s, function (err, xml) {
-				if (err){
+				if (err) {
 					Out.log(err)
 					return;
 				}
