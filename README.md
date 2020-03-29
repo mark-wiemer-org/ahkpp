@@ -11,7 +11,7 @@ AutoHotKey language support for VS Code
 * Code Assistant
 * [Code Symbol](#CodeSymbol) and [Method Symbol](#MethodSymbol)
 * [Goto Definition](#GotoDefinition)
-* Run/[Debug](#Debug)/Compile Script
+* [Run/Compile](#script)、 [Debug](#Debug) Script
 * [Code Format](#CodeFormat)
 
 ## Debug
@@ -31,15 +31,21 @@ AutoHotKey language support for VS Code
 
 ![methodSymbol](image/methodSymbol.jpg)
 
-## CodeSymbol
-
-1. You can add two semicolon to comment code block
-![codeSymbole](image/codeSymbol.jpg)
-
 ## GotoDefinition
 
 1. Press ctrl and move the mouse coordinates to the calling code 
 ![gotoDefinition](image/gotoDefinition.jpg)
+
+## Script
+1. Right click.
+- **Run**: run script without debug
+- **Compile**: compile script in same directory.
+![compile](image/compile.jpg)
+
+## CodeSymbol
+
+1. You can add two semicolon to comment code block
+![codeSymbole](image/codeSymbol.jpg)
 
 ## CodeFormat
 1. Right click then click format document.
