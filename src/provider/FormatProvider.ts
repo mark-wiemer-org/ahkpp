@@ -5,42 +5,16 @@ function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     return new vscode.Range(0, 0, lastLineId, document.lineAt(lastLineId).text.length);
 }
 
-/**
- * core function
- * check text include searchStr, and after string not match regex
- * f('for s=2','for')->false f('for','for')->true
- * @param text 
- * @param searchStr 
- * @param regex 
- */
-function excludeRegexAfterStr(text: string, searchStr: string, regex = /\S/): boolean {
-    return text.includes(searchStr) && text.substring(text.indexOf(searchStr) + searchStr.length, text.length).match(regex) == null;
-}
-
-/**
- * check text include searchStr, and after string match regex
- * f('for s=2','for')->true f('for','for')->false
- * @param text 
- * @param searchStr 
- * @param regex 
- */
-function includeRegexAfterStr(text: string, searchStr: string, regex = /\S/): boolean {
-    return text.includes(searchStr) && text.substring(text.indexOf(searchStr) + searchStr.length, text.length).match(regex) != null;
-}
 function trimContent(text: string) {
 
     const comment = text.indexOf(";");
-    const equ = text.indexOf(":=");
     const msgbox = text.indexOf("msgbox");
     const gui = text.match(/gui[\s|,]/);
     if (comment !== -1) {
         text = text.substring(0, comment);
     }
-    if (equ !== -1) {
-        text = text.substring(0, equ);
-    }
     if (msgbox !== -1) {
-        text = text.substring(0, msgbox);
+        text = text.substring(0, msgbox) + "mb";
     }
     if (gui != null) {
         text = text.substring(0, text.indexOf("gui"));
@@ -65,13 +39,13 @@ export class FormatProvider implements vscode.DocumentRangeFormattingEditProvide
 
         for (let line = 0; line < document.lineCount; line++) {
 
-            let simpleCode = true;
+            let notDeep = true;
             let { text } = document.lineAt(line);
             text = text.toLowerCase();
             text = trimContent(text);
 
-            if (excludeRegexAfterStr(text, "#ifwinactive") || excludeRegexAfterStr(text, "#ifwinnotactive") || (text.includes("return") && tagDeep === deep)) {
-                deep--; simpleCode = false;
+            if (text.match(/#ifwinactive$/) || text.match(/#ifwinnotactive$/) || (text.includes("return") && tagDeep === deep)) {
+                deep--; notDeep = false;
             }
 
             if (text.match(/}/) != null) {
@@ -82,13 +56,13 @@ export class FormatProvider implements vscode.DocumentRangeFormattingEditProvide
                 }
                 deep -= temp;
                 if (temp > 0) {
-                    simpleCode = false;
+                    notDeep = false;
                 }
             }
 
-            if ((excludeRegexAfterStr(text, ":") || excludeRegexAfterStr(text, "::")) && !text.includes(":=")) {
+            if (text.match(/:$/)) {
                 if (tagDeep > 0 && tagDeep === deep) {
-                    deep--; simpleCode = false;
+                    deep--; notDeep = false;
                 }
             }
 
@@ -107,7 +81,7 @@ export class FormatProvider implements vscode.DocumentRangeFormattingEditProvide
             if (deep < 0) {
                 deep = 0;
             }
-            formatDocument += (" ".repeat(deep * 4) + document.lineAt(line).text.replace(/^\s*/, ""));
+            formatDocument += (" ".repeat(deep * 4) + document.lineAt(line).text.replace(/ {2,}/g, " ").replace(/^\s*/, ""));
             if (line !== document.lineCount - 1) {
                 formatDocument += "\n";
             }
@@ -117,8 +91,8 @@ export class FormatProvider implements vscode.DocumentRangeFormattingEditProvide
                 deep--;
             }
 
-            if (includeRegexAfterStr(text, "#ifwinactive") || includeRegexAfterStr(text, "#ifwinnotactive")) {
-                deep++; simpleCode = false;
+            if (text.match(/#ifwinactive.*?\s/) || text.match(/#ifwinnotactive.*?\s/)) {
+                deep++; notDeep = false;
             }
 
             if (text.match(/{/) != null) {
@@ -129,19 +103,22 @@ export class FormatProvider implements vscode.DocumentRangeFormattingEditProvide
                 }
                 deep += temp;
                 if (temp > 0) {
-                    simpleCode = false;
+                    notDeep = false;
                 }
             }
 
-            if ((excludeRegexAfterStr(text, ":") || excludeRegexAfterStr(text, "::")) && !text.includes(":=")) {
+            if (text.match(/:$/)) {
                 deep++;
                 tagDeep = deep;
-                simpleCode = false;
+                notDeep = false;
             }
 
-            if (simpleCode) {
+            if (notDeep) {
                 for (const oneCommand of oneCommandList) {
-                    if (new RegExp("\\b" + oneCommand + "\\b").exec(text) && excludeRegexAfterStr(text, oneCommand, /{/)) {
+                    let temp: RegExpExecArray;
+                    if (
+                        (temp = new RegExp("\\b" + oneCommand + "\\b(.*)").exec(text)) != null
+                        && !temp[1].includes("/")) {
                         oneCommandCode = true;
                         deep++;
                         break;
