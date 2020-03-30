@@ -17,6 +17,7 @@ export interface AhkBreakpoint {
 
 /**
  * A Ahk runtime with minimal debugger functionality.
+ * refrence: https://xdebug.org/docs/dbgp
  */
 export class AhkRuntime extends EventEmitter {
 

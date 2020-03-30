@@ -23,11 +23,7 @@ function trimContent(text: string) {
     return text;
 }
 
-export class FormatProvider implements vscode.DocumentRangeFormattingEditProvider, vscode.DocumentFormattingEditProvider {
-
-    public provideDocumentRangeFormattingEdits(document: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextEdit[]> {
-        throw new Error("Method not implemented.");
-    }
+export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
     public provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextEdit[]> {
 
@@ -35,7 +31,7 @@ export class FormatProvider implements vscode.DocumentRangeFormattingEditProvide
         let deep = 0;
         let tagDeep = 0;
         let oneCommandCode = false;
-        const oneCommandList = ["ifnotexist", "ifexist", "ifwinactive", "ifwinnotactive", "ifwinexist", "ifwinnotexist", "ifinstring", "ifnotinstring", "if", "else", "loop", "for", "while"];
+        const oneCommandList = ["ifnotexist", "ifexist", "ifwinactive", "ifwinnotactive", "ifwinexist", "ifwinnotexist", "ifinstring", "ifnotinstring", "if", "else", "loop", "for", "while","catch"];
 
         for (let line = 0; line < document.lineCount; line++) {
 
@@ -44,7 +40,7 @@ export class FormatProvider implements vscode.DocumentRangeFormattingEditProvide
             text = text.toLowerCase();
             text = trimContent(text);
 
-            if (text.match(/#ifwinactive$/) || text.match(/#ifwinnotactive$/) || (text.includes("return") && tagDeep === deep)) {
+            if (text.match(/#ifwinactive$/) || text.match(/#ifwinnotactive$/) || (text.match(/\breturn\b/) && tagDeep === deep)) {
                 deep--; notDeep = false;
             }
 

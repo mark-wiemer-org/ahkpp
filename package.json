@@ -115,7 +115,7 @@
 			{
 				"language": "ahk",
 				"scopeName": "source.ahk",
-				"path": "./syntaxes/ahk.tmLanguage"
+				"path": "./syntaxes/ahk.tmLanguage.json"
 			}
 		],
 		"commands": [
