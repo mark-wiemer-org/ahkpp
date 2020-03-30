@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import { readFileSync } from 'fs';
 import * as vscode from 'vscode';
-import { Variable, TerminatedEvent } from 'vscode-debugadapter';
+import { Variable } from 'vscode-debugadapter';
 import { ScriptRunner } from '../core/ScriptRunner';
 import Net = require('net');
 import { Out } from '../common/out';
@@ -16,11 +16,9 @@ export interface AhkBreakpoint {
 }
 
 /**
- * A Mock runtime with minimal debugger functionality.
+ * A Ahk runtime with minimal debugger functionality.
  */
 export class AhkRuntime extends EventEmitter {
-
-
 
 	// the initial (and one and only) file we are 'debugging'
 	private _sourceFile: string;
@@ -31,31 +29,17 @@ export class AhkRuntime extends EventEmitter {
 	// the contents (= lines) of the one and only file
 	private _sourceLines: string[];
 
-	// This is the next line that will be 'executed'
-	private _currentLine = 0;
-
 	// maps from sourceFile to array of Mock breakpoints
 	private _breakPoints = new Map<string, AhkBreakpoint[]>();
 	private _transBreakPoints = new Map<number, AhkBreakpoint>();
-
-	// since we want to send breakpoint events, we will assign an id to every event
-	// so that the frontend can match events with breakpoints.
-	private _breakpointId = 1;
 
 	private connection: Net.Socket;
 	private transId = 1;
 	private commandPromise = {}
 	private netIns: Net.Server;
 
-	private _breakAddresses = new Set<string>();
-
 	constructor() {
 		super();
-	}
-
-	public stop() {
-		this.sendComand('stop')
-		this.netIns.close()
 	}
 
 	/**
@@ -65,7 +49,6 @@ export class AhkRuntime extends EventEmitter {
 
 		program = vscode.window.activeTextEditor.document.uri.fsPath
 		this.loadSource(program);
-		this._currentLine = -1;
 		let tempData = '';
 		let port = await getPort({ port: getPort.makeRange(9000, 9100) });
 		this.netIns = new Net.Server().listen(port).on('connection', (socket: Net.Socket) => {
@@ -85,7 +68,7 @@ export class AhkRuntime extends EventEmitter {
 			this.sendEvent('end')
 		}
 	}
-	createPoints() {
+	private createPoints() {
 		for (const key of this._breakPoints.keys()) {
 			for (const bp of this._breakPoints.get(key)) {
 				this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp)
@@ -122,8 +105,12 @@ export class AhkRuntime extends EventEmitter {
 	public stepIn() {
 		this.sendComand('step_into')
 	}
+	public stop() {
+		this.sendComand('stop')
+		this.netIns.close()
+	}
 
-	variables(scope: string): Promise<Array<Variable>> {
+	public variables(scope: string): Promise<Array<Variable>> {
 		let transId = this.sendComand(`context_get -c ${scope == "Local" ? 0 : 1}`)
 		return new Promise(resolve => {
 			this.commandPromise[transId] = (response: any) => {
@@ -174,26 +161,6 @@ export class AhkRuntime extends EventEmitter {
 
 	}
 
-	public getBreakpoints(path: string, line: number): number[] {
-
-		const l = this._sourceLines[line];
-
-		let sawSpace = true;
-		const bps: number[] = [];
-		for (let i = 0; i < l.length; i++) {
-			if (l[i] !== ' ') {
-				if (sawSpace) {
-					bps.push(i);
-					sawSpace = false;
-				}
-			} else {
-				sawSpace = true;
-			}
-		}
-
-		return bps;
-	}
-
 	/*
 	 * Set breakpoint in file with given line.
 	 */
@@ -215,22 +182,6 @@ export class AhkRuntime extends EventEmitter {
 	}
 
 	/*
-	 * Clear breakpoint in file with given line.
-	 */
-	public clearBreakPoint(path: string, line: number): AhkBreakpoint | undefined {
-		let bps = this._breakPoints.get(path);
-		if (bps) {
-			const index = bps.findIndex(bp => bp.line === line);
-			if (index >= 0) {
-				const bp = bps[index];
-				bps.splice(index, 1);
-				return bp;
-			}
-		}
-		return undefined;
-	}
-
-	/*
 	 * Clear all breakpoints for file.
 	 */
 	public clearBreakpoints(path: string): void {
@@ -243,26 +194,6 @@ export class AhkRuntime extends EventEmitter {
 		}
 		this._breakPoints.delete(path);
 	}
-
-	/*
-	 * Set data breakpoint.
-	 */
-	public setDataBreakpoint(address: string): boolean {
-		if (address) {
-			this._breakAddresses.add(address);
-			return true;
-		}
-		return false;
-	}
-
-	/*
-	 * Clear all data breakpoints.
-	 */
-	public clearAllDataBreakpoints(): void {
-		this._breakAddresses.clear();
-	}
-
-	// private methods
 
 	private loadSource(file: string) {
 		if (this._sourceFile !== file) {
@@ -376,10 +307,7 @@ export class AhkRuntime extends EventEmitter {
 		this.sendEvent('end');
 		this.connection.end()
 	}
-	private processContextResponse(result: any) {
-		throw new Error("Method not implemented.");
-	}
-	processRunResponse(response: any) {
+	private processRunResponse(response: any) {
 		// Run command returns a status
 		switch (response.response.attributes.status) {
 			case 'break':

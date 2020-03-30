@@ -2,11 +2,6 @@ import { basename } from 'path';
 import { Breakpoint, BreakpointEvent, Handles, InitializedEvent, Logger, logger, LoggingDebugSession, OutputEvent, Scope, Source, StackFrame, StoppedEvent, TerminatedEvent, Thread } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { AhkRuntime, AhkBreakpoint } from './AhkRuntime';
-const { Subject } = require('await-notify');
-
-function timeout(ms: number) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 /**
  * This interface describes the mock-debug specific launch attributes
@@ -32,16 +27,6 @@ export class AhkDebugSession extends LoggingDebugSession {
 	private _runtime: AhkRuntime;
 
 	private _variableHandles = new Handles<string>();
-
-	private _configurationDone = new Subject();
-
-	private _cancelationTokens = new Map<number, boolean>();
-	private _isLongrunning = new Map<number, boolean>();
-
-	private _reportProgress = false;
-	private _progressId = 10000;
-	private _cancelledProgressId: string | undefined = undefined;
-	private _isProgressCancellable = true;
 
 	/**
 	 * Creates a new debug adapter that is used for one debug session.
@@ -99,15 +84,11 @@ export class AhkDebugSession extends LoggingDebugSession {
 	 */
 	protected initializeRequest(response: DebugProtocol.InitializeResponse, args: DebugProtocol.InitializeRequestArguments): void {
 
-		if (args.supportsProgressReporting) {
-			this._reportProgress = true;
-		}
-
 		// build and return the capabilities of this debug adapter:
 		response.body = response.body || {};
 
 		// the adapter implements the configurationDoneRequest.
-		response.body.supportsConfigurationDoneRequest = true;
+		response.body.supportsConfigurationDoneRequest = false;
 
 		// make VS Code to use 'evaluate' when hovering over source
 		response.body.supportsEvaluateForHovers = true;
@@ -116,14 +97,14 @@ export class AhkDebugSession extends LoggingDebugSession {
 		response.body.supportsStepBack = false;
 
 		// make VS Code to support data breakpoints
-		response.body.supportsDataBreakpoints = true;
+		response.body.supportsDataBreakpoints = false;
 
 		// make VS Code to support completion in REPL
 		response.body.supportsCompletionsRequest = true;
 		response.body.completionTriggerCharacters = [".", "["];
 
 		// make VS Code to send cancelRequests
-		response.body.supportsCancelRequest = true;
+		response.body.supportsCancelRequest = false;
 
 		// make VS Code send the breakpointLocations request
 		response.body.supportsBreakpointLocationsRequest = false;
@@ -136,17 +117,6 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.sendEvent(new InitializedEvent());
 	}
 
-	/**
-	 * Called at the end of the configuration sequence.
-	 * Indicates that all breakpoints etc. have been sent to the DA and that the 'launch' can start.
-	 */
-	protected configurationDoneRequest(response: DebugProtocol.ConfigurationDoneResponse, args: DebugProtocol.ConfigurationDoneArguments): void {
-		super.configurationDoneRequest(response, args);
-
-		// notify the launchRequest that configuration has finished
-		this._configurationDone.notify();
-	}
-
 	protected disconnectRequest(response: DebugProtocol.DisconnectResponse, args: DebugProtocol.DisconnectArguments, request?: DebugProtocol.Request): void {
 		this._runtime.stop()
 		this.sendResponse(response)
@@ -156,9 +126,6 @@ export class AhkDebugSession extends LoggingDebugSession {
 
 		// make sure to 'Stop' the buffered logging if 'trace' is not set
 		logger.setup(args.trace ? Logger.LogLevel.Verbose : Logger.LogLevel.Stop, false);
-
-		// wait until configuration has finished (and configurationDoneRequest has been called)
-		await this._configurationDone.wait(1000);
 
 		// start the program in the runtime
 		this._runtime.start(args.program, !!args.stopOnEntry);
@@ -189,16 +156,6 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.sendResponse(response);
 	}
 
-	protected threadsRequest(response: DebugProtocol.ThreadsResponse): void {
-
-		// runtime supports no threads so just return a default thread.
-		response.body = {
-			threads: [
-				new Thread(AhkDebugSession.THREAD_ID, "thread 1")
-			]
-		};
-		this.sendResponse(response);
-	}
 
 	protected async stackTraceRequest(response: DebugProtocol.StackTraceResponse, args: DebugProtocol.StackTraceArguments): Promise<void> {
 
@@ -228,7 +185,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 
 	protected async variablesRequest(response: DebugProtocol.VariablesResponse, args: DebugProtocol.VariablesArguments, request?: DebugProtocol.Request) {
 
-
+		// not support level down stack variable, because frameId not found in args
 		const variables = await this._runtime.variables(this._variableHandles.get(args.variablesReference));
 
 		response.body = {
@@ -238,11 +195,6 @@ export class AhkDebugSession extends LoggingDebugSession {
 	}
 
 	protected continueRequest(response: DebugProtocol.ContinueResponse, args: DebugProtocol.ContinueArguments): void {
-		this._runtime.continue();
-		this.sendResponse(response);
-	}
-
-	protected reverseContinueRequest(response: DebugProtocol.ReverseContinueResponse, args: DebugProtocol.ReverseContinueArguments): void {
 		this._runtime.continue();
 		this.sendResponse(response);
 	}
@@ -262,61 +214,21 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.sendResponse(response);
 	}
 
-	protected evaluateRequest(response: DebugProtocol.EvaluateResponse, args: DebugProtocol.EvaluateArguments): void {
+	protected threadsRequest(response: DebugProtocol.ThreadsResponse): void {
 
-		this._runtime.sendComand(`eval -i transaction_id -- ${args.expression}`)
-
-		// response.body = {
-		// 	result: reply ? reply : `evaluate(context: '${args.context}', '${args.expression}')`,
-		// 	variablesReference: 0
-		// };
-		// this.sendResponse(response);
-	}
-
-	protected dataBreakpointInfoRequest(response: DebugProtocol.DataBreakpointInfoResponse, args: DebugProtocol.DataBreakpointInfoArguments): void {
-
+		// not implment
+		// runtime supports no threads so just return a default thread.
 		response.body = {
-			dataId: null,
-			description: "cannot break on data access",
-			accessTypes: undefined,
-			canPersist: false
+			threads: [
+				new Thread(AhkDebugSession.THREAD_ID, "thread 1")
+			]
 		};
-
-		if (args.variablesReference && args.name) {
-			const id = this._variableHandles.get(args.variablesReference);
-			if (id.startsWith("global_")) {
-				response.body.dataId = args.name;
-				response.body.description = args.name;
-				response.body.accessTypes = ["read"];
-				response.body.canPersist = true;
-			}
-		}
-
-		this.sendResponse(response);
-	}
-
-	protected setDataBreakpointsRequest(response: DebugProtocol.SetDataBreakpointsResponse, args: DebugProtocol.SetDataBreakpointsArguments): void {
-
-		// clear all data breakpoints
-		this._runtime.clearAllDataBreakpoints();
-
-		response.body = {
-			breakpoints: []
-		};
-
-		for (let dbp of args.breakpoints) {
-			// assume that id is the "address" to break on
-			const ok = this._runtime.setDataBreakpoint(dbp.dataId);
-			response.body.breakpoints.push({
-				verified: ok
-			});
-		}
-
 		this.sendResponse(response);
 	}
 
 	protected completionsRequest(response: DebugProtocol.CompletionsResponse, args: DebugProtocol.CompletionsArguments): void {
-
+		// not implment
+		// trigger on eval input
 		response.body = {
 			targets: [
 				{
@@ -328,18 +240,25 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.sendResponse(response);
 	}
 
-	protected cancelRequest(response: DebugProtocol.CancelResponse, args: DebugProtocol.CancelArguments) {
-		if (args.requestId) {
-			this._cancelationTokens.set(args.requestId, true);
-		}
-		if (args.progressId) {
-			this._cancelledProgressId = args.progressId;
-		}
+	protected evaluateRequest(response: DebugProtocol.EvaluateResponse, args: DebugProtocol.EvaluateArguments): void {
+		//not implment, eval have problem
+		this._runtime.sendComand(`eval -i transaction_id -- ${args.expression}`)
+
+		// response.body = {
+		// 	result: reply ? reply : `evaluate(context: '${args.context}', '${args.expression}')`,
+		// 	variablesReference: 0
+		// };
+		// this.sendResponse(response);
 	}
+
 
 	//---- helpers
 
 	private createSource(filePath: string): Source {
 		return new Source(basename(filePath), this.convertDebuggerPathToClient(filePath), undefined, undefined, 'mock-adapter-data');
 	}
+	private timeout(ms: number) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
 }

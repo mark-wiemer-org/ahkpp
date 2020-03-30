@@ -151,7 +151,8 @@
 					"command": "run.ahk",
 					"when": "editorLangId == ahk",
 					"group": "navigation@0"
-				},{
+				},
+				{
 					"command": "compile.ahk",
 					"when": "editorLangId == ahk",
 					"group": "navigation@1"
@@ -187,7 +188,6 @@
 		"tslint": "tslint -t verbose src/**/*.ts"
 	},
 	"dependencies": {
-		"await-notify": "1.0.1",
 		"get-port": "^5.1.1",
 		"vscode-debugadapter": "1.40.0-pre.1",
 		"xml2js": "^0.4.23"
