@@ -2,12 +2,10 @@ import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { Process } from '../common/processWrapper';
 import { Setting } from '../common/setting';
-import * as path from 'path'
-import { Z_PARTIAL_FLUSH } from 'zlib';
 
 export class ScriptRunner {
 
-    private defaultPath = "\"C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe\"";
+    private defaultPath = `C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe`;
     private KEY = 'executePath';
     private setting: Setting;
     public static instance: ScriptRunner;
@@ -69,8 +67,9 @@ export class ScriptRunner {
         }
 
         if (fs.existsSync(this.defaultPath)) {
-            this.setting.set(this.KEY, this.defaultPath)
-            return executePath;
+            // setting look like not sync
+            // this.setting.set(this.KEY, this.defaultPath)
+            return this.defaultPath;
         } else {
             if (await this.reqConfigPath()) return this.buildExecutePath()
         }
