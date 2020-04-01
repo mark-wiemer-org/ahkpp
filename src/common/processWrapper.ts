@@ -2,9 +2,9 @@ import * as child_process from 'child_process';
 import { Out } from './out';
 
 export class Process {
-    static exec(command: string): Promise<boolean> {
+    static exec(command: string, opt: child_process.ExecOptions = {}): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            child_process.exec(command, error => {
+            child_process.exec(command, opt, error => {
                 if (error) {
                     Out.log(error.message)
                     reject(error)

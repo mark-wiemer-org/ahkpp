@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { Process } from '../common/processWrapper';
 import { Setting } from '../common/setting';
+import { resolve as res } from "path";
 
 export class ScriptRunner {
 
@@ -35,7 +36,8 @@ export class ScriptRunner {
     async run(path: string = null, debug: boolean = false, debugPort = 9000) {
         let executePath = await this.buildExecutePath()
         if (executePath) {
-            Process.exec(`\"${executePath}\"${debug ? ' /debug=localhost:' + debugPort : ''} \"${path ? path : vscode.window.activeTextEditor.document.fileName}\"`)
+            path = path ? path : vscode.window.activeTextEditor.document.fileName
+            Process.exec(`\"${executePath}\"${debug ? ' /debug=localhost:' + debugPort : ''} \"${path}\"`, { cwd: `${res(path, '..')}` })
             return true;
         } else {
             return false;
@@ -50,7 +52,7 @@ export class ScriptRunner {
         if (!currentPath) return;
         var pos = currentPath.lastIndexOf(".");
         let compilePath = currentPath.substr(0, pos < 0 ? currentPath.length : pos) + ".exe"
-        if (await Process.exec(`"C:/Program Files/autoHotkey/Compiler/Ahk2Exe.exe" /in "${currentPath}" /out "${compilePath}"`)) {
+        if (await Process.exec(`"C:/Program Files/autoHotkey/Compiler/Ahk2Exe.exe" /in "${currentPath}" /out "${compilePath}"`, { cwd: `${res(currentPath, '..')}` })) {
             vscode.window.showInformationMessage("compile success!")
         }
     }
