@@ -10,9 +10,9 @@ import { SymBolProvider } from "./provider/SymbolProvider";
 
 export function activate(context: vscode.ExtensionContext) {
 
-    const language = { language: "ahk" };
     Detecter.buildByPath(vscode.workspace.rootPath);
-    let scriptRunner = new ScriptRunner(context);
+    const language = { language: "ahk" };
+    const scriptRunner = new ScriptRunner(context);
     context.subscriptions.push(
         // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
         vscode.languages.registerDefinitionProvider(language, new DefProvider()),

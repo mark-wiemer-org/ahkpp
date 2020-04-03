@@ -25,13 +25,14 @@ function trimContent(text: string) {
 
 export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
+    private static oneCommandList = ["ifnotexist", "ifexist", "ifwinactive", "ifwinnotactive", "ifwinexist", "ifwinnotexist", "ifinstring", "ifnotinstring", "if", "else", "loop", "for", "while","catch"];
+
     public provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextEdit[]> {
 
         let formatDocument = "";
         let deep = 0;
         let tagDeep = 0;
         let oneCommandCode = false;
-        const oneCommandList = ["ifnotexist", "ifexist", "ifwinactive", "ifwinnotactive", "ifwinexist", "ifwinnotexist", "ifinstring", "ifnotinstring", "if", "else", "loop", "for", "while","catch"];
 
         for (let line = 0; line < document.lineCount; line++) {
 
@@ -110,7 +111,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             if (notDeep) {
-                for (const oneCommand of oneCommandList) {
+                for (const oneCommand of FormatProvider.oneCommandList) {
                     let temp: RegExpExecArray;
                     if (
                         (temp = new RegExp("\\b" + oneCommand + "\\b(.*)").exec(text)) != null
