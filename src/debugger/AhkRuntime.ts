@@ -5,9 +5,10 @@ import { Variable } from 'vscode-debugadapter';
 import { ScriptRunner } from '../core/ScriptRunner';
 import Net = require('net');
 import { Out } from '../common/out';
-const xml2js = require('xml2js');
-const getPort = require('get-port');
+import xml2js = require('xml2js');
+import getPort = require('get-port');
 import { DebugProtocol } from 'vscode-debugprotocol';
+import { VariableParser } from './handler/VariableParser';
 
 export interface AhkBreakpoint {
 	id: number;
@@ -15,6 +16,7 @@ export interface AhkBreakpoint {
 	verified: boolean;
 	source: string;
 }
+
 export interface DbgpResponse {
 	response: {
 		attributes: {
@@ -23,83 +25,9 @@ export interface DbgpResponse {
 			transaction_id: string;
 		}
 		children: {
-			property: DbgpProperty | DbgpProperty[]
+			property: any | any[]
 		}
 	}
-}
-export interface DbgpProperty {
-	attributes?: {
-		name?: string;
-		fullname?: string;
-		type?: string;
-		facet?: string;
-		classname?: string;
-		address?: string;
-		size?: string;
-		page?: string;
-		pagesize?: string;
-		children?: string;
-		numchildren?: string;
-		encoding?: string;
-	}
-	content?: string;
-	children?: { property: DbgpProperty | DbgpProperty[] };
-}
-
-/** formats a dbgp property value for VS Code */
-function formatPropertyValue(property: DbgpProperty): string {
-	const { attributes, content = '' } = property;
-
-	if (['string', 'integer', 'float'].includes(attributes.type) === true) {
-		const primitive = Buffer.from(content, attributes.encoding).toString();
-
-		if (attributes.type === 'integer' || attributes.type === 'float') {
-			return primitive;
-		}
-		return `"${primitive}"`;
-	}
-	else if (attributes.type === 'object') {
-		if (isArrayLikeProperty(property) == true) {
-			const classname = attributes.classname === 'Object' ? 'Array' : attributes.classname;
-			const length = getArrayLikeLength(property);
-
-			return `${classname}(${length})`;
-		}
-	}
-
-	return `${attributes.classname}`;
-}
-function getArrayLikeLength(property: DbgpProperty): number {
-	const { children } = property;
-
-	if (!children) {
-		return 0;
-	}
-
-	const properties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
-	for (let i = properties.length - 1; 0 <= i; i--) {
-		const property = properties[i];
-
-		const match = property.attributes.name.match(/\[([0-9]+)\]/);
-		if (match) {
-			return parseInt(match[1]);
-		}
-	}
-	return 0;
-}
-function isArrayLikeProperty(property: DbgpProperty): boolean {
-	const { attributes, children } = property;
-	if (attributes.children === "0") {
-		return false;
-	}
-
-	const childProperties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
-	return childProperties.some((childProperty: DbgpProperty) => {
-		if (childProperty.attributes.name.match(/\[[0-9]+\]/)) {
-			return true;
-		}
-		return false;
-	})
 }
 
 /**
@@ -121,12 +49,9 @@ export class AhkRuntime extends EventEmitter {
 	private _breakPoints = new Map<string, AhkBreakpoint[]>();
 	private _transBreakPoints = new Map<number, AhkBreakpoint>();
 
-	private _properties = new Map<number, DbgpProperty>()
-	private _variableReferenceCounter = 10000;
-
 	private connection: Net.Socket;
 	private transId = 1;
-	private commandPromise = {}
+	private commandCallback = {}
 	private netIns: Net.Server;
 
 	constructor() {
@@ -173,13 +98,6 @@ export class AhkRuntime extends EventEmitter {
 			this.sendEvent('end')
 		}
 	}
-	private createPoints() {
-		for (const key of this._breakPoints.keys()) {
-			for (const bp of this._breakPoints.get(key)) {
-				this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp)
-			}
-		}
-	}
 
 	public sendComand(command: string): number {
 		if (!this.connection) {
@@ -215,104 +133,33 @@ export class AhkRuntime extends EventEmitter {
 		this.netIns.close()
 	}
 
-	public variables(scope: string,args: DebugProtocol.VariablesArguments): Promise<Array<Variable>> {
-		let transId;
-		if (this._properties.has(args.variablesReference) === true) {
-			const property = this._properties.get(args.variablesReference);
-			transId = this.sendComand(`property_get -n ${property.attributes.fullname}`);
-		}
-		else {
+	/**
+	 * List all variable or get refrence variable property detail.
+	 * @param scope Local and Global
+	 * @param args 
+	 */
+	public variables(scope: string, args: DebugProtocol.VariablesArguments): Promise<Array<Variable>> {
+		let transId: number;
+		let propertyName = VariableParser.getPropertyNameByRef(args.variablesReference);
+		if (propertyName) {
+			transId = this.sendComand(`property_get -n ${propertyName}`);
+		} else {
 			transId = this.sendComand(`context_get -c ${scope == "Local" ? 0 : 1}`);
 		}
-		return new Promise(resolve => {
-			this.commandPromise[transId] = (xml: DbgpResponse) => {
-				let properties: DbgpProperty[];
-
-				if (this._properties.has(args.variablesReference) == true
-					&& xml.response.attributes.command === 'property_get'
-				) {
-					const { children } = xml.response.children.property as DbgpProperty;
-					properties = Array.isArray(children.property) == true ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
-				}
-				else {
-					if ("children" in xml.response) {
-						const { children } = xml.response;
-						properties = Array.isArray(children.property) ? children.property : [children.property];
-					}
-					else {
-						properties = [];
-					}
-				}
-
-				if (properties.length === 0) {
-					resolve([]);
-					return;
-				}
-
-				const variables: Variable[] = [];
-				properties.forEach((property, i) => {
-					const { attributes } = property;
-					let variablesReference;
-					let indexedVariables, namedVariables;
-
-					if ('filter' in args) {
-						const match = attributes.name.match(/\[([0-9]+)\]/);
-						const indexed = !!match;
-						if (args.filter === 'named' && indexed) {
-							return;
-						}
-						else if (args.filter === 'indexed') {
-							if (indexed) {
-								const index = parseInt(match[1]);
-								const start = args.start + 1;
-								const end = args.start + args.count;
-								const contains = (start) <= index && index <= end;
-								if (contains === false) {
-									return;
-								}
-							}
-							else {
-								return;
-							}
-						}
-					}
-
-					if ('children' in property && attributes.type === 'object') {
-						variablesReference = this._variableReferenceCounter++;
-						this._properties.set(variablesReference, property);
-
-						if (isArrayLikeProperty(property) === true) {
-							const length = getArrayLikeLength(property);
-
-							indexedVariables = 100 < length ? length : undefined;
-							namedVariables = 100 < length ? 1 : undefined;
-						}
-					}
-					else {
-						variablesReference = 0;
-					}
-
-					const { name, type } = attributes;
-					const value = formatPropertyValue(property);
-					const variable = {
-						name, type, value, variablesReference,
-						indexedVariables, namedVariables
-					}
-					variables.push(variable);
-				});
-
-				resolve(variables);
-			};
-		});
+		return new Promise(resolve =>
+			this.commandCallback[transId] = (response: any) => resolve(VariableParser.parse(response, args))
+		);
 	}
 
 	/**
-	 * Returns a fake 'stacktrace' where every 'stackframe' is a word from the current line.
+	 * send get stack command and return stack result promise
+	 * @param startFrame stack frame limit start
+	 * @param endFrame  stack frame limit end
 	 */
-	public stack(startFrame: number, endFrame: number): any {
+	public stack(startFrame: number, endFrame: number): Promise<any> {
 		let transId = this.sendComand(`stack_get`)
 		return new Promise(resolve => {
-			this.commandPromise[transId] = (response: any) => {
+			this.commandCallback[transId] = (response: any) => {
 				let stackList = response.match(/<stack(.|\s|\n)+?\/>/ig)
 				if (stackList) {
 					const frames = new Array<any>();
@@ -334,8 +181,18 @@ export class AhkRuntime extends EventEmitter {
 
 	}
 
-	/*
-	 * Set breakpoint in file with given line.
+	
+	private loadSource(file: string) {
+		if (this._sourceFile !== file) {
+			this._sourceFile = file;
+			this._sourceLines = readFileSync(this._sourceFile).toString().split('\n');
+		}
+	}
+
+	/**
+	 * Set breakpoint in file with given line. 
+	 * @param path file path
+	 * @param line file line
 	 */
 	public setBreakPoint(path: string, line: number): AhkBreakpoint {
 
@@ -354,8 +211,18 @@ export class AhkRuntime extends EventEmitter {
 		return bp;
 	}
 
-	/*
+	
+	private createPoints() {
+		for (const key of this._breakPoints.keys()) {
+			for (const bp of this._breakPoints.get(key)) {
+				this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp)
+			}
+		}
+	}
+
+	/** 
 	 * Clear all breakpoints for file.
+	 * @param path file path
 	 */
 	public clearBreakpoints(path: string): void {
 
@@ -368,13 +235,10 @@ export class AhkRuntime extends EventEmitter {
 		this._breakPoints.delete(path);
 	}
 
-	private loadSource(file: string) {
-		if (this._sourceFile !== file) {
-			this._sourceFile = file;
-			this._sourceLines = readFileSync(this._sourceFile).toString().split('\n');
-		}
-	}
-
+	/**
+	 * check debug line is enable.
+	 * @param path file path
+	 */
 	private verifyBreakpoints(path: string): void {
 		let bps = this._breakPoints.get(path);
 		if (bps) {
@@ -440,7 +304,7 @@ export class AhkRuntime extends EventEmitter {
 								that.processBreakpointSet(xml);
 								break;
 							case 'stack_get':
-								if (that.commandPromise[transId]) that.commandPromise[transId](part)
+								if (that.commandCallback[transId]) that.commandCallback[transId](part)
 								break;
 							case 'run':
 							case 'step_into':
@@ -450,13 +314,10 @@ export class AhkRuntime extends EventEmitter {
 								break;
 							case 'context_get':
 							case 'property_get':
-								if (that.commandPromise[transId]) that.commandPromise[transId](xml)
+								if (that.commandCallback[transId]) that.commandCallback[transId](xml)
 								break;
 							case 'stop':
 								that.processStopResponse(xml);
-								break;
-
-							default:
 								break;
 						}
 					}
@@ -466,13 +327,9 @@ export class AhkRuntime extends EventEmitter {
 
 	}
 
-	private getBreakpointByTransId(transId: string) {
-		return this._transBreakPoints.get(parseInt(transId));;
-	}
-
 	private processBreakpointSet(xml: any) {
 		let transId = xml.response.attributes.transaction_id;
-		let bp = this.getBreakpointByTransId(transId)
+		let bp = this._transBreakPoints.get(parseInt(transId));
 		bp.id = xml.response.attributes.id
 		bp.verified = true;
 		this.sendEvent('breakpointValidated', bp);
