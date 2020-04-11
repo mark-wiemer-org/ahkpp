@@ -7,6 +7,7 @@ import Net = require('net');
 import { Out } from '../common/out';
 const xml2js = require('xml2js');
 const getPort = require('get-port');
+import { DebugProtocol } from 'vscode-debugprotocol';
 
 export interface AhkBreakpoint {
 	id: number;
@@ -69,13 +70,13 @@ function formatPropertyValue(property: DbgpProperty): string {
 	return `${attributes.classname}`;
 }
 function getArrayLikeLength(property: DbgpProperty): number {
-	const { children }= property;
+	const { children } = property;
 
 	if (!children) {
 		return 0;
 	}
 
-	const properties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [ children.property as DbgpProperty];
+	const properties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
 	for (let i = properties.length - 1; 0 <= i; i--) {
 		const property = properties[i];
 
@@ -92,7 +93,7 @@ function isArrayLikeProperty(property: DbgpProperty): boolean {
 		return false;
 	}
 
-	const childProperties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [ children.property as DbgpProperty];
+	const childProperties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
 	return childProperties.some((childProperty: DbgpProperty) => {
 		if (childProperty.attributes.name.match(/\[[0-9]+\]/)) {
 			return true;
@@ -214,95 +215,93 @@ export class AhkRuntime extends EventEmitter {
 		this.netIns.close()
 	}
 
-	public variables(scope: string, args /* : VariablesArguments */): Promise<Array<Variable>> {
+	public variables(scope: string,args: DebugProtocol.VariablesArguments): Promise<Array<Variable>> {
 		let transId;
-		if (this._properties.has(args.variableReference) === true) {
-			const property = this._properties.get(args.variableReference);
+		if (this._properties.has(args.variablesReference) === true) {
+			const property = this._properties.get(args.variablesReference);
 			transId = this.sendComand(`property_get -n ${property.attributes.fullname}`);
 		}
 		else {
 			transId = this.sendComand(`context_get -c ${scope == "Local" ? 0 : 1}`);
 		}
 		return new Promise(resolve => {
-			this.commandPromise[transId] = (response: any) => {
-				this.parser.parseString(response, (err, xml: DbgpResponse) => {
-					let properties: DbgpProperty[];
+			this.commandPromise[transId] = (xml: DbgpResponse) => {
+				let properties: DbgpProperty[];
 
-					if (	this._properties.has(args.variableReference) == true
-						&&	xml.response.attributes.command === 'property_get'
-					) {
-						const { children } = xml.response.children.property as DbgpProperty;
-						properties = Array.isArray(children.property) == true ? children.property as DbgpProperty[] : [ children.property as DbgpProperty ];
+				if (this._properties.has(args.variablesReference) == true
+					&& xml.response.attributes.command === 'property_get'
+				) {
+					const { children } = xml.response.children.property as DbgpProperty;
+					properties = Array.isArray(children.property) == true ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
+				}
+				else {
+					if ("children" in xml.response) {
+						const { children } = xml.response;
+						properties = Array.isArray(children.property) ? children.property : [children.property];
 					}
 					else {
-						if ("children" in xml.response) {
-							const { children } = xml.response;
-							properties = Array.isArray(children.property) ? children.property : [ children.property ];
-						}
-						else {
-							properties = [];
-						}
+						properties = [];
 					}
+				}
 
-					if (properties.length === 0) {
-						resolve([]);
-						return;
-					}
+				if (properties.length === 0) {
+					resolve([]);
+					return;
+				}
 
-					const variables: Variable[] = [];
-					properties.forEach((property, i) => {
-						const { attributes } = property;
-						let variablesReference;
-						let indexedVariables, namedVariables;
+				const variables: Variable[] = [];
+				properties.forEach((property, i) => {
+					const { attributes } = property;
+					let variablesReference;
+					let indexedVariables, namedVariables;
 
-						if ('filter' in args) {
-							const match = attributes.name.match(/\[([0-9]+)\]/);
-							const indexed = !!match;
-							if (args.filter === 'named' && indexed) {
-								return;
-							}
-							else if (args.filter === 'indexed') {
-								if (indexed) {
-									const index = parseInt(match[1]);
-									const start = args.start + 1;
-									const end = args.start + args.count;
-									const contains = (start) <= index && index <= end;
-									if (contains === false) {
-										return;
-									}
-								}
-								else {
+					if ('filter' in args) {
+						const match = attributes.name.match(/\[([0-9]+)\]/);
+						const indexed = !!match;
+						if (args.filter === 'named' && indexed) {
+							return;
+						}
+						else if (args.filter === 'indexed') {
+							if (indexed) {
+								const index = parseInt(match[1]);
+								const start = args.start + 1;
+								const end = args.start + args.count;
+								const contains = (start) <= index && index <= end;
+								if (contains === false) {
 									return;
 								}
 							}
-						}
-
-						if ('children' in property && attributes.type === 'object') {
-							variablesReference = this._variableReferenceCounter++;
-							this._properties.set(variablesReference, property);
-
-							if (isArrayLikeProperty(property) === true) {
-								const length = getArrayLikeLength(property);
-
-								indexedVariables = 100 < length ? length : undefined;
-								namedVariables = 100 < length ? 1 : undefined;
+							else {
+								return;
 							}
 						}
-						else {
-							variablesReference = 0;
-						}
+					}
 
-						const { name, type } = attributes;
-						const value = formatPropertyValue(property);
-						const variable = {
-							name, type, value, variablesReference,
-							indexedVariables, namedVariables
-						}
-						variables.push(variable);
-					});
+					if ('children' in property && attributes.type === 'object') {
+						variablesReference = this._variableReferenceCounter++;
+						this._properties.set(variablesReference, property);
 
-					resolve(variables);
+						if (isArrayLikeProperty(property) === true) {
+							const length = getArrayLikeLength(property);
+
+							indexedVariables = 100 < length ? length : undefined;
+							namedVariables = 100 < length ? 1 : undefined;
+						}
+					}
+					else {
+						variablesReference = 0;
+					}
+
+					const { name, type } = attributes;
+					const value = formatPropertyValue(property);
+					const variable = {
+						name, type, value, variablesReference,
+						indexedVariables, namedVariables
+					}
+					variables.push(variable);
 				});
+
+				resolve(variables);
 			};
 		});
 	}
@@ -451,7 +450,7 @@ export class AhkRuntime extends EventEmitter {
 								break;
 							case 'context_get':
 							case 'property_get':
-								if (that.commandPromise[transId]) that.commandPromise[transId](part)
+								if (that.commandPromise[transId]) that.commandPromise[transId](xml)
 								break;
 							case 'stop':
 								that.processStopResponse(xml);
