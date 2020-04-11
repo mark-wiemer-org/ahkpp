@@ -58,7 +58,7 @@ export class AhkRuntime extends EventEmitter {
 	/**
 	 * Start executing the given program.
 	 */
-	public async start(program: string, stopOnEntry: boolean) {
+	public async start(program: string, stopOnEntry: boolean, runtime?: string) {
 
 		program = vscode.window.activeTextEditor.document.uri.fsPath;
 		this.loadSource(program);
@@ -90,7 +90,7 @@ export class AhkRuntime extends EventEmitter {
 		}).on("error", (err: Error) => {
 			Out.log(err.message);
 		});
-		if (!(await ScriptRunner.instance.run(program, true, port))) {
+		if (!(await ScriptRunner.instance.run(runtime, program, true, port))) {
 			this.stop();
 			this.sendEvent('end');
 		}

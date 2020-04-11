@@ -60,6 +60,11 @@
 								"description": "Absolute path to a text file.",
 								"default": "${file}"
 							},
+							"runtime": {
+								"type": "string",
+								"description": "Absolute path to a AutoHotkey.exe file.",
+								"default": "C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe"
+							},
 							"stopOnEntry": {
 								"type": "boolean",
 								"description": "Automatically stop after launch.",

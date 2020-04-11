@@ -29,12 +29,14 @@ export class ScriptRunner {
 
     /**
      * run/debug script
+     * @param executePath runtime path
      * @param path execute script path
      * @param debug enable debug model?
      * @param debugPort debug proxy port
      */
-    public async run(path: string = null, debug: boolean = false, debugPort = 9000) {
-        const executePath = await this.buildExecutePath();
+    public async run(executePath = null, path: string = null, debug: boolean = false, debugPort = 9000) {
+        executePath = executePath ? executePath : await this.buildExecutePath();
+
         if (executePath) {
             path = path ? path : vscode.window.activeTextEditor.document.fileName;
             await Process.exec(`\"${executePath}\"${debug ? ' /debug=localhost:' + debugPort : ''} \"${path}\"`, {cwd: `${res(path, '..')}`});

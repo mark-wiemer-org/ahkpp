@@ -5,8 +5,17 @@
 		{
 			"type": "ahk",
 			"request": "launch",
-			"name": "Autohotkey Debugger",
+			"name": "Autohotkey v1 Debugger",
 			"program": "${file}",
+			"runtime": "C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe",
+			"stopOnEntry": false
+		},
+		{
+			"type": "ahk",
+			"request": "launch",
+			"name": "Autohotkey v2 Debugger",
+			"program": "${file}",
+			"runtime": "C:\\Program Files\\AutoHotkey\\v2-alpha\\x64\\AutoHotkey.exe", // Default value of Scite for ahk v2
 			"stopOnEntry": false
 		},
 		{

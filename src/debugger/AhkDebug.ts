@@ -31,6 +31,8 @@ interface LaunchRequestArguments extends DebugProtocol.LaunchRequestArguments {
 	stopOnEntry?: boolean;
 	/** enable logging the Debug Adapter Protocol */
 	trace?: boolean;
+	/** An absolute path to the AutoHotkey.exe. */
+	runtime: string;
 }
 
 export class AhkDebugSession extends LoggingDebugSession {
@@ -143,7 +145,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 		logger.setup(args.trace ? Logger.LogLevel.Verbose : Logger.LogLevel.Stop, false);
 
 		// start the program in the runtime
-		this._runtime.start(args.program, !!args.stopOnEntry);
+		this._runtime.start(args.program, !!args.stopOnEntry, args.runtime);
 
 		this.sendResponse(response);
 	}
