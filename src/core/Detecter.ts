@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
 import { Out } from "../common/out";
+import { CodeUtil } from "../common/codeUtil";
 
 export class Method {
     constructor(public full: string, public name: string, public line: number, public comnent: string) { }
@@ -94,10 +95,10 @@ export class Detecter {
      * @param line 
      */
     private static buildCodeBlock(document: vscode.TextDocument, line: number): string {
-        let text = document.lineAt(line).text.replace(/;.+/, "");
+        let text = CodeUtil.purity(document.lineAt(line).text);
         for (let end = false, i = line + 1; i < document.lineCount && !end; i++) {
             if (text.match(this.methodPreviousPattern)) {
-                const nextLineText = document.lineAt(i).text.replace(/;.+/, "");
+                const nextLineText = CodeUtil.purity(document.lineAt(i).text);
                 if (!nextLineText.trim()) { continue; }
                 if (nextLineText.match(/^\s*{/)) { text += "{"; }
             }

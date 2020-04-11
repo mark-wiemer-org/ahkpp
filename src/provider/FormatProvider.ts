@@ -1,26 +1,9 @@
 import * as vscode from "vscode";
+import { CodeUtil } from "../common/codeUtil";
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
     return new vscode.Range(0, 0, lastLineId, document.lineAt(lastLineId).text.length);
-}
-
-function trimContent(text: string) {
-
-    const comment = text.indexOf(";");
-    const msgbox = text.indexOf("msgbox");
-    const gui = text.match(/gui[\s|,]/);
-    if (comment !== -1) {
-        text = text.substring(0, comment);
-    }
-    if (msgbox !== -1) {
-        text = text.substring(0, msgbox) + "mb";
-    }
-    if (gui != null) {
-        text = text.substring(0, text.indexOf("gui"));
-    }
-
-    return text;
 }
 
 export class FormatProvider implements vscode.DocumentFormattingEditProvider {
@@ -40,7 +23,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             let notDeep = true;
             let { text } = document.lineAt(line);
             text = text.toLowerCase();
-            text = trimContent(text);
+            text = CodeUtil.purity(text);
 
             if (text.match(/#ifwinactive$/) || text.match(/#ifwinnotactive$/) || (text.match(/\breturn\b/) && tagDeep === deep)) {
                 deep--; notDeep = false;

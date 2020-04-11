@@ -31,7 +31,7 @@
         "one-variable-per-declaration": false,
         "indent": false,
         "no-conditional-assignment": false,
-        "max-classes-per-file":false
-
+        "max-classes-per-file": false,
+        "curly": false
     }
 }
