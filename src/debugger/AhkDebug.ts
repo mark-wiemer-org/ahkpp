@@ -23,7 +23,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 	// we don't support multiple threads, so we can use a hardcoded ID for the default thread
 	private static THREAD_ID = 1;
 
-	// a Mock runtime (or debugger)
+	// ahk debugger.
 	private _runtime: AhkRuntime;
 
 	private _variableHandles = new Handles<string>();

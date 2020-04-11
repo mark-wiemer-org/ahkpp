@@ -2,13 +2,14 @@ import { EventEmitter } from 'events';
 import { readFileSync } from 'fs';
 import * as vscode from 'vscode';
 import { Variable } from 'vscode-debugadapter';
-import { ScriptRunner } from '../core/ScriptRunner';
-import Net = require('net');
+import { DebugProtocol } from 'vscode-debugprotocol';
 import { Out } from '../common/out';
+import { ScriptRunner } from '../core/ScriptRunner';
+import { AhkStack, StackHandler } from './handler/StackHandler';
+import { VariableParser } from './handler/VariableParser';
+import Net = require('net');
 import xml2js = require('xml2js');
 import getPort = require('get-port');
-import { DebugProtocol } from 'vscode-debugprotocol';
-import { VariableParser } from './handler/VariableParser';
 
 export interface AhkBreakpoint {
 	id: number;
@@ -31,7 +32,7 @@ export interface DbgpResponse {
 }
 
 /**
- * A Ahk runtime with minimal debugger functionality.
+ * A Ahk runtime debugger.
  * refrence: https://xdebug.org/docs/dbgp
  */
 export class AhkRuntime extends EventEmitter {
@@ -53,10 +54,6 @@ export class AhkRuntime extends EventEmitter {
 	private transId = 1;
 	private commandCallback = {}
 	private netIns: Net.Server;
-
-	constructor() {
-		super();
-	}
 
 	/**
 	 * Start executing the given program.
@@ -99,6 +96,10 @@ export class AhkRuntime extends EventEmitter {
 		}
 	}
 
+	/**
+	 * send command to the ahk debug proxy.
+	 * @param command 
+	 */
 	public sendComand(command: string): number {
 		if (!this.connection) {
 			return;
@@ -109,27 +110,50 @@ export class AhkRuntime extends EventEmitter {
 	}
 
 	/**
-	 * Continue execution to the end/beginning.
+	 * notice the script continue execution to the next point or end.
 	 */
 	public continue() {
 		this.sendComand('run')
 	}
 
 	/**
-	 * Step to the next/previous non empty line.
+	 * notice the script step over.
 	 */
 	public step() {
 		this.sendComand('step_over')
 	}
 
+	/**
+	 * notice the script step out.
+	 */
 	public stepOut() {
 		this.sendComand('step_out')
 	}
+
+	/**
+	 * notice the script step info
+	 */
 	public stepIn() {
 		this.sendComand('step_into')
 	}
+
+	/**
+	 * receive stop request from vscode, send command to notice the script stop.
+	 */
 	public stop() {
 		this.sendComand('stop')
+		if (this.connection)
+			this.connection.end()
+		this.netIns.close()
+	}
+
+	/**
+	 * receive end message from script, send event to stop the debug session.
+	 */
+	public end(){
+		this.sendEvent('end');
+		if (this.connection)
+			this.connection.end()
 		this.netIns.close()
 	}
 
@@ -156,32 +180,14 @@ export class AhkRuntime extends EventEmitter {
 	 * @param startFrame stack frame limit start
 	 * @param endFrame  stack frame limit end
 	 */
-	public stack(startFrame: number, endFrame: number): Promise<any> {
+	public stack(startFrame: number, endFrame: number): Promise<AhkStack> {
 		let transId = this.sendComand(`stack_get`)
 		return new Promise(resolve => {
-			this.commandCallback[transId] = (response: any) => {
-				let stackList = response.match(/<stack(.|\s|\n)+?\/>/ig)
-				if (stackList) {
-					const frames = new Array<any>();
-					for (let i = startFrame; i < Math.min(endFrame, stackList.length); i++) {
-						let stack = stackList[i]
-						frames.push({
-							index: i,
-							name: `${stack.match(/where="(.+?)"/i)[1]}`,
-							file: `${stack.match(/filename="(.+?)"/i)[1]}`,
-							line: parseInt(`${stack.match(/lineno="(.+?)"/i)[1]}`) - 1
-						});
-					}
-					resolve({ frames, count: stackList.length });
-				} else {
-					resolve({ frames: [{ index: startFrame, name: this._sourceFile, file: this._sourceFile, line: 1 }], count: 1 });
-				}
-			}
+			this.commandCallback[transId] = (response: string) => resolve(StackHandler.handle(response,startFrame,endFrame,this._sourceFile))
 		})
 
 	}
 
-	
 	private loadSource(file: string) {
 		if (this._sourceFile !== file) {
 			this._sourceFile = file;
@@ -211,7 +217,10 @@ export class AhkRuntime extends EventEmitter {
 		return bp;
 	}
 
-	
+
+	/**
+	 * set breakpoint to the script actual.
+	 */
 	private createPoints() {
 		for (const key of this._breakPoints.keys()) {
 			for (const bp of this._breakPoints.get(key)) {
@@ -317,7 +326,7 @@ export class AhkRuntime extends EventEmitter {
 								if (that.commandCallback[transId]) that.commandCallback[transId](xml)
 								break;
 							case 'stop':
-								that.processStopResponse(xml);
+								that.end()
 								break;
 						}
 					}
@@ -334,10 +343,7 @@ export class AhkRuntime extends EventEmitter {
 		bp.verified = true;
 		this.sendEvent('breakpointValidated', bp);
 	}
-	private processStopResponse(result: any) {
-		this.sendEvent('end');
-		this.connection.end()
-	}
+	
 	private processRunResponse(response: any) {
 		// Run command returns a status
 		switch (response.response.attributes.status) {
@@ -346,10 +352,7 @@ export class AhkRuntime extends EventEmitter {
 				break;
 			case 'stopping':
 			case 'stopped':
-				this.sendEvent('end');
-				this.connection.end()
-				break;
-			default:
+				this.end()
 				break;
 		}
 	}
