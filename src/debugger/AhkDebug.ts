@@ -171,7 +171,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.sendResponse(response);
 	}
 
-
+	
 	protected async stackTraceRequest(response: DebugProtocol.StackTraceResponse, args: DebugProtocol.StackTraceArguments): Promise<void> {
 
 		const startFrame = typeof args.startFrame === 'number' ? args.startFrame : 0;
@@ -187,6 +187,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.sendResponse(response);
 	}
 
+	private frameId: number = 0;
 	protected scopesRequest(response: DebugProtocol.ScopesResponse, args: DebugProtocol.ScopesArguments): void {
 
 		response.body = {
@@ -195,12 +196,13 @@ export class AhkDebugSession extends LoggingDebugSession {
 				new Scope("Global", this._variableHandles.create("Global"), false),
 			],
 		};
+		this.frameId = args.frameId;
 		this.sendResponse(response);
 	}
 
 	protected async variablesRequest(response: DebugProtocol.VariablesResponse, args: DebugProtocol.VariablesArguments, request?: DebugProtocol.Request) {
 
-		const variables = await this._runtime.variables(this._variableHandles.get(args.variablesReference), args);
+		const variables = await this._runtime.variables(this._variableHandles.get(args.variablesReference), this.frameId, args);
 
 		response.body = {
 			variables,

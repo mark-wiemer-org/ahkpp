@@ -164,13 +164,13 @@ export class AhkRuntime extends EventEmitter {
 	 * @param scope Local and Global
 	 * @param args 
 	 */
-	public variables(scope: string, args: DebugProtocol.VariablesArguments): Promise<Variable[]> {
+	public variables(scope: string, frameId: number, args: DebugProtocol.VariablesArguments): Promise<Variable[]> {
 		let transId: number;
 		const propertyName = VariableParser.getPropertyNameByRef(args.variablesReference);
 		if (propertyName) {
-			transId = this.sendComand(`property_get -n ${propertyName}`);
+			transId = this.sendComand(`property_get -d ${frameId} -n ${propertyName}`);
 		} else {
-			transId = this.sendComand(`context_get -c ${scope == "Local" ? 0 : 1}`);
+			transId = this.sendComand(`context_get -d ${frameId} -c ${scope == "Local" ? 0 : 1}`);
 		}
 		return new Promise((resolve) =>
 			this.commandCallback[transId] = (response: any) => resolve(VariableParser.parse(response, args)),
@@ -345,7 +345,7 @@ export class AhkRuntime extends EventEmitter {
 		bp.verified = true;
 		this.sendEvent('breakpointValidated', bp);
 	}
-	
+
 	private processRunResponse(response: any) {
 		// Run command returns a status
 		switch (response.response.attributes.status) {
