@@ -60,7 +60,6 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public async start(program: string, stopOnEntry: boolean, runtime?: string) {
 
-		program = vscode.window.activeTextEditor.document.uri.fsPath;
 		this.loadSource(program);
 		let tempData = '';
 		const port = await getPort({ port: getPort.makeRange(9000, 9100) });
