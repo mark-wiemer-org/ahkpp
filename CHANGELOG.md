@@ -1,3 +1,7 @@
+## 2.3.0 (2020/4/11)
+- Variable view support complex variable value, contribute for @zero-plusplus
+- Enhance method detecher
+
 ## 2.2.2 (2020/3/27)
 - Fix path with space error.
 
