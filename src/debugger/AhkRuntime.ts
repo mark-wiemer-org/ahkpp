@@ -7,6 +7,8 @@ import { Out } from '../common/out';
 import { ScriptRunner } from '../core/ScriptRunner';
 import { AhkStack, StackHandler } from './handler/StackHandler';
 import { VariableParser } from './handler/VariableParser';
+import { LaunchRequestArguments } from './AhkDebug';
+
 import Net = require('net');
 import xml2js = require('xml2js');
 import getPort = require('get-port');
@@ -30,6 +32,11 @@ export interface DbgpResponse {
 		},
 	};
 }
+
+const defaultDbgpSettings = {
+	max_children: 300, // 300 is Scite default * 3
+	max_data: 131072,  // 131072 is Scite default
+};
 
 /**
  * A Ahk runtime debugger.
@@ -58,7 +65,9 @@ export class AhkRuntime extends EventEmitter {
 	/**
 	 * Start executing the given program.
 	 */
-	public async start(program: string, stopOnEntry: boolean, runtime?: string) {
+	public async start(args: LaunchRequestArguments) {
+		const { program, runtime, dbgpSettings = {} } = args;
+		const { max_children, max_data} = Object.assign({}, defaultDbgpSettings, dbgpSettings)
 
 		this.loadSource(program);
 		let tempData = '';
@@ -66,17 +75,8 @@ export class AhkRuntime extends EventEmitter {
 		this.netIns = new Net.Server().listen(port).on('connection', (socket: Net.Socket) => {
 			this.connection = socket;
 
-			// TODO: Allowing values to be changed in launch.json
-			// {
-			// 	...
-			// 	"dbgp": {
-			// 		"max_data": 131072,
-			// 		"max_children": 1000
-			// 	}
-			// }
-			this.sendComand(`feature_set -n max_data -v 131072`);	// 131072 is Scite default
-			this.sendComand(`feature_set -n max_children -v 1000`);	// 1000 is Scite default * 10
-
+			this.sendComand(`feature_set -n max_children -v ${max_children}`);
+			this.sendComand(`feature_set -n max_data -v ${max_data}`);
 			this.sendComand(`feature_set -n max_depth -v 2`); // Get properties recursively. Therefore fixed at 2
 
 			socket.on('data', (chunk) => {
@@ -97,7 +97,7 @@ export class AhkRuntime extends EventEmitter {
 
 	/**
 	 * send command to the ahk debug proxy.
-	 * @param command 
+	 * @param command
 	 */
 	public sendComand(command: string): number {
 		if (!this.connection) {
@@ -161,7 +161,7 @@ export class AhkRuntime extends EventEmitter {
 	/**
 	 * List all variable or get refrence variable property detail.
 	 * @param scope Local and Global
-	 * @param args 
+	 * @param args
 	 */
 	public variables(scope: string, args: DebugProtocol.VariablesArguments): Promise<Variable[]> {
 		let transId: number;
@@ -197,7 +197,7 @@ export class AhkRuntime extends EventEmitter {
 	}
 
 	/**
-	 * Set breakpoint in file with given line. 
+	 * Set breakpoint in file with given line.
 	 * @param path file path
 	 * @param line file line
 	 */
@@ -230,7 +230,7 @@ export class AhkRuntime extends EventEmitter {
 		}
 	}
 
-	/** 
+	/**
 	 * Clear all breakpoints for file.
 	 * @param path file path
 	 */
@@ -329,6 +329,9 @@ export class AhkRuntime extends EventEmitter {
 							case 'stop':
 								that.end();
 								break;
+							// case 'feature_set':
+							// 	Out.log(`feature_set: ${JSON.stringify(xml)}`);
+							// 	break;
 						}
 					}
 				}
@@ -344,7 +347,7 @@ export class AhkRuntime extends EventEmitter {
 		bp.verified = true;
 		this.sendEvent('breakpointValidated', bp);
 	}
-	
+
 	private processRunResponse(response: any) {
 		// Run command returns a status
 		switch (response.response.attributes.status) {
