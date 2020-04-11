@@ -180,12 +180,12 @@ export class AhkRuntime extends EventEmitter {
 		}
 	}
 
-	public sendComand(command: string, cb?: Function): number {
+	public sendComand(command: string): number {
 		if (!this.connection) {
 			return;
 		}
 		this.transId++;
-		this.connection.write(`${command} -i ${this.transId}\x00`, cb)
+		this.connection.write(`${command} -i ${this.transId}\x00`)
 		return this.transId;
 	}
 
