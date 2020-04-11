@@ -41,7 +41,7 @@ export interface DbgpProperty {
 		numchildren?: string;
 		encoding?: string;
 	}
-	content?: string
+	content?: string;
 	children?: { property: DbgpProperty | DbgpProperty[] };
 }
 
@@ -53,14 +53,14 @@ function formatPropertyValue(property: DbgpProperty): string {
 		const primitive = Buffer.from(content, attributes.encoding).toString();
 
 		if (attributes.type === 'integer' || attributes.type === 'float') {
-			return primitive
+			return primitive;
 		}
 		return `"${primitive}"`;
 	}
 	else if (attributes.type === 'object') {
 		if (isArrayLikeProperty(property) == true) {
 			const classname = attributes.classname === 'Object' ? 'Array' : attributes.classname;
-			const length = getArrayLikeLength(property)
+			const length = getArrayLikeLength(property);
 
 			return `${classname}(${length})`;
 		}
@@ -95,7 +95,7 @@ function isArrayLikeProperty(property: DbgpProperty): boolean {
 	const childProperties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [ children.property as DbgpProperty];
 	return childProperties.some((childProperty: DbgpProperty) => {
 		if (childProperty.attributes.name.match(/\[[0-9]+\]/)) {
-			return true
+			return true;
 		}
 		return false;
 	})
@@ -121,7 +121,7 @@ export class AhkRuntime extends EventEmitter {
 	private _transBreakPoints = new Map<number, AhkBreakpoint>();
 
 	private _properties = new Map<number, DbgpProperty>()
-    private _variableReferenceCounter = 10000;
+	private _variableReferenceCounter = 10000;
 
 	private connection: Net.Socket;
 	private transId = 1;
@@ -146,14 +146,14 @@ export class AhkRuntime extends EventEmitter {
 
 			// TODO: Allowing values to be changed in launch.json
 			// {
-			//  ...
+			//	...
 			// 	"dbgp": {
 			// 		"max_data": 131072,
 			// 		"max_children": 1000
-			// 	}
+			//	}
 			// }
-			this.sendComand(`feature_set -n max_data -v 131072`);   // 131072 is Scite default
-			this.sendComand(`feature_set -n max_children -v 1000`); // 1000 is Scite default * 10
+			this.sendComand(`feature_set -n max_data -v 131072`);	// 131072 is Scite default
+			this.sendComand(`feature_set -n max_children -v 1000`);	// 1000 is Scite default * 10
 
 			this.sendComand(`feature_set -n max_depth -v 2`); // Get properties recursively. Therefore fixed at 2
 
@@ -217,8 +217,8 @@ export class AhkRuntime extends EventEmitter {
 	public variables(variableReference: number, scope: string, args /* : VariablesArguments */): Promise<Array<Variable>> {
 		let transId;
 		if (this._properties.has(variableReference) === true) {
-			const property = this._properties.get(variableReference)
-			transId = this.sendComand(`property_get -n ${property.attributes.fullname}`)
+			const property = this._properties.get(variableReference);
+			transId = this.sendComand(`property_get -n ${property.attributes.fullname}`);
 		}
 		else {
 			transId = this.sendComand(`context_get -c ${scope == "Local" ? 0 : 1}`);
@@ -284,7 +284,7 @@ export class AhkRuntime extends EventEmitter {
 							if (isArrayLikeProperty(property) === true) {
 								const length = getArrayLikeLength(property);
 
-								indexedVariables = 100 < length  ? length : undefined;
+								indexedVariables = 100 < length ? length : undefined;
 								namedVariables = 100 < length ? 1 : undefined;
 							}
 						}

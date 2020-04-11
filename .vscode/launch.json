@@ -3,12 +3,12 @@
 	"version": "0.1.0",
 	"configurations": [
 		{
-            "type": "ahk",
-            "request": "launch",
+			"type": "ahk",
+			"request": "launch",
 			"name": "Autohotkey Debugger",
 			"program": "${file}",
-            "stopOnEntry": false
-        },
+			"stopOnEntry": false
+		},
 		{
 			"name": "Launch Extension",
 			"type": "extensionHost",
@@ -16,9 +16,9 @@
 			"runtimeExecutable": "${execPath}",
 			"args": ["--extensionDevelopmentPath=${workspaceRoot}" ],
 			"stopOnEntry": false,
-            "sourceMaps": true,
-            "outFiles": ["${workspaceRoot}/out/src/**/*.js"],
-            "preLaunchTask": "npm: watch"
+			"sourceMaps": true,
+			"outFiles": ["${workspaceRoot}/out/src/**/*.js"],
+			"preLaunchTask": "npm: watch"
 		}
 	]
 }
