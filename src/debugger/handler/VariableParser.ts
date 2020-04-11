@@ -16,14 +16,14 @@ interface DbgpProperty {
         children?: string;
         numchildren?: string;
         encoding?: string;
-    }
+    };
     content?: string;
     children?: { property: DbgpProperty | DbgpProperty[] };
 }
 
 export class VariableParser {
 
-    private static _properties = new Map<number, string>()
+    private static _properties = new Map<number, string>();
     private static _variableReferenceCounter = 10000;
 
     public static getPropertyNameByRef(ref: number): string {
@@ -38,14 +38,12 @@ export class VariableParser {
             && property.response.attributes.command === 'property_get') {
             const { children } = property.response.children.property as DbgpProperty;
             properties = Array.isArray(children.property) == true ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
-        }
-        else {
+        } else {
             if ("children" in property.response) {
                 const { children } = property.response;
                 properties = Array.isArray(children.property) ? children.property : [children.property];
-            }
-            else {
-                properties = [];1
+            } else {
+                properties = []; 1;
             }
         }
 
@@ -65,8 +63,7 @@ export class VariableParser {
                 const indexed = !!match;
                 if (args.filter === 'named' && indexed) {
                     continue;
-                }
-                else if (args.filter === 'indexed') {
+                } else if (args.filter === 'indexed') {
                     if (indexed) {
                         const index = parseInt(match[1]);
                         const start = args.start + 1;
@@ -75,8 +72,7 @@ export class VariableParser {
                         if (contains === false) {
                             continue;
                         }
-                    }
-                    else {
+                    } else {
                         continue;
                     }
                 }
@@ -92,8 +88,7 @@ export class VariableParser {
                     indexedVariables = 100 < length ? length : undefined;
                     namedVariables = 100 < length ? 1 : undefined;
                 }
-            }
-            else {
+            } else {
                 variablesReference = 0;
             }
 
@@ -101,8 +96,8 @@ export class VariableParser {
             const value = this.formatPropertyValue(property);
             const variable = {
                 name, type, value, variablesReference,
-                indexedVariables, namedVariables
-            }
+                indexedVariables, namedVariables,
+            };
             variables.push(variable);
             // return variable;
 
@@ -124,8 +119,7 @@ export class VariableParser {
                 return primitive;
             }
             return `"${primitive}"`;
-        }
-        else if (attributes.type === 'object') {
+        } else if (attributes.type === 'object') {
             if (this.isArrayLikeProperty(property) == true) {
                 const classname = attributes.classname === 'Object' ? 'Array' : attributes.classname;
                 const length = this.getArrayLikeLength(property);
@@ -166,7 +160,7 @@ export class VariableParser {
                 return true;
             }
             return false;
-        })
+        });
     }
 
 }

@@ -12,19 +12,19 @@ export class ScriptRunner {
     public static instance: ScriptRunner;
 
     constructor(context: vscode.ExtensionContext) {
-        this.setting = new Setting(context)
-        ScriptRunner.instance = this
+        this.setting = new Setting(context);
+        ScriptRunner.instance = this;
     }
 
     /**
      * start debuggin session
      */
-    startDebugger() {
+    public startDebugger() {
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(vscode.window.activeTextEditor.document.uri), {
             type: "ahk",
             request: "launch",
-            name: "Autohotkey Debugger"
-        })
+            name: "Autohotkey Debugger",
+        });
     }
 
     /**
@@ -33,11 +33,11 @@ export class ScriptRunner {
      * @param debug enable debug model?
      * @param debugPort debug proxy port
      */
-    async run(path: string = null, debug: boolean = false, debugPort = 9000) {
-        let executePath = await this.buildExecutePath()
+    public async run(path: string = null, debug: boolean = false, debugPort = 9000) {
+        const executePath = await this.buildExecutePath();
         if (executePath) {
-            path = path ? path : vscode.window.activeTextEditor.document.fileName
-            Process.exec(`\"${executePath}\"${debug ? ' /debug=localhost:' + debugPort : ''} \"${path}\"`, { cwd: `${res(path, '..')}` })
+            path = path ? path : vscode.window.activeTextEditor.document.fileName;
+            await Process.exec(`\"${executePath}\"${debug ? ' /debug=localhost:' + debugPort : ''} \"${path}\"`, {cwd: `${res(path, '..')}`});
             return true;
         } else {
             return false;
@@ -47,23 +47,23 @@ export class ScriptRunner {
     /**
      * compile current script
      */
-    async compile() {
-        let currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
-        if (!currentPath) return;
-        var pos = currentPath.lastIndexOf(".");
-        let compilePath = currentPath.substr(0, pos < 0 ? currentPath.length : pos) + ".exe"
+    public async compile() {
+        const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
+        if (!currentPath) { return; }
+        const pos = currentPath.lastIndexOf(".");
+        const compilePath = currentPath.substr(0, pos < 0 ? currentPath.length : pos) + ".exe";
         if (await Process.exec(`"C:/Program Files/autoHotkey/Compiler/Ahk2Exe.exe" /in "${currentPath}" /out "${compilePath}"`, { cwd: `${res(currentPath, '..')}` })) {
-            vscode.window.showInformationMessage("compile success!")
+            vscode.window.showInformationMessage("compile success!");
         }
     }
 
     private async buildExecutePath(): Promise<string> {
-        let executePath = this.setting.get(this.KEY)
+        const executePath = this.setting.get(this.KEY);
         if (executePath) {
             if (fs.existsSync(executePath)) {
                 return executePath;
             }
-            vscode.window.showErrorMessage("Valid Autohotkey Path, run script fail!")
+            vscode.window.showErrorMessage("Valid Autohotkey Path, run script fail!");
             this.setting.set(this.KEY, null);
             return this.buildExecutePath();
         }
@@ -73,18 +73,18 @@ export class ScriptRunner {
             // this.setting.set(this.KEY, this.defaultPath)
             return this.defaultPath;
         } else {
-            if (await this.reqConfigPath()) return this.buildExecutePath()
+            if (await this.reqConfigPath()) { return this.buildExecutePath(); }
         }
         return null;
     }
 
-    async reqConfigPath(): Promise<boolean> {
-        return await vscode.window.showInputBox({ placeHolder: this.defaultPath, prompt: `you need config the autohotkey bin path.` }).then(value => {
-            if (!value) return false;
-            this.setting.set(this.KEY, value)
-            vscode.window.showInformationMessage("Change Autohotkey Execute Path success!")
+    public async reqConfigPath(): Promise<boolean> {
+        return vscode.window.showInputBox({ placeHolder: this.defaultPath, prompt: `you need config the autohotkey bin path.` }).then((value) => {
+            if (!value) { return false; }
+            this.setting.set(this.KEY, value);
+            vscode.window.showInformationMessage("Change Autohotkey Execute Path success!");
             return true;
-        })
+        });
     }
 
 }

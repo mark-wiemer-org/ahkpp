@@ -1,5 +1,20 @@
 import { basename } from 'path';
-import { Breakpoint, BreakpointEvent, Handles, InitializedEvent, Logger, logger, LoggingDebugSession, OutputEvent, Scope, Source, StackFrame, StoppedEvent, TerminatedEvent, Thread } from 'vscode-debugadapter';
+import {
+	Breakpoint,
+	BreakpointEvent,
+	Handles,
+	InitializedEvent,
+	Logger,
+	logger,
+	LoggingDebugSession,
+	OutputEvent,
+	Scope,
+	Source,
+	StackFrame,
+	StoppedEvent,
+	TerminatedEvent,
+	Thread,
+} from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { AhkRuntime, AhkBreakpoint } from './AhkRuntime';
 
@@ -58,7 +73,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 			this.sendEvent(new StoppedEvent('exception', AhkDebugSession.THREAD_ID));
 		});
 		this._runtime.on('breakpointValidated', (bp: AhkBreakpoint) => {
-			this.sendEvent(new BreakpointEvent('changed', <DebugProtocol.Breakpoint>{ verified: bp.verified, id: bp.id }));
+			this.sendEvent(new BreakpointEvent('changed', { verified: bp.verified, id: bp.id } as DebugProtocol.Breakpoint));
 		});
 		this._runtime.on('output', (text, filePath, line, column) => {
 			const e: DebugProtocol.OutputEvent = new OutputEvent(`${text}\n`);
@@ -118,8 +133,8 @@ export class AhkDebugSession extends LoggingDebugSession {
 	}
 
 	protected disconnectRequest(response: DebugProtocol.DisconnectResponse, args: DebugProtocol.DisconnectArguments, request?: DebugProtocol.Request): void {
-		this._runtime.stop()
-		this.sendResponse(response)
+		this._runtime.stop();
+		this.sendResponse(response);
 	}
 
 	protected async launchRequest(response: DebugProtocol.LaunchResponse, args: LaunchRequestArguments) {
@@ -135,23 +150,23 @@ export class AhkDebugSession extends LoggingDebugSession {
 
 	protected setBreakPointsRequest(response: DebugProtocol.SetBreakpointsResponse, args: DebugProtocol.SetBreakpointsArguments): void {
 
-		const path = <string>args.source.path;
+		const path = args.source.path as string;
 		const clientLines = args.lines || [];
 
 		// clear all breakpoints for this file
 		this._runtime.clearBreakpoints(path);
 
 		// set and verify breakpoint locations
-		const actualBreakpoints = clientLines.map(l => {
-			let { verified, line, id } = this._runtime.setBreakPoint(path, this.convertClientLineToDebugger(l));
-			const bp = <DebugProtocol.Breakpoint>new Breakpoint(verified, this.convertDebuggerLineToClient(line));
+		const actualBreakpoints = clientLines.map((l) => {
+			const { verified, line, id } = this._runtime.setBreakPoint(path, this.convertClientLineToDebugger(l));
+			const bp = new Breakpoint(verified, this.convertDebuggerLineToClient(line)) as DebugProtocol.Breakpoint;
 			bp.id = id;
 			return bp;
 		});
 
 		// send back the actual breakpoint positions
 		response.body = {
-			breakpoints: actualBreakpoints
+			breakpoints: actualBreakpoints,
 		};
 		this.sendResponse(response);
 	}
@@ -166,8 +181,8 @@ export class AhkDebugSession extends LoggingDebugSession {
 		const stk = await this._runtime.stack(startFrame, endFrame);
 
 		response.body = {
-			stackFrames: stk.frames.map(f => new StackFrame(f.index, f.name, this.createSource(f.file), this.convertDebuggerLineToClient(f.line))),
-			totalFrames: stk.count
+			stackFrames: stk.frames.map((f) => new StackFrame(f.index, f.name, this.createSource(f.file), this.convertDebuggerLineToClient(f.line))),
+			totalFrames: stk.count,
 		};
 		this.sendResponse(response);
 	}
@@ -177,8 +192,8 @@ export class AhkDebugSession extends LoggingDebugSession {
 		response.body = {
 			scopes: [
 				new Scope("Local", this._variableHandles.create("Local"), false),
-				new Scope("Global", this._variableHandles.create("Global"), false)
-			]
+				new Scope("Global", this._variableHandles.create("Global"), false),
+			],
 		};
 		this.sendResponse(response);
 	}
@@ -188,7 +203,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 		const variables = await this._runtime.variables(this._variableHandles.get(args.variablesReference), args);
 
 		response.body = {
-			variables
+			variables,
 		};
 		this.sendResponse(response);
 	}
@@ -219,8 +234,8 @@ export class AhkDebugSession extends LoggingDebugSession {
 		// runtime supports no threads so just return a default thread.
 		response.body = {
 			threads: [
-				new Thread(AhkDebugSession.THREAD_ID, "thread 1")
-			]
+				new Thread(AhkDebugSession.THREAD_ID, "thread 1"),
+			],
 		};
 		this.sendResponse(response);
 	}
@@ -232,16 +247,16 @@ export class AhkDebugSession extends LoggingDebugSession {
 			targets: [
 				{
 					label: "item 10",
-					sortText: "10"
-				}
-			]
+					sortText: "10",
+				},
+			],
 		};
 		this.sendResponse(response);
 	}
 
 	protected evaluateRequest(response: DebugProtocol.EvaluateResponse, args: DebugProtocol.EvaluateArguments): void {
-		//not implment, eval have problem
-		this._runtime.sendComand(`eval -i transaction_id -- ${args.expression}`)
+		// not implment, eval have problem
+		this._runtime.sendComand(`eval -i transaction_id -- ${args.expression}`);
 
 		// response.body = {
 		// 	result: reply ? reply : `evaluate(context: '${args.context}', '${args.expression}')`,
@@ -251,13 +266,13 @@ export class AhkDebugSession extends LoggingDebugSession {
 	}
 
 
-	//---- helpers
+	// ---- helpers
 
 	private createSource(filePath: string): Source {
 		return new Source(basename(filePath), this.convertDebuggerPathToClient(filePath), undefined, undefined, 'mock-adapter-data');
 	}
 	private timeout(ms: number) {
-		return new Promise(resolve => setTimeout(resolve, ms));
+		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 
 }

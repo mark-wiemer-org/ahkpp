@@ -2,4 +2,5 @@ out
 node_modules
 .vscode-test/
 .vsix
+.idea/
 package-lock.json

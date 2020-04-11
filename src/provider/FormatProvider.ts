@@ -25,7 +25,8 @@ function trimContent(text: string) {
 
 export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
-    private static oneCommandList = ["ifnotexist", "ifexist", "ifwinactive", "ifwinnotactive", "ifwinexist", "ifwinnotexist", "ifinstring", "ifnotinstring", "if", "else", "loop", "for", "while","catch"];
+    private static oneCommandList = ["ifnotexist", "ifexist", "ifwinactive", "ifwinnotactive",
+        "ifwinexist", "ifwinnotexist", "ifinstring", "ifnotinstring", "if", "else", "loop", "for", "while", "catch"];
 
     public provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextEdit[]> {
 

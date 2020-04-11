@@ -23,14 +23,14 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand("run.ahk", () => scriptRunner.run()),
         vscode.commands.registerCommand("debug.ahk", () => scriptRunner.startDebugger()),
         vscode.commands.registerCommand("compile.ahk", () => scriptRunner.compile()),
-        vscode.commands.registerCommand("run.ahk.config", () => scriptRunner.reqConfigPath())
-    )
+        vscode.commands.registerCommand("run.ahk.config", () => scriptRunner.reqConfigPath()),
+    );
 
 }
 
 class InlineDebugAdapterFactory implements vscode.DebugAdapterDescriptorFactory {
 
-    createDebugAdapterDescriptor(_session: vscode.DebugSession): ProviderResult<vscode.DebugAdapterDescriptor> {
+    public createDebugAdapterDescriptor(_session: vscode.DebugSession): ProviderResult<vscode.DebugAdapterDescriptor> {
         return new vscode.DebugAdapterInlineImplementation(new AhkDebugSession());
     }
 

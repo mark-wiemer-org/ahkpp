@@ -1,5 +1,10 @@
 {
     "extends": "tslint:recommended",
+    "linterOptions": {
+        "exclude": [
+            "node_modules/**"
+        ]
+    },
     "rules": {
         "variable-name": [
             true,
@@ -8,11 +13,25 @@
             "allow-pascal-case",
             "allow-leading-underscore"
         ],
-        "max-line-length": false,
+        "max-line-length": [
+            true,
+            200
+        ],
         "no-empty": false,
         "object-literal-sort-keys": false,
-        "max-classes-per-file": false,
+        "interface-name": false,
+        "triple-equals": false,
+        "member-ordering": false,
+        "no-trailing-whitespace": false,
+        "quotemark": false,
         "no-consecutive-blank-lines": false,
-        "member-ordering": false
+        "eofline": false,
+        "ordered-imports": false,
+        "radix": false,
+        "one-variable-per-declaration": false,
+        "indent": false,
+        "no-conditional-assignment": false,
+        "max-classes-per-file":false
+
     }
 }

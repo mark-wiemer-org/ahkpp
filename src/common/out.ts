@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import { OutputChannel } from "vscode";
 
 export class Out {
-    public static log(value: Object) {
+    public static log(value: any) {
         if (!this.channel) {
             this.channel = vscode.window.createOutputChannel("AHK");
         }

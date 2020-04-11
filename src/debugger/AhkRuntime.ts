@@ -26,9 +26,9 @@ export interface DbgpResponse {
 			transaction_id: string;
 		}
 		children: {
-			property: any | any[]
-		}
-	}
+			property: any | any[],
+		},
+	};
 }
 
 /**
@@ -52,7 +52,7 @@ export class AhkRuntime extends EventEmitter {
 
 	private connection: Net.Socket;
 	private transId = 1;
-	private commandCallback = {}
+	private commandCallback = {};
 	private netIns: Net.Server;
 
 	/**
@@ -60,20 +60,20 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public async start(program: string, stopOnEntry: boolean) {
 
-		program = vscode.window.activeTextEditor.document.uri.fsPath
+		program = vscode.window.activeTextEditor.document.uri.fsPath;
 		this.loadSource(program);
 		let tempData = '';
-		let port = await getPort({ port: getPort.makeRange(9000, 9100) });
+		const port = await getPort({ port: getPort.makeRange(9000, 9100) });
 		this.netIns = new Net.Server().listen(port).on('connection', (socket: Net.Socket) => {
 			this.connection = socket;
 
 			// TODO: Allowing values to be changed in launch.json
 			// {
-			//	...
+			// 	...
 			// 	"dbgp": {
 			// 		"max_data": 131072,
 			// 		"max_children": 1000
-			//	}
+			// 	}
 			// }
 			this.sendComand(`feature_set -n max_data -v 131072`);	// 131072 is Scite default
 			this.sendComand(`feature_set -n max_children -v 1000`);	// 1000 is Scite default * 10
@@ -83,16 +83,16 @@ export class AhkRuntime extends EventEmitter {
 			socket.on('data', (chunk) => {
 				tempData += chunk.toString();
 				if (tempData.match(/<\?xml version="1.0" encoding="UTF-8"\?>\s*</)) {
-					this.process(tempData)
-					tempData = ''
+					this.process(tempData);
+					tempData = '';
 				}
 			});
 		}).on("error", (err: Error) => {
-			Out.log(err.message)
-		})
+			Out.log(err.message);
+		});
 		if (!(await ScriptRunner.instance.run(program, true, port))) {
-			this.stop()
-			this.sendEvent('end')
+			this.stop();
+			this.sendEvent('end');
 		}
 	}
 
@@ -105,7 +105,7 @@ export class AhkRuntime extends EventEmitter {
 			return;
 		}
 		this.transId++;
-		this.connection.write(`${command} -i ${this.transId}\x00`)
+		this.connection.write(`${command} -i ${this.transId}\x00`);
 		return this.transId;
 	}
 
@@ -113,48 +113,50 @@ export class AhkRuntime extends EventEmitter {
 	 * notice the script continue execution to the next point or end.
 	 */
 	public continue() {
-		this.sendComand('run')
+		this.sendComand('run');
 	}
 
 	/**
 	 * notice the script step over.
 	 */
 	public step() {
-		this.sendComand('step_over')
+		this.sendComand('step_over');
 	}
 
 	/**
 	 * notice the script step out.
 	 */
 	public stepOut() {
-		this.sendComand('step_out')
+		this.sendComand('step_out');
 	}
 
 	/**
 	 * notice the script step info
 	 */
 	public stepIn() {
-		this.sendComand('step_into')
+		this.sendComand('step_into');
 	}
 
 	/**
 	 * receive stop request from vscode, send command to notice the script stop.
 	 */
 	public stop() {
-		this.sendComand('stop')
-		if (this.connection)
-			this.connection.end()
-		this.netIns.close()
+		this.sendComand('stop');
+		if (this.connection) {
+			this.connection.end();
+		}
+		this.netIns.close();
 	}
 
 	/**
 	 * receive end message from script, send event to stop the debug session.
 	 */
-	public end(){
+	public end() {
 		this.sendEvent('end');
-		if (this.connection)
-			this.connection.end()
-		this.netIns.close()
+		if (this.connection) {
+			this.connection.end();
+		}
+		this.netIns.close();
 	}
 
 	/**
@@ -162,16 +164,16 @@ export class AhkRuntime extends EventEmitter {
 	 * @param scope Local and Global
 	 * @param args 
 	 */
-	public variables(scope: string, args: DebugProtocol.VariablesArguments): Promise<Array<Variable>> {
+	public variables(scope: string, args: DebugProtocol.VariablesArguments): Promise<Variable[]> {
 		let transId: number;
-		let propertyName = VariableParser.getPropertyNameByRef(args.variablesReference);
+		const propertyName = VariableParser.getPropertyNameByRef(args.variablesReference);
 		if (propertyName) {
 			transId = this.sendComand(`property_get -n ${propertyName}`);
 		} else {
 			transId = this.sendComand(`context_get -c ${scope == "Local" ? 0 : 1}`);
 		}
-		return new Promise(resolve =>
-			this.commandCallback[transId] = (response: any) => resolve(VariableParser.parse(response, args))
+		return new Promise((resolve) =>
+			this.commandCallback[transId] = (response: any) => resolve(VariableParser.parse(response, args)),
 		);
 	}
 
@@ -181,10 +183,10 @@ export class AhkRuntime extends EventEmitter {
 	 * @param endFrame  stack frame limit end
 	 */
 	public stack(startFrame: number, endFrame: number): Promise<AhkStack> {
-		let transId = this.sendComand(`stack_get`)
-		return new Promise(resolve => {
-			this.commandCallback[transId] = (response: string) => resolve(StackHandler.handle(response,startFrame,endFrame,this._sourceFile))
-		})
+		const transId = this.sendComand(`stack_get`);
+		return new Promise((resolve) => {
+			this.commandCallback[transId] = (response: string) => resolve(StackHandler.handle(response, startFrame, endFrame, this._sourceFile));
+		});
 
 	}
 
@@ -202,7 +204,7 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public setBreakPoint(path: string, line: number): AhkBreakpoint {
 
-		const bp = <AhkBreakpoint>{ verified: false, line, id: null, transId: null, source: path };
+		const bp = { verified: false, line, id: null, transId: null, source: path } as AhkBreakpoint;
 		let bps = this._breakPoints.get(path);
 		if (!bps) {
 			bps = new Array<AhkBreakpoint>();
@@ -211,7 +213,7 @@ export class AhkRuntime extends EventEmitter {
 		bps.push(bp);
 		this.verifyBreakpoints(path);
 		if (this.connection && bp.verified) {
-			this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp)
+			this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp);
 		}
 
 		return bp;
@@ -224,7 +226,7 @@ export class AhkRuntime extends EventEmitter {
 	private createPoints() {
 		for (const key of this._breakPoints.keys()) {
 			for (const bp of this._breakPoints.get(key)) {
-				this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp)
+				this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp);
 			}
 		}
 	}
@@ -235,10 +237,10 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public clearBreakpoints(path: string): void {
 
-		let bps: AhkBreakpoint[]
+		let bps: AhkBreakpoint[];
 		if (this.connection && (bps = this._breakPoints.get(path))) {
 			for (const bp of bps) {
-				this.sendComand(`breakpoint_remove -d ${bp.id}`)
+				this.sendComand(`breakpoint_remove -d ${bp.id}`);
 			}
 		}
 		this._breakPoints.delete(path);
@@ -249,10 +251,10 @@ export class AhkRuntime extends EventEmitter {
 	 * @param path file path
 	 */
 	private verifyBreakpoints(path: string): void {
-		let bps = this._breakPoints.get(path);
+		const bps = this._breakPoints.get(path);
 		if (bps) {
 			this.loadSource(path);
-			bps.forEach(bp => {
+			bps.forEach((bp) => {
 				if (!bp.verified && bp.line < this._sourceLines.length) {
 					const srcLine = this._sourceLines[bp.line].trim();
 					if (srcLine.trim().charAt(0) != ';') {
@@ -265,7 +267,7 @@ export class AhkRuntime extends EventEmitter {
 	}
 
 	private sendEvent(event: string, ...args: any[]) {
-		setImmediate(_ => {
+		setImmediate((_) => {
 			this.emit(event, ...args);
 		});
 	}
@@ -278,11 +280,11 @@ export class AhkRuntime extends EventEmitter {
 		charsAsChildren: false,
 		charkey: 'content',
 		explicitCharkey: true,
-		explicitArray: false
+		explicitArray: false,
 	});
 	// refrence: https://github.com/wesleylancel/node-dbgp
-	process(data: string) {
-		var that = this;
+	public process(data: string) {
+		const that = this;
 
 		// Strip everything before the xml tag
 		data = data.substr(data.indexOf('<?xml'));
@@ -291,29 +293,29 @@ export class AhkRuntime extends EventEmitter {
 			data = this.header + data;
 		}
 		for (const part of data.split(this.header)) {
-			if (null == part || part.trim() == "") continue;
-			let s = this.header + part;
-			this.parser.parseString(s, function (err, xml) {
+			if (null == part || part.trim() == "") { continue; }
+			const s = this.header + part;
+			this.parser.parseString(s, (err, xml) => {
 				if (err) {
-					Out.log(err)
+					Out.log(err);
 					return;
 				}
 
 				if (xml.init) {
-					that.createPoints()
+					that.createPoints();
 					return that.sendComand('run');
 				}
 
 
 				if (xml.response) {
 					if (xml.response.attributes.command) {
-						let transId = parseInt(xml.response.attributes.transaction_id);
+						const transId = parseInt(xml.response.attributes.transaction_id);
 						switch (xml.response.attributes.command) {
 							case 'breakpoint_set':
 								that.processBreakpointSet(xml);
 								break;
 							case 'stack_get':
-								if (that.commandCallback[transId]) that.commandCallback[transId](part)
+								if (that.commandCallback[transId]) { that.commandCallback[transId](part); }
 								break;
 							case 'run':
 							case 'step_into':
@@ -323,10 +325,10 @@ export class AhkRuntime extends EventEmitter {
 								break;
 							case 'context_get':
 							case 'property_get':
-								if (that.commandCallback[transId]) that.commandCallback[transId](xml)
+								if (that.commandCallback[transId]) { that.commandCallback[transId](xml); }
 								break;
 							case 'stop':
-								that.end()
+								that.end();
 								break;
 						}
 					}
@@ -337,9 +339,9 @@ export class AhkRuntime extends EventEmitter {
 	}
 
 	private processBreakpointSet(xml: any) {
-		let transId = xml.response.attributes.transaction_id;
-		let bp = this._transBreakPoints.get(parseInt(transId));
-		bp.id = xml.response.attributes.id
+		const transId = xml.response.attributes.transaction_id;
+		const bp = this._transBreakPoints.get(parseInt(transId));
+		bp.id = xml.response.attributes.id;
 		bp.verified = true;
 		this.sendEvent('breakpointValidated', bp);
 	}
@@ -352,7 +354,7 @@ export class AhkRuntime extends EventEmitter {
 				break;
 			case 'stopping':
 			case 'stopped':
-				this.end()
+				this.end();
 				break;
 		}
 	}

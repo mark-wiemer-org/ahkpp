@@ -6,15 +6,15 @@ export class Setting {
     private settingPath: string;
     private interSetting = {};
     constructor(private context: vscode.ExtensionContext) {
-        let extPath = this.context['globalStoragePath'];
+        const extPath = this.context.globalStoragePath;
         if (!fs.existsSync(extPath)) {
-            fs.mkdirSync(extPath)
+            fs.mkdirSync(extPath);
         }
-        this.settingPath = extPath + '/setting.json'
+        this.settingPath = extPath + '/setting.json';
 
     }
     public get(key: string): string {
-        if (!fs.existsSync(this.settingPath)) return this.interSetting[key];
+        if (!fs.existsSync(this.settingPath)) { return this.interSetting[key]; }
         try {
             return JSON.parse(fs.readFileSync(this.settingPath, "utf8"))[key];
         } catch (err) {

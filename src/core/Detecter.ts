@@ -28,7 +28,7 @@ export class Detecter {
         if (fs.statSync(buildPath).isDirectory()) {
             fs.readdir(buildPath, (err, files) => {
                 if (err) {
-                    Out.log(err)
+                    Out.log(err);
                     return;
                 }
                 for (const file of files) {
@@ -79,7 +79,7 @@ export class Detecter {
      * @param line
      */
     public static getMethodByLine(document: vscode.TextDocument, line: number) {
-        let text = this.buildCodeBlock(document, line)
+        const text = this.buildCodeBlock(document, line);
 
         const methodMatch = text.match(this.methodPattern);
         const keywordMatch = text.match(this.keywordPattern);
@@ -97,9 +97,9 @@ export class Detecter {
         let text = document.lineAt(line).text.replace(/;.+/, "");
         for (let end = false, i = line + 1; i < document.lineCount && !end; i++) {
             if (text.match(this.methodPreviousPattern)) {
-                const nextLineText = document.lineAt(i).text;
-                if (!nextLineText.trim()) continue;
-                if (nextLineText.match(/^\s*{/)) text += "{";
+                const nextLineText = document.lineAt(i).text.replace(/;.+/, "");
+                if (!nextLineText.trim()) { continue; }
+                if (nextLineText.match(/^\s*{/)) { text += "{"; }
             }
             end = true;
         }
