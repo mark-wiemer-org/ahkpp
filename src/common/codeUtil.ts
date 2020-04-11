@@ -4,7 +4,7 @@ export class CodeUtil {
      * @param origin any string
      */
     public static purity(origin: string): string {
-        if (!origin) return null;
+        if (!origin) return "";
         // TODO: untest 
         return origin.replace(/;.+/, "")
             .replace(/".+?"/, "")
