@@ -214,10 +214,10 @@ export class AhkRuntime extends EventEmitter {
 		this.netIns.close()
 	}
 
-	public variables(variableReference: number, scope: string, args /* : VariablesArguments */): Promise<Array<Variable>> {
+	public variables(scope: string, args /* : VariablesArguments */): Promise<Array<Variable>> {
 		let transId;
-		if (this._properties.has(variableReference) === true) {
-			const property = this._properties.get(variableReference);
+		if (this._properties.has(args.variableReference) === true) {
+			const property = this._properties.get(args.variableReference);
 			transId = this.sendComand(`property_get -n ${property.attributes.fullname}`);
 		}
 		else {
@@ -228,7 +228,7 @@ export class AhkRuntime extends EventEmitter {
 				this.parser.parseString(response, (err, xml: DbgpResponse) => {
 					let properties: DbgpProperty[];
 
-					if (	this._properties.has(variableReference) == true
+					if (	this._properties.has(args.variableReference) == true
 						&&	xml.response.attributes.command === 'property_get'
 					) {
 						const { children } = xml.response.children.property as DbgpProperty;
