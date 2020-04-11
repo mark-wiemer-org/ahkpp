@@ -10,8 +10,10 @@ export class Method {
 export class Detecter {
 
     private static documentMethodMap = { key: String, methodList: Array<Method>() };
-    private static methodPattern = /(([\w_]+)\s*\([\w\s,:"=]*\))\s*\{/;
-    private static methodSecondPattern = /(([\w_]+)\s*\([\w\s,:"=]*\))\s*/;
+    // detect any like word(any)
+    private static methodPreviousPattern = /(([\w_]+)\s*\(.*?\))/;
+    // detech any like word(any){
+    private static methodPattern = /(([\w_]+)\s*\(.*?\))\s*\{/;
     private static keywordPattern = /\b(if|While)\b/ig;
 
     public static getCacheFile(): string[] {
@@ -77,9 +79,14 @@ export class Detecter {
      * @param line
      */
     public static getMethodByLine(document: vscode.TextDocument, line: number) {
-        let text = document.lineAt(line).text;
-        if (line + 1 < document.lineCount && text.match(this.methodSecondPattern)) {
-            text += document.lineAt(line + 1).text;
+        let text = document.lineAt(line).text.replace(/;.+/,"");
+        for (let end = false, i = line + 1; i < document.lineCount && !end; i++) {
+            if (text.match(this.methodPreviousPattern)) {
+                const nextLineText = document.lineAt(i).text;
+                if (!nextLineText.trim()) continue;
+                if (nextLineText.match(/^\s*{/)) text += "{";
+            }
+            end = true;
         }
 
         const methodMatch = text.match(this.methodPattern);
