@@ -3,6 +3,13 @@
 	"version": "0.1.0",
 	"configurations": [
 		{
+            "type": "ahk",
+            "request": "launch",
+			"name": "Autohotkey Debugger",
+			"program": "${file}",
+            "stopOnEntry": false
+        },
+		{
 			"name": "Launch Extension",
 			"type": "extensionHost",
 			"request": "launch",
