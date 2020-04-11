@@ -79,15 +79,7 @@ export class Detecter {
      * @param line
      */
     public static getMethodByLine(document: vscode.TextDocument, line: number) {
-        let text = document.lineAt(line).text.replace(/;.+/,"");
-        for (let end = false, i = line + 1; i < document.lineCount && !end; i++) {
-            if (text.match(this.methodPreviousPattern)) {
-                const nextLineText = document.lineAt(i).text;
-                if (!nextLineText.trim()) continue;
-                if (nextLineText.match(/^\s*{/)) text += "{";
-            }
-            end = true;
-        }
+        let text = this.buildCodeBlock(document, line)
 
         const methodMatch = text.match(this.methodPattern);
         const keywordMatch = text.match(this.keywordPattern);
@@ -96,6 +88,29 @@ export class Detecter {
         }
     }
 
+    /**
+     * collect multi line code to one.
+     * @param document 
+     * @param line 
+     */
+    private static buildCodeBlock(document: vscode.TextDocument, line: number): string {
+        let text = document.lineAt(line).text.replace(/;.+/, "");
+        for (let end = false, i = line + 1; i < document.lineCount && !end; i++) {
+            if (text.match(this.methodPreviousPattern)) {
+                const nextLineText = document.lineAt(i).text;
+                if (!nextLineText.trim()) continue;
+                if (nextLineText.match(/^\s*{/)) text += "{";
+            }
+            end = true;
+        }
+        return text;
+    }
+
+    /**
+     * detech remark, remark format: ;any
+     * @param document 
+     * @param line 
+     */
     private static getRemarkByLine(document: vscode.TextDocument, line: number) {
         if (line >= 0) {
             const { text } = document.lineAt(line);
@@ -107,10 +122,5 @@ export class Detecter {
 
         return null;
     }
-
-}
-
-
-export class FileChangeProvider {
 
 }

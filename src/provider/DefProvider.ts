@@ -37,14 +37,14 @@ export class DefProvider implements vscode.DefinitionProvider {
             return;
         }
         for (const method of await Detecter.getMethodList(document)) {
-            if (method.name.indexOf(word) !== -1) {
+            if (new RegExp("\\b" + method.name + "\\b").exec(word)) {
                 return new vscode.Location(document.uri, new vscode.Position(method.line, document.lineAt(method.line).text.indexOf(word)));
             }
         }
         for (const filePath of Detecter.getCacheFile()) {
             const tempDocument = await vscode.workspace.openTextDocument(filePath);
             for (const method of await Detecter.getMethodList(tempDocument)) {
-                if (method.name.indexOf(word) !== -1) {
+                if (new RegExp("\\b" + method.name + "\\b").exec(word)) {
                     return new vscode.Location(tempDocument.uri, new vscode.Position(method.line, tempDocument.lineAt(method.line).text.indexOf(word)));
                 }
             }
