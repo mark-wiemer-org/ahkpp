@@ -185,8 +185,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 
 	protected async variablesRequest(response: DebugProtocol.VariablesResponse, args: DebugProtocol.VariablesArguments, request?: DebugProtocol.Request) {
 
-		// not support level down stack variable, because frameId not found in args
-		const variables = await this._runtime.variables(this._variableHandles.get(args.variablesReference));
+		const variables = await this._runtime.variables(this._variableHandles.get(args.variablesReference), args);
 
 		response.body = {
 			variables
