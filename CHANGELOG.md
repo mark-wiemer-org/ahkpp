@@ -1,3 +1,6 @@
+## 2.3.1 (2020/4/12)
+- Support view variable when change call stack
+
 ## 2.3.0 (2020/4/11)
 - Variable view support complex variable value, contribute for @zero-plusplus
 - Enhance method detecher
