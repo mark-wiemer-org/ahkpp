@@ -33,7 +33,7 @@ export class Detecter {
                     return;
                 }
                 for (const file of files) {
-                    if (file.match(/(\.git|\.svn|out|target|node_modules)/)) {
+                    if (file.match(/(^\.|out|target|node_modules)/)) {
                         continue;
                     }
                     this.buildByPath(buildPath + "/" + file);
