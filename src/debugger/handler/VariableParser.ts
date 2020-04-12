@@ -43,7 +43,7 @@ export class VariableParser {
                 const { children } = property.response;
                 properties = Array.isArray(children.property) ? children.property : [children.property];
             } else {
-                properties = []; 1;
+                properties = []; 
             }
         }
 

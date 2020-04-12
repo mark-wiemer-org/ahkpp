@@ -36,7 +36,7 @@ export interface LaunchRequestArguments extends DebugProtocol.LaunchRequestArgum
 	dbgpSettings: {
 		max_children: number;
 		max_data: number;
-	}
+	};
 }
 
 export class AhkDebugSession extends LoggingDebugSession {
@@ -177,7 +177,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.sendResponse(response);
 	}
 
-	
+
 	protected async stackTraceRequest(response: DebugProtocol.StackTraceResponse, args: DebugProtocol.StackTraceArguments): Promise<void> {
 
 		const startFrame = typeof args.startFrame === 'number' ? args.startFrame : 0;

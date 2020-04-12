@@ -8,6 +8,7 @@ export class CodeUtil {
         // TODO: untest 
         return origin.replace(/;.+/, "")
             .replace(/".+?"/, "")
+            .replace(/ +/, " ")
             .replace(/gui.*/ig, "")
             .replace(/(msgbox).+?%/ig, "$1");
     }

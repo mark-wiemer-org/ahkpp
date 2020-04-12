@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 import { readFileSync } from 'fs';
-import * as vscode from 'vscode';
 import { Variable } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { Out } from '../common/out';
@@ -67,7 +66,7 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public async start(args: LaunchRequestArguments) {
 		const { program, runtime, dbgpSettings = {} } = args;
-		const { max_children, max_data} = Object.assign({}, defaultDbgpSettings, dbgpSettings)
+		const { max_children, max_data} = Object.assign({}, defaultDbgpSettings, dbgpSettings);
 
 		this.loadSource(program);
 		let tempData = '';
