@@ -39,8 +39,12 @@ export class ScriptRunner {
 
         if (executePath) {
             path = path ? path : vscode.window.activeTextEditor.document.fileName;
-            await Process.exec(`\"${executePath}\"${debug ? ' /debug=localhost:' + debugPort : ''} \"${path}\"`, {cwd: `${res(path, '..')}`});
-            return true;
+            try {
+                await Process.exec(`\"${executePath}\"${debug ? ' /debug=localhost:' + debugPort : ''} \"${path}\"`, { cwd: `${res(path, '..')}` });
+                return true;
+            } catch (error) {
+                return false;
+            }
         } else {
             return false;
         }

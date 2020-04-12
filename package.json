@@ -11,7 +11,8 @@
 		"onLanguage:ahk",
 		"onCommand:run.ahk",
 		"onCommand:run.ahk.config",
-		"onCommand:run.ahk.configrun.ahk.config"
+		"onCommand:run.ahk.configrun.ahk.config",
+		"onDebug"
 	],
 	"main": "./out/extension",
 	"categories": [
