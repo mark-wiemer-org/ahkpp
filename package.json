@@ -60,6 +60,11 @@
 								"description": "Absolute path to a text file.",
 								"default": "${file}"
 							},
+							"runtime": {
+								"type": "string",
+								"description": "Absolute path to a AutoHotkey.exe file.",
+								"default": "C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe"
+							},
 							"stopOnEntry": {
 								"type": "boolean",
 								"description": "Automatically stop after launch.",
@@ -69,7 +74,24 @@
 								"type": "boolean",
 								"description": "Enable logging of the Debug Adapter Protocol.",
 								"default": true
-							}
+							},
+							"dbgpSettings": {
+								"type": "object",
+								"properties": {
+								  "max_children": {
+									"type": "integer",
+									"description": "max number of array or object children to initially retrieve",
+									"default": 300
+								  },
+								  "max_data": {
+									"type": "integer",
+									"description": "max amount of variable data to initially retrieve.",
+									"default": 131072
+								  }
+								},
+								"description": "Dbgp settings. See https://xdebug.org/docs-dbgp.php#feature-names",
+								"default": {}
+						  	}
 						}
 					}
 				},

@@ -24,13 +24,19 @@ import { AhkRuntime, AhkBreakpoint } from './AhkRuntime';
  * The schema for these attributes lives in the package.json of the mock-debug extension.
  * The interface should always match this schema.
  */
-interface LaunchRequestArguments extends DebugProtocol.LaunchRequestArguments {
+export interface LaunchRequestArguments extends DebugProtocol.LaunchRequestArguments {
 	/** An absolute path to the "program" to debug. */
 	program: string;
 	/** Automatically stop target after launch. If not specified, target does not stop. */
 	stopOnEntry?: boolean;
 	/** enable logging the Debug Adapter Protocol */
 	trace?: boolean;
+	/** An absolute path to the AutoHotkey.exe. */
+	runtime: string;
+	dbgpSettings: {
+		max_children: number;
+		max_data: number;
+	}
 }
 
 export class AhkDebugSession extends LoggingDebugSession {
@@ -143,7 +149,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 		logger.setup(args.trace ? Logger.LogLevel.Verbose : Logger.LogLevel.Stop, false);
 
 		// start the program in the runtime
-		this._runtime.start(args.program, !!args.stopOnEntry);
+		this._runtime.start(args);
 
 		this.sendResponse(response);
 	}
