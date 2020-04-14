@@ -25,9 +25,15 @@ export interface DbgpResponse {
 			command: string;
 			context: string;
 			transaction_id: string;
+			success: '0' | '1';
 		}
 		children: {
 			property: any | any[],
+			error?: {
+				attributes: {
+					code: number;
+				}
+			}
 		},
 	};
 }
@@ -98,12 +104,19 @@ export class AhkRuntime extends EventEmitter {
 	 * send command to the ahk debug proxy.
 	 * @param command
 	 */
-	public sendComand(command: string): number {
+	 public sendComand(command: string, data?: string): number {
 		if (!this.connection) {
 			return;
 		}
 		this.transId++;
-		this.connection.write(`${command} -i ${this.transId}\x00`);
+		command += ` -i ${this.transId}`;
+		if (typeof data === 'string') {
+			command += ` -- ${Buffer.from(data).toString('base64')}`;
+		}
+		// Out.log(`command: ${command}`)
+		command += '\x00';
+
+		this.connection.write(`${command}`);
 		return this.transId;
 	}
 
@@ -159,20 +172,99 @@ export class AhkRuntime extends EventEmitter {
 
 	/**
 	 * List all variable or get refrence variable property detail.
-	 * @param scope Local and Global
+	 * @param scopeId 0(Local) and 1(Global)
 	 * @param args
 	 */
-	public variables(scope: string, frameId: number, args: DebugProtocol.VariablesArguments): Promise<Variable[]> {
-		let transId: number;
+	public variables(scopeId: number, frameId: number, args: DebugProtocol.VariablesArguments): Promise<Variable[]> {
 		const propertyName = VariableParser.getPropertyNameByRef(args.variablesReference);
+		let command = `context_get -d ${frameId} -c ${scopeId}`;
 		if (propertyName) {
-			transId = this.sendComand(`property_get -d ${frameId} -n ${propertyName}`);
-		} else {
-			transId = this.sendComand(`context_get -d ${frameId} -c ${scope == "Local" ? 0 : 1}`);
+			scopeId = VariableParser.getPropertyScopeByRef(args.variablesReference);
+			command = `property_get -d ${frameId} -c ${scopeId} -n ${propertyName}`;
 		}
+
+		const transId = this.sendComand(command);
 		return new Promise((resolve) =>
-			this.commandCallback[transId] = (response: any) => resolve(VariableParser.parse(response, args)),
+			this.commandCallback[transId] = (response: any) => resolve(VariableParser.parse(response, scopeId, args)),
 		);
+	}
+
+	public setVariable(scopeId: number, frameId: number, args: DebugProtocol.SetVariableArguments): Promise<any> {
+		const match = args.value.match(/^(?:()|\"(.*)\"|(true|false)|([0-9]+|-[0-9]+)|([1-9]+\.[0-9]+|-[1-9]\.[0-9]+)|([^0-9]+))$/si);
+
+		const isInvaridValue = !match;
+		if (isInvaridValue === true) {
+			const msg: DebugProtocol.Message = {
+				id: args.variablesReference,
+				format: `"${args.value}" is invalid value.`,
+			};
+			return new Promise((resolve) => resolve(msg));
+		}
+
+		let variablesReference = 0;
+		let type: string, value: string;
+		{
+			const [, blank, str, bool, int, float /*, varName */ ] = match;
+			if (blank !== undefined) {
+				type = 'string';
+				value = '';
+			} else if (str !== undefined) {
+				type = 'string';
+				value = str
+			} else if (bool !== undefined) {
+				type = 'intger';
+				value = bool.match(/true/i) ? '1' : '0';
+			} else if (int !== undefined) {
+				type = 'integer';
+				value = int;
+			} else if (float !== undefined) {
+				type = 'float';
+				value = float;
+			} else {
+				const msg: DebugProtocol.Message = {
+					id: args.variablesReference,
+					format: `Rewriting values by variable name is not supported.`,
+				};
+				return new Promise((resolve) => resolve(msg));
+			}
+		}
+
+		const parentFullName: string = VariableParser.getPropertyNameByRef(args.variablesReference);
+		let fullname: string = args.name;
+		let command: string = `property_set -d ${frameId} -c ${scopeId} -n ${args.name} -t ${type}`;
+		if (parentFullName) {
+			const isIndex: boolean = fullname.includes('[') && fullname.includes(']');
+			fullname = isIndex === true ? `${parentFullName}${fullname}` : `${parentFullName}.${fullname}`;
+
+			scopeId = VariableParser.getPropertyScopeByRef(args.variablesReference);
+			command = `property_set -d ${frameId} -c ${scopeId} -n ${fullname} -t ${type}`;
+		}
+
+		const transId: number = this.sendComand(command, value);
+		return new Promise((resolve) => {
+			this.commandCallback[transId] = ({ response }: DbgpResponse) => {
+				// Out.log(`setVariable: ${JSON.stringify(response)}\n`);
+				const success: boolean = !!parseInt(response.attributes.success);
+				if (success === false) {
+					const msg: DebugProtocol.Message = {
+						id: args.variablesReference,
+						format: `"${fullname}" cannot be written. Probably read-only.`,
+					}
+
+					resolve(msg);
+					return;
+				}
+
+				const displayValue = type === 'string' ? `"${value}"` : value;
+				const variable = {
+					name: args.name,
+					value: displayValue,
+					type, variablesReference
+				};
+
+				resolve(variable);
+			};
+		});
 	}
 
 	/**
@@ -323,6 +415,7 @@ export class AhkRuntime extends EventEmitter {
 								break;
 							case 'context_get':
 							case 'property_get':
+							case 'property_set':
 								if (that.commandCallback[transId]) { that.commandCallback[transId](xml); }
 								break;
 							case 'stop':

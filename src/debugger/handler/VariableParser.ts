@@ -24,14 +24,17 @@ interface DbgpProperty {
 export class VariableParser {
 
     private static _properties = new Map<number, string>();
+    private static _propertyScopeIdMap = new Map<number, number>();
     private static _variableReferenceCounter = 10000;
 
     public static getPropertyNameByRef(ref: number): string {
         return this._properties.get(ref);
     }
+    public static getPropertyScopeByRef(ref: number): number {
+        return this._propertyScopeIdMap.get(ref);
+    }
 
-    public static parse(property: DbgpResponse, args: DebugProtocol.VariablesArguments): Variable[] {
-
+    public static parse(property: DbgpResponse, scopeId: number, args: DebugProtocol.VariablesArguments): Variable[] {
         let properties: DbgpProperty[];
 
         if (this._properties.has(args.variablesReference) == true
@@ -43,7 +46,7 @@ export class VariableParser {
                 const { children } = property.response;
                 properties = Array.isArray(children.property) ? children.property : [children.property];
             } else {
-                properties = []; 
+                properties = [];
             }
         }
 
@@ -81,6 +84,7 @@ export class VariableParser {
             if ('children' in property && attributes.type === 'object') {
                 variablesReference = this._variableReferenceCounter++;
                 this._properties.set(variablesReference, property.attributes.fullname);
+                this._propertyScopeIdMap.set(variablesReference, scopeId);
 
                 if (this.isArrayLikeProperty(property) === true) {
                     const length = this.getArrayLikeLength(property);

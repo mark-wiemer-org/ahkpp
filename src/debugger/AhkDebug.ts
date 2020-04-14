@@ -14,6 +14,7 @@ import {
 	StoppedEvent,
 	TerminatedEvent,
 	Thread,
+	Variable,
 } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { AhkRuntime, AhkBreakpoint } from './AhkRuntime';
@@ -130,6 +131,9 @@ export class AhkDebugSession extends LoggingDebugSession {
 		// make VS Code send the breakpointLocations request
 		response.body.supportsBreakpointLocationsRequest = false;
 
+		// make VS Code to support setting a variable to a value.
+		response.body.supportsSetVariable = true;
+
 		this.sendResponse(response);
 
 		// since this debug adapter can accept configuration requests like 'setBreakpoint' at any time,
@@ -208,11 +212,27 @@ export class AhkDebugSession extends LoggingDebugSession {
 
 	protected async variablesRequest(response: DebugProtocol.VariablesResponse, args: DebugProtocol.VariablesArguments, request?: DebugProtocol.Request) {
 
-		const variables = await this._runtime.variables(this._variableHandles.get(args.variablesReference), this.frameId, args);
+		const scopeId = this._variableHandles.get(args.variablesReference) === 'Local' ? 0 : 1;
+		const variables = await this._runtime.variables(scopeId, this.frameId, args);
 
 		response.body = {
 			variables,
 		};
+		this.sendResponse(response);
+	}
+
+	protected async setVariableRequest(response: DebugProtocol.SetVariableResponse, args: DebugProtocol.SetVariableArguments, request?: DebugProtocol.Request): Promise<void> {
+
+		const scopeId: number = this._variableHandles.get(args.variablesReference) === 'Local' ? 0 : 1;
+		const body = await this._runtime.setVariable(scopeId, this.frameId, args);
+
+		const isDebugProtocolMessage: boolean = 'id' in body && 'format' in body;
+		if (isDebugProtocolMessage === true) {
+			this.sendErrorResponse(response, body);
+			return;
+		}
+
+		response.body = body;
 		this.sendResponse(response);
 	}
 
