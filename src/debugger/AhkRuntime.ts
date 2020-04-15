@@ -49,6 +49,8 @@ const defaultDbgpSettings = {
  */
 export class AhkRuntime extends EventEmitter {
 
+	private static LOCAL = 0;
+	private static GLOBAL = 1;
 	// the initial (and one and only) file we are 'debugging'
 	private _sourceFile: string;
 	public get sourceFile() {
@@ -72,7 +74,7 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public async start(args: LaunchRequestArguments) {
 		const { program, runtime, dbgpSettings = {} } = args;
-		const { max_children, max_data} = Object.assign({}, defaultDbgpSettings, dbgpSettings);
+		const { max_children, max_data } = Object.assign({}, defaultDbgpSettings, dbgpSettings);
 
 		this.loadSource(program);
 		let tempData = '';
@@ -104,7 +106,7 @@ export class AhkRuntime extends EventEmitter {
 	 * send command to the ahk debug proxy.
 	 * @param command
 	 */
-	 public sendComand(command: string, data?: string): number {
+	public sendComand(command: string, data?: string): number {
 		if (!this.connection) {
 			return;
 		}
@@ -175,11 +177,11 @@ export class AhkRuntime extends EventEmitter {
 	 * @param scopeId 0(Local) and 1(Global)
 	 * @param args
 	 */
-	public variables(scopeId: number, frameId: number, args: DebugProtocol.VariablesArguments): Promise<Variable[]> {
-		const propertyName = VariableParser.getPropertyNameByRef(args.variablesReference);
+	public variables(scopeId: number, frameId: number, args: DebugProtocol.VariablesArguments, param?: string): Promise<Variable[]> {
+		const propertyName = param ? param : VariableParser.getPropertyNameByRef(args.variablesReference);
 		let command = `context_get -d ${frameId} -c ${scopeId}`;
 		if (propertyName) {
-			scopeId = VariableParser.getPropertyScopeByRef(args.variablesReference);
+			if (args) { scopeId = VariableParser.getPropertyScopeByRef(args.variablesReference); }
 			command = `property_get -d ${frameId} -c ${scopeId} -n ${propertyName}`;
 		}
 
@@ -189,8 +191,8 @@ export class AhkRuntime extends EventEmitter {
 		);
 	}
 
-	public setVariable(scopeId: number, frameId: number, args: DebugProtocol.SetVariableArguments): Promise<any> {
-		const match = args.value.match(/^(?:()|\"(.*)\"|(true|false)|([0-9]+|-[0-9]+)|([1-9]+\.[0-9]+|-[1-9]\.[0-9]+)|([^0-9]+))$/si);
+	public async setVariable(scopeId: number, frameId: number, args: DebugProtocol.SetVariableArguments): Promise<any> {
+		const match = args.value.match(/^(?:()|\"(.*)\"|(true|false)|([+1]\d+)|([+1]\d+\.[+1]\d+)|([\w\d]+))$/si);
 
 		const isInvaridValue = !match;
 		if (isInvaridValue === true) {
@@ -201,10 +203,10 @@ export class AhkRuntime extends EventEmitter {
 			return new Promise((resolve) => resolve(msg));
 		}
 
-		let variablesReference = 0;
+		const variablesReference = 0;
 		let type: string, value: string;
 		{
-			const [, blank, str, bool, int, float /*, varName */ ] = match;
+			const [, blank, str, bool, int, float, varName] = match;
 			if (blank !== undefined) {
 				type = 'string';
 				value = '';
@@ -221,11 +223,20 @@ export class AhkRuntime extends EventEmitter {
 				type = 'float';
 				value = float;
 			} else {
-				const msg: DebugProtocol.Message = {
-					id: args.variablesReference,
-					format: `Rewriting values by variable name is not supported.`,
-				};
-				return new Promise((resolve) => resolve(msg));
+				let variable = await this.variables(scopeId, frameId, null, varName)
+				if (variable[0].value == "undefined" && scopeId == AhkRuntime.LOCAL) {
+					variable = await this.variables(AhkRuntime.GLOBAL, frameId, null, varName)[0]
+				}
+				if (variable[0].value == "undefined") {
+					const msg: DebugProtocol.Message = {
+						id: args.variablesReference,
+						format: `Variable ${varName} not found!`,
+					};
+					return new Promise((resolve) => resolve(msg));
+				} else {
+					value = variable[0].value
+				}
+
 			}
 		}
 
@@ -241,7 +252,7 @@ export class AhkRuntime extends EventEmitter {
 		}
 
 		const transId: number = this.sendComand(command, value);
-		return new Promise((resolve) => {
+		return await new Promise((resolve) => {
 			this.commandCallback[transId] = ({ response }: DbgpResponse) => {
 				// Out.log(`setVariable: ${JSON.stringify(response)}\n`);
 				const success: boolean = !!parseInt(response.attributes.success);

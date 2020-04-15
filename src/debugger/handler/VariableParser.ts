@@ -37,7 +37,7 @@ export class VariableParser {
     public static parse(property: DbgpResponse, scopeId: number, args: DebugProtocol.VariablesArguments): Variable[] {
         let properties: DbgpProperty[];
 
-        if (this._properties.has(args.variablesReference) == true
+        if (args && this._properties.has(args.variablesReference)
             && property.response.attributes.command === 'property_get') {
             const { children } = property.response.children.property as DbgpProperty;
             properties = Array.isArray(children.property) == true ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
@@ -61,7 +61,7 @@ export class VariableParser {
             let variablesReference;
             let indexedVariables, namedVariables;
 
-            if ('filter' in args) {
+            if (args && 'filter' in args) {
                 const match = attributes.name.match(/\[([0-9]+)\]/);
                 const indexed = !!match;
                 if (args.filter === 'named' && indexed) {

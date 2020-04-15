@@ -21,6 +21,7 @@
         "object-literal-sort-keys": false,
         "interface-name": false,
         "triple-equals": false,
+        "semicolon":false,
         "member-ordering": false,
         "no-trailing-whitespace": false,
         "quotemark": false,
