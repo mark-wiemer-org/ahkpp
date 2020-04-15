@@ -1,3 +1,6 @@
+## 2.3.3 (2020/4/15)
+- Suport change variable value when debug, contribute for @zero-plusplus
+
 ## 2.3.1 (2020/4/12)
 - Support view variable when change call stack
 
