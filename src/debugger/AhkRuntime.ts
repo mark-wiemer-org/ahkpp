@@ -234,7 +234,11 @@ export class AhkRuntime extends EventEmitter {
 					};
 					return new Promise((resolve) => resolve(msg));
 				} else {
-					value = variable[0].value
+					value = variable[0].value;
+					if (value.match(/^"|"$/g)) {
+						type = "string"
+						value = value.replace(/^"|"$/g, "")
+					}
 				}
 
 			}
