@@ -1,4 +1,4 @@
-## 2.3.3 (2020/4/15)
+## 2.3.4 (2020/4/15)
 - Suport change variable value when debug, contribute by @zero-plusplus.
 
 ## 2.3.1 (2020/4/12)
