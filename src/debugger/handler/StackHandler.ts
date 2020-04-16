@@ -1,3 +1,5 @@
+import { DbgpResponse } from "../AhkRuntime";
+
 export interface AhkStackItem {
     /** stack order */
     index: number;
@@ -16,18 +18,18 @@ export interface AhkStack {
 
 export class StackHandler {
 
-    public static handle(response: string, startFrame: number, endFrame: number, currentFile: string): AhkStack {
+    public static handle(response: DbgpResponse, startFrame: number, endFrame: number, currentFile: string): AhkStack {
 
-        const stackList = response.match(/<stack(.|\s|\n)+?\/>/ig);
+        const stackList = response.children.stack;
         if (stackList) {
             const frames = new Array<any>();
             for (let i = startFrame; i < Math.min(endFrame, stackList.length); i++) {
                 const stack = stackList[i];
                 frames.push({
                     index: i,
-                    name: `${stack.match(/where="(.+?)"/i)[1]}`,
-                    file: `${stack.match(/filename="(.+?)"/i)[1]}`,
-                    line: parseInt(`${stack.match(/lineno="(.+?)"/i)[1]}`) - 1,
+                    name: `${stack.attributes.where}`,
+                    file: `${stack.attributes.filename}`,
+                    line: parseInt(`${stack.attributes.lineno}`) - 1,
                 });
             }
             return ({ frames, count: stackList.length });

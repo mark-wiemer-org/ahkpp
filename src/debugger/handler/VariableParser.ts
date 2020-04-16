@@ -34,16 +34,16 @@ export class VariableParser {
         return this._propertyScopeIdMap.get(ref);
     }
 
-    public static parse(property: DbgpResponse, scopeId: number, args: DebugProtocol.VariablesArguments): Variable[] {
+    public static parse(response: DbgpResponse, scopeId: number, args: DebugProtocol.VariablesArguments): Variable[] {
         let properties: DbgpProperty[];
 
         if (args && this._properties.has(args.variablesReference)
-            && property.response.attributes.command === 'property_get') {
-            const { children } = property.response.children.property as DbgpProperty;
+            && response.attributes.command === 'property_get') {
+            const { children } = response.children.property as DbgpProperty;
             properties = Array.isArray(children.property) == true ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
         } else {
-            if ("children" in property.response) {
-                const { children } = property.response;
+            if ("children" in response) {
+                const { children } = response;
                 properties = Array.isArray(children.property) ? children.property : [children.property];
             } else {
                 properties = [];

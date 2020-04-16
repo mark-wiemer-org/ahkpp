@@ -20,22 +20,25 @@ export interface AhkBreakpoint {
 }
 
 export interface DbgpResponse {
-	response: {
-		attributes: {
-			command: string;
-			context: string;
-			transaction_id: string;
-			success: '0' | '1';
-		}
-		children: {
-			property: any | any[],
-			error?: {
-				attributes: {
-					code: number;
-				}
+	attributes: {
+		command: string;
+		context: string;
+		transaction_id: string;
+		success: '0' | '1';
+		/** Breakpoint id */
+		id: number;
+		/** run state */
+		status: string;
+	}
+	children: {
+		stack:any,
+		property: any | any[],
+		error?: {
+			attributes: {
+				code: number;
 			}
-		},
-	};
+		}
+	},
 }
 
 const defaultDbgpSettings = {
@@ -106,7 +109,7 @@ export class AhkRuntime extends EventEmitter {
 	 * send command to the ahk debug proxy.
 	 * @param command
 	 */
-	public sendComand(command: string, data?: string): number {
+	public sendComand(command: string, data?: string): Promise<DbgpResponse> {
 		if (!this.connection) {
 			return;
 		}
@@ -119,7 +122,11 @@ export class AhkRuntime extends EventEmitter {
 		command += '\x00';
 
 		this.connection.write(`${command}`);
-		return this.transId;
+		return new Promise((resolve) => {
+			this.commandCallback[this.transId] = (response: DbgpResponse) => {
+				resolve(response)
+			};
+		})
 	}
 
 	/**
@@ -177,7 +184,7 @@ export class AhkRuntime extends EventEmitter {
 	 * @param scopeId 0(Local) and 1(Global)
 	 * @param args
 	 */
-	public variables(scopeId: number, frameId: number, args: DebugProtocol.VariablesArguments, param?: string): Promise<Variable[]> {
+	public async variables(scopeId: number, frameId: number, args: DebugProtocol.VariablesArguments, param?: string): Promise<Variable[]> {
 		const propertyName = param ? param : VariableParser.getPropertyNameByRef(args.variablesReference);
 		let command = `context_get -d ${frameId} -c ${scopeId}`;
 		if (propertyName) {
@@ -185,10 +192,8 @@ export class AhkRuntime extends EventEmitter {
 			command = `property_get -d ${frameId} -c ${scopeId} -n ${propertyName}`;
 		}
 
-		const transId = this.sendComand(command);
-		return new Promise((resolve) =>
-			this.commandCallback[transId] = (response: any) => resolve(VariableParser.parse(response, scopeId, args)),
-		);
+		const response = await this.sendComand(command)
+		return VariableParser.parse(response, scopeId, args);
 	}
 
 	public async setVariable(scopeId: number, frameId: number, args: DebugProtocol.SetVariableArguments): Promise<any> {
@@ -214,7 +219,7 @@ export class AhkRuntime extends EventEmitter {
 				type = 'string';
 				value = str
 			} else if (bool !== undefined) {
-				type = 'intger';
+				type = 'bool';
 				value = bool.match(/true/i) ? '1' : '0';
 			} else if (int !== undefined) {
 				type = 'integer';
@@ -255,31 +260,23 @@ export class AhkRuntime extends EventEmitter {
 			command = `property_set -d ${frameId} -c ${scopeId} -n ${fullname} -t ${type}`;
 		}
 
-		const transId: number = this.sendComand(command, value);
-		return await new Promise((resolve) => {
-			this.commandCallback[transId] = ({ response }: DbgpResponse) => {
-				// Out.log(`setVariable: ${JSON.stringify(response)}\n`);
-				const success: boolean = !!parseInt(response.attributes.success);
-				if (success === false) {
-					const msg: DebugProtocol.Message = {
-						id: args.variablesReference,
-						format: `"${fullname}" cannot be written. Probably read-only.`,
-					}
+		const response: DbgpResponse = await this.sendComand(command, value);
+		const success: boolean = !!parseInt(response.attributes.success);
+		if (success === false) {
+			const msg: DebugProtocol.Message = {
+				id: args.variablesReference,
+				format: `"${fullname}" cannot be written. Probably read-only.`,
+			}
+			return msg;
+		}
 
-					resolve(msg);
-					return;
-				}
+		const displayValue = type === 'string' ? `"${value}"` : value;
+		return {
+			name: args.name,
+			value: displayValue,
+			type, variablesReference
+		};
 
-				const displayValue = type === 'string' ? `"${value}"` : value;
-				const variable = {
-					name: args.name,
-					value: displayValue,
-					type, variablesReference
-				};
-
-				resolve(variable);
-			};
-		});
 	}
 
 	/**
@@ -287,12 +284,9 @@ export class AhkRuntime extends EventEmitter {
 	 * @param startFrame stack frame limit start
 	 * @param endFrame  stack frame limit end
 	 */
-	public stack(startFrame: number, endFrame: number): Promise<AhkStack> {
-		const transId = this.sendComand(`stack_get`);
-		return new Promise((resolve) => {
-			this.commandCallback[transId] = (response: string) => resolve(StackHandler.handle(response, startFrame, endFrame, this._sourceFile));
-		});
-
+	public async stack(startFrame: number, endFrame: number): Promise<AhkStack> {
+		const response = await this.sendComand(`stack_get`);
+		return StackHandler.handle(response, startFrame, endFrame, this._sourceFile)
 	}
 
 	private loadSource(file: string) {
@@ -318,7 +312,8 @@ export class AhkRuntime extends EventEmitter {
 		bps.push(bp);
 		this.verifyBreakpoints(path);
 		if (this.connection && bp.verified) {
-			this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp);
+			this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`)
+			this._transBreakPoints.set(this.transId, bp);
 		}
 
 		return bp;
@@ -331,7 +326,8 @@ export class AhkRuntime extends EventEmitter {
 	private createPoints() {
 		for (const key of this._breakPoints.keys()) {
 			for (const bp of this._breakPoints.get(key)) {
-				this._transBreakPoints.set(this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`), bp);
+				this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`)
+				this._transBreakPoints.set(this.transId, bp);
 			}
 		}
 	}
@@ -400,38 +396,34 @@ export class AhkRuntime extends EventEmitter {
 		for (const part of data.split(this.header)) {
 			if (null == part || part.trim() == "") { continue; }
 			const s = this.header + part;
-			this.parser.parseString(s, (err, xml) => {
+			this.parser.parseString(s, (err, res) => {
 				if (err) {
 					Out.log(err);
 					return;
 				}
 
-				if (xml.init) {
+				if (res.init) {
 					that.createPoints();
 					return that.sendComand('run');
 				}
 
-
-				if (xml.response) {
-					if (xml.response.attributes.command) {
-						const transId = parseInt(xml.response.attributes.transaction_id);
-						switch (xml.response.attributes.command) {
+				const response = res.response
+				if (response) {
+					if (res.response.attributes.command) {
+						const transId = parseInt(response.attributes.transaction_id);
+						if (that.commandCallback[transId]) {
+							that.commandCallback[transId](response);
+							that.commandCallback[transId] = null;
+						}
+						switch (response.attributes.command) {
 							case 'breakpoint_set':
-								that.processBreakpointSet(xml);
-								break;
-							case 'stack_get':
-								if (that.commandCallback[transId]) { that.commandCallback[transId](part); }
+								that.processBreakpointSet(response);
 								break;
 							case 'run':
 							case 'step_into':
 							case 'step_over':
 							case 'step_out':
-								that.processRunResponse(xml);
-								break;
-							case 'context_get':
-							case 'property_get':
-							case 'property_set':
-								if (that.commandCallback[transId]) { that.commandCallback[transId](xml); }
+								that.processRunResponse(response);
 								break;
 							case 'stop':
 								that.end();
@@ -447,17 +439,17 @@ export class AhkRuntime extends EventEmitter {
 
 	}
 
-	private processBreakpointSet(xml: any) {
-		const transId = xml.response.attributes.transaction_id;
+	private processBreakpointSet(response: DbgpResponse) {
+		const transId = response.attributes.transaction_id;
 		const bp = this._transBreakPoints.get(parseInt(transId));
-		bp.id = xml.response.attributes.id;
+		bp.id = response.attributes.id;
 		bp.verified = true;
 		this.sendEvent('breakpointValidated', bp);
 	}
 
-	private processRunResponse(response: any) {
+	private processRunResponse(response: DbgpResponse) {
 		// Run command returns a status
-		switch (response.response.attributes.status) {
+		switch (response.attributes.status) {
 			case 'break':
 				this.sendEvent('stopOnStep');
 				break;
