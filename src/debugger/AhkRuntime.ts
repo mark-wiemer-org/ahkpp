@@ -197,7 +197,7 @@ export class AhkRuntime extends EventEmitter {
 	}
 
 	public async setVariable(scopeId: number, frameId: number, args: DebugProtocol.SetVariableArguments): Promise<any> {
-		const match = args.value.match(/^(?:()|\"(.*)\"|(true|false)|([+-]\d+)|([+-]\d+\.[+-]\d+)|([\w\d]+))$/si);
+		const match = args.value.match(/^(?:()|\"(.*)\"|(true|false)|([+-]?\d+)|([+-]?\d+\.[+-]?\d+)|([\w\d]+))$/si);
 
 		const isInvaridValue = !match;
 		if (isInvaridValue === true) {
