@@ -20,7 +20,7 @@ export class StackHandler {
 
     public static handle(response: DbgpResponse, startFrame: number, endFrame: number, currentFile: string): AhkStack {
 
-        const stackList = response.children.stack;
+        const stackList = Array.isArray(response.children.stack) ? response.children.stack : Array.of(response.children.stack);
         if (stackList) {
             const frames = new Array<any>();
             for (let i = startFrame; i < Math.min(endFrame, stackList.length); i++) {

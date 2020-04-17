@@ -21,6 +21,8 @@ export interface AhkBreakpoint {
 
 export interface DbgpResponse {
 	attributes: {
+		/** only one stack */
+		stack:any,
 		command: string;
 		context: string;
 		transaction_id: string;
