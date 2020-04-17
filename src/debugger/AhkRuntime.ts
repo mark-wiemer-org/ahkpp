@@ -219,7 +219,7 @@ export class AhkRuntime extends EventEmitter {
 				type = 'string';
 				value = str
 			} else if (bool !== undefined) {
-				type = 'bool';
+				type = 'string';
 				value = bool.match(/true/i) ? '1' : '0';
 			} else if (int !== undefined) {
 				type = 'integer';
