@@ -23,7 +23,12 @@ export class DefProvider implements vscode.DefinitionProvider {
         const includeMatch = text.match(/(?<=#include).+?\.(ahk|ext)\b/i);
         if (includeMatch) {
             const parent = document.uri.path.substr(0, document.uri.path.lastIndexOf("/"));
-            return new vscode.Location(vscode.Uri.file(includeMatch[0].trim().replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parent)), new vscode.Position(0, 0));
+            const derefedPath = vscode.Uri.file(
+                includeMatch[0].trim()
+                    .replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parent)
+                    .replace(/(%A_LineFile%)/, document.uri.path)
+            );
+            return new vscode.Location(derefedPath, new vscode.Position(0, 0));
         }
 
     }
