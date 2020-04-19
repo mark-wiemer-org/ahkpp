@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { Detecter } from "../core/Detecter";
+import { existsSync } from "fs";
 
 export class DefProvider implements vscode.DefinitionProvider {
 
@@ -23,12 +24,15 @@ export class DefProvider implements vscode.DefinitionProvider {
         const includeMatch = text.match(/(?<=#include).+?\.(ahk|ext)\b/i);
         if (includeMatch) {
             const parent = document.uri.path.substr(0, document.uri.path.lastIndexOf("/"));
-            const derefedPath = vscode.Uri.file(
+            const targetPath = vscode.Uri.file(
                 includeMatch[0].trim()
                     .replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parent)
                     .replace(/(%A_LineFile%)/, document.uri.path)
             );
-            return new vscode.Location(derefedPath, new vscode.Position(0, 0));
+            if (existsSync(targetPath.fsPath)) {
+                return new vscode.Location(targetPath, new vscode.Position(0, 0));
+            }
+            return null;
         }
 
     }
