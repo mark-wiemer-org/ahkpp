@@ -7,11 +7,13 @@ import { DefProvider } from "./provider/DefProvider";
 import { FileProvider } from "./provider/FileProvider";
 import { FormatProvider } from "./provider/FormatProvider";
 import { SymBolProvider } from "./provider/SymbolProvider";
+import { FileManager } from "./common/fileManager";
 
 export function activate(context: vscode.ExtensionContext) {
 
     Detecter.buildByPath(vscode.workspace.rootPath);
     const language = { language: "ahk" };
+    FileManager.init(context)
     const scriptRunner = new ScriptRunner(context);
     context.subscriptions.push(
         // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),

@@ -1,8 +1,9 @@
 import * as fs from 'fs';
+import { resolve as res } from "path";
 import * as vscode from 'vscode';
 import { Process } from '../common/processWrapper';
 import { Setting } from '../common/setting';
-import { resolve as res } from "path";
+import { FileManager, FileModel } from '../common/fileManager';
 
 export class ScriptRunner {
 
@@ -38,7 +39,9 @@ export class ScriptRunner {
         executePath = executePath ? executePath : await this.buildExecutePath();
 
         if (executePath) {
-            path = path ? path : vscode.window.activeTextEditor.document.fileName;
+            if (!path) {
+                path = await this.getPathByActive();
+            }
             try {
                 await Process.exec(`\"${executePath}\"${debug ? ' /debug=localhost:' + debugPort : ''} \"${path}\"`, { cwd: `${res(path, '..')}` });
                 return true;
@@ -92,5 +95,40 @@ export class ScriptRunner {
             return true;
         });
     }
+
+    private async getPathByActive(): Promise<string> {
+        const document = vscode.window.activeTextEditor.document
+        if (document.isUntitled) {
+            const path = `temp-${this.getNowDate()}.ahk`;
+            const fullPath = await FileManager.record(path, document.getText(), FileModel.WRITE)
+            return fullPath;
+        }
+        return document.fileName;
+    }
+
+
+    private getNowDate(): string {
+        const date = new Date();
+        let month: string | number = date.getMonth() + 1;
+        let strDate: string | number = date.getDate();
+
+        if (month <= 9) {
+            month = "0" + month;
+        }
+
+        if (strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+
+        return date.getFullYear() + "-" + month + "-" + strDate + "-" + this.pad(date.getHours(), 2) + "-" + this.pad(date.getMinutes(), 2) + "-" + this.pad(date.getSeconds(), 2);
+    }
+
+
+    public pad(n: any, width: number, z?: any): number {
+        z = z || '0';
+        n = n + '';
+        return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    }
+
 
 }

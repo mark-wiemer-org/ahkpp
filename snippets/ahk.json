@@ -770,7 +770,7 @@
   },
   "OutputDebug": {
     "prefix": "OutputDebug",
-    "body": "OutputDebug${1:, Text}${2: % }$3",
+    "body": "OutputDebug, ${1:%Text%}$2",
     "description": "Sends a string to the debugger (if any) for display."
   },
   "Pause": {
