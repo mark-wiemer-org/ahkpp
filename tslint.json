@@ -28,6 +28,7 @@
         "no-consecutive-blank-lines": false,
         "eofline": false,
         "ordered-imports": false,
+        "trailing-comma": false,
         "radix": false,
         "one-variable-per-declaration": false,
         "indent": false,

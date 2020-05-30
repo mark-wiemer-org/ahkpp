@@ -58,19 +58,16 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.setDebuggerColumnsStartAt1(false);
 
 		this._runtime = new AhkRuntime();
-
 		this._runtime.on('break', (reason: string) => {
 			this.sendEvent(new StoppedEvent(reason, AhkDebugSession.THREAD_ID));
-		})
-		this._runtime.on('stopOnDataBreakpoint', () => {
+		}).on('stopOnDataBreakpoint', () => {
 			this.sendEvent(new StoppedEvent('data breakpoint', AhkDebugSession.THREAD_ID));
-		});
-		this._runtime.on('output', (text) => {
+		}).on('output', (text) => {
 			this.sendEvent(new OutputEvent(`${text}\n`));
-		});
-		this._runtime.on('end', () => {
+		}).on('end', () => {
 			this.sendEvent(new TerminatedEvent());
 		});
+
 	}
 
 	/**
@@ -156,11 +153,10 @@ export class AhkDebugSession extends LoggingDebugSession {
 	protected async variablesRequest(response: DebugProtocol.VariablesResponse, args: DebugProtocol.VariablesArguments, request?: DebugProtocol.Request) {
 
 		const scopeId = this._variableHandles.get(args.variablesReference) === 'Local' ? 0 : 1;
-		const variables = await this._runtime.variables(scopeId, this.frameId, args);
-
 		response.body = {
-			variables,
+			variables: await this._runtime.variables(scopeId, this.frameId, args),
 		};
+
 		this.sendResponse(response);
 	}
 
@@ -209,10 +205,9 @@ export class AhkDebugSession extends LoggingDebugSession {
 	protected threadsRequest(response: DebugProtocol.ThreadsResponse): void {
 
 		// not implment
-		// runtime supports no threads so just return a default thread.
 		response.body = {
 			threads: [
-				new Thread(AhkDebugSession.THREAD_ID, "thread 1"),
+				new Thread(AhkDebugSession.THREAD_ID, "main thread"),
 			],
 		};
 		this.sendResponse(response);
@@ -234,7 +229,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 
 	protected evaluateRequest(response: DebugProtocol.EvaluateResponse, args: DebugProtocol.EvaluateArguments): void {
 		// not implment, eval have problem
-		this._runtime.sendComand(`eval -i transaction_id -- ${args.expression}`);
+		this._runtime.sendComand(`expression -i transaction_id -- ${args.expression}`);
 
 		// response.body = {
 		// 	result: reply ? reply : `evaluate(context: '${args.context}', '${args.expression}')`,
