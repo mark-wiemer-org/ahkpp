@@ -25,6 +25,10 @@ AutoHotKey language support for VS Code
 3. Input "Config Ahk" to select config command.
 ![runConfig](image/runConfig.jpg)
 
+## Output Message
+If you run as debug mode, you can output message like below.
+![output](image/output.jpg)
+
 ## MethodSymbol
 1. Detech source method as symbol
 2. You can add a comment to the method using a semicolon on the previous line of the method

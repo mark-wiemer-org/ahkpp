@@ -22,7 +22,7 @@ export interface AhkBreakpoint {
 export interface DbgpResponse {
 	attributes: {
 		/** only one stack */
-		stack:any,
+		stack: any,
 		command: string;
 		context: string;
 		transaction_id: string;
@@ -33,7 +33,7 @@ export interface DbgpResponse {
 		status: string;
 	}
 	children: {
-		stack:any,
+		stack: any,
 		property: any | any[],
 		error?: {
 			attributes: {
@@ -404,8 +404,14 @@ export class AhkRuntime extends EventEmitter {
 					return;
 				}
 
+				if (res.stream) {
+					that.sendEvent('output', Buffer.from(res.stream.content, 'base64').toString())
+				}
+
 				if (res.init) {
 					that.createPoints();
+					that.sendComand('stdout -c 1')
+					that.sendComand('stderr -c 1')
 					return that.sendComand('run');
 				}
 

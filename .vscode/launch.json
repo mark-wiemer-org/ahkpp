@@ -3,6 +3,21 @@
 	"version": "0.1.0",
 	"configurations": [
 		{
+			"name": "Launch Extension",
+			"type": "extensionHost",
+			"request": "launch",
+			"runtimeExecutable": "${execPath}",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceRoot}"
+			],
+			"stopOnEntry": false,
+			"sourceMaps": true,
+			"outFiles": [
+				"${workspaceRoot}/out/src/**/*.js"
+			],
+			"preLaunchTask": "npm: watch"
+		},
+		{
 			"type": "ahk",
 			"request": "launch",
 			"name": "Autohotkey v1 Debugger",
@@ -23,17 +38,6 @@
 			"dbgpSettings": {
 				"max_children": 149,
 			}
-		},
-		{
-			"name": "Launch Extension",
-			"type": "extensionHost",
-			"request": "launch",
-			"runtimeExecutable": "${execPath}",
-			"args": ["--extensionDevelopmentPath=${workspaceRoot}" ],
-			"stopOnEntry": false,
-			"sourceMaps": true,
-			"outFiles": ["${workspaceRoot}/out/src/**/*.js"],
-			"preLaunchTask": "npm: watch"
 		}
 	]
 }

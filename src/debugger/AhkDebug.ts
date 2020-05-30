@@ -82,18 +82,8 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this._runtime.on('breakpointValidated', (bp: AhkBreakpoint) => {
 			this.sendEvent(new BreakpointEvent('changed', { verified: bp.verified, id: bp.id } as DebugProtocol.Breakpoint));
 		});
-		this._runtime.on('output', (text, filePath, line, column) => {
-			const e: DebugProtocol.OutputEvent = new OutputEvent(`${text}\n`);
-
-			if (text === 'start' || text === 'startCollapsed' || text === 'end') {
-				e.body.group = text;
-				e.body.output = `group-${text}\n`;
-			}
-
-			e.body.source = this.createSource(filePath);
-			e.body.line = this.convertDebuggerLineToClient(line);
-			e.body.column = this.convertDebuggerColumnToClient(column);
-			this.sendEvent(e);
+		this._runtime.on('output', (text) => {
+			this.sendEvent(new OutputEvent(`${text}\n`));
 		});
 		this._runtime.on('end', () => {
 			this.sendEvent(new TerminatedEvent());
