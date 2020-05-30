@@ -132,6 +132,13 @@ export class AhkRuntime extends EventEmitter {
 	}
 
 	/**
+	 * pause ahk script
+	 */
+	public pause() {
+		this.sendComand('break');
+	}
+
+	/**
 	 * notice the script continue execution to the next point or end.
 	 */
 	public continue() {
@@ -168,6 +175,10 @@ export class AhkRuntime extends EventEmitter {
 			this.connection.end();
 		}
 		this.netIns.close();
+	}
+
+	private break(reason: string) {
+		this.sendEvent('break', reason)
 	}
 
 	/**
@@ -459,7 +470,7 @@ export class AhkRuntime extends EventEmitter {
 		// Run command returns a status
 		switch (response.attributes.status) {
 			case 'break':
-				this.sendEvent('stopOnStep');
+				this.break(response.attributes.command)
 				break;
 			case 'stopping':
 			case 'stopped':

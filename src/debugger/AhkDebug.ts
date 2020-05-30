@@ -63,16 +63,9 @@ export class AhkDebugSession extends LoggingDebugSession {
 
 		this._runtime = new AhkRuntime();
 
-		// setup event handlers
-		this._runtime.on('stopOnEntry', () => {
-			this.sendEvent(new StoppedEvent('entry', AhkDebugSession.THREAD_ID));
-		});
-		this._runtime.on('stopOnStep', () => {
-			this.sendEvent(new StoppedEvent('step', AhkDebugSession.THREAD_ID));
-		});
-		this._runtime.on('stopOnBreakpoint', () => {
-			this.sendEvent(new StoppedEvent('breakpoint', AhkDebugSession.THREAD_ID));
-		});
+		this._runtime.on('break', (reason: string) => {
+			this.sendEvent(new StoppedEvent(reason, AhkDebugSession.THREAD_ID));
+		})
 		this._runtime.on('stopOnDataBreakpoint', () => {
 			this.sendEvent(new StoppedEvent('data breakpoint', AhkDebugSession.THREAD_ID));
 		});
@@ -96,39 +89,20 @@ export class AhkDebugSession extends LoggingDebugSession {
 	 */
 	protected initializeRequest(response: DebugProtocol.InitializeResponse, args: DebugProtocol.InitializeRequestArguments): void {
 
-		// build and return the capabilities of this debug adapter:
-		response.body = response.body || {};
-
-		// the adapter implements the configurationDoneRequest.
-		response.body.supportsConfigurationDoneRequest = false;
-
-		// make VS Code to use 'evaluate' when hovering over source
-		response.body.supportsEvaluateForHovers = true;
-
-		// make VS Code to show a 'step back' button
-		response.body.supportsStepBack = false;
-
-		// make VS Code to support data breakpoints
-		response.body.supportsDataBreakpoints = false;
-
-		// make VS Code to support completion in REPL
-		response.body.supportsCompletionsRequest = true;
-		response.body.completionTriggerCharacters = [".", "["];
-
-		// make VS Code to send cancelRequests
-		response.body.supportsCancelRequest = false;
-
-		// make VS Code send the breakpointLocations request
-		response.body.supportsBreakpointLocationsRequest = false;
-
-		// make VS Code to support setting a variable to a value.
-		response.body.supportsSetVariable = true;
+		response.body = {
+			...response.body,
+			completionTriggerCharacters: [".", "["],
+			supportsConfigurationDoneRequest: false,
+			supportsEvaluateForHovers: true,
+			supportsStepBack: false,
+			supportsDataBreakpoints: false,
+			supportsCompletionsRequest: true,
+			supportsCancelRequest: true,
+			supportsBreakpointLocationsRequest: false,
+			supportsSetVariable: true,
+		}
 
 		this.sendResponse(response);
-
-		// since this debug adapter can accept configuration requests like 'setBreakpoint' at any time,
-		// we request them early by sending an 'initializeRequest' to the frontend.
-		// The frontend will end the configuration sequence by calling 'configurationDone' request.
 		this.sendEvent(new InitializedEvent());
 	}
 
@@ -225,6 +199,13 @@ export class AhkDebugSession extends LoggingDebugSession {
 		response.body = body;
 		this.sendResponse(response);
 	}
+
+
+	protected pauseRequest(response: DebugProtocol.PauseResponse, args: DebugProtocol.PauseArguments, request?: DebugProtocol.Request): void {
+		this._runtime.pause()
+		this.sendResponse(response);
+	}
+
 
 	protected continueRequest(response: DebugProtocol.ContinueResponse, args: DebugProtocol.ContinueArguments): void {
 		this._runtime.continue();
