@@ -7,7 +7,7 @@ import { LaunchRequestArguments } from './debugSession';
 import { BreakPointHandler } from './handler/breakpointHandler';
 import { CommandHandler } from './handler/commandHandler';
 import { StackHandler } from './handler/StackHandler';
-import { VariableParser } from './handler/VariableParser';
+import { VariableHandler } from './handler/variableHandler';
 import { DbgpResponse } from './struct/dbgpResponse';
 import { VarScope } from './struct/scope';
 
@@ -23,11 +23,13 @@ export class DebugDispather extends EventEmitter {
 	private breakPointHandler: BreakPointHandler;
 	private commandHandler: CommandHandler;
 	private stackHandler: StackHandler;
+	private variableHandler: VariableHandler;
 
 	public constructor() {
 		super();
 		this.breakPointHandler = new BreakPointHandler();
 		this.stackHandler = new StackHandler()
+		this.variableHandler = new VariableHandler()
 	}
 
 	/**
@@ -109,15 +111,15 @@ export class DebugDispather extends EventEmitter {
 	 * @param args
 	 */
 	public async variables(scopeId: number, frameId: number, args: DebugProtocol.VariablesArguments, param?: string): Promise<Variable[]> {
-		const propertyName = param ? param : VariableParser.getPropertyNameByRef(args.variablesReference);
+		const propertyName = param ? param : this.variableHandler.getPropertyNameByRef(args.variablesReference);
 		let command = `context_get -d ${frameId} -c ${scopeId}`;
 		if (propertyName) {
-			if (args) { scopeId = VariableParser.getPropertyScopeByRef(args.variablesReference); }
+			if (args) { scopeId = this.variableHandler.getPropertyScopeByRef(args.variablesReference); }
 			command = `property_get -d ${frameId} -c ${scopeId} -n ${propertyName}`;
 		}
 
 		const response = await this.sendComand(command)
-		return VariableParser.parse(response, scopeId, args);
+		return this.variableHandler.parse(response, scopeId, args);
 	}
 
 	public async setVariable(scopeId: number, frameId: number, args: DebugProtocol.SetVariableArguments): Promise<any> {
@@ -173,14 +175,14 @@ export class DebugDispather extends EventEmitter {
 			}
 		}
 
-		const parentFullName: string = VariableParser.getPropertyNameByRef(args.variablesReference);
+		const parentFullName: string = this.variableHandler.getPropertyNameByRef(args.variablesReference);
 		let fullname: string = args.name;
 		let command: string = `property_set -d ${frameId} -c ${scopeId} -n ${args.name} -t ${type}`;
 		if (parentFullName) {
 			const isIndex: boolean = fullname.includes('[') && fullname.includes(']');
 			fullname = isIndex === true ? `${parentFullName}${fullname}` : `${parentFullName}.${fullname}`;
 
-			scopeId = VariableParser.getPropertyScopeByRef(args.variablesReference);
+			scopeId = this.variableHandler.getPropertyScopeByRef(args.variablesReference);
 			command = `property_set -d ${frameId} -c ${scopeId} -n ${fullname} -t ${type}`;
 		}
 

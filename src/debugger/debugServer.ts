@@ -43,8 +43,6 @@ export class DebugServer extends EventEmitter {
     private header = `<?xml version="1.0" encoding="UTF-8"?>`;
     private parser = new xml2js.Parser({
         attrkey: 'attr',
-        explicitChildren: true,
-        childkey: 'children',
         charsAsChildren: false,
         charkey: 'content',
         explicitCharkey: true,

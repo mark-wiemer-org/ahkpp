@@ -1,6 +1,7 @@
 import { Variable } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { DbgpResponse } from '../struct/dbgpResponse';
+import { Util } from '../util/util';
 
 interface DbgpProperty {
     attr?: {
@@ -18,39 +19,26 @@ interface DbgpProperty {
         encoding?: string;
     };
     content?: string;
-    children?: { property: DbgpProperty | DbgpProperty[] };
+    property?: DbgpProperty | DbgpProperty[]
 }
 
-export class VariableParser {
+export class VariableHandler {
 
-    private static _properties = new Map<number, string>();
-    private static _propertyScopeIdMap = new Map<number, number>();
-    private static _variableReferenceCounter = 10000;
+    private _properties = new Map<number, string>();
+    private _propertyScopeIdMap = new Map<number, number>();
+    private _variableReferenceCounter = 10000;
 
-    public static getPropertyNameByRef(ref: number): string {
+    public getPropertyNameByRef(ref: number): string {
         return this._properties.get(ref);
     }
-    public static getPropertyScopeByRef(ref: number): number {
+    public getPropertyScopeByRef(ref: number): number {
         return this._propertyScopeIdMap.get(ref);
     }
 
-    public static parse(response: DbgpResponse, scopeId: number, args: DebugProtocol.VariablesArguments): Variable[] {
-        let properties: DbgpProperty[];
+    public parse(response: DbgpResponse, scopeId: number, args: DebugProtocol.VariablesArguments): Variable[] {
 
-        if (args && this._properties.has(args.variablesReference)
-            && response.attr.command === 'property_get') {
-            const { children } = response.children.property as DbgpProperty;
-            properties = Array.isArray(children.property) == true ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
-        } else {
-            if ("children" in response) {
-                const { children } = response;
-                properties = Array.isArray(children.property) ? children.property : [children.property];
-            } else {
-                properties = [];
-            }
-        }
-
-        if (properties.length === 0) {
+        const properties: DbgpProperty[] = Util.toArray(response.attr.command === 'property_get' ? response.property.property : response.property)
+        if (properties.length == 0) {
             return [];
         }
 
@@ -81,7 +69,7 @@ export class VariableParser {
                 }
             }
 
-            if ('children' in property && attr.type === 'object') {
+            if (property.property && attr.type === 'object') {
                 variablesReference = this._variableReferenceCounter++;
                 this._properties.set(variablesReference, property.attr.fullname);
                 this._propertyScopeIdMap.set(variablesReference, scopeId);
@@ -113,7 +101,7 @@ export class VariableParser {
 
 
     /** formats a dbgp property value for VS Code */
-    private static formatPropertyValue(property: DbgpProperty): string {
+    private formatPropertyValue(property: DbgpProperty): string {
         const { attr, content = '' } = property;
 
         if (['string', 'integer', 'float'].includes(attr.type) === true) {
@@ -134,17 +122,13 @@ export class VariableParser {
 
         return `${attr.classname}`;
     }
-    private static getArrayLikeLength(property: DbgpProperty): number {
-        const { children } = property;
-
-        if (!children) {
+    private getArrayLikeLength(property: DbgpProperty): number {
+        const properties: DbgpProperty[] = Util.toArray(property.property)
+        if (properties.length == 0) {
             return 0;
         }
-
-        const properties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
         for (let i = properties.length - 1; 0 <= i; i--) {
             const property = properties[i];
-
             const match = property.attr.name.match(/\[([0-9]+)\]/);
             if (match) {
                 return parseInt(match[1]);
@@ -152,13 +136,11 @@ export class VariableParser {
         }
         return 0;
     }
-    private static isArrayLikeProperty(property: DbgpProperty): boolean {
-        const { attr, children } = property;
-        if (attr.children === "0") {
+    private isArrayLikeProperty(property: DbgpProperty): boolean {
+        const childProperties: DbgpProperty[] = Util.toArray(property.property)
+        if (childProperties.length == 0) {
             return false;
         }
-
-        const childProperties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
         return childProperties.some((childProperty: DbgpProperty) => {
             if (childProperty.attr.name.match(/\[[0-9]+\]/)) {
                 return true;

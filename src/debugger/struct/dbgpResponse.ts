@@ -11,7 +11,7 @@ export interface DbgpResponse {
 		/** run state */
 		status: string;
 	}
-	children: {
+	// children: {
 		stack: any,
 		property: any | any[],
 		error?: {
@@ -19,5 +19,5 @@ export interface DbgpResponse {
 				code: number;
 			},
 		},
-	},
+	// },
 }
