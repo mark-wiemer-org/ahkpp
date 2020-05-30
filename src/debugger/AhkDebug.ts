@@ -11,17 +11,16 @@ import {
 	StackFrame,
 	StoppedEvent,
 	TerminatedEvent,
-	Thread,
-	Variable,
+	Thread
 } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
-import { AhkRuntime } from './AhkRuntime';
+import { AhkRuntime, AhkBreakpoint } from './AhkRuntime';
 import { Continue } from './struct/command';
 
 /**
- * This interface describes the mock-debug specific launch attributes
+ * This interface describes the mock-debug specific launch attr
  * (which are not part of the Debug Adapter Protocol).
- * The schema for these attributes lives in the package.json of the mock-debug extension.
+ * The schema for these attr lives in the package.json of the mock-debug extension.
  * The interface should always match this schema.
  */
 export interface LaunchRequestArguments extends DebugProtocol.LaunchRequestArguments {
@@ -51,8 +50,8 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this._runtime = new AhkRuntime();
 		this._runtime.on('break', (reason: string) => {
 			this.sendEvent(new StoppedEvent(reason, AhkDebugSession.THREAD_ID));
-		}).on('stopOnDataBreakpoint', () => {
-			this.sendEvent(new StoppedEvent('data breakpoint', AhkDebugSession.THREAD_ID));
+		}).on('breakpointValidated', (bp: AhkBreakpoint) => {
+			this.sendEvent(new BreakpointEvent('changed', { verified: bp.verified, id: bp.id } as DebugProtocol.Breakpoint));
 		}).on('output', (text) => {
 			this.sendEvent(new OutputEvent(`${text}\n`));
 		}).on('end', () => {
@@ -194,11 +193,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 	}
 
 	protected threadsRequest(response: DebugProtocol.ThreadsResponse): void {
-		response.body = {
-			threads: [
-				new Thread(AhkDebugSession.THREAD_ID, "main thread"),
-			],
-		};
+		response.body = { threads: [new Thread(AhkDebugSession.THREAD_ID, "main thread")] };
 		this.sendResponse(response);
 	}
 

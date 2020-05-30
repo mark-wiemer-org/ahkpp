@@ -20,7 +20,7 @@ export interface AhkBreakpoint {
 }
 
 export interface DbgpResponse {
-	attributes: {
+	attr: {
 		/** only one stack */
 		stack: any,
 		command: string;
@@ -36,7 +36,7 @@ export interface DbgpResponse {
 		stack: any,
 		property: any | any[],
 		error?: {
-			attributes: {
+			attr: {
 				code: number;
 			},
 		},
@@ -69,10 +69,10 @@ export class AhkRuntime extends EventEmitter {
 	private _breakPoints = new Map<string, AhkBreakpoint[]>();
 	private _transBreakPoints = new Map<number, AhkBreakpoint>();
 
-	private connection: Net.Socket;
+	private proxyServer: Net.Server;
+	private proxyConnection: Net.Socket;
 	private transId = 1;
 	private commandCallback = {};
-	private netIns: Net.Server;
 
 	/**
 	 * Start executing the given program.
@@ -84,8 +84,8 @@ export class AhkRuntime extends EventEmitter {
 		this.loadSource(program);
 		let tempData = '';
 		const port = await getPort({ port: getPort.makeRange(9000, 9100) });
-		this.netIns = new Net.Server().listen(port).on('connection', (socket: Net.Socket) => {
-			this.connection = socket;
+		this.proxyServer = new Net.Server().listen(port).on('connection', (socket: Net.Socket) => {
+			this.proxyConnection = socket;
 
 			this.sendComand(`feature_set -n max_children -v ${max_children}`);
 			this.sendComand(`feature_set -n max_data -v ${max_data}`);
@@ -100,10 +100,10 @@ export class AhkRuntime extends EventEmitter {
 			});
 		}).on("error", (err: Error) => {
 			Out.log(err.message);
+			throw err;
 		});
 		if (!(await ScriptRunner.instance.run(runtime, program, true, port))) {
-			this.stop();
-			this.sendEvent('end');
+			this.end();
 		}
 	}
 
@@ -112,7 +112,7 @@ export class AhkRuntime extends EventEmitter {
 	 * @param command
 	 */
 	public sendComand(command: string, data?: string): Promise<DbgpResponse> {
-		if (!this.connection) {
+		if (!this.proxyConnection) {
 			return;
 		}
 		this.transId++;
@@ -123,7 +123,7 @@ export class AhkRuntime extends EventEmitter {
 		// Out.log(`command: ${command}`)
 		command += '\x00';
 
-		this.connection.write(`${command}`);
+		this.proxyConnection.write(`${command}`);
 		return new Promise((resolve) => {
 			this.commandCallback[this.transId] = (response: DbgpResponse) => {
 				resolve(response)
@@ -136,14 +136,8 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public stop() {
 		this.sendComand('stop');
-		if (this.connection) {
-			this.connection.end();
-		}
-		this.netIns.close();
-	}
-
-	private break(reason: string) {
-		this.sendEvent('break', reason)
+		if (this.proxyConnection) { this.proxyConnection.end(); }
+		if (this.proxyServer) { this.proxyServer.close(); }
 	}
 
 	/**
@@ -151,10 +145,8 @@ export class AhkRuntime extends EventEmitter {
 	 */
 	public end() {
 		this.sendEvent('end');
-		if (this.connection) {
-			this.connection.end();
-		}
-		this.netIns.close();
+		if (this.proxyConnection) { this.proxyConnection.end(); }
+		if (this.proxyServer) { this.proxyServer.close(); }
 	}
 
 	/**
@@ -239,7 +231,7 @@ export class AhkRuntime extends EventEmitter {
 		}
 
 		const response: DbgpResponse = await this.sendComand(command, value);
-		const success: boolean = !!parseInt(response.attributes.success);
+		const success: boolean = !!parseInt(response.attr.success);
 		if (success === false) {
 			const msg: DebugProtocol.Message = {
 				id: args.variablesReference,
@@ -289,7 +281,7 @@ export class AhkRuntime extends EventEmitter {
 		}
 		bps.push(bp);
 		this.verifyBreakpoints(path);
-		if (this.connection && bp.verified) {
+		if (this.proxyConnection && bp.verified) {
 			this.sendComand(`breakpoint_set -t line -f ${bp.source} -n ${bp.line + 1}`)
 			this._transBreakPoints.set(this.transId, bp);
 		}
@@ -317,7 +309,7 @@ export class AhkRuntime extends EventEmitter {
 	public clearBreakpoints(path: string): void {
 
 		let bps: AhkBreakpoint[];
-		if (this.connection && (bps = this._breakPoints.get(path))) {
+		if (this.proxyConnection && (bps = this._breakPoints.get(path))) {
 			for (const bp of bps) {
 				this.sendComand(`breakpoint_remove -d ${bp.id}`);
 			}
@@ -353,7 +345,7 @@ export class AhkRuntime extends EventEmitter {
 
 	private header = `<?xml version="1.0" encoding="UTF-8"?>`;
 	private parser = new xml2js.Parser({
-		attrkey: 'attributes',
+		attrkey: 'attr',
 		explicitChildren: true,
 		childkey: 'children',
 		charsAsChildren: false,
@@ -365,7 +357,6 @@ export class AhkRuntime extends EventEmitter {
 	public process(data: string) {
 		const that = this;
 
-		// Strip everything before the xml tag
 		data = data.substr(data.indexOf('<?xml'));
 
 		if (data.indexOf(this.header) == -1) {
@@ -391,15 +382,16 @@ export class AhkRuntime extends EventEmitter {
 					return that.sendComand('run');
 				}
 
-				const response = res.response
+				const response = res.response as DbgpResponse
+
 				if (response) {
-					if (res.response.attributes.command) {
-						const transId = parseInt(response.attributes.transaction_id);
+					if (res.response.attr.command) {
+						const transId = parseInt(response.attr.transaction_id);
 						if (that.commandCallback[transId]) {
 							that.commandCallback[transId](response);
 							that.commandCallback[transId] = null;
 						}
-						switch (response.attributes.command) {
+						switch (response.attr.command) {
 							case 'breakpoint_set':
 								that.processBreakpointSet(response);
 								break;
@@ -412,9 +404,6 @@ export class AhkRuntime extends EventEmitter {
 							case 'stop':
 								that.end();
 								break;
-							// case 'feature_set':
-							// 	Out.log(`feature_set: ${JSON.stringify(xml)}`);
-							// 	break;
 						}
 					}
 				}
@@ -424,18 +413,17 @@ export class AhkRuntime extends EventEmitter {
 	}
 
 	private processBreakpointSet(response: DbgpResponse) {
-		const transId = response.attributes.transaction_id;
+		const transId = response.attr.transaction_id;
 		const bp = this._transBreakPoints.get(parseInt(transId));
-		bp.id = response.attributes.id;
+		bp.id = response.attr.id;
 		bp.verified = true;
 		this.sendEvent('breakpointValidated', bp);
 	}
 
 	private processRunResponse(response: DbgpResponse) {
-		// Run command returns a status
-		switch (response.attributes.status) {
+		switch (response.attr.status) {
 			case 'break':
-				this.break(response.attributes.command)
+				this.sendEvent('break', response.attr.command)
 				break;
 			case 'stopping':
 			case 'stopped':

@@ -3,7 +3,7 @@ import { DebugProtocol } from 'vscode-debugprotocol';
 import { DbgpResponse } from '../AhkRuntime';
 
 interface DbgpProperty {
-    attributes?: {
+    attr?: {
         name?: string;
         fullname?: string;
         type?: string;
@@ -38,7 +38,7 @@ export class VariableParser {
         let properties: DbgpProperty[];
 
         if (args && this._properties.has(args.variablesReference)
-            && response.attributes.command === 'property_get') {
+            && response.attr.command === 'property_get') {
             const { children } = response.children.property as DbgpProperty;
             properties = Array.isArray(children.property) == true ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
         } else {
@@ -57,12 +57,12 @@ export class VariableParser {
         const variables: Variable[] = [];
         for (const property of properties) {
 
-            const { attributes } = property;
+            const { attr } = property;
             let variablesReference;
             let indexedVariables, namedVariables;
 
             if (args && 'filter' in args) {
-                const match = attributes.name.match(/\[([0-9]+)\]/);
+                const match = attr.name.match(/\[([0-9]+)\]/);
                 const indexed = !!match;
                 if (args.filter === 'named' && indexed) {
                     continue;
@@ -81,9 +81,9 @@ export class VariableParser {
                 }
             }
 
-            if ('children' in property && attributes.type === 'object') {
+            if ('children' in property && attr.type === 'object') {
                 variablesReference = this._variableReferenceCounter++;
-                this._properties.set(variablesReference, property.attributes.fullname);
+                this._properties.set(variablesReference, property.attr.fullname);
                 this._propertyScopeIdMap.set(variablesReference, scopeId);
 
                 if (this.isArrayLikeProperty(property) === true) {
@@ -96,7 +96,7 @@ export class VariableParser {
                 variablesReference = 0;
             }
 
-            const { name, type } = attributes;
+            const { name, type } = attr;
             const value = this.formatPropertyValue(property);
             const variable = {
                 name, type, value, variablesReference,
@@ -114,25 +114,25 @@ export class VariableParser {
 
     /** formats a dbgp property value for VS Code */
     private static formatPropertyValue(property: DbgpProperty): string {
-        const { attributes, content = '' } = property;
+        const { attr, content = '' } = property;
 
-        if (['string', 'integer', 'float'].includes(attributes.type) === true) {
-            const primitive = Buffer.from(content, attributes.encoding).toString();
+        if (['string', 'integer', 'float'].includes(attr.type) === true) {
+            const primitive = Buffer.from(content, attr.encoding).toString();
 
-            if (attributes.type === 'integer' || attributes.type === 'float') {
+            if (attr.type === 'integer' || attr.type === 'float') {
                 return primitive;
             }
             return `"${primitive}"`;
-        } else if (attributes.type === 'object') {
+        } else if (attr.type === 'object') {
             if (this.isArrayLikeProperty(property) == true) {
-                const classname = attributes.classname === 'Object' ? 'Array' : attributes.classname;
+                const classname = attr.classname === 'Object' ? 'Array' : attr.classname;
                 const length = this.getArrayLikeLength(property);
 
                 return `${classname}(${length})`;
             }
         }
 
-        return `${attributes.classname}`;
+        return `${attr.classname}`;
     }
     private static getArrayLikeLength(property: DbgpProperty): number {
         const { children } = property;
@@ -145,7 +145,7 @@ export class VariableParser {
         for (let i = properties.length - 1; 0 <= i; i--) {
             const property = properties[i];
 
-            const match = property.attributes.name.match(/\[([0-9]+)\]/);
+            const match = property.attr.name.match(/\[([0-9]+)\]/);
             if (match) {
                 return parseInt(match[1]);
             }
@@ -153,14 +153,14 @@ export class VariableParser {
         return 0;
     }
     private static isArrayLikeProperty(property: DbgpProperty): boolean {
-        const { attributes, children } = property;
-        if (attributes.children === "0") {
+        const { attr, children } = property;
+        if (attr.children === "0") {
             return false;
         }
 
         const childProperties: DbgpProperty[] = Array.isArray(children.property) ? children.property as DbgpProperty[] : [children.property as DbgpProperty];
         return childProperties.some((childProperty: DbgpProperty) => {
-            if (childProperty.attributes.name.match(/\[[0-9]+\]/)) {
+            if (childProperty.attr.name.match(/\[[0-9]+\]/)) {
                 return true;
             }
             return false;
