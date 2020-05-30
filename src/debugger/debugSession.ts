@@ -1,5 +1,4 @@
-import { basename } from 'path';
-import { Breakpoint, BreakpointEvent, Handles, InitializedEvent, LoggingDebugSession, OutputEvent, Scope, Source, StackFrame, StoppedEvent, TerminatedEvent, Thread } from 'vscode-debugadapter';
+import { BreakpointEvent, Handles, InitializedEvent, LoggingDebugSession, OutputEvent, Scope, StoppedEvent, TerminatedEvent, Thread } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { DebugDispather } from './debugDispather';
 import { Continue } from './struct/command';
@@ -86,17 +85,7 @@ export class DebugSession extends LoggingDebugSession {
 	}
 
 	protected async stackTraceRequest(response: DebugProtocol.StackTraceResponse, args: DebugProtocol.StackTraceArguments): Promise<void> {
-
-		const startFrame = typeof args.startFrame === 'number' ? args.startFrame : 0;
-		const maxLevels = typeof args.levels === 'number' ? args.levels : 1000;
-		const endFrame = startFrame + maxLevels;
-
-		const stk = await this.dispather.stack(startFrame, endFrame);
-
-		response.body = {
-			stackFrames: stk.frames.map((f) => new StackFrame(f.index, f.name, this.createSource(f.file), f.line)),
-			totalFrames: stk.count,
-		};
+		response.body = { stackFrames: await this.dispather.stack(args) };
 		this.sendResponse(response);
 	}
 
@@ -203,11 +192,6 @@ export class DebugSession extends LoggingDebugSession {
 			variablesReference: 0
 		};
 		this.sendResponse(response);
-	}
-
-
-	private createSource(filePath: string): Source {
-		return new Source(basename(filePath), this.convertDebuggerPathToClient(filePath), undefined, undefined, 'mock-adapter-data');
 	}
 
 }

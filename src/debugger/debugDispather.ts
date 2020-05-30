@@ -1,17 +1,17 @@
 import { EventEmitter } from 'events';
-import { Variable } from 'vscode-debugadapter';
+import { StackFrame, Variable } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { ScriptRunner } from '../core/ScriptRunner';
-import { AhkStack, StackHandler } from './handler/StackHandler';
-import { VariableParser } from './handler/VariableParser';
-import { LaunchRequestArguments } from './debugSession';
-
-import getPort = require('get-port');
 import { DebugServer } from './debugServer';
-import { DbgpResponse } from './struct/dbgpResponse';
-import { VarScope } from './struct/scope';
+import { LaunchRequestArguments } from './debugSession';
 import { BreakPointHandler } from './handler/breakpointHandler';
 import { CommandHandler } from './handler/commandHandler';
+import { StackHandler } from './handler/StackHandler';
+import { VariableParser } from './handler/VariableParser';
+import { DbgpResponse } from './struct/dbgpResponse';
+import { VarScope } from './struct/scope';
+
+import getPort = require('get-port');
 
 /**
  * A Ahk runtime debugger.
@@ -22,10 +22,12 @@ export class DebugDispather extends EventEmitter {
 	private debugServer: DebugServer;
 	private breakPointHandler: BreakPointHandler;
 	private commandHandler: CommandHandler;
+	private stackHandler: StackHandler;
 
 	public constructor() {
 		super();
 		this.breakPointHandler = new BreakPointHandler();
+		this.stackHandler = new StackHandler()
 	}
 
 	/**
@@ -206,9 +208,9 @@ export class DebugDispather extends EventEmitter {
 	 * @param startFrame stack frame limit start
 	 * @param endFrame  stack frame limit end
 	 */
-	public async stack(startFrame: number, endFrame: number): Promise<AhkStack> {
+	public async stack(args: DebugProtocol.StackTraceArguments): Promise<StackFrame[]> {
 		const response = await this.sendComand(`stack_get`);
-		return StackHandler.handle(response, startFrame, endFrame)
+		return this.stackHandler.handle(args, response)
 	}
 
 	private async setBreakPonit(bp: DebugProtocol.Breakpoint) {

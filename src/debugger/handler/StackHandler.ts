@@ -1,40 +1,18 @@
 import { DbgpResponse } from "../struct/dbgpResponse";
-
-export interface AhkStackItem {
-    /** stack order */
-    index: number;
-    /** * stack name */
-    name: string;
-    /** stack source file path */
-    file: string;
-    /** source file executing line */
-    line: number;
-}
-
-export interface AhkStack {
-    frames: AhkStackItem[];
-    count: number;
-}
+import { DebugProtocol } from 'vscode-debugprotocol';
+import { StackFrame, Source } from "vscode-debugadapter";
+import { basename } from "path";
 
 export class StackHandler {
 
-    public static handle(response: DbgpResponse, startFrame: number, endFrame: number): AhkStack {
-
-        if (response) {
+    public handle(args: DebugProtocol.StackTraceArguments, response: DbgpResponse): StackFrame[] {
+        if (response.children) {
             const stackList = Array.isArray(response.children.stack) ? response.children.stack : Array.of(response.children.stack);
-            const frames = new Array<any>();
-            for (let i = startFrame; i < Math.min(endFrame, stackList.length); i++) {
-                const stack = stackList[i];
-                frames.push({
-                    index: i,
-                    name: `${stack.attr.where}`,
-                    file: `${stack.attr.filename}`,
-                    line: parseInt(`${stack.attr.lineno}`),
-                });
-            }
-            return ({ frames, count: stackList.length });
+            return stackList.map((stack, index) => {
+                return new StackFrame(index, stack.attr.where, new Source(basename(stack.attr.filename), stack.attr.filename), parseInt(stack.attr.lineno));
+            })
         } else {
-            return { frames: [], count: 0 };
+            return [];
         }
 
     }

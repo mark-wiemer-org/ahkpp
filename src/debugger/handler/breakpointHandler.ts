@@ -28,8 +28,9 @@ export class BreakPointHandler {
 
         const sourceLines = readFileSync(path).toString().split('\n');
         const bps = sourceBreakpoints.map((sourceBreakpoint) => {
-            const breakPoint = new Breakpoint(false, sourceBreakpoint.line, sourceBreakpoint.column, this.createSource(path))
-            if (sourceLines[sourceBreakpoint.line].trim().charAt(0) != ';') {
+            const breakPoint = new Breakpoint(false, sourceBreakpoint.line, sourceBreakpoint.column, new Source(basename(path), path))
+            const lineText = sourceLines[sourceBreakpoint.line];
+            if (lineText && lineText.trim().charAt(0) != ';') {
                 breakPoint.verified = true;
             }
             callback(breakPoint)
@@ -38,10 +39,5 @@ export class BreakPointHandler {
         this._breakPoints.set(path, bps)
         return bps;
     }
-
-    private createSource(filePath: string): Source {
-        return new Source(basename(filePath), filePath, undefined, undefined, 'mock-adapter-data');
-    }
-
 
 }
