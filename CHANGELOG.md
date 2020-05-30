@@ -1,3 +1,7 @@
+## 2.4.0 (2020/5/30)
+- Support get and modify variable in debug evalute
+- Support pause and continue run script.
+
 ## 2.3.4 (2020/4/15)
 - Suport change variable value when debug, contribute by @zero-plusplus.
 

@@ -2,7 +2,7 @@
 
 > Base of [vscode-autohotkey](https://github.com/stef-levesque/vscode-autohotkey)
 > 
-> Welcome to contribute in [repository](https://github.com/cweijan/vscode-autohotkey)
+> Project site: [vscode-autohotkey-plus](https://github.com/cweijan/vscode-autohotkey)
 >
 > You can see changes in the [changelog](/CHANGELOG.md)
 
@@ -26,7 +26,7 @@ AutoHotKey language support for VS Code
 ![runConfig](image/runConfig.jpg)
 
 ## Output Message
-If you run as debug mode, you can output message like below.
+If you use this this extension to run script, you can using OutputDebug command instead MsgBox.
 ![output](image/output.jpg)
 
 ## MethodSymbol
