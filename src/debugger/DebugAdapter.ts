@@ -1,3 +1,3 @@
-import { AhkDebugSession } from './AhkDebug';
+import { DebugSession } from './debugSession';
 
-AhkDebugSession.run(AhkDebugSession);
+DebugSession.run(DebugSession);

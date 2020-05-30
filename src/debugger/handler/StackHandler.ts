@@ -1,4 +1,4 @@
-import { DbgpResponse } from "../AhkRuntime";
+import { DbgpResponse } from "../struct/dbgpResponse";
 
 export interface AhkStackItem {
     /** stack order */
@@ -18,7 +18,7 @@ export interface AhkStack {
 
 export class StackHandler {
 
-    public static handle(response: DbgpResponse, startFrame: number, endFrame: number, currentFile: string): AhkStack {
+    public static handle(response: DbgpResponse, startFrame: number, endFrame: number): AhkStack {
 
         if (response) {
             const stackList = Array.isArray(response.children.stack) ? response.children.stack : Array.of(response.children.stack);
@@ -29,7 +29,7 @@ export class StackHandler {
                     index: i,
                     name: `${stack.attr.where}`,
                     file: `${stack.attr.filename}`,
-                    line: parseInt(`${stack.attr.lineno}`) - 1,
+                    line: parseInt(`${stack.attr.lineno}`),
                 });
             }
             return ({ frames, count: stackList.length });

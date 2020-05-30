@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 
 export class Setting {
-    executePath: string;
     private settingPath: string;
     private interSetting = {};
     constructor(private context: vscode.ExtensionContext) {

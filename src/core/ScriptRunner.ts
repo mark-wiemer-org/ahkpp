@@ -35,7 +35,7 @@ export class ScriptRunner {
      * @param debug enable debug model?
      * @param debugPort debug proxy port
      */
-    public async run(executePath = null, path: string = null, debug: boolean = false, debugPort = 9000) {
+    public async run(executePath = null, path: string = null, debug: boolean = false, debugPort = 9000): Promise<boolean> {
         executePath = executePath ? executePath : await this.buildExecutePath();
 
         if (executePath) {

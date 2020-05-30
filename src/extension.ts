@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { ProviderResult } from "vscode";
 import { Detecter } from "./core/Detecter";
 import { ScriptRunner } from "./core/ScriptRunner";
-import { AhkDebugSession } from "./debugger/AhkDebug";
+import { DebugSession } from "./debugger/debugSession";
 import { DefProvider } from "./provider/DefProvider";
 import { FileProvider } from "./provider/FileProvider";
 import { FormatProvider } from "./provider/FormatProvider";
@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
 class InlineDebugAdapterFactory implements vscode.DebugAdapterDescriptorFactory {
 
     public createDebugAdapterDescriptor(_session: vscode.DebugSession): ProviderResult<vscode.DebugAdapterDescriptor> {
-        return new vscode.DebugAdapterInlineImplementation(new AhkDebugSession());
+        return new vscode.DebugAdapterInlineImplementation(new DebugSession());
     }
 
 }
