@@ -38,8 +38,8 @@ export interface DbgpResponse {
 		error?: {
 			attributes: {
 				code: number;
-			}
-		}
+			},
+		},
 	},
 }
 
@@ -287,7 +287,7 @@ export class AhkRuntime extends EventEmitter {
 		return {
 			name: args.name,
 			value: displayValue,
-			type, variablesReference
+			type, variablesReference,
 		};
 
 	}

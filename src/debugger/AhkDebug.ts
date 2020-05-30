@@ -28,10 +28,6 @@ import { AhkRuntime, AhkBreakpoint } from './AhkRuntime';
 export interface LaunchRequestArguments extends DebugProtocol.LaunchRequestArguments {
 	/** An absolute path to the "program" to debug. */
 	program: string;
-	/** Automatically stop target after launch. If not specified, target does not stop. */
-	stopOnEntry?: boolean;
-	/** enable logging the Debug Adapter Protocol */
-	trace?: boolean;
 	/** An absolute path to the AutoHotkey.exe. */
 	runtime: string;
 	dbgpSettings: {
@@ -68,12 +64,6 @@ export class AhkDebugSession extends LoggingDebugSession {
 		})
 		this._runtime.on('stopOnDataBreakpoint', () => {
 			this.sendEvent(new StoppedEvent('data breakpoint', AhkDebugSession.THREAD_ID));
-		});
-		this._runtime.on('stopOnException', () => {
-			this.sendEvent(new StoppedEvent('exception', AhkDebugSession.THREAD_ID));
-		});
-		this._runtime.on('breakpointValidated', (bp: AhkBreakpoint) => {
-			this.sendEvent(new BreakpointEvent('changed', { verified: bp.verified, id: bp.id } as DebugProtocol.Breakpoint));
 		});
 		this._runtime.on('output', (text) => {
 			this.sendEvent(new OutputEvent(`${text}\n`));
@@ -112,13 +102,7 @@ export class AhkDebugSession extends LoggingDebugSession {
 	}
 
 	protected async launchRequest(response: DebugProtocol.LaunchResponse, args: LaunchRequestArguments) {
-
-		// make sure to 'Stop' the buffered logging if 'trace' is not set
-		logger.setup(args.trace ? Logger.LogLevel.Verbose : Logger.LogLevel.Stop, false);
-
-		// start the program in the runtime
 		this._runtime.start(args);
-
 		this.sendResponse(response);
 	}
 
@@ -127,20 +111,15 @@ export class AhkDebugSession extends LoggingDebugSession {
 		const path = args.source.path as string;
 		const clientLines = args.lines || [];
 
-		// clear all breakpoints for this file
 		this._runtime.clearBreakpoints(path);
 
-		// set and verify breakpoint locations
-		const actualBreakpoints = clientLines.map((l) => {
-			const { verified, line, id } = this._runtime.setBreakPoint(path, this.convertClientLineToDebugger(l));
-			const bp = new Breakpoint(verified, this.convertDebuggerLineToClient(line)) as DebugProtocol.Breakpoint;
-			bp.id = id;
-			return bp;
-		});
-
-		// send back the actual breakpoint positions
 		response.body = {
-			breakpoints: actualBreakpoints,
+			breakpoints: clientLines.map((l) => {
+				const { verified, line, id } = this._runtime.setBreakPoint(path, this.convertClientLineToDebugger(l));
+				const bp = new Breakpoint(verified, this.convertDebuggerLineToClient(line)) as DebugProtocol.Breakpoint;
+				bp.id = id;
+				return bp;
+			}),
 		};
 		this.sendResponse(response);
 	}
@@ -269,9 +248,6 @@ export class AhkDebugSession extends LoggingDebugSession {
 
 	private createSource(filePath: string): Source {
 		return new Source(basename(filePath), this.convertDebuggerPathToClient(filePath), undefined, undefined, 'mock-adapter-data');
-	}
-	private timeout(ms: number) {
-		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 
 }
