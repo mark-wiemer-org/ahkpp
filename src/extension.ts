@@ -14,7 +14,6 @@ export function activate(context: vscode.ExtensionContext) {
     Detecter.buildByPath(vscode.workspace.rootPath);
     const language = { language: "ahk" };
     FileManager.init(context)
-    const scriptRunner = new ScriptRunner(context);
     context.subscriptions.push(
         // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
         vscode.languages.registerDefinitionProvider(language, new DefProvider()),
@@ -22,10 +21,9 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
         FileProvider.createEditorListenr(),
         vscode.debug.registerDebugAdapterDescriptorFactory('ahk', new InlineDebugAdapterFactory()),
-        vscode.commands.registerCommand("run.ahk", () => scriptRunner.run()),
-        vscode.commands.registerCommand("debug.ahk", () => scriptRunner.startDebugger()),
-        vscode.commands.registerCommand("compile.ahk", () => scriptRunner.compile()),
-        vscode.commands.registerCommand("run.ahk.config", () => scriptRunner.reqConfigPath()),
+        vscode.commands.registerCommand("run.ahk", () => ScriptRunner.run()),
+        vscode.commands.registerCommand("debug.ahk", () => ScriptRunner.startDebugger()),
+        vscode.commands.registerCommand("compile.ahk", () => ScriptRunner.compile())
     );
 
 }

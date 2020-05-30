@@ -10,8 +10,6 @@
 	"activationEvents": [
 		"onLanguage:ahk",
 		"onCommand:run.ahk",
-		"onCommand:run.ahk.config",
-		"onCommand:run.ahk.configrun.ahk.config",
 		"onDebug"
 	],
 	"main": "./out/extension",
@@ -79,20 +77,20 @@
 							"dbgpSettings": {
 								"type": "object",
 								"properties": {
-								  "max_children": {
-									"type": "integer",
-									"description": "max number of array or object children to initially retrieve",
-									"default": 300
-								  },
-								  "max_data": {
-									"type": "integer",
-									"description": "max amount of variable data to initially retrieve.",
-									"default": 131072
-								  }
+									"max_children": {
+										"type": "integer",
+										"description": "max number of array or object children to initially retrieve",
+										"default": 300
+									},
+									"max_data": {
+										"type": "integer",
+										"description": "max amount of variable data to initially retrieve.",
+										"default": 131072
+									}
 								},
 								"description": "Dbgp settings. See https://xdebug.org/docs-dbgp.php#feature-names",
 								"default": {}
-						  	}
+							}
 						}
 					}
 				},
@@ -161,11 +159,6 @@
 					"light": "./image/run.png",
 					"dark": "./image/run-dark.png"
 				}
-			},
-			{
-				"command": "run.ahk.config",
-				"title": "Config Ahk Execute Bin Path",
-				"category": "AHK"
 			}
 		],
 		"menus": {
@@ -201,7 +194,23 @@
 				"language": "ahk",
 				"path": "./snippets/ahk.json"
 			}
-		]
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Ahk Plus",
+			"properties": {
+				"vscode-ahk-plus.executePath": {
+					"type": "string",
+					"default": "C:/Program Files/Autohotkey/AutoHotkeyU64.exe",
+					"description": "The execute path of ahk."
+				},
+				"vscode-ahk-plus.compilePath": {
+					"type": "string",
+					"default": "C:/Program Files/autoHotkey/Compiler/Ahk2Exe.exe",
+					"description": "The compiler path of ahk."
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

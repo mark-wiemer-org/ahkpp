@@ -6,13 +6,16 @@
 >
 > You can see changes in the [changelog](/CHANGELOG.md)
 
-
 AutoHotKey language support for VS Code
-* Code Assistant
-* [Code Symbol](#CodeSymbol) and [Method Symbol](#MethodSymbol)
-* [Goto Definition](#GotoDefinition)
-* [Run/Compile](#script)、 [Debug](#Debug) Script
-* [Code Format](#CodeFormat)
+- [vscode-autohotkey-Plus](#vscode-autohotkey-plus)
+  - [Debug](#debug)
+  - [Output Message](#output-message)
+  - [MethodSymbol](#methodsymbol)
+  - [GotoDefinition](#gotodefinition)
+  - [Script](#script)
+  - [Setting](#setting)
+  - [CodeSymbol](#codesymbol)
+  - [CodeFormat](#codeformat)
 
 ## Debug
 1. Click run button or press f9
@@ -45,6 +48,11 @@ If you use this this extension to run script, you can using OutputDebug command 
 - **Run**: run script without debug
 - **Compile**: compile script in same directory.
 ![compile](image/compile.jpg)
+
+## Setting
+
+1. OpenSetting -> config
+![settings](image/settings.jpg)
 
 ## CodeSymbol
 

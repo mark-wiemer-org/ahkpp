@@ -70,7 +70,7 @@ export class DebugDispather extends EventEmitter {
 					}
 				}
 			})
-		const runSuccess = await ScriptRunner.instance.run(runtime, program, true, port)
+		const runSuccess = await ScriptRunner.run(runtime, program, true, port)
 		if (!runSuccess) {
 			this.end();
 		}
