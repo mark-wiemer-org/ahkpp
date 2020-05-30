@@ -37,68 +37,52 @@ export class VariableHandler {
 
     public parse(response: DbgpResponse, scopeId: number, args: DebugProtocol.VariablesArguments): Variable[] {
 
-        const properties: DbgpProperty[] = Util.toArray(response.attr.command === 'property_get' ? response.property.property : response.property)
-        if (properties.length == 0) {
-            return [];
-        }
+        return Util.toArray(response.attr.command === 'property_get' ? response.property.property : response.property)
+            .map((property) => {
+                const { attr } = property;
+                let variablesReference: number;
+                let indexedVariables: number, namedVariables: number;
 
-        const variables: Variable[] = [];
-        for (const property of properties) {
-
-            const { attr } = property;
-            let variablesReference;
-            let indexedVariables, namedVariables;
-
-            if (args && 'filter' in args) {
-                const match = attr.name.match(/\[([0-9]+)\]/);
-                const indexed = !!match;
-                if (args.filter === 'named' && indexed) {
-                    continue;
-                } else if (args.filter === 'indexed') {
-                    if (indexed) {
-                        const index = parseInt(match[1]);
-                        const start = args.start + 1;
-                        const end = args.start + args.count;
-                        const contains = (start) <= index && index <= end;
-                        if (contains === false) {
-                            continue;
+                if (args && args.filter) {
+                    const match = attr.name.match(/\[([0-9]+)\]/);
+                    // get object array property
+                    if (args.filter === 'named' && match) {
+                        return;
+                    } else if (args.filter === 'indexed') {
+                        // get array value
+                        if (match) {
+                            const index = parseInt(match[1]);
+                            const start = args.start + 1;
+                            const end = args.start + args.count;
+                            const contains = (start) <= index && index <= end;
+                            if (!contains) {
+                                return;
+                            }
+                        } else {
+                            return;
                         }
-                    } else {
-                        continue;
                     }
                 }
-            }
 
-            if (property.property && attr.type === 'object') {
-                variablesReference = this._variableReferenceCounter++;
-                this._properties.set(variablesReference, property.attr.fullname);
-                this._propertyScopeIdMap.set(variablesReference, scopeId);
-
-                if (this.isArrayLikeProperty(property) === true) {
-                    const length = this.getArrayLikeLength(property);
-
-                    indexedVariables = 100 < length ? length : undefined;
-                    namedVariables = 100 < length ? 1 : undefined;
+                if (property.property && attr.type === 'object') {
+                    variablesReference = this._variableReferenceCounter++;
+                    this._properties.set(variablesReference, property.attr.fullname);
+                    this._propertyScopeIdMap.set(variablesReference, scopeId);
+                    if (this.likeArray(property)) {
+                        const length = this.getLikeArrayLength(property);
+                        indexedVariables = 100 < length ? length : undefined;
+                        namedVariables = 100 < length ? 1 : undefined;
+                    }
+                } else {
+                    variablesReference = 0;
                 }
-            } else {
-                variablesReference = 0;
-            }
-
-            const { name, type } = attr;
-            const value = this.formatPropertyValue(property);
-            const variable = {
-                name, type, value, variablesReference,
-                indexedVariables, namedVariables,
-            };
-            variables.push(variable);
-            // return variable;
-
-        }
-        // properties.forEach((property, i) => {});
-        return variables;
-
+                return {
+                    name: attr.name, type: attr.type,
+                    value: this.formatPropertyValue(property),
+                    variablesReference, indexedVariables, namedVariables,
+                };
+            })
     }
-
 
     /** formats a dbgp property value for VS Code */
     private formatPropertyValue(property: DbgpProperty): string {
@@ -112,9 +96,9 @@ export class VariableHandler {
             }
             return `"${primitive}"`;
         } else if (attr.type === 'object') {
-            if (this.isArrayLikeProperty(property) == true) {
+            if (this.likeArray(property) == true) {
                 const classname = attr.classname === 'Object' ? 'Array' : attr.classname;
-                const length = this.getArrayLikeLength(property);
+                const length = this.getLikeArrayLength(property);
 
                 return `${classname}(${length})`;
             }
@@ -122,31 +106,22 @@ export class VariableHandler {
 
         return `${attr.classname}`;
     }
-    private getArrayLikeLength(property: DbgpProperty): number {
+    private getLikeArrayLength(property: DbgpProperty): number {
         const properties: DbgpProperty[] = Util.toArray(property.property)
         if (properties.length == 0) {
             return 0;
         }
-        for (let i = properties.length - 1; 0 <= i; i--) {
-            const property = properties[i];
-            const match = property.attr.name.match(/\[([0-9]+)\]/);
+        for (let i = properties.length - 1; i > 0; i--) {
+            const match = properties[i].attr.name.match(/\[([0-9]+)\]/);
             if (match) {
                 return parseInt(match[1]);
             }
         }
         return 0;
     }
-    private isArrayLikeProperty(property: DbgpProperty): boolean {
-        const childProperties: DbgpProperty[] = Util.toArray(property.property)
-        if (childProperties.length == 0) {
-            return false;
-        }
-        return childProperties.some((childProperty: DbgpProperty) => {
-            if (childProperty.attr.name.match(/\[[0-9]+\]/)) {
-                return true;
-            }
-            return false;
-        });
+    private likeArray(property: DbgpProperty): boolean {
+        return Util.toArray(property.property)
+            .some((childProperty) => childProperty.attr.name.match(/\[[0-9]+\]/));
     }
 
 }
