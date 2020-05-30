@@ -4,8 +4,6 @@ import {
 	BreakpointEvent,
 	Handles,
 	InitializedEvent,
-	Logger,
-	logger,
 	LoggingDebugSession,
 	OutputEvent,
 	Scope,
@@ -17,7 +15,8 @@ import {
 	Variable,
 } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
-import { AhkRuntime, AhkBreakpoint } from './AhkRuntime';
+import { AhkRuntime } from './AhkRuntime';
+import { Continue } from './struct/command';
 
 /**
  * This interface describes the mock-debug specific launch attributes
@@ -38,18 +37,10 @@ export interface LaunchRequestArguments extends DebugProtocol.LaunchRequestArgum
 
 export class AhkDebugSession extends LoggingDebugSession {
 
-	// we don't support multiple threads, so we can use a hardcoded ID for the default thread
 	private static THREAD_ID = 1;
-
-	// ahk debugger.
 	private _runtime: AhkRuntime;
-
 	private _variableHandles = new Handles<string>();
 
-	/**
-	 * Creates a new debug adapter that is used for one debug session.
-	 * We configure the default implementation of a debug adapter here.
-	 */
 	public constructor() {
 		super("ahk-debug.txt");
 
@@ -177,34 +168,32 @@ export class AhkDebugSession extends LoggingDebugSession {
 
 
 	protected pauseRequest(response: DebugProtocol.PauseResponse, args: DebugProtocol.PauseArguments, request?: DebugProtocol.Request): void {
-		this._runtime.pause()
+		this._runtime.sendComand(Continue.BREAK)
 		this.sendResponse(response);
 	}
 
 
 	protected continueRequest(response: DebugProtocol.ContinueResponse, args: DebugProtocol.ContinueArguments): void {
-		this._runtime.continue();
+		this._runtime.sendComand(Continue.RUN)
 		this.sendResponse(response);
 	}
 
 	protected nextRequest(response: DebugProtocol.NextResponse, args: DebugProtocol.NextArguments): void {
-		this._runtime.step();
+		this._runtime.sendComand(Continue.STEP_OVER);
 		this.sendResponse(response);
 	}
 
 	protected stepInRequest(response: DebugProtocol.StepInResponse, args: DebugProtocol.StepInArguments, request?: DebugProtocol.Request): void {
-		this._runtime.stepIn();
+		this._runtime.sendComand(Continue.STEP_INTO);
 		this.sendResponse(response);
 	}
 
 	protected stepOutRequest(response: DebugProtocol.StepOutResponse, args: DebugProtocol.StepOutArguments, request?: DebugProtocol.Request): void {
-		this._runtime.stepOut();
+		this._runtime.sendComand(Continue.STEP_OUT);
 		this.sendResponse(response);
 	}
 
 	protected threadsRequest(response: DebugProtocol.ThreadsResponse): void {
-
-		// not implment
 		response.body = {
 			threads: [
 				new Thread(AhkDebugSession.THREAD_ID, "main thread"),
@@ -213,33 +202,41 @@ export class AhkDebugSession extends LoggingDebugSession {
 		this.sendResponse(response);
 	}
 
-	protected completionsRequest(response: DebugProtocol.CompletionsResponse, args: DebugProtocol.CompletionsArguments): void {
-		// not implment
-		// trigger on eval input
+	protected async completionsRequest(response: DebugProtocol.CompletionsResponse, args: DebugProtocol.CompletionsArguments): Promise<void> {
 		response.body = {
-			targets: [
-				{
-					label: "item 10",
-					sortText: "10",
-				},
-			],
+			targets: [...(await this._runtime.variables(0, 0, {} as any)), ...(await this._runtime.variables(1, 0, {} as any))]
+				.map((variable) => {
+					return {
+						type: "variable",
+						label: variable.name,
+						sortText: variable.name
+					}
+				})
 		};
 		this.sendResponse(response);
 	}
 
-	protected evaluateRequest(response: DebugProtocol.EvaluateResponse, args: DebugProtocol.EvaluateArguments): void {
-		// not implment, eval have problem
-		this._runtime.sendComand(`expression -i transaction_id -- ${args.expression}`);
+	protected async evaluateRequest(response: DebugProtocol.EvaluateResponse, args: DebugProtocol.EvaluateArguments): Promise<void> {
 
-		// response.body = {
-		// 	result: reply ? reply : `evaluate(context: '${args.context}', '${args.expression}')`,
-		// 	variablesReference: 0
-		// };
-		// this.sendResponse(response);
+		const exp = args.expression.split("=")
+		let reply: string;
+		if (exp.length == 1) {
+			const variable = await this._runtime.variables(0, this.frameId, {} as any, args.expression)
+			if (variable.length == 1) {
+				reply = variable[0].value
+			}
+		} else {
+			this._runtime.sendComand(`property_set -d ${this.frameId} -c 0 -n ${exp[0]}`, exp[1])
+			reply = `execute: ${args.expression}`
+		}
+
+		response.body = {
+			result: reply ? reply : `null`,
+			variablesReference: 0
+		};
+		this.sendResponse(response);
 	}
 
-
-	// ---- helpers
 
 	private createSource(filePath: string): Source {
 		return new Source(basename(filePath), this.convertDebuggerPathToClient(filePath), undefined, undefined, 'mock-adapter-data');

@@ -132,41 +132,6 @@ export class AhkRuntime extends EventEmitter {
 	}
 
 	/**
-	 * pause ahk script
-	 */
-	public pause() {
-		this.sendComand('break');
-	}
-
-	/**
-	 * notice the script continue execution to the next point or end.
-	 */
-	public continue() {
-		this.sendComand('run');
-	}
-
-	/**
-	 * notice the script step over.
-	 */
-	public step() {
-		this.sendComand('step_over');
-	}
-
-	/**
-	 * notice the script step out.
-	 */
-	public stepOut() {
-		this.sendComand('step_out');
-	}
-
-	/**
-	 * notice the script step info
-	 */
-	public stepIn() {
-		this.sendComand('step_into');
-	}
-
-	/**
 	 * receive stop request from vscode, send command to notice the script stop.
 	 */
 	public stop() {
