@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { StackFrame, Variable } from 'vscode-debugadapter';
+import { Scope, StackFrame, Variable } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { ScriptRunner } from '../core/ScriptRunner';
 import { DebugServer } from './debugServer';
@@ -105,103 +105,90 @@ export class DebugDispather extends EventEmitter {
 		this.debugServer.shutdown()
 	}
 
+	public scopes(frameId: number): Scope[] {
+		return this.variableHandler.scopes(frameId)
+	}
+
 	/**
 	 * List all variable or get refrence variable property detail.
 	 * @param scopeId 0(Local) and 1(Global)
 	 * @param args
 	 */
-	public async variables(scopeId: number, frameId: number, args: DebugProtocol.VariablesArguments, param?: string): Promise<Variable[]> {
-		const propertyName = param ? param : this.variableHandler.getPropertyNameByRef(args.variablesReference);
-		let command = `context_get -d ${frameId} -c ${scopeId}`;
-		if (propertyName) {
-			if (args) { scopeId = this.variableHandler.getPropertyScopeByRef(args.variablesReference); }
-			command = `property_get -d ${frameId} -c ${scopeId} -n ${propertyName}`;
+	public async listVariables(args: DebugProtocol.VariablesArguments): Promise<Variable[]> {
+
+		if (args.filter === 'named') {
+			return [];
 		}
 
-		const response = await this.sendComand(command)
-		return this.variableHandler.parse(response, scopeId, args);
+		if (args.filter === 'indexed') {
+			return this.variableHandler.getArrayValue(args.variablesReference, args.start, args.count);
+		}
+
+		const scope: number = this.variableHandler.getScopeByRef(args.variablesReference)
+		const frameId: number = this.variableHandler.getFrameId()
+
+		const propertyName = this.variableHandler.getVarByRef(args.variablesReference)?.name
+		if (propertyName) {
+			return this.getVariable(frameId, scope, propertyName)
+		}
+
+		const response = await this.sendComand(`context_get -d ${frameId} -c ${scope}`)
+
+		return this.variableHandler.parse(response, scope);
 	}
 
-	public async setVariable(scopeId: number, frameId: number, args: DebugProtocol.SetVariableArguments): Promise<any> {
-		const match = args.value.match(/^(?:()|\"(.*)\"|(true|false)|([+-]?\d+)|([+-]?\d+\.[+-]?\d+)|([\w\d]+))$/si);
+	public async getVariableByEval(variableName: string): Promise<string> {
+		const frameId: number = this.variableHandler.getFrameId()
 
-		const isInvaridValue = !match;
-		if (isInvaridValue === true) {
-			const msg: DebugProtocol.Message = {
-				id: args.variablesReference,
-				format: `"${args.value}" is invalid value.`,
+		const variables = await this.getVariable(frameId, VarScope.LOCAL, variableName)
+		if (variables.length == 1) {
+			return variables[0].value
+		} else {
+			const ahkVar = this.variableHandler.getVarByName(variableName)
+			return JSON.stringify(ahkVar.value)
+		}
+	}
+
+	private async getVariable(frameId: number, scope: VarScope, variableName: string): Promise<Variable[]> {
+		const response = await this.sendComand(`property_get -d ${frameId} -c ${scope} -n ${variableName}`)
+		return this.variableHandler.parsePropertyget(response, scope);
+	}
+
+	public async setVariable(args: DebugProtocol.SetVariableArguments): Promise<any> {
+		return this.variableHandler.obtainValue(args.value).then(async ({ type, value, isVariable }) => {
+			const frameId: number = this.variableHandler.getFrameId()
+			const scope: number = this.variableHandler.getScopeByRef(args.variablesReference)
+			if (isVariable) {
+				const ahkVar = (await this.getVariable(frameId, scope, value))[0]
+				if (!ahkVar) {
+					throw new Error(`variable ${args.value} not found!`);
+				}
+				value = ahkVar.value;
+				if (value.match(/^"|"$/g)) {
+					type = "string"
+					value = value.replace(/^"|"$/g, "")
+				}
+			}
+			const parentFullName: string = this.variableHandler.getVarByRef(args.variablesReference)?.name;
+			let fullname: string = args.name;
+			if (parentFullName) {
+				const isIndex: boolean = fullname.includes('[') && fullname.includes(']');
+				fullname = isIndex === true ? `${parentFullName}${fullname}` : `${parentFullName}.${fullname}`;
+			}
+
+			const response: DbgpResponse = await this.sendComand(`property_set -d ${frameId} -c ${scope} -n ${fullname} -t ${type}`, value);
+			const success: boolean = !!parseInt(response.attr.success);
+			if (success === false) {
+				throw new Error(`"${fullname}" cannot be written. Probably read-only.`);
+			}
+			const displayValue = type === 'string' ? `"${value}"` : value;
+			const PRIMITIVE = 0
+			return {
+				name: args.name,
+				value: displayValue,
+				type, variablesReference: PRIMITIVE,
 			};
-			return new Promise((resolve) => resolve(msg));
-		}
-
-		const variablesReference = 0;
-		let type: string, value: string;
-		{
-			const [, blank, str, bool, int, float, varName] = match;
-			if (blank !== undefined) {
-				type = 'string';
-				value = '';
-			} else if (str !== undefined) {
-				type = 'string';
-				value = str
-			} else if (bool !== undefined) {
-				type = 'string';
-				value = bool.match(/true/i) ? '1' : '0';
-			} else if (int !== undefined) {
-				type = 'integer';
-				value = int;
-			} else if (float !== undefined) {
-				type = 'float';
-				value = float;
-			} else {
-				let variable = await this.variables(scopeId, frameId, null, varName)
-				if (variable[0].value == "undefined" && scopeId == VarScope.LOCAL) {
-					variable = await this.variables(VarScope.GLOBAL, frameId, null, varName)[0]
-				}
-				if (variable[0].value == "undefined") {
-					const msg: DebugProtocol.Message = {
-						id: args.variablesReference,
-						format: `Variable ${varName} not found!`,
-					};
-					return new Promise((resolve) => resolve(msg));
-				} else {
-					value = variable[0].value;
-					if (value.match(/^"|"$/g)) {
-						type = "string"
-						value = value.replace(/^"|"$/g, "")
-					}
-				}
-
-			}
-		}
-
-		const parentFullName: string = this.variableHandler.getPropertyNameByRef(args.variablesReference);
-		let fullname: string = args.name;
-		let command: string = `property_set -d ${frameId} -c ${scopeId} -n ${args.name} -t ${type}`;
-		if (parentFullName) {
-			const isIndex: boolean = fullname.includes('[') && fullname.includes(']');
-			fullname = isIndex === true ? `${parentFullName}${fullname}` : `${parentFullName}.${fullname}`;
-
-			scopeId = this.variableHandler.getPropertyScopeByRef(args.variablesReference);
-			command = `property_set -d ${frameId} -c ${scopeId} -n ${fullname} -t ${type}`;
-		}
-
-		const response: DbgpResponse = await this.sendComand(command, value);
-		const success: boolean = !!parseInt(response.attr.success);
-		if (success === false) {
-			const msg: DebugProtocol.Message = {
-				id: args.variablesReference,
-				format: `"${fullname}" cannot be written. Probably read-only.`,
-			}
-			return msg;
-		}
-
-		const displayValue = type === 'string' ? `"${value}"` : value;
-		return {
-			name: args.name,
-			value: displayValue,
-			type, variablesReference,
-		};
+		})
 
 	}
 

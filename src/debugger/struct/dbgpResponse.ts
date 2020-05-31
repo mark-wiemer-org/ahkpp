@@ -21,3 +21,22 @@ export interface DbgpResponse {
 		},
 	// },
 }
+
+export interface DbgpProperty {
+    attr?: {
+        name?: string;
+        fullname?: string;
+        type?: string;
+        facet?: string;
+        classname?: string;
+        address?: string;
+        size?: string;
+        page?: string;
+        pagesize?: string;
+        children?: string;
+        numchildren?: string;
+        encoding?: string;
+    };
+    content?: string;
+    property?: DbgpProperty | DbgpProperty[]
+}

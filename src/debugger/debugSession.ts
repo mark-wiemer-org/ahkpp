@@ -1,8 +1,8 @@
-import { BreakpointEvent, Handles, InitializedEvent, LoggingDebugSession, OutputEvent, Scope, StoppedEvent, TerminatedEvent, Thread } from 'vscode-debugadapter';
+import { BreakpointEvent, InitializedEvent, LoggingDebugSession, OutputEvent, StoppedEvent, TerminatedEvent, Thread } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { DebugDispather } from './debugDispather';
 import { Continue } from './struct/command';
-import { VarScope } from './struct/scope';
+import { VscodeScope } from './struct/scope';
 
 /**
  * This interface describes the mock-debug specific launch attr
@@ -28,7 +28,6 @@ export class DebugSession extends LoggingDebugSession {
 
 	private static THREAD_ID = 1;
 	private dispather: DebugDispather;
-	private _variableHandles = new Handles<string>();
 
 	public constructor() {
 		super("ahk-debug.txt");
@@ -89,44 +88,27 @@ export class DebugSession extends LoggingDebugSession {
 		this.sendResponse(response);
 	}
 
-	private frameId: number = 0;
 	protected scopesRequest(response: DebugProtocol.ScopesResponse, args: DebugProtocol.ScopesArguments): void {
-
-		response.body = {
-			scopes: [
-				new Scope("Local", this._variableHandles.create("Local"), false),
-				new Scope("Global", this._variableHandles.create("Global"), false),
-			],
-		};
-		this.frameId = args.frameId;
+		response.body = { scopes: this.dispather.scopes(args.frameId) };
 		this.sendResponse(response);
 	}
 
 	protected async variablesRequest(response: DebugProtocol.VariablesResponse, args: DebugProtocol.VariablesArguments, request?: DebugProtocol.Request) {
-
-		const scopeId = this._variableHandles.get(args.variablesReference) === 'Local' ? VarScope.LOCAL : VarScope.GLOBAL;
-		response.body = {
-			variables: await this.dispather.variables(scopeId, this.frameId, args),
-		};
-
+		response.body = { variables: await this.dispather.listVariables(args) };
 		this.sendResponse(response);
 	}
 
 	protected async setVariableRequest(response: DebugProtocol.SetVariableResponse, args: DebugProtocol.SetVariableArguments, request?: DebugProtocol.Request): Promise<void> {
-
-		const scopeId: number = this._variableHandles.get(args.variablesReference) === 'Local' ? VarScope.LOCAL : VarScope.GLOBAL;
-		const body = await this.dispather.setVariable(scopeId, this.frameId, args);
-
-		const isDebugProtocolMessage: boolean = 'id' in body && 'format' in body;
-		if (isDebugProtocolMessage === true) {
-			this.sendErrorResponse(response, body);
-			return;
+		try {
+			response.body = await this.dispather.setVariable(args);
+			this.sendResponse(response);
+		} catch (error) {
+			this.sendErrorResponse(response, {
+				id: args.variablesReference,
+				format: error.message,
+			})
 		}
-
-		response.body = body;
-		this.sendResponse(response);
 	}
-
 
 	protected pauseRequest(response: DebugProtocol.PauseResponse, args: DebugProtocol.PauseArguments, request?: DebugProtocol.Request): void {
 		this.dispather.sendComand(Continue.BREAK)
@@ -160,8 +142,10 @@ export class DebugSession extends LoggingDebugSession {
 	}
 
 	protected async completionsRequest(response: DebugProtocol.CompletionsResponse, args: DebugProtocol.CompletionsArguments): Promise<void> {
+
 		response.body = {
-			targets: [...(await this.dispather.variables(VarScope.LOCAL, 0, {} as any)), ...(await this.dispather.variables(VarScope.GLOBAL, 0, {} as any))]
+			targets: [...(await this.dispather.listVariables({ variablesReference: VscodeScope.LOCAL })),
+			...(await this.dispather.listVariables({ variablesReference: VscodeScope.GLOBAL }))]
 				.map((variable) => {
 					return {
 						type: "variable",
@@ -178,12 +162,9 @@ export class DebugSession extends LoggingDebugSession {
 		const exp = args.expression.split("=")
 		let reply: string;
 		if (exp.length == 1) {
-			const variable = await this.dispather.variables(VarScope.LOCAL, this.frameId, {} as any, args.expression)
-			if (variable.length == 1) {
-				reply = variable[0].value
-			}
+			reply = await this.dispather.getVariableByEval(args.expression)
 		} else {
-			this.dispather.sendComand(`property_set -d ${this.frameId} -c 0 -n ${exp[0]}`, exp[1])
+			this.dispather.setVariable({ name: exp[0], value: exp[1], variablesReference: VscodeScope.LOCAL })
 			reply = `execute: ${args.expression}`
 		}
 
