@@ -1,3 +1,7 @@
+## 2.4.1 (2020/5/31)
+- Support config compiler path.
+- Show variable detail in debug evalute
+
 ## 2.4.0 (2020/5/30)
 - Support get and modify variable in debug evalute
 - Support pause and continue run script.

@@ -9,7 +9,6 @@
 AutoHotKey language support for VS Code
 - [vscode-autohotkey-Plus](#vscode-autohotkey-plus)
   - [Debug](#debug)
-  - [Output Message](#output-message)
   - [MethodSymbol](#methodsymbol)
   - [GotoDefinition](#gotodefinition)
   - [Script](#script)
@@ -22,15 +21,10 @@ AutoHotKey language support for VS Code
 2. Support breakpoint、stacktrace、variable
 ![debug](image/debug.gif)
 
-**Change Default Execute Path:**
-1. The default is C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe
-2. Press "Ctrl+Shift+P" to open command palette.
-3. Input "Config Ahk" to select config command.
-![runConfig](image/runConfig.jpg)
-
-## Output Message
-If you use this this extension to run script, you can using OutputDebug command instead MsgBox.
+**features:**
+1. **Output Message**: you can using `OutputDebug` command instead MsgBox.
 ![output](image/output.jpg)
+2. **Evalute**: Set and get variable in debug evaluter.![evalute](image/evalute.jpg)
 
 ## MethodSymbol
 1. Detech source method as symbol
