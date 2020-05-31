@@ -8,6 +8,7 @@ export class Util {
      * base64 to string
      */
     public static atob(base64: string) {
+        if (!base64) return null;
         return Buffer.from(base64, 'base64').toString()
     }
 
@@ -15,6 +16,7 @@ export class Util {
      * string to base64
      */
     public static btoa(data: string) {
+        if (!data) return null;
         return Buffer.from(data).toString('base64')
     }
 

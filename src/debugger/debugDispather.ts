@@ -141,7 +141,9 @@ export class DebugDispather extends EventEmitter {
 		const frameId: number = this.variableHandler.getFrameId()
 
 		const variables = await this.getVariable(frameId, VarScope.LOCAL, variableName)
-		if (variables.length == 1) {
+		if (variables.length == 0) {
+			return null;
+		} else if (variables.length == 1) {
 			return variables[0].value
 		} else {
 			const ahkVar = this.variableHandler.getVarByName(variableName)
