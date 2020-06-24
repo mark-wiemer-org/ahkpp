@@ -1,3 +1,8 @@
+## 2.4.2 - 2020/6/24
+- Support restart current programe.
+- Support go to label.
+- Fix bugs.
+
 ## 2.4.1 (2020/5/31)
 - Support config compiler path.
 - Show variable detail in debug evalute
