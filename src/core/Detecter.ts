@@ -3,22 +3,24 @@ import * as vscode from "vscode";
 import { Out } from "../common/out";
 import { CodeUtil } from "../common/codeUtil";
 
-export class Method {
-    constructor(public full: string, public name: string, public line: number, public comnent: string) { }
+export class Script {
+    constructor(public methods: Method[], public labels: Label[]) { }
 }
 
+export class Method {
+    constructor(public full: string, public name: string, public line: number, public comment: string) { }
+}
+
+export class Label {
+    constructor(public name: string, public line: number) { }
+}
 
 export class Detecter {
 
-    private static documentMethodMap = { key: String, methodList: Array<Method>() };
-    // detect any like word(any)
-    private static methodPreviousPattern = /(([\w_]+)\s*\(.*?\))/;
-    // detech any like word(any){
-    private static methodPattern = /(([\w_]+)\s*\(.*?\))\s*\{/;
-    private static keywordPattern = /\b(if|While)\b/ig;
-
-    public static getCacheFile(): string[] {
-        return Object.keys(this.documentMethodMap).filter((key) => key.match(/\b(ahk|ext)$/i) && this.documentMethodMap[key].length > 0);
+    private static documentCache=new Map<string,Script>();
+    
+    public static getCacheFile() {
+        return this.documentCache.keys()
     }
 
     /**
@@ -40,40 +42,45 @@ export class Detecter {
                 }
             });
         } else if (buildPath.match(/\b(ahk|ext)$/i)) {
-            this.getMethodList(vscode.Uri.file(buildPath));
+            const document = await vscode.workspace.openTextDocument(vscode.Uri.file(buildPath));
+            this.buildScript(document);
         }
 
     }
 
     /**
      * detect method list by document
-     * @param document
+     * @param document 
      */
-    public static async getMethodList(docId: vscode.TextDocument | vscode.Uri, usingCache = false): Promise<Method[]> {
+    public static async buildScript(document: vscode.TextDocument, usingCache = false): Promise<Script> {
 
-        let document: vscode.TextDocument;
-        if (docId instanceof vscode.Uri) {
-            document = await vscode.workspace.openTextDocument(docId as vscode.Uri);
-        } else {
-            document = docId as vscode.TextDocument;
+        if (usingCache && null != this.documentCache.get(document.uri.path)) {
+            return this.documentCache.get(document.uri.path)
         }
 
-        if (usingCache && null != this.documentMethodMap[document.uri.path]) {
-            return this.documentMethodMap[document.uri.path];
-        }
-
-        const methodList: Method[] = [];
+        const methods: Method[] = [];
+        const labels: Label[] = [];
         const lineCount = Math.min(document.lineCount, 10000);
         for (let line = 0; line < lineCount; line++) {
             const method = Detecter.getMethodByLine(document, line);
             if (method) {
-                methodList.push(method);
+                methods.push(method);
+            }
+            const text = CodeUtil.purity(document.lineAt(line).text);
+            const label = /^ *(\w+) *:{1}(?!(:|=))/.exec(text)
+            if (label) {
+                labels.push(new Label(label[1],line))
             }
         }
-        this.documentMethodMap[document.uri.path] = methodList;
-        return methodList;
+        const script: Script = { methods, labels }
+        this.documentCache.set(document.uri.path,script)
+        return script;
     }
 
+    // detect any like word(any)
+    private static methodPreviousPattern = /(([\w_]+)\s*\(.*?\))/;
+    // detech any like word(any){
+    private static methodPattern = /(([\w_]+)\s*\(.*?\))\s*\{/;
     /**
      * detect method by line
      * @param document
@@ -83,8 +90,7 @@ export class Detecter {
         const text = this.buildCodeBlock(document, line);
 
         const methodMatch = text.match(this.methodPattern);
-        const keywordMatch = text.match(this.keywordPattern);
-        if (methodMatch && !keywordMatch) {
+        if (methodMatch && !/\b(if|While)\b/ig.test(text)) {
             return new Method(methodMatch[1], methodMatch[2], line, Detecter.getRemarkByLine(document, line - 1));
         }
     }

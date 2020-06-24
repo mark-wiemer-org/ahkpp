@@ -13,9 +13,9 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
     public async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
 
         const result: vscode.CompletionItem[] = [];
-        (await Detecter.getMethodList(document, true)).forEach((method) => {
+        (await Detecter.buildScript(document, true)).methods.forEach((method) => {
             const completionItem = new vscode.CompletionItem(method.name + "()", vscode.CompletionItemKind.Method);
-            completionItem.detail = method.comnent;
+            completionItem.detail = method.comment;
             result.push(completionItem);
         });
 

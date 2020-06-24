@@ -5,7 +5,7 @@ export function getSymbolForLine(document: vscode.TextDocument, line: number): v
 
     const method = Detecter.getMethodByLine(document, line);
     if (method) {
-        return new vscode.SymbolInformation(method.full, vscode.SymbolKind.Method, method.comnent, new vscode.Location(document.uri, new vscode.Position(line, 0)));
+        return new vscode.SymbolInformation(method.full, vscode.SymbolKind.Method, method.comment, new vscode.Location(document.uri, new vscode.Position(line, 0)));
     }
 
     const {text} = document.lineAt(line);
