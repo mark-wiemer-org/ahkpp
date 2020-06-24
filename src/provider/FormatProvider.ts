@@ -17,13 +17,27 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let deep = 0;
         let tagDeep = 0;
         let oneCommandCode = false;
+        let blockComment = false;
 
         for (let line = 0; line < document.lineCount; line++) {
 
-            let notDeep = true;
             let { text } = document.lineAt(line);
+            if (text.match(/ *\*\//)) {
+                blockComment = false;
+            }
+            if (text.match(/ *\/\*/)) {
+                blockComment = true;
+            }
+            if (blockComment) {
+                formatDocument += text;
+                if (line !== document.lineCount - 1) {
+                    formatDocument += "\n";
+                }
+                continue;
+            };
             text = text.toLowerCase();
             text = CodeUtil.purity(text);
+            let notDeep = true;
 
             if (text.match(/#ifwinactive$/) || text.match(/#ifwinnotactive$/) || (text.match(/\breturn\b/) && tagDeep === deep)) {
                 deep--; notDeep = false;
