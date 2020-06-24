@@ -62,7 +62,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (deep < 0) {
                 deep = 0;
             }
-            formatDocument += (" ".repeat(deep * 4) + document.lineAt(line).text.replace(/ {2,}/g, " ").replace(/^\s*/, ""));
+            formatDocument += (" ".repeat(deep * options.tabSize) + document.lineAt(line).text.replace(/ {2,}/g, " ").replace(/^\s*/, ""));
             if (line !== document.lineCount - 1) {
                 formatDocument += "\n";
             }
