@@ -33,7 +33,8 @@ export class CommandHandler {
 
 
     public callback(transId: string, response: DbgpResponse) {
-        this.commandCallback[transId](response);
+        const fun = this.commandCallback[transId];
+        if (fun) fun(response)
         this.commandCallback[transId] = null;
     }
 

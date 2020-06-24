@@ -9,11 +9,13 @@ export class ScriptRunner {
     /**
      * start debuggin session
      */
-    public static startDebugger() {
-        vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(vscode.window.activeTextEditor.document.uri), {
+    public static startDebugger(script?: string) {
+        const cwd = script ? vscode.Uri.file(script) : vscode.window.activeTextEditor.document.uri
+        vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {
             type: "ahk",
             request: "launch",
             name: "Autohotkey Debugger",
+            program: script
         });
     }
 
@@ -56,7 +58,7 @@ export class ScriptRunner {
     }
 
 
-    private static async getPathByActive(): Promise<string> {
+    public static async getPathByActive(): Promise<string> {
         const document = vscode.window.activeTextEditor.document
         if (document.isUntitled) {
             const path = `temp-${this.getNowDate()}.ahk`;

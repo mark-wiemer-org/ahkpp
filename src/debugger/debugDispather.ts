@@ -24,12 +24,10 @@ export class DebugDispather extends EventEmitter {
 	private commandHandler: CommandHandler;
 	private stackHandler: StackHandler;
 	private variableHandler: VariableHandler;
+	private startArgs: LaunchRequestArguments;
 
 	public constructor() {
 		super();
-		this.breakPointHandler = new BreakPointHandler();
-		this.stackHandler = new StackHandler()
-		this.variableHandler = new VariableHandler()
 	}
 
 	/**
@@ -37,9 +35,13 @@ export class DebugDispather extends EventEmitter {
 	 */
 	public async start(args: LaunchRequestArguments) {
 
-		const { program, runtime, dbgpSettings = {} } = args;
+		const { runtime, dbgpSettings = {} } = args;
 		const { max_children, max_data } = { max_children: 300, max_data: 131072, ...dbgpSettings };
 
+		this.breakPointHandler = new BreakPointHandler();
+		this.stackHandler = new StackHandler()
+		this.variableHandler = new VariableHandler()
+		this.startArgs = args;
 		const port = await getPort({ port: getPort.makeRange(9000, 9100) });
 		this.debugServer = new DebugServer(port)
 		this.commandHandler = new CommandHandler(this.debugServer)
@@ -72,10 +74,19 @@ export class DebugDispather extends EventEmitter {
 					}
 				}
 			})
-		const runSuccess = await ScriptRunner.run(runtime, program, true, port)
+		if (!args.program) {
+			args.program = await ScriptRunner.getPathByActive()
+		}
+		const runSuccess = await ScriptRunner.run(runtime, args.program, true, port)
 		if (!runSuccess) {
 			this.end();
 		}
+	}
+
+	public async restart() {
+		this.sendComand('stop');
+		this.end()
+		ScriptRunner.startDebugger(this.startArgs.program)
 	}
 
 	/**

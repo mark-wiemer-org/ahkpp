@@ -60,12 +60,18 @@ export class DebugSession extends LoggingDebugSession {
 			supportsDataBreakpoints: false,
 			supportsCompletionsRequest: true,
 			supportsCancelRequest: true,
+			supportsRestartRequest: true,
 			supportsBreakpointLocationsRequest: false,
 			supportsSetVariable: true,
 		}
 
 		this.sendResponse(response);
 		this.sendEvent(new InitializedEvent());
+	}
+
+	protected restartRequest(response: DebugProtocol.RestartResponse, args: DebugProtocol.RestartArguments, request?: DebugProtocol.Request): void {
+		this.dispather.restart()
+		this.sendResponse(response);
 	}
 
 	protected async launchRequest(response: DebugProtocol.LaunchResponse, args: LaunchRequestArguments) {
