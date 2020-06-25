@@ -1,10 +1,8 @@
 # vscode-autohotkey-Plus
 
-> Base of [vscode-autohotkey](https://github.com/stef-levesque/vscode-autohotkey)
-> 
 > Project site: [vscode-autohotkey-plus](https://github.com/cweijan/vscode-autohotkey)
 >
-> You can see changes in the [changelog](/CHANGELOG.md)
+> View the changes in the [changelog](/CHANGELOG.md)
 
 AutoHotKey language support for VS Code
 - [vscode-autohotkey-Plus](#vscode-autohotkey-plus)
@@ -15,6 +13,7 @@ AutoHotKey language support for VS Code
   - [Setting](#setting)
   - [CodeSymbol](#codesymbol)
   - [CodeFormat](#codeformat)
+  - [Credits](#credits)
 
 ## Debug
 1. Click run button or press f9
@@ -57,3 +56,6 @@ AutoHotKey language support for VS Code
 1. Right click then click format document.
 - **Formatter follows my coding habits, so it may not unsuited for you**.
 ![codeFormat](image/codeFormat.jpg)
+
+## Credits
+- [vscode-autohotkey](https://github.com/stef-levesque/vscode-autohotkey)
