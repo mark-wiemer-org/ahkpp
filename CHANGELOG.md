@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.4.3 - Preview
+## 2.4.3 - 2020/6/25
 - Add command|method hover feature.
 - Add labels to outline.
 - More syntax support.
