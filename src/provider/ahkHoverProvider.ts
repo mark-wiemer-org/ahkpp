@@ -16,7 +16,11 @@ export class AhkHoverProvider implements HoverProvider {
         this.snippetMap = new Map<string, Snippet>();
         // tslint:disable-next-line: forin
         for (const key in ahk) {
-            this.snippetMap.set(key.toLowerCase(), ahk[key])
+            const snip = ahk[key] as Snippet
+            if (typeof snip.body  === 'string' ) {
+                snip.body = snip.body?.replace("1:", "")?.replace("2:", "")
+            }
+            this.snippetMap.set(key.toLowerCase(), snip)
         }
     }
 

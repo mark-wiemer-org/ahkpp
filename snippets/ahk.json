@@ -2,10 +2,10 @@
   "AhkTemplate": {
     "prefix": "#TEMPLATE",
     "body": [
-        "#SingleInstance, Force",
-        "SendMode Input",
-        "SetWorkingDir, %A_ScriptDir%",
-        ""
+      "#SingleInstance, Force",
+      "SendMode Input",
+      "SetWorkingDir, %A_ScriptDir%",
+      ""
     ]
   },
   "#ClipboardTimeout": {
@@ -1861,51 +1861,63 @@
   },
   "Insert()": {
     "prefix": ".Insert()",
-    "body": ".Insert(${1:Key}, ${2:Value})"
+    "body": ".Insert(${1:Key}, ${2:Value})",
+    "description": "Inserts key-value pairs into the object, automatically adjusting existing keys if given an integer key.\nDeprecated: Insert is not recommended for use in new scripts. Use InsertAt, Push, ObjRawSet or a simple assignment instead."
   },
   "InsertAt()": {
     "prefix": ".InsertAt()",
-    "body": ".InsertAt(${1:Key}, ${2:Value})"
+    "body": ".InsertAt(${1:Key}, ${2:Value})",
+    "description": "Inserts one or more values at a given position within a linear array."
   },
   "MinIndex()": {
     "prefix": ".MinIndex()",
-    "body": ".MinIndex()"
+    "body": ".MinIndex()",
+    "description": "If any integer keys are present, MinIndex returns the lowest. Otherwise an empty string is returned."
   },
   "MaxIndex()": {
     "prefix": ".MaxIndex()",
-    "body": ".MaxIndex()"
+    "body": ".MaxIndex()",
+    "description": "If any integer keys are present, MaxIndex returns the highest. Otherwise an empty string is returned."
   },
   "SetCapacity()": {
     "prefix": ".SetCapacity()",
-    "body": ".SetCapacity(${1:MaxItems})"
+    "body": ".SetCapacity(${1:MaxItems})",
+    "description": "Adjusts the capacity of an object or one of its fields."
   },
   "Remove()": {
     "prefix": ".Remove()",
-    "body": ".Remove(${1:Key})"
+    "body": ".Remove(${1:Key})",
+    "description": "Removes key-value pairs from an object.\nDeprecated: Remove is not recommended for use in new scripts. Use RemoveAt, Delete or Pop instead."
   },
   "RemoveAt()": {
     "prefix": ".RemoveAt()",
-    "body": ".RemoveAt(${1:Pos}, ${2:Length})"
+    "body": ".RemoveAt(${1:Pos}, ${2:Length})",
+    "description": "Removes items from the given position in a linear array."
   },
   "GetCapacity()": {
     "prefix": ".GetCapacity()",
-    "body": ".GetCapacity()"
+    "body": ".GetCapacity()",
+    "description": "Returns the current capacity of an object or one of its fields.\nReturns an empty string if the field does not exist or does not contain a string."
   },
   "GetAddress()": {
     "prefix": ".GetAddress()",
-    "body": ".GetAddress(${1:Key})"
+    "body": ".GetAddress(${1:Key})",
+    "description": "Returns the current address of the field's string buffer, if it has one."
   },
   "NewEnum()": {
     "prefix": ".NewEnum()",
-    "body": "._NewEnum()"
+    "body": "._NewEnum()",
+    "description": "Returns a new enumerator to enumerate this object's key-value pairs. This method is usually not called directly, but by the for-loop."
   },
   "HasKey()": {
     "prefix": ".HasKey()",
-    "body": ".HasKey(${1:Key})"
+    "body": ".HasKey(${1:Key})",
+    "description": "Returns true if Key is associated with a value (even '') within Object, otherwise false."
   },
   "Clone()": {
     "prefix": ".Clone()",
-    "body": ".Clone()"
+    "body": ".Clone()",
+    "description": "Returns a shallow copy of the object."
   },
   "IsOptional()": {
     "prefix": ".IsOptional()",
@@ -1913,11 +1925,13 @@
   },
   "Push()": {
     "prefix": ".Push(",
-    "body": ".Push(${1:Value})"
+    "body": ".Push(${1:Value})",
+    "description": "Appends values to the end of an array."
   },
   "Pop()": {
     "prefix": ".Pop(",
-    "body": ".Pop()"
+    "body": ".Pop()",
+    "description": "Removes and returns the last array element."
   },
   "__Get()": {
     "prefix": ".__Get()",
@@ -2081,7 +2095,8 @@
   },
   "A_AutoTrim": {
     "prefix": "A_AutoTrim",
-    "body": "A_AutoTrim"
+    "body": "A_AutoTrim",
+    "description": "The current mode (On or Off) set by AutoTrim."
   },
   "A_BatchLines": {
     "prefix": "A_BatchLines",
@@ -2125,7 +2140,8 @@
   },
   "A_Desktop": {
     "prefix": "A_Desktop",
-    "body": "A_Desktop"
+    "body": "A_Desktop",
+    "description":"The full path and name of the folder containing the current user's desktop files."
   },
   "A_DesktopCommon": {
     "prefix": "A_DesktopCommon",
@@ -2237,107 +2253,133 @@
   },
   "A_Is64bitOS": {
     "prefix": "A_Is64bitOS",
-    "body": "A_Is64bitOS"
+    "body": "A_Is64bitOS",
+    "description": ""
   },
   "A_IsAdmin": {
     "prefix": "A_IsAdmin",
-    "body": "A_IsAdmin"
+    "body": "A_IsAdmin",
+    "description": ""
   },
   "A_IsCompiled": {
     "prefix": "A_IsCompiled",
-    "body": "A_IsCompiled"
+    "body": "A_IsCompiled",
+    "description": ""
   },
   "A_IsCritical": {
     "prefix": "A_IsCritical",
-    "body": "A_IsCritical"
+    "body": "A_IsCritical",
+    "description": ""
   },
   "A_IsPaused": {
     "prefix": "A_IsPaused",
-    "body": "A_IsPaused"
+    "body": "A_IsPaused",
+    "description": "Contains 1 if the thread immediately underneath the current thread is paused. Otherwise it contains 0."
   },
   "A_IsSuspended": {
     "prefix": "A_IsSuspended",
-    "body": "A_IsSuspended"
+    "body": "A_IsSuspended",
+    "description": "Contains 1 if the script is suspended and 0 otherwise."
   },
   "A_IsUnicode": {
     "prefix": "A_IsUnicode",
-    "body": "A_IsUnicode"
+    "body": "A_IsUnicode",
+    "description": ""
   },
   "A_KeyDelay": {
     "prefix": "A_KeyDelay",
-    "body": "A_KeyDelay"
+    "body": "A_KeyDelay",
+    "description": "The current delay or duration set by SetKeyDelay (always decimal, not hex). A_KeyDuration requires [v1.1.23+]."
   },
   "A_Language": {
     "prefix": "A_Language",
-    "body": "A_Language"
+    "body": "A_Language",
+    "description": ""
   },
   "A_LastError": {
     "prefix": "A_LastError",
-    "body": "A_LastError"
+    "body": "A_LastError",
+    "description": ""
   },
   "A_LineFile": {
     "prefix": "A_LineFile",
-    "body": "A_LineFile"
+    "body": "A_LineFile",
+    "description": "The full path and name of the file to which A_LineNumber belongs, which will be the same as A_ScriptFullPath unless the line belongs to one of a non-compiled script's #Include files."
   },
   "A_LineNumber": {
     "prefix": "A_LineNumber",
-    "body": "A_LineNumber"
+    "body": "A_LineNumber",
+    "description": "The number of the currently executing line within the script (or one of its #Include files). This line number will match the one shown by ListLines; it can be useful for error reporting such as this example: MsgBox Could not write to log file (line number %A_LineNumber%)."
   },
   "A_LoopField": {
     "prefix": "A_LoopField",
-    "body": "A_LoopField"
+    "body": "A_LoopField",
+    "description": ""
   },
   "A_LoopFileAttrib": {
     "prefix": "A_LoopFileAttrib",
-    "body": "A_LoopFileAttrib"
+    "body": "A_LoopFileAttrib",
+    "description": ""
   },
   "A_LoopFileDir": {
     "prefix": "A_LoopFileDir",
-    "body": "A_LoopFileDir"
+    "body": "A_LoopFileDir",
+    "description": ""
   },
   "A_LoopFileExt": {
     "prefix": "A_LoopFileExt",
-    "body": "A_LoopFileExt"
+    "body": "A_LoopFileExt",
+    "description": "The file's extension (e.g. TXT, DOC, or EXE). The period (.) is not included."
   },
   "A_LoopFileFullPath": {
     "prefix": "A_LoopFileFullPath",
-    "body": "A_LoopFileFullPath"
+    "body": "A_LoopFileFullPath",
+    "description": "The path and name of the file/folder currently retrieved. If FilePattern contains a relative path rather than an absolute path, the path here will also be relative. In addition, any short (8.3) folder names in FilePattern will still be short (see next item to get the long version)."
   },
   "A_LoopFileLongPath": {
     "prefix": "A_LoopFileLongPath",
-    "body": "A_LoopFileLongPath"
+    "body": "A_LoopFileLongPath",
+    "description": "This is different than A_LoopFileFullPath in the following ways: 1) It always contains the absolute/complete path of the file even if FilePattern contains a relative path; 2) Any short (8.3) folder names in FilePattern itself are converted to their long names; 3) Characters in FilePattern are converted to uppercase or lowercase to match the case stored in the file system. This is useful for converting file names -- such as those passed into a script as command line parameters -- to their exact path names as shown by Explorer."
   },
   "A_LoopFileName": {
     "prefix": "A_LoopFileName",
-    "body": "A_LoopFileName"
+    "body": "A_LoopFileName",
+    "description": "The name of the file or folder currently retrieved (without the path)."
   },
   "A_LoopFileShortName": {
     "prefix": "A_LoopFileShortName",
-    "body": "A_LoopFileShortName"
+    "body": "A_LoopFileShortName",
+    "description": "The 8.3 short name, or alternate name of the file."
   },
   "A_LoopFileShortPath": {
     "prefix": "A_LoopFileShortPath",
-    "body": "A_LoopFileShortPath"
+    "body": "A_LoopFileShortPath",
+    "description": "The 8.3 short path and name of the file/folder currently retrieved."
   },
   "A_LoopFileSize": {
     "prefix": "A_LoopFileSize",
-    "body": "A_LoopFileSize"
+    "body": "A_LoopFileSize",
+    "description": "The size in bytes of the file currently retrieved. Files larger than 4 gigabytes are also supported."
   },
   "A_LoopFileSizeKB": {
     "prefix": "A_LoopFileSizeKB",
-    "body": "A_LoopFileSizeKB"
+    "body": "A_LoopFileSizeKB",
+    "description": " The size in Kbytes of the file currently retrieved, rounded down to the nearest integer. "
   },
   "A_LoopFileSizeMB": {
     "prefix": "A_LoopFileSizeMB",
-    "body": "A_LoopFileSizeMB"
+    "body": "A_LoopFileSizeMB",
+    "description": "The size in Mbytes of the file currently retrieved, rounded down to the nearest integer."
   },
   "A_LoopFileTimeAccessed": {
     "prefix": "A_LoopFileTimeAccessed",
-    "body": "A_LoopFileTimeAccessed"
+    "body": "A_LoopFileTimeAccessed",
+    "description": "The time the file was last accessed. Format YYYYMMDDHH24MISS."
   },
   "A_LoopFileTimeCreated": {
     "prefix": "A_LoopFileTimeCreated",
-    "body": "A_LoopFileTimeCreated"
+    "body": "A_LoopFileTimeCreated",
+    "description": "The time the file was created. Format YYYYMMDDHH24MISS."
   },
   "A_LoopFileTimeModified": {
     "prefix": "A_LoopFileTimeModified",
@@ -2365,147 +2407,183 @@
   },
   "A_LoopRegType": {
     "prefix": "A_LoopRegType",
-    "body": "A_LoopRegType"
+    "body": "A_LoopRegType",
+    "description": ""
   },
   "A_MDay": {
     "prefix": "A_MDay",
-    "body": "A_MDay"
+    "body": "A_MDay",
+    "description": ""
   },
   "A_Min": {
     "prefix": "A_Min",
-    "body": "A_Min"
+    "body": "A_Min",
+    "description": "Current 2-digit minute (00-59)."
   },
   "A_MM": {
     "prefix": "A_MM",
-    "body": "A_MM"
+    "body": "A_MM",
+    "description": "Current 2-digit month (01-12). Synonymous with A_Mon."
   },
   "A_MMM": {
     "prefix": "A_MMM",
-    "body": "A_MMM"
+    "body": "A_MMM",
+    "description": "Current month's abbreviation in the current user's language, e.g. Jul"
   },
   "A_MMMM": {
     "prefix": "A_MMMM",
-    "body": "A_MMMM"
+    "body": "A_MMMM",
+    "description": "Current month's full name in the current user's language, e.g. July"
   },
   "A_Mon": {
     "prefix": "A_Mon",
-    "body": "A_Mon"
+    "body": "A_Mon",
+    "description": "Current 2-digit month (01-12)."
   },
   "A_MouseDelay": {
     "prefix": "A_MouseDelay",
-    "body": "A_MouseDelay"
+    "body": "A_MouseDelay",
+    "description": ""
   },
   "A_MSec": {
     "prefix": "A_MSec",
-    "body": "A_MSec"
+    "body": "A_MSec",
+    "description": ""
   },
   "A_MyDocuments": {
     "prefix": "A_MyDocuments",
-    "body": "A_MyDocuments"
+    "body": "A_MyDocuments",
+    "description": "The full path and name of the current user's \"My Documents\" folder. Unlike most of the similar variables, if the folder is the root of a drive, the final backslash is not included"
   },
   "A_Now": {
     "prefix": "A_Now",
-    "body": "A_Now"
+    "body": "A_Now",
+    "description": "The current local time in YYYYMMDDHH24MISS format."
   },
   "A_NowUTC": {
     "prefix": "A_NowUTC",
-    "body": "A_NowUTC"
+    "body": "A_NowUTC",
+    "description": "The current Coordinated Universal Time (UTC) in YYYYMMDDHH24MISS format. UTC is essentially the same as Greenwich Mean Time (GMT)."
   },
   "A_NumBatchLines": {
     "prefix": "A_NumBatchLines",
-    "body": "A_NumBatchLines"
+    "body": "A_NumBatchLines",
+    "description": ""
   },
   "A_OSType": {
     "prefix": "A_OSType",
-    "body": "A_OSType"
+    "body": "A_OSType",
+    "description": ""
   },
   "A_OSVersion": {
     "prefix": "A_OSVersion",
-    "body": "A_OSVersion"
+    "body": "A_OSVersion",
+    "description": ""
   },
   "A_PriorHotkey": {
     "prefix": "A_PriorHotkey",
-    "body": "A_PriorHotkey"
+    "body": "A_PriorHotkey",
+    "description": ""
   },
   "A_PriorKey": {
     "prefix": "A_PriorKey",
-    "body": "A_PriorKey"
+    "body": "A_PriorKey",
+    "description": "The name of the last key which was pressed prior to the most recent key-press or key-release, or blank if no applicable key-press can be found in the key history. All input generated by AutoHotkey scripts is excluded. For this variable to be of use, the keyboard or mouse hook must be installed and key history must be enabled."
   },
   "A_ProgramFiles": {
     "prefix": "A_ProgramFiles",
-    "body": "A_ProgramFiles"
+    "body": "A_ProgramFiles",
+    "description": "The Program Files directory."
   },
   "A_Programs": {
     "prefix": "A_Programs",
-    "body": "A_Programs"
+    "body": "A_Programs",
+    "description": "The full path and name of the Programs folder in the current user's Start Menu."
   },
   "A_ProgramsCommon": {
     "prefix": "A_ProgramsCommon",
-    "body": "A_ProgramsCommon"
+    "body": "A_ProgramsCommon",
+    "description": "The full path and name of the Programs folder in the all-users Start Menu."
   },
   "A_PtrSize": {
     "prefix": "A_PtrSize",
-    "body": "A_PtrSize"
+    "body": "A_PtrSize",
+    "description": ""
   },
   "A_RegView": {
     "prefix": "A_RegView",
-    "body": "A_RegView"
+    "body": "A_RegView",
+    "description": "The current registry view as set by SetRegView."
   },
   "A_ScreenDPI": {
     "prefix": "A_ScreenDPI",
-    "body": "A_ScreenDPI"
+    "body": "A_ScreenDPI",
+    "description": "Number of pixels per logical inch along the screen width."
   },
   "A_ScreenHeight": {
     "prefix": "A_ScreenHeight",
-    "body": "A_ScreenHeight"
+    "body": "A_ScreenHeight",
+    "description": "The height of the primary monitor"
   },
   "A_ScreenWidth": {
     "prefix": "A_ScreenWidth",
-    "body": "A_ScreenWidth"
+    "body": "A_ScreenWidth",
+    "description": "The width of the primary monitor"
   },
   "A_ScriptDir": {
     "prefix": "A_ScriptDir",
-    "body": "A_ScriptDir"
+    "body": "A_ScriptDir",
+    "description": "The full path of the directory where the current script is located. The final backslash is omitted (even for root directories)."
   },
   "A_ScriptFullPath": {
     "prefix": "A_ScriptFullPath",
-    "body": "A_ScriptFullPath"
+    "body": "A_ScriptFullPath",
+    "description": "The full path of the current script"
   },
   "A_ScriptHwnd": {
     "prefix": "A_ScriptHwnd",
-    "body": "A_ScriptHwnd"
+    "body": "A_ScriptHwnd",
+    "description": "The unique ID (HWND/handle) of the script's hidden main window."
   },
   "A_ScriptName": {
     "prefix": "A_ScriptName",
-    "body": "A_ScriptName"
+    "body": "A_ScriptName",
+    "description": "The file name of the current script, without its path, e.g. MyScript.ahk. "
   },
   "A_Sec": {
     "prefix": "A_Sec",
-    "body": "A_Sec"
+    "body": "A_Sec",
+    "description": ""
   },
   "A_Space": {
     "prefix": "A_Space",
-    "body": "A_Space"
+    "body": "A_Space",
+    "description": "This variable contains a single space character. See AutoTrim for details."
   },
   "A_StartMenu": {
     "prefix": "A_StartMenu",
-    "body": "A_StartMenu"
+    "body": "A_StartMenu",
+    "description": "The full path and name of the current user's Start Menu folder"
   },
   "A_StartMenuCommon": {
     "prefix": "A_StartMenuCommon",
-    "body": "A_StartMenuCommon"
+    "body": "A_StartMenuCommon",
+    "description": "The full path and name of the all-users Start Menu folder."
   },
   "A_Startup": {
     "prefix": "A_Startup",
-    "body": "A_Startup"
+    "body": "A_Startup",
+    "description": "The full path and name of the Startup folder in the current user's Start Menu."
   },
   "A_StartupCommon": {
     "prefix": "A_StartupCommon",
-    "body": "A_StartupCommon"
+    "body": "A_StartupCommon",
+    "description": "The full path and name of the Startup folder in the all-users Start Menu."
   },
   "A_StringCaseSense": {
     "prefix": "A_StringCaseSense",
-    "body": "A_StringCaseSense"
+    "body": "A_StringCaseSense",
+    "description": ""
   },
   "A_Tab": {
     "prefix": "A_Tab",
@@ -2533,7 +2611,8 @@
   },
   "A_ThisMenuItem": {
     "prefix": "A_ThisMenuItem",
-    "body": "A_ThisMenuItem"
+    "body": "A_ThisMenuItem",
+    "description":"The name of the most recently selected custom menu item (blank if none)."
   },
   "A_ThisMenuItemPos": {
     "prefix": "A_ThisMenuItemPos",
@@ -2617,7 +2696,8 @@
   },
   "ErrorLevel": {
     "prefix": "ErrorLevel",
-    "body": "ErrorLevel"
+    "body": "ErrorLevel",
+    "description":"This is a built-in variable that is set to indicate the success or failure of some of the commands (not all commands change the value of ErrorLevel). A value of 0 usually indicates success, and any other value usually indicates failure. You can also set the value of ErrorLevel yourself.\nOf special interest is that RunWait sets ErrorLevel to be the exit code of the program it ran. Most programs yield an exit code of zero if they completed successfully.\nEach thread retains its own value of ErrorLevel, meaning that if the current thread is interrupted by another, when the original thread is resumed it will still have its original value of ErrorLevel, not the ErrorLevel that may have been set by the interrupting thread."
   },
   "ProgramFiles": {
     "prefix": "ProgramFiles",
