@@ -3441,23 +3441,28 @@
   },
   "ahk_id": {
     "prefix": "ahk_id",
-    "body": "ahk_id"
+    "body": "ahk_id",
+    "description":"Each window or control has a unique ID, also known as a HWND (short for handle to window)."
   },
   "ahk_pid": {
     "prefix": "ahk_pid",
-    "body": "ahk_pid"
+    "body": "ahk_pid",
+    "description":"Use ahk_pid to identify a window belonging to a specific process. The process identifier (PID) is typically retrieved by WinGet, Run or Process."
   },
   "ahk_class": {
     "prefix": "ahk_class",
-    "body": "ahk_class"
+    "body": "ahk_class",
+    "description":"A window class is a set of attributes that the system uses as a template to create a window. In other words, the class name of the window identifies what type of window it is. To use a window class, specify ahk_class ExactClassName as shown by Window Spy. ExactClassName can be retrieved by WinGetClass."
   },
   "ahk_group": {
     "prefix": "ahk_group",
-    "body": "ahk_group"
+    "body": "ahk_group",
+    "description":"Use ahk_group to identify a window or windows matching the rules contained by a previously defined window group."
   },
   "ahk_exe": {
     "prefix": "ahk_exe",
-    "body": "ahk_exe"
+    "body": "ahk_exe",
+    "description":"Use ahk_exe to identify a window belonging to any process with the given name or path."
   },
   "Between": {
     "prefix": "Between",
@@ -3645,15 +3650,18 @@
   },
   "static": {
     "prefix": "static",
-    "body": "static"
+    "body": "static",
+    "description":"Static variables are always implicitly local, but differ from locals because their values are remembered between calls."
   },
   "global": {
     "prefix": "global",
-    "body": "global"
+    "body": "global",
+    "description":"To refer to an existing global variable inside a function (or create a new one), declare the variable as global prior to using it."
   },
   "local": {
     "prefix": "local",
-    "body": "local"
+    "body": "local",
+    "description":"Local variables are specific to a single function and are visible only inside that function. Consequently, a local variable may have the same name as a global variable and both will have separate contents. Separate functions may also safely use the same variable names."
   },
   "ByRef": {
     "prefix": "ByRef",
