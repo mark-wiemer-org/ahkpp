@@ -8,6 +8,8 @@ import { FileProvider } from "./provider/FileProvider";
 import { FormatProvider } from "./provider/FormatProvider";
 import { SymBolProvider } from "./provider/SymbolProvider";
 import { FileManager } from "./common/fileManager";
+import { CompletionProvider } from "./provider/CompletionProvider";
+import { AhkHoverProvider } from "./provider/ahkHoverProvider";
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -16,6 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
     FileManager.init(context)
     context.subscriptions.push(
         // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
+        vscode.languages.registerHoverProvider('ahk', new AhkHoverProvider(context)),
         vscode.languages.registerDefinitionProvider(language, new DefProvider()),
         vscode.languages.registerDocumentSymbolProvider(language, new SymBolProvider()),
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),

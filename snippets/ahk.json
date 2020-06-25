@@ -1743,247 +1743,243 @@
     "body": "WinExist(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText]}\")",
     "description": "Checks if a matching window exists. If it is, WinExist() returns the Unique ID (HWND) of the first matching window."
   },
-  ".Read()": {
+  "Read()": {
     "prefix": ".Read()",
     "body": ".Read(${1:[Characters]})"
   },
-  ".Write()": {
+  "Write()": {
     "prefix": ".Write()",
     "body": ".Write(${1:String})"
   },
-  ".ReadLine()": {
+  "ReadLine()": {
     "prefix": ".ReadLine()",
     "body": ".ReadLine()"
   },
-  ".WriteLine()": {
+  "WriteLine()": {
     "prefix": ".WriteLine()",
     "body": ".WriteLine(${1:[String]})"
   },
-  ".ReadUInt()": {
+  "ReadUInt()": {
     "prefix": ".ReadUInt()",
     "body": ".ReadUInt()"
   },
-  ".ReadInt()": {
+  "ReadInt()": {
     "prefix": ".ReadInt()",
     "body": ".ReadInt()"
   },
-  ".ReadInt64()": {
+  "ReadInt64()": {
     "prefix": ".ReadInt64()",
     "body": ".ReadInt64()"
   },
-  ".ReadShort()": {
+  "ReadShort()": {
     "prefix": ".ReadShort()",
     "body": ".ReadShort()"
   },
-  ".ReadUShort()": {
+  "ReadUShort()": {
     "prefix": ".ReadUShort()",
     "body": ".ReadUShort()"
   },
-  ".ReadChar()": {
+  "ReadChar()": {
     "prefix": ".ReadChar()",
     "body": ".ReadChar()"
   },
-  ".ReadUChar()": {
+  "ReadUChar()": {
     "prefix": ".ReadUChar()",
     "body": "ReadUChar()"
   },
-  ".ReadDouble()": {
+  "ReadDouble()": {
     "prefix": ".ReadDouble()",
     "body": ".ReadDouble()"
   },
-  ".ReadFloat()": {
+  "ReadFloat()": {
     "prefix": ".ReadFloat()",
     "body": ".ReadFloat()"
   },
-  ".WriteUInt()": {
+  "WriteUInt()": {
     "prefix": ".WriteUInt()",
     "body": ".WriteUInt(${1:Num})"
   },
-  ".WriteInt()": {
+  "WriteInt()": {
     "prefix": ".WriteInt()",
     "body": ".WriteInt(${1:Num})"
   },
-  ".WriteInt64()": {
+  "WriteInt64()": {
     "prefix": ".WriteInt64()",
     "body": ".WriteInt64(${1:Num})"
   },
-  ".WriteShort()": {
+  "WriteShort()": {
     "prefix": ".WriteShort()",
     "body": ".WriteShort(${1:Num})"
   },
-  ".WriteUShort()": {
+  "WriteUShort()": {
     "prefix": ".WriteUShort()",
     "body": ".WriteUShort(${1:Num})"
   },
-  ".WriteChar()": {
+  "WriteChar()": {
     "prefix": ".WriteChar()",
     "body": ".WriteChar(${1:Num})"
   },
-  ".WriteUChar()": {
+  "WriteUChar()": {
     "prefix": ".WriteUChar()",
     "body": ".WriteUChar(${1:Num})"
   },
-  ".WriteDouble()": {
+  "WriteDouble()": {
     "prefix": ".WriteDouble()",
     "body": ".WriteDouble(${1:Num})"
   },
-  ".WriteFloat()": {
+  "WriteFloat()": {
     "prefix": ".WriteFloat()",
     "body": ".WriteFloat(${1:Num})"
   },
-  ".RawRead()": {
+  "RawRead()": {
     "prefix": ".RawRead()",
     "body": ".RawRead(${1:VarOrAddress}, ${2:Bytes})"
   },
-  ".RawWrite()": {
+  "RawWrite()": {
     "prefix": ".RawWrite()",
     "body": ".RawWrite(${1:VarOrAddress}, ${2:Bytes})"
   },
-  ".Seek()": {
+  "Seek()": {
     "prefix": ".Seek()",
     "body": ".Seek(${1:Distance}, ${2:[Origin = 0]})"
   },
-  ".Tell()": {
+  "Tell()": {
     "prefix": ".Tell()",
     "body": ".Tell()"
   },
-  ".Close()": {
+  "Close()": {
     "prefix": ".Close()",
     "body": ".Close()"
   },
-  ".Count()": {
+  "Count()": {
     "prefix": ".Count()",
     "body": ".Count()"
   },
-  ".Delete()": {
+  "Delete()": {
     "prefix": ".Delete()",
     "body": ".Delete()"
   },
-  ".Insert()": {
+  "Insert()": {
     "prefix": ".Insert()",
     "body": ".Insert(${1:Key}, ${2:Value})"
   },
-  ".InsertAt()": {
+  "InsertAt()": {
     "prefix": ".InsertAt()",
     "body": ".InsertAt(${1:Key}, ${2:Value})"
   },
-  ".MinIndex()": {
+  "MinIndex()": {
     "prefix": ".MinIndex()",
     "body": ".MinIndex()"
   },
-  ".MaxIndex()": {
+  "MaxIndex()": {
     "prefix": ".MaxIndex()",
     "body": ".MaxIndex()"
   },
-  ".SetCapacity()": {
+  "SetCapacity()": {
     "prefix": ".SetCapacity()",
     "body": ".SetCapacity(${1:MaxItems})"
   },
-  ".Remove()": {
+  "Remove()": {
     "prefix": ".Remove()",
     "body": ".Remove(${1:Key})"
   },
-  ".RemoveAt()": {
+  "RemoveAt()": {
     "prefix": ".RemoveAt()",
     "body": ".RemoveAt(${1:Pos}, ${2:Length})"
   },
-  ".GetCapacity()": {
+  "GetCapacity()": {
     "prefix": ".GetCapacity()",
     "body": ".GetCapacity()"
   },
-  ".GetAddress()": {
+  "GetAddress()": {
     "prefix": ".GetAddress()",
     "body": ".GetAddress(${1:Key})"
   },
-  ".NewEnum()": {
+  "NewEnum()": {
     "prefix": ".NewEnum()",
     "body": "._NewEnum()"
   },
-  ".HasKey()": {
+  "HasKey()": {
     "prefix": ".HasKey()",
     "body": ".HasKey(${1:Key})"
   },
-  ".Clone()": {
+  "Clone()": {
     "prefix": ".Clone()",
     "body": ".Clone()"
   },
-  ".IsByRef()": {
-    "prefix": ".IsByRef()",
-    "body": ".IsByRef(${1:ParamIndex})"
-  },
-  ".IsOptional()": {
+  "IsOptional()": {
     "prefix": ".IsOptional()",
     "body": ".IsOptional(${1:ParamIndex})"
   },
-  ".Push": {
-    "prefix": ".Push",
+  "Push()": {
+    "prefix": ".Push(",
     "body": ".Push(${1:Value})"
   },
-  ".Pop": {
-    "prefix": ".Pop()",
+  "Pop()": {
+    "prefix": ".Pop(",
     "body": ".Pop()"
   },
-  ".__Get()": {
+  "__Get()": {
     "prefix": ".__Get()",
     "body": ".__Get(${1:[Key}, ${2:Key2}, ${3:...]})"
   },
-  ".__Set()": {
+  "__Set()": {
     "prefix": ".__Set()",
     "body": ".__Set(${1:[Key}, ${2:Key2}, ${3:...]}, ${4:Value})"
   },
-  ".__Call()": {
+  "__Call()": {
     "prefix": ".__Call()",
     "body": ".__Call(${1:Name}, ${2:[Params...]})"
   },
-  ".__New()": {
+  "__New()": {
     "prefix": ".__New()",
     "body": ".__New(${1:})"
   },
-  ".__Delete()": {
+  "__Delete()": {
     "prefix": ".__Delete()",
     "body": ".__Delete(${1:})"
   },
-  ".Length": {
+  "Length": {
     "prefix": ".Length",
     "body": ".Length"
   },
-  ".AtEOF": {
+  "AtEOF": {
     "prefix": ".AtEOF",
     "body": ".AtEOF"
   },
-  ".Encoding": {
+  "Encoding": {
     "prefix": ".Encoding",
     "body": ".Encoding"
   },
-  ".__Handle": {
+  "__Handle": {
     "prefix": ".__Handle",
     "body": ".__Handle"
   },
-  ".Name": {
+  "Name": {
     "prefix": ".Name",
     "body": ".Name"
   },
-  ".IsBuiltIn": {
+  "IsBuiltIn": {
     "prefix": ".IsBuiltIn",
     "body": ".IsBuiltIn"
   },
-  ".IsVariadic": {
+  "IsVariadic": {
     "prefix": ".IsVariadic",
     "body": ".IsVariadic"
   },
-  ".MinParams": {
+  "MinParams": {
     "prefix": ".MinParams",
     "body": ".MinParams"
   },
-  ".MaxParams": {
+  "MaxParams": {
     "prefix": ".MaxParams",
     "body": ".MaxParams"
   },
-  ".Pos": {
+  "Pos": {
     "prefix": ".Pos",
     "body": ".Pos"
   },
-  ".Position": {
+  "Position": {
     "prefix": ".Position",
     "body": ".Position"
   },
