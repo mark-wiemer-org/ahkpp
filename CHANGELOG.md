@@ -1,7 +1,8 @@
 # CHANGELOG
 
 ## 2.4.3 - Preview
-- Add command hover feature.
+- Add command|method hover feature.
+- Add labels to outline.
 
 ## 2.4.2 - 2020/6/24
 - Support restart current programe.
