@@ -17,8 +17,8 @@ export class Label {
 
 export class Detecter {
 
-    private static documentCache=new Map<string,Script>();
-    
+    private static documentCache = new Map<string, Script>();
+
     public static getCacheFile() {
         return this.documentCache.keys()
     }
@@ -66,15 +66,22 @@ export class Detecter {
             if (method) {
                 methods.push(method);
             }
-            const text = CodeUtil.purity(document.lineAt(line).text);
-            const label = /^ *(\w+) *:{1}(?!(:|=))/.exec(text)
+            const label = Detecter.getLabelByLine(document, line);
             if (label) {
-                labels.push(new Label(label[1],line))
+                labels.push(label);
             }
         }
         const script: Script = { methods, labels }
-        this.documentCache.set(document.uri.path,script)
+        this.documentCache.set(document.uri.path, script)
         return script;
+    }
+
+    public static getLabelByLine(document: vscode.TextDocument, line: number) {
+        const text = CodeUtil.purity(document.lineAt(line).text);
+        const label = /^ *(\w+) *:{1}(?!(:|=))/.exec(text)
+        if (label) {
+            return new Label(label[1], line);
+        }
     }
 
     // detect any like word(any)
