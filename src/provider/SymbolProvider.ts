@@ -6,7 +6,18 @@ export class SymBolProvider implements vscode.DocumentSymbolProvider {
     public provideDocumentSymbols(document: vscode.TextDocument, token: vscode.CancellationToken): vscode.ProviderResult<vscode.SymbolInformation[] | vscode.DocumentSymbol[]> {
         const lineCount = Math.min(document.lineCount, 10000);
         const result: vscode.SymbolInformation[] = [];
+        let blockComment = false;
         for (let line = 0; line < lineCount; line++) {
+            const lineText = document.lineAt(line).text;
+            if (lineText.match(/ *\/\*/)) {
+                blockComment = true;
+            }
+            if (lineText.match(/ *\*\//)) {
+                blockComment = false;
+            }
+            if (blockComment) {
+                continue;
+            }
             const symbol = this.getSymbolForLine(document, line);
             if (symbol) {
                 result.push(symbol);

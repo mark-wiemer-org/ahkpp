@@ -22,11 +22,11 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         for (let line = 0; line < document.lineCount; line++) {
 
             let { text } = document.lineAt(line);
-            if (text.match(/ *\*\//)) {
-                blockComment = false;
-            }
             if (text.match(/ *\/\*/)) {
                 blockComment = true;
+            }
+            if (text.match(/ *\*\//)) {
+                blockComment = false;
             }
             if (blockComment) {
                 formatDocument += text;

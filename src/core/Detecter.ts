@@ -62,7 +62,18 @@ export class Detecter {
         const methods: Method[] = [];
         const labels: Label[] = [];
         const lineCount = Math.min(document.lineCount, 10000);
+        let blockComment = false;
         for (let line = 0; line < lineCount; line++) {
+            const lineText = document.lineAt(line).text;
+            if (lineText.match(/ *\/\*/)) {
+                blockComment = true;
+            }
+            if (lineText.match(/ *\*\//)) {
+                blockComment = false;
+            }
+            if (blockComment) {
+                continue;
+            }
             const method = Detecter.getMethodByLine(document, line);
             if (method) {
                 methods.push(method);
