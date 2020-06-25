@@ -2,17 +2,18 @@ import * as fs from "fs";
 import * as vscode from "vscode";
 import { Out } from "../common/out";
 import { CodeUtil } from "../common/codeUtil";
+import { worker } from "cluster";
 
 export class Script {
     constructor(public methods: Method[], public labels: Label[]) { }
 }
 
 export class Method {
-    constructor(public full: string, public name: string, public line: number, public comment: string) { }
+    constructor(public full: string, public name: string, public document: vscode.TextDocument, public line: number, public comment: string) { }
 }
 
 export class Label {
-    constructor(public name: string, public line: number) { }
+    constructor(public name: string, public document: vscode.TextDocument, public line: number) { }
 }
 
 export class Detecter {
@@ -76,11 +77,47 @@ export class Detecter {
         return script;
     }
 
+
+    public static async getMethodByName(document: vscode.TextDocument, name: string) {
+        name = name.toLowerCase()
+        for (const method of (await Detecter.buildScript(document)).methods) {
+            if (method.name.toLowerCase() == name) {
+                return method;
+            }
+        }
+        for (const filePath of Detecter.getCacheFile()) {
+            const tempDocument = await vscode.workspace.openTextDocument(filePath);
+            for (const method of (await Detecter.buildScript(tempDocument)).methods) {
+                if (method.name.toLowerCase() == name) {
+                    return method;
+                }
+            }
+        }
+    }
+
+    public static async getLabelByName(document: vscode.TextDocument, name: string) {
+        name = name.toLowerCase()
+        for (const label of (await Detecter.buildScript(document)).labels) {
+            if (new RegExp("\\bg?" + label.name + "\\b", "i").test(name)) {
+                return label;
+            }
+        }
+        for (const filePath of Detecter.getCacheFile()) {
+            const tempDocument = await vscode.workspace.openTextDocument(filePath);
+            for (const label of (await Detecter.buildScript(tempDocument)).labels) {
+                if (new RegExp("\\bg?" + label.name + "\\b", "i").test(name)) {
+                    return label;
+                }
+            }
+        }
+    }
+
+
     public static getLabelByLine(document: vscode.TextDocument, line: number) {
         const text = CodeUtil.purity(document.lineAt(line).text);
         const label = /^ *(\w+) *:{1}(?!(:|=))/.exec(text)
         if (label) {
-            return new Label(label[1], line);
+            return new Label(label[1], document, line);
         }
     }
 
@@ -98,7 +135,7 @@ export class Detecter {
 
         const methodMatch = text.match(this.methodPattern);
         if (methodMatch && !/\b(if|While)\b/ig.test(text)) {
-            return new Method(methodMatch[1], methodMatch[2], line, Detecter.getRemarkByLine(document, line - 1));
+            return new Method(methodMatch[1], methodMatch[2], document, line, Detecter.getRemarkByLine(document, line - 1));
         }
     }
 

@@ -586,7 +586,7 @@
   "IfExist": {
     "prefix": "IfExist",
     "body": "IfExist, ${1:File|Dir|Pattern}",
-    "description": "Checks for the existence of a file or folder.⚠ Deprecated: These commands are not recommended for use in new scripts. Use the FileExist function instead."
+    "description": "Checks for the existence of a file or folder.\n⚠Deprecated: These commands are not recommended for use in new scripts. Use the FileExist function instead."
   },
   "IfGreater": {
     "prefix": "IfGreater",
@@ -626,12 +626,12 @@
   "IfNotExist": {
     "prefix": "IfNotExist",
     "body": "IfNotExist, ${1:File|Dir|Pattern}",
-    "description": "Checks for the existence of a file or folder.⚠Deprecated: These commands are not recommended for use in new scripts. Use the FileExist function instead."
+    "description": "Checks for the existence of a file or folder.\n⚠Deprecated: These commands are not recommended for use in new scripts. Use the FileExist function instead."
   },
   "IfNotInString": {
     "prefix": "IfNotInString",
     "body": "IfNotInString, ${1:Var}, ${2:SearchString}",
-    "description": "Checks if a variable contains the specified string.⚠Deprecated: These commands are not recommended for use in new scripts. Use the InStr function instead."
+    "description": "Checks if a variable contains the specified string.\n⚠Deprecated: These commands are not recommended for use in new scripts. Use the InStr function instead."
   },
   "IfWinActive": {
     "prefix": "IfWinActive",
@@ -1651,7 +1651,7 @@
   "StrSplit()": {
     "prefix": "StrSplit()",
     "body": "StrSplit(${1:String}, ${2:[Delimiters}, ${3:OmitChars]})",
-    "description": "Separates a string into an array of substrings using the specified delimiters.⚠Deprecated: Use the StrSplit function instead."
+    "description": "Separates a string into an array of substrings using the specified delimiters.\n⚠Deprecated: Use the StrSplit function instead."
   },
   "StrReplace()": {
     "prefix": "StrReplace()",
@@ -1862,7 +1862,7 @@
   "Insert()": {
     "prefix": ".Insert()",
     "body": ".Insert(${1:Key}, ${2:Value})",
-    "description": "Inserts key-value pairs into the object, automatically adjusting existing keys if given an integer key.\nDeprecated: Insert is not recommended for use in new scripts. Use InsertAt, Push, ObjRawSet or a simple assignment instead."
+    "description": "Inserts key-value pairs into the object, automatically adjusting existing keys if given an integer key.\n⚠Deprecated: Insert is not recommended for use in new scripts. Use InsertAt, Push, ObjRawSet or a simple assignment instead."
   },
   "InsertAt()": {
     "prefix": ".InsertAt()",
@@ -1887,7 +1887,7 @@
   "Remove()": {
     "prefix": ".Remove()",
     "body": ".Remove(${1:Key})",
-    "description": "Removes key-value pairs from an object.\nDeprecated: Remove is not recommended for use in new scripts. Use RemoveAt, Delete or Pop instead."
+    "description": "Removes key-value pairs from an object.\n⚠Deprecated: Remove is not recommended for use in new scripts. Use RemoveAt, Delete or Pop instead."
   },
   "RemoveAt()": {
     "prefix": ".RemoveAt()",

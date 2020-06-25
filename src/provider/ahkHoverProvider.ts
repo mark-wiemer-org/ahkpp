@@ -1,6 +1,8 @@
 import { HoverProvider, TextDocument, Position, CancellationToken, ExtensionContext, ProviderResult, Range, Hover, MarkdownString } from "vscode";
 import { join } from "path";
 import { readFileSync } from "fs";
+import { worker } from "cluster";
+import { Detecter } from "../core/Detecter";
 
 interface Snippet {
     prefix: string;
@@ -8,23 +10,56 @@ interface Snippet {
     description?: string;
 }
 
+interface Context {
+    nextChart: string;
+    word: string;
+}
+
 export class AhkHoverProvider implements HoverProvider {
 
-    private snippetMap: Map<string, Snippet>;
+    private snippetCache: Map<string, Snippet>;
     public constructor(context: ExtensionContext) {
-        const ahk = JSON.parse(readFileSync(join(context.extensionPath, "snippets", "ahk.json"), "UTF8"))
-        this.snippetMap = new Map<string, Snippet>();
-        // tslint:disable-next-line: forin
-        for (const key in ahk) {
-            const snip = ahk[key] as Snippet
-            if (typeof snip.body  === 'string' ) {
-                snip.body = snip.body?.replace("1:", "")?.replace("2:", "")
+        this.initSnippetCache(context);
+    }
+
+    public async provideHover(document: TextDocument, position: Position, token: CancellationToken) {
+
+        const context = this.buildContext(document, position)
+
+        const snippetHover = this.tryGetSnippetHover(context)
+        if (snippetHover) {
+            return snippetHover;
+        }
+
+        const method = await Detecter.getMethodByName(document, context.word)
+        if (method) {
+            const markdonw = new MarkdownString("", true).appendCodeblock(method.full)
+            if (method.comment) {
+                markdonw.appendText(method.comment)
             }
-            this.snippetMap.set(key.toLowerCase(), snip)
+            return new Hover(markdonw)
+        }
+
+        return null
+    }
+
+    private tryGetSnippetHover(context: Context): Hover {
+        let snippetKey = context.word.toLowerCase();
+        if (context.nextChart == "(") {
+            snippetKey += "()"
+        }
+        const snippet = this.snippetCache.get(snippetKey)
+        if (snippet) {
+            const content = new MarkdownString(null, true)
+                .appendCodeblock(snippet.body, 'ahk')
+            if (snippet.description) {
+                 content.appendText(snippet.description)
+            }
+            return new Hover(content)
         }
     }
 
-    public provideHover(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Hover> {
+    private buildContext(document: TextDocument, position: Position): Context {
         const line = position.line;
         const wordRange = document.getWordRangeAtPosition(position)
         let word = document.getText(wordRange);
@@ -34,23 +69,21 @@ export class AhkHoverProvider implements HoverProvider {
                 word = "#" + word;
             }
         }
-
         const nextChart = document.getText(new Range(line, wordRange.end.character, line, wordRange.end.character + 1))
-        if (nextChart == "(") {
-            word += "()";
-        }
+        return { word, nextChart }
+    }
 
-        const snippet = this.snippetMap.get(word.toLowerCase())
-        if (snippet) {
-            let content = new MarkdownString(null, true)
-                .appendCodeblock(snippet.body, 'ahk')
-            if (snippet.description) {
-                content = content.appendText(snippet.description)
+    private initSnippetCache(context: ExtensionContext) {
+        const ahk = JSON.parse(readFileSync(join(context.extensionPath, "snippets", "ahk.json"), "UTF8"));
+        this.snippetCache = new Map<string, Snippet>();
+        // tslint:disable-next-line: forin
+        for (const key in ahk) {
+            const snip = ahk[key] as Snippet;
+            if (typeof snip.body === 'string') {
+                snip.body = snip.body?.replace(/\d{1}:/g, "");
             }
-            return new Hover(content)
+            this.snippetCache.set(key.toLowerCase(), snip);
         }
-
-        return null
     }
 
 }
