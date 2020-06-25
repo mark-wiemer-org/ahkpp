@@ -3,6 +3,7 @@
 ## 2.4.3 - Preview
 - Add command|method hover feature.
 - Add labels to outline.
+- More syntax support.
 
 ## 2.4.2 - 2020/6/24
 - Support restart current programe.
