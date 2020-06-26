@@ -3,47 +3,35 @@ import { Detecter } from "../core/Detecter";
 
 
 export class SymBolProvider implements vscode.DocumentSymbolProvider {
-    public provideDocumentSymbols(document: vscode.TextDocument, token: vscode.CancellationToken): vscode.ProviderResult<vscode.SymbolInformation[] | vscode.DocumentSymbol[]> {
-        const lineCount = Math.min(document.lineCount, 10000);
-        const result: vscode.SymbolInformation[] = [];
-        let blockComment = false;
-        for (let line = 0; line < lineCount; line++) {
-            const lineText = document.lineAt(line).text;
-            if (lineText.match(/ *\/\*/)) {
-                blockComment = true;
-            }
-            if (lineText.match(/ *\*\//)) {
-                blockComment = false;
-            }
-            if (blockComment) {
-                continue;
-            }
-            const symbol = this.getSymbolForLine(document, line);
-            if (symbol) {
-                result.push(symbol);
-            }
+    public async provideDocumentSymbols(document: vscode.TextDocument, token: vscode.CancellationToken): Promise<vscode.DocumentSymbol[]> {
+
+        const result = [];
+
+        const script = await Detecter.buildScript(document, false)
+
+        for (const method of script.methods) {
+            result.push(
+                new vscode.SymbolInformation(method.full, vscode.SymbolKind.Method, method.comment,
+                    new vscode.Location(method.document.uri, new vscode.Position(method.line, 0))
+                )
+            )
         }
+
+        for (const label of script.labels) {
+            result.push(
+                new vscode.SymbolInformation(label.name, vscode.SymbolKind.Field, null,
+                    new vscode.Location(label.document.uri, new vscode.Position(label.line, 0))
+                )
+            )
+        }
+
+        // const { text } = document.lineAt(line);
+        // const hotKeyMatch = text.match(/;;(.+)/);
+        // if (hotKeyMatch) {
+        //     return new vscode.SymbolInformation(hotKeyMatch[1], vscode.SymbolKind.Module, null, new vscode.Location(document.uri, new vscode.Position(line, 0)));
+        // }
+
         return result;
-    }
-
-    private getSymbolForLine(document: vscode.TextDocument, line: number): vscode.SymbolInformation {
-
-        const method = Detecter.getMethodByLine(document, line);
-        if (method) {
-            return new vscode.SymbolInformation(method.full, vscode.SymbolKind.Method, method.comment, new vscode.Location(document.uri, new vscode.Position(line, 0)));
-        }
-
-        const label = Detecter.getLabelByLine(document, line);
-        if (label) {
-            return new vscode.SymbolInformation(label.name + ":", vscode.SymbolKind.Field, null, new vscode.Location(document.uri, new vscode.Position(line, 0)));
-        }
-
-        const { text } = document.lineAt(line);
-        const hotKeyMatch = text.match(/;;(.+)/);
-        if (hotKeyMatch) {
-            return new vscode.SymbolInformation(hotKeyMatch[1], vscode.SymbolKind.Module, null, new vscode.Location(document.uri, new vscode.Position(line, 0)));
-        }
-
     }
 
 }

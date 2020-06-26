@@ -2,10 +2,9 @@ import * as fs from "fs";
 import * as vscode from "vscode";
 import { Out } from "../common/out";
 import { CodeUtil } from "../common/codeUtil";
-import { worker } from "cluster";
 
 export class Script {
-    constructor(public methods: Method[], public labels: Label[]) { }
+    constructor(public methods: Method[], public refs: Ref[], public labels: Label[]) { }
 }
 
 export class Method {
@@ -16,13 +15,13 @@ export class Label {
     constructor(public name: string, public document: vscode.TextDocument, public line: number) { }
 }
 
+export class Ref {
+    constructor(public name: string, public document: vscode.TextDocument, public line: number) { }
+}
+
 export class Detecter {
 
     private static documentCache = new Map<string, Script>();
-
-    public static getCacheFile() {
-        return this.documentCache.keys()
-    }
 
     /**
      * load method list by path
@@ -60,6 +59,7 @@ export class Detecter {
         }
 
         const methods: Method[] = [];
+        const refs: Ref[] = [];
         const labels: Label[] = [];
         const lineCount = Math.min(document.lineCount, 10000);
         let blockComment = false;
@@ -74,20 +74,24 @@ export class Detecter {
             if (blockComment) {
                 continue;
             }
-            const method = Detecter.getMethodByLine(document, line);
-            if (method) {
-                methods.push(method);
+            const methodOrRef = Detecter.detechMethodByLine(document, line);
+            if (methodOrRef) {
+                if (methodOrRef instanceof Method) {
+                    methods.push(methodOrRef);
+                    refs.push(new Label(methodOrRef.name, document, line))
+                } else {
+                    refs.push(methodOrRef)
+                }
             }
             const label = Detecter.getLabelByLine(document, line);
             if (label) {
                 labels.push(label);
             }
         }
-        const script: Script = { methods, labels }
+        const script: Script = { methods, labels, refs }
         this.documentCache.set(document.uri.path, script)
         return script;
     }
-
 
     public static async getMethodByName(document: vscode.TextDocument, name: string) {
         name = name.toLowerCase()
@@ -96,7 +100,7 @@ export class Detecter {
                 return method;
             }
         }
-        for (const filePath of Detecter.getCacheFile()) {
+        for (const filePath of this.documentCache.keys()) {
             const tempDocument = await vscode.workspace.openTextDocument(filePath);
             for (const method of (await Detecter.buildScript(tempDocument)).methods) {
                 if (method.name.toLowerCase() == name) {
@@ -113,7 +117,7 @@ export class Detecter {
                 return label;
             }
         }
-        for (const filePath of Detecter.getCacheFile()) {
+        for (const filePath of this.documentCache.keys()) {
             const tempDocument = await vscode.workspace.openTextDocument(filePath);
             for (const label of (await Detecter.buildScript(tempDocument)).labels) {
                 if (new RegExp("\\bg?" + label.name + "\\b", "i").test(name)) {
@@ -123,8 +127,22 @@ export class Detecter {
         }
     }
 
+    public static getAllRefByName(name: string): Ref[] {
+        const refs = [];
+        name = name.toLowerCase()
+        for (const filePath of this.documentCache.keys()) {
+            const document = this.documentCache.get(filePath)
+            for (const ref of document.refs) {
+                if (ref.name.toLowerCase() == name) {
+                    refs.push(ref)
+                }
+            }
+        }
+        return refs;
+    }
 
-    public static getLabelByLine(document: vscode.TextDocument, line: number) {
+
+    private static getLabelByLine(document: vscode.TextDocument, line: number) {
         const text = CodeUtil.purity(document.lineAt(line).text);
         const label = /^ *(\w+) *:{1}(?!(:|=))/.exec(text)
         if (label) {
@@ -132,40 +150,33 @@ export class Detecter {
         }
     }
 
-    // detect any like word(any)
-    private static methodPreviousPattern = /(([\w_]+)\s*\(.*?\))/;
-    // detech any like word(any){
-    private static methodPattern = /(([\w_]+)\s*\(.*?\))\s*\{/;
     /**
      * detect method by line
      * @param document
      * @param line
      */
-    public static getMethodByLine(document: vscode.TextDocument, line: number) {
-        const text = this.buildCodeBlock(document, line);
+    private static detechMethodByLine(document: vscode.TextDocument, line: number) {
 
-        const methodMatch = text.match(this.methodPattern);
-        if (methodMatch && !/\b(if|While)\b/ig.test(text)) {
-            return new Method(methodMatch[1], methodMatch[2], document, line, Detecter.getRemarkByLine(document, line - 1));
+        const text = CodeUtil.purity(document.lineAt(line).text);
+        const methodMatch = text.match(/(([\w_]+)(?<!if|while)\s*\(.*?\))\s*(\{)?/);
+        if (!methodMatch) {
+            return;
         }
-    }
-
-    /**
-     * collect multi line code to one.
-     * @param document 
-     * @param line 
-     */
-    private static buildCodeBlock(document: vscode.TextDocument, line: number): string {
-        let text = CodeUtil.purity(document.lineAt(line).text);
-        for (let end = false, i = line + 1; i < document.lineCount && !end; i++) {
-            if (text.match(this.methodPreviousPattern)) {
-                const nextLineText = CodeUtil.purity(document.lineAt(i).text);
-                if (!nextLineText.trim()) { continue; }
-                if (nextLineText.match(/^\s*{/)) { text += "{"; }
+        const methodFullName = methodMatch[1];
+        const methodName = methodMatch[2];
+        const isMethod = methodMatch[3];
+        if (isMethod) {
+            return new Method(methodFullName, methodName, document, line, Detecter.getRemarkByLine(document, line - 1));
+        }
+        for (let i = line + 1; i < document.lineCount; i++) {
+            const nextLineText = CodeUtil.purity(document.lineAt(i).text);
+            if (!nextLineText.trim()) { continue; }
+            if (nextLineText.match(/^\s*{/)) {
+                return new Method(methodFullName, methodName, document, line, Detecter.getRemarkByLine(document, line - 1));
+            } else {
+                return new Ref(methodName, document, line)
             }
-            end = true;
         }
-        return text;
     }
 
     /**

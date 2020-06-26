@@ -286,7 +286,7 @@
               "name": "comment.line.semicolon.functionline.ahk"
             }
           },
-          "match": "^(\\s*\\w+)(?<!if)(\\()(.*)(\\))\\s*({)\\s*(;?.*)$",
+          "match": "^(\\s*\\w+)(?<!if|while)(\\()(.*)(\\))\\s*({)\\s*(;?.*)$",
           "name": "functionline.ahk",
           "example": "fun(){"
         }
