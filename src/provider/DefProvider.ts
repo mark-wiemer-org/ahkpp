@@ -34,11 +34,11 @@ export class DefProvider implements vscode.DefinitionProvider {
 
     }
 
-    public async tryGetFileLink(document: vscode.TextDocument, position: vscode.Position) {
+    public async tryGetFileLink(document: vscode.TextDocument, position: vscode.Position, workFolder?: string) {
         const { text } = document.lineAt(position.line);
         const includeMatch = text.match(/(?<=#include).+?\.(ahk|ext)\b/i);
         if (includeMatch) {
-            const parent = document.uri.path.substr(0, document.uri.path.lastIndexOf("/"));
+            const parent = workFolder ? workFolder : document.uri.path.substr(0, document.uri.path.lastIndexOf("/"));
             const targetPath = vscode.Uri.file(
                 includeMatch[0].trim()
                     .replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parent)
@@ -46,8 +46,11 @@ export class DefProvider implements vscode.DefinitionProvider {
             );
             if (existsSync(targetPath.fsPath)) {
                 return new vscode.Location(targetPath, new vscode.Position(0, 0));
+            } else if (workFolder) {
+                return this.tryGetFileLink(document, position, vscode.workspace.rootPath)
+            } else {
+                return null;
             }
-            return null;
         }
 
     }
