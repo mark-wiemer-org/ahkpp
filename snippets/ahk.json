@@ -1333,6 +1333,21 @@
     "body": "Cos(${1:Number})",
     "description": "Returns the trigonometric cosine of Number."
   },
+  "ObjRelease()": {
+    "prefix": "ObjRelease()",
+    "body": "ObjRelease($Ptr)",
+    "description": "Decrements an object's reference count."
+  },
+  "ObjAddRef()": {
+    "prefix": "ObjAddRef()",
+    "body": "ObjAddRef($Ptr)",
+    "description": "Increments an object's reference count."
+  },
+  "ComObject()": {
+    "prefix": "ComObject()",
+    "body": "ComObject(${VarType}, ${Value} [, ${Flags}])",
+    "description": "Creates an object representing a typed value to be passed as a parameter or return value.."
+  },
   "ComObjCreate()": {
     "prefix": "ComObjCreate()",
     "body": "ComObjCreate(${1:CLSID} [, ${2:IID}])",
@@ -1858,7 +1873,8 @@
   },
   "Count()": {
     "prefix": ".Count()",
-    "body": ".Count()"
+    "body": ".Count()",
+    "description":"Returns the number of key-value pairs present in the object."
   },
   "Delete()": {
     "prefix": ".Delete()",

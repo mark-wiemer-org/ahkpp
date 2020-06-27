@@ -10,10 +10,16 @@ import { SymBolProvider } from "./provider/SymbolProvider";
 import { FileManager } from "./common/fileManager";
 import { AhkHoverProvider } from "./provider/ahkHoverProvider";
 import { RefProvider } from "./provider/RefProvider";
+import { Global } from "./common/global";
 
 export function activate(context: vscode.ExtensionContext) {
 
-    Detecter.buildByPath(vscode.workspace.rootPath);
+    (async () => {
+        Global.updateStatusBarItems("Indexing Autohotkey Workspace...")
+        await Detecter.buildByPath(vscode.workspace.rootPath);
+        Global.updateStatusBarItems("Index Workspace Success!")
+    })();
+
     const language = { language: "ahk" };
     FileManager.init(context)
     context.subscriptions.push(
