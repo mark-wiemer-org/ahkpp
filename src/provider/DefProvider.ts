@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import { Detecter } from "../core/Detecter";
 import { existsSync } from "fs";
-import { worker } from "cluster";
 
 export class DefProvider implements vscode.DefinitionProvider {
 
@@ -19,7 +18,7 @@ export class DefProvider implements vscode.DefinitionProvider {
             const method = await Detecter.getMethodByName(document, word)
             if (method) {
                 const methodDoc = method.document;
-                return new vscode.Location(methodDoc.uri, new vscode.Position(method.line, methodDoc.lineAt(method.line).text.indexOf(word)));
+                return new vscode.Location(methodDoc.uri, new vscode.Position(method.line, method.character));
             }
         }
 
@@ -27,7 +26,7 @@ export class DefProvider implements vscode.DefinitionProvider {
         const label = await Detecter.getLabelByName(document, word)
         if (label) {
             const tempDocument = label.document;
-            return new vscode.Location(tempDocument.uri, new vscode.Position(label.line, tempDocument.lineAt(label.line).text.indexOf(label.name)));
+            return new vscode.Location(tempDocument.uri, new vscode.Position(label.line, label.character));
         }
 
         return null;

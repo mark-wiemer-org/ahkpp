@@ -22,6 +22,7 @@
         "interface-name": false,
         "triple-equals": false,
         "semicolon":false,
+        "align":false,
         "member-ordering": false,
         "no-trailing-whitespace": false,
         "quotemark": false,

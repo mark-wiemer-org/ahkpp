@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { Detecter } from "../core/Detecter";
+import { Detecter, Method } from "../core/Detecter";
 
 
 export class SymBolProvider implements vscode.DocumentSymbolProvider {
@@ -12,7 +12,7 @@ export class SymBolProvider implements vscode.DocumentSymbolProvider {
         for (const method of script.methods) {
             result.push(
                 new vscode.SymbolInformation(method.full, vscode.SymbolKind.Method, method.comment,
-                    new vscode.Location(method.document.uri, new vscode.Position(method.line, 0))
+                    new vscode.Location(method.document.uri, new vscode.Position(method.line, method.character))
                 )
             )
         }
@@ -20,7 +20,7 @@ export class SymBolProvider implements vscode.DocumentSymbolProvider {
         for (const label of script.labels) {
             result.push(
                 new vscode.SymbolInformation(label.name, vscode.SymbolKind.Field, null,
-                    new vscode.Location(label.document.uri, new vscode.Position(label.line, 0))
+                    new vscode.Location(label.document.uri, new vscode.Position(label.line, label.character))
                 )
             )
         }

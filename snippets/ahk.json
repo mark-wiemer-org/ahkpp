@@ -1118,6 +1118,11 @@
     "body": "Thread, ${1:NoTimers|Priority|Interrupt}",
     "description": "Sets the priority or interruptibility of threads. It can also temporarily disable all timers."
   },
+  "Exception()": {
+    "prefix": "Exception",
+    "body": "Exception(${Message})",
+    "description": "Creates an object with properties, also common to exceptions created by runtime errors."
+  },
   "Throw": {
     "prefix": "Throw",
     "body": "Throw, ${1:[Expression]}",
@@ -2141,7 +2146,7 @@
   "A_Desktop": {
     "prefix": "A_Desktop",
     "body": "A_Desktop",
-    "description":"The full path and name of the folder containing the current user's desktop files."
+    "description": "The full path and name of the folder containing the current user's desktop files."
   },
   "A_DesktopCommon": {
     "prefix": "A_DesktopCommon",
@@ -2612,7 +2617,7 @@
   "A_ThisMenuItem": {
     "prefix": "A_ThisMenuItem",
     "body": "A_ThisMenuItem",
-    "description":"The name of the most recently selected custom menu item (blank if none)."
+    "description": "The name of the most recently selected custom menu item (blank if none)."
   },
   "A_ThisMenuItemPos": {
     "prefix": "A_ThisMenuItemPos",
@@ -2697,7 +2702,7 @@
   "ErrorLevel": {
     "prefix": "ErrorLevel",
     "body": "ErrorLevel",
-    "description":"This is a built-in variable that is set to indicate the success or failure of some of the commands (not all commands change the value of ErrorLevel). A value of 0 usually indicates success, and any other value usually indicates failure. You can also set the value of ErrorLevel yourself.\nOf special interest is that RunWait sets ErrorLevel to be the exit code of the program it ran. Most programs yield an exit code of zero if they completed successfully.\nEach thread retains its own value of ErrorLevel, meaning that if the current thread is interrupted by another, when the original thread is resumed it will still have its original value of ErrorLevel, not the ErrorLevel that may have been set by the interrupting thread."
+    "description": "This is a built-in variable that is set to indicate the success or failure of some of the commands (not all commands change the value of ErrorLevel). A value of 0 usually indicates success, and any other value usually indicates failure. You can also set the value of ErrorLevel yourself.\nOf special interest is that RunWait sets ErrorLevel to be the exit code of the program it ran. Most programs yield an exit code of zero if they completed successfully.\nEach thread retains its own value of ErrorLevel, meaning that if the current thread is interrupted by another, when the original thread is resumed it will still have its original value of ErrorLevel, not the ErrorLevel that may have been set by the interrupting thread."
   },
   "ProgramFiles": {
     "prefix": "ProgramFiles",
@@ -3442,27 +3447,27 @@
   "ahk_id": {
     "prefix": "ahk_id",
     "body": "ahk_id",
-    "description":"Each window or control has a unique ID, also known as a HWND (short for handle to window)."
+    "description": "Each window or control has a unique ID, also known as a HWND (short for handle to window)."
   },
   "ahk_pid": {
     "prefix": "ahk_pid",
     "body": "ahk_pid",
-    "description":"Use ahk_pid to identify a window belonging to a specific process. The process identifier (PID) is typically retrieved by WinGet, Run or Process."
+    "description": "Use ahk_pid to identify a window belonging to a specific process. The process identifier (PID) is typically retrieved by WinGet, Run or Process."
   },
   "ahk_class": {
     "prefix": "ahk_class",
     "body": "ahk_class",
-    "description":"A window class is a set of attributes that the system uses as a template to create a window. In other words, the class name of the window identifies what type of window it is. To use a window class, specify ahk_class ExactClassName as shown by Window Spy. ExactClassName can be retrieved by WinGetClass."
+    "description": "A window class is a set of attributes that the system uses as a template to create a window. In other words, the class name of the window identifies what type of window it is. To use a window class, specify ahk_class ExactClassName as shown by Window Spy. ExactClassName can be retrieved by WinGetClass."
   },
   "ahk_group": {
     "prefix": "ahk_group",
     "body": "ahk_group",
-    "description":"Use ahk_group to identify a window or windows matching the rules contained by a previously defined window group."
+    "description": "Use ahk_group to identify a window or windows matching the rules contained by a previously defined window group."
   },
   "ahk_exe": {
     "prefix": "ahk_exe",
     "body": "ahk_exe",
-    "description":"Use ahk_exe to identify a window belonging to any process with the given name or path."
+    "description": "Use ahk_exe to identify a window belonging to any process with the given name or path."
   },
   "Between": {
     "prefix": "Between",
@@ -3651,17 +3656,17 @@
   "static": {
     "prefix": "static",
     "body": "static",
-    "description":"Static variables are always implicitly local, but differ from locals because their values are remembered between calls."
+    "description": "Static variables are always implicitly local, but differ from locals because their values are remembered between calls."
   },
   "global": {
     "prefix": "global",
     "body": "global",
-    "description":"To refer to an existing global variable inside a function (or create a new one), declare the variable as global prior to using it."
+    "description": "To refer to an existing global variable inside a function (or create a new one), declare the variable as global prior to using it."
   },
   "local": {
     "prefix": "local",
     "body": "local",
-    "description":"Local variables are specific to a single function and are visible only inside that function. Consequently, a local variable may have the same name as a global variable and both will have separate contents. Separate functions may also safely use the same variable names."
+    "description": "Local variables are specific to a single function and are visible only inside that function. Consequently, a local variable may have the same name as a global variable and both will have separate contents. Separate functions may also safely use the same variable names."
   },
   "ByRef": {
     "prefix": "ByRef",

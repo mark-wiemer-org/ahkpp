@@ -9,7 +9,7 @@ export class CodeUtil {
         return origin.replace(/;.+/, "")
             .replace(/".+?"/, "")
             .replace(/ +/, " ")
-            .replace(/gui.*/ig, "")
-            .replace(/(msgbox).+?%/ig, "$1");
+            .replace(/\bgui\b.*/ig, "")
+            .replace(/\b(msgbox)\b.+?%/ig, "$1");
     }
 }

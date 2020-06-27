@@ -11,6 +11,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
     private static oneCommandList = ["ifnotexist", "ifexist", "ifwinactive", "ifwinnotactive",
         "ifwinexist", "ifwinnotexist", "ifinstring", "ifnotinstring", "if", "else", "loop", "for", "while", "catch"];
 
+
     public provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextEdit[]> {
 
         let formatDocument = "";
@@ -21,31 +22,30 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
         for (let line = 0; line < document.lineCount; line++) {
 
-            let { text } = document.lineAt(line);
-            if (text.match(/ *\/\*/)) {
+            const originText = document.lineAt(line).text;
+            if (originText.match(/ *\/\*/)) {
                 blockComment = true;
             }
-            if (text.match(/ *\*\//)) {
+            if (originText.match(/ *\*\//)) {
                 blockComment = false;
             }
             if (blockComment) {
-                formatDocument += text;
+                formatDocument += originText;
                 if (line !== document.lineCount - 1) {
                     formatDocument += "\n";
                 }
                 continue;
             };
-            text = text.toLowerCase();
-            text = CodeUtil.purity(text);
+            const purityText = CodeUtil.purity(originText.toLowerCase());
             let notDeep = true;
 
-            if (text.match(/#ifwinactive$/) || text.match(/#ifwinnotactive$/) || (text.match(/\b(return|ExitApp)\b/i) && tagDeep === deep)) {
+            if (purityText.match(/#ifwinactive$/) || purityText.match(/#ifwinnotactive$/) || (purityText.match(/\b(return|ExitApp)\b/i) && tagDeep === deep)) {
                 deep--; notDeep = false;
             }
 
-            if (text.match(/}/) != null) {
-                let temp = text.match(/}/).length;
-                const t2 = text.match(/{[^{}]*}/);
+            if (purityText.match(/}/) != null) {
+                let temp = purityText.match(/}/).length;
+                const t2 = purityText.match(/{[^{}]*}/);
                 if (t2) {
                     temp = temp - t2.length;
                 }
@@ -55,15 +55,15 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            if (text.match(/:$/)) {
+            if (purityText.match(/:$/)) {
                 if (tagDeep > 0 && tagDeep === deep) {
                     deep--; notDeep = false;
                 }
             }
 
-            if (oneCommandCode && text.match(/{/) != null) {
-                let temp = text.match(/{/).length;
-                const t2 = text.match(/{[^{}]*}/);
+            if (oneCommandCode && purityText.match(/{/) != null) {
+                let temp = purityText.match(/{/).length;
+                const t2 = purityText.match(/{[^{}]*}/);
                 if (t2) {
                     temp = temp - t2.length;
                 }
@@ -76,7 +76,11 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (deep < 0) {
                 deep = 0;
             }
-            formatDocument += (" ".repeat(deep * options.tabSize) + document.lineAt(line).text.replace(/ {2,}/g, " ").replace(/^\s*/, ""));
+            let comment: any = /;.+/.exec(originText)
+            comment = comment ? comment[0] : ""
+
+            formatDocument += (" ".repeat(deep * options.tabSize) + originText.replace(/^\s*/, "")
+                .replace(/;.+/, "").replace(/ {2,}/g, " ") + comment);
             if (line !== document.lineCount - 1) {
                 formatDocument += "\n";
             }
@@ -86,13 +90,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 deep--;
             }
 
-            if (text.match(/#ifwinactive.*?\s/) || text.match(/#ifwinnotactive.*?\s/)) {
+            if (purityText.match(/#ifwinactive.*?\s/) || purityText.match(/#ifwinnotactive.*?\s/)) {
                 deep++; notDeep = false;
             }
 
-            if (text.match(/{/) != null) {
-                let temp = text.match(/{/).length;
-                const t2 = text.match(/{[^{}]*}/);
+            if (purityText.match(/{/) != null) {
+                let temp = purityText.match(/{/).length;
+                const t2 = purityText.match(/{[^{}]*}/);
                 if (t2) {
                     temp = temp - t2.length;
                 }
@@ -102,7 +106,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            if (text.match(/:$/)) {
+            if (purityText.match(/:$/)) {
                 deep++;
                 tagDeep = deep;
                 notDeep = false;
@@ -112,7 +116,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 for (const oneCommand of FormatProvider.oneCommandList) {
                     let temp: RegExpExecArray;
                     if (
-                        (temp = new RegExp("\\b" + oneCommand + "\\b(.*)").exec(text)) != null
+                        (temp = new RegExp("\\b" + oneCommand + "\\b(.*)").exec(purityText)) != null
                         && !temp[1].includes("/")) {
                         oneCommandCode = true;
                         deep++;

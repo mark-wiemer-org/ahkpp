@@ -1,18 +1,19 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
-import { Out } from "../common/out";
 import { CodeUtil } from "../common/codeUtil";
+import { Out } from "../common/out";
 
 export class Script {
     constructor(public methods: Method[], public refs: Ref[], public labels: Label[]) { }
 }
 
 export class Method {
-    constructor(public full: string, public name: string, public document: vscode.TextDocument, public line: number, public comment: string) { }
+    constructor(public full: string, public name: string, public document: vscode.TextDocument,
+        public line: number, public character: number, public comment: string) { }
 }
 
 export class Label {
-    constructor(public name: string, public document: vscode.TextDocument, public line: number) { }
+    constructor(public name: string, public document: vscode.TextDocument, public line: number, public character: number) { }
 }
 
 export class Ref {
@@ -78,7 +79,7 @@ export class Detecter {
             if (methodOrRef) {
                 if (methodOrRef instanceof Method) {
                     methods.push(methodOrRef);
-                    refs.push(new Label(methodOrRef.name, document, line))
+                    refs.push(new Label(methodOrRef.name, document, line, methodOrRef.character))
                 } else {
                     refs.push(methodOrRef)
                 }
@@ -95,14 +96,13 @@ export class Detecter {
 
     public static async getMethodByName(document: vscode.TextDocument, name: string) {
         name = name.toLowerCase()
-        for (const method of (await Detecter.buildScript(document)).methods) {
+        for (const method of this.documentCache.get(document.uri.path).methods) {
             if (method.name.toLowerCase() == name) {
                 return method;
             }
         }
         for (const filePath of this.documentCache.keys()) {
-            const tempDocument = await vscode.workspace.openTextDocument(filePath);
-            for (const method of (await Detecter.buildScript(tempDocument)).methods) {
+            for (const method of this.documentCache.get(filePath).methods) {
                 if (method.name.toLowerCase() == name) {
                     return method;
                 }
@@ -112,14 +112,13 @@ export class Detecter {
 
     public static async getLabelByName(document: vscode.TextDocument, name: string) {
         name = name.toLowerCase()
-        for (const label of (await Detecter.buildScript(document)).labels) {
+        for (const label of this.documentCache.get(document.uri.path).labels) {
             if (new RegExp("\\bg?" + label.name + "\\b", "i").test(name)) {
                 return label;
             }
         }
         for (const filePath of this.documentCache.keys()) {
-            const tempDocument = await vscode.workspace.openTextDocument(filePath);
-            for (const label of (await Detecter.buildScript(tempDocument)).labels) {
+            for (const label of this.documentCache.get(filePath).labels) {
                 if (new RegExp("\\bg?" + label.name + "\\b", "i").test(name)) {
                     return label;
                 }
@@ -146,7 +145,8 @@ export class Detecter {
         const text = CodeUtil.purity(document.lineAt(line).text);
         const label = /^ *(\w+) *:{1}(?!(:|=))/.exec(text)
         if (label) {
-            return new Label(label[1], document, line);
+            const labelName = label[1]
+            return new Label(label[1], document, line, text.indexOf(labelName));
         }
     }
 
@@ -157,22 +157,27 @@ export class Detecter {
      */
     private static detechMethodByLine(document: vscode.TextDocument, line: number) {
 
-        const text = CodeUtil.purity(document.lineAt(line).text);
-        const methodMatch = text.match(/(([\w_]+)(?<!if|while)\s*\(.*?\))\s*(\{)?/);
+        const origin = document.lineAt(line).text;
+        const text = CodeUtil.purity(origin);
+        const refPattern = /\s*(([\w_]+)(?<!if|while)\s*\(.*?\))\s*(\{)?\s*/i
+        const methodMatch = text.match(refPattern);
         if (!methodMatch) {
             return;
         }
-        const methodFullName = methodMatch[1];
         const methodName = methodMatch[2];
+        if (text.length != methodMatch[0].length) {
+            return new Ref(methodName, document, line)
+        }
+        const methodFullName = methodMatch[1];
         const isMethod = methodMatch[3];
         if (isMethod) {
-            return new Method(methodFullName, methodName, document, line, Detecter.getRemarkByLine(document, line - 1));
+            return new Method(methodFullName, methodName, document, line, origin.indexOf(methodName), Detecter.getRemarkByLine(document, line - 1));
         }
         for (let i = line + 1; i < document.lineCount; i++) {
             const nextLineText = CodeUtil.purity(document.lineAt(i).text);
             if (!nextLineText.trim()) { continue; }
             if (nextLineText.match(/^\s*{/)) {
-                return new Method(methodFullName, methodName, document, line, Detecter.getRemarkByLine(document, line - 1));
+                return new Method(methodFullName, methodName, document, line, origin.indexOf(methodName), Detecter.getRemarkByLine(document, line - 1));
             } else {
                 return new Ref(methodName, document, line)
             }
@@ -192,7 +197,6 @@ export class Detecter {
                 return markMatch[1];
             }
         }
-
         return null;
     }
 
