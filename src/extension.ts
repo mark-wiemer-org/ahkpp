@@ -1,11 +1,11 @@
 import * as vscode from "vscode";
 import { ProviderResult } from "vscode";
-import { Detecter } from "./core/Detecter";
+import { Detecter } from "./core/detect/detecter";
 import { ScriptRunner } from "./core/ScriptRunner";
 import { DebugSession } from "./debugger/debugSession";
 import { DefProvider } from "./provider/DefProvider";
-import { FileProvider } from "./provider/FileProvider";
-import { FormatProvider } from "./provider/FormatProvider";
+import { TemplateProvider } from "./provider/templateProvider";
+import { FormatProvider } from "./provider/formattingProvider";
 import { SymBolProvider } from "./provider/SymbolProvider";
 import { FileManager } from "./common/fileManager";
 import { AhkHoverProvider } from "./provider/ahkHoverProvider";
@@ -29,7 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerDocumentSymbolProvider(language, new SymBolProvider()),
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
         vscode.languages.registerReferenceProvider(language, new RefProvider()),
-        FileProvider.createEditorListenr(),
+        TemplateProvider.createEditorListenr(),
         vscode.debug.registerDebugAdapterDescriptorFactory('ahk', new InlineDebugAdapterFactory()),
         vscode.commands.registerCommand("run.ahk", () => ScriptRunner.run()),
         vscode.commands.registerCommand("debug.ahk", () => ScriptRunner.startDebugger()),

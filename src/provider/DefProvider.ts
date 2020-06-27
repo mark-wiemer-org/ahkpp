@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { Detecter } from "../core/Detecter";
+import { Detecter } from "../core/detect/detecter";
 import { existsSync } from "fs";
 
 export class DefProvider implements vscode.DefinitionProvider {

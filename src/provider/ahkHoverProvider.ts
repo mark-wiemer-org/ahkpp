@@ -2,7 +2,7 @@ import { HoverProvider, TextDocument, Position, CancellationToken, ExtensionCont
 import { join } from "path";
 import { readFileSync } from "fs";
 import { worker } from "cluster";
-import { Detecter } from "../core/Detecter";
+import { Detecter } from "../core/detect/detecter";
 
 interface Snippet {
     prefix: string;

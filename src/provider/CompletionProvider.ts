@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
-import { Detecter } from "../core/Detecter";
-
+import { Detecter } from "../core/detect/detecter";
 
 export class CompletionProvider implements vscode.CompletionItemProvider {
 

@@ -1,24 +1,8 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
-import { CodeUtil } from "../common/codeUtil";
-import { Out } from "../common/out";
-
-export class Script {
-    constructor(public methods: Method[], public refs: Ref[], public labels: Label[]) { }
-}
-
-export class Method {
-    constructor(public full: string, public name: string, public document: vscode.TextDocument,
-        public line: number, public character: number, public comment: string) { }
-}
-
-export class Label {
-    constructor(public name: string, public document: vscode.TextDocument, public line: number, public character: number) { }
-}
-
-export class Ref {
-    constructor(public name: string, public document: vscode.TextDocument, public line: number) { }
-}
+import { CodeUtil } from "../../common/codeUtil";
+import { Out } from "../../common/out";
+import { Script, Method, Ref, Label } from "./model";
 
 export class Detecter {
 
@@ -60,7 +44,7 @@ export class Detecter {
         }
 
         const methods: Method[] = [];
-        const refs: Ref[] = [];
+        let refs: Ref[] = [];
         const labels: Label[] = [];
         const lineCount = Math.min(document.lineCount, 10000);
         let blockComment = false;
@@ -79,7 +63,9 @@ export class Detecter {
             if (methodOrRef) {
                 if (methodOrRef instanceof Method) {
                     methods.push(methodOrRef);
-                    refs.push(new Label(methodOrRef.name, document, line, methodOrRef.character))
+                    refs.push(new Ref(methodOrRef.name, document, line, methodOrRef.character))
+                } else if (methodOrRef instanceof Array) {
+                    refs = refs.concat(methodOrRef)
                 } else {
                     refs.push(methodOrRef)
                 }
@@ -155,9 +141,9 @@ export class Detecter {
      * @param document
      * @param line
      */
-    private static detechMethodByLine(document: vscode.TextDocument, line: number) {
+    private static detechMethodByLine(document: vscode.TextDocument, line: number, origin?: string) {
 
-        const origin = document.lineAt(line).text;
+        origin = origin != undefined ? origin : document.lineAt(line).text;
         const text = CodeUtil.purity(origin);
         const refPattern = /\s*(([\w_]+)(?<!if|while)\s*\(.*?\))\s*(\{)?\s*/i
         const methodMatch = text.match(refPattern);
@@ -165,21 +151,31 @@ export class Detecter {
             return;
         }
         const methodName = methodMatch[2];
+        const character = origin.indexOf(methodName);
         if (text.length != methodMatch[0].length) {
-            return new Ref(methodName, document, line)
+            let refs = [new Ref(methodName, document, line, character)];
+            const newRef = this.detechMethodByLine(document, line, origin.replace(new RegExp(methodName + "\\s*\\("), ""));
+            if(newRef){
+                if (newRef instanceof Array) {
+                    refs = refs.concat(newRef);
+                } else {
+                    refs.push(newRef)
+                }
+            }
+            return refs
         }
         const methodFullName = methodMatch[1];
         const isMethod = methodMatch[3];
         if (isMethod) {
-            return new Method(methodFullName, methodName, document, line, origin.indexOf(methodName), Detecter.getRemarkByLine(document, line - 1));
+            return new Method(methodFullName, methodName, document, line, character, Detecter.getRemarkByLine(document, line - 1));
         }
         for (let i = line + 1; i < document.lineCount; i++) {
             const nextLineText = CodeUtil.purity(document.lineAt(i).text);
             if (!nextLineText.trim()) { continue; }
             if (nextLineText.match(/^\s*{/)) {
-                return new Method(methodFullName, methodName, document, line, origin.indexOf(methodName), Detecter.getRemarkByLine(document, line - 1));
+                return new Method(methodFullName, methodName, document, line, character, Detecter.getRemarkByLine(document, line - 1));
             } else {
-                return new Ref(methodName, document, line)
+                return new Ref(methodName, document, line, character)
             }
         }
     }

@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
-import { Detecter, Method } from "../core/Detecter";
-
+import { Detecter } from "../core/detect/detecter";
 
 export class SymBolProvider implements vscode.DocumentSymbolProvider {
     public async provideDocumentSymbols(document: vscode.TextDocument, token: vscode.CancellationToken): Promise<vscode.DocumentSymbol[]> {

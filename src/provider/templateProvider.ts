@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-export class FileProvider {
+export class TemplateProvider {
     public static createEditorListenr(): vscode.Disposable {
         return vscode.window.onDidChangeActiveTextEditor((e) => {
             if (e && e.document.languageId === "ahk" && e.document.getText() === "") {
