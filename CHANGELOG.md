@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.4 - 2020/6/27
+- Support find method references.
+- Fix syntax bug.
+
 ## 2.4.3 - 2020/6/25
 - Add command|method hover feature.
 - Add labels to outline.
