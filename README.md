@@ -12,7 +12,7 @@ AutoHotKey language support for VS Code
     - [Goto Definition](#goto-definition)
     - [Find References](#find-references)
     - [Code Symbol](#code-symbol)
-    - [Hover tip](#hover-tip)
+    - [Hover Tip](#hover-tip)
     - [Code Format](#code-format)
   - [Context Menu](#context-menu)
   - [Setting](#setting)
@@ -39,14 +39,14 @@ AutoHotKey language support for VS Code
 
 ### Goto Definition
 
-Press ctrl and move the mouse coordinates to the calling code.
+Usage: Press ctrl and move the mouse coordinates to the calling code.
 ![gotoDefinition](image/gotoDefinition.jpg)
 
 ### Find References
 
 Usage: Move coordinates to method, then:
 - Right click then click find all references.
-- Or press shift+f12.
+- Or press `shift+f12`.
 
 ### Code Symbol
 
@@ -61,7 +61,7 @@ Usage: Move mouse to method call or command.
 ### Code Format
 Usage:
 - Right click then click format document.
-- Press Shift+Alt+F.
+- Or press `Shift+Alt+F`.
 
 - **Formatter follows my coding habits, so it may not unsuited for you**.
 ![codeFormat](image/codeFormat.jpg)
