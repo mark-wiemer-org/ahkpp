@@ -12,6 +12,8 @@ import { DbgpResponse } from './struct/dbgpResponse';
 import { VarScope } from './struct/scope';
 
 import getPort = require('get-port');
+import { spawn } from 'child_process';
+import { resolve } from 'url';
 
 /**
  * A Ahk runtime debugger.
@@ -77,10 +79,11 @@ export class DebugDispather extends EventEmitter {
 		if (!args.program) {
 			args.program = await ScriptRunner.getPathByActive()
 		}
-		const runSuccess = await ScriptRunner.run(runtime, args.program, true, port)
-		if (!runSuccess) {
-			this.end();
-		}
+		const ahkProcess = spawn(runtime, ["/ErrorStdOut", `/debug=localhost:${port}`, args.program], { cwd: `${resolve(args.program, '..')}` })
+		ahkProcess.stderr.on("data", err => {
+			this.emit('output', err.toString("utf8"))
+			this.end()
+		})
 	}
 
 	public async restart() {

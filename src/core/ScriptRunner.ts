@@ -9,12 +9,14 @@ export class ScriptRunner {
     /**
      * start debuggin session
      */
-    public static startDebugger(script?: string) {
+    public static async startDebugger(script?: string) {
         const cwd = script ? vscode.Uri.file(script) : vscode.window.activeTextEditor.document.uri
+        script = script ? script : await this.getPathByActive()
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {
             type: "ahk",
             request: "launch",
             name: "Autohotkey Debugger",
+            runtime: Global.getConfig(ConfigKey.executePath),
             program: script
         });
     }
@@ -34,7 +36,7 @@ export class ScriptRunner {
                 path = await this.getPathByActive();
             }
             try {
-                await Process.exec(`\"${executePath}\"${debug ? ' /debug=localhost:' + debugPort : ''} \"${path}\"`, { cwd: `${res(path, '..')}` });
+                await Process.exec(`\"${executePath}\"${debug ? ' /ErrorStdOut /debug=localhost:' + debugPort : ''} \"${path}\"`, { cwd: `${res(path, '..')}` });
                 return true;
             } catch (error) {
                 return false;
