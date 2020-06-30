@@ -4,6 +4,7 @@ export interface Script {
     methods: Method[];
     refs: Ref[];
     labels: Label[];
+    blocks: Block[];
 }
 
 export interface Variable {
@@ -21,5 +22,9 @@ export class Label {
 }
 
 export class Ref {
+    constructor(public name: string, public document: vscode.TextDocument, public line: number, public character: number) { }
+}
+
+export class Block {
     constructor(public name: string, public document: vscode.TextDocument, public line: number, public character: number) { }
 }

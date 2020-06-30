@@ -24,11 +24,11 @@ export class SymBolProvider implements vscode.DocumentSymbolProvider {
             )
         }
 
-        // const { text } = document.lineAt(line);
-        // const hotKeyMatch = text.match(/;;(.+)/);
-        // if (hotKeyMatch) {
-        //     return new vscode.SymbolInformation(hotKeyMatch[1], vscode.SymbolKind.Module, null, new vscode.Location(document.uri, new vscode.Position(line, 0)));
-        // }
+        for (const block of script.blocks) {
+            result.push(
+                new vscode.SymbolInformation(block.name, vscode.SymbolKind.Module, null, new vscode.Location(block.document.uri, new vscode.Position(block.line, block.character)))
+            )
+        }
 
         return result;
     }

@@ -1,7 +1,7 @@
 import { basename } from 'path';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { Breakpoint, Source } from "vscode-debugadapter";
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 
 type Callback = (breakPoint: DebugProtocol.Breakpoint) => void;
 
@@ -26,6 +26,9 @@ export class BreakPointHandler {
 
     public buildBreakPoint(path: string, sourceBreakpoints: DebugProtocol.SourceBreakpoint[], callback: Callback): DebugProtocol.Breakpoint[] {
 
+        if (!existsSync(path)) {
+            return [];
+        }
         const sourceLines = readFileSync(path).toString().split('\n');
         const bps = sourceBreakpoints.map((sourceBreakpoint) => {
             const breakPoint = new Breakpoint(false, sourceBreakpoint.line, sourceBreakpoint.column, new Source(basename(path), path))

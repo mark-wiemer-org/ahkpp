@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as vscode from "vscode";
 import { CodeUtil } from "../../common/codeUtil";
 import { Out } from "../../common/out";
-import { Script, Method, Ref, Label } from "./model";
+import { Script, Method, Ref, Label, Block } from "./model";
 
 export class Detecter {
 
@@ -46,6 +46,7 @@ export class Detecter {
         const methods: Method[] = [];
         let refs: Ref[] = [];
         const labels: Label[] = [];
+        const blocks: Block[] = [];
         const lineCount = Math.min(document.lineCount, 10000);
         let blockComment = false;
         for (let line = 0; line < lineCount; line++) {
@@ -74,8 +75,12 @@ export class Detecter {
             if (label) {
                 labels.push(label);
             }
+            const block = Detecter.getBlockByLine(document, line);
+            if (block) {
+                blocks.push(block);
+            }
         }
-        const script: Script = { methods, labels, refs }
+        const script: Script = { methods, labels, refs,blocks }
         this.documentCache.set(document.uri.path, script)
         return script;
     }
@@ -126,6 +131,13 @@ export class Detecter {
         return refs;
     }
 
+    private static getBlockByLine(document: vscode.TextDocument, line: number):Block {
+        const { text } = document.lineAt(line);
+        const blockMatch = text.match(/;;(.+)/);
+        if (blockMatch) {
+            return {document,line,name:blockMatch[1],character:text.indexOf(blockMatch[1])}
+        }
+    }
 
     private static getLabelByLine(document: vscode.TextDocument, line: number) {
         const text = CodeUtil.purity(document.lineAt(line).text);

@@ -54,41 +54,6 @@
     "string": {
       "patterns": [
         {
-          "match": "(?i:(msgbox|OutputDebug)[ ,]*(.+))",
-          "captures": {
-            "1": {
-              "name": "keyword.ahk"
-            },
-            "2": {
-              "patterns": [
-                {
-                  "match": "%\\s+(.+)",
-                  "captures": {
-                    "1": {
-                      "patterns": [{
-                        "include": "#text" 
-                      }]
-                    }
-                  }
-                },
-                {
-                  "match": "%(\\w+)%",
-                  "captures": {
-                    "1": {
-                      "name": "variable.ref.ahk"
-                    }
-                  }
-                },
-                {
-                  "match": ".+",
-                  "name": "string.ahk"
-                }
-              ]
-            }
-          },
-          "example": "msgbox text"
-        },
-        {
           "begin": "^\\s*\\((?!.*\\))",
           "end": "^\\s*\\)",
           "name": "string.ahk",

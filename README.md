@@ -7,12 +7,16 @@
 AutoHotKey language support for VS Code
 - [vscode-autohotkey-Plus](#vscode-autohotkey-plus)
   - [Debug](#debug)
-  - [MethodSymbol](#methodsymbol)
-  - [GotoDefinition](#gotodefinition)
-  - [Script](#script)
+  - [Language Features](#language-features)
+    - [Method Symbol](#method-symbol)
+    - [Goto Definition](#goto-definition)
+    - [Find References](#find-references)
+    - [Code Symbol](#code-symbol)
+    - [Hover tip](#hover-tip)
+    - [Code Format](#code-format)
+  - [Context Menu](#context-menu)
   - [Setting](#setting)
-  - [CodeSymbol](#codesymbol)
-  - [CodeFormat](#codeformat)
+  - [RoadMap](#roadmap)
   - [Credits](#credits)
 
 ## Debug
@@ -20,42 +24,64 @@ AutoHotKey language support for VS Code
 2. Support breakpoint、stacktrace、variable
 ![debug](image/debug.gif)
 
-**features:**
+**Features:**
 1. **Output Message**: you can using `OutputDebug` command instead MsgBox.
 ![output](image/output.jpg)
 2. **Evalute**: Set and get variable in debug evaluter.![evalute](image/evalute.jpg)
 
-## MethodSymbol
+## Language Features
+
+### Method Symbol
 1. Detech source method as symbol
 2. You can add a comment to the method using a semicolon on the previous line of the method
 
 ![methodSymbol](image/methodSymbol.jpg)
 
-## GotoDefinition
+### Goto Definition
 
-1. Press ctrl and move the mouse coordinates to the calling code 
+Press ctrl and move the mouse coordinates to the calling code.
 ![gotoDefinition](image/gotoDefinition.jpg)
 
-## Script
-1. Right click.
-- **Run**: run script without debug
-- **Compile**: compile script in same directory.
+### Find References
+
+Usage: Move coordinates to method, then:
+- Right click then click find all references.
+- Or press shift+f12.
+
+### Code Symbol
+
+Usage: Add two semicolon to comment code block
+![codeSymbole](image/codeSymbol.jpg)
+
+### Hover Tip
+
+Usage: Move mouse to method call or command.
+![hover](image/hover.png)
+
+### Code Format
+Usage:
+- Right click then click format document.
+- Press Shift+Alt+F.
+
+- **Formatter follows my coding habits, so it may not unsuited for you**.
+![codeFormat](image/codeFormat.jpg)
+
+## Context Menu
+Usage: Right click, then:
+- **Run**: Run script without debug.
+- **Compile**: Compile script in same directory.
 ![compile](image/compile.jpg)
 
 ## Setting
 
-1. OpenSetting -> config
+OpenSetting -> extensions -> Ahk Plus
 ![settings](image/settings.jpg)
 
-## CodeSymbol
+## RoadMap
+- Go to variable definition.
+- IntelliSense Code for ahk.
 
-1. You can add two semicolon to comment code block
-![codeSymbole](image/codeSymbol.jpg)
-
-## CodeFormat
-1. Right click then click format document.
-- **Formatter follows my coding habits, so it may not unsuited for you**.
-![codeFormat](image/codeFormat.jpg)
+These two items need to involve a language parser, I am not sure I can achieve it, so this is a plan, if you have knowledge of compilation principles, can give me some guidance.
 
 ## Credits
 - [vscode-autohotkey](https://github.com/stef-levesque/vscode-autohotkey)
