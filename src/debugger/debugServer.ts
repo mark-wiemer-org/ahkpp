@@ -13,14 +13,15 @@ export class DebugServer extends EventEmitter {
     public constructor(private port: number) { super(); }
 
     public start(): DebugServer {
-        let tempData = '';
+        const END = 0;
+        let tempData: Buffer;
         this.proxyServer = new Net.Server().listen(this.port).on('connection', (socket: Net.Socket) => {
             this.proxyConnection = socket;
             socket.on('data', (chunk) => {
-                tempData += chunk.toString();
-                if (tempData.match(/<\?xml version="1.0" encoding="UTF-8"\?>\s*</)) {
-                    this.process(tempData);
-                    tempData = '';
+                tempData = tempData ? Buffer.concat([tempData, chunk]) : chunk
+                if (tempData[tempData.length - 1] == END) {
+                    this.process(tempData.toString());
+                    tempData = null;
                 }
             });
         }).on("error", (err: Error) => {

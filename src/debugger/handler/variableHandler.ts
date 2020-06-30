@@ -100,19 +100,23 @@ export class VariableHandler {
 
         return Util.toArray(response.property)
             .map((property) => {
-                const { attr } = property;
-                let indexedVariables: number, namedVariables: number;
-                if (this.likeArray(property)) {
-                    const length = this.getLikeArrayLength(property);
-                    indexedVariables = 100 < length ? length : undefined;
-                    namedVariables = 100 < length ? 1 : undefined;
+                try {
+                    const { attr } = property;
+                    let indexedVariables: number, namedVariables: number;
+                    if (this.likeArray(property)) {
+                        const length = this.getLikeArrayLength(property);
+                        indexedVariables = 100 < length ? length : undefined;
+                        namedVariables = 100 < length ? 1 : undefined;
+                    }
+                    const ahkVar = { scope, frameId: scope == VarScope.GLOBAL ? -1 : this.frameId, name: property.attr.fullname, value: this.buildVariableValue(property) }
+                    this.variableMap.set(attr.name, ahkVar)
+                    return {
+                        type: attr.type, name: attr.name, value: this.formatPropertyValue(property),
+                        indexedVariables, namedVariables, variablesReference: attr.type != "object" ? 0 : this.variableHandles.create(ahkVar),
+                    };
+                } catch (err) {
+                    console.log(err)
                 }
-                const ahkVar = { scope, frameId: scope == VarScope.GLOBAL ? -1 : this.frameId, name: property.attr.fullname, value: this.buildVariableValue(property) }
-                this.variableMap.set(attr.name, ahkVar)
-                return {
-                    type: attr.type, name: attr.name, value: this.formatPropertyValue(property),
-                    indexedVariables, namedVariables, variablesReference: attr.type != "object" ? 0 : this.variableHandles.create(ahkVar),
-                };
             })
     }
 
