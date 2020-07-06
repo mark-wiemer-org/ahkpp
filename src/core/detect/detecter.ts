@@ -13,6 +13,7 @@ export class Detecter {
      * @param buildPath
      */
     public static async buildByPath(buildPath: string) {
+        if (!buildPath) return;
         if (fs.statSync(buildPath).isDirectory()) {
             fs.readdir(buildPath, (err, files) => {
                 if (err) {
@@ -144,6 +145,7 @@ export class Detecter {
         const label = /^ *(\w+) *:{1}(?!(:|=))/.exec(text)
         if (label) {
             const labelName = label[1]
+            if(labelName.toLowerCase()=="case")return;
             return new Label(label[1], document, line, text.indexOf(labelName));
         }
     }
