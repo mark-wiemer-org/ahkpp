@@ -145,7 +145,7 @@ export class Detecter {
         const label = /^ *(\w+) *:{1}(?!(:|=))/.exec(text)
         if (label) {
             const labelName = label[1]
-            if(labelName.toLowerCase()=="case")return;
+            if(labelName.toLowerCase()=="case" || labelName.toLowerCase()=="default")return;
             return new Label(label[1], document, line, text.indexOf(labelName));
         }
     }
