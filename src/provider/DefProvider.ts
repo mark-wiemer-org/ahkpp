@@ -14,7 +14,7 @@ export class DefProvider implements vscode.DefinitionProvider {
         const word = document.getText(document.getWordRangeAtPosition(position));
 
         // get method
-        if (new RegExp("\\b" + word + "\\s*\\(.*?\\)").test(document.lineAt(position.line).text)) {
+        if (new RegExp(word + "\\s*\\(.*?\\)").test(document.lineAt(position.line).text)) {
             const method = await Detecter.getMethodByName(document, word)
             if (method) {
                 const methodDoc = method.document;

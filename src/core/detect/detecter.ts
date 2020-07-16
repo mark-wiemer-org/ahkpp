@@ -105,13 +105,13 @@ export class Detecter {
     public static async getLabelByName(document: vscode.TextDocument, name: string) {
         name = name.toLowerCase()
         for (const label of this.documentCache.get(document.uri.path).labels) {
-            if (new RegExp("\\bg?" + label.name + "\\b", "i").test(name)) {
+            if (label.name.toLowerCase()==name) {
                 return label;
             }
         }
         for (const filePath of this.documentCache.keys()) {
             for (const label of this.documentCache.get(filePath).labels) {
-                if (new RegExp("\\bg?" + label.name + "\\b", "i").test(name)) {
+                if (label.name.toLowerCase()==name) {
                     return label;
                 }
             }
