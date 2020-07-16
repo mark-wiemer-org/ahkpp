@@ -13,7 +13,7 @@ import { VarScope } from './struct/scope';
 
 import getPort = require('get-port');
 import { spawn } from 'child_process';
-import { resolve } from 'url';
+import { resolve } from 'path';
 
 /**
  * A Ahk runtime debugger.
