@@ -7,7 +7,7 @@ export class CodeUtil {
         if (!origin) return "";
         // TODO: untest 
         return origin.replace(/;.+/, "")
-            .replace(/".+?"/, "")
+            .replace(/".*?"/, "")
             .replace(/ +/, " ")
             .replace(/\bgui\b.*/ig, "")
             .replace(/\b(msgbox)\b.+?%/ig, "$1");
