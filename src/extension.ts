@@ -18,6 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
         Global.updateStatusBarItems("Indexing Autohotkey Workspace...")
         await Detecter.buildByPath(vscode.workspace.rootPath);
         Global.updateStatusBarItems("Index Workspace Success!")
+        Global.hide();
     })();
 
     const language = { language: "ahk" };

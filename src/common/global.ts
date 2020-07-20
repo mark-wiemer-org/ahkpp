@@ -19,6 +19,10 @@ export class Global {
         this.statusBarItem.show()
     }
 
+    public static hide(){
+        this.statusBarItem.hide();
+    }
+
 }
 
 export enum ConfigKey {

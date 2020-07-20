@@ -680,7 +680,7 @@
   },
   "InputBox": {
     "prefix": "InputBox",
-    "body": "InputBox, ${1:OutputVar [}, ${2:Title}, ${3:Prompt}, ${4:HIDE}, ${5:Width}, ${6:Height}, ${7:X}, ${8:Y}, ${9:Font}, ${10:Timeout}",
+    "body": "InputBox, ${1:OutputVar [}, ${2:Title}, ${3:Prompt}, ${4:HIDE}, ${5:Width}, ${6:Height}, ${7:X}, ${8:Y}, ${9:Locale}, ${10:Timeout}, ${11:Default}",
     "description": "Displays an input box to ask the user to enter a string."
   },
   "KeyHistory": {
