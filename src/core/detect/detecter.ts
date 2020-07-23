@@ -159,7 +159,7 @@ export class Detecter {
 
         origin = origin != undefined ? origin : document.lineAt(line).text;
         const text = CodeUtil.purity(origin);
-        const refPattern = /\s*(([\u4e00-\u9fa5_a-zA-Z0-9]+)(?<!if|while)\s*\(.*?\))\s*(\{)?\s*/i
+        const refPattern = /\s*(([\u4e00-\u9fa5_a-zA-Z0-9]+)(?<!if|while)\(.*?\))\s*(\{)?\s*/i
         const methodMatch = text.match(refPattern);
         if (!methodMatch) {
             return;
