@@ -77,11 +77,5 @@ Usage: Right click, then:
 OpenSetting -> extensions -> Ahk Plus
 ![settings](image/settings.jpg)
 
-## RoadMap
-- Go to variable definition.
-- IntelliSense Code for ahk.
-
-These two items need to involve a language parser, I am not sure I can achieve it, so this is a plan, if you have knowledge of compilation principles, can give me some guidance.
-
 ## Credits
 - [vscode-autohotkey](https://github.com/stef-levesque/vscode-autohotkey)
