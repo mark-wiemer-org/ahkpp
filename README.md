@@ -77,5 +77,9 @@ Usage: Right click, then:
 OpenSetting -> extensions -> Ahk Plus
 ![settings](image/settings.jpg)
 
+## Coffee
+
+If you like this this extension, consider [buying me a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
+
 ## Credits
 - [vscode-autohotkey](https://github.com/stef-levesque/vscode-autohotkey)
