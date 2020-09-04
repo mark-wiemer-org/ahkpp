@@ -14,6 +14,9 @@ import { VarScope } from './struct/scope';
 import getPort = require('get-port');
 import { spawn } from 'child_process';
 import { resolve } from 'path';
+import { existsSync } from 'fs';
+import { Out } from '../common/out';
+import { Global, ConfigKey } from '../common/global';
 
 /**
  * A Ahk runtime debugger.
@@ -37,8 +40,11 @@ export class DebugDispather extends EventEmitter {
 	 */
 	public async start(args: LaunchRequestArguments) {
 
-		const { runtime, dbgpSettings = {} } = args;
+		let { runtime, dbgpSettings = {} } = args;
 		const { max_children, max_data } = { max_children: 300, max_data: 131072, ...dbgpSettings };
+		if (!runtime) {
+			runtime = Global.getConfig(ConfigKey.executePath);
+		}
 
 		this.breakPointHandler = new BreakPointHandler();
 		this.stackHandler = new StackHandler()
@@ -79,6 +85,13 @@ export class DebugDispather extends EventEmitter {
 		if (!args.program) {
 			args.program = await ScriptRunner.getPathByActive()
 		}
+
+		if (!existsSync(runtime)) {
+			Out.log(`Autohotkey Execute Bin Not Found : ${runtime}`)
+			this.end();
+			return;
+		}
+
 		const ahkProcess = spawn(runtime, ["/ErrorStdOut", `/debug=localhost:${port}`, args.program], { cwd: `${resolve(args.program, '..')}` })
 		ahkProcess.stderr.on("data", err => {
 			this.emit('output', err.toString("utf8"))
