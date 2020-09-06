@@ -6,6 +6,7 @@
 
 AutoHotKey language support for VS Code
 - [vscode-autohotkey-Plus](#vscode-autohotkey-plus)
+  - [Coffee](#coffee)
   - [Debug](#debug)
   - [Language Features](#language-features)
     - [Method Symbol](#method-symbol)
@@ -16,8 +17,11 @@ AutoHotKey language support for VS Code
     - [Code Format](#code-format)
   - [Context Menu](#context-menu)
   - [Setting](#setting)
-  - [RoadMap](#roadmap)
   - [Credits](#credits)
+
+## Coffee
+
+If you like this this extension, consider [buying me a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
 
 ## Debug
 1. Click run button or press f9
@@ -76,10 +80,6 @@ Usage: Right click, then:
 
 OpenSetting -> extensions -> Ahk Plus
 ![settings](image/settings.jpg)
-
-## Coffee
-
-If you like this this extension, consider [buying me a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
 
 ## Credits
 - [vscode-autohotkey](https://github.com/stef-levesque/vscode-autohotkey)
