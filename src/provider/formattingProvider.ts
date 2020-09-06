@@ -79,8 +79,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             let comment: any = /;.+/.exec(originText)
             comment = comment ? comment[0] : ""
 
-            formatDocument += (" ".repeat(deep * options.tabSize) + originText.replace(/^\s*/, "")
-                .replace(/;.+/, "").replace(/ {2,}/g, " ") + comment);
+            const formatedText = originText.replace(/^\s*/, "").replace(/;.+/, "").replace(/ {2,}/g, " ") + comment;
+            formatDocument += (!formatedText || formatedText.trim() == "") ? formatedText : " ".repeat(deep * options.tabSize) + formatedText;
             if (line !== document.lineCount - 1) {
                 formatDocument += "\n";
             }
