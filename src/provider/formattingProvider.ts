@@ -40,7 +40,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             let notDeep = true;
 
             if (purityText.match(/#ifwinactive$/) || purityText.match(/#ifwinnotactive$/) || (purityText.match(/\b(return|ExitApp)\b/i) && tagDeep === deep)) {
-                deep--; notDeep = false;
+                tagDeep--; deep--; notDeep = false;
             }
 
             if (purityText.match(/}/) != null) {
