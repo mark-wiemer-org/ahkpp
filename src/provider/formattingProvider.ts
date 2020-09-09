@@ -55,7 +55,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            if (purityText.match(/:$/)) {
+            if (purityText.match(/:\s*$/)) {
                 if (tagDeep > 0 && tagDeep === deep) {
                     deep--; notDeep = false;
                 }
@@ -106,7 +106,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            if (purityText.match(/:$/)) {
+            if (purityText.match(/:\s*$/)) {
                 deep++;
                 tagDeep = deep;
                 notDeep = false;
