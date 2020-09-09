@@ -43,6 +43,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 tagDeep--; deep--; notDeep = false;
             }
 
+            if(purityText.match(/^\s*case.+?:/)){
+                tagDeep--; deep--; notDeep = false;
+            }
+
             if (purityText.match(/}/) != null) {
                 let temp = purityText.match(/}/).length;
                 const t2 = purityText.match(/{[^{}]*}/);
