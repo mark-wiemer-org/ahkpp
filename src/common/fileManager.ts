@@ -1,11 +1,15 @@
 import * as fs from "fs";
 import * as path from 'path';
 import * as vscode from "vscode";
+import { Detecter } from "../core/detect/detecter";
 
 export class FileManager {
     private static storagePath: string;
     public static init(context: vscode.ExtensionContext) {
         this.storagePath = context.globalStoragePath;
+        vscode.workspace.onDidSaveTextDocument(e => {
+            Detecter.buildScript(e)
+        })
     }
 
     private static check(path: string) {
