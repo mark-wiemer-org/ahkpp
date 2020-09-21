@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.5.0 - 2020/9/21
+- Adaptation zeroplus debuger extension.
+- Support rename method name.
+
 ## 2.4.5~2.4.16 
 - Just fix bugs.
 
