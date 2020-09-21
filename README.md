@@ -33,6 +33,8 @@ If you like this this extension, consider [buying me a coffee](https://www.buyme
 ![output](image/output.jpg)
 2. **Evalute**: Set and get variable in debug evaluter.![evalute](image/evalute.jpg)
 
+This extension provides basic debugging functions. If you need more debugging functions(Like **conditional breakpoint**), you need to add additional extension [vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
+
 ## Language Features
 
 ### Method Symbol

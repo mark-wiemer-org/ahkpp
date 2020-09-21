@@ -12,8 +12,9 @@ export class ScriptRunner {
     public static async startDebugger(script?: string) {
         const cwd = script ? vscode.Uri.file(script) : vscode.window.activeTextEditor.document.uri
         script = script ? script : await this.getPathByActive()
+        const debugPlusExists=vscode.extensions.getExtension("zero-plusplus.vscode-autohotkey-debug")!=undefined
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {
-            type: "ahk",
+            type: debugPlusExists?"autohotkey":"ahk",
             request: "launch",
             name: "Autohotkey Debugger",
             runtime: Global.getConfig(ConfigKey.executePath),
