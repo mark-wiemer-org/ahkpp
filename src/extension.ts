@@ -11,6 +11,8 @@ import { FileManager } from "./common/fileManager";
 import { AhkHoverProvider } from "./provider/ahkHoverProvider";
 import { RefProvider } from "./provider/RefProvider";
 import { Global } from "./common/global";
+import { AhkCodeActionProvider } from "./provider/ahkCodeActionProvider";
+import { AhkRenameProvider } from "./provider/ahkRenameProvider";
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -24,8 +26,10 @@ export function activate(context: vscode.ExtensionContext) {
     const language = { language: "ahk" };
     FileManager.init(context)
     context.subscriptions.push(
-        // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
         vscode.languages.registerHoverProvider(language, new AhkHoverProvider(context)),
+        // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
+        // vscode.languages.registerCodeActionsProvider(language,new AhkCodeActionProvider()),
+        vscode.languages.registerRenameProvider(language,new AhkRenameProvider()),
         vscode.languages.registerDefinitionProvider(language, new DefProvider()),
         vscode.languages.registerDocumentSymbolProvider(language, new SymBolProvider()),
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
