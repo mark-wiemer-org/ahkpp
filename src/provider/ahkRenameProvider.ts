@@ -19,17 +19,15 @@ export class AhkRenameProvider implements vscode.RenameProvider {
         }
         return workEdit;
     }
-    
+
     async prepareRename?(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken):
         Promise<vscode.Range> {
-        const word = document.getText(document.getWordRangeAtPosition(position));
+        const wordRange = document.getWordRangeAtPosition(position)
+        const word = document.getText(wordRange);
 
         const method = await Detecter.getMethodByName(document, word)
         if (method != null) {
-            return new vscode.Range(
-                new vscode.Position(method.line, method.character),
-                new vscode.Position(method.line, method.character + word.length)
-            )
+            return wordRange
         }
         throw new Error("You cannot rename this element.")
     }
