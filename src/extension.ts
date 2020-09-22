@@ -12,6 +12,7 @@ import { AhkHoverProvider } from "./provider/ahkHoverProvider";
 import { RefProvider } from "./provider/RefProvider";
 import { Global } from "./common/global";
 import { AhkRenameProvider } from "./provider/ahkRenameProvider";
+import { SignatureProvider } from "./provider/signatureProvider";
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -27,8 +28,9 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.languages.registerHoverProvider(language, new AhkHoverProvider(context)),
         // vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
-        vscode.languages.registerRenameProvider(language,new AhkRenameProvider()),
         vscode.languages.registerDefinitionProvider(language, new DefProvider()),
+        vscode.languages.registerRenameProvider(language,new AhkRenameProvider()),
+        vscode.languages.registerSignatureHelpProvider(language,new SignatureProvider()),
         vscode.languages.registerDocumentSymbolProvider(language, new SymBolProvider()),
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
         vscode.languages.registerReferenceProvider(language, new RefProvider()),
