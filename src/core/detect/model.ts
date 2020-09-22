@@ -4,11 +4,12 @@ export interface Script {
     methods: Method[];
     refs: Ref[];
     labels: Label[];
+    variables: Variable[];
     blocks: Block[];
 }
 
 export interface Variable {
-    name: string; document: vscode.TextDocument; line: number;
+    name: string; document: vscode.TextDocument; line: number; character: number;
     method: string; isGlobal: boolean;
 }
 

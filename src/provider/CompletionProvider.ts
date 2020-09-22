@@ -16,6 +16,16 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             const completionItem = new vscode.CompletionItem(method.name + "()", vscode.CompletionItemKind.Method);
             completionItem.detail = method.comment;
             result.push(completionItem);
+            if(method.params){
+                for (const param of method.params) {
+                    result.push(new vscode.CompletionItem(param, vscode.CompletionItemKind.Variable));   
+                }
+            }
+        });
+
+        (await Detecter.buildScript(document, true)).variables.forEach((variable) => {
+            const completionItem = new vscode.CompletionItem(variable.name , vscode.CompletionItemKind.Variable);
+            result.push(completionItem);
         });
 
         return this.keywordComplectionItems.concat(result);

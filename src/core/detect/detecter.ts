@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as vscode from "vscode";
 import { CodeUtil } from "../../common/codeUtil";
 import { Out } from "../../common/out";
-import { Script, Method, Ref, Label, Block } from "./model";
+import { Script, Method, Ref, Label, Block, Variable } from "./model";
 
 export class Detecter {
 
@@ -47,6 +47,7 @@ export class Detecter {
         const methods: Method[] = [];
         let refs: Ref[] = [];
         const labels: Label[] = [];
+        const variables: Variable[] = [];
         const blocks: Block[] = [];
         const lineCount = Math.min(document.lineCount, 10000);
         let blockComment = false;
@@ -76,12 +77,19 @@ export class Detecter {
             if (label) {
                 labels.push(label);
             }
-            const block = Detecter.getBlockByLine(document, line);
-            if (block) {
-                blocks.push(block);
+            if (methodOrRef == null && label == null) {
+                const variable = Detecter.detechVariableByLine(document, line);
+                if (variable) {
+                    variables.push(variable)
+                }
+            } else {
+                const block = Detecter.getBlockByLine(document, line);
+                if (block) {
+                    blocks.push(block);
+                }
             }
         }
-        const script: Script = { methods, labels, refs,blocks }
+        const script: Script = { methods, labels, refs, variables, blocks }
         this.documentCache.set(document.uri.path, script)
         return script;
     }
@@ -105,13 +113,13 @@ export class Detecter {
     public static async getLabelByName(document: vscode.TextDocument, name: string) {
         name = name.toLowerCase()
         for (const label of this.documentCache.get(document.uri.path).labels) {
-            if (label.name.toLowerCase()==name) {
+            if (label.name.toLowerCase() == name) {
                 return label;
             }
         }
         for (const filePath of this.documentCache.keys()) {
             for (const label of this.documentCache.get(filePath).labels) {
-                if (label.name.toLowerCase()==name) {
+                if (label.name.toLowerCase() == name) {
                     return label;
                 }
             }
@@ -132,11 +140,11 @@ export class Detecter {
         return refs;
     }
 
-    private static getBlockByLine(document: vscode.TextDocument, line: number):Block {
+    private static getBlockByLine(document: vscode.TextDocument, line: number): Block {
         const { text } = document.lineAt(line);
         const blockMatch = text.match(/;;(.+)/);
         if (blockMatch) {
-            return {document,line,name:blockMatch[1],character:text.indexOf(blockMatch[1])}
+            return { document, line, name: blockMatch[1], character: text.indexOf(blockMatch[1]) }
         }
     }
 
@@ -145,9 +153,24 @@ export class Detecter {
         const label = /^ *([\u4e00-\u9fa5_a-zA-Z0-9]+) *:{1}(?!(:|=))/.exec(text)
         if (label) {
             const labelName = label[1]
-            if(labelName.toLowerCase()=="case" || labelName.toLowerCase()=="default")return;
+            if (labelName.toLowerCase() == "case" || labelName.toLowerCase() == "default") return;
             return new Label(label[1], document, line, text.indexOf(labelName));
         }
+    }
+
+
+    private static detechVariableByLine(document: vscode.TextDocument, line: number): Variable {
+
+        const varPattern = /[ \t]*(\w+?)\s*(.)?(?<![=!])=(?![=!]).+/
+        const lineText = document.lineAt(line).text;
+        const varMatch = lineText.match(varPattern)
+        if (varMatch) {
+            const varName = varMatch[1];
+            return {
+                line, document, isGlobal: true, method: null, name: varName, character: lineText.indexOf(varName)
+            }
+        }
+        return null;
     }
 
     /**
@@ -169,7 +192,7 @@ export class Detecter {
         if (text.length != methodMatch[0].length) {
             let refs = [new Ref(methodName, document, line, character)];
             const newRef = this.detechMethodByLine(document, line, origin.replace(new RegExp(methodName + "\\s*\\("), ""));
-            if(newRef){
+            if (newRef) {
                 if (newRef instanceof Array) {
                     refs = refs.concat(newRef);
                 } else {
