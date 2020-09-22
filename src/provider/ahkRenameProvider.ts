@@ -4,6 +4,11 @@ import { Detecter } from "../core/detect/detecter";
 export class AhkRenameProvider implements vscode.RenameProvider {
 
     async provideRenameEdits(document: vscode.TextDocument, position: vscode.Position, newName: string, token: vscode.CancellationToken): Promise<vscode.WorkspaceEdit> {
+
+        for (const doc of vscode.workspace.textDocuments) {
+            Detecter.buildScript(doc)
+        }
+
         const word = document.getText(document.getWordRangeAtPosition(position));
         const refs = Detecter.getAllRefByName(word)
         const workEdit = new vscode.WorkspaceEdit();
