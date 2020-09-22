@@ -11,6 +11,12 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
 
     public async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
 
+        const prePostion = position.character === 0 ? position : new vscode.Position(position.line, position.character - 1);
+        const preChart = position.character === 0 ? null : document.getText(new vscode.Range(prePostion, position));
+        if(preChart=="."){
+            return []
+        }
+
         const result: vscode.CompletionItem[] = [];
         (await Detecter.buildScript(document, true)).methods.forEach((method) => {
             const completionItem = new vscode.CompletionItem(method.name + "()", vscode.CompletionItemKind.Method);
