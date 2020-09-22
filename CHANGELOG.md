@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.5.3 - 2020/9/22
+- Fix rename fail when unsave.
+- Simple support variable detect.
+- Simple implement intellisence.
+
 ## 2.5.0 - 2020/9/21
 - Adaptation zeroplus debuger extension.
 - Support rename method name.
