@@ -95,7 +95,7 @@ export class Detecter {
             }
             const variable = Detecter.detechVariableByLine(document, line);
             if (variable) {
-                if (deep == 0) {
+                if (deep == 0 || !currentMethod) {
                     variables.push(variable)
                 } else {
                     currentMethod.variables.push(variable)
