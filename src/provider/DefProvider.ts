@@ -29,6 +29,31 @@ export class DefProvider implements vscode.DefinitionProvider {
             return new vscode.Location(tempDocument.uri, new vscode.Position(label.line, label.character));
         }
 
+        const script = (await Detecter.buildScript(document, true));
+
+        for (const method of script.methods) {
+            if (position.line >= method.line && position.line <= method.endLine) {
+                for (const variable of method.variables) {
+                    if (variable.name == word) {
+                        return new vscode.Location(document.uri, new vscode.Position(variable.line, variable.character));
+                    }
+                }
+                for (const param of method.params) {
+                    if (param == word) {
+                        // TODO cannot find param character
+                        return new vscode.Location(document.uri, new vscode.Position(method.line, method.character + param.length));
+                    }
+                }
+            }
+        }
+
+        for (const variable of script.variables) {
+            if (variable.name == word) {
+                return new vscode.Location(document.uri, new vscode.Position(variable.line, variable.character));
+            }
+
+        }
+
         return null;
 
     }

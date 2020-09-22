@@ -70,8 +70,7 @@ export class Detecter {
                     methods.push(methodOrRef);
                     refs.push(new Ref(methodOrRef.name, document, line, methodOrRef.character))
                     currentMethod = methodOrRef;
-                    if (methodOrRef.withQuote)
-                     deep++;
+                    if (methodOrRef.withQuote) deep++;
                     continue;
                 } else if (methodOrRef instanceof Array) {
                     refs = refs.concat(methodOrRef)
