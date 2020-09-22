@@ -208,6 +208,11 @@
 					"type": "string",
 					"default": "C:/Program Files/autoHotkey/Compiler/Ahk2Exe.exe",
 					"description": "The compiler path of ahk."
+				},
+				"vscode-ahk-plus.enableIntelliSense": {
+					"type": "boolean",
+					"default": false,
+					"description": "EnableIntelliSense."
 				}
 			}
 		}

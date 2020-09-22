@@ -10,7 +10,7 @@ import { SymBolProvider } from "./provider/SymbolProvider";
 import { FileManager } from "./common/fileManager";
 import { AhkHoverProvider } from "./provider/ahkHoverProvider";
 import { RefProvider } from "./provider/RefProvider";
-import { Global } from "./common/global";
+import { Global, ConfigKey } from "./common/global";
 import { AhkRenameProvider } from "./provider/ahkRenameProvider";
 import { SignatureProvider } from "./provider/signatureProvider";
 import { CompletionProvider } from "./provider/CompletionProvider";
@@ -28,7 +28,6 @@ export function activate(context: vscode.ExtensionContext) {
     FileManager.init(context)
     context.subscriptions.push(
         vscode.languages.registerHoverProvider(language, new AhkHoverProvider(context)),
-        vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", "."),
         vscode.languages.registerDefinitionProvider(language, new DefProvider()),
         vscode.languages.registerRenameProvider(language, new AhkRenameProvider()),
         vscode.languages.registerSignatureHelpProvider(language, new SignatureProvider(), "(", ","),
@@ -41,6 +40,12 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand("debug.ahk", () => ScriptRunner.startDebugger()),
         vscode.commands.registerCommand("compile.ahk", () => ScriptRunner.compile())
     );
+
+    if (Global.getConfig(ConfigKey.enableIntelliSense)) {
+        context.subscriptions.push(
+            vscode.languages.registerCompletionItemProvider(language, new CompletionProvider(), " ", ".")
+        )
+    }
 
 }
 
