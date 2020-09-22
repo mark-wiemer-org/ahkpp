@@ -19,9 +19,8 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
         }
 
         const result: vscode.CompletionItem[] = [];
-        const script = (await Detecter.buildScript(document, true));
 
-        script.methods.forEach((method) => {
+        (await Detecter.getAllMethod()).forEach((method) => {
             const completionItem = new vscode.CompletionItem(method.params.length == 0 ? method.name : method.full, vscode.CompletionItemKind.Method);
             if (method.params.length == 0) {
                 completionItem.insertText = method.name + "()"
@@ -30,7 +29,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             }
             completionItem.detail = method.comment;
             result.push(completionItem);
-            if (position.line >= method.line && position.line <= method.endLine) {
+            if (method.document == document && position.line >= method.line && position.line <= method.endLine) {
                 for (const param of method.params) {
                     result.push(new vscode.CompletionItem(param, vscode.CompletionItemKind.Variable));
                 }
@@ -40,6 +39,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             }
         });
 
+        const script = (await Detecter.buildScript(document, true));
         script.variables.forEach((variable) => {
             const completionItem = new vscode.CompletionItem(variable.name, vscode.CompletionItemKind.Variable);
             result.push(completionItem);

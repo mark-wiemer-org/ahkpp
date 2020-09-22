@@ -70,13 +70,14 @@ export class Detecter {
                     methods.push(methodOrRef);
                     refs.push(new Ref(methodOrRef.name, document, line, methodOrRef.character))
                     currentMethod = methodOrRef;
-                    if (methodOrRef.withQuote) deep++;
+                    if (methodOrRef.withQuote)
+                     deep++;
+                    continue;
                 } else if (methodOrRef instanceof Array) {
                     refs = refs.concat(methodOrRef)
                 } else {
                     refs.push(methodOrRef)
                 }
-                continue;
             }
             const label = Detecter.getLabelByLine(document, line);
             if (label) {
@@ -87,6 +88,12 @@ export class Detecter {
             if (block) {
                 blocks.push(block);
             }
+            if (lineText.indexOf("{") != -1) {
+                deep++;
+            }
+            if (lineText.indexOf("}") != -1) {
+                deep--;
+            }
             const variable = Detecter.detechVariableByLine(document, line);
             if (variable) {
                 if (deep == 0) {
@@ -94,12 +101,6 @@ export class Detecter {
                 } else {
                     currentMethod.variables.push(variable)
                 }
-            }
-            if (lineText.indexOf("{") != -1) {
-                deep++;
-            }
-            if (lineText.indexOf("}") != -1) {
-                deep--;
             }
             if (deep == 0 && currentMethod != null) {
                 currentMethod.endLine = line
@@ -124,6 +125,16 @@ export class Detecter {
                 }
             }
         }
+    }
+
+    public static async getAllMethod():Promise<Method[]> {
+        const methods = []
+        for (const filePath of this.documentCache.keys()) {
+            for (const method of this.documentCache.get(filePath).methods) {
+                methods.push(method)
+            }
+        }
+        return methods;
     }
 
     public static async getLabelByName(document: vscode.TextDocument, name: string) {
