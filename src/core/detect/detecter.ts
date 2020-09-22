@@ -49,6 +49,8 @@ export class Detecter {
         const labels: Label[] = [];
         const variables: Variable[] = [];
         const blocks: Block[] = [];
+        let currentMethod: Method;
+        let deep = 0;
         const lineCount = Math.min(document.lineCount, 10000);
         let blockComment = false;
         for (let line = 0; line < lineCount; line++) {
@@ -67,26 +69,40 @@ export class Detecter {
                 if (methodOrRef instanceof Method) {
                     methods.push(methodOrRef);
                     refs.push(new Ref(methodOrRef.name, document, line, methodOrRef.character))
+                    currentMethod = methodOrRef;
+                    if (methodOrRef.withQuote) deep++;
                 } else if (methodOrRef instanceof Array) {
                     refs = refs.concat(methodOrRef)
                 } else {
                     refs.push(methodOrRef)
                 }
+                continue;
             }
             const label = Detecter.getLabelByLine(document, line);
             if (label) {
                 labels.push(label);
+                continue;
             }
-            if (methodOrRef == null && label == null) {
-                const variable = Detecter.detechVariableByLine(document, line);
-                if (variable) {
+            const block = Detecter.getBlockByLine(document, line);
+            if (block) {
+                blocks.push(block);
+            }
+            const variable = Detecter.detechVariableByLine(document, line);
+            if (variable) {
+                if (deep == 0) {
                     variables.push(variable)
+                } else {
+                    currentMethod.variables.push(variable)
                 }
-            } else {
-                const block = Detecter.getBlockByLine(document, line);
-                if (block) {
-                    blocks.push(block);
-                }
+            }
+            if (lineText.indexOf("{") != -1) {
+                deep++;
+            }
+            if (lineText.indexOf("}") != -1) {
+                deep--;
+            }
+            if (deep == 0 && currentMethod != null) {
+                currentMethod.endLine = line
             }
         }
         const script: Script = { methods, labels, refs, variables, blocks }
@@ -204,13 +220,13 @@ export class Detecter {
         const methodFullName = methodMatch[1];
         const isMethod = methodMatch[3];
         if (isMethod) {
-            return new Method(methodFullName, methodName, document, line, character, Detecter.getRemarkByLine(document, line - 1));
+            return new Method(methodFullName, methodName, document, line, character, true, Detecter.getRemarkByLine(document, line - 1));
         }
         for (let i = line + 1; i < document.lineCount; i++) {
             const nextLineText = CodeUtil.purity(document.lineAt(i).text);
             if (!nextLineText.trim()) { continue; }
             if (nextLineText.match(/^\s*{/)) {
-                return new Method(methodFullName, methodName, document, line, character, Detecter.getRemarkByLine(document, line - 1));
+                return new Method(methodFullName, methodName, document, line, character, false, Detecter.getRemarkByLine(document, line - 1));
             } else {
                 return new Ref(methodName, document, line, character)
             }

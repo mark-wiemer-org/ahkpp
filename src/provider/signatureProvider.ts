@@ -25,7 +25,7 @@ export class SignatureProvider implements vscode.SignatureHelpProvider {
             return {
                 activeSignature: 0,
                 signatures: [{
-                    label: method.full,
+                    label: method.origin,
                     parameters: method.params.map(param => { return { label: param } })
                 }],
                 activeParameter: splitCount,

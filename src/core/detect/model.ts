@@ -10,7 +10,7 @@ export interface Script {
 
 export interface Variable {
     name: string; document: vscode.TextDocument; line: number; character: number;
-    method: string; isGlobal: boolean;
+    method: Method; isGlobal: boolean;
 }
 
 export class Label {
@@ -27,10 +27,13 @@ export class Block {
 
 export class Method {
     public params: string[];
+    public variables: Variable[];
     public full: string;
+    public endLine: number;
     constructor(public origin: string, public name: string, public document: vscode.TextDocument,
-        public line: number, public character: number, public comment: string) {
+        public line: number, public character: number,public withQuote:boolean, public comment: string) {
         this.buildParams();
+        this.variables=[]
     }
 
     private buildParams() {
@@ -44,6 +47,7 @@ export class Method {
                 this.full = this.origin.replace(paramsMatch[1], this.params.join(","));
             }
             else {
+                this.params=[]
                 this.full = this.origin;
             }
         }

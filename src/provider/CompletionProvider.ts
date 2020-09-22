@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { Detecter } from "../core/detect/detecter";
+import { SnippetString } from "vscode";
 
 export class CompletionProvider implements vscode.CompletionItemProvider {
 
@@ -13,24 +14,34 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
 
         const prePostion = position.character === 0 ? position : new vscode.Position(position.line, position.character - 1);
         const preChart = position.character === 0 ? null : document.getText(new vscode.Range(prePostion, position));
-        if(preChart=="."){
+        if (preChart == ".") {
             return []
         }
 
         const result: vscode.CompletionItem[] = [];
-        (await Detecter.buildScript(document, true)).methods.forEach((method) => {
-            const completionItem = new vscode.CompletionItem(method.name + "()", vscode.CompletionItemKind.Method);
+        const script = (await Detecter.buildScript(document, true));
+
+        script.methods.forEach((method) => {
+            const completionItem = new vscode.CompletionItem(method.params.length == 0 ? method.name : method.full, vscode.CompletionItemKind.Method);
+            if (method.params.length == 0) {
+                completionItem.insertText = method.name + "()"
+            } else {
+                completionItem.insertText = new SnippetString(method.name + "($1)")
+            }
             completionItem.detail = method.comment;
             result.push(completionItem);
-            if(method.params){
+            if (position.line >= method.line && position.line <= method.endLine) {
                 for (const param of method.params) {
-                    result.push(new vscode.CompletionItem(param, vscode.CompletionItemKind.Variable));   
+                    result.push(new vscode.CompletionItem(param, vscode.CompletionItemKind.Variable));
+                }
+                for (const variable of method.variables) {
+                    result.push(new vscode.CompletionItem(variable.name, vscode.CompletionItemKind.Variable));
                 }
             }
         });
 
-        (await Detecter.buildScript(document, true)).variables.forEach((variable) => {
-            const completionItem = new vscode.CompletionItem(variable.name , vscode.CompletionItemKind.Variable);
+        script.variables.forEach((variable) => {
+            const completionItem = new vscode.CompletionItem(variable.name, vscode.CompletionItemKind.Variable);
             result.push(completionItem);
         });
 
