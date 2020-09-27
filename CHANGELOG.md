@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.5.4 - 2020/9/27
+- Enable IntelliSense as default.
+- Fix switch format error.
+- fix variable detech fail.
+
 ## 2.5.3 - 2020/9/22
 - Fix rename fail when unsave.
 - Simple support variable detect.
