@@ -212,7 +212,7 @@
 				"vscode-ahk-plus.enableIntelliSense": {
 					"type": "boolean",
 					"default": false,
-					"description": "EnableIntelliSense."
+					"description": "EnableIntelliSense(Preview)."
 				}
 			}
 		}
