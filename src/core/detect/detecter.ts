@@ -94,7 +94,7 @@ export class Detecter {
             const variable = Detecter.detechVariableByLine(document, line);
             if (variable) {
                 if (deep == 0 || !currentMethod) {
-                    CodeUtil.join(variables, variable)
+                    this.joinVars(variables, variable)
                 } else {
                     currentMethod.pushVariable(variable)
                 }
@@ -201,6 +201,10 @@ export class Detecter {
             for (let index = 0; index < commandMatchAll.length; index++) {
                 if (index == 0) continue;
                 const varName = commandMatchAll[index][1];
+                const tempvarName = varName.toLowerCase()
+                if (tempvarName == "and" || tempvarName == "or") {
+                    continue;
+                }
                 vars.push({
                     line, document, isGlobal: true, method: null, name: varName, character: lineText.indexOf(commandMatchAll[index][0])
                 })
@@ -263,6 +267,27 @@ export class Detecter {
             }
         }
         return null;
+    }
+
+    public static joinVars(variables: Variable[], items: Variable | Variable[]) {
+        if (variables == undefined || items == undefined) {
+            return
+        }
+
+        if (!Array.isArray(items)) {
+            items = [items]
+        }
+
+        loop: for (const item of items) {
+            for (const variable of variables) {
+                if (variable.name == item.name) {
+                    continue loop;
+                }
+            }
+            variables.push(item)
+        }
+
+
     }
 
 }
