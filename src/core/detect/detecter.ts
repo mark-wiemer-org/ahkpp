@@ -187,7 +187,7 @@ export class Detecter {
 
     private static detechVariableByLine(document: vscode.TextDocument, line: number): Variable {
 
-        const varPattern = /[ \t]*(\w+?)\s*(.)?(?<![=!])=(?![=!]).+/
+        const varPattern = /[ \t]*(\w+?)\s*([+\-*/.:])?(?<![=!])=(?![=!]).+/
         const lineText = document.lineAt(line).text;
         const varMatch = lineText.match(varPattern)
         if (varMatch) {
