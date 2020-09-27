@@ -34,5 +34,12 @@
         ["\"", "\""],
         ["'", "'"],
         ["%", "%"]
-	]
+	],
+    // Folding regions marked by ";region" and ";endregion" comments.
+    "folding": {
+        "markers": {
+            "start": "^\\s*\\;\\s*region\\b",
+            "end": "^\\s*\\;\\s*endregion\\b"
+        }
+    }
 }
