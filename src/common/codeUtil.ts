@@ -1,3 +1,5 @@
+import { ifError } from "assert";
+
 export class CodeUtil {
     /**
      * trim unfoucs code.
@@ -13,4 +15,33 @@ export class CodeUtil {
             .replace(/\bgui\b.*/ig, "")
             .replace(/\b(msgbox)\b.+?%/ig, "$1");
     }
+
+    public static join(array: any[], items: any | any[]) {
+        if (array == undefined || items == undefined) {
+            return
+        }
+        if (Array.isArray(items)) {
+            for (const item of items) {
+                array.push(item)
+            }
+        } else {
+            array.push(items)
+        }
+    }
+
+    public static matchAll(regex: RegExp, text: string): RegExpExecArray[] {
+
+        if (!regex.global) {
+            throw new Error("Only support global regex!");
+        }
+
+        let regs = [];
+        let temp: RegExpExecArray;
+        while ((temp = regex.exec(text)) != null) {
+            regs.push(temp)
+        }
+
+        return regs;
+    }
+
 }

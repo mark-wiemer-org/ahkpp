@@ -53,14 +53,19 @@ export class Method {
         }
     }
 
-    public pushVariable(variable: Variable) {
-        for (const curVariable of this.variables) {
-            if (curVariable.name == variable.name) return;
+    public pushVariable(variables: Variable | Variable[]) {
+        if (!Array.isArray(variables)) {
+            variables = [variables];
         }
-        for (const paramStr of this.params) {
-            if (paramStr == variable.name) return;
+        for (const variable of variables) {
+            for (const curVariable of this.variables) {
+                if (curVariable.name == variable.name) return;
+            }
+            for (const paramStr of this.params) {
+                if (paramStr == variable.name) return;
+            }
+            this.variables.push(variable)
         }
-        this.variables.push(variable)
     }
 
 }

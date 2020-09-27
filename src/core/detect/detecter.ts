@@ -72,10 +72,8 @@ export class Detecter {
                     currentMethod = methodOrRef;
                     if (methodOrRef.withQuote) deep++;
                     continue;
-                } else if (methodOrRef instanceof Array) {
-                    refs = refs.concat(methodOrRef)
                 } else {
-                    refs.push(methodOrRef)
+                    CodeUtil.join(refs, methodOrRef)
                 }
             }
             const label = Detecter.getLabelByLine(document, line);
@@ -96,7 +94,7 @@ export class Detecter {
             const variable = Detecter.detechVariableByLine(document, line);
             if (variable) {
                 if (deep == 0 || !currentMethod) {
-                    variables.push(variable)
+                    CodeUtil.join(variables, variable)
                 } else {
                     currentMethod.pushVariable(variable)
                 }
@@ -126,7 +124,7 @@ export class Detecter {
         }
     }
 
-    public static async getAllMethod():Promise<Method[]> {
+    public static async getAllMethod(): Promise<Method[]> {
         const methods = []
         for (const filePath of this.documentCache.keys()) {
             for (const method of this.documentCache.get(filePath).methods) {
@@ -185,17 +183,31 @@ export class Detecter {
     }
 
 
-    private static detechVariableByLine(document: vscode.TextDocument, line: number): Variable {
+    private static varDefPattern = /[ \t]*(\w+?)\s*([+\-*/.:])?(?<![=!])=(?![=!]).+/
+    private static varCommandPattern = /(\w+)[ \t,]+/g
+    private static detechVariableByLine(document: vscode.TextDocument, line: number): Variable | Variable[] {
 
-        const varPattern = /[ \t]*(\w+?)\s*([+\-*/.:])?(?<![=!])=(?![=!]).+/
         const lineText = document.lineAt(line).text;
-        const varMatch = lineText.match(varPattern)
-        if (varMatch) {
-            const varName = varMatch[1];
+
+        const defMatch = lineText.match(Detecter.varDefPattern)
+        if (defMatch) {
+            const varName = defMatch[1];
             return {
                 line, document, isGlobal: true, method: null, name: varName, character: lineText.indexOf(varName)
             }
+        } else {
+            let vars = [];
+            const commandMatchAll = CodeUtil.matchAll(Detecter.varCommandPattern, lineText)
+            for (let index = 0; index < commandMatchAll.length; index++) {
+                if (index == 0) continue;
+                const varName = commandMatchAll[index][1];
+                vars.push({
+                    line, document, isGlobal: true, method: null, name: varName, character: lineText.indexOf(commandMatchAll[index][0])
+                })
+            }
+            return vars;
         }
+
         return null;
     }
 
@@ -218,13 +230,7 @@ export class Detecter {
         if (text.length != methodMatch[0].length) {
             let refs = [new Ref(methodName, document, line, character)];
             const newRef = this.detechMethodByLine(document, line, origin.replace(new RegExp(methodName + "\\s*\\("), ""));
-            if (newRef) {
-                if (newRef instanceof Array) {
-                    refs = refs.concat(newRef);
-                } else {
-                    refs.push(newRef)
-                }
-            }
+            CodeUtil.join(refs, newRef)
             return refs
         }
         const methodFullName = methodMatch[1];
