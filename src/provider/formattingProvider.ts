@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { CodeUtil } from "../common/codeUtil";
+import { deprecate } from "util";
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
@@ -39,11 +40,20 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             const purityText = CodeUtil.purity(originText.toLowerCase());
             let notDeep = true;
 
-            if (purityText.match(/#ifwinactive$/) || purityText.match(/#ifwinnotactive$/) || (purityText.match(/\b(return|ExitApp)\b/i) && tagDeep === deep)) {
-                tagDeep--; deep--; notDeep = false;
+            if (purityText.match(/#ifwinactive$/) || purityText.match(/#ifwinnotactive$/)) {
+                if(tagDeep>0){
+                    deep -= tagDeep
+                }else{
+                    deep--;
+                }
+                notDeep = false;
             }
 
-            if(purityText.match(/^\s*case.+?:/)){
+            if (purityText.match(/\b(return)\b/i) && tagDeep === deep) {
+                tagDeep == 0; deep--; notDeep = false;
+            }
+
+            if (purityText.match(/^\s*case.+?:/)) {
                 tagDeep--; deep--; notDeep = false;
             }
 
