@@ -31,9 +31,9 @@ export class Method {
     public full: string;
     public endLine: number;
     constructor(public origin: string, public name: string, public document: vscode.TextDocument,
-        public line: number, public character: number,public withQuote:boolean, public comment: string) {
+        public line: number, public character: number, public withQuote: boolean, public comment: string) {
         this.buildParams();
-        this.variables=[]
+        this.variables = []
     }
 
     private buildParams() {
@@ -47,9 +47,20 @@ export class Method {
                 this.full = this.origin.replace(paramsMatch[1], this.params.join(","));
             }
             else {
-                this.params=[]
+                this.params = []
                 this.full = this.origin;
             }
         }
     }
+
+    public pushVariable(variable: Variable) {
+        for (const curVariable of this.variables) {
+            if (curVariable.name == variable.name) return;
+        }
+        for (const paramStr of this.params) {
+            if (paramStr == variable.name) return;
+        }
+        this.variables.push(variable)
+    }
+
 }

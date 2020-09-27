@@ -41,7 +41,7 @@ export class DefProvider implements vscode.DefinitionProvider {
                 for (const param of method.params) {
                     if (param == word) {
                         // TODO cannot find param character
-                        return new vscode.Location(document.uri, new vscode.Position(method.line, method.character + param.length));
+                        return new vscode.Location(document.uri, new vscode.Position(method.line, method.character + method.origin.indexOf(param)));
                     }
                 }
             }

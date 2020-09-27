@@ -98,7 +98,7 @@ export class Detecter {
                 if (deep == 0 || !currentMethod) {
                     variables.push(variable)
                 } else {
-                    currentMethod.variables.push(variable)
+                    currentMethod.pushVariable(variable)
                 }
             }
             if (deep == 0 && currentMethod != null) {
