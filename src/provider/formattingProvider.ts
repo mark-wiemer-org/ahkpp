@@ -41,9 +41,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             let notDeep = true;
 
             if (purityText.match(/#ifwinactive$/) || purityText.match(/#ifwinnotactive$/)) {
-                if(tagDeep>0){
+                if (tagDeep > 0) {
                     deep -= tagDeep
-                }else{
+                } else {
                     deep--;
                 }
                 notDeep = false;
@@ -53,8 +53,12 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 tagDeep == 0; deep--; notDeep = false;
             }
 
-            if (purityText.match(/^\s*case.+?:/)) {
+            if (purityText.match(/^\s*case.+?:\s*$/)) {
                 tagDeep--; deep--; notDeep = false;
+            } else if (purityText.match(/:\s*$/)) {
+                if (tagDeep > 0 && tagDeep === deep) {
+                    deep--; notDeep = false;
+                }
             }
 
             if (purityText.match(/}/) != null) {
@@ -69,11 +73,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            if (purityText.match(/:\s*$/)) {
-                if (tagDeep > 0 && tagDeep === deep) {
-                    deep--; notDeep = false;
-                }
-            }
 
             if (oneCommandCode && purityText.match(/{/) != null) {
                 let temp = purityText.match(/{/).length;
