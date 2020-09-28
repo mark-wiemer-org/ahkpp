@@ -1,14 +1,15 @@
 # vscode-autohotkey-Plus
 
 > Project site: [vscode-autohotkey-plus](https://github.com/cweijan/vscode-autohotkey)
->
-> View the changes in the [changelog](/CHANGELOG.md)
 
 AutoHotKey language support for VS Code
 - [vscode-autohotkey-Plus](#vscode-autohotkey-plus)
+  - [Before all](#before-all)
   - [Coffee](#coffee)
+  - [Install](#install)
   - [Debug](#debug)
   - [Language Features](#language-features)
+    - [IntelliSense](#intellisense)
     - [Method Symbol](#method-symbol)
     - [Goto Definition](#goto-definition)
     - [Find References](#find-references)
@@ -19,12 +20,20 @@ AutoHotKey language support for VS Code
   - [Setting](#setting)
   - [Credits](#credits)
 
+## Before all
+
+Parser is using regex, so it is not perfect, please understand this.
+
 ## Coffee
 
 If you like this this extension, consider [buying me a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
 
+## Install
+
+Install from vscode marketplace [vscode-autohotkey-plus](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-autohotkey-plus).
+
 ## Debug
-1. Click run button or press f9
+1. Click run button or press F9.
 2. Support breakpoint、stacktrace、variable
 ![debug](image/debug.gif)
 
@@ -37,6 +46,10 @@ This extension provides basic debugging functions. If you need more debugging fu
 
 ## Language Features
 
+### IntelliSense
+
+Supports intelliSense for variables and methods.
+
 ### Method Symbol
 1. Detech source method as symbol
 2. You can add a comment to the method using a semicolon on the previous line of the method
@@ -45,7 +58,9 @@ This extension provides basic debugging functions. If you need more debugging fu
 
 ### Goto Definition
 
-Usage: Press ctrl and move the mouse coordinates to the calling code.
+1. Support goto method and variable definition.
+2. Usage: Press ctrl and move the mouse coordinates to the calling code.
+
 ![gotoDefinition](image/gotoDefinition.jpg)
 
 ### Find References
@@ -74,8 +89,8 @@ Usage:
 
 ## Context Menu
 Usage: Right click, then:
-- **Run**: Run script without debug.
-- **Compile**: Compile script in same directory.
+- **Run**: Run script without debug(Shortcut: Ctrl+F9).
+- **Compile**: Compile script in same directory(Shortcut: Ctrl+Shift+F9).
 ![compile](image/compile.jpg)
 
 ## Setting
