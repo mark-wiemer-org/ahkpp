@@ -187,6 +187,16 @@
 				"command": "debug.ahk",
 				"key": "f9",
 				"when": "editorLangId == ahk"
+			},
+			{
+				"command": "run.ahk",
+				"key": "ctrl+f9",
+				"when": "editorLangId == ahk"
+			},
+			{
+				"command": "compile.ahk",
+				"key": "ctrl+shift+f9",
+				"when": "editorLangId == ahk"
 			}
 		],
 		"snippets": [
