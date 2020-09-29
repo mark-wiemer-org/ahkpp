@@ -41,8 +41,8 @@ export class Method {
         if (this.origin != this.name) {
             const paramsMatch = this.origin.match(refPattern);
             if (paramsMatch) {
-                this.params = paramsMatch[1].split(",").map(param => {
-                    const paramMatch = param.match(/[^:=]+/);
+                this.params = paramsMatch[1].split(",").filter(param => param.trim() != "").map(param => {
+                    const paramMatch = param.match(/[^:=* \t]+/);
                     return paramMatch != null ? paramMatch[0] : param;
                 });
                 this.full = this.origin.replace(paramsMatch[1], this.params.join(","));
