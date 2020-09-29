@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { Detecter } from "../core/detect/detecter";
+import { Out } from "../common/out";
 
 export class AhkRenameProvider implements vscode.RenameProvider {
 
@@ -13,6 +14,9 @@ export class AhkRenameProvider implements vscode.RenameProvider {
         const refs = Detecter.getAllRefByName(word)
         const workEdit = new vscode.WorkspaceEdit();
         for (const ref of refs) {
+            if (ref.document.uri.scheme != "file") {
+                continue;
+            }
             let uriEdits = workEdit.get(ref.document.uri) || []
             uriEdits.push(new vscode.TextEdit(
                 new vscode.Range(
@@ -20,6 +24,7 @@ export class AhkRenameProvider implements vscode.RenameProvider {
                     new vscode.Position(ref.line, ref.character + word.length)
                 ), newName
             ))
+            console.debug(`url:${ref.document.uri},line:${ref.line},character:${ref.character}`)
             workEdit.set(ref.document.uri, uriEdits)
         }
         return workEdit;
