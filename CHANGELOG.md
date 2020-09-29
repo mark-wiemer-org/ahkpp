@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.5.5 - 2020/9/29
+- Fix rename bug.
+- Bind key to context menu command.
+
 ## 2.5.4 - 2020/9/27
 - Enable IntelliSense as default.
 - Fix switch format error.
