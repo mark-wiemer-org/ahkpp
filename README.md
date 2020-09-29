@@ -42,7 +42,7 @@ Install from vscode marketplace [vscode-autohotkey-plus](https://marketplace.vis
 ![output](image/output.jpg)
 2. **Evalute**: Set and get variable in debug evaluter.![evalute](image/evalute.jpg)
 
-This extension provides basic debugging functions. If you need more debugging functions(Like **conditional breakpoint**), you need to add additional extension [vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
+This extension provides basic debugging functions. If you need more debugging functions(Like **conditional breakpoint**), you can to add additional extension [vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
 
 ## Language Features
 
