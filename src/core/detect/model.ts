@@ -42,7 +42,8 @@ export class Method {
             const paramsMatch = this.origin.match(refPattern);
             if (paramsMatch) {
                 this.params = paramsMatch[1].split(",").map(param => {
-                    return param.match(/[^:=]+/)[0];
+                    const paramMatch = param.match(/[^:=]+/);
+                    return paramMatch != null ? paramMatch[0] : param;
                 });
                 this.full = this.origin.replace(paramsMatch[1], this.params.join(","));
             }
