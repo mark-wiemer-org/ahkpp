@@ -90,6 +90,9 @@ export class Detecter {
             }
             if (lineText.indexOf("}") != -1) {
                 deep--;
+                if (currentMethod != null) {
+                    currentMethod.endLine = line
+                }
             }
             const variable = Detecter.detechVariableByLine(document, line);
             if (variable) {
@@ -98,9 +101,6 @@ export class Detecter {
                 } else {
                     currentMethod.pushVariable(variable)
                 }
-            }
-            if (deep == 0 && currentMethod != null) {
-                currentMethod.endLine = line
             }
         }
         const script: Script = { methods, labels, refs, variables, blocks }
@@ -185,9 +185,10 @@ export class Detecter {
 
     private static varDefPattern = /[ \t]*(\w+?)\s*([+\-*/.:])?(?<![=!])=(?![=!]).+/
     private static varCommandPattern = /(\w+)[ \t,]+/g
+    private static keywords = ['and','or','new','extends','if','loop']
     private static detechVariableByLine(document: vscode.TextDocument, line: number): Variable | Variable[] {
 
-        const lineText = document.lineAt(line).text;
+        const lineText = CodeUtil.purity(document.lineAt(line).text);
 
         const defMatch = lineText.match(Detecter.varDefPattern)
         if (defMatch) {
@@ -197,12 +198,11 @@ export class Detecter {
             }
         } else {
             let vars = [];
-            const commandMatchAll = CodeUtil.matchAll(Detecter.varCommandPattern, lineText)
+            const commandMatchAll = CodeUtil.matchAll(Detecter.varCommandPattern, lineText.replace(/\(.+?\)/g,""))
             for (let index = 0; index < commandMatchAll.length; index++) {
                 if (index == 0) continue;
                 const varName = commandMatchAll[index][1];
-                const tempvarName = varName.toLowerCase()
-                if (tempvarName == "and" || tempvarName == "or") {
+                if(this.keywords.includes(varName.toLowerCase())){
                     continue;
                 }
                 vars.push({
