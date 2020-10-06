@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.5.6 - 2020/10/6
+- Fix syntax error.
+- Fix variable detect error.
+
 ## 2.5.5 - 2020/9/29
 - Fix rename bug.
 - Bind key to context menu command.
