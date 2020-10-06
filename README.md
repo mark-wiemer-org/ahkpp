@@ -22,7 +22,7 @@ AutoHotKey language support for VS Code
 
 ## Before all
 
-Parser is using regex, so it is not perfect, please understand this.
+Parser is using regex, so it is extremely limited, please understand this.
 
 ## Coffee
 
