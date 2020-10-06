@@ -1755,12 +1755,12 @@
   },
   "WinActive()": {
     "prefix": "WinActive()",
-    "body": "WinActive(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText]}\")",
+    "body": "WinActive(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText}\"])",
     "description": "Checks if the specified window exists and is currently active (foremost). If it is, WinActive() returns its Unique ID (HWND)."
   },
   "WinExist()": {
     "prefix": "WinExist()",
-    "body": "WinExist(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText]}\")",
+    "body": "WinExist(\"${1:WinTitle}\" [, \"${2:WinText}\", \"${3:ExcludeTitle}\", \"${4:ExcludeText}\"])",
     "description": "Checks if a matching window exists. If it is, WinExist() returns the Unique ID (HWND) of the first matching window."
   },
   "Read()": {
