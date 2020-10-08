@@ -31,7 +31,9 @@ export class ScriptRunner {
      */
     public static async run(executePath = null, path: string = null, debug: boolean = false, debugPort = 9000): Promise<boolean> {
         executePath = Global.getConfig(ConfigKey.executePath)
-        vscode.commands.executeCommand('workbench.action.files.save');
+        if(!vscode.window.activeTextEditor.document.isUntitled){
+            vscode.commands.executeCommand('workbench.action.files.save');
+        }
         if (executePath) {
             if (!path) {
                 path = await this.getPathByActive();
@@ -52,7 +54,9 @@ export class ScriptRunner {
      */
     public static async compile() {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
-        vscode.commands.executeCommand('workbench.action.files.save');
+        if(!vscode.window.activeTextEditor.document.isUntitled){
+            vscode.commands.executeCommand('workbench.action.files.save');
+        }
         if (!currentPath) { return; }
         const pos = currentPath.lastIndexOf(".");
         const compilePath = currentPath.substr(0, pos < 0 ? currentPath.length : pos) + ".exe";
