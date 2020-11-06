@@ -1,3 +1,5 @@
+# This plugin stop development.
+
 # vscode-autohotkey-Plus
 
 > Project site: [vscode-autohotkey-plus](https://github.com/cweijan/vscode-autohotkey)
