@@ -1,9 +1,9 @@
 {
-    "name": "vscode-autohotkey-plus",
-    "displayName": "AutoHotkey Plus",
-    "description": "AutoHotkey language support for VS Code",
-    "version": "2.5.9",
-    "publisher": "cweijan",
+    "name": "vscode-autohotkey-plus-plus",
+    "displayName": "AutoHotkey Plus Plus",
+    "description": "AutoHotkey language support for VS Code, based off AutoHotkey Plus by cweijan",
+    "version": "2.5.10",
+    "publisher": "mark-wiemer",
     "engines": {
         "vscode": "^1.30.0"
     },
@@ -17,15 +17,15 @@
         "Programming Languages",
         "Snippets"
     ],
-    "license": "SEE LICENSE IN LICENSE.md",
+    "license": "See LICENSE file",
     "icon": "icon.png",
     "bugs": {
-        "url": "https://github.com/cweijan/vscode-autohotkey/issues"
+        "url": "https://github.com/mark-wiemer/vscode-autohotkey/issues"
     },
-    "homepage": "https://github.com/cweijan/vscode-autohotkey/blob/master/README.md",
+    "homepage": "https://github.com/mark-wiemer/vscode-autohotkey/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cweijan/vscode-autohotkey.git"
+        "url": "https://github.com/mark-wiemer/vscode-autohotkey.git"
     },
     "galleryBanner": {
         "color": "#5c2d91",
@@ -207,7 +207,7 @@
         ],
         "configuration": {
             "type": "object",
-            "title": "Ahk Plus",
+            "title": "AutoHotkey Plus Plus",
             "properties": {
                 "vscode-ahk-plus.executePath": {
                     "type": "string",
