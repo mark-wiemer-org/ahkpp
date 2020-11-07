@@ -3,8 +3,9 @@
 ## 2.5.10 - 2020-11-07
 
 -   Change ownership (from `cweijan` to `mark-wiemer`)
--   Update README
 -   Change configuration title to 'AutoHotkey Plus Plus'
+-   Update README
+-   Increase icon resolution
 
 ## 2.5.6 - 2020/10/6
 
