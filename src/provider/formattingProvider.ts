@@ -1,28 +1,46 @@
-import * as vscode from "vscode";
-import { CodeUtil } from "../common/codeUtil";
-import { deprecate } from "util";
+import * as vscode from 'vscode';
+import { CodeUtil } from '../common/codeUtil';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
-    return new vscode.Range(0, 0, lastLineId, document.lineAt(lastLineId).text.length);
+    return new vscode.Range(
+        0,
+        0,
+        lastLineId,
+        document.lineAt(lastLineId).text.length,
+    );
 }
 
 export class FormatProvider implements vscode.DocumentFormattingEditProvider {
+    private static oneCommandList = [
+        'ifnotexist',
+        'ifexist',
+        'ifwinactive',
+        'ifwinnotactive',
+        'ifwinexist',
+        'ifwinnotexist',
+        'ifinstring',
+        'ifnotinstring',
+        'if',
+        'else',
+        'loop',
+        'for',
+        'while',
+        'catch',
+    ];
 
-    private static oneCommandList = ["ifnotexist", "ifexist", "ifwinactive", "ifwinnotactive",
-        "ifwinexist", "ifwinnotexist", "ifinstring", "ifnotinstring", "if", "else", "loop", "for", "while", "catch"];
-
-
-    public provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextEdit[]> {
-
-        let formatDocument = "";
+    public provideDocumentFormattingEdits(
+        document: vscode.TextDocument,
+        options: vscode.FormattingOptions,
+        token: vscode.CancellationToken,
+    ): vscode.ProviderResult<vscode.TextEdit[]> {
+        let formatDocument = '';
         let deep = 0;
         let tagDeep = 0;
         let oneCommandCode = false;
         let blockComment = false;
 
         for (let line = 0; line < document.lineCount; line++) {
-
             const originText = document.lineAt(line).text;
             if (originText.match(/ *\/\*/)) {
                 blockComment = true;
@@ -33,16 +51,19 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (blockComment) {
                 formatDocument += originText;
                 if (line !== document.lineCount - 1) {
-                    formatDocument += "\n";
+                    formatDocument += '\n';
                 }
                 continue;
-            };
+            }
             const purityText = CodeUtil.purity(originText.toLowerCase());
             let notDeep = true;
 
-            if (purityText.match(/#ifwinactive$/) || purityText.match(/#ifwinnotactive$/)) {
+            if (
+                purityText.match(/#ifwinactive$/) ||
+                purityText.match(/#ifwinnotactive$/)
+            ) {
                 if (tagDeep > 0) {
-                    deep -= tagDeep
+                    deep -= tagDeep;
                 } else {
                     deep--;
                 }
@@ -50,14 +71,19 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             if (purityText.match(/\b(return)\b/i) && tagDeep === deep) {
-                tagDeep == 0; deep--; notDeep = false;
+                tagDeep == 0;
+                deep--;
+                notDeep = false;
             }
 
             if (purityText.match(/^\s*case.+?:\s*$/)) {
-                tagDeep--; deep--; notDeep = false;
+                tagDeep--;
+                deep--;
+                notDeep = false;
             } else if (purityText.match(/:\s*$/)) {
                 if (tagDeep > 0 && tagDeep === deep) {
-                    deep--; notDeep = false;
+                    deep--;
+                    notDeep = false;
                 }
             }
 
@@ -72,7 +98,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     notDeep = false;
                 }
             }
-
 
             if (oneCommandCode && purityText.match(/{/) != null) {
                 let temp = purityText.match(/{/).length;
@@ -89,13 +114,20 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (deep < 0) {
                 deep = 0;
             }
-            let comment: any = /;.+/.exec(originText)
-            comment = comment ? comment[0] : ""
+            let comment: any = /;.+/.exec(originText);
+            comment = comment ? comment[0] : '';
 
-            const formatedText = originText.replace(/^\s*/, "").replace(/;.+/, "").replace(/ {2,}/g, " ") + comment;
-            formatDocument += (!formatedText || formatedText.trim() == "") ? formatedText : " ".repeat(deep * options.tabSize) + formatedText;
+            const formatedText =
+                originText
+                    .replace(/^\s*/, '')
+                    .replace(/;.+/, '')
+                    .replace(/ {2,}/g, ' ') + comment;
+            formatDocument +=
+                !formatedText || formatedText.trim() == ''
+                    ? formatedText
+                    : ' '.repeat(deep * options.tabSize) + formatedText;
             if (line !== document.lineCount - 1) {
-                formatDocument += "\n";
+                formatDocument += '\n';
             }
 
             if (oneCommandCode) {
@@ -103,8 +135,12 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 deep--;
             }
 
-            if (purityText.match(/#ifwinactive.*?\s/) || purityText.match(/#ifwinnotactive.*?\s/)) {
-                deep++; notDeep = false;
+            if (
+                purityText.match(/#ifwinactive.*?\s/) ||
+                purityText.match(/#ifwinnotactive.*?\s/)
+            ) {
+                deep++;
+                notDeep = false;
             }
 
             if (purityText.match(/{/) != null) {
@@ -129,19 +165,25 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 for (const oneCommand of FormatProvider.oneCommandList) {
                     let temp: RegExpExecArray;
                     if (
-                        (temp = new RegExp("\\b" + oneCommand + "\\b(.*)").exec(purityText)) != null
-                        && !temp[1].includes("/")) {
+                        (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
+                            purityText,
+                        )) != null &&
+                        !temp[1].includes('/')
+                    ) {
                         oneCommandCode = true;
                         deep++;
                         break;
                     }
                 }
             }
-
         }
         const result = [];
-        result.push(new vscode.TextEdit(fullDocumentRange(document), formatDocument.replace(/\n{2,}/g, "\n\n")));
+        result.push(
+            new vscode.TextEdit(
+                fullDocumentRange(document),
+                formatDocument.replace(/\n{2,}/g, '\n\n'),
+            ),
+        );
         return result;
     }
-
 }

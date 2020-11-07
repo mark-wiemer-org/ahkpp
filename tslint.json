@@ -1,9 +1,7 @@
 {
     "extends": "tslint:recommended",
     "linterOptions": {
-        "exclude": [
-            "node_modules/**"
-        ]
+        "exclude": ["node_modules/**"]
     },
     "rules": {
         "variable-name": [
@@ -13,16 +11,13 @@
             "allow-pascal-case",
             "allow-leading-underscore"
         ],
-        "max-line-length": [
-            true,
-            200
-        ],
+        "max-line-length": [true, 200],
         "no-empty": false,
         "object-literal-sort-keys": false,
         "interface-name": false,
         "triple-equals": false,
-        "semicolon":false,
-        "align":false,
+        "semicolon": false,
+        "align": false,
         "member-ordering": false,
         "no-trailing-whitespace": false,
         "quotemark": false,

@@ -1,12 +1,11 @@
-import { DbgpResponse } from "../struct/dbgpResponse";
-import { DebugServer } from "../debugServer";
+import { DbgpResponse } from '../struct/dbgpResponse';
+import { DebugServer } from '../debugServer';
 
 export class CommandHandler {
-
     private transId = 1;
     private commandCallback = {};
 
-    public constructor(private readonly debugServer: DebugServer) { }
+    public constructor(private readonly debugServer: DebugServer) {}
 
     /**
      * send command to the ahk debug proxy.
@@ -25,17 +24,17 @@ export class CommandHandler {
 
         this.debugServer.write(`${command}`);
         return new Promise((resolve) => {
-            this.commandCallback["" + this.transId] = (response: DbgpResponse) => {
-                resolve(response)
+            this.commandCallback['' + this.transId] = (
+                response: DbgpResponse,
+            ) => {
+                resolve(response);
             };
-        })
+        });
     }
-
 
     public callback(transId: string, response: DbgpResponse) {
         const fun = this.commandCallback[transId];
-        if (fun) fun(response)
+        if (fun) fun(response);
         this.commandCallback[transId] = null;
     }
-
 }
