@@ -11,7 +11,7 @@ AutoHotkey language support for VS Code, based off [AutoHotkey Plus by cweijan](
 -   [Debug](#debug)
 -   [Language Features](#language-features)
     -   [IntelliSense](#intellisense)
-    -   [Method Symbol](#method-symbol)
+    -   [Function Symbol](#function-symbol)
     -   [Goto Definition](#goto-definition)
     -   [Find References](#find-references)
     -   [Code Symbol](#code-symbol)
@@ -31,7 +31,7 @@ Install from VS Code Marketplace: [Install AutoHotkey Plus Plus](https://marketp
 
 ## Debug
 
-1. Click run button or press F9.
+1. Click Run or press F9.
 2. Debugger supports breakpoints, stack tracing, and variable watching
    ![Debug](image/debug.gif)
 
@@ -39,27 +39,27 @@ Install from VS Code Marketplace: [Install AutoHotkey Plus Plus](https://marketp
 
 1. **Output Message**: You can use `OutputDebug` command instead of `MsgBox` to log values.
    ![Output](image/output.jpg)
-2. **Evaluate**: Set and get variable in debug evaluater.
+2. **Evaluate**: Set and get variable values through the debug console.
    ![Evaluate](image/evalute.jpg)
 
-This extension provides basic debugging functions. If you need more debugging functions (such as **conditional breakpoints**), you can add an additional extension:[Install vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
+This extension provides basic debugging functions. If you need more debugging functions (such as conditional breakpoints), you can add an additional extension: [Install vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
 
 ## Language Features
 
 ### IntelliSense
 
-Supports IntelliSense for variables and methods.
+Supports IntelliSense for variables and functions.
 
-### Method Symbol
+### Function Symbol
 
-1. Detach source method as symbol
-2. You can add a comment to the method using a semicolon on the previous line of the method
+1. Detach source function as symbol
+2. You can add a comment to the function using a semicolon on the line above the function declaration
 
-![Method Symbol](image/methodSymbol.jpg)
+![Function Symbol](image/functionSymbol.jpg)
 
 ### Goto Definition
 
-1. Support goto method and variable definition.
+1. Support goto function and variable definition.
 2. Usage: Ctrl-click on the symbol to navigate to its definition.
 
 ![Goto Definition](image/gotoDefinition.jpg)
@@ -78,7 +78,7 @@ Usage: Add two semicolon to comment code block
 
 ### Hover Tip
 
-Usage: Move mouse to method call or command.
+Usage: Move mouse to function call or command.
 ![Hover](image/hover.png)
 
 ### Code Format
