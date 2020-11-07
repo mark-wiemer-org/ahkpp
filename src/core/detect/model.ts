@@ -1,4 +1,4 @@
-import * as vscode from "vscode";
+import * as vscode from 'vscode';
 
 export interface Script {
     methods: Method[];
@@ -9,20 +9,39 @@ export interface Script {
 }
 
 export interface Variable {
-    name: string; document: vscode.TextDocument; line: number; character: number;
-    method: Method; isGlobal: boolean;
+    name: string;
+    document: vscode.TextDocument;
+    line: number;
+    character: number;
+    method: Method;
+    isGlobal: boolean;
 }
 
 export class Label {
-    constructor(public name: string, public document: vscode.TextDocument, public line: number, public character: number) { }
+    constructor(
+        public name: string,
+        public document: vscode.TextDocument,
+        public line: number,
+        public character: number,
+    ) {}
 }
 
 export class Ref {
-    constructor(public name: string, public document: vscode.TextDocument, public line: number, public character: number) { }
+    constructor(
+        public name: string,
+        public document: vscode.TextDocument,
+        public line: number,
+        public character: number,
+    ) {}
 }
 
 export class Block {
-    constructor(public name: string, public document: vscode.TextDocument, public line: number, public character: number) { }
+    constructor(
+        public name: string,
+        public document: vscode.TextDocument,
+        public line: number,
+        public character: number,
+    ) {}
 }
 
 export class Method {
@@ -30,10 +49,17 @@ export class Method {
     public variables: Variable[];
     public full: string;
     public endLine: number;
-    constructor(public origin: string, public name: string, public document: vscode.TextDocument,
-        public line: number, public character: number, public withQuote: boolean, public comment: string) {
+    constructor(
+        public origin: string,
+        public name: string,
+        public document: vscode.TextDocument,
+        public line: number,
+        public character: number,
+        public withQuote: boolean,
+        public comment: string,
+    ) {
         this.buildParams();
-        this.variables = []
+        this.variables = [];
     }
 
     private buildParams() {
@@ -41,14 +67,19 @@ export class Method {
         if (this.origin != this.name) {
             const paramsMatch = this.origin.match(refPattern);
             if (paramsMatch) {
-                this.params = paramsMatch[1].split(",").filter(param => param.trim() != "").map(param => {
-                    const paramMatch = param.match(/[^:=* \t]+/);
-                    return paramMatch != null ? paramMatch[0] : param;
-                });
-                this.full = this.origin.replace(paramsMatch[1], this.params.join(","));
-            }
-            else {
-                this.params = []
+                this.params = paramsMatch[1]
+                    .split(',')
+                    .filter((param) => param.trim() != '')
+                    .map((param) => {
+                        const paramMatch = param.match(/[^:=* \t]+/);
+                        return paramMatch != null ? paramMatch[0] : param;
+                    });
+                this.full = this.origin.replace(
+                    paramsMatch[1],
+                    this.params.join(','),
+                );
+            } else {
+                this.params = [];
                 this.full = this.origin;
             }
         }
@@ -65,8 +96,7 @@ export class Method {
             for (const paramStr of this.params) {
                 if (paramStr == variable.name) continue loop;
             }
-            this.variables.push(variable)
+            this.variables.push(variable);
         }
     }
-
 }

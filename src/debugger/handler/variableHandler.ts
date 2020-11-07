@@ -3,12 +3,11 @@ import { DbgpProperty, DbgpResponse } from '../struct/dbgpResponse';
 import { VarScope } from '../struct/scope';
 import { Util } from '../util/util';
 
-
 export interface VariableRequest {
-    scope: VarScope,
-    frameId: number,
-    paramRef?: number,
-    paramName?: string
+    scope: VarScope;
+    frameId: number;
+    paramRef?: number;
+    paramName?: string;
 }
 
 interface AhkVariable {
@@ -19,14 +18,13 @@ interface AhkVariable {
 }
 
 export class VariableHandler {
-
     private variableHandles = new Handles<string | AhkVariable>();
     private variableMap = new Map<string, AhkVariable>();
     private frameId: number;
 
     public getScopeByRef(ref: number): number {
-        const scopeOrVar = this.variableHandles.get(ref)
-        if ((typeof scopeOrVar) == "string") {
+        const scopeOrVar = this.variableHandles.get(ref);
+        if (typeof scopeOrVar == 'string') {
             return scopeOrVar == 'Local' ? VarScope.LOCAL : VarScope.GLOBAL;
         }
         return (scopeOrVar as AhkVariable).scope;
@@ -41,12 +39,13 @@ export class VariableHandler {
     }
 
     public obtainValue(value: string) {
-
         let type: string;
         let isVariable = false;
-        const match = value.match(/^(?:()|\"(.*)\"|(true|false)|([+-]?\d+)|([+-]?\d+\.[+-]?\d+)|([\w\d]+))$/si);
+        const match = value.match(
+            /^(?:()|\"(.*)\"|(true|false)|([+-]?\d+)|([+-]?\d+\.[+-]?\d+)|([\w\d]+))$/is,
+        );
         if (!match) {
-            return Promise.reject(new Error(`"${value}" is invalid value.`))
+            return Promise.reject(new Error(`"${value}" is invalid value.`));
         }
 
         const [, blank, str, bool, int, float, varName] = match;
@@ -55,7 +54,7 @@ export class VariableHandler {
             value = '';
         } else if (str !== undefined) {
             type = 'string';
-            value = str
+            value = str;
         } else if (bool !== undefined) {
             type = 'string';
             value = bool.match(/true/i) ? '1' : '0';
@@ -67,24 +66,32 @@ export class VariableHandler {
             value = float;
         } else {
             isVariable = true;
-            value = varName
+            value = varName;
         }
-        return Promise.resolve({ type, value, isVariable })
+        return Promise.resolve({ type, value, isVariable });
     }
 
-    public getArrayValue(ref: number, start: number, count: number): Variable[] | PromiseLike<Variable[]> {
+    public getArrayValue(
+        ref: number,
+        start: number,
+        count: number,
+    ): Variable[] | PromiseLike<Variable[]> {
+        const ahkVar = this.getVarByRef(ref);
+        if (!Array.isArray(ahkVar?.value)) return [];
 
-        const ahkVar = this.getVarByRef(ref)
-        if (!Array.isArray(ahkVar?.value)) return []
-
-        return (ahkVar.value as any[]).slice(start, start + count).map((value, index) => {
-            return new Variable(`[${start + index + 1}]`, value)
-        });
+        return (ahkVar.value as any[])
+            .slice(start, start + count)
+            .map((value, index) => {
+                return new Variable(`[${start + index + 1}]`, value);
+            });
     }
 
     public scopes(frameId: number): Scope[] {
         this.frameId = frameId;
-        return [new Scope("Local", this.variableHandles.create("Local"), false), new Scope("Global", this.variableHandles.create("Global"), false)];
+        return [
+            new Scope('Local', this.variableHandles.create('Local'), false),
+            new Scope('Global', this.variableHandles.create('Global'), false),
+        ];
     }
 
     public getFrameId(): number {
@@ -92,32 +99,44 @@ export class VariableHandler {
     }
 
     public parsePropertyget(response: DbgpResponse, scope: number): Variable[] {
-
-        return this.parse(response.property.content ? response : response.property, scope)
+        return this.parse(
+            response.property.content ? response : response.property,
+            scope,
+        );
     }
 
     public parse(response: DbgpResponse, scope: number): Variable[] {
-
-        return Util.toArray(response.property)
-            .map((property) => {
-                try {
-                    const { attr } = property;
-                    let indexedVariables: number, namedVariables: number;
-                    if (this.likeArray(property)) {
-                        const length = this.getLikeArrayLength(property);
-                        indexedVariables = 100 < length ? length : undefined;
-                        namedVariables = 100 < length ? 1 : undefined;
-                    }
-                    const ahkVar = { scope, frameId: scope == VarScope.GLOBAL ? -1 : this.frameId, name: property.attr.fullname, value: this.buildVariableValue(property) }
-                    this.variableMap.set(attr.name, ahkVar)
-                    return {
-                        type: attr.type, name: attr.name, value: this.formatPropertyValue(property),
-                        indexedVariables, namedVariables, variablesReference: attr.type != "object" ? 0 : this.variableHandles.create(ahkVar),
-                    };
-                } catch (err) {
-                    console.log(err)
+        return Util.toArray(response.property).map((property) => {
+            try {
+                const { attr } = property;
+                let indexedVariables: number, namedVariables: number;
+                if (this.likeArray(property)) {
+                    const length = this.getLikeArrayLength(property);
+                    indexedVariables = 100 < length ? length : undefined;
+                    namedVariables = 100 < length ? 1 : undefined;
                 }
-            })
+                const ahkVar = {
+                    scope,
+                    frameId: scope == VarScope.GLOBAL ? -1 : this.frameId,
+                    name: property.attr.fullname,
+                    value: this.buildVariableValue(property),
+                };
+                this.variableMap.set(attr.name, ahkVar);
+                return {
+                    type: attr.type,
+                    name: attr.name,
+                    value: this.formatPropertyValue(property),
+                    indexedVariables,
+                    namedVariables,
+                    variablesReference:
+                        attr.type != 'object'
+                            ? 0
+                            : this.variableHandles.create(ahkVar),
+                };
+            } catch (err) {
+                console.log(err);
+            }
+        });
     }
 
     private buildVariableValue(property: DbgpProperty): any {
@@ -130,16 +149,19 @@ export class VariableHandler {
             }
             return `"${primitive}"`;
         } else if (attr.type === 'object') {
-            const childs = Util.toArray(property.property)
-            if (this.likeArray(property) == true && attr.classname === 'Object') {
+            const childs = Util.toArray(property.property);
+            if (
+                this.likeArray(property) == true &&
+                attr.classname === 'Object'
+            ) {
                 return childs.map((p) => {
                     return Util.atob(p.content);
-                })
+                });
             } else {
                 return childs.reduce((value, child) => {
-                    value[child.attr.fullname] = Util.atob(child.content)
+                    value[child.attr.fullname] = Util.atob(child.content);
                     return value;
-                }, {})
+                }, {});
             }
         }
 
@@ -159,7 +181,8 @@ export class VariableHandler {
             return `"${primitive}"`;
         } else if (attr.type === 'object') {
             if (this.likeArray(property) == true) {
-                const classname = attr.classname === 'Object' ? 'Array' : attr.classname;
+                const classname =
+                    attr.classname === 'Object' ? 'Array' : attr.classname;
                 const length = this.getLikeArrayLength(property);
 
                 return `${classname}(${length})`;
@@ -170,7 +193,7 @@ export class VariableHandler {
     }
 
     private getLikeArrayLength(property: DbgpProperty): number {
-        const properties: DbgpProperty[] = Util.toArray(property.property)
+        const properties: DbgpProperty[] = Util.toArray(property.property);
         if (properties.length == 0) {
             return 0;
         }
@@ -184,8 +207,8 @@ export class VariableHandler {
     }
 
     private likeArray(property: DbgpProperty): boolean {
-        return Util.toArray(property.property)
-            .some((childProperty) => childProperty.attr.name.match(/\[[0-9]+\]/));
+        return Util.toArray(property.property).some((childProperty) =>
+            childProperty.attr.name.match(/\[[0-9]+\]/),
+        );
     }
-
 }
