@@ -21,7 +21,7 @@ export class ScriptRunner {
             type: debugPlusExists ? 'autohotkey' : 'ahk',
             request: 'launch',
             name: 'AutoHotkey Debugger',
-            runtime: Global.getConfig(ConfigKey.executePath),
+            runtime: Global.getConfig<string>(ConfigKey.executePath),
             program: script,
         });
     }
@@ -39,7 +39,7 @@ export class ScriptRunner {
         debug: boolean = false,
         debugPort = 9000,
     ): Promise<boolean> {
-        executePath = Global.getConfig(ConfigKey.executePath);
+        executePath = Global.getConfig<string>(ConfigKey.executePath);
         if (!vscode.window.activeTextEditor.document.isUntitled) {
             vscode.commands.executeCommand('workbench.action.files.save');
         }
@@ -81,7 +81,7 @@ export class ScriptRunner {
             currentPath.substr(0, pos < 0 ? currentPath.length : pos) + '.exe';
         if (
             await Process.exec(
-                `"${Global.getConfig(
+                `"${Global.getConfig<string>(
                     ConfigKey.compilePath,
                 )}" /in "${currentPath}" /out "${compilePath}"`,
                 { cwd: `${res(currentPath, '..')}` },

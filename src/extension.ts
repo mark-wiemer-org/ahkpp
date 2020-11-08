@@ -67,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
         ),
     );
 
-    if (Global.getConfig(ConfigKey.intellisense)) {
+    if (Global.getConfig<boolean>(ConfigKey.intellisense)) {
         context.subscriptions.push(
             vscode.languages.registerCompletionItemProvider(
                 language,
