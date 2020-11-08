@@ -23,7 +23,7 @@ AutoHotkey Plus Plus (AHK++) provides actively maintained AutoHotkey language an
 
 ## Why AutoHotkey Plus Plus?
 
-AutoHotkey Plus Plus is one of many that offer VS Code language support. So why should you use this one?
+AutoHotkey Plus Plus is one of many extensions that offer VS Code language support. So why should you use this one?
 
 -   **IntelliSense**: Smart code completion, syntax highlighting, code navigation, and more.
     **Actively Maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues (and view all issues) at [the issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues)
