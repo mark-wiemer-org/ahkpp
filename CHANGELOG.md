@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.5.12 - 2020-11-08
+
+-   Improve settings readability
+-   Fix some bogus snippets
+-   Improve Marketplace presence
+
 ## 2.5.11 - 2020-11-07
 
 -   Update icon

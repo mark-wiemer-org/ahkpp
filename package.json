@@ -2,7 +2,7 @@
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
     "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
-    "version": "2.5.10",
+    "version": "2.5.12",
     "publisher": "mark-wiemer",
     "engines": {
         "vscode": "^1.30.0"
