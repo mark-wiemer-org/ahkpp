@@ -222,7 +222,7 @@
                 "ahk++.intellisense": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Enable IntelliSense (Preview)."
+                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
                 }
             }
         }
