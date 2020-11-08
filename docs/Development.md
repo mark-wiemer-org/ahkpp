@@ -7,6 +7,7 @@ This document covers the development process, from writing code to publishing a 
 1. Push the changes, open a PR, review the changes, and merge to `master`.
     1. Confirm the package version has been updated
     1. Confirm the changelog has been updated
+    1. Confirm Markdown files appear as intended
 1. Pull the new master branch
 1. Package the new release using `vsce package`.
 1. Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
