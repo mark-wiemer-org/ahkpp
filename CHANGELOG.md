@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.5.11 - 2020-11-07
+
+-   Update icon
+-   Change marketplace banner color
+-   Add development documentation
+
 ## 2.5.10 - 2020-11-07
 
 -   Change ownership (from `cweijan` to `mark-wiemer`)
