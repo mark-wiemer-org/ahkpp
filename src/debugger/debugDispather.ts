@@ -19,7 +19,7 @@ import { Out } from '../common/out';
 import { Global, ConfigKey } from '../common/global';
 
 /**
- * A Ahk runtime debugger.
+ * An AHK runtime debugger.
  * refrence: https://xdebug.org/docs/dbgp
  */
 export class DebugDispather extends EventEmitter {
