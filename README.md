@@ -1,6 +1,6 @@
-# AutoHotkey Plus Plus
+# AutoHotkey Plus Plus (AHK++)
 
-AutoHotkey Plus Plus (AHK++) provides actively maintained AutoHotkey language and debug support for VS Code. This extension is a fork of the deprecated [AutoHotkey Plus by cweijan](https://github.com/cweijan/vscode-autohotkey#readme).
+AutoHotkey Plus Plus (AHK++) provides actively maintained, comprehensive AutoHotkey language support for VS Code. This includes IntelliSense and debug support, along with the standard code highlighting. AHK++ is a fork of the deprecated [AutoHotkey Plus by cweijan](https://github.com/cweijan/vscode-autohotkey#readme).
 
 > View this README on the [project site](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus#readme)
 
@@ -32,7 +32,7 @@ AutoHotkey Plus Plus is one of many extensions that offer VS Code language suppo
 
 ## Coffee
 
-If you like this this extension, consider [buying the orignal author a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
+If you like this extension, consider [buying the orignal author a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
 
 ## Install
 
@@ -94,7 +94,7 @@ Usage: Move mouse to function call or command.
 
 Supports standard VS Code formatting.
 
-> Formatter is not currently customizable.
+> The formatter is not currently customizable.
 
 ![Code Format](image/codeFormat.jpg)
 
