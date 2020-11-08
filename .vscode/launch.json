@@ -1,4 +1,3 @@
-// A launch configuration that compiles the extension and then opens it inside a new window
 {
     "version": "0.1.0",
     "configurations": [
@@ -29,7 +28,7 @@
             "request": "launch",
             "name": "AutoHotkey v2 Debugger",
             "program": "${workspaceFolder}/demos/demo_for_ahk_v2.ahk",
-            "runtime": "C:\\Program Files\\AutoHotkey\\v2-alpha\\x64\\AutoHotkey.exe", // Default value of Scite for ahk v2
+            "runtime": "C:\\Program Files\\AutoHotkey\\v2-alpha\\x64\\AutoHotkey.exe",
             "stopOnEntry": false,
             "dbgpSettings": {
                 "max_children": 149
