@@ -1335,12 +1335,12 @@
     },
     "ObjRelease()": {
         "prefix": "ObjRelease()",
-        "body": "ObjRelease($Ptr)",
+        "body": "ObjRelease(${1:Ptr})",
         "description": "Decrements an object's reference count."
     },
     "ObjAddRef()": {
         "prefix": "ObjAddRef()",
-        "body": "ObjAddRef($Ptr)",
+        "body": "ObjAddRef(${1:Ptr})",
         "description": "Increments an object's reference count."
     },
     "ComObject()": {
