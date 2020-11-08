@@ -2,7 +2,7 @@
 
 AutoHotkey language and debug support for VS Code. This extension is a fork of the deprecated [AutoHotkey Plus by cweijan](https://github.com/cweijan/vscode-autohotkey#readme).
 
-> Visit the [project site](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus#readme)
+> View this README on the [project site](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus#readme)
 
 ## Contents
 
