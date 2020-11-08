@@ -45,7 +45,7 @@
         "debuggers": [
             {
                 "type": "ahk",
-                "label": "Autohotkey",
+                "label": "AutoHotkey",
                 "program": "./out/debugger/DebugAdapter.js",
                 "runtime": "\"C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe\"",
                 "configurationAttributes": {
@@ -98,18 +98,18 @@
                     {
                         "type": "ahk",
                         "request": "launch",
-                        "name": "Autohotkey Debugger",
+                        "name": "AutoHotkey Debugger",
                         "program": "${file}",
                         "stopOnEntry": true
                     }
                 ],
                 "configurationSnippets": [
                     {
-                        "label": "Autohotkey Debug: Launch",
+                        "label": "AutoHotkey Debug: Launch",
                         "body": {
                             "type": "ahk",
                             "request": "launch",
-                            "name": "Autohotkey Debugger",
+                            "name": "AutoHotkey Debugger",
                             "program": "${file}",
                             "stopOnEntry": true
                         }

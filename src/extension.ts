@@ -17,7 +17,7 @@ import { CompletionProvider } from './provider/CompletionProvider';
 
 export function activate(context: vscode.ExtensionContext) {
     (async () => {
-        Global.updateStatusBarItems('Indexing Autohotkey Workspace...');
+        Global.updateStatusBarItems('Indexing AutoHotkey Workspace...');
         await Detecter.buildByPath(vscode.workspace.rootPath);
         Global.updateStatusBarItems('Index Workspace Success!');
         Global.hide();

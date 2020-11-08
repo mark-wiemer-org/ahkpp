@@ -100,7 +100,7 @@ export class DebugDispather extends EventEmitter {
         }
 
         if (!existsSync(runtime)) {
-            Out.log(`Autohotkey Execute Bin Not Found : ${runtime}`);
+            Out.log(`AutoHotkey Execute Bin Not Found : ${runtime}`);
             this.end();
             return;
         }

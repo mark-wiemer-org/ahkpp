@@ -20,7 +20,7 @@ export class ScriptRunner {
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {
             type: debugPlusExists ? 'autohotkey' : 'ahk',
             request: 'launch',
-            name: 'Autohotkey Debugger',
+            name: 'AutoHotkey Debugger',
             runtime: Global.getConfig(ConfigKey.executePath),
             program: script,
         });
