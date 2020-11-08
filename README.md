@@ -1,11 +1,12 @@
 # AutoHotkey Plus Plus
 
-AutoHotkey language and debug support for VS Code. This extension is a fork of the deprecated [AutoHotkey Plus by cweijan](https://github.com/cweijan/vscode-autohotkey#readme).
+AutoHotkey Plus Plus (AHK++) provides actively maintained AutoHotkey language and debug support for VS Code. This extension is a fork of the deprecated [AutoHotkey Plus by cweijan](https://github.com/cweijan/vscode-autohotkey#readme).
 
 > View this README on the [project site](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus#readme)
 
 ## Contents
 
+-   [Why AutoHotkey Plus Plus?](#why-autohotkey-plus-plus)
 -   [Coffee](#coffee)
 -   [Install](#install)
 -   [Debug](#debug)
@@ -20,6 +21,14 @@ AutoHotkey language and debug support for VS Code. This extension is a fork of t
 -   [Context Menu](#context-menu)
 -   [Setting](#setting)
 -   [Credits](#credits)
+
+## Why AutoHotkey Plus Plus?
+
+AutoHotkey Plus Plus is one of many that offer VS Code language support. So why should you use this one?
+
+-   **Actively Maintained**: This means that any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever.
+-   **Debug Support**: Run and debug AHK scripts from VS Code.
+-   **New Features**: Another benefit to active maintenance is that AHK++ can add new features as users request them.
 
 ## Coffee
 
