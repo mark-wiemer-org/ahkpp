@@ -209,20 +209,20 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "vscode-ahk-plus.executePath": {
+                "ahk-pp.executePath": {
                     "type": "string",
-                    "default": "C:/Program Files/Autohotkey/AutoHotkeyU64.exe",
-                    "description": "The execute path of ahk."
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "description": "The execute path of AHK."
                 },
-                "vscode-ahk-plus.compilePath": {
+                "ahk-pp.compilePath": {
                     "type": "string",
-                    "default": "C:/Program Files/autoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "The compiler path of ahk."
+                    "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
+                    "description": "The compiler path of AHK."
                 },
-                "vscode-ahk-plus.enableIntelliSense": {
+                "ahk-pp.enableIntellisense": {
                     "type": "boolean",
                     "default": true,
-                    "description": "EnableIntelliSense(Preview)."
+                    "description": "Enable IntelliSense (Preview)."
                 }
             }
         }
