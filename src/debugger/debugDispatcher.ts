@@ -22,7 +22,7 @@ import { Global, ConfigKey } from '../common/global';
  * An AHK runtime debugger.
  * refrence: https://xdebug.org/docs/dbgp
  */
-export class DebugDispather extends EventEmitter {
+export class DebugDispatcher extends EventEmitter {
     private debugServer: DebugServer;
     private breakPointHandler: BreakPointHandler;
     private commandHandler: CommandHandler;
