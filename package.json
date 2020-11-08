@@ -1,8 +1,8 @@
 {
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
-    "description": "AutoHotkey language and debug support for VS Code, forked from AutoHotkey Plus by cweijan",
-    "version": "2.5.10",
+    "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
+    "version": "2.5.12",
     "publisher": "mark-wiemer",
     "engines": {
         "vscode": "^1.30.0"
@@ -20,12 +20,12 @@
     "license": "See LICENSE file",
     "icon": "icon.png",
     "bugs": {
-        "url": "https://github.com/mark-wiemer/vscode-autohotkey/issues"
+        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues"
     },
-    "homepage": "https://github.com/mark-wiemer/vscode-autohotkey/blob/master/README.md",
+    "homepage": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/mark-wiemer/vscode-autohotkey.git"
+        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus.git"
     },
     "galleryBanner": {
         "color": "#00769D",
@@ -45,7 +45,7 @@
         "debuggers": [
             {
                 "type": "ahk",
-                "label": "Autohotkey",
+                "label": "AutoHotkey",
                 "program": "./out/debugger/DebugAdapter.js",
                 "runtime": "\"C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe\"",
                 "configurationAttributes": {
@@ -98,18 +98,18 @@
                     {
                         "type": "ahk",
                         "request": "launch",
-                        "name": "Autohotkey Debugger",
+                        "name": "AutoHotkey Debugger",
                         "program": "${file}",
                         "stopOnEntry": true
                     }
                 ],
                 "configurationSnippets": [
                     {
-                        "label": "Autohotkey Debug: Launch",
+                        "label": "AutoHotkey Debug: Launch",
                         "body": {
                             "type": "ahk",
                             "request": "launch",
-                            "name": "Autohotkey Debugger",
+                            "name": "AutoHotkey Debugger",
                             "program": "${file}",
                             "stopOnEntry": true
                         }
@@ -148,12 +148,12 @@
             },
             {
                 "command": "run.ahk",
-                "title": "Run Ahk Script",
+                "title": "Run AHK Script",
                 "category": "AHK"
             },
             {
                 "command": "debug.ahk",
-                "title": "Debug Ahk Script",
+                "title": "Debug AHK Script",
                 "category": "AHK",
                 "icon": {
                     "light": "./image/run.png",
@@ -209,20 +209,20 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "vscode-ahk-plus.executePath": {
+                "ahk++.executePath": {
                     "type": "string",
-                    "default": "C:/Program Files/Autohotkey/AutoHotkeyU64.exe",
-                    "description": "The execute path of ahk."
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "description": "The execute path of AHK."
                 },
-                "vscode-ahk-plus.compilePath": {
+                "ahk++.compilePath": {
                     "type": "string",
-                    "default": "C:/Program Files/autoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "The compiler path of ahk."
+                    "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
+                    "description": "The compiler path of AHK."
                 },
-                "vscode-ahk-plus.enableIntelliSense": {
+                "ahk++.intellisense": {
                     "type": "boolean",
                     "default": true,
-                    "description": "EnableIntelliSense(Preview)."
+                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
                 }
             }
         }

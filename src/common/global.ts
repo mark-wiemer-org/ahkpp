@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 export class Global {
-    public static CONFIG_PREFIX = 'vscode-ahk-plus';
+    public static CONFIG_PREFIX = 'ahk++';
     private static statusBarItem: vscode.StatusBarItem;
     /**
      * get configuration from vscode setting.
@@ -31,5 +31,5 @@ export class Global {
 export enum ConfigKey {
     compilePath = 'compilePath',
     executePath = 'executePath',
-    enableIntelliSense = 'enableIntelliSense',
+    intellisense = 'intellisense',
 }

@@ -19,10 +19,10 @@ import { Out } from '../common/out';
 import { Global, ConfigKey } from '../common/global';
 
 /**
- * A Ahk runtime debugger.
+ * An AHK runtime debugger.
  * refrence: https://xdebug.org/docs/dbgp
  */
-export class DebugDispather extends EventEmitter {
+export class DebugDispatcher extends EventEmitter {
     private debugServer: DebugServer;
     private breakPointHandler: BreakPointHandler;
     private commandHandler: CommandHandler;
@@ -100,7 +100,7 @@ export class DebugDispather extends EventEmitter {
         }
 
         if (!existsSync(runtime)) {
-            Out.log(`Autohotkey Execute Bin Not Found : ${runtime}`);
+            Out.log(`AutoHotkey Execute Bin Not Found: ${runtime}`);
             this.end();
             return;
         }

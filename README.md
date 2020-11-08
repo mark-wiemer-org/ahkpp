@@ -1,11 +1,12 @@
-# AutoHotkey Plus Plus
+# AutoHotkey Plus Plus (AHK++)
 
-AutoHotkey language and debug support for VS Code. This extension is a fork of the deprecated [AutoHotkey Plus by cweijan](https://github.com/cweijan/vscode-autohotkey).
+AutoHotkey Plus Plus (AHK++) provides actively maintained, comprehensive AutoHotkey language support for VS Code. This includes IntelliSense and debug support, along with the standard code highlighting. AHK++ is a fork of the deprecated [AutoHotkey Plus by cweijan](https://github.com/cweijan/vscode-autohotkey#readme).
 
-> Visit the [project site](https://github.com/mark-wiemer/vscode-autohotkey)
+> View this README on the [project site](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus#readme)
 
 ## Contents
 
+-   [Why AutoHotkey Plus Plus?](#why-autohotkey-plus-plus)
 -   [Coffee](#coffee)
 -   [Install](#install)
 -   [Debug](#debug)
@@ -18,12 +19,20 @@ AutoHotkey language and debug support for VS Code. This extension is a fork of t
     -   [Hover Tip](#hover-tip)
     -   [Code Format](#code-format)
 -   [Context Menu](#context-menu)
--   [Setting](#setting)
 -   [Credits](#credits)
+
+## Why AutoHotkey Plus Plus?
+
+AutoHotkey Plus Plus is one of many extensions that offer VS Code language support. So why should you use this one?
+
+-   **IntelliSense**: Smart code completion, syntax highlighting, code navigation, and more.
+    **Actively Maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues (and view all issues) at [the issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues)
+-   **Debug Support**: Run and debug AHK scripts from VS Code.
+-   **New Features**: Another benefit to active maintenance is that AHK++ can add new features as users request them.
 
 ## Coffee
 
-If you like this this extension, consider [buying the orignal author a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
+If you like this extension, consider [buying the orignal author a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
 
 ## Install
 
@@ -85,7 +94,7 @@ Usage: Move mouse to function call or command.
 
 Supports standard VS Code formatting.
 
-> Formatter is not currently customizable.
+> The formatter is not currently customizable.
 
 ![Code Format](image/codeFormat.jpg)
 
@@ -98,10 +107,6 @@ Right-click to open the context menu, then:
 -   **Run**: Run script without debug (`Ctrl + F9`).
 -   **Compile**: Compile script in same directory (`Ctrl + Shift + F9`).
     ![compile](image/compile.jpg)
-
-## Setting
-
-Find more info in VS Code settings for `AutoHotkey Plus Plus`.
 
 ## Credits
 

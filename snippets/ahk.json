@@ -1120,7 +1120,7 @@
     },
     "Exception()": {
         "prefix": "Exception",
-        "body": "Exception(${Message})",
+        "body": "Exception(${1:Message})",
         "description": "Creates an object with properties, also common to exceptions created by runtime errors."
     },
     "Throw": {
@@ -1335,17 +1335,17 @@
     },
     "ObjRelease()": {
         "prefix": "ObjRelease()",
-        "body": "ObjRelease($Ptr)",
+        "body": "ObjRelease(${1:Ptr})",
         "description": "Decrements an object's reference count."
     },
     "ObjAddRef()": {
         "prefix": "ObjAddRef()",
-        "body": "ObjAddRef($Ptr)",
+        "body": "ObjAddRef(${1:Ptr})",
         "description": "Increments an object's reference count."
     },
     "ComObject()": {
         "prefix": "ComObject()",
-        "body": "ComObject(${VarType}, ${Value} [, ${Flags}])",
+        "body": "ComObject(${1:VarType}, ${2:Value} [, ${3:Flags}])",
         "description": "Creates an object representing a typed value to be passed as a parameter or return value.."
     },
     "ComObjCreate()": {
