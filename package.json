@@ -1,7 +1,7 @@
 {
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
-    "description": "AutoHotkey language and debug support for VS Code, based off AutoHotkey Plus by cweijan",
+    "description": "AutoHotkey language and debug support for VS Code, forked from AutoHotkey Plus by cweijan",
     "version": "2.5.10",
     "publisher": "mark-wiemer",
     "engines": {
@@ -28,7 +28,7 @@
         "url": "https://github.com/mark-wiemer/vscode-autohotkey.git"
     },
     "galleryBanner": {
-        "color": "#5c2d91",
+        "color": "#00769D",
         "theme": "dark"
     },
     "keywords": [
