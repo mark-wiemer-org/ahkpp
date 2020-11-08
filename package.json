@@ -209,17 +209,17 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk-pp.executePath": {
+                "ahk++.executePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
                     "description": "The execute path of AHK."
                 },
-                "ahk-pp.compilePath": {
+                "ahk++.compilePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "The compiler path of AHK."
                 },
-                "ahk-pp.enableIntellisense": {
+                "ahk++.intellisense": {
                     "type": "boolean",
                     "default": true,
                     "description": "Enable IntelliSense (Preview)."
