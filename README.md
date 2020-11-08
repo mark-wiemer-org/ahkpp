@@ -19,7 +19,6 @@ AutoHotkey Plus Plus (AHK++) provides actively maintained AutoHotkey language an
     -   [Hover Tip](#hover-tip)
     -   [Code Format](#code-format)
 -   [Context Menu](#context-menu)
--   [Setting](#setting)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
@@ -108,10 +107,6 @@ Right-click to open the context menu, then:
 -   **Run**: Run script without debug (`Ctrl + F9`).
 -   **Compile**: Compile script in same directory (`Ctrl + Shift + F9`).
     ![compile](image/compile.jpg)
-
-## Setting
-
-Find more info in VS Code settings for `AutoHotkey Plus Plus`.
 
 ## Credits
 
