@@ -20,12 +20,12 @@
     "license": "See LICENSE file",
     "icon": "icon.png",
     "bugs": {
-        "url": "https://github.com/mark-wiemer/vscode-autohotkey/issues"
+        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues"
     },
-    "homepage": "https://github.com/mark-wiemer/vscode-autohotkey/blob/master/README.md",
+    "homepage": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/mark-wiemer/vscode-autohotkey.git"
+        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus.git"
     },
     "galleryBanner": {
         "color": "#00769D",
