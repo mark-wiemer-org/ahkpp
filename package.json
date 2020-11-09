@@ -148,12 +148,12 @@
             },
             {
                 "command": "run.ahk",
-                "title": "Run AHK Script",
+                "title": "Run Script",
                 "category": "AHK"
             },
             {
                 "command": "debug.ahk",
-                "title": "Debug AHK Script",
+                "title": "Debug Script",
                 "category": "AHK",
                 "icon": {
                     "light": "./image/run.png",
