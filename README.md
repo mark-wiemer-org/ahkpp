@@ -32,7 +32,7 @@ AutoHotkey Plus Plus is one of many extensions that offer VS Code language suppo
 
 ## Coffee
 
-If you like this extension, consider [buying the orignal author a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
+If you like this extension, consider [buying cweijan a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
 
 ## Install
 
