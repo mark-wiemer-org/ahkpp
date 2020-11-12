@@ -127,6 +127,8 @@
                 ],
                 "extensions": [
                     ".ahk",
+                    ".ah2",
+                    ".ahk2",
                     ".ext"
                 ],
                 "configuration": "./ahk.configuration.json"
