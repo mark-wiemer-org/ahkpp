@@ -185,17 +185,17 @@
         "keybindings": [
             {
                 "command": "debug.ahk",
-                "key": "f9",
+                "key": "F9",
                 "when": "editorLangId == ahk"
             },
             {
                 "command": "run.ahk",
-                "key": "ctrl+f9",
+                "key": "Ctrl+F9",
                 "when": "editorLangId == ahk"
             },
             {
                 "command": "compile.ahk",
-                "key": "ctrl+shift+f9",
+                "key": "Ctrl+Shift+F9",
                 "when": "editorLangId == ahk"
             }
         ],
