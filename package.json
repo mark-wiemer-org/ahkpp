@@ -212,12 +212,12 @@
                 "ahk++.executePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "The execute path of AHK."
+                    "description": "Absolute path to an AutoHotkey.exe file."
                 },
                 "ahk++.compilePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "The compiler path of AHK."
+                    "description": "Absolute path to an Ahk2Exe.exe file."
                 },
                 "ahk++.intellisense": {
                     "type": "boolean",
