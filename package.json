@@ -17,7 +17,7 @@
         "Programming Languages",
         "Snippets"
     ],
-    "license": "See LICENSE file",
+    "license": "MIT",
     "icon": "icon.png",
     "bugs": {
         "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues"
