@@ -1,21 +1,20 @@
 # AutoHotkey Plus Plus (AHK++)
 
-AutoHotkey Plus Plus (AHK++) provides actively maintained, comprehensive AutoHotkey language support for VS Code. This includes IntelliSense and debug support, along with the standard code highlighting. AHK++ is a fork of the deprecated [AutoHotkey Plus by cweijan](https://github.com/cweijan/vscode-autohotkey#readme).
+AutoHotkey Plus Plus (AHK++) provides actively maintained, comprehensive AutoHotkey language support for VS Code. This includes IntelliSense and debug support, along with the standard code highlighting. AHK++ is a fork of the [once-deprecated AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Plus/vscode-autohotkey/commit/e87f12774692d4c0d792650c099e6071dc17b069).
 
 > View this README on the [project site](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus#readme)
 
 ## Contents
 
 -   [Why AutoHotkey Plus Plus?](#why-autohotkey-plus-plus)
--   [Coffee](#coffee)
 -   [Install](#install)
+-   [Commands](#commands)
 -   [Debug](#debug)
 -   [Language Features](#language-features)
     -   [IntelliSense](#intellisense)
     -   [Function Symbol](#function-symbol)
     -   [Goto Definition](#goto-definition)
     -   [Find References](#find-references)
-    -   [Code Symbol](#code-symbol)
     -   [Hover Tip](#hover-tip)
     -   [Code Format](#code-format)
 -   [Context Menu](#context-menu)
@@ -30,13 +29,19 @@ AutoHotkey Plus Plus is one of many extensions that offer VS Code language suppo
 -   **Debug Support**: Run and debug AHK scripts from VS Code.
 -   **New Features**: Another benefit to active maintenance is that AHK++ can add new features as users request them.
 
-## Coffee
-
-If you like this extension, consider [buying cweijan a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
-
 ## Install
 
 Install from VS Code Marketplace: [Install AutoHotkey Plus Plus](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus).
+
+## Commands
+
+With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts. You can also run a selection as a standalone script. Additionally, you can `Open Help` with `Shift + F1`.
+
+-   Compile: `Ctrl + Shift + F9`
+-   Debug: `F9`
+-   Open Help: `Shift + F1`
+-   Run: `Ctrl + F9`
+-   Run Selection: `Ctrl + F8`
 
 ## Debug
 
@@ -64,8 +69,6 @@ Supports IntelliSense for variables and functions.
 1. Detach source function as symbol
 2. You can add a comment to the function using a semicolon on the line above the function declaration
 
-![Function Symbol](image/functionSymbol.jpg)
-
 ### Goto Definition
 
 1. Support goto function and variable definition.
@@ -75,15 +78,10 @@ Supports IntelliSense for variables and functions.
 
 ### Find Symbol References
 
-Usage: Move coordinates to symbol, then:
+Select a symbol, then:
 
--   Right-click on a symbol, then select `Find All References`.
+-   Right-click and select `Find All References`.
 -   Or press `Shift + F12`.
-
-### Code Symbol
-
-Usage: Add two semicolon to comment code block
-![Code Symbol](image/codeSymbol.jpg)
 
 ### Hover Tip
 
@@ -98,19 +96,9 @@ Supports standard VS Code formatting.
 
 ![Code Format](image/codeFormat.jpg)
 
-## Context Menu
-
-Run and compile code from the context menu.
-
-Right-click to open the context menu, then:
-
--   **Run**: Run script without debug (`Ctrl + F9`).
--   **Compile**: Compile script in same directory (`Ctrl + Shift + F9`).
-    ![compile](image/compile.jpg)
-
 ## Credits
 
 Previous extensions:
 
--   [AutoHotkey Plus](https://github.com/cweijan/vscode-autohotkey)
--   [AutoHotkey](https://github.com/stef-levesque/vscode-autohotkey)
+-   [AutoHotkey Plus by cweijan](https://github.com/cweijan/vscode-autohotkey)
+-   [AutoHotkey by stef-levesque](https://github.com/stef-levesque/vscode-autohotkey)
