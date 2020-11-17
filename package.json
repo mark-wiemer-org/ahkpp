@@ -153,12 +153,17 @@
 			},
 			{
 				"command": "run.ahk",
-				"title": "Run Ahk Script",
+				"title": "Run Script",
+				"category": "AHK"
+			},
+			{
+				"command": "run.selection.ahk",
+				"title": "Run Selection Script",
 				"category": "AHK"
 			},
 			{
 				"command": "debug.ahk",
-				"title": "Debug Ahk Script",
+				"title": "Debug Script",
 				"category": "AHK",
 				"icon": {
 					"light": "./image/run.png",
@@ -168,6 +173,11 @@
 		],
 		"menus": {
 			"editor/context": [
+				{
+					"command": "run.selection.ahk",
+					"when": "editorLangId == ahk && editorHasSelection",
+					"group": "navigation@-1"
+				},
 				{
 					"command": "run.ahk",
 					"when": "editorLangId == ahk",
@@ -196,6 +206,11 @@
 			{
 				"command": "debug.ahk",
 				"key": "f9",
+				"when": "editorLangId == ahk"
+			},
+			{
+				"command": "run.selection.ahk",
+				"key": "f8",
 				"when": "editorLangId == ahk"
 			},
 			{

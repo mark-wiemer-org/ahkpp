@@ -6,15 +6,28 @@ import { Process } from '../common/processWrapper';
 
 export class RunnerService {
 
+    public static async runSelection(): Promise<void> {
+
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showErrorMessage("Not active editor found!")
+            return;
+        }
+
+        var selection = editor.selection;
+        var text = editor.document.getText(selection);
+        this.run(await this.createTemplate(text))
+    }
+
     /**
      * start debuggin session
      */
     public static async startDebugger(script?: string) {
         const cwd = script ? vscode.Uri.file(script) : vscode.window.activeTextEditor.document.uri
         script = script ? script : await this.getPathByActive()
-        const debugPlusExists=vscode.extensions.getExtension("zero-plusplus.vscode-autohotkey-debug")!=undefined
+        const debugPlusExists = vscode.extensions.getExtension("zero-plusplus.vscode-autohotkey-debug") != undefined
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {
-            type: debugPlusExists?"autohotkey":"ahk",
+            type: debugPlusExists ? "autohotkey" : "ahk",
             request: "launch",
             name: "Autohotkey Debugger",
             runtime: Global.getConfig(ConfigKey.executePath),
@@ -23,30 +36,16 @@ export class RunnerService {
     }
 
     /**
-     * run/debug script
-     * @param executePath runtime path
+     * run script
      * @param path execute script path
-     * @param debug enable debug model?
-     * @param debugPort debug proxy port
      */
-    public static async run(executePath = null, path: string = null, debug: boolean = false, debugPort = 9000): Promise<boolean> {
-        executePath = Global.getConfig(ConfigKey.executePath)
-        if(!vscode.window.activeTextEditor.document.isUntitled){
-            vscode.commands.executeCommand('workbench.action.files.save');
+    public static async run(path?: string): Promise<void> {
+        const executePath = Global.getConfig(ConfigKey.executePath)
+        this.checkAndSaveActive();
+        if (!path) {
+            path = await this.getPathByActive();
         }
-        if (executePath) {
-            if (!path) {
-                path = await this.getPathByActive();
-            }
-            try {
-                await Process.exec(`\"${executePath}\"${debug ? ' /ErrorStdOut /debug=localhost:' + debugPort : ''} \"${path}\"`, { cwd: `${res(path, '..')}` });
-                return true;
-            } catch (error) {
-                return false;
-            }
-        } else {
-            return false;
-        }
+        Process.exec(`\"${executePath}\" \"${path}\"`, { cwd: `${res(path, '..')}` });
     }
 
     /**
@@ -54,10 +53,11 @@ export class RunnerService {
      */
     public static async compile() {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
-        if(!vscode.window.activeTextEditor.document.isUntitled){
-            vscode.commands.executeCommand('workbench.action.files.save');
+        if (!currentPath) {
+            vscode.window.showErrorMessage("Unsupport compile template scripts.")
+            return;
         }
-        if (!currentPath) { return; }
+        this.checkAndSaveActive();
         const pos = currentPath.lastIndexOf(".");
         const compilePath = currentPath.substr(0, pos < 0 ? currentPath.length : pos) + ".exe";
         if (await Process.exec(`"${Global.getConfig(ConfigKey.compilePath)}" /in "${currentPath}" /out "${compilePath}"`, { cwd: `${res(currentPath, '..')}` })) {
@@ -65,17 +65,25 @@ export class RunnerService {
         }
     }
 
-
     public static async getPathByActive(): Promise<string> {
         const document = vscode.window.activeTextEditor.document
         if (document.isUntitled) {
-            const path = `temp-${this.getNowDate()}.ahk`;
-            const fullPath = await FileManager.record(path, document.getText(), FileModel.WRITE)
-            return fullPath;
+            return await this.createTemplate(document.getText())
         }
         return document.fileName;
     }
 
+    public static async createTemplate(content: string) {
+        const path = `temp-${this.getNowDate()}.ahk`;
+        return await FileManager.record(path, content, FileModel.WRITE);
+    }
+
+
+    private static checkAndSaveActive(): void {
+        if (!vscode.window.activeTextEditor.document.isUntitled) {
+            vscode.commands.executeCommand('workbench.action.files.save');
+        }
+    }
 
     private static getNowDate(): string {
         const date = new Date();
@@ -94,7 +102,7 @@ export class RunnerService {
     }
 
 
-    public static pad(n: any, width: number, z?: any): number {
+    private static pad(n: any, width: number, z?: any): number {
         z = z || '0';
         n = n + '';
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;

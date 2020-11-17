@@ -38,6 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.debug.registerDebugAdapterDescriptorFactory('ahk', new InlineDebugAdapterFactory()),
         TemplateService.createEditorListenr(),
         vscode.commands.registerCommand("run.ahk", () => RunnerService.run()),
+        vscode.commands.registerCommand("run.selection.ahk", () => RunnerService.runSelection()),
         vscode.commands.registerCommand("document.open", () => DocumentService.open()),
         vscode.commands.registerCommand("debug.ahk", () => RunnerService.startDebugger()),
         vscode.commands.registerCommand("compile.ahk", () => RunnerService.compile())

@@ -1,3 +1,4 @@
+import { commands } from 'vscode';
 import { BreakpointEvent, InitializedEvent, LoggingDebugSession, OutputEvent, StoppedEvent, TerminatedEvent, Thread } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { DebugDispather } from './debugDispather';
@@ -43,6 +44,7 @@ export class DebugSession extends LoggingDebugSession {
 			this.sendEvent(new BreakpointEvent('changed', { verified: bp.verified, id: bp.id } as DebugProtocol.Breakpoint));
 		}).on('output', (text) => {
 			this.sendEvent(new OutputEvent(`${text}\n`));
+			commands.executeCommand('workbench.debug.action.focusRepl')
 		}).on('end', () => {
 			this.sendEvent(new TerminatedEvent());
 		});
