@@ -9,7 +9,7 @@
     },
     "activationEvents": [
         "onLanguage:ahk",
-        "onCommand:run.ahk",
+        "onCommand:ahk++.run",
         "onDebug"
     ],
     "main": "./out/extension",
@@ -141,25 +141,25 @@
         ],
         "commands": [
             {
-                "command": "document.open",
-                "title": "Open Autohotkey Help",
-                "category": "AHK"
+                "command": "ahk++.openHelp",
+                "title": "Open AutoHotkey Help",
+                "category": "AHK++"
             },
             {
-                "command": "compile.ahk",
-                "title": "Compile Script",
-                "category": "AHK",
+                "command": "ahk++.compile",
+                "title": "Compile AHK Script",
+                "category": "AHK++",
                 "icon": "./image/build.svg"
             },
             {
-                "command": "run.ahk",
-                "title": "Run Script",
-                "category": "AHK"
+                "command": "ahk++.run",
+                "title": "Run AHK Script",
+                "category": "AHK++"
             },
             {
-                "command": "debug.ahk",
-                "title": "Debug Script",
-                "category": "AHK",
+                "command": "ahk++.debug",
+                "title": "Debug AHK Script",
+                "category": "AHK++",
                 "icon": {
                     "light": "./image/run.png",
                     "dark": "./image/run-dark.png"
@@ -169,19 +169,19 @@
         "menus": {
             "editor/context": [
                 {
-                    "command": "run.ahk",
+                    "command": "ahk++.run",
                     "when": "editorLangId == ahk",
                     "group": "navigation@0"
                 },
                 {
-                    "command": "compile.ahk",
+                    "command": "ahk++.compile",
                     "when": "editorLangId == ahk",
                     "group": "navigation@1"
                 }
             ],
             "editor/title": [
                 {
-                    "command": "debug.ahk",
+                    "command": "ahk++.debug",
                     "when": "editorLangId == ahk",
                     "group": "navigation@1"
                 }
@@ -189,23 +189,23 @@
         },
         "keybindings": [
             {
-                "command": "document.open",
+                "command": "ahk++.openHelp",
                 "key": "shift+f1",
                 "when": "editorLangId == ahk"
             },
             {
-                "command": "debug.ahk",
-                "key": "F9",
+                "command": "ahk++.debug",
+                "key": "f9",
                 "when": "editorLangId == ahk"
             },
             {
-                "command": "run.ahk",
-                "key": "Ctrl+F9",
+                "command": "ahk++.run",
+                "key": "ctrl+f9",
                 "when": "editorLangId == ahk"
             },
             {
-                "command": "compile.ahk",
-                "key": "Ctrl+Shift+F9",
+                "command": "ahk++.compile",
+                "key": "ctrl+shift+f9",
                 "when": "editorLangId == ahk"
             }
         ],
@@ -222,17 +222,17 @@
                 "ahk++.compilePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "Absolute path to an Ahk2Exe.exe file."
+                    "description": "Path to the AHK compiler."
                 },
-                "ahk++.documentPath": {
+                "ahk++.helpPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-                    "description": "Document path of autohotkey."
+                    "description": "Path to the AHK Help document."
                 },
                 "ahk++.executePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "The execute path of AHK."
+                    "description": "Path to the AHK runner."
                 },
                 "ahk++.intellisense": {
                     "type": "boolean",
