@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
-export class TemplateProvider {
-    public static createEditorListenr(): vscode.Disposable {
+export class TemplateService {
+    public static createEditorListener(): vscode.Disposable {
         return vscode.window.onDidChangeActiveTextEditor((e) => {
             if (
                 e &&

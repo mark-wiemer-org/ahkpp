@@ -1,17 +1,16 @@
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import {
-    HoverProvider,
-    TextDocument,
-    Position,
     CancellationToken,
     ExtensionContext,
-    Range,
     Hover,
+    HoverProvider,
     MarkdownString,
+    Position,
+    Range,
+    TextDocument,
 } from 'vscode';
-import { join } from 'path';
-import { readFileSync } from 'fs';
-import { worker } from 'cluster';
-import { Detecter } from '../core/detect/detecter';
+import { Parser } from '../parser/parser';
 
 interface Snippet {
     prefix: string;
@@ -42,7 +41,7 @@ export class AhkHoverProvider implements HoverProvider {
             return snippetHover;
         }
 
-        const method = await Detecter.getMethodByName(document, context.word);
+        const method = await Parser.getMethodByName(document, context.word);
         if (method) {
             const markdonw = new MarkdownString('', true).appendCodeblock(
                 method.full,

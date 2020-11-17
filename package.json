@@ -141,6 +141,11 @@
         ],
         "commands": [
             {
+                "command": "document.open",
+                "title": "Open Autohotkey Help",
+                "category": "AHK"
+            },
+            {
                 "command": "compile.ahk",
                 "title": "Compile Script",
                 "category": "AHK",
@@ -184,6 +189,11 @@
         },
         "keybindings": [
             {
+                "command": "document.open",
+                "key": "shift+f1",
+                "when": "editorLangId == ahk"
+            },
+            {
                 "command": "debug.ahk",
                 "key": "F9",
                 "when": "editorLangId == ahk"
@@ -209,15 +219,20 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk++.executePath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "Absolute path to an AutoHotkey.exe file."
-                },
                 "ahk++.compilePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "Absolute path to an Ahk2Exe.exe file."
+                },
+                "ahk++.documentPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+                    "description": "Document path of autohotkey."
+                },
+                "ahk++.executePath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "description": "The execute path of AHK."
                 },
                 "ahk++.intellisense": {
                     "type": "boolean",

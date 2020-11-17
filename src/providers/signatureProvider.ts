@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Detecter } from '../core/detect/detecter';
+import { Parser } from '../parser/parser';
 
 export class SignatureProvider implements vscode.SignatureHelpProvider {
     public async provideSignatureHelp(
@@ -25,7 +25,7 @@ export class SignatureProvider implements vscode.SignatureHelpProvider {
             document.getWordRangeAtPosition(methodPosition),
         );
 
-        const method = await Detecter.getMethodByName(document, word);
+        const method = await Parser.getMethodByName(document, word);
         if (method) {
             return {
                 activeSignature: 0,

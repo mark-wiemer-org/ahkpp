@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Detecter } from '../core/detect/detecter';
+import { Parser } from '../parser/parser';
 import { existsSync } from 'fs';
 
 export class DefProvider implements vscode.DefinitionProvider {
@@ -23,7 +23,7 @@ export class DefProvider implements vscode.DefinitionProvider {
                 document.lineAt(position.line).text,
             )
         ) {
-            const method = await Detecter.getMethodByName(document, word);
+            const method = await Parser.getMethodByName(document, word);
             if (method) {
                 const methodDoc = method.document;
                 return new vscode.Location(
@@ -34,7 +34,7 @@ export class DefProvider implements vscode.DefinitionProvider {
         }
 
         // getlabel
-        const label = await Detecter.getLabelByName(document, word);
+        const label = await Parser.getLabelByName(document, word);
         if (label) {
             const tempDocument = label.document;
             return new vscode.Location(
@@ -43,7 +43,7 @@ export class DefProvider implements vscode.DefinitionProvider {
             );
         }
 
-        const script = await Detecter.buildScript(document, true);
+        const script = await Parser.buildScript(document, true);
 
         for (const method of script.methods) {
             if (
