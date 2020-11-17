@@ -1,97 +1,47 @@
-# vscode-autohotkey-Plus
+# VSCode-Autohotkey-Plus
 
-> Project site: [vscode-autohotkey-plus](https://github.com/cweijan/vscode-autohotkey)
-
-AutoHotKey language support for VS Code
+AutoHotKey language support for VSCode
 - [vscode-autohotkey-Plus](#vscode-autohotkey-plus)
-  - [Before all](#before-all)
-  - [Coffee](#coffee)
-  - [Install](#install)
+  - [Start](#start)
   - [Debug](#debug)
   - [Language Features](#language-features)
-    - [IntelliSense](#intellisense)
-    - [Method Symbol](#method-symbol)
-    - [Goto Definition](#goto-definition)
-    - [Find References](#find-references)
-    - [Code Symbol](#code-symbol)
-    - [Hover Tip](#hover-tip)
-    - [Code Format](#code-format)
   - [Context Menu](#context-menu)
   - [Setting](#setting)
   - [Credits](#credits)
 
-## Before all
+## Start
 
-Parser is using regex, so it is extremely limited, please understand this.
+1. The author has not learned the principles of compilation, so parser can only provide limited support, please understand this.
+2. If you like this this extension, consider [buying me a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
 
-## Coffee
-
-If you like this this extension, consider [buying me a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
-
-## Install
-
-Install from vscode marketplace [vscode-autohotkey-plus](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-autohotkey-plus).
+Install  [vscode-autohotkey-plus](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-autohotkey-plus) from vscode marketplace.
 
 ## Debug
-1. Click run button or press F9.
-2. Support breakpoint、stacktrace、variable
+
 ![debug](image/debug.gif)
 
 **Features:**
-1. **Output Message**: you can using `OutputDebug` command instead MsgBox.
-![output](image/output.jpg)
-2. **Evalute**: Set and get variable in debug evaluter.![evalute](image/evalute.jpg)
+1. Click run button or press F9.
+2. Support breakpoint、stacktrace、variable
+4. **Output Message**: Recommend using `OutputDebug` command instead MsgBox when debug.
+4. **Evalute**: Set and get variable in debug evaluter.
 
-This extension provides basic debugging functions. If you need more debugging functions(Like **conditional breakpoint**), you can to add additional extension [vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
+This extension provides basic debugging functions. If you need more debugging functions(Like **conditional breakpoint**), install additional extension [vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
 
 ## Language Features
 
-### IntelliSense
-
-Supports intelliSense for variables and methods.
-
-### Method Symbol
-1. Detech source method as symbol
-2. You can add a comment to the method using a semicolon on the previous line of the method
-
-![methodSymbol](image/methodSymbol.jpg)
-
-### Goto Definition
-
-1. Support goto method and variable definition.
-2. Usage: Press ctrl and move the mouse coordinates to the calling code.
-
-![gotoDefinition](image/gotoDefinition.jpg)
-
-### Find References
-
-Usage: Move coordinates to method, then:
-- Right click then click find all references.
-- Or press `shift+f12`.
-
-### Code Symbol
-
-Usage: Add two semicolon to comment code block
-![codeSymbole](image/codeSymbol.jpg)
-
-### Hover Tip
-
-Usage: Move mouse to method call or command.
-![hover](image/hover.png)
-
-### Code Format
-Usage:
-- Right click then click format document.
-- Or press `Shift+Alt+F`.
-
-- **Formatter follows my coding habits, so it may not unsuited for you**.
-![codeFormat](image/codeFormat.jpg)
+This extension provides basic programming language support for autohotkey:
+- Method Symbol: ![methodSymbol](image/methodSymbol.png)
+- Goto Definition: param, variable, method(**press ctrl then click**)
+- Find References: Find method references(**shift+f12**).
+- Code Format(**Shift+Alt+F**)
+- Hover tip: Move mouse to method call or command. ![hover](image/hover.png)
+- Code Symbol: Add two semicolon to comment code block. ![codeSymbole](image/codeSymbol.png)
+- IntelliSense
 
 ## Context Menu
-Usage: Right click, then:
-- **Run**: Run script without debug(Shortcut: Ctrl+F9).
-- **Compile**: Compile script in same directory(Shortcut: Ctrl+Shift+F9).
-![compile](image/compile.jpg)
+
+Support below function: ![context](image/context.png)
 
 ## Setting
 

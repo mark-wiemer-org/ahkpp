@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.6.0 - 2020/11/17
+- Support run selection script.
+- Support open doc
+
 ## 2.5.6 - 2020/10/6
 - Fix syntax error.
 - Fix variable detect error.
