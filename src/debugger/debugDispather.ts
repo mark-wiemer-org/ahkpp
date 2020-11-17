@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import { Scope, StackFrame, Variable } from 'vscode-debugadapter';
 import { DebugProtocol } from 'vscode-debugprotocol';
-import { ScriptRunner } from '../core/ScriptRunner';
+import { RunnerService } from '../service/runnerService';
 import { DebugServer } from './debugServer';
 import { LaunchRequestArguments } from './debugSession';
 import { BreakPointHandler } from './handler/breakpointHandler';
@@ -83,7 +83,7 @@ export class DebugDispather extends EventEmitter {
 				}
 			})
 		if (!args.program) {
-			args.program = await ScriptRunner.getPathByActive()
+			args.program = await RunnerService.getPathByActive()
 		}
 
 		if (!existsSync(runtime)) {
@@ -102,7 +102,7 @@ export class DebugDispather extends EventEmitter {
 	public async restart() {
 		this.sendComand('stop');
 		this.end()
-		ScriptRunner.startDebugger(this.startArgs.program)
+		RunnerService.startDebugger(this.startArgs.program)
 	}
 
 	/**

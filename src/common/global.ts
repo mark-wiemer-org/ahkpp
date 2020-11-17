@@ -19,12 +19,13 @@ export class Global {
         this.statusBarItem.show()
     }
 
-    public static hide(){
+    public static hide() {
         this.statusBarItem.hide();
     }
 
 }
 
 export enum ConfigKey {
-    compilePath = "compilePath", executePath = "executePath",enableIntelliSense = "enableIntelliSense"
+    compilePath = "compilePath", executePath = "executePath", enableIntelliSense = "enableIntelliSense",
+    documentPath = "documentPath"
 }

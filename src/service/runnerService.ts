@@ -4,7 +4,7 @@ import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
 import { Process } from '../common/processWrapper';
 
-export class ScriptRunner {
+export class RunnerService {
 
     /**
      * start debuggin session

@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import { CodeUtil } from "../common/codeUtil";
-import { deprecate } from "util";
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;

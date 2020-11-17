@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { Detecter } from "../core/detect/detecter";
+import { Parser } from "../parser/parser";
 
 export class RefProvider implements vscode.ReferenceProvider {
 
@@ -8,7 +8,7 @@ export class RefProvider implements vscode.ReferenceProvider {
         const word = document.getText(document.getWordRangeAtPosition(position));
 
         const vscodeRefs = [];
-        const refs = Detecter.getAllRefByName(word)
+        const refs = Parser.getAllRefByName(word)
         for (const ref of refs) {
             vscodeRefs.push(
                 new vscode.Location(ref.document.uri, new vscode.Position(ref.line, ref.character))

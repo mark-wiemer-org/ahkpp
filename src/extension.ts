@@ -1,25 +1,26 @@
 import * as vscode from "vscode";
 import { ProviderResult } from "vscode";
-import { Detecter } from "./core/detect/detecter";
-import { ScriptRunner } from "./core/ScriptRunner";
+import { Parser } from "./parser/parser";
+import { RunnerService } from "./service/runnerService";
 import { DebugSession } from "./debugger/debugSession";
-import { DefProvider } from "./provider/DefProvider";
-import { TemplateProvider } from "./provider/templateProvider";
-import { FormatProvider } from "./provider/formattingProvider";
-import { SymBolProvider } from "./provider/SymbolProvider";
+import { DefProvider } from "./providers/defProvider";
+import { TemplateService } from "./service/templateService";
+import { FormatProvider } from "./providers/formattingProvider";
+import { SymBolProvider } from "./providers/SymbolProvider";
 import { FileManager } from "./common/fileManager";
-import { AhkHoverProvider } from "./provider/ahkHoverProvider";
-import { RefProvider } from "./provider/RefProvider";
+import { AhkHoverProvider } from "./providers/ahkHoverProvider";
+import { RefProvider } from "./providers/refProvider";
 import { Global, ConfigKey } from "./common/global";
-import { AhkRenameProvider } from "./provider/ahkRenameProvider";
-import { SignatureProvider } from "./provider/signatureProvider";
-import { CompletionProvider } from "./provider/CompletionProvider";
+import { AhkRenameProvider } from "./providers/ahkRenameProvider";
+import { SignatureProvider } from "./providers/signatureProvider";
+import { CompletionProvider } from "./providers/completionProvider";
+import { DocumentService } from "./service/documentService";
 
 export function activate(context: vscode.ExtensionContext) {
 
     (async () => {
         Global.updateStatusBarItems("Indexing Autohotkey Workspace...")
-        await Detecter.buildByPath(vscode.workspace.rootPath);
+        await Parser.buildByPath(vscode.workspace.rootPath);
         Global.updateStatusBarItems("Index Workspace Success!")
         Global.hide();
     })();
@@ -34,11 +35,12 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerDocumentSymbolProvider(language, new SymBolProvider()),
         vscode.languages.registerDocumentFormattingEditProvider(language, new FormatProvider()),
         vscode.languages.registerReferenceProvider(language, new RefProvider()),
-        TemplateProvider.createEditorListenr(),
         vscode.debug.registerDebugAdapterDescriptorFactory('ahk', new InlineDebugAdapterFactory()),
-        vscode.commands.registerCommand("run.ahk", () => ScriptRunner.run()),
-        vscode.commands.registerCommand("debug.ahk", () => ScriptRunner.startDebugger()),
-        vscode.commands.registerCommand("compile.ahk", () => ScriptRunner.compile())
+        TemplateService.createEditorListenr(),
+        vscode.commands.registerCommand("run.ahk", () => RunnerService.run()),
+        vscode.commands.registerCommand("document.open", () => DocumentService.open()),
+        vscode.commands.registerCommand("debug.ahk", () => RunnerService.startDebugger()),
+        vscode.commands.registerCommand("compile.ahk", () => RunnerService.compile())
     );
 
     if (Global.getConfig(ConfigKey.enableIntelliSense)) {

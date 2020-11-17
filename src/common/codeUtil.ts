@@ -1,5 +1,3 @@
-import { ifError } from "assert";
-
 export class CodeUtil {
     /**
      * trim unfoucs code.

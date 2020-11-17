@@ -1,12 +1,12 @@
 import * as vscode from "vscode";
-import { Detecter } from "../core/detect/detecter";
+import { Parser } from "../parser/parser";
 
 export class SymBolProvider implements vscode.DocumentSymbolProvider {
     public async provideDocumentSymbols(document: vscode.TextDocument, token: vscode.CancellationToken): Promise<vscode.DocumentSymbol[]> {
 
         const result = [];
 
-        const script = await Detecter.buildScript(document, false)
+        const script = await Parser.buildScript(document, false)
 
         for (const method of script.methods) {
             result.push(

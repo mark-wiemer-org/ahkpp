@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { Detecter } from "../core/detect/detecter";
+import { Parser } from "../parser/parser";
 import { SnippetString } from "vscode";
 
 export class CompletionProvider implements vscode.CompletionItemProvider {
@@ -20,7 +20,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
 
         const result: vscode.CompletionItem[] = [];
 
-        (await Detecter.getAllMethod()).forEach((method) => {
+        (await Parser.getAllMethod()).forEach((method) => {
             const completionItem = new vscode.CompletionItem(method.params.length == 0 ? method.name : method.full, vscode.CompletionItemKind.Method);
             if (method.params.length == 0) {
                 completionItem.insertText = method.name + "()"
@@ -39,7 +39,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             }
         });
 
-        const script = (await Detecter.buildScript(document, true));
+        const script = (await Parser.buildScript(document, true));
         script.variables.forEach((variable) => {
             const completionItem = new vscode.CompletionItem(variable.name, vscode.CompletionItemKind.Variable);
             result.push(completionItem);

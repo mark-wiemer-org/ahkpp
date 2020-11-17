@@ -1,10 +1,10 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
-import { CodeUtil } from "../../common/codeUtil";
-import { Out } from "../../common/out";
+import { CodeUtil } from "../common/codeUtil";
+import { Out } from "../common/out";
 import { Script, Method, Ref, Label, Block, Variable } from "./model";
 
-export class Detecter {
+export class Parser {
 
     private static documentCache = new Map<string, Script>();
 
@@ -64,7 +64,7 @@ export class Detecter {
             if (blockComment) {
                 continue;
             }
-            const methodOrRef = Detecter.detechMethodByLine(document, line);
+            const methodOrRef = Parser.detechMethodByLine(document, line);
             if (methodOrRef) {
                 if (methodOrRef instanceof Method) {
                     methods.push(methodOrRef);
@@ -76,12 +76,12 @@ export class Detecter {
                     CodeUtil.join(refs, methodOrRef)
                 }
             }
-            const label = Detecter.getLabelByLine(document, line);
+            const label = Parser.getLabelByLine(document, line);
             if (label) {
                 labels.push(label);
                 continue;
             }
-            const block = Detecter.getBlockByLine(document, line);
+            const block = Parser.getBlockByLine(document, line);
             if (block) {
                 blocks.push(block);
             }
@@ -94,7 +94,7 @@ export class Detecter {
                     currentMethod.endLine = line
                 }
             }
-            const variable = Detecter.detechVariableByLine(document, line);
+            const variable = Parser.detechVariableByLine(document, line);
             if (variable) {
                 if (deep == 0 || !currentMethod) {
                     this.joinVars(variables, variable)
@@ -190,7 +190,7 @@ export class Detecter {
 
         const lineText = CodeUtil.purity(document.lineAt(line).text);
 
-        const defMatch = lineText.match(Detecter.varDefPattern)
+        const defMatch = lineText.match(Parser.varDefPattern)
         if (defMatch) {
             const varName = defMatch[1];
             return {
@@ -198,7 +198,7 @@ export class Detecter {
             }
         } else {
             let vars = [];
-            const commandMatchAll = CodeUtil.matchAll(Detecter.varCommandPattern, lineText.replace(/\(.+?\)/g,""))
+            const commandMatchAll = CodeUtil.matchAll(Parser.varCommandPattern, lineText.replace(/\(.+?\)/g,""))
             for (let index = 0; index < commandMatchAll.length; index++) {
                 if (index == 0) continue;
                 const varName = commandMatchAll[index][1];
@@ -240,13 +240,13 @@ export class Detecter {
         const methodFullName = methodMatch[1];
         const isMethod = methodMatch[3];
         if (isMethod) {
-            return new Method(methodFullName, methodName, document, line, character, true, Detecter.getRemarkByLine(document, line - 1));
+            return new Method(methodFullName, methodName, document, line, character, true, Parser.getRemarkByLine(document, line - 1));
         }
         for (let i = line + 1; i < document.lineCount; i++) {
             const nextLineText = CodeUtil.purity(document.lineAt(i).text);
             if (!nextLineText.trim()) { continue; }
             if (nextLineText.match(/^\s*{/)) {
-                return new Method(methodFullName, methodName, document, line, character, false, Detecter.getRemarkByLine(document, line - 1));
+                return new Method(methodFullName, methodName, document, line, character, false, Parser.getRemarkByLine(document, line - 1));
             } else {
                 return new Ref(methodName, document, line, character)
             }

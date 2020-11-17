@@ -1,4 +1,3 @@
-"user strict";
 import * as vscode from "vscode";
 import { OutputChannel } from "vscode";
 

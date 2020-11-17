@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { Detecter } from "../core/detect/detecter";
+import { Parser } from "../parser/parser";
 import { Out } from "../common/out";
 
 export class AhkRenameProvider implements vscode.RenameProvider {
@@ -7,11 +7,11 @@ export class AhkRenameProvider implements vscode.RenameProvider {
     async provideRenameEdits(document: vscode.TextDocument, position: vscode.Position, newName: string, token: vscode.CancellationToken): Promise<vscode.WorkspaceEdit> {
 
         for (const doc of vscode.workspace.textDocuments) {
-            Detecter.buildScript(doc)
+            Parser.buildScript(doc)
         }
 
         const word = document.getText(document.getWordRangeAtPosition(position));
-        const refs = Detecter.getAllRefByName(word)
+        const refs = Parser.getAllRefByName(word)
         const workEdit = new vscode.WorkspaceEdit();
         for (const ref of refs) {
             if (ref.document.uri.scheme != "file") {
@@ -35,7 +35,7 @@ export class AhkRenameProvider implements vscode.RenameProvider {
         const wordRange = document.getWordRangeAtPosition(position)
         const word = document.getText(wordRange);
 
-        const method = await Detecter.getMethodByName(document, word)
+        const method = await Parser.getMethodByName(document, word)
         if (method != null) {
             return wordRange
         }

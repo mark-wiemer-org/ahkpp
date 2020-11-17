@@ -141,6 +141,11 @@
 		],
 		"commands": [
 			{
+				"command": "document.open",
+				"title": "Open Autohotkey Document",
+				"category": "AHK"
+			},
+			{
 				"command": "compile.ahk",
 				"title": "Compile Script",
 				"category": "AHK",
@@ -184,6 +189,11 @@
 		},
 		"keybindings": [
 			{
+				"command": "document.open",
+				"key": "f1",
+				"when": "editorLangId == ahk"
+			},
+			{
 				"command": "debug.ahk",
 				"key": "f9",
 				"when": "editorLangId == ahk"
@@ -212,12 +222,17 @@
 				"vscode-ahk-plus.executePath": {
 					"type": "string",
 					"default": "C:/Program Files/Autohotkey/AutoHotkeyU64.exe",
-					"description": "The execute path of ahk."
+					"description": "Execute path of autohotkey."
 				},
 				"vscode-ahk-plus.compilePath": {
 					"type": "string",
 					"default": "C:/Program Files/autoHotkey/Compiler/Ahk2Exe.exe",
-					"description": "The compiler path of ahk."
+					"description": "Compiler path of autohotkey."
+				},
+				"vscode-ahk-plus.documentPath": {
+					"type": "string",
+					"default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+					"description": "Document path of autohotkey."
 				},
 				"vscode-ahk-plus.enableIntelliSense": {
 					"type": "boolean",
