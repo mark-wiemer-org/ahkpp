@@ -59,15 +59,18 @@ export function activate(context: vscode.ExtensionContext) {
             new InlineDebugAdapterFactory(),
         ),
         TemplateService.createEditorListener(),
-        vscode.commands.registerCommand('ahk++.run', () => RunnerService.run()),
-        vscode.commands.registerCommand('ahk++.openHelp', () =>
-            HelpService.open(),
+        vscode.commands.registerCommand('ahk++.compile', () =>
+            RunnerService.compile(),
         ),
         vscode.commands.registerCommand('ahk++.debug', () =>
             RunnerService.startDebugger(),
         ),
-        vscode.commands.registerCommand('ahk++.compile', () =>
-            RunnerService.compile(),
+        vscode.commands.registerCommand('ahk++.openHelp', () =>
+            HelpService.open(),
+        ),
+        vscode.commands.registerCommand('ahk++.run', () => RunnerService.run()),
+        vscode.commands.registerCommand('ahk++.runSelection', () =>
+            RunnerService.runSelection(),
         ),
     );
 

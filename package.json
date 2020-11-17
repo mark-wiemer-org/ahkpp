@@ -141,20 +141,10 @@
         ],
         "commands": [
             {
-                "command": "ahk++.openHelp",
-                "title": "Open AutoHotkey Help",
-                "category": "AHK++"
-            },
-            {
                 "command": "ahk++.compile",
                 "title": "Compile AHK Script",
                 "category": "AHK++",
                 "icon": "./image/build.svg"
-            },
-            {
-                "command": "ahk++.run",
-                "title": "Run AHK Script",
-                "category": "AHK++"
             },
             {
                 "command": "ahk++.debug",
@@ -164,19 +154,39 @@
                     "light": "./image/run.png",
                     "dark": "./image/run-dark.png"
                 }
+            },
+            {
+                "command": "ahk++.openHelp",
+                "title": "Open AutoHotkey Help",
+                "category": "AHK++"
+            },
+            {
+                "command": "ahk++.run",
+                "title": "Run AHK Script",
+                "category": "AHK++"
+            },
+            {
+                "command": "ahk++.runSelection",
+                "title": "Run Selection",
+                "category": "AHK"
             }
         ],
         "menus": {
             "editor/context": [
+                {
+                    "command": "ahk++.compile",
+                    "when": "editorLangId == ahk",
+                    "group": "navigation@1"
+                },
                 {
                     "command": "ahk++.run",
                     "when": "editorLangId == ahk",
                     "group": "navigation@0"
                 },
                 {
-                    "command": "ahk++.compile",
-                    "when": "editorLangId == ahk",
-                    "group": "navigation@1"
+                    "command": "ahk++.runSelection",
+                    "when": "editorLangId == ahk && editorHasSelection",
+                    "group": "navigation@-1"
                 }
             ],
             "editor/title": [
@@ -189,8 +199,8 @@
         },
         "keybindings": [
             {
-                "command": "ahk++.openHelp",
-                "key": "shift+f1",
+                "command": "ahk++.compile",
+                "key": "ctrl+shift+f9",
                 "when": "editorLangId == ahk"
             },
             {
@@ -199,13 +209,18 @@
                 "when": "editorLangId == ahk"
             },
             {
+                "command": "ahk++.openHelp",
+                "key": "shift+f1",
+                "when": "editorLangId == ahk"
+            },
+            {
                 "command": "ahk++.run",
                 "key": "ctrl+f9",
                 "when": "editorLangId == ahk"
             },
             {
-                "command": "ahk++.compile",
-                "key": "ctrl+shift+f9",
+                "command": "ahk++.runSelection",
+                "key": "ctrl+f8",
                 "when": "editorLangId == ahk"
             }
         ],
