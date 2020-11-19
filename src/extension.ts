@@ -6,7 +6,7 @@ import { DebugSession } from './debugger/debugSession';
 import { DefProvider } from './providers/defProvider';
 import { TemplateService } from './service/templateService';
 import { FormatProvider } from './providers/formattingProvider';
-import { SymBolProvider } from './providers/SymbolProvider';
+import { SymbolProvider } from './providers/symbolProvider';
 import { FileManager } from './common/fileManager';
 import { AhkHoverProvider } from './providers/ahkHoverProvider';
 import { RefProvider } from './providers/refProvider';
@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         ),
         vscode.languages.registerDocumentSymbolProvider(
             language,
-            new SymBolProvider(),
+            new SymbolProvider(),
         ),
         vscode.languages.registerDocumentFormattingEditProvider(
             language,
