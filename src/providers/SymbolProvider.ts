@@ -30,11 +30,11 @@ export class SymBolProvider implements vscode.DocumentSymbolProvider {
             )
         }
 
-        for (const variable of script.variables) {
-            result.push(
-                new vscode.SymbolInformation(variable.name, vscode.SymbolKind.Variable, null, new vscode.Location(variable.document.uri, new vscode.Position(variable.line, variable.character)))
-            )
-        }
+        // for (const variable of script.variables) {
+        //     result.push(
+        //         new vscode.SymbolInformation(variable.name, vscode.SymbolKind.Variable, null, new vscode.Location(variable.document.uri, new vscode.Position(variable.line, variable.character)))
+        //     )
+        // }
 
         return result;
     }
