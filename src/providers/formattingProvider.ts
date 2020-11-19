@@ -70,7 +70,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 notDeep = false;
             }
 
-            if (purityText.match(/\b(return)\b/i) && tagDeep === deep) {
+            if (purityText.match(/\b(return|ExitApp)\b/i) && tagDeep === deep) {
                 tagDeep == 0;
                 deep--;
                 notDeep = false;
