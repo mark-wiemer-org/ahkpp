@@ -1,4 +1,4 @@
-# VSCode-Autohotkey-Plus
+# VSCode-AutoHotkey-Plus
 
 AutoHotKey language support for VSCode
 - [vscode-autohotkey-Plus](#vscode-autohotkey-plus)
