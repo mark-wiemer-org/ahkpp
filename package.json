@@ -45,9 +45,9 @@
 		"debuggers": [
 			{
 				"type": "ahk",
-				"label": "Autohotkey",
+				"label": "AutoHotkey",
 				"program": "./out/debugger/DebugAdapter.js",
-				"runtime": "\"C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe\"",
+				"runtime": "\"C:\\Program Files\\AutoHotkey\\AutoHotkeyU64.exe\"",
 				"configurationAttributes": {
 					"launch": {
 						"required": [
@@ -62,7 +62,7 @@
 							"runtime": {
 								"type": "string",
 								"description": "Absolute path to a AutoHotkey.exe file.",
-								"default": "C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe"
+								"default": "C:\\Program Files\\AutoHotkey\\AutoHotkeyU64.exe"
 							},
 							"stopOnEntry": {
 								"type": "boolean",
@@ -98,18 +98,18 @@
 					{
 						"type": "ahk",
 						"request": "launch",
-						"name": "Autohotkey Debugger",
+						"name": "AutoHotkey Debugger",
 						"program": "${file}",
 						"stopOnEntry": true
 					}
 				],
 				"configurationSnippets": [
 					{
-						"label": "Autohotkey Debug: Launch",
+						"label": "AutoHotkey Debug: Launch",
 						"body": {
 							"type": "ahk",
 							"request": "launch",
-							"name": "Autohotkey Debugger",
+							"name": "AutoHotkey Debugger",
 							"program": "${file}",
 							"stopOnEntry": true
 						}
@@ -142,7 +142,7 @@
 		"commands": [
 			{
 				"command": "document.open",
-				"title": "Open Autohotkey Document",
+				"title": "Open AutoHotkey Document",
 				"category": "AHK"
 			},
 			{
@@ -236,12 +236,12 @@
 			"properties": {
 				"vscode-ahk-plus.executePath": {
 					"type": "string",
-					"default": "C:/Program Files/Autohotkey/AutoHotkeyU64.exe",
+					"default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
 					"description": "Execute path of autohotkey."
 				},
 				"vscode-ahk-plus.compilePath": {
 					"type": "string",
-					"default": "C:/Program Files/autoHotkey/Compiler/Ahk2Exe.exe",
+					"default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
 					"description": "Compiler path of autohotkey."
 				},
 				"vscode-ahk-plus.documentPath": {
