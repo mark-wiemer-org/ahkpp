@@ -1671,7 +1671,7 @@
     "StrSplit()": {
         "prefix": "StrSplit()",
         "body": "StrSplit(${1:String}, ${2:[Delimiters}, ${3:OmitChars]})",
-        "description": "Separates a string into an array of substrings using the specified delimiters.\n⚠Deprecated: Use the StrSplit function instead."
+        "description": "Separates a string into an array of substrings using the specified delimiters."
     },
     "StrReplace()": {
         "prefix": "StrReplace()",
