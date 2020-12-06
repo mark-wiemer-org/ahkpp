@@ -174,7 +174,7 @@ export class Parser {
 
     private static getLabelByLine(document: vscode.TextDocument, line: number) {
         const text = CodeUtil.purity(document.lineAt(line).text);
-        const label = /^ *([\u4e00-\u9fa5_a-zA-Z0-9]+) *:{1}(?!(:|=))/.exec(text)
+        const label = /^[ \t]*([\u4e00-\u9fa5_a-zA-Z0-9]+) *:{1}(?!(:|=))/.exec(text)
         if (label) {
             const labelName = label[1]
             if (labelName.toLowerCase() == "case" || labelName.toLowerCase() == "default") return;
