@@ -55,3 +55,17 @@ class Cls
 	method() {
 	}
 }
+
+; Does a thing
+LAlt() {
+	; do a thing
+}
+
+<#Tab::     AltTab
+<#c::       CenterActiveWindow()
+$LAlt::     LAlt()
+$*Pause::   Pause()
+$AppsKey::  AppsKey()
+$CapsLock:: CapsLock()
+
+Pause
