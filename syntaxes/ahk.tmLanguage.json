@@ -279,7 +279,7 @@
                     "name": "support.function.ahk"
                 },
                 {
-                    "match": "\\b(?!MsgBox)([\\w]+)(?=\\()",
+                    "match": "\\b(?!MsgBox)[\\w]+\\s*(?=\\()",
                     "name": "entity.name.function.ahk",
                     "example": "fun("
                 },
