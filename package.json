@@ -17,7 +17,7 @@
         "Programming Languages",
         "Snippets"
     ],
-    "license": "See LICENSE file",
+    "license": "MIT",
     "icon": "icon.png",
     "bugs": {
         "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues"
@@ -148,12 +148,12 @@
             },
             {
                 "command": "run.ahk",
-                "title": "Run AHK Script",
+                "title": "Run Script",
                 "category": "AHK"
             },
             {
                 "command": "debug.ahk",
-                "title": "Debug AHK Script",
+                "title": "Debug Script",
                 "category": "AHK",
                 "icon": {
                     "light": "./image/run.png",
@@ -185,17 +185,17 @@
         "keybindings": [
             {
                 "command": "debug.ahk",
-                "key": "f9",
+                "key": "F9",
                 "when": "editorLangId == ahk"
             },
             {
                 "command": "run.ahk",
-                "key": "ctrl+f9",
+                "key": "Ctrl+F9",
                 "when": "editorLangId == ahk"
             },
             {
                 "command": "compile.ahk",
-                "key": "ctrl+shift+f9",
+                "key": "Ctrl+Shift+F9",
                 "when": "editorLangId == ahk"
             }
         ],
@@ -212,12 +212,12 @@
                 "ahk++.executePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "The execute path of AHK."
+                    "description": "Absolute path to an AutoHotkey.exe file."
                 },
                 "ahk++.compilePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "The compiler path of AHK."
+                    "description": "Absolute path to an Ahk2Exe.exe file."
                 },
                 "ahk++.intellisense": {
                     "type": "boolean",
