@@ -3,6 +3,8 @@
 This document covers the development process, from writing code to publishing a new version.
 
 1. Write the code on the `dev` branch, or offshoots of that branch. Merge the changes to the `dev` branch as they become stable.
+    1. Test all added commands
+    1. Perform the formatting tests
 1. Once the `dev` branch has all the features for a new release, create a new release branch named `v-<major>.<minor>.<patch>` (e.g. `v-2.5.10`).
 1. Push the changes, open a PR, review the changes, and merge to `master`.
     1. Confirm the package version has been updated
