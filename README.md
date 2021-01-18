@@ -14,10 +14,9 @@ AutoHotkey Plus Plus (AHK++) provides actively maintained, comprehensive AutoHot
     -   [IntelliSense](#intellisense)
     -   [Function Symbol](#function-symbol)
     -   [Goto Definition](#goto-definition)
-    -   [Find References](#find-references)
+    -   [Find References](#find-symbol-references)
     -   [Hover Tip](#hover-tip)
     -   [Code Format](#code-format)
--   [Context Menu](#context-menu)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
