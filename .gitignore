@@ -1,6 +1,12 @@
-out
-node_modules
-.vscode-test/
-*.vsix
+# Folders
 .idea/
+.vscode-test/
+node_modules
+out
+
+# Files
+.vscode/settings.json
 package-lock.json
+
+# Both
+*.vsix

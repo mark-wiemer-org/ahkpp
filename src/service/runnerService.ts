@@ -4,10 +4,20 @@ import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
 import { Process } from '../common/processWrapper';
 
-export class ScriptRunner {
-    /**
-     * start debuggin session
-     */
+export class RunnerService {
+    /** Runs the editor selection as a standalone script. */
+    public static async runSelection(): Promise<void> {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showErrorMessage('No active editor found!');
+            return;
+        }
+
+        var selection = editor.selection;
+        var text = editor.document.getText(selection);
+        this.run(await this.createTemplate(text));
+    }
+
     public static async startDebugger(script?: string) {
         const cwd = script
             ? vscode.Uri.file(script)
@@ -27,61 +37,35 @@ export class ScriptRunner {
     }
 
     /**
-     * run/debug script
-     * @param executePath runtime path
-     * @param path execute script path
-     * @param debug enable debug model?
-     * @param debugPort debug proxy port
+     * Runs the script at the specified path
      */
-    public static async run(
-        executePath = null,
-        path: string = null,
-        debug: boolean = false,
-        debugPort = 9000,
-    ): Promise<boolean> {
-        executePath = Global.getConfig<string>(ConfigKey.executePath);
-        if (!vscode.window.activeTextEditor.document.isUntitled) {
-            vscode.commands.executeCommand('workbench.action.files.save');
+    public static async run(path?: string): Promise<void> {
+        const executePath = Global.getConfig(ConfigKey.executePath);
+        this.checkAndSaveActive();
+        if (!path) {
+            path = await this.getPathByActive();
         }
-        if (executePath) {
-            if (!path) {
-                path = await this.getPathByActive();
-            }
-            try {
-                await Process.exec(
-                    `\"${executePath}\"${
-                        debug
-                            ? ' /ErrorStdOut /debug=localhost:' + debugPort
-                            : ''
-                    } \"${path}\"`,
-                    { cwd: `${res(path, '..')}` },
-                );
-                return true;
-            } catch (error) {
-                return false;
-            }
-        } else {
-            return false;
-        }
+        Process.exec(`\"${executePath}\" \"${path}\"`, {
+            cwd: `${res(path, '..')}`,
+        });
     }
 
     /**
-     * compile current script
+     * Compiles current script
      */
     public static async compile() {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
-        if (!vscode.window.activeTextEditor.document.isUntitled) {
-            vscode.commands.executeCommand('workbench.action.files.save');
-        }
         if (!currentPath) {
+            vscode.window.showErrorMessage('Cannot compile never-saved files.');
             return;
         }
+        this.checkAndSaveActive();
         const pos = currentPath.lastIndexOf('.');
         const compilePath =
             currentPath.substr(0, pos < 0 ? currentPath.length : pos) + '.exe';
         if (
             await Process.exec(
-                `"${Global.getConfig<string>(
+                `"${Global.getConfig(
                     ConfigKey.compilePath,
                 )}" /in "${currentPath}" /out "${compilePath}"`,
                 { cwd: `${res(currentPath, '..')}` },
@@ -94,15 +78,20 @@ export class ScriptRunner {
     public static async getPathByActive(): Promise<string> {
         const document = vscode.window.activeTextEditor.document;
         if (document.isUntitled) {
-            const path = `temp-${this.getNowDate()}.ahk`;
-            const fullPath = await FileManager.record(
-                path,
-                document.getText(),
-                FileModel.WRITE,
-            );
-            return fullPath;
+            return await this.createTemplate(document.getText());
         }
         return document.fileName;
+    }
+
+    public static async createTemplate(content: string) {
+        const path = `temp-${this.getNowDate()}.ahk`;
+        return await FileManager.record(path, content, FileModel.WRITE);
+    }
+
+    private static checkAndSaveActive(): void {
+        if (!vscode.window.activeTextEditor.document.isUntitled) {
+            vscode.commands.executeCommand('workbench.action.files.save');
+        }
     }
 
     private static getNowDate(): string {
@@ -133,7 +122,7 @@ export class ScriptRunner {
         );
     }
 
-    public static pad(n: any, width: number, z?: any): number {
+    private static pad(n: any, width: number, z?: any): number {
         z = z || '0';
         n = n + '';
         return n.length >= width

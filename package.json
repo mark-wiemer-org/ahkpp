@@ -2,14 +2,14 @@
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
     "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
-    "version": "2.5.12",
+    "version": "2.6.0",
     "publisher": "mark-wiemer",
     "engines": {
         "vscode": "^1.30.0"
     },
     "activationEvents": [
         "onLanguage:ahk",
-        "onCommand:run.ahk",
+        "onCommand:ahk++.run",
         "onDebug"
     ],
     "main": "./out/extension",
@@ -17,7 +17,7 @@
         "Programming Languages",
         "Snippets"
     ],
-    "license": "See LICENSE file",
+    "license": "MIT",
     "icon": "icon.png",
     "bugs": {
         "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues"
@@ -141,42 +141,57 @@
         ],
         "commands": [
             {
-                "command": "compile.ahk",
-                "title": "Compile Script",
-                "category": "AHK",
+                "command": "ahk++.compile",
+                "title": "Compile AHK Script",
+                "category": "AHK++",
                 "icon": "./image/build.svg"
             },
             {
-                "command": "run.ahk",
-                "title": "Run AHK Script",
-                "category": "AHK"
-            },
-            {
-                "command": "debug.ahk",
+                "command": "ahk++.debug",
                 "title": "Debug AHK Script",
-                "category": "AHK",
+                "category": "AHK++",
                 "icon": {
                     "light": "./image/run.png",
                     "dark": "./image/run-dark.png"
                 }
+            },
+            {
+                "command": "ahk++.openHelp",
+                "title": "Open AutoHotkey Help",
+                "category": "AHK++"
+            },
+            {
+                "command": "ahk++.run",
+                "title": "Run AHK Script",
+                "category": "AHK++"
+            },
+            {
+                "command": "ahk++.runSelection",
+                "title": "Run Selection",
+                "category": "AHK"
             }
         ],
         "menus": {
             "editor/context": [
                 {
-                    "command": "run.ahk",
+                    "command": "ahk++.compile",
+                    "when": "editorLangId == ahk",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "ahk++.run",
                     "when": "editorLangId == ahk",
                     "group": "navigation@0"
                 },
                 {
-                    "command": "compile.ahk",
-                    "when": "editorLangId == ahk",
-                    "group": "navigation@1"
+                    "command": "ahk++.runSelection",
+                    "when": "editorLangId == ahk && editorHasSelection",
+                    "group": "navigation@-1"
                 }
             ],
             "editor/title": [
                 {
-                    "command": "debug.ahk",
+                    "command": "ahk++.debug",
                     "when": "editorLangId == ahk",
                     "group": "navigation@1"
                 }
@@ -184,18 +199,28 @@
         },
         "keybindings": [
             {
-                "command": "debug.ahk",
+                "command": "ahk++.compile",
+                "key": "ctrl+shift+f9",
+                "when": "editorLangId == ahk"
+            },
+            {
+                "command": "ahk++.debug",
                 "key": "f9",
                 "when": "editorLangId == ahk"
             },
             {
-                "command": "run.ahk",
+                "command": "ahk++.openHelp",
+                "key": "ctrl+f1",
+                "when": "editorLangId == ahk"
+            },
+            {
+                "command": "ahk++.run",
                 "key": "ctrl+f9",
                 "when": "editorLangId == ahk"
             },
             {
-                "command": "compile.ahk",
-                "key": "ctrl+shift+f9",
+                "command": "ahk++.runSelection",
+                "key": "ctrl+f8",
                 "when": "editorLangId == ahk"
             }
         ],
@@ -209,15 +234,20 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk++.executePath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "The execute path of AHK."
-                },
                 "ahk++.compilePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "The compiler path of AHK."
+                    "description": "Path to the AHK compiler."
+                },
+                "ahk++.helpPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+                    "description": "Path to the AHK Help document."
+                },
+                "ahk++.executePath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "description": "Path to the AHK runner."
                 },
                 "ahk++.intellisense": {
                     "type": "boolean",

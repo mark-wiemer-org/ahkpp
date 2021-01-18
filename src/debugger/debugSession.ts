@@ -1,3 +1,4 @@
+import { commands } from 'vscode';
 import {
     BreakpointEvent,
     InitializedEvent,
@@ -61,6 +62,7 @@ export class DebugSession extends LoggingDebugSession {
             })
             .on('output', (text) => {
                 this.sendEvent(new OutputEvent(`${text}\n`));
+                commands.executeCommand('workbench.debug.action.focusRepl');
             })
             .on('end', () => {
                 this.sendEvent(new TerminatedEvent());

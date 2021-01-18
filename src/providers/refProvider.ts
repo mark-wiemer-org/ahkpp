@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Detecter } from '../core/detect/detecter';
+import { Parser } from '../parser/parser';
 
 export class RefProvider implements vscode.ReferenceProvider {
     public provideReferences(
@@ -13,7 +13,7 @@ export class RefProvider implements vscode.ReferenceProvider {
         );
 
         const vscodeRefs = [];
-        const refs = Detecter.getAllRefByName(word);
+        const refs = Parser.getAllRefByName(word);
         for (const ref of refs) {
             vscodeRefs.push(
                 new vscode.Location(

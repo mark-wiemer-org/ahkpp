@@ -1,14 +1,14 @@
 import * as vscode from 'vscode';
-import { Detecter } from '../core/detect/detecter';
+import { Parser } from '../parser/parser';
 
-export class SymBolProvider implements vscode.DocumentSymbolProvider {
+export class SymbolProvider implements vscode.DocumentSymbolProvider {
     public async provideDocumentSymbols(
         document: vscode.TextDocument,
         token: vscode.CancellationToken,
     ): Promise<vscode.DocumentSymbol[]> {
         const result = [];
 
-        const script = await Detecter.buildScript(document, false);
+        const script = await Parser.buildScript(document, false);
 
         for (const method of script.methods) {
             result.push(
@@ -47,20 +47,6 @@ export class SymBolProvider implements vscode.DocumentSymbolProvider {
                     new vscode.Location(
                         block.document.uri,
                         new vscode.Position(block.line, block.character),
-                    ),
-                ),
-            );
-        }
-
-        for (const variable of script.variables) {
-            result.push(
-                new vscode.SymbolInformation(
-                    variable.name,
-                    vscode.SymbolKind.Variable,
-                    null,
-                    new vscode.Location(
-                        variable.document.uri,
-                        new vscode.Position(variable.line, variable.character),
                     ),
                 ),
             );
