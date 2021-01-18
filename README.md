@@ -34,11 +34,11 @@ Install from VS Code Marketplace: [Install AutoHotkey Plus Plus](https://marketp
 
 ## Commands
 
-With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts. You can also run a selection as a standalone script. Additionally, you can `Open Help` with `Shift + F1`.
+With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts. You can also run a selection as a standalone script. Additionally, you can `Open Help` with `Ctrl + F1`.
 
 -   Compile: `Ctrl + Shift + F9`
 -   Debug: `F9`
--   Open Help: `Shift + F1`
+-   Open Help: `Ctrl + F1`
 -   Run: `Ctrl + F9`
 -   Run Selection: `Ctrl + F8`
 

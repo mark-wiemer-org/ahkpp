@@ -210,7 +210,7 @@
             },
             {
                 "command": "ahk++.openHelp",
-                "key": "shift+f1",
+                "key": "ctrl+f1",
                 "when": "editorLangId == ahk"
             },
             {
