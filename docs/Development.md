@@ -5,7 +5,8 @@ This document covers the development process, from writing code to publishing a 
 1. Write the code on the `dev` branch, or offshoots of that branch. Merge the changes to the `dev` branch as they become stable.
     - Test all added commands
     - Perform the formatting tests
-    - Confirm Markdown files appear as intended
+    - Confirm README appears as intended
+    - Confirm links in README work
 1. Once the `dev` branch has all the features for a new release, create a new release branch named `v-<major>.<minor>.<patch>` (e.g. `v-2.5.10`).
     - Confirm the package version has been updated
     - Confirm the changelog has been updated
