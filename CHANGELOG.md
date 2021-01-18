@@ -15,6 +15,7 @@
 -   Fix function coloring for calls with a space before the parentheses (e.g. `foo ()`)
 -   Fix detection of labels indented with a tab
 -   Remove confusing deprecation warning from `StrSplit` function
+-   Remove variables from outline
 
 ## 2.5.12 - 2020-11-08
 
