@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 2.6.0 - 2021-01-18
+
+### Features
+
+-   Add `Open Help` command
+-   Add `Run Selection` command
+-   Add foldable region comments
+
+### Fixes
+
+-   Improve formatting for using `ExitApp` to end subroutines
+-   Fix function coloring for functions whose names were also keywords ([#11](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/11))
+-   Fix function coloring for calls with a space before the parentheses (e.g. `foo ()`)
+-   Fix detection of labels indented with a tab
+-   Remove confusing deprecation warning from `StrSplit` function
+
 ## 2.5.12 - 2020-11-08
 
 -   Improve settings readability
