@@ -11,11 +11,13 @@ function()
     if (str == "str") {
         MsgBox Overwrite primitive variable!
     }
+    ; Known bug: `line <n>` lines should be indented one level more
+    ; https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/25
     str_multiline := "
     (LTrim
-        line 1
-        line 2
-        line 3
+    line 1
+    line 2
+    line 3
     )"
     int := 123
     float := 123.456
@@ -34,13 +36,15 @@ function()
 
     obj := { str: str, int: int, float: float }
     objobj := { str: str, obj: obj }
-    objobjobj := { str: str, int: int, obj: { str: str, obj: obj } }
+    ; Known bug: the entire body of a function should be indented
+    ; https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/26
+objobjobj := { str: str, int: int, obj: { str: str, obj: obj } }
 
-    circular := {}
-    circular.circular := circular
-    instance := new Cls()
+circular := {}
+circular.circular := circular
+instance := new Cls()
 
-    enum := obj._NewEnum()
+enum := obj._NewEnum()
 }
 class Cls
 {
@@ -56,6 +60,14 @@ class Cls
     }
 }
 
+; Block comments and nested regions
+/* ;region
+Collapse me!
+{
+    Collapse me too!
+}
+*/ ;endregion
+
 ; Hotkeys and Keywords
 
 <#Tab:: AltTab
@@ -67,7 +79,7 @@ LAlt() {
     ; do a thing
 }
 
-; Function calls
+; Function calls (with a space before parens)
 foo()
 bar ()
 baz ()
@@ -77,3 +89,10 @@ LAlt()
 Pause()
 AppsKey()
 CapsLock()
+
+; SUBROUTINES
+
+; ExitApp indentation for subroutines
+MySub:
+    foo()
+ExitApp
