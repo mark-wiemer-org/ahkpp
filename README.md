@@ -13,7 +13,7 @@ AutoHotkey Plus Plus (AHK++) provides actively maintained, comprehensive AutoHot
 -   [Language Features](#language-features)
     -   [IntelliSense](#intellisense)
     -   [Function Symbol](#function-symbol)
-    -   [Goto Definition](#goto-definition)
+    -   [Go To Definition](#go-to-definition)
     -   [Find References](#find-symbol-references)
     -   [Hover Tip](#hover-tip)
     -   [Code Format](#code-format)
@@ -24,13 +24,13 @@ AutoHotkey Plus Plus (AHK++) provides actively maintained, comprehensive AutoHot
 AutoHotkey Plus Plus is one of many extensions that offer VS Code language support. So why should you use this one?
 
 -   **IntelliSense**: Smart code completion, syntax highlighting, code navigation, and more.
--   **Actively Maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues)
+-   **Actively Maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues).
 -   **Debug Support**: Run and debug AHK scripts from VS Code.
 -   **New Features**: Another benefit to active maintenance is that AHK++ can add new features as users request them.
 
 ## Install
 
-Install from VS Code Marketplace: [Install AutoHotkey Plus Plus](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus).
+Install from VS Code or install from VS Code Marketplace: [Install AutoHotkey Plus Plus](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus).
 
 ## Commands
 
@@ -46,14 +46,18 @@ With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts
 
 1. Click Run or press F9.
 2. Debugger supports breakpoints, stack tracing, and variable watching
-   ![Debug](image/debug.gif)
+
+    ![Debug](image/debug.gif)
 
 ### Debug Features
 
 1. **Output Message**: You can use `OutputDebug` command instead of `MsgBox` to log values.
-   ![Output](image/output.jpg)
+
+    ![Output](image/output.jpg)
+
 2. **Evaluate**: Set and get variable values through the debug console.
-   ![Evaluate](image/evalute.jpg)
+
+    ![Evaluate](image/evalute.jpg)
 
 This extension provides basic debugging functions. If you need more debugging functions (such as conditional breakpoints), you can add an additional extension: [Install vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
 
@@ -65,12 +69,11 @@ Supports IntelliSense for variables and functions.
 
 ### Function Symbol
 
-1. Detach source function as symbol
-2. You can add a comment to the function using a semicolon on the line above the function declaration
+1. You can add a comment to the function using a semicolon on the line above the function declaration
 
-### Goto Definition
+### Go to Definition
 
-1. Support goto function and variable definition.
+1. Supports navigation to symbol definition.
 2. Usage: Ctrl-click on the symbol to navigate to its definition.
 
 ![Goto Definition](image/gotoDefinition.jpg)
@@ -84,7 +87,8 @@ Select a symbol, then:
 
 ### Hover Tip
 
-Usage: Move mouse to function call or command.
+Usage: Hover over symbol to see IntelliSense documentation.
+
 ![Hover](image/hover.png)
 
 ### Code Format
