@@ -19,7 +19,8 @@ interface Snippet {
 }
 
 interface Context {
-    nextChart: string;
+    /** The character after the word */
+    charAfter: string;
     word: string;
 }
 
@@ -35,6 +36,7 @@ export class AhkHoverProvider implements HoverProvider {
         token: CancellationToken,
     ) {
         const context = this.buildContext(document, position);
+        if (context === undefined) return null;
 
         const snippetHover = this.tryGetSnippetHover(context);
         if (snippetHover) {
@@ -43,13 +45,13 @@ export class AhkHoverProvider implements HoverProvider {
 
         const method = await Parser.getMethodByName(document, context.word);
         if (method) {
-            const markdonw = new MarkdownString('', true).appendCodeblock(
+            const contents = new MarkdownString('', true).appendCodeblock(
                 method.full,
             );
             if (method.comment) {
-                markdonw.appendText(method.comment);
+                contents.appendText(method.comment);
             }
-            return new Hover(markdonw);
+            return new Hover(contents);
         }
 
         return null;
@@ -57,12 +59,12 @@ export class AhkHoverProvider implements HoverProvider {
 
     private tryGetSnippetHover(context: Context): Hover {
         let snippetKey = context.word.toLowerCase();
-        if (context.nextChart == '(') {
+        if (context.charAfter == '(') {
             snippetKey += '()';
         }
         const snippet = this.snippetCache.get(snippetKey);
         if (snippet) {
-            const content = new MarkdownString(null, true).appendCodeblock(
+            const content = new MarkdownString('', true).appendCodeblock(
                 snippet.body,
                 'ahk',
             );
@@ -76,9 +78,10 @@ export class AhkHoverProvider implements HoverProvider {
     private buildContext(document: TextDocument, position: Position): Context {
         const line = position.line;
         const wordRange = document.getWordRangeAtPosition(position);
+        if (wordRange === undefined) return undefined;
         let word = document.getText(wordRange);
         if (wordRange.start.character > 0) {
-            const preChart = document.getText(
+            const charBefore = document.getText(
                 new Range(
                     line,
                     wordRange.start.character - 1,
@@ -86,11 +89,11 @@ export class AhkHoverProvider implements HoverProvider {
                     wordRange.start.character,
                 ),
             );
-            if (preChart == '#') {
+            if (charBefore == '#') {
                 word = '#' + word;
             }
         }
-        const nextChart = document.getText(
+        const charAfter = document.getText(
             new Range(
                 line,
                 wordRange.end.character,
@@ -98,7 +101,7 @@ export class AhkHoverProvider implements HoverProvider {
                 wordRange.end.character + 1,
             ),
         );
-        return { word, nextChart };
+        return { word, charAfter };
     }
 
     private initSnippetCache(context: ExtensionContext) {
