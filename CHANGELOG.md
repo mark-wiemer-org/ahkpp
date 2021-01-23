@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.6.1 - 2021-01-23
+
+-   Fix hover provider ([#16](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/16))
+
 ## 2.6.0 - 2021-01-18
 
 ### Features
