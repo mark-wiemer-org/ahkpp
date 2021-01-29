@@ -11,9 +11,6 @@ AutoHotKey language support for VSCode
 
 ## Start
 
-1. The author has not learned the principles of compilation, so parser can only provide limited support, please understand this.
-2. If you like this this extension, consider [buying me a coffee](https://www.buymeacoffee.com/cweijan). Thank you!
-
 Install  [vscode-autohotkey-plus](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-autohotkey-plus) from vscode marketplace.
 
 ## Debug
