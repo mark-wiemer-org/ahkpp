@@ -107,4 +107,4 @@ f2:: MsgBox, You hit F2
 
 ; Formatting line below ternary with third operand a string value
 true ? 1 : "string"
-    foo()
+foo()
