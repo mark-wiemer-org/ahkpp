@@ -8,7 +8,7 @@ export class CodeUtil {
         return original
             .replace(/;.+/, '')
             .replace(/".*?"/g, '""') // replace string literals with empty string literal
-            .replace(/\{.*?\}/g, '')
+            .replace(/{.*}/g, '') // remove matching braces
             .replace(/ +/g, ' ')
             .replace(/\bgui\b.*/gi, '')
             .replace(/\b(msgbox)\b.+?%/gi, '$1');
