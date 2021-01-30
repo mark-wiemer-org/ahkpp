@@ -10,7 +10,7 @@ This document covers the development process, from writing code to publishing a 
 1. Once the `dev` branch has all the features for a new release, create a new release branch named `v<major>.<minor>.<patch>` (e.g. `v2.5.10`).
     1. Update package version
     1. Update changelog
-    1. Save final changes in commit. The message of the commit should be the same name as the branch.
+    1. Save final changes in commit. The message of the commit should be the name of the release branch.
 1. Push the changes, open a PR, review the changes, and merge to `master`.
 1. Pull the new master branch
 1. Package the new release using `vsce package`.
