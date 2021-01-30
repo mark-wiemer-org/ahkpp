@@ -53,7 +53,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 .replace(/ {2,}/g, ' ')
                 .concat(comment);
 
-            atTopLevel = true; // assume at top level
+            atTopLevel = true;
 
             // Match block comments
             if (originalLine.match(/ *\/\*/)) {
