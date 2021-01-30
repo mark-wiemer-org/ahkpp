@@ -12,6 +12,7 @@ function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
 }
 
 export class FormatProvider implements vscode.DocumentFormattingEditProvider {
+    /** Special keywords that can trigger one-line commands */
     private static oneCommandList = [
         'ifnotexist',
         'ifexist',
@@ -34,156 +35,164 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         options: vscode.FormattingOptions,
         token: vscode.CancellationToken,
     ): vscode.ProviderResult<vscode.TextEdit[]> {
-        let formatDocument = '';
-        let deep = 0;
-        let tagDeep = 0;
+        let formattedDocument = '';
+        let depth = 0;
+        let tagDepth = 0;
         let oneCommandCode = false;
         let blockComment = false;
+        let atTopLevel = true;
 
-        for (let line = 0; line < document.lineCount; line++) {
-            const originText = document.lineAt(line).text;
-            if (originText.match(/ *\/\*/)) {
+        for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
+            const originalLine = document.lineAt(lineIndex).text;
+            const purifiedLine = CodeUtil.purify(originalLine.toLowerCase());
+            /** The line comment. Empty string if no line comment exists */
+            const comment = /;.+/.exec(originalLine)?.[0] ?? '';
+            const formattedLine = originalLine
+                .replace(/^\s*/, '')
+                .replace(/;.+/, '')
+                .replace(/ {2,}/g, ' ')
+                .concat(comment);
+
+            atTopLevel = true;
+
+            // Match block comments
+            if (originalLine.match(/ *\/\*/)) {
                 blockComment = true;
             }
-            if (originText.match(/ *\*\//)) {
+            if (originalLine.match(/ *\*\//)) {
                 blockComment = false;
             }
             if (blockComment) {
-                formatDocument += originText;
-                if (line !== document.lineCount - 1) {
-                    formatDocument += '\n';
+                formattedDocument += originalLine;
+                if (lineIndex !== document.lineCount - 1) {
+                    formattedDocument += '\n';
                 }
                 continue;
             }
-            const purityText = CodeUtil.purity(originText.toLowerCase());
-            let notDeep = true;
 
             if (
-                purityText.match(/#ifwinactive$/) ||
-                purityText.match(/#ifwinnotactive$/)
+                purifiedLine.match(/#ifwinactive$/) ||
+                purifiedLine.match(/#ifwinnotactive$/)
             ) {
-                if (tagDeep > 0) {
-                    deep -= tagDeep;
+                if (tagDepth > 0) {
+                    depth -= tagDepth;
                 } else {
-                    deep--;
+                    depth--;
                 }
-                notDeep = false;
+                atTopLevel = false;
             }
 
-            if (purityText.match(/\b(return|ExitApp)\b/i) && tagDeep === deep) {
-                tagDeep == 0;
-                deep--;
-                notDeep = false;
+            if (
+                purifiedLine.match(/\b(return|ExitApp)\b/i) &&
+                tagDepth === depth
+            ) {
+                tagDepth == 0;
+                depth--;
+                atTopLevel = false;
             }
 
-            if (purityText.match(/^\s*case.+?:\s*$/)) {
-                tagDeep--;
-                deep--;
-                notDeep = false;
-            } else if (purityText.match(/:\s*$/)) {
-                if (tagDeep > 0 && tagDeep === deep) {
-                    deep--;
-                    notDeep = false;
+            if (purifiedLine.match(/^\s*case.+?:\s*$/)) {
+                tagDepth--;
+                depth--;
+                atTopLevel = false;
+            } else if (purifiedLine.match(/:\s*$/)) {
+                if (tagDepth > 0 && tagDepth === depth) {
+                    depth--;
+                    atTopLevel = false;
                 }
             }
 
-            if (purityText.match(/}/) != null) {
-                let temp = purityText.match(/}/).length;
-                const t2 = purityText.match(/{[^{}]*}/);
+            // Check open and close braces
+            if (purifiedLine.match(/}/) != null) {
+                let temp = purifiedLine.match(/}/).length;
+                const t2 = purifiedLine.match(/{[^{}]*}/);
                 if (t2) {
                     temp = temp - t2.length;
                 }
-                deep -= temp;
+                depth -= temp;
                 if (temp > 0) {
-                    notDeep = false;
+                    atTopLevel = false;
                 }
             }
-
-            if (oneCommandCode && purityText.match(/{/) != null) {
-                let temp = purityText.match(/{/).length;
-                const t2 = purityText.match(/{[^{}]*}/);
+            if (oneCommandCode && purifiedLine.match(/{/) != null) {
+                let temp = purifiedLine.match(/{/).length;
+                const t2 = purifiedLine.match(/{[^{}]*}/);
                 if (t2) {
                     temp = temp - t2.length;
                 }
                 if (temp > 0) {
                     oneCommandCode = false;
-                    deep--;
+                    depth--;
                 }
             }
 
-            if (deep < 0) {
-                deep = 0;
+            if (depth < 0) {
+                depth = 0;
             }
-            let comment: any = /;.+/.exec(originText);
-            comment = comment ? comment[0] : '';
 
-            const formatedText =
-                originText
-                    .replace(/^\s*/, '')
-                    .replace(/;.+/, '')
-                    .replace(/ {2,}/g, ' ') + comment;
-            formatDocument +=
-                !formatedText || formatedText.trim() == ''
-                    ? formatedText
-                    : ' '.repeat(deep * options.tabSize) + formatedText;
-            if (line !== document.lineCount - 1) {
-                formatDocument += '\n';
+            formattedDocument +=
+                !formattedLine || formattedLine.trim() == ''
+                    ? formattedLine
+                    : ' '.repeat(depth * options.tabSize) + formattedLine;
+
+            // If not last line, add newline
+            if (lineIndex !== document.lineCount - 1) {
+                formattedDocument += '\n';
             }
 
             if (oneCommandCode) {
                 oneCommandCode = false;
-                deep--;
+                depth--;
             }
 
             if (
-                purityText.match(/#ifwinactive.*?\s/) ||
-                purityText.match(/#ifwinnotactive.*?\s/)
+                purifiedLine.match(/#ifwinactive.*?\s/) ||
+                purifiedLine.match(/#ifwinnotactive.*?\s/)
             ) {
-                deep++;
-                notDeep = false;
+                depth++;
+                atTopLevel = false;
             }
 
-            if (purityText.match(/{/) != null) {
-                let temp = purityText.match(/{/).length;
-                const t2 = purityText.match(/{[^{}]*}/);
+            if (purifiedLine.match(/{/) != null) {
+                let temp = purifiedLine.match(/{/).length;
+                const t2 = purifiedLine.match(/{[^{}]*}/);
                 if (t2) {
                     temp = temp - t2.length;
                 }
-                deep += temp;
+                depth += temp;
                 if (temp > 0) {
-                    notDeep = false;
+                    atTopLevel = false;
                 }
             }
 
-            if (purityText.match(/:\s*$/)) {
-                deep++;
-                tagDeep = deep;
-                notDeep = false;
+            if (purifiedLine.match(/:\s*$/)) {
+                depth++;
+                tagDepth = depth;
+                atTopLevel = false;
             }
 
-            if (notDeep) {
+            if (atTopLevel) {
                 for (const oneCommand of FormatProvider.oneCommandList) {
                     let temp: RegExpExecArray;
                     if (
                         (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
-                            purityText,
+                            purifiedLine,
                         )) != null &&
                         !temp[1].includes('/')
                     ) {
                         oneCommandCode = true;
-                        deep++;
+                        depth++;
                         break;
                     }
                 }
             }
         }
-        const result = [];
-        result.push(
+
+        return [
             new vscode.TextEdit(
                 fullDocumentRange(document),
-                formatDocument.replace(/\n{2,}/g, '\n\n'),
+                formattedDocument.replace(/\n{2,}/g, '\n\n'),
             ),
-        );
-        return result;
+        ];
     }
 }
