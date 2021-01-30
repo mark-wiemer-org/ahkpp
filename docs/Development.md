@@ -14,7 +14,20 @@ This document covers the development process, from writing code to publishing a 
 1. Push the changes, open a PR, review the changes, and merge to `master`.
 1. Pull the new master branch
 1. Package the new release using `vsce package`.
-1. Final round of tests
+1. Install new release
+1. Perform final round of tests
+    1. If tests fail, there are two choices:
+        1. Delay the release until the tests pass (preferred choice)
+            > Changes can be made on the same release branch, same package version
+        1. Create issues for the newly-introduced failures before releasing, then publish the release anyway
+1. Create and push the version tag
+    1. Delete the release branch
+    1. `git tag v<major>.<minor>.<patch>`
+    1. `git push`
+    1. Update the metadata in the [Releases Entry](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/releases)
+        1. Release title: Same as in [CHANGELOG.md](../CHANGELOG.md)
+        1. Description: Same as in changelog
+        1. Attach binary
 1. Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
 
     1. Select the ellipsis `Actions` icon and select `Update`.
