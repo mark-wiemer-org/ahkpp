@@ -36,15 +36,13 @@ function()
 
     obj := { str: str, int: int, float: float }
     objobj := { str: str, obj: obj }
-    ; Known bug: the entire body of a function should be indented
-    ; https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/26
-objobjobj := { str: str, int: int, obj: { str: str, obj: obj } }
+    objobjobj := { str: str, int: int, obj: { str: str, obj: obj } }
 
-circular := {}
-circular.circular := circular
-instance := new Cls()
+    circular := {}
+    circular.circular := circular
+    instance := new Cls()
 
-enum := obj._NewEnum()
+    enum := obj._NewEnum()
 }
 class Cls
 {
@@ -104,3 +102,7 @@ f1:: MsgBox, You hit F1
 
 ; The F2 hotkey will not work because it was not part of the selection
 f2:: MsgBox, You hit F2
+
+; Formatting line below ternary with third operand a string value
+true ? 1 : "string"
+foo()

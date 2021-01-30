@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.6.2 - 2021-01-30
+
+-   Fix formatting after ternary operator ([#18](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/18))
+-   Fix formatting after multiple close braces on one line ([#26](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/26))
+
 ## 2.6.1 - 2021-01-23
 
 -   Fix hover provider ([#16](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/16))
