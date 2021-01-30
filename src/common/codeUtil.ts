@@ -7,7 +7,7 @@ export class CodeUtil {
         if (!original) return '';
         return original
             .replace(/;.+/, '')
-            .replace(/".*?"/g, '')
+            .replace(/".*?"/g, '""') // replace string literals with empty string literal
             .replace(/\{.*?\}/g, '')
             .replace(/ +/g, ' ')
             .replace(/\bgui\b.*/gi, '')

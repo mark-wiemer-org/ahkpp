@@ -104,3 +104,7 @@ f1:: MsgBox, You hit F1
 
 ; The F2 hotkey will not work because it was not part of the selection
 f2:: MsgBox, You hit F2
+
+; Formatting line below ternary with third operand a string value
+true ? 1 : "string"
+    foo()
