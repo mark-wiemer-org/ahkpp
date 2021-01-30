@@ -197,7 +197,7 @@ export class Parser {
     }
 
     private static getLabelByLine(document: vscode.TextDocument, line: number) {
-        const text = CodeUtil.purity(document.lineAt(line).text);
+        const text = CodeUtil.purify(document.lineAt(line).text);
         const label = /^[ \t]*([\u4e00-\u9fa5_a-zA-Z0-9]+) *:{1}(?!(:|=))/.exec(
             text,
         );
@@ -219,7 +219,7 @@ export class Parser {
         document: vscode.TextDocument,
         line: number,
     ): Variable | Variable[] {
-        const lineText = CodeUtil.purity(document.lineAt(line).text);
+        const lineText = CodeUtil.purify(document.lineAt(line).text);
 
         const defMatch = lineText.match(Parser.varDefPattern);
         if (defMatch) {
@@ -270,7 +270,7 @@ export class Parser {
         origin?: string,
     ) {
         origin = origin != undefined ? origin : document.lineAt(line).text;
-        const text = CodeUtil.purity(origin);
+        const text = CodeUtil.purify(origin);
         const refPattern = /\s*(([\u4e00-\u9fa5_a-zA-Z0-9]+)(?<!if|while)\(.*?\))\s*(\{)?\s*/i;
         const methodMatch = text.match(refPattern);
         if (!methodMatch) {
@@ -302,7 +302,7 @@ export class Parser {
             );
         }
         for (let i = line + 1; i < document.lineCount; i++) {
-            const nextLineText = CodeUtil.purity(document.lineAt(i).text);
+            const nextLineText = CodeUtil.purify(document.lineAt(i).text);
             if (!nextLineText.trim()) {
                 continue;
             }
