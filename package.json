@@ -168,7 +168,7 @@
             {
                 "command": "ahk++.runSelection",
                 "title": "Run Selection",
-                "category": "AHK"
+                "category": "AHK++"
             }
         ],
         "menus": {
