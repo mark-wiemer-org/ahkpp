@@ -6,7 +6,4 @@ out
 
 # Files
 .vscode/settings.json
-package-lock.json
-
-# Both
 *.vsix
