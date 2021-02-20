@@ -249,7 +249,7 @@
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
                     "description": "Path to the AHK runner."
                 },
-                "ahk++.intellisense": {
+                "ahk++.enableIntellisense": {
                     "type": "boolean",
                     "default": true,
                     "description": "Enable IntelliSense (Preview). Changes take effect after reload."
