@@ -69,15 +69,17 @@ Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `
 
     1. `git tag v<major>.<minor>.<patch>`
 
-    1. `git push`
+    1. `git push origin v<major>.<minor>.<patch>`
 
-    1. Update the metadata in the [Releases Entry](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/releases)
+    1. [Create a new release for this tag](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tags)
 
         1. Release title: Same as in [CHANGELOG.md](../CHANGELOG.md)
 
         1. Description: Same as in changelog
 
         1. Attach binary
+
+        1. Publish release
 
 1.  Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
 
