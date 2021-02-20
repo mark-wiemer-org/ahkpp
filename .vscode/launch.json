@@ -13,9 +13,9 @@
             "preLaunchTask": "npm: watch"
         },
         {
+            "name": "AutoHotkey v1 Debugger",
             "type": "ahk",
             "request": "launch",
-            "name": "AutoHotkey v1 Debugger",
             "program": "${workspaceFolder}/demos/demo_for_ahk_v1.ahk",
             "runtime": "C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe",
             "stopOnEntry": false,
@@ -24,9 +24,9 @@
             }
         },
         {
+            "name": "AutoHotkey v2 Debugger",
             "type": "ahk",
             "request": "launch",
-            "name": "AutoHotkey v2 Debugger",
             "program": "${workspaceFolder}/demos/demo_for_ahk_v2.ahk",
             "runtime": "C:\\Program Files\\AutoHotkey\\v2-alpha\\x64\\AutoHotkey.exe",
             "stopOnEntry": false,
