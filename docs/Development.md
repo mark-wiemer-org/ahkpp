@@ -2,35 +2,93 @@
 
 This document covers the development process, from writing code to publishing a new version.
 
-1. Write the code on the `dev` branch, or offshoots of that branch. Merge the changes to the `dev` branch as they become stable.
-    - Test all added commands
-    - Perform the formatting tests
-    - Confirm README appears as intended
-    - Confirm links in README work
-1. Once the `dev` branch has all the features for a new release, create a new release branch named `v<major>.<minor>.<patch>` (e.g. `v2.5.10`).
-    1. Update package version
-    1. Update changelog
-    1. Save final changes in commit. The message of the commit should be the name of the release branch.
-1. Push the changes, open a PR, review the changes, and merge to `master`.
-1. Pull the new master branch
-1. Package the new release using `vsce package`.
-1. Install new release
-1. Perform final round of tests
-    1. If tests fail, there are two choices:
+## Writing
+
+1. Write your change on an offshoot of `dev` (these are feature branches).
+
+1. Merge each change to `dev` via a squash-commit PR.
+
+    > `master` is still the default branch, but all PRs (aside from releases) should be merged to `dev`.
+
+1. Each new feature or multi-commit bugfixes should be developed on its own feature branch, then merged into `dev`.
+
+Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `dev` directly if they are only one commit.
+
+## Testing
+
+-   Test all added commands
+-   Perform the formatting tests
+-   If the README was modified, confirm README appears as intended
+-   Confirm links in README work (even if it wasn't modified: some of its targets be invalidated at any time)
+
+(Eventually this process will be automated)
+
+## Releasing
+
+1.  Once the `dev` branch has all the features for a new release, create a new release branch named `v<major>.<minor>.<patch>` (e.g. `v1.2.3`).
+
+1.  Update the changelog. Once updated, the changelog should not be changed. This is to prevent feature creep.
+
+1.  Open a draft PR to merge to `master`. The title of the PR should be the name of the release branch, lowercase 'v'. The PR description should contain the changelog entry.
+
+1.  Fix any remaining issues with the code (but only make changes already logged in the changelog). Use the draft PR to easily detect issues.
+
+1.  Bump the version. The message of the commit should be the name of the release branch.
+
+1.  Push the changes.
+
+1.  Merge the PR. The body of the commit message should be the changelog entry.
+
+1.  Pull `master`.
+
+1.  Package the new version using `vsce package`.
+
+1.  Install the new version:
+
+    1. Select the newly-created `.vsix` file.
+
+    1. Open the context menu (right-click).
+
+    1. Select `Install Extension VSIX`.
+
+    1. Reload the window.
+
+1.  Perform final pre-release tests.
+
+    -   If tests fail, there are two choices:
+
         1. Delay the release until the tests pass (preferred choice)
+
             > Changes can be made on the same release branch, same package version
+
         1. Create issues for the newly-introduced failures before releasing, then publish the release anyway
-1. Create and push the version tag
-    1. Delete the release branch
+
+1.  Tag the release
+
+    1. Delete the release branch in local
+
     1. `git tag v<major>.<minor>.<patch>`
+
     1. `git push`
+
     1. Update the metadata in the [Releases Entry](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/releases)
+
         1. Release title: Same as in [CHANGELOG.md](../CHANGELOG.md)
+
         1. Description: Same as in changelog
+
         1. Attach binary
-1. Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
+
+1.  Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
 
     1. Select the ellipsis `Actions` icon and select `Update`.
+
     1. Upload the `.vsix` release file packaged in a previous step.
 
     > The release is usually available within 5 minutes of uploading.
+
+## Post-Release
+
+1. `git co dev`
+
+1. `git merge master`

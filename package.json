@@ -2,7 +2,7 @@
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
     "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
-    "version": "2.6.2",
+    "version": "2.6.3",
     "publisher": "mark-wiemer",
     "engines": {
         "vscode": "^1.30.0"
@@ -168,7 +168,7 @@
             {
                 "command": "ahk++.runSelection",
                 "title": "Run Selection",
-                "category": "AHK"
+                "category": "AHK++"
             }
         ],
         "menus": {
@@ -249,7 +249,7 @@
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
                     "description": "Path to the AHK runner."
                 },
-                "ahk++.intellisense": {
+                "ahk++.enableIntellisense": {
                     "type": "boolean",
                     "default": true,
                     "description": "Enable IntelliSense (Preview). Changes take effect after reload."
