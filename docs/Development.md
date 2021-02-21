@@ -21,7 +21,17 @@ Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `
 -   If the README was modified, confirm README appears as intended
 -   Confirm links in README work (even if it wasn't modified: some of its targets be invalidated at any time)
 
-(Eventually this process will be automated)
+### Automated Tests
+
+1. Open the Debug console panel
+
+1. Select `Test Extension` in the Debug side bar
+
+1. Begin Debugging (`F5` or press the play button)
+
+The tests should run automatically, and you should see passing output in the Debug console within a few seconds.
+
+> Learn more about debugging at the [VS Code Debugging Guide](https://code.visualstudio.com/Docs/editor/debugging).
 
 ## Starting a Release
 
