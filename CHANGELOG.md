@@ -2,7 +2,7 @@
 
 ## 2.7.0 - 2021-02-21
 
--   Respect user choice to indent with tabs vs spaces ([#49](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/49))
+-   Respect user choice to indent with either tabs or spaces ([#49](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/49))
 
 ## 2.6.3 - 2021-02-20
 
