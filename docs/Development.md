@@ -23,7 +23,7 @@ Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `
 
 (Eventually this process will be automated)
 
-## Releasing
+## Starting a Release
 
 1.  Once the `dev` branch has all the features for a new release, create a new release branch named `v<major>.<minor>.<patch>` (e.g. `v1.2.3`).
 
@@ -63,7 +63,13 @@ Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `
 
         1. Create issues for the newly-introduced failures before releasing, then publish the release anyway
 
-1.  Tag the release
+### Publishing
+
+1. `git co dev`
+
+1. `git merge v<major>.<minor>.<patch>`
+
+1. Tag the release
 
     1. Delete the release branch in local
 
@@ -81,16 +87,10 @@ Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `
 
         1. Publish release
 
-1.  Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
+1. Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
 
     1. Select the ellipsis `Actions` icon and select `Update`.
 
     1. Upload the `.vsix` release file packaged in a previous step.
 
     > The release is usually available within 5 minutes of uploading.
-
-## Post-Release
-
-1. `git co dev`
-
-1. `git merge master`
