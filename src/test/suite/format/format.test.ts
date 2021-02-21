@@ -48,4 +48,29 @@ suite('Formatter', () => {
         });
         assert.strictEqual(textEditor.document.getText(), outFileString);
     });
+
+    test('Respect insertSpaces option test', async () => {
+        const outFileString = fs
+            .readFileSync(path.join(filesParentPath, 'multiline.out.ahk'))
+            .toString();
+
+        const unformattedSampleFile = await vscode.workspace.openTextDocument(
+            path.join(filesParentPath, 'multiline.in.ahk'),
+        );
+        const textEditor = await vscode.window.showTextDocument(
+            unformattedSampleFile,
+        );
+        const formatter = new FormatProvider();
+        const edits = formatter.provideDocumentFormattingEdits(
+            unformattedSampleFile,
+            { tabSize: 4, insertSpaces: false },
+            null,
+        );
+        await textEditor.edit((editBuilder) => {
+            edits.forEach((edit) =>
+                editBuilder.replace(edit.range, edit.newText),
+            );
+        });
+        assert.strictEqual(textEditor.document.getText(), outFileString);
+    });
 });

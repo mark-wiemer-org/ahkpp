@@ -130,10 +130,14 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 depth = 0;
             }
 
+            const indentationChars = options.insertSpaces
+                ? ' '.repeat(depth * options.tabSize)
+                : '\t'.repeat(depth);
+
             formattedDocument +=
                 !formattedLine || formattedLine.trim() == ''
                     ? formattedLine
-                    : ' '.repeat(depth * options.tabSize) + formattedLine;
+                    : indentationChars + formattedLine;
 
             // If not last line, add newline
             if (lineIndex !== document.lineCount - 1) {
