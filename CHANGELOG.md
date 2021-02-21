@@ -1,4 +1,4 @@
-# CHANGELOG
+# Changelog
 
 ## 2.6.4 - 2021-02-21
 
