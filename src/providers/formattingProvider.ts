@@ -34,7 +34,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         document: vscode.TextDocument,
         options: vscode.FormattingOptions,
         token: vscode.CancellationToken,
-    ): vscode.ProviderResult<vscode.TextEdit[]> {
+    ): vscode.TextEdit[] {
         let formattedDocument = '';
         let depth = 0;
         let tagDepth = 0;
