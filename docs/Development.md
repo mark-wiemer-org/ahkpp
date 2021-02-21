@@ -21,9 +21,19 @@ Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `
 -   If the README was modified, confirm README appears as intended
 -   Confirm links in README work (even if it wasn't modified: some of its targets be invalidated at any time)
 
-(Eventually this process will be automated)
+### Automated Tests
 
-## Releasing
+1. Open the Debug console panel
+
+1. Select `Test Extension` in the Debug side bar
+
+1. Begin Debugging (`F5` or press the play button)
+
+The tests should run automatically, and you should see passing output in the Debug console within a few seconds.
+
+> Learn more about debugging at the [VS Code Debugging Guide](https://code.visualstudio.com/Docs/editor/debugging).
+
+## Starting a Release
 
 1.  Once the `dev` branch has all the features for a new release, create a new release branch named `v<major>.<minor>.<patch>` (e.g. `v1.2.3`).
 
@@ -63,32 +73,34 @@ Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `
 
         1. Create issues for the newly-introduced failures before releasing, then publish the release anyway
 
-1.  Tag the release
+### Publishing
+
+1. `git co dev`
+
+1. `git merge v<major>.<minor>.<patch>`
+
+1. Tag the release
 
     1. Delete the release branch in local
 
     1. `git tag v<major>.<minor>.<patch>`
 
-    1. `git push`
+    1. `git push origin v<major>.<minor>.<patch>`
 
-    1. Update the metadata in the [Releases Entry](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/releases)
+    1. [Create a new release for this tag](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tags)
 
-        1. Release title: Same as in [CHANGELOG.md](../CHANGELOG.md)
+        1. Release title: Same as in [Changelog.md](../Changelog.md)
 
         1. Description: Same as in changelog
 
         1. Attach binary
 
-1.  Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
+        1. Publish release
+
+1. Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
 
     1. Select the ellipsis `Actions` icon and select `Update`.
 
     1. Upload the `.vsix` release file packaged in a previous step.
 
     > The release is usually available within 5 minutes of uploading.
-
-## Post-Release
-
-1. `git co dev`
-
-1. `git merge master`
