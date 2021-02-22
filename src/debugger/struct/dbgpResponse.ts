@@ -35,7 +35,7 @@ export interface DbgpProperty {
         pagesize?: string;
         children?: string;
         numchildren?: string;
-        encoding?: string;
+        encoding?: BufferEncoding;
     };
     content?: string;
     property?: DbgpProperty | DbgpProperty[];
