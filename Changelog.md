@@ -1,4 +1,13 @@
-# CHANGELOG
+# Changelog
+
+## 2.7.0 - 2021-02-21
+
+-   Respect user choice to indent with either tabs or spaces ([#49](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/49))
+
+## 2.6.3 - 2021-02-20
+
+-   Fix IntelliSense ([#48](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/48))
+-   Move `Run Selection` command to same category as all other commands (Thanks [@fade2gray](https://github.com/fade2gray)!)
 
 ## 2.6.3 - 2021-02-20
 

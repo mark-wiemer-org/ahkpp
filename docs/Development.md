@@ -89,7 +89,11 @@ The tests should run automatically, and you should see passing output in the Deb
 
     1. [Create a new release for this tag](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tags)
 
+<<<<<<< HEAD
         1. Release title: Same as in [CHANGELOG.md](../CHANGELOG.md)
+=======
+        1. Release title: Same as in [Changelog.md](../Changelog.md)
+>>>>>>> master
 
         1. Description: Same as in changelog
 
