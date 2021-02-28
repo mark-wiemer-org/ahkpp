@@ -4,17 +4,32 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { FormatProvider } from '../../../providers/formattingProvider';
 
-interface FormatTest {
-    filenameRoot: string;
-    options: vscode.FormattingOptions;
-}
-
-const formatTests: FormatTest[] = [
-    { filenameRoot: 'demo', options: { tabSize: 4, insertSpaces: true } },
-    { filenameRoot: 'multiline', options: { tabSize: 4, insertSpaces: false } },
-];
+// Make sure const values match provided suffixes below
 const inFilenameSuffix = '.in.ahk';
 const outFilenameSuffix = '.out.ahk';
+interface FormatTest {
+    // Make sure provided suffixes match const values above
+    /** Name of the file, excluding the suffix (suffixes include .in.ahk, .out.ahk) */
+    filenameRoot: string;
+    /** If not provided, file will be formatted with spaces. */
+    options?: Partial<vscode.FormattingOptions>;
+}
+/** Default formatting options */
+const defaultOptions: vscode.FormattingOptions = {
+    tabSize: 4,
+    insertSpaces: true,
+};
+const formatTests: FormatTest[] = [
+    { filenameRoot: 'demo' },
+    {
+        filenameRoot: 'insertSpacesFalse',
+        options: { insertSpaces: false },
+    },
+    {
+        filenameRoot: 'tabSize2',
+        options: { tabSize: 2 },
+    },
+];
 
 const filesParentPath = path.join(
     __dirname,
@@ -45,7 +60,10 @@ suite('Formatter', () => {
             const formatter = new FormatProvider();
             const edits = formatter.provideDocumentFormattingEdits(
                 unformattedSampleFile,
-                formatTest.options,
+                {
+                    ...defaultOptions,
+                    ...formatTest.options,
+                },
                 null,
             );
             await textEditor.edit((editBuilder) => {
