@@ -41,6 +41,7 @@ const filesParentPath = path.join(
     'test',
     'suite',
     'format',
+    'samples',
 );
 
 suite('Formatter', () => {
