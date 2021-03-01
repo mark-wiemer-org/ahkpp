@@ -36,7 +36,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         token: vscode.CancellationToken,
     ): vscode.TextEdit[] {
         let formattedDocument = '';
+        /** Current level of indentation. 0 = top-level, no indentation */
         let depth = 0;
+        /** ??? */
         let tagDepth = 0;
         let oneCommandCode = false;
         let blockComment = false;
@@ -102,7 +104,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            // Check open and close braces
+            // Check close braces
             if (purifiedLine.match(/}/) != null) {
                 let temp = purifiedLine.match(/}/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
@@ -114,6 +116,16 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     atTopLevel = false;
                 }
             }
+
+            // Check close parens
+            if (purifiedLine.includes(')')) {
+                const openCount = purifiedLine.match(/\(/)?.length ?? 0;
+                const closeCount = purifiedLine.match(/\)/).length;
+                if (closeCount > openCount) {
+                    depth--;
+                }
+            }
+
             if (oneCommandCode && purifiedLine.match(/{/) != null) {
                 let temp = purifiedLine.match(/{/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
@@ -130,10 +142,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 depth = 0;
             }
 
+            // Add the indented line to the file
             const indentationChars = options.insertSpaces
                 ? ' '.repeat(depth * options.tabSize)
                 : '\t'.repeat(depth);
-
             formattedDocument +=
                 !formattedLine || formattedLine.trim() == ''
                     ? formattedLine
@@ -157,6 +169,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 atTopLevel = false;
             }
 
+            // Check open braces
             if (purifiedLine.match(/{/) != null) {
                 let temp = purifiedLine.match(/{/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
@@ -166,6 +179,15 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 depth += temp;
                 if (temp > 0) {
                     atTopLevel = false;
+                }
+            }
+
+            // Check open parens
+            if (purifiedLine.includes('(')) {
+                const openCount = purifiedLine.match(/\(/).length;
+                const closeCount = purifiedLine.match(/\)/)?.length ?? 0;
+                if (openCount > closeCount) {
+                    depth++;
                 }
             }
 
