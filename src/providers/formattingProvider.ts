@@ -117,6 +117,15 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
+            // Check close parens
+            if (purifiedLine.includes(')')) {
+                const openCount = purifiedLine.match(/\(/)?.length ?? 0;
+                const closeCount = purifiedLine.match(/\)/).length;
+                if (closeCount > openCount) {
+                    depth--;
+                }
+            }
+
             if (oneCommandCode && purifiedLine.match(/{/) != null) {
                 let temp = purifiedLine.match(/{/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
@@ -170,6 +179,15 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 depth += temp;
                 if (temp > 0) {
                     atTopLevel = false;
+                }
+            }
+
+            // Check open parens
+            if (purifiedLine.includes('(')) {
+                const openCount = purifiedLine.match(/\(/).length;
+                const closeCount = purifiedLine.match(/\)/)?.length ?? 0;
+                if (openCount > closeCount) {
+                    depth++;
                 }
             }
 

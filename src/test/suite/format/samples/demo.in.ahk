@@ -11,8 +11,6 @@ str := "string"
 if (str == "str") {
 MsgBox Overwrite primitive variable!
 }
-; Known bug: `line <n>` lines should be indented one level more
-; https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/25
 str_multiline := "
 (LTrim
 line 1

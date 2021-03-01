@@ -1,0 +1,5 @@
+x := "
+(LTrim
+hello world
+)
+"

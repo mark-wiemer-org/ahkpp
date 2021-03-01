@@ -26,6 +26,9 @@ const formatTests: FormatTest[] = [
         options: { insertSpaces: false },
     },
     {
+        filenameRoot: 'multilineString',
+    },
+    {
         filenameRoot: 'tabSize2',
         options: { tabSize: 2 },
     },
