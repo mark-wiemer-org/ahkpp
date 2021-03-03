@@ -1,5 +1,0 @@
-x := "
-(LTrim
-hello world
-)
-"
