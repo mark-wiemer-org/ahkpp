@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.2 - 2021-03-02
+
+-   Fix indentation with parentheses again (sorry!) ([#58](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/58))
+
 ## 2.7.1 - 2021-02-28
 
 -   Fix indentation with parentheses ([#25](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/25))

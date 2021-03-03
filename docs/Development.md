@@ -75,13 +75,15 @@ The tests should run automatically, and you should see passing output in the Deb
 
 ### Publishing
 
-1. `git co dev`
+1. `git checkout dev`
 
 1. `git merge v<major>.<minor>.<patch>`
 
 1. Tag the release
 
     1. Delete the release branch in local
+
+    1. `git checkout master`
 
     1. `git tag v<major>.<minor>.<patch>`
 

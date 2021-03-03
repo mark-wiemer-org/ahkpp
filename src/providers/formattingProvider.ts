@@ -119,8 +119,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // Check close parens
             if (purifiedLine.includes(')')) {
-                const openCount = purifiedLine.match(/\(/)?.length ?? 0;
-                const closeCount = purifiedLine.match(/\)/).length;
+                const openCount = purifiedLine.match(/\(/g)?.length ?? 0;
+                const closeCount = purifiedLine.match(/\)/g).length;
                 if (closeCount > openCount) {
                     depth--;
                 }
@@ -184,8 +184,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // Check open parens
             if (purifiedLine.includes('(')) {
-                const openCount = purifiedLine.match(/\(/).length;
-                const closeCount = purifiedLine.match(/\)/)?.length ?? 0;
+                const openCount = purifiedLine.match(/\(/g).length;
+                const closeCount = purifiedLine.match(/\)/g)?.length ?? 0;
                 if (openCount > closeCount) {
                     depth++;
                 }
