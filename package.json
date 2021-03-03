@@ -192,7 +192,7 @@
             "editor/title": [
                 {
                     "command": "ahk++.debug",
-                    "when": "editorLangId == ahk",
+                    "when": "editorLangId == ahk && config.ahk++.showDebugButton",
                     "group": "navigation@1"
                 }
             ]
@@ -253,6 +253,11 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Enable IntelliSense (Preview). Changes take effect after reload."
+                },
+                "ahk++.showDebugButton": {
+                    "type": "boolean",
+                    "default": "true",
+                    "description": "Show the Debug button in the editor title menu"
                 }
             }
         }
