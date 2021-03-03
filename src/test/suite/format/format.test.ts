@@ -20,6 +20,9 @@ const defaultOptions: vscode.FormattingOptions = {
     insertSpaces: true,
 };
 const formatTests: FormatTest[] = [
+    {
+        filenameRoot: '58-parenthesesIndentation',
+    },
     { filenameRoot: 'demo' },
     {
         filenameRoot: 'insertSpacesFalse',
