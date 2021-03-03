@@ -26,6 +26,7 @@ const formatTests: FormatTest[] = [
     {
         filenameRoot: '58-parentheses-indentation',
     },
+    { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'demo' },
     {
         filenameRoot: 'insert-spaces-false',
