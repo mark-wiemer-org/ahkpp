@@ -1,6 +1,7 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: Bug report (non-formatter)
+about: Report a bug with the extension. For issues with the formatter, please use
+  the "Formatting bug" template
 title: ''
 labels: bug
 assignees: mark-wiemer
