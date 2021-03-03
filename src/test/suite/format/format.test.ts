@@ -11,7 +11,7 @@ interface FormatTest {
     // Make sure provided suffixes match const values above
     /** Name of the file, excluding the suffix (suffixes include .in.ahk, .out.ahk) */
     filenameRoot: string;
-    /** If not provided, file will be formatted with spaces. */
+    /** If not provided, file will be formatted with 4 spaces. */
     options?: Partial<vscode.FormattingOptions>;
 }
 /** Default formatting options */

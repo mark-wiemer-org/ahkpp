@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.1 - 2021-02-28
+
+-   Fix indentation with parentheses ([#25](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/25))
+
 ## 2.7.0 - 2021-02-21
 
 -   Respect user choice to indent with either tabs or spaces ([#49](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/49))
