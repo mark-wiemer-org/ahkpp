@@ -21,18 +21,19 @@ const defaultOptions: vscode.FormattingOptions = {
 };
 const formatTests: FormatTest[] = [
     {
-        filenameRoot: '58-parenthesesIndentation',
+        filenameRoot: '25-multiline-string',
     },
+    {
+        filenameRoot: '58-parentheses-indentation',
+    },
+    { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'demo' },
     {
-        filenameRoot: 'insertSpacesFalse',
+        filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
     },
     {
-        filenameRoot: 'multilineString',
-    },
-    {
-        filenameRoot: 'tabSize2',
+        filenameRoot: 'tab-size-2',
         options: { tabSize: 2 },
     },
 ];
