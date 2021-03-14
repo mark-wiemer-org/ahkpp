@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.0 - 2021-03-14
+
+-   Add setting to toggle debug button in editor title menu ([#10](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/10))
+
 ## 2.7.2 - 2021-03-02
 
 -   Fix indentation with parentheses again (sorry!) ([#58](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/58))
