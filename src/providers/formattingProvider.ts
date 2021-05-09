@@ -131,10 +131,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            // Check close parens
-            if (moreCloseParens) {
-                depth--;
-            }
+            if (moreCloseParens) depth--;
 
             // One command code and open braces
             if (oneCommandCode && purifiedLine.match(/{/) != null) {
