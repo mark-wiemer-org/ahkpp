@@ -23,11 +23,13 @@ Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `
 
 ### Automated Tests
 
-1. Open the Debug console panel
+1. Open the Debug console panel (`Ctrl + Shift + Y`)
 
-1. Select `Test Extension` in the Debug side bar
+1. Run the tests (`debug test`)
 
-1. Begin Debugging (`F5` or press the play button)
+    1. Select `Test Extension` in the Debug side bar
+
+    1. Begin Debugging (`F5` or press the play button)
 
 The tests should run automatically, and you should see passing output in the Debug console within a few seconds.
 
