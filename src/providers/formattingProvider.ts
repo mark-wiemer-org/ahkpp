@@ -207,7 +207,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (moreOpenParens) depth++;
 
             // default or hotkey
-            if (purifiedLine.match(/:\s*$/)) {
+            if (!moreOpenParens && purifiedLine.match(/:\s*$/)) {
                 depth++;
                 tagDepth = depth;
                 atTopLevel = false;
