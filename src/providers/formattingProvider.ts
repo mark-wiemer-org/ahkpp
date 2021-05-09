@@ -1,5 +1,9 @@
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
+import {
+    hasMoreCloseParens,
+    hasMoreOpenParens,
+} from './formattingProvider.utils';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
@@ -40,6 +44,16 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let depth = 0;
         /** ??? */
         let tagDepth = 0;
+        /**
+         * True iff this line MAY be a one-statement block
+         * e.g.
+         * ```ahk
+         * ; <start script>
+         * for n, param in A_Args ; false
+         * { ; true
+         *    fileExist:=fileExist(param) ; false
+         *  ```
+         */
         let oneCommandCode = false;
         let blockComment = false;
         let atTopLevel = true;
@@ -57,7 +71,12 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             atTopLevel = true;
 
-            // Match block comments
+            const moreCloseParens = hasMoreCloseParens(purifiedLine);
+            const moreOpenParens = hasMoreOpenParens(purifiedLine);
+
+            // This line
+
+            // Block comments
             if (originalLine.match(/ *\/\*/)) {
                 blockComment = true;
             }
@@ -72,6 +91,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 continue;
             }
 
+            // #IfWinActive, #IfWinNotActive
             if (
                 purifiedLine.match(/#ifwinactive$/) ||
                 purifiedLine.match(/#ifwinnotactive$/)
@@ -84,6 +104,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 atTopLevel = false;
             }
 
+            // return or ExitApp
             if (
                 purifiedLine.match(/\b(return|ExitApp)\b/i) &&
                 tagDepth === depth
@@ -93,11 +114,14 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 atTopLevel = false;
             }
 
+            // switch-case, hotkeys
             if (purifiedLine.match(/^\s*case.+?:\s*$/)) {
+                // case
                 tagDepth--;
                 depth--;
                 atTopLevel = false;
             } else if (purifiedLine.match(/:\s*$/)) {
+                // default or hotkey
                 if (tagDepth > 0 && tagDepth === depth) {
                     depth--;
                     atTopLevel = false;
@@ -117,15 +141,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            // Check close parens
-            if (purifiedLine.includes(')')) {
-                const openCount = purifiedLine.match(/\(/g)?.length ?? 0;
-                const closeCount = purifiedLine.match(/\)/g).length;
-                if (closeCount > openCount) {
-                    depth--;
-                }
-            }
+            if (moreCloseParens) depth--;
 
+            // One command code and open braces
             if (oneCommandCode && purifiedLine.match(/{/) != null) {
                 let temp = purifiedLine.match(/{/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
@@ -156,11 +174,15 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 formattedDocument += '\n';
             }
 
+            // Next line
+
+            // One command code
             if (oneCommandCode) {
                 oneCommandCode = false;
                 depth--;
             }
 
+            // #IfWinActive, #IfWinNotActive
             if (
                 purifiedLine.match(/#ifwinactive.*?\s/) ||
                 purifiedLine.match(/#ifwinnotactive.*?\s/)
@@ -182,16 +204,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            // Check open parens
-            if (purifiedLine.includes('(')) {
-                const openCount = purifiedLine.match(/\(/g).length;
-                const closeCount = purifiedLine.match(/\)/g)?.length ?? 0;
-                if (openCount > closeCount) {
-                    depth++;
-                }
-            }
+            if (moreOpenParens) depth++;
 
-            if (purifiedLine.match(/:\s*$/)) {
+            // default or hotkey
+            if (!moreOpenParens && purifiedLine.match(/:\s*$/)) {
                 depth++;
                 tagDepth = depth;
                 atTopLevel = false;
