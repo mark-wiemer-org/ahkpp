@@ -72,6 +72,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 continue;
             }
 
+            // #IfWinActive, #IfWinNotActive
             if (
                 purifiedLine.match(/#ifwinactive$/) ||
                 purifiedLine.match(/#ifwinnotactive$/)
@@ -84,6 +85,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 atTopLevel = false;
             }
 
+            // return or ExitApp
             if (
                 purifiedLine.match(/\b(return|ExitApp)\b/i) &&
                 tagDepth === depth
@@ -93,11 +95,14 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 atTopLevel = false;
             }
 
+            // switch-case, hotkeys
             if (purifiedLine.match(/^\s*case.+?:\s*$/)) {
+                // case
                 tagDepth--;
                 depth--;
                 atTopLevel = false;
             } else if (purifiedLine.match(/:\s*$/)) {
+                // default or hotkey
                 if (tagDepth > 0 && tagDepth === depth) {
                     depth--;
                     atTopLevel = false;
@@ -126,6 +131,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
+            // One command code and open braces
             if (oneCommandCode && purifiedLine.match(/{/) != null) {
                 let temp = purifiedLine.match(/{/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
@@ -191,6 +197,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
+            // default or hotkey
             if (purifiedLine.match(/:\s*$/)) {
                 depth++;
                 tagDepth = depth;
