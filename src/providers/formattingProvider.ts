@@ -60,7 +60,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             const moreCloseParens = hasMoreCloseParens(purifiedLine);
 
-            // Match block comments
+            // This line
+
+            // Block comments
             if (originalLine.match(/ *\/\*/)) {
                 blockComment = true;
             }
@@ -161,11 +163,15 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 formattedDocument += '\n';
             }
 
+            // Next line
+
+            // One command code
             if (oneCommandCode) {
                 oneCommandCode = false;
                 depth--;
             }
 
+            // #IfWinActive, #IfWinNotActive
             if (
                 purifiedLine.match(/#ifwinactive.*?\s/) ||
                 purifiedLine.match(/#ifwinnotactive.*?\s/)
