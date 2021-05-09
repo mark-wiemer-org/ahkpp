@@ -44,6 +44,16 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let depth = 0;
         /** ??? */
         let tagDepth = 0;
+        /**
+         * True iff this line MAY be a one-statement block
+         * e.g.
+         * ```ahk
+         * ; <start script>
+         * for n, param in A_Args ; false
+         * { ; true
+         *    fileExist:=fileExist(param) ; false
+         *  ```
+         */
         let oneCommandCode = false;
         let blockComment = false;
         let atTopLevel = true;
