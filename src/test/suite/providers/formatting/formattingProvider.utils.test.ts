@@ -1,5 +1,8 @@
 import * as assert from 'assert';
-import { hasMoreCloseParens } from '../../../../providers/formattingProvider.utils';
+import {
+    hasMoreCloseParens,
+    hasMoreOpenParens,
+} from '../../../../providers/formattingProvider.utils';
 
 suite('FormattingProvider utils', () => {
     suite('hasMoreCloseParens', () => {
@@ -21,6 +24,28 @@ suite('FormattingProvider utils', () => {
 
         test("('') => false", () => {
             assert.strictEqual(hasMoreCloseParens(''), false);
+        });
+    });
+
+    suite('hasMoreOpenParens', () => {
+        test("('(') => true", () => {
+            assert.strictEqual(hasMoreOpenParens('('), true);
+        });
+
+        test("('()') => false", () => {
+            assert.strictEqual(hasMoreOpenParens('()'), false);
+        });
+
+        test("('(()') => true", () => {
+            assert.strictEqual(hasMoreOpenParens('(()'), true);
+        });
+
+        test("('(::') => true", () => {
+            assert.strictEqual(hasMoreOpenParens('(::'), true);
+        });
+
+        test("('') => false", () => {
+            assert.strictEqual(hasMoreOpenParens(''), false);
         });
     });
 });

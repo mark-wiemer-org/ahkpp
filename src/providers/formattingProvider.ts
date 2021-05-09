@@ -1,6 +1,9 @@
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
-import { hasMoreCloseParens } from './formattingProvider.utils';
+import {
+    hasMoreCloseParens,
+    hasMoreOpenParens,
+} from './formattingProvider.utils';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
@@ -59,6 +62,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             atTopLevel = true;
 
             const moreCloseParens = hasMoreCloseParens(purifiedLine);
+            const moreOpenParens = hasMoreOpenParens(purifiedLine);
 
             // This line
 
@@ -193,14 +197,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            // Check open parens
-            if (purifiedLine.includes('(')) {
-                const openCount = purifiedLine.match(/\(/g).length;
-                const closeCount = purifiedLine.match(/\)/g)?.length ?? 0;
-                if (openCount > closeCount) {
-                    depth++;
-                }
-            }
+            if (moreOpenParens) depth++;
 
             // default or hotkey
             if (purifiedLine.match(/:\s*$/)) {
