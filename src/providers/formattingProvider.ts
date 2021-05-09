@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
+import { hasMoreCloseParens } from './formattingProvider.utils';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
@@ -56,6 +57,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 .concat(comment);
 
             atTopLevel = true;
+
+            const moreCloseParens = hasMoreCloseParens(purifiedLine);
 
             // Match block comments
             if (originalLine.match(/ *\/\*/)) {
@@ -123,12 +126,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             // Check close parens
-            if (purifiedLine.includes(')')) {
-                const openCount = purifiedLine.match(/\(/g)?.length ?? 0;
-                const closeCount = purifiedLine.match(/\)/g).length;
-                if (closeCount > openCount) {
-                    depth--;
-                }
+            if (moreCloseParens) {
+                depth--;
             }
 
             // One command code and open braces
