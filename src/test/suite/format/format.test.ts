@@ -4,12 +4,10 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { FormatProvider } from '../../../providers/formattingProvider';
 
-// Make sure const values match provided suffixes below
 const inFilenameSuffix = '.in.ahk';
 const outFilenameSuffix = '.out.ahk';
 interface FormatTest {
-    // Make sure provided suffixes match const values above
-    /** Name of the file, excluding the suffix (suffixes include .in.ahk, .out.ahk) */
+    /** Name of the file, excluding the suffix (@see inFilenameSuffix, @see outFilenameSuffix) */
     filenameRoot: string;
     /** If not provided, file will be formatted with 4 spaces. */
     options?: Partial<vscode.FormattingOptions>;
@@ -25,6 +23,9 @@ const formatTests: FormatTest[] = [
     },
     {
         filenameRoot: '58-parentheses-indentation',
+    },
+    {
+        filenameRoot: '72-paren-hotkey',
     },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'demo' },
