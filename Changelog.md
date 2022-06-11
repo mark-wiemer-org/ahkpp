@@ -4,6 +4,8 @@
 
 -   No user-facing changes
 -   Security fixes in dependencies
+-   Update internal dependencies: Node v16, npm v8
+-   Close #126
 
 ## 2.8.1 - 2021-05-09
 

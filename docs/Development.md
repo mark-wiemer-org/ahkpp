@@ -27,9 +27,9 @@ The tests should run automatically, and you should see passing output in the Deb
 ## Starting a release
 
 1.  Update the changelog.
-1.  Open a draft PR to merge to `main`. The title of the PR should be the name of the release branch, lowercase 'v'. The PR description should contain the changelog entry.
+1.  Open a draft PR to merge to `main`. The title of the PR should be e.g. `v2.8.2`, lowercase 'v'. The PR description should contain the changelog entry.
 1.  Fix any remaining issues with the code (but only make changes already logged in the changelog). Use the draft PR to easily detect issues.
-1.  Bump the version in `package.json`. The message of the commit should be the name of the release branch.
+1.  Bump the version in `package.json`. The message of the commit should be e.g. `v2.8.2`.
 1.  Push the changes.
 1.  Merge the PR. The body of the commit message should be the changelog entry.
 1.  Checkout `main`
