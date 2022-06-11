@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.8.2 - 2022-06-11
+
+-   No user-facing changes
+-   Security fixes in dependencies
+
 ## 2.8.1 - 2021-05-09
 
 -   Fix indentation with `(::` ([#72](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/72))
