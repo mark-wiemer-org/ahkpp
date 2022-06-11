@@ -4,15 +4,9 @@ This document covers the development process, from writing code to publishing a 
 
 ## Writing
 
-1. Write your change on an offshoot of `dev` (these are feature branches).
+1. Write your change on an offshoot of `master` (these are feature branches).
 
-1. Merge each change to `dev` via a squash-commit PR.
-
-    > `master` is still the default branch, but all PRs (aside from releases) should be merged to `dev`.
-
-1. Each new feature or multi-commit bugfixes should be developed on its own feature branch, then merged into `dev`.
-
-Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `dev` directly if they are only one commit.
+1. Merge each change to `master` via a squash-commit PR.
 
 ## Testing
 
@@ -21,7 +15,7 @@ Trusted collaborators only: Bugfixes, lint fixes, and refactors can be done on `
 -   If the README was modified, confirm README appears as intended
 -   Confirm links in README work (even if it wasn't modified: some of its targets be invalidated at any time)
 
-### Automated Tests
+### Automated tests
 
 1. Open the Debug console panel (`Ctrl + Shift + Y`)
 
@@ -35,23 +29,21 @@ The tests should run automatically, and you should see passing output in the Deb
 
 > Learn more about debugging at the [VS Code Debugging Guide](https://code.visualstudio.com/Docs/editor/debugging).
 
-## Starting a Release
+## Starting a release
 
-1.  Once the `dev` branch has all the features for a new release, create a new release branch named `v<major>.<minor>.<patch>` (e.g. `v1.2.3`).
-
-1.  Update the changelog. Once updated, the changelog should not be changed. This is to prevent feature creep.
+1.  Update the changelog.
 
 1.  Open a draft PR to merge to `master`. The title of the PR should be the name of the release branch, lowercase 'v'. The PR description should contain the changelog entry.
 
 1.  Fix any remaining issues with the code (but only make changes already logged in the changelog). Use the draft PR to easily detect issues.
 
-1.  Bump the version. The message of the commit should be the name of the release branch.
+1.  Bump the version in `package.json`. The message of the commit should be the name of the release branch.
 
 1.  Push the changes.
 
 1.  Merge the PR. The body of the commit message should be the changelog entry.
 
-1.  Pull `master`.
+1.  Checkout `master`
 
 1.  Package the new version using `vsce package`.
 
@@ -76,10 +68,6 @@ The tests should run automatically, and you should see passing output in the Deb
         1. Create issues for the newly-introduced failures before releasing, then publish the release anyway
 
 ### Publishing
-
-1. `git checkout dev`
-
-1. `git merge v<major>.<minor>.<patch>`
 
 1. Tag the release
 
