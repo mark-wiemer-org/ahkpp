@@ -1,6 +1,6 @@
 # Folders
 .idea/
-.vscode-test/
+.@vscode/test-electron/
 node_modules
 out
 

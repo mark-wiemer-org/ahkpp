@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import { Scope, StackFrame, Variable } from 'vscode-debugadapter';
-import { DebugProtocol } from 'vscode-debugprotocol';
+import { Scope, StackFrame, Variable } from '@vscode/debugadapter';
+import { DebugProtocol } from '@vscode/debugprotocol';
 import { RunnerService } from '../service/runnerService';
 import { DebugServer } from './debugServer';
 import { LaunchRequestArguments } from './debugSession';

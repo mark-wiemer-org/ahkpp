@@ -1,6 +1,13 @@
 # AutoHotkey Plus Plus (AHK++)
 
-AutoHotkey Plus Plus (AHK++) provides actively maintained, comprehensive AutoHotkey language support for VS Code. This includes IntelliSense and debug support, along with the standard code highlighting. AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Plus/vscode-autohotkey).
+AutoHotkey Plus Plus (AHK++) provides AutoHotkey language support for VS Code. This includes:
+- IntelliSense
+- code highlighting
+- basic debug support
+- code formatting
+- ...and more!
+
+ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Plus/vscode-autohotkey), with the primary goal of fixing bugs and adding user-requested features.
 
 > View this README on the [project site](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus#readme)
 
@@ -43,6 +50,8 @@ With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts
 -   Run Selection: `Ctrl + F8`
 
 ## Debug
+
+> There are some [known issues with the debugger](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues?q=is%3Aopen+is%3Aissue+label%3Adebugger). If you need an advanced setup, we recommend [zero-plusplus.vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
 
 1. Click Run or press F9.
 2. Debugger supports breakpoints, stack tracing, and variable watching

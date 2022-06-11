@@ -1,5 +1,5 @@
 .vscode/**
-.vscode-test/**
+.@vscode/test-electron/**
 out/test/**
 out/**/*.map
 src/**
