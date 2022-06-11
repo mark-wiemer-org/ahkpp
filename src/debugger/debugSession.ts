@@ -7,8 +7,8 @@ import {
     StoppedEvent,
     TerminatedEvent,
     Thread,
-} from 'vscode-debugadapter';
-import { DebugProtocol } from 'vscode-debugprotocol';
+} from '@vscode/debugadapter';
+import { DebugProtocol } from '@vscode/debugprotocol';
 import { DebugDispatcher } from './debugDispatcher';
 import { Continue } from './struct/command';
 import { VscodeScope } from './struct/scope';
