@@ -55,18 +55,23 @@ const filesParentPath = path.join(
 suite('Formatter', () => {
     formatTests.forEach((formatTest) => {
         test(`Format ${formatTest.filenameRoot}`, async () => {
+            // Arrange
             const inFilename = formatTest.filenameRoot + inFilenameSuffix;
             const outFilename = formatTest.filenameRoot + outFilenameSuffix;
             const outFileString = fs
                 .readFileSync(path.join(filesParentPath, outFilename))
                 .toString();
-            const unformattedSampleFile = await vscode.workspace.openTextDocument(
-                path.join(filesParentPath, inFilename),
-            );
+            const unformattedSampleFile =
+                await vscode.workspace.openTextDocument(
+                    path.join(filesParentPath, inFilename),
+                );
+            const originalText = unformattedSampleFile.getText();
             const textEditor = await vscode.window.showTextDocument(
                 unformattedSampleFile,
             );
             const formatter = new FormatProvider();
+
+            // Act
             const edits = formatter.provideDocumentFormattingEdits(
                 unformattedSampleFile,
                 {
@@ -75,12 +80,31 @@ suite('Formatter', () => {
                 },
                 null,
             );
+            // editing the file also saves the file, so we'll need to teardown
             await textEditor.edit((editBuilder) => {
                 edits.forEach((edit) =>
                     editBuilder.replace(edit.range, edit.newText),
                 );
             });
+
+            // Assert
             assert.strictEqual(textEditor.document.getText(), outFileString);
+
+            // Teardown - revert the file to its original state
+            const lastLineIndex = unformattedSampleFile.lineCount - 1;
+            const lastLineLength =
+                unformattedSampleFile.lineAt(lastLineIndex).text.length;
+            const fullDocumentRange = unformattedSampleFile.validateRange(
+                new vscode.Range(
+                    new vscode.Position(0, 0),
+                    new vscode.Position(lastLineIndex + 1, lastLineLength + 1), // + 1 to ensure full coverage
+                ),
+            );
+
+            // editing the file also saves the file
+            await textEditor.edit((editBuilder) =>
+                editBuilder.replace(fullDocumentRange, originalText),
+            );
         });
     });
 });
