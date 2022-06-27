@@ -24,7 +24,13 @@
     "publisher": "mark-wiemer",
     "main": "./out/extension",
     "scripts": {
-        "compile": "tsc -p ./",
+        "compile": "npm run compile_ts && npm run compile_grammar",
+        "compile_grammar": "js-yaml syntaxes/ahk.tmLanguage.yaml > syntaxes/ahk.tmLanguage.json",
+        "compile_ts": "tsc -p ./",
+        "pretest": "npm run compile",
+        "test": "npm run test_unit && npm run test_grammar",
+        "test_grammar": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
+        "test_unit": "node ./out/test/runTest.js",
         "vscode:prepublish": "npm run compile",
         "watch": "tsc -watch -p ./"
     },
@@ -273,9 +279,11 @@
         "@vscode/test-electron": "^1.6.1",
         "fs-extra": "^9.1.0",
         "glob": "^7.1.6",
+        "js-yaml": "^4.1.0",
         "mocha": "^10.0.0",
         "source-map-support": "^0.5.19",
-        "typescript": "^3.4.3"
+        "typescript": "^3.4.3",
+        "vscode-tmgrammar-test": "^0.1.1"
     },
     "engines": {
         "vscode": "^1.30.0"
@@ -284,5 +292,11 @@
     "galleryBanner": {
         "color": "#00769D",
         "theme": "dark"
+    },
+    "__metadata": {
+        "id": "cf96e3c7-3b07-4403-acc9-2b6299ba7877",
+        "publisherDisplayName": "Mark Wiemer",
+        "publisherId": "5d0c3a99-7c1e-41ac-a4b0-401d0091adcf",
+        "isPreReleaseVersion": false
     }
 }
