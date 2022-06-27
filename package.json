@@ -35,7 +35,8 @@
         "test_grammar": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
         "test_unit": "node ./out/test/runTest.js",
         "vscode:prepublish": "npm run compile",
-        "watch": "tsc -watch -p ./"
+        "watch": "tsc -watch -p ./",
+        "validate": "npm run quality && npm run test"
     },
     "contributes": {
         "breakpoints": [
