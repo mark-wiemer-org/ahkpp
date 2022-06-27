@@ -12,7 +12,7 @@ I welcome any issues or PRs :)
 
 ## Validate the build
 
-1. `npm run test`
+1. `npm run validate`
 1. Go to `Run and Debug` viewlet (`Ctrl+Shift+D`) and click "Run Extension"
 
 ## Automated checks
