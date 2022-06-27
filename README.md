@@ -1,13 +1,14 @@
 # AutoHotkey Plus Plus (AHK++)
 
 AutoHotkey Plus Plus (AHK++) provides AutoHotkey language support for VS Code. This includes:
-- IntelliSense
-- code highlighting
-- basic debug support
-- code formatting
-- ...and more!
 
- AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Plus/vscode-autohotkey), with the primary goal of fixing bugs and adding user-requested features.
+-   IntelliSense
+-   code highlighting
+-   basic debug support
+-   code formatting
+-   ...and more!
+
+AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Plus/vscode-autohotkey), with the primary goal of fixing bugs and adding user-requested features.
 
 > View this README on the [project site](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus#readme)
 

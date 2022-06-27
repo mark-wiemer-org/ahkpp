@@ -1,0 +1,7 @@
+singleQuote: true
+tabWidth: 4
+trailingComma: all
+overrides:
+  - files: ['*.yml', '*.yaml', '.prettierrc']
+    options:
+      tabWidth: 2

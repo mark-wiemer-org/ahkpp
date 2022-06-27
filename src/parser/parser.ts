@@ -12,7 +12,9 @@ export class Parser {
      * @param buildPath
      */
     public static async buildByPath(buildPath: string) {
-        if (!buildPath) return;
+        if (!buildPath) {
+            return;
+        }
         if (fs.statSync(buildPath).isDirectory()) {
             fs.readdir(buildPath, (err, files) => {
                 if (err) {
@@ -42,7 +44,7 @@ export class Parser {
         document: vscode.TextDocument,
         usingCache = false,
     ): Promise<Script> {
-        if (usingCache && null != this.documentCache.get(document.uri.path)) {
+        if (usingCache && !!this.documentCache.get(document.uri.path)) {
             return this.documentCache.get(document.uri.path);
         }
 
@@ -79,7 +81,9 @@ export class Parser {
                         ),
                     );
                     currentMethod = methodOrRef;
-                    if (methodOrRef.withQuote) deep++;
+                    if (methodOrRef.withQuote) {
+                        deep++;
+                    }
                     continue;
                 } else {
                     CodeUtil.join(refs, methodOrRef);
@@ -94,18 +98,18 @@ export class Parser {
             if (block) {
                 blocks.push(block);
             }
-            if (lineText.indexOf('{') != -1) {
+            if (lineText.indexOf('{') !== -1) {
                 deep++;
             }
-            if (lineText.indexOf('}') != -1) {
+            if (lineText.indexOf('}') !== -1) {
                 deep--;
-                if (currentMethod != null) {
+                if (!!currentMethod) {
                     currentMethod.endLine = line;
                 }
             }
             const variable = Parser.detechVariableByLine(document, line);
             if (variable) {
-                if (deep == 0 || !currentMethod) {
+                if (deep === 0 || !currentMethod) {
                     this.joinVars(variables, variable);
                 } else {
                     currentMethod.pushVariable(variable);
@@ -124,13 +128,13 @@ export class Parser {
         name = name.toLowerCase();
         for (const method of this.documentCache.get(document.uri.path)
             .methods) {
-            if (method.name.toLowerCase() == name) {
+            if (method.name.toLowerCase() === name) {
                 return method;
             }
         }
         for (const filePath of this.documentCache.keys()) {
             for (const method of this.documentCache.get(filePath).methods) {
-                if (method.name.toLowerCase() == name) {
+                if (method.name.toLowerCase() === name) {
                     return method;
                 }
             }
@@ -153,13 +157,13 @@ export class Parser {
     ) {
         name = name.toLowerCase();
         for (const label of this.documentCache.get(document.uri.path).labels) {
-            if (label.name.toLowerCase() == name) {
+            if (label.name.toLowerCase() === name) {
                 return label;
             }
         }
         for (const filePath of this.documentCache.keys()) {
             for (const label of this.documentCache.get(filePath).labels) {
-                if (label.name.toLowerCase() == name) {
+                if (label.name.toLowerCase() === name) {
                     return label;
                 }
             }
@@ -172,7 +176,7 @@ export class Parser {
         for (const filePath of this.documentCache.keys()) {
             const document = this.documentCache.get(filePath);
             for (const ref of document.refs) {
-                if (ref.name.toLowerCase() == name) {
+                if (ref.name.toLowerCase() === name) {
                     refs.push(ref);
                 }
             }
@@ -204,15 +208,17 @@ export class Parser {
         if (label) {
             const labelName = label[1];
             if (
-                labelName.toLowerCase() == 'case' ||
-                labelName.toLowerCase() == 'default'
-            )
+                labelName.toLowerCase() === 'case' ||
+                labelName.toLowerCase() === 'default'
+            ) {
                 return;
+            }
             return new Label(label[1], document, line, text.indexOf(labelName));
         }
     }
 
-    private static varDefPattern = /[ \t]*(\w+?)\s*([+\-*/.:])?(?<![=!])=(?![=!]).+/;
+    private static varDefPattern =
+        /[ \t]*(\w+?)\s*([+\-*/.:])?(?<![=!])=(?![=!]).+/;
     private static varCommandPattern = /(\w+)[ \t,]+/g;
     private static keywords = ['and', 'or', 'new', 'extends', 'if', 'loop'];
     private static detechVariableByLine(
@@ -239,7 +245,9 @@ export class Parser {
                 lineText.replace(/\(.+?\)/g, ''),
             );
             for (let index = 0; index < commandMatchAll.length; index++) {
-                if (index == 0) continue;
+                if (index === 0) {
+                    continue;
+                }
                 const varName = commandMatchAll[index][1];
                 if (this.keywords.includes(varName.toLowerCase())) {
                     continue;
@@ -269,16 +277,17 @@ export class Parser {
         line: number,
         origin?: string,
     ) {
-        origin = origin != undefined ? origin : document.lineAt(line).text;
+        origin ??= document.lineAt(line).text;
         const text = CodeUtil.purify(origin);
-        const refPattern = /\s*(([\u4e00-\u9fa5_a-zA-Z0-9]+)(?<!if|while)\(.*?\))\s*(\{)?\s*/i;
+        const refPattern =
+            /\s*(([\u4e00-\u9fa5_a-zA-Z0-9]+)(?<!if|while)\(.*?\))\s*(\{)?\s*/i;
         const methodMatch = text.match(refPattern);
         if (!methodMatch) {
             return;
         }
         const methodName = methodMatch[2];
         const character = origin.indexOf(methodName);
-        if (text.length != methodMatch[0].length) {
+        if (text.length !== methodMatch[0].length) {
             let refs = [new Ref(methodName, document, line, character)];
             const newRef = this.detechMethodByLine(
                 document,
@@ -345,7 +354,7 @@ export class Parser {
         variables: Variable[],
         items: Variable | Variable[],
     ) {
-        if (variables == undefined || items == undefined) {
+        if (!variables || !items) {
             return;
         }
 
@@ -355,7 +364,7 @@ export class Parser {
 
         loop: for (const item of items) {
             for (const variable of variables) {
-                if (variable.name == item.name) {
+                if (variable.name === item.name) {
                     continue loop;
                 }
             }

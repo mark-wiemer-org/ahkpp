@@ -4,7 +4,6 @@ about: Report issues with code formatting
 title: ''
 labels: bug, formatter
 assignees: mark-wiemer
-
 ---
 
 ### Description

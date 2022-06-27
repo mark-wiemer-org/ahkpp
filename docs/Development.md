@@ -32,7 +32,7 @@ The tests should run automatically, and you should see passing output in the Deb
 1.  Bump the version in `package.json`. The message of the commit should be e.g. `v2.8.2`.
 1.  Push the changes.
 1.  Merge the PR. The body of the commit message should be the changelog entry.
-1.  Checkout `main`
+1.  `git checkout main`
 1.  Package the new version using `vsce package`.
 1.  Install the new version:
     1. Select the newly-created `.vsix` file.
@@ -48,10 +48,9 @@ The tests should run automatically, and you should see passing output in the Deb
 ### Publishing
 
 1. Tag the release
-    1. Delete the release branch in local
     1. `git checkout main`
-    1. `git tag v<major>.<minor>.<patch>`
-    1. `git push origin v<major>.<minor>.<patch>`
+    1. e.g. `git tag v2.8.2`
+    1. `git push origin v2.8.2`
     1. [Create a new release for this tag](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tags)
         1. Release title: Same as in [Changelog.md](../Changelog.md)
         1. Description: Same as in changelog

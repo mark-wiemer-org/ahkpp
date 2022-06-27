@@ -1,47 +1,119 @@
 {
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
-    "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
     "version": "2.8.2",
-    "publisher": "mark-wiemer",
-    "engines": {
-        "vscode": "^1.30.0"
-    },
-    "activationEvents": [
-        "onLanguage:ahk",
-        "onCommand:ahk++.run",
-        "onDebug"
-    ],
-    "main": "./out/extension",
+    "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
     "categories": [
         "Programming Languages",
         "Snippets"
     ],
-    "license": "MIT",
-    "icon": "icon.png",
-    "bugs": {
-        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues"
-    },
-    "homepage": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/README.md",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus.git"
-    },
-    "galleryBanner": {
-        "color": "#00769D",
-        "theme": "dark"
-    },
     "keywords": [
         "vscode",
         "autohotkey",
         "ahk"
     ],
+    "homepage": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/README.md",
+    "bugs": {
+        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus.git"
+    },
+    "license": "MIT",
+    "publisher": "mark-wiemer",
+    "main": "./out/extension",
+    "scripts": {
+        "compile": "npm run compile_ts && npm run compile_grammar",
+        "compile_grammar": "js-yaml syntaxes/ahk.tmLanguage.yaml > syntaxes/ahk.tmLanguage.json",
+        "compile_ts": "tsc -p ./",
+        "format": "npm run format_inner -- --check .",
+        "format_fix": "npm run format_inner -- --write .",
+        "format_inner": "prettier",
+        "lint": "npm run quality && npm run format && npm run packagejson",
+        "packagejson": "sort-package-json --check",
+        "packagejson_fix": "sort-package-json",
+        "prepare": "husky install",
+        "quality": "npm run quality_inner -- src && echo ✅ No problems",
+        "quality_fix": "npm run quality_inner -- --fix src",
+        "quality_inner": "eslint --ext ts --max-warnings=0",
+        "pretest": "npm run compile",
+        "test": "npm run test_unit && npm run test_grammar",
+        "test_grammar": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
+        "test_unit": "node ./out/test/runTest.js",
+        "validate": "npm run lint && npm run test",
+        "vscode:prepublish": "npm run compile",
+        "watch": "tsc -watch -p ./"
+    },
     "contributes": {
         "breakpoints": [
             {
                 "language": "ahk"
             }
         ],
+        "commands": [
+            {
+                "command": "ahk++.compile",
+                "title": "Compile AHK Script",
+                "category": "AHK++",
+                "icon": "./image/build.svg"
+            },
+            {
+                "command": "ahk++.debug",
+                "title": "Debug AHK Script",
+                "category": "AHK++",
+                "icon": {
+                    "light": "./image/run.png",
+                    "dark": "./image/run-dark.png"
+                }
+            },
+            {
+                "command": "ahk++.openHelp",
+                "title": "Open AutoHotkey Help",
+                "category": "AHK++"
+            },
+            {
+                "command": "ahk++.run",
+                "title": "Run AHK Script",
+                "category": "AHK++"
+            },
+            {
+                "command": "ahk++.runSelection",
+                "title": "Run Selection",
+                "category": "AHK++"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "AutoHotkey Plus Plus",
+            "properties": {
+                "ahk++.compilePath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
+                    "description": "Path to the AHK compiler."
+                },
+                "ahk++.enableIntellisense": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
+                },
+                "ahk++.executePath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "description": "Path to the AHK runner."
+                },
+                "ahk++.helpPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+                    "description": "Path to the AHK Help document."
+                },
+                "ahk++.showDebugButton": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Show the Debug button in the editor title menu"
+                }
+            }
+        },
         "debuggers": [
             {
                 "type": "ahk",
@@ -117,6 +189,40 @@
                 ]
             }
         ],
+        "grammars": [
+            {
+                "language": "ahk",
+                "scopeName": "source.ahk",
+                "path": "./syntaxes/ahk.tmLanguage.json"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "ahk++.compile",
+                "key": "ctrl+shift+f9",
+                "when": "editorLangId == ahk"
+            },
+            {
+                "command": "ahk++.debug",
+                "key": "f9",
+                "when": "editorLangId == ahk"
+            },
+            {
+                "command": "ahk++.openHelp",
+                "key": "ctrl+f1",
+                "when": "editorLangId == ahk"
+            },
+            {
+                "command": "ahk++.run",
+                "key": "ctrl+f9",
+                "when": "editorLangId == ahk"
+            },
+            {
+                "command": "ahk++.runSelection",
+                "key": "ctrl+f8",
+                "when": "editorLangId == ahk"
+            }
+        ],
         "languages": [
             {
                 "id": "ahk",
@@ -130,45 +236,6 @@
                     ".ext"
                 ],
                 "configuration": "./ahk.configuration.json"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "ahk",
-                "scopeName": "source.ahk",
-                "path": "./syntaxes/ahk.tmLanguage.json"
-            }
-        ],
-        "commands": [
-            {
-                "command": "ahk++.compile",
-                "title": "Compile AHK Script",
-                "category": "AHK++",
-                "icon": "./image/build.svg"
-            },
-            {
-                "command": "ahk++.debug",
-                "title": "Debug AHK Script",
-                "category": "AHK++",
-                "icon": {
-                    "light": "./image/run.png",
-                    "dark": "./image/run-dark.png"
-                }
-            },
-            {
-                "command": "ahk++.openHelp",
-                "title": "Open AutoHotkey Help",
-                "category": "AHK++"
-            },
-            {
-                "command": "ahk++.run",
-                "title": "Run AHK Script",
-                "category": "AHK++"
-            },
-            {
-                "command": "ahk++.runSelection",
-                "title": "Run Selection",
-                "category": "AHK++"
             }
         ],
         "menus": {
@@ -197,79 +264,29 @@
                 }
             ]
         },
-        "keybindings": [
-            {
-                "command": "ahk++.compile",
-                "key": "ctrl+shift+f9",
-                "when": "editorLangId == ahk"
-            },
-            {
-                "command": "ahk++.debug",
-                "key": "f9",
-                "when": "editorLangId == ahk"
-            },
-            {
-                "command": "ahk++.openHelp",
-                "key": "ctrl+f1",
-                "when": "editorLangId == ahk"
-            },
-            {
-                "command": "ahk++.run",
-                "key": "ctrl+f9",
-                "when": "editorLangId == ahk"
-            },
-            {
-                "command": "ahk++.runSelection",
-                "key": "ctrl+f8",
-                "when": "editorLangId == ahk"
-            }
-        ],
         "snippets": [
             {
                 "language": "ahk",
                 "path": "./snippets/ahk.json"
             }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "AutoHotkey Plus Plus",
-            "properties": {
-                "ahk++.compilePath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "Path to the AHK compiler."
-                },
-                "ahk++.enableIntellisense": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
-                },
-                "ahk++.executePath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "Path to the AHK runner."
-                },
-                "ahk++.helpPath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-                    "description": "Path to the AHK Help document."
-                },
-                "ahk++.showDebugButton": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Show the Debug button in the editor title menu"
-                }
-            }
-        }
+        ]
     },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./"
+    "activationEvents": [
+        "onLanguage:ahk",
+        "onCommand:ahk++.run",
+        "onDebug"
+    ],
+    "lint-staged": {
+        "*": "prettier --check",
+        "src/*": [
+            "npm run quality_inner",
+            "tsc --noEmit"
+        ],
+        "package.json": "npm run packagejson"
     },
     "dependencies": {
-        "get-port": "^5.1.1",
         "@vscode/debugadapter": "^1.44.0",
+        "get-port": "^5.1.1",
         "xml2js": "^0.4.23"
     },
     "devDependencies": {
@@ -278,11 +295,34 @@
         "@types/mocha": "^9.1.1",
         "@types/node": "^14.14.31",
         "@types/vscode": "^1.30.0",
+        "@typescript-eslint/eslint-plugin": "^5.29.0",
+        "@typescript-eslint/parser": "^5.29.0",
+        "@vscode/test-electron": "^1.6.1",
+        "eslint": "^8.18.0",
         "fs-extra": "^9.1.0",
         "glob": "^7.1.6",
+        "husky": "^8.0.1",
+        "js-yaml": "^4.1.0",
+        "lint-staged": "^13.0.3",
         "mocha": "^10.0.0",
+        "prettier": "^2.6.1",
+        "sort-package-json": "^1.57.0",
         "source-map-support": "^0.5.19",
-        "typescript": "^3.4.3",
-        "@vscode/test-electron": "^1.6.1"
+        "typescript": "~4.7.4",
+        "vscode-tmgrammar-test": "^0.1.1"
+    },
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "icon": "icon.png",
+    "galleryBanner": {
+        "color": "#00769D",
+        "theme": "dark"
+    },
+    "__metadata": {
+        "id": "cf96e3c7-3b07-4403-acc9-2b6299ba7877",
+        "publisherDisplayName": "Mark Wiemer",
+        "publisherId": "5d0c3a99-7c1e-41ac-a4b0-401d0091adcf",
+        "isPreReleaseVersion": false
     }
 }
