@@ -33,6 +33,7 @@
         "lint": "npm run quality && npm run format && npm run packagejson",
         "packagejson": "sort-package-json --check",
         "packagejson_fix": "sort-package-json",
+        "prepare": "husky install",
         "quality": "npm run quality_inner -- src && echo ✅ No problems",
         "quality_fix": "npm run quality_inner -- --fix src",
         "quality_inner": "eslint --ext ts --max-warnings=0",
@@ -275,6 +276,14 @@
         "onCommand:ahk++.run",
         "onDebug"
     ],
+    "lint-staged": {
+        "*": "prettier --check",
+        "src/*": [
+            "npm run quality_inner",
+            "tsc --noEmit"
+        ],
+        "package.json": "npm run packagejson"
+    },
     "dependencies": {
         "@vscode/debugadapter": "^1.44.0",
         "get-port": "^5.1.1",
@@ -292,7 +301,9 @@
         "eslint": "^8.18.0",
         "fs-extra": "^9.1.0",
         "glob": "^7.1.6",
+        "husky": "^8.0.1",
         "js-yaml": "^4.1.0",
+        "lint-staged": "^13.0.3",
         "mocha": "^10.0.0",
         "prettier": "^2.6.1",
         "sort-package-json": "^1.57.0",
