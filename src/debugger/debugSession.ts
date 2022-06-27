@@ -17,7 +17,7 @@ import { VscodeScope } from './struct/scope';
  * This interface describes the mock-debug specific launch attr
  * (which are not part of the Debug Adapter Protocol).
  * The schema for these attr lives in the package.json of the mock-debug extension.
- * The interface should always match this schema.
+ * The interface should always match the package.json.
  */
 export interface LaunchRequestArguments
     extends DebugProtocol.LaunchRequestArguments {
@@ -26,7 +26,9 @@ export interface LaunchRequestArguments
     /** An absolute path to the AutoHotkey.exe. */
     runtime: string;
     dbgpSettings: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         max_children: number;
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         max_data: number;
     };
 }
@@ -35,7 +37,7 @@ export interface LaunchRequestArguments
  * debug session for vscode.
  */
 export class DebugSession extends LoggingDebugSession {
-    private static THREAD_ID = 1;
+    private static threadId = 1;
     private dispatcher: DebugDispatcher;
 
     public constructor() {
@@ -48,9 +50,7 @@ export class DebugSession extends LoggingDebugSession {
         this.dispatcher = new DebugDispatcher();
         this.dispatcher
             .on('break', (reason: string) => {
-                this.sendEvent(
-                    new StoppedEvent(reason, DebugSession.THREAD_ID),
-                );
+                this.sendEvent(new StoppedEvent(reason, DebugSession.threadId));
             })
             .on('breakpointValidated', (bp: DebugProtocol.Breakpoint) => {
                 this.sendEvent(
@@ -178,7 +178,7 @@ export class DebugSession extends LoggingDebugSession {
         args: DebugProtocol.PauseArguments,
         request?: DebugProtocol.Request,
     ): void {
-        this.dispatcher.sendComand(Continue.BREAK);
+        this.dispatcher.sendComand(Continue.break);
         this.sendResponse(response);
     }
 
@@ -186,7 +186,7 @@ export class DebugSession extends LoggingDebugSession {
         response: DebugProtocol.ContinueResponse,
         args: DebugProtocol.ContinueArguments,
     ): void {
-        this.dispatcher.sendComand(Continue.RUN);
+        this.dispatcher.sendComand(Continue.run);
         this.sendResponse(response);
     }
 
@@ -194,7 +194,7 @@ export class DebugSession extends LoggingDebugSession {
         response: DebugProtocol.NextResponse,
         args: DebugProtocol.NextArguments,
     ): void {
-        this.dispatcher.sendComand(Continue.STEP_OVER);
+        this.dispatcher.sendComand(Continue.stepOver);
         this.sendResponse(response);
     }
 
@@ -203,7 +203,7 @@ export class DebugSession extends LoggingDebugSession {
         args: DebugProtocol.StepInArguments,
         request?: DebugProtocol.Request,
     ): void {
-        this.dispatcher.sendComand(Continue.STEP_INTO);
+        this.dispatcher.sendComand(Continue.stepInto);
         this.sendResponse(response);
     }
 
@@ -212,13 +212,13 @@ export class DebugSession extends LoggingDebugSession {
         args: DebugProtocol.StepOutArguments,
         request?: DebugProtocol.Request,
     ): void {
-        this.dispatcher.sendComand(Continue.STEP_OUT);
+        this.dispatcher.sendComand(Continue.stepOut);
         this.sendResponse(response);
     }
 
     protected threadsRequest(response: DebugProtocol.ThreadsResponse): void {
         response.body = {
-            threads: [new Thread(DebugSession.THREAD_ID, 'main thread')],
+            threads: [new Thread(DebugSession.threadId, 'main thread')],
         };
         this.sendResponse(response);
     }
@@ -230,10 +230,10 @@ export class DebugSession extends LoggingDebugSession {
         response.body = {
             targets: [
                 ...(await this.dispatcher.listVariables({
-                    variablesReference: VscodeScope.LOCAL,
+                    variablesReference: VscodeScope.local,
                 })),
                 ...(await this.dispatcher.listVariables({
-                    variablesReference: VscodeScope.GLOBAL,
+                    variablesReference: VscodeScope.global,
                 })),
             ].map((variable) => {
                 return {
@@ -252,13 +252,13 @@ export class DebugSession extends LoggingDebugSession {
     ): Promise<void> {
         const exp = args.expression.split('=');
         let reply: string;
-        if (exp.length == 1) {
+        if (exp.length === 1) {
             reply = await this.dispatcher.getVariableByEval(args.expression);
         } else {
             this.dispatcher.setVariable({
                 name: exp[0],
                 value: exp[1],
-                variablesReference: VscodeScope.LOCAL,
+                variablesReference: VscodeScope.local,
             });
             reply = `execute: ${args.expression}`;
         }

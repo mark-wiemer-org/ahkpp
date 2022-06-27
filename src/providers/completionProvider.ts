@@ -21,7 +21,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             position.character === 0
                 ? null
                 : document.getText(new vscode.Range(prePostion, position));
-        if (preChart == '.') {
+        if (preChart === '.') {
             return [];
         }
 
@@ -29,10 +29,10 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
 
         (await Parser.getAllMethod()).forEach((method) => {
             const completionItem = new vscode.CompletionItem(
-                method.params.length == 0 ? method.name : method.full,
+                method.params.length === 0 ? method.name : method.full,
                 vscode.CompletionItemKind.Method,
             );
-            if (method.params.length == 0) {
+            if (method.params.length === 0) {
                 completionItem.insertText = method.name + '()';
             } else {
                 completionItem.insertText = new SnippetString(
@@ -42,7 +42,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             completionItem.detail = method.comment;
             result.push(completionItem);
             if (
-                method.document == document &&
+                method.document === document &&
                 position.line >= method.line &&
                 position.line <= method.endLine
             ) {
