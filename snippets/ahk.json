@@ -4252,10 +4252,6 @@
         "prefix": "ChooseString",
         "body": "ChooseString"
     },
-    "Pos": {
-        "prefix": "Pos",
-        "body": "Pos"
-    },
     "Enabled": {
         "prefix": "Enabled",
         "body": "Enabled"
