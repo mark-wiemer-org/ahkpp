@@ -7,7 +7,7 @@ I welcome any issues or PRs :)
 1. Clone the repo
 1. Install the relevant dependencies
     - VS Code Insiders (needed to run the tests from CLI, see [using Insiders version for extension development](https://code.visualstudio.com/api/working-with-extensions/testing-extension#using-insiders-version-for-extension-development))
-    - Node 16 with npm 8
+    - [Node 16](https://nodejs.org/en/), which comes automatically bundled with npm 8.
 1. `npm i`
 
 ## Validate the build
