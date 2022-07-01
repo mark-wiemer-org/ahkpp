@@ -10,15 +10,47 @@ I welcome any issues or PRs :)
     - [Node 16](https://nodejs.org/en/), which comes automatically bundled with npm 8.
 1. `npm i`
 
-## Validate the build
+### Validate the build
 
 1. `npm run validate`
 1. Go to `Run and Debug` viewlet (`Ctrl+Shift+D`) and click "Run Extension"
 
-## Automated checks
+### Automated checks
 
-All checks are found in `package.json`.
+All checks are found in [📄 `package.json`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/package.json).
 
+-   Validate: Make sure everything is working correctly
+    -   Lint
+        -   Quality: [ESLint](https://eslint.org/)
+        -   Format: [Prettier](https://prettier.io/)
+        -   Package: [`sort-package-json`](https://www.npmjs.com/package/sort-package-json)
     -   Test
-        -   Pretest (compile): tsc, js-yaml
-        -   Automated tests: Mocha
+        -   Pretest (compile): [TypeScript compiler](https://code.visualstudio.com/docs/typescript/typescript-compiling)
+        -   Automated tests: [Mocha](https://mochajs.org/)
+
+## Syntax / code color contributions
+
+The syntax in [📄 `syntaxes/ahk.tmLanguage.yaml`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/syntaxes/ahk.tmLanguage.yaml) determines how the code is colorized.
+
+```
+; No colorization for me 😞
+```
+
+```ahk
+; 🌈 I'm colorized! 🌈
+```
+
+Some resources:
+
+-   See the [official syntax highlight guide](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide) for more details about how this works.
+-   We use [`PanAeon/vscode-tmgrammar-test`](https://github.com/PanAeon/vscode-tmgrammar-test) for testing the grammar.
+-   If you're curious, [`microsoft/vscode-textmate`](https://github.com/microsoft/vscode-textmate) hosts the tokenization grammar.
+
+To update the syntax, we recommend following this flow:
+
+1. 🤔 Take some time to reproduce a colorizing issue with as little AHK code as possible
+1. ➕ Add a new file in [📁 `src/test/suite/grammar/samples`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tree/main/src/test/suite/grammar/samples) that demonstrates the issue
+1. 🏃 Run `npm run test_grammar` to generate a `.snap` snapshot for the file you added
+1. ✏️ Edit the YAML grammar
+1. 🧪 Repeat the last two steps until everything is working as you want
+    > [`PanAeon/vscode-tmgrammar-test`](https://github.com/PanAeon/vscode-tmgrammar-test#readme) has great documentation on how to test the syntax
