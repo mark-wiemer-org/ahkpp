@@ -63,10 +63,7 @@
                 "command": "ahk++.debug",
                 "title": "Debug AHK Script",
                 "category": "AHK++",
-                "icon": {
-                    "light": "./image/run.png",
-                    "dark": "./image/run-dark.png"
-                }
+                "icon": "$(debug-alt)"
             },
             {
                 "command": "ahk++.openHelp",
