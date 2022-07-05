@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.8.2 - 2022-06-11
+## 2.8.3 - 2022-07-04 🦅
+
+-   Change to use default debug icon ([#100](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/100))
+
+## 2.8.2 - 2022-06-11 🎂
 
 -   No user-facing changes
 -   Security fixes in dependencies
