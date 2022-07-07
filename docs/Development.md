@@ -32,13 +32,13 @@ The tests should run automatically, and you should see passing output in the Deb
 1.  Bump the version in `package.json`. The message of the commit should be e.g. `v2.8.2`.
 1.  Push the changes.
 1.  Merge the PR. The body of the commit message should be the changelog entry.
-1.  `git checkout main`
+1.  `git checkout main && git pull`
 1.  Package the new version using `vsce package`.
 1.  Install the new version:
     1. Select the newly-created `.vsix` file.
     1. Open the context menu (right-click).
     1. Select `Install Extension VSIX`.
-    1. Reload the window.
+    1. Reload the window. (F1 -> Developer: Reload Window)
 1.  Perform final pre-release tests.
     -   If tests fail, there are two choices:
         1. Delay the release until the tests pass (preferred choice)
