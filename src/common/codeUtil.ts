@@ -8,12 +8,13 @@ export class CodeUtil {
             return '';
         }
         return original
-            .replace(/;.+/, '')
             .replace(/".*?"/g, '""') // replace string literals with empty string literal
             .replace(/{.*}/g, '') // remove matching braces
             .replace(/ +/g, ' ')
             .replace(/\bgui\b.*/gi, '')
-            .replace(/\b(msgbox)\b.+?%/gi, '$1');
+            .replace(/\b(msgbox)\b.+?%/gi, '$1')
+            .replace(/;.+/, '') // remove comments must be last, semicolon may be inside string (expression) or 'MsgBox, { ; comment with close brace }'
+            .trim();
     }
 
     /**
