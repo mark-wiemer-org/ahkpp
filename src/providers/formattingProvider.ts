@@ -45,7 +45,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         /** ??? */
         let tagDepth = 0;
         /**
-         * True iff this line MAY be a one-statement block
+         * True if this line MAY be a one-statement block
          * e.g.
          * ```ahk
          * ; <start script>

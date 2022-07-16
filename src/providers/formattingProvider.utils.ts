@@ -1,4 +1,4 @@
-/** @return true iff this line has more closing parens than opening parens (round brackets) */
+/** @return true if this line has more closing parens than opening parens (round brackets) */
 export function hasMoreCloseParens(line: string): boolean {
     if (!line.includes(')')) {
         return false;
@@ -8,7 +8,7 @@ export function hasMoreCloseParens(line: string): boolean {
     return closeCount > openCount;
 }
 
-/** @return true iff this line has more opening parens than closing parens (round brackets) */
+/** @return true if this line has more opening parens than closing parens (round brackets) */
 export function hasMoreOpenParens(line: string): boolean {
     if (!line.includes('(')) {
         return false;
