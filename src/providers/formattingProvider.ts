@@ -221,10 +221,11 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     let temp: RegExpExecArray;
                     if (
                         // if the regex matches the purified line
-                        (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
+                        //(temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
+                        (temp = new RegExp('^(?:{|}|\\s)*' + oneCommand + '\\b(.*)').exec(
                             purifiedLine,
                         )) &&
-                        // and the captured group includes a slash
+                        // and the captured group not includes a slash
                         !temp[1].includes('/')
                     ) {
                         oneCommandCode = true;
