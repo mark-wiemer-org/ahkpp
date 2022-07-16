@@ -209,8 +209,11 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 depth++;
             }
 
-            // default or hotkey
-            if (!moreOpenParens && purifiedLine.match(/:\s*$/)) {
+            // default or hotkey or label
+            if (
+                !moreOpenParens &&
+                purifiedLine.match(/^(?:\s*[^\s\t,`]+):\s*$/) // Label name may consist of any characters other than space, tab, comma and the escape character (`)
+            ) {
                 depth++;
                 tagDepth = depth;
                 atTopLevel = false;
