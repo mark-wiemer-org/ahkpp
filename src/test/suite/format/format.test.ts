@@ -22,13 +22,28 @@ const formatTests: FormatTest[] = [
         filenameRoot: '25-multiline-string',
     },
     {
+        filenameRoot: '40-command-inside-text',
+    },
+    {
         filenameRoot: '58-parentheses-indentation',
+    },
+    {
+        filenameRoot: '59-one-command-indentation',
     },
     {
         filenameRoot: '72-paren-hotkey',
     },
     {
+        filenameRoot: '119-semicolon-inside-string',
+    },
+    {
+        filenameRoot: '161-colon-on-last-position-in-text',
+    },
+    {
         filenameRoot: 'ahk-explorer',
+    },
+    {
+        filenameRoot: 'complex-curve-braces',
     },
     {
         filenameRoot: 'demo',
@@ -36,6 +51,9 @@ const formatTests: FormatTest[] = [
     {
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
+    },
+    {
+        filenameRoot: 'label-not-indent-after-sharp-command',
     },
     {
         filenameRoot: 'tab-size-2',
