@@ -83,20 +83,14 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 blockComment = true;
             }
             if (blockComment) {
-                // Add the indented line to the file
-                const indentationChars = FormatProvider.buildIndentationChars(
+                // Save indented line
+                formattedDocument += FormatProvider.buildIndentedLine(
+                    lineIndex,
+                    document.lineCount,
+                    formattedLine,
                     depth,
                     options,
                 );
-                formattedDocument += FormatProvider.buildIndentedLine(
-                    indentationChars,
-                    formattedLine,
-                );
-
-                // If not last line, add newline
-                if (lineIndex !== document.lineCount - 1) {
-                    formattedDocument += '\n';
-                }
 
                 if (originalLine.match(/\s*\*\//)) {
                     // found end '*/' pattern
@@ -176,20 +170,14 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 depth = 0;
             }
 
-            // Add the indented line to the file
-            const indentationChars = FormatProvider.buildIndentationChars(
+            // Save indented line
+            formattedDocument += FormatProvider.buildIndentedLine(
+                lineIndex,
+                document.lineCount,
+                formattedLine,
                 depth,
                 options,
             );
-            formattedDocument += FormatProvider.buildIndentedLine(
-                indentationChars,
-                formattedLine,
-            );
-
-            // If not last line, add newline
-            if (lineIndex !== document.lineCount - 1) {
-                formattedDocument += '\n';
-            }
 
             // Next line
 
@@ -274,16 +262,46 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
     }
 
     /**
-     * Build indented line of code
+     * Build indented line of code (not ready for saving)
      * @param indentationChars Indentation chars
      * @param formattedLine Formatted line of code
      */
-    static buildIndentedLine(
+    static buildIndentedString(
         indentationChars: string,
         formattedLine: string,
     ): string {
         return !formattedLine?.trim()
             ? formattedLine
             : indentationChars + formattedLine;
+    }
+
+    /**
+     * Build indented line of code (ready for saving)
+     * @param lineIndex Line index of passed formattedLine
+     * @param lastLineIndex Index of last line of document
+     * @param formattedLine Formatted line of code
+     * @param depth Depth of indent
+     * @param options VS Code formatting options
+     */
+    static buildIndentedLine(
+        lineIndex: number,
+        lastLineIndex: number,
+        formattedLine: string,
+        depth: number,
+        options: vscode.FormattingOptions,
+    ) {
+        const indentationChars = FormatProvider.buildIndentationChars(
+            depth,
+            options,
+        );
+        let indentedLine = FormatProvider.buildIndentedString(
+            indentationChars,
+            formattedLine,
+        );
+        // If not last line, add newline
+        if (lineIndex !== lastLineIndex - 1) {
+            indentedLine += '\n';
+        }
+        return indentedLine;
     }
 }
