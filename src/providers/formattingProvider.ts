@@ -66,7 +66,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             const formattedLine = originalLine
                 .replace(/^\s*/, '')
                 .replace(/;.+/, '')
-                .replace(/ {2,}/g, ' ')
+                .replace(/\s{2,}/g, ' ')
                 .concat(comment);
 
             atTopLevel = true;
@@ -77,10 +77,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             // This line
 
             // Block comments
-            if (originalLine.match(/ *\/\*/)) {
+            if (originalLine.match(/\s*\/\*/)) {
                 blockComment = true;
             }
-            if (originalLine.match(/ *\*\//)) {
+            if (originalLine.match(/\s*\*\//)) {
                 blockComment = false;
             }
             if (blockComment) {
