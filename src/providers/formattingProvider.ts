@@ -68,6 +68,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 .replace(/;.+/, '')
                 .replace(/\s{2,}/g, ' ')
                 .concat(comment);
+            const emptyLine = purifiedLine === '';
 
             atTopLevel = true;
 
@@ -78,15 +79,28 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // Block comments
             if (originalLine.match(/\s*\/\*/)) {
+                // found start '/*' pattern
                 blockComment = true;
             }
-            if (originalLine.match(/\s*\*\//)) {
-                blockComment = false;
-            }
             if (blockComment) {
-                formattedDocument += originalLine;
+                // Add the indented line to the file
+                const indentationChars = FormatProvider.buildIndentationChars(
+                    depth,
+                    options,
+                );
+                formattedDocument += FormatProvider.buildIndentedLine(
+                    indentationChars,
+                    formattedLine,
+                );
+
+                // If not last line, add newline
                 if (lineIndex !== document.lineCount - 1) {
                     formattedDocument += '\n';
+                }
+
+                if (originalLine.match(/\s*\*\//)) {
+                    // found end '*/' pattern
+                    blockComment = false;
                 }
                 continue;
             }
@@ -180,7 +194,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             // Next line
 
             // One command code
-            if (oneCommandCode) {
+            // Don't change indentation on empty lines (single line comments are equal to empty line) after one command code
+            // Block comments indentation and writing to result file executes earlier and never reach this check
+            if (oneCommandCode && !emptyLine) {
                 oneCommandCode = false;
                 depth--;
             }
