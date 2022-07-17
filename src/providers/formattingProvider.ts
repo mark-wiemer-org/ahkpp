@@ -57,6 +57,11 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let oneCommandCode = false;
         let blockComment = false;
         let atTopLevel = true;
+        /** Save important values to this variables on block comment enter, restore them on exit */
+        let blockCommentDepth = 0;
+        let blockCommentTagDepth = 0;
+        let blockCommentAtTopLevel = true;
+        let blockCommentOneCommandCode = false;
 
         for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
             const originalLine = document.lineAt(lineIndex).text;
@@ -78,25 +83,32 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             // This line
 
             // Block comments
-            if (originalLine.match(/\s*\/\*/)) {
+            // The /* and */ symbols can be used to comment out an entire section,
+            // but only if the symbols appear at the beginning of a line (excluding whitespace),
+            // as in this example:
+            // /*
+            // MsgBox, This line is commented out (disabled).
+            // MsgBox, Common mistake: */ this does not end the comment.
+            // MsgBox, This line is commented out.
+            // */
+            if (!blockComment && originalLine.match(/^\s*\/\*/)) {
                 // found start '/*' pattern
                 blockComment = true;
+                // save indent values on block comment enter
+                blockCommentDepth = depth;
+                blockCommentTagDepth = tagDepth;
+                blockCommentAtTopLevel = atTopLevel;
+                blockCommentOneCommandCode = oneCommandCode;
+                // reset indent values to default values with added current 'depth' indent
+                oneCommandCode = false;
             }
-            if (blockComment) {
-                // Save indented line
-                formattedDocument += FormatProvider.buildIndentedLine(
-                    lineIndex,
-                    document.lineCount,
-                    formattedLine,
-                    depth,
-                    options,
-                );
-
-                if (originalLine.match(/\s*\*\//)) {
-                    // found end '*/' pattern
-                    blockComment = false;
-                }
-                continue;
+            if (blockComment && originalLine.match(/^\s*\*\//)) {
+                // found end '*/' pattern
+                // restore indent values on block comment exit
+                depth = blockCommentDepth;
+                tagDepth = blockCommentTagDepth;
+                atTopLevel = blockCommentAtTopLevel;
+                oneCommandCode = blockCommentOneCommandCode;
             }
 
             // #IfWinActive, #IfWinNotActive
@@ -169,6 +181,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (depth < 0) {
                 depth = 0;
             }
+            if (blockCommentDepth < 0) {
+                blockCommentDepth = 0;
+            }
 
             // Save indented line
             formattedDocument += FormatProvider.buildIndentedLine(
@@ -182,11 +197,16 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             // Next line
 
             // One command code
-            // Don't change indentation on empty lines (single line comments are equal to empty line) after one command code
-            // Block comments indentation and writing to result file executes earlier and never reach this check
-            if (oneCommandCode && !emptyLine) {
+            // Don't change indentation on empty lines (single line comments are equal to empty line) or block comment after one command code
+            if (oneCommandCode && !emptyLine && !blockComment) {
                 oneCommandCode = false;
                 depth--;
+            }
+
+            // Block comments (must be after 'One command code' check!)
+            if (blockComment && originalLine.match(/^\s*\*\//)) {
+                // found end '*/' pattern
+                blockComment = false;
             }
 
             // #IfWinActive, #IfWinNotActive
