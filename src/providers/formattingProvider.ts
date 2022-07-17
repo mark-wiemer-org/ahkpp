@@ -163,12 +163,14 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             // Add the indented line to the file
-            const indentationChars = options.insertSpaces
-                ? ' '.repeat(depth * options.tabSize)
-                : '\t'.repeat(depth);
-            formattedDocument += !formattedLine?.trim()
-                ? formattedLine
-                : indentationChars + formattedLine;
+            const indentationChars = FormatProvider.buildIndentationChars(
+                depth,
+                options,
+            );
+            formattedDocument += FormatProvider.buildIndentedLine(
+                indentationChars,
+                formattedLine,
+            );
 
             // If not last line, add newline
             if (lineIndex !== document.lineCount - 1) {
@@ -239,5 +241,33 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 formattedDocument.replace(/\n{2,}/g, '\n\n'),
             ),
         ];
+    }
+
+    /**
+     * Build indentation chars
+     * @param depth Depth of indent
+     * @param options VS Code formatting options
+     */
+    static buildIndentationChars(
+        depth: number,
+        options: vscode.FormattingOptions,
+    ): string {
+        return options.insertSpaces
+            ? ' '.repeat(depth * options.tabSize)
+            : '\t'.repeat(depth);
+    }
+
+    /**
+     * Build indented line of code
+     * @param indentationChars Indentation chars
+     * @param formattedLine Formatted line of code
+     */
+    static buildIndentedLine(
+        indentationChars: string,
+        formattedLine: string,
+    ): string {
+        return !formattedLine?.trim()
+            ? formattedLine
+            : indentationChars + formattedLine;
     }
 }
