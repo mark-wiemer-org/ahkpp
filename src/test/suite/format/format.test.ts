@@ -27,8 +27,12 @@ const formatTests: FormatTest[] = [
     {
         filenameRoot: '72-paren-hotkey',
     },
-    { filenameRoot: 'ahk-explorer' },
-    { filenameRoot: 'demo' },
+    {
+        filenameRoot: 'ahk-explorer',
+    },
+    {
+        filenameRoot: 'demo',
+    },
     {
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
