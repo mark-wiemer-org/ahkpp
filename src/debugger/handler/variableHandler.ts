@@ -25,7 +25,7 @@ export class VariableHandler {
     public getScopeByRef(ref: number): number {
         const scopeOrVar = this.variableHandles.get(ref);
         if (typeof scopeOrVar === 'string') {
-            return scopeOrVar === 'Local' ? VarScope.LOCAL : VarScope.GLOBAL;
+            return scopeOrVar === 'Local' ? VarScope.local : VarScope.global;
         }
         return (scopeOrVar as AhkVariable).scope;
     }
@@ -119,7 +119,7 @@ export class VariableHandler {
                 }
                 const ahkVar = {
                     scope,
-                    frameId: scope === VarScope.GLOBAL ? -1 : this.frameId,
+                    frameId: scope === VarScope.global ? -1 : this.frameId,
                     name: property.attr.fullname,
                     value: this.buildVariableValue(property),
                 };

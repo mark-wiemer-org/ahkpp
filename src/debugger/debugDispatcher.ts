@@ -201,7 +201,7 @@ export class DebugDispatcher extends EventEmitter {
 
         const variables = await this.getVariable(
             frameId,
-            VarScope.LOCAL,
+            VarScope.local,
             variableName,
         );
         if (variables.length === 0) {

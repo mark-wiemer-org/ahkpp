@@ -230,10 +230,10 @@ export class DebugSession extends LoggingDebugSession {
         response.body = {
             targets: [
                 ...(await this.dispatcher.listVariables({
-                    variablesReference: VscodeScope.LOCAL,
+                    variablesReference: VscodeScope.local,
                 })),
                 ...(await this.dispatcher.listVariables({
-                    variablesReference: VscodeScope.GLOBAL,
+                    variablesReference: VscodeScope.global,
                 })),
             ].map((variable) => {
                 return {
@@ -258,7 +258,7 @@ export class DebugSession extends LoggingDebugSession {
             this.dispatcher.setVariable({
                 name: exp[0],
                 value: exp[1],
-                variablesReference: VscodeScope.LOCAL,
+                variablesReference: VscodeScope.local,
             });
             reply = `execute: ${args.expression}`;
         }
