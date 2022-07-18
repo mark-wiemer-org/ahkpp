@@ -36,9 +36,7 @@ export class AhkHoverProvider implements HoverProvider {
         token: CancellationToken,
     ) {
         const context = this.buildContext(document, position);
-        if (context === undefined) {
-            return null;
-        }
+        if (context === undefined) return null;
 
         const snippetHover = this.tryGetSnippetHover(context);
         if (snippetHover) {
@@ -61,7 +59,7 @@ export class AhkHoverProvider implements HoverProvider {
 
     private tryGetSnippetHover(context: Context): Hover {
         let snippetKey = context.word.toLowerCase();
-        if (context.charAfter === '(') {
+        if (context.charAfter == '(') {
             snippetKey += '()';
         }
         const snippet = this.snippetCache.get(snippetKey);
@@ -80,9 +78,7 @@ export class AhkHoverProvider implements HoverProvider {
     private buildContext(document: TextDocument, position: Position): Context {
         const line = position.line;
         const wordRange = document.getWordRangeAtPosition(position);
-        if (!wordRange) {
-            return undefined;
-        }
+        if (wordRange === undefined) return undefined;
         let word = document.getText(wordRange);
         if (wordRange.start.character > 0) {
             const charBefore = document.getText(
@@ -93,7 +89,7 @@ export class AhkHoverProvider implements HoverProvider {
                     wordRange.start.character,
                 ),
             );
-            if (charBefore === '#') {
+            if (charBefore == '#') {
                 word = '#' + word;
             }
         }

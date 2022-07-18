@@ -34,9 +34,7 @@ export class CommandHandler {
 
     public callback(transId: string, response: DbgpResponse) {
         const fun = this.commandCallback[transId];
-        if (fun) {
-            fun(response);
-        }
+        if (fun) fun(response);
         this.commandCallback[transId] = null;
     }
 }

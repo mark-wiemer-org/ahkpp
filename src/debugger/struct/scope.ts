@@ -1,9 +1,9 @@
 export enum VarScope {
-    local = 0,
-    global = 1,
+    LOCAL = 0,
+    GLOBAL = 1,
 }
 
 export enum VscodeScope {
-    local = 1000,
-    global = 1001,
+    LOCAL = 1000,
+    GLOBAL = 1001,
 }

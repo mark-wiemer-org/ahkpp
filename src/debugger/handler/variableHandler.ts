@@ -24,8 +24,8 @@ export class VariableHandler {
 
     public getScopeByRef(ref: number): number {
         const scopeOrVar = this.variableHandles.get(ref);
-        if (typeof scopeOrVar === 'string') {
-            return scopeOrVar === 'Local' ? VarScope.local : VarScope.global;
+        if (typeof scopeOrVar == 'string') {
+            return scopeOrVar == 'Local' ? VarScope.LOCAL : VarScope.GLOBAL;
         }
         return (scopeOrVar as AhkVariable).scope;
     }
@@ -77,9 +77,7 @@ export class VariableHandler {
         count: number,
     ): Variable[] | PromiseLike<Variable[]> {
         const ahkVar = this.getVarByRef(ref);
-        if (!Array.isArray(ahkVar?.value)) {
-            return [];
-        }
+        if (!Array.isArray(ahkVar?.value)) return [];
 
         return (ahkVar.value as any[])
             .slice(start, start + count)
@@ -119,7 +117,7 @@ export class VariableHandler {
                 }
                 const ahkVar = {
                     scope,
-                    frameId: scope === VarScope.global ? -1 : this.frameId,
+                    frameId: scope == VarScope.GLOBAL ? -1 : this.frameId,
                     name: property.attr.fullname,
                     value: this.buildVariableValue(property),
                 };
@@ -131,7 +129,7 @@ export class VariableHandler {
                     indexedVariables,
                     namedVariables,
                     variablesReference:
-                        attr.type !== 'object'
+                        attr.type != 'object'
                             ? 0
                             : this.variableHandles.create(ahkVar),
                 };
@@ -144,7 +142,7 @@ export class VariableHandler {
     private buildVariableValue(property: DbgpProperty): any {
         const { attr, content = '' } = property;
 
-        if (['string', 'integer', 'float'].includes(attr.type)) {
+        if (['string', 'integer', 'float'].includes(attr.type) === true) {
             const primitive = Util.atob(content);
             if (attr.type === 'integer' || attr.type === 'float') {
                 return primitive;
@@ -152,7 +150,10 @@ export class VariableHandler {
             return `"${primitive}"`;
         } else if (attr.type === 'object') {
             const childs = Util.toArray(property.property);
-            if (this.likeArray(property) && attr.classname === 'Object') {
+            if (
+                this.likeArray(property) == true &&
+                attr.classname === 'Object'
+            ) {
                 return childs.map((p) => {
                     return Util.atob(p.content);
                 });
@@ -171,7 +172,7 @@ export class VariableHandler {
     private formatPropertyValue(property: DbgpProperty): string {
         const { attr, content = '' } = property;
 
-        if (['string', 'integer', 'float'].includes(attr.type)) {
+        if (['string', 'integer', 'float'].includes(attr.type) === true) {
             const primitive = Buffer.from(content, attr.encoding).toString();
 
             if (attr.type === 'integer' || attr.type === 'float') {
@@ -179,7 +180,7 @@ export class VariableHandler {
             }
             return `"${primitive}"`;
         } else if (attr.type === 'object') {
-            if (this.likeArray(property)) {
+            if (this.likeArray(property) == true) {
                 const classname =
                     attr.classname === 'Object' ? 'Array' : attr.classname;
                 const length = this.getLikeArrayLength(property);
@@ -193,7 +194,7 @@ export class VariableHandler {
 
     private getLikeArrayLength(property: DbgpProperty): number {
         const properties: DbgpProperty[] = Util.toArray(property.property);
-        if (properties.length === 0) {
+        if (properties.length == 0) {
             return 0;
         }
         for (let i = properties.length - 1; i > 0; i--) {

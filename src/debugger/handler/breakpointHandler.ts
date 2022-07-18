@@ -40,7 +40,7 @@ export class BreakPointHandler {
                 new Source(basename(path), path),
             );
             const lineText = sourceLines[sourceBreakpoint.line];
-            if (lineText && lineText.trim().charAt(0) !== ';') {
+            if (lineText && lineText.trim().charAt(0) != ';') {
                 breakPoint.verified = true;
             }
             callback(breakPoint);

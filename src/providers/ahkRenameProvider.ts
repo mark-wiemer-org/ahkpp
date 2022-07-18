@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
+import { Out } from '../common/out';
 
 export class AhkRenameProvider implements vscode.RenameProvider {
     async provideRenameEdits(
@@ -18,7 +19,7 @@ export class AhkRenameProvider implements vscode.RenameProvider {
         const refs = Parser.getAllRefByName(word);
         const workEdit = new vscode.WorkspaceEdit();
         for (const ref of refs) {
-            if (ref.document.uri.scheme !== 'file') {
+            if (ref.document.uri.scheme != 'file') {
                 continue;
             }
             let uriEdits = [];
@@ -51,7 +52,7 @@ export class AhkRenameProvider implements vscode.RenameProvider {
         const word = document.getText(wordRange);
 
         const method = await Parser.getMethodByName(document, word);
-        if (!!method) {
+        if (method != null) {
             return wordRange;
         }
         throw new Error('You cannot rename this element.');
