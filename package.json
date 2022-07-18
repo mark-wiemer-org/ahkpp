@@ -33,7 +33,7 @@
         "format": "npm run format_inner -- --check .",
         "format_fix": "npm run format_inner -- --write .",
         "format_inner": "prettier",
-        "lint": "npm run eslint && npm run format && npm run packagejson",
+        "lint": "npm run tsc && npm run eslint && npm run format && npm run packagejson",
         "packagejson": "sort-package-json --check",
         "packagejson_fix": "sort-package-json",
         "prepare": "husky install",
@@ -279,7 +279,7 @@
         "*": "prettier --check",
         "src/**": [
             "npm run eslint_inner",
-            "tsc --noEmit --target 'es2016'"
+            "npm run tsc"
         ],
         "package.json": "npm run packagejson"
     },
