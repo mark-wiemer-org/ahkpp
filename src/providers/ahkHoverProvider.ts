@@ -36,7 +36,7 @@ export class AhkHoverProvider implements HoverProvider {
         token: CancellationToken,
     ) {
         const context = this.buildContext(document, position);
-        if (context === undefined) {
+        if (!context) {
             return null;
         }
 
@@ -80,7 +80,7 @@ export class AhkHoverProvider implements HoverProvider {
     private buildContext(document: TextDocument, position: Position): Context {
         const line = position.line;
         const wordRange = document.getWordRangeAtPosition(position);
-        if (wordRange === undefined) {
+        if (!wordRange) {
             return undefined;
         }
         let word = document.getText(wordRange);

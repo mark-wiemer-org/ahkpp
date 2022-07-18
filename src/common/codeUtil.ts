@@ -42,7 +42,7 @@ export class CodeUtil {
 
         let regs = [];
         let temp: RegExpExecArray;
-        while ((temp = regex.exec(text))) {
+        while (!!(temp = regex.exec(text))) {
             regs.push(temp);
         }
 

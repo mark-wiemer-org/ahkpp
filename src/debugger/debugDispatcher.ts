@@ -39,6 +39,7 @@ export class DebugDispatcher extends EventEmitter {
      */
     public async start(args: LaunchRequestArguments) {
         let { runtime, dbgpSettings = {} } = args;
+        // names may used by AHK, let's not change them for now
         // eslint-disable-next-line @typescript-eslint/naming-convention
         const { max_children, max_data } = {
             // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -254,10 +255,9 @@ export class DebugDispatcher extends EventEmitter {
                 if (parentFullName) {
                     const isIndex: boolean =
                         fullname.includes('[') && fullname.includes(']');
-                    fullname =
-                        isIndex === true
-                            ? `${parentFullName}${fullname}`
-                            : `${parentFullName}.${fullname}`;
+                    fullname = isIndex
+                        ? `${parentFullName}${fullname}`
+                        : `${parentFullName}.${fullname}`;
                 }
 
                 const response: DbgpResponse = await this.sendComand(
