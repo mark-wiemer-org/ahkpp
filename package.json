@@ -276,7 +276,7 @@
     ],
     "lint-staged": {
         "*": "prettier --check",
-        "src/*": [
+        "src/**": [
             "npm run quality_inner",
             "tsc --noEmit"
         ],
