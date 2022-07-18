@@ -39,12 +39,8 @@ export class DebugDispatcher extends EventEmitter {
      */
     public async start(args: LaunchRequestArguments) {
         let { runtime, dbgpSettings = {} } = args;
-        // names may used by AHK, let's not change them for now
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { max_children, max_data } = {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
             max_children: 300,
-            // eslint-disable-next-line @typescript-eslint/naming-convention
             max_data: 131072,
             ...dbgpSettings,
         };
@@ -201,12 +197,12 @@ export class DebugDispatcher extends EventEmitter {
 
         const variables = await this.getVariable(
             frameId,
-            VarScope.local,
+            VarScope.LOCAL,
             variableName,
         );
-        if (variables.length === 0) {
+        if (variables.length == 0) {
             return null;
-        } else if (variables.length === 1) {
+        } else if (variables.length == 1) {
             return variables[0].value;
         } else {
             const ahkVar = this.variableHandler.getVarByName(variableName);

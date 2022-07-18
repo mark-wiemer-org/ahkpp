@@ -64,15 +64,15 @@ export class Method {
 
     private buildParams() {
         const refPattern = /\s*\((.+?)\)\s*$/;
-        if (this.origin !== this.name) {
+        if (this.origin != this.name) {
             const paramsMatch = this.origin.match(refPattern);
             if (paramsMatch) {
                 this.params = paramsMatch[1]
                     .split(',')
-                    .filter((param) => param.trim() !== '')
+                    .filter((param) => param.trim() != '')
                     .map((param) => {
                         const paramMatch = param.match(/[^:=* \t]+/);
-                        return paramMatch?.[0] ?? param;
+                        return paramMatch != null ? paramMatch[0] : param;
                     });
                 this.full = this.origin.replace(
                     paramsMatch[1],
@@ -91,14 +91,10 @@ export class Method {
         }
         loop: for (const variable of variables) {
             for (const curVariable of this.variables) {
-                if (curVariable.name === variable.name) {
-                    continue loop;
-                }
+                if (curVariable.name == variable.name) continue loop;
             }
             for (const paramStr of this.params) {
-                if (paramStr === variable.name) {
-                    continue loop;
-                }
+                if (paramStr == variable.name) continue loop;
             }
             this.variables.push(variable);
         }

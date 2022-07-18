@@ -14,7 +14,7 @@ export class DebugServer extends EventEmitter {
     }
 
     public start(): DebugServer {
-        const end = 0;
+        const END = 0;
         let tempData: Buffer;
         this.proxyServer = new Net.Server()
             .listen(this.port)
@@ -24,7 +24,7 @@ export class DebugServer extends EventEmitter {
                     tempData = tempData
                         ? Buffer.concat([tempData, chunk])
                         : chunk;
-                    if (tempData[tempData.length - 1] === end) {
+                    if (tempData[tempData.length - 1] == END) {
                         this.process(tempData.toString());
                         tempData = null;
                     }
@@ -63,11 +63,11 @@ export class DebugServer extends EventEmitter {
     });
     public process(data: string) {
         data = data.substr(data.indexOf('<?xml'));
-        if (data.indexOf(this.header) === -1) {
+        if (data.indexOf(this.header) == -1) {
             data = this.header + data;
         }
         for (const part of data.split(this.header)) {
-            if (!part?.trim()) {
+            if (null == part || part.trim() == '') {
                 continue;
             }
             const xmlString = this.header + part;

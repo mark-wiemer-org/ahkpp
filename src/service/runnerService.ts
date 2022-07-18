@@ -23,9 +23,10 @@ export class RunnerService {
             ? vscode.Uri.file(script)
             : vscode.window.activeTextEditor.document.uri;
         script = script ? script : await this.getPathByActive();
-        const debugPlusExists = !!vscode.extensions.getExtension(
-            'zero-plusplus.vscode-autohotkey-debug',
-        );
+        const debugPlusExists =
+            vscode.extensions.getExtension(
+                'zero-plusplus.vscode-autohotkey-debug',
+            ) != undefined;
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {
             type: debugPlusExists ? 'autohotkey' : 'ahk',
             request: 'launch',
@@ -84,7 +85,7 @@ export class RunnerService {
 
     public static async createTemplate(content: string) {
         const path = `temp-${this.getNowDate()}.ahk`;
-        return await FileManager.record(path, content, FileModel.write);
+        return await FileManager.record(path, content, FileModel.WRITE);
     }
 
     private static checkAndSaveActive(): void {

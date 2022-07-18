@@ -4,9 +4,7 @@ export class CodeUtil {
      * @param original Original line of code
      */
     public static purify(original: string): string {
-        if (!original) {
-            return '';
-        }
+        if (!original) return '';
         return original
             .replace(/;.+/, '')
             .replace(/".*?"/g, '""') // replace string literals with empty string literal
@@ -23,7 +21,7 @@ export class CodeUtil {
      * or another array to concat to the end of @see array
      */
     public static join(array: unknown[], items: unknown) {
-        if (!array || !items) {
+        if (array == undefined || items == undefined) {
             return;
         }
         if (Array.isArray(items)) {
@@ -42,7 +40,7 @@ export class CodeUtil {
 
         let regs = [];
         let temp: RegExpExecArray;
-        while (!!(temp = regex.exec(text))) {
+        while ((temp = regex.exec(text)) != null) {
             regs.push(temp);
         }
 
