@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.8.5 (🧪 pre-release) - 2022-07-18
+
+Woohoo a 🧪 pre-release! Note this requires VS Code 1.63.0 (November 2021) or newer. See [🧪 pre-release extensions](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions) and [publishing 🧪 pre-release extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#prerelease-extensions) for more info.
+
+This is a 🧪 pre-release for now since last time I tried to make a change like this, everything 💥 exploded 😔. Please try it out and let me know if anything else 💥 explodes!
+
+-   Fix [#153](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/153) in main branch
+-   Restore functionality introduced in 2.8.3
+
+## 2.8.4 (👍 latest) - 2022-07-07
+
+-   Fix [#153](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/153)
+-   Revert changes in 2.8.3
+
+2.8.4 has identical code and functionality to 2.8.2
+
+Very sorry for this.
+
 ## 2.8.3 - 2022-07-04 🦅
 
 -   Change to use default debug icon ([#100](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/100))
