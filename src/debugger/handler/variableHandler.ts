@@ -25,7 +25,7 @@ export class VariableHandler {
     public getScopeByRef(ref: number): number {
         const scopeOrVar = this.variableHandles.get(ref);
         if (typeof scopeOrVar === 'string') {
-            return scopeOrVar == 'Local' ? VarScope.LOCAL : VarScope.GLOBAL;
+            return scopeOrVar === 'Local' ? VarScope.LOCAL : VarScope.GLOBAL;
         }
         return (scopeOrVar as AhkVariable).scope;
     }
@@ -119,7 +119,7 @@ export class VariableHandler {
                 }
                 const ahkVar = {
                     scope,
-                    frameId: scope == VarScope.GLOBAL ? -1 : this.frameId,
+                    frameId: scope === VarScope.GLOBAL ? -1 : this.frameId,
                     name: property.attr.fullname,
                     value: this.buildVariableValue(property),
                 };
@@ -131,7 +131,7 @@ export class VariableHandler {
                     indexedVariables,
                     namedVariables,
                     variablesReference:
-                        attr.type != 'object'
+                        attr.type !== 'object'
                             ? 0
                             : this.variableHandles.create(ahkVar),
                 };
@@ -152,10 +152,7 @@ export class VariableHandler {
             return `"${primitive}"`;
         } else if (attr.type === 'object') {
             const childs = Util.toArray(property.property);
-            if (
-                this.likeArray(property) == true &&
-                attr.classname === 'Object'
-            ) {
+            if (this.likeArray(property) && attr.classname === 'Object') {
                 return childs.map((p) => {
                     return Util.atob(p.content);
                 });
@@ -182,7 +179,7 @@ export class VariableHandler {
             }
             return `"${primitive}"`;
         } else if (attr.type === 'object') {
-            if (this.likeArray(property) == true) {
+            if (this.likeArray(property)) {
                 const classname =
                     attr.classname === 'Object' ? 'Array' : attr.classname;
                 const length = this.getLikeArrayLength(property);
@@ -196,7 +193,7 @@ export class VariableHandler {
 
     private getLikeArrayLength(property: DbgpProperty): number {
         const properties: DbgpProperty[] = Util.toArray(property.property);
-        if (properties.length == 0) {
+        if (!properties.length) {
             return 0;
         }
         for (let i = properties.length - 1; i > 0; i--) {
