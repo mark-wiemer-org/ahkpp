@@ -2,6 +2,8 @@
 
 This document covers the development process, from writing code to publishing a new version.
 
+> Throughout the document, `F1` is short for Show all commands / Open [command palette](https://code.visualstudio.com/api/ux-guidelines/command-palette)
+
 ## Writing
 
 1. Write your change on any branch other than `main`
@@ -15,7 +17,7 @@ This document covers the development process, from writing code to publishing a 
 
 ### Automated tests
 
-1. Open the Debug console panel (`Ctrl + Shift + Y`)
+1. Open the Debug console panel (`Ctrl + Shift + Y` or `F1` -> View: Toggle Debug Console)
 1. Run the tests (`debug test`)
     1. Select `Test Extension` in the Debug side bar
     1. Begin Debugging (`F5` or press the play button)
@@ -38,7 +40,7 @@ The tests should run automatically, and you should see passing output in the Deb
     1. Select the newly-created `.vsix` file.
     1. Open the context menu (right-click).
     1. Select `Install Extension VSIX`.
-    1. Reload the window. (F1 -> Developer: Reload Window)
+    1. Reload the window. (`Ctrl + Shift + R` or `F1` -> Developer: Reload Window)
 1.  Perform final pre-release tests.
     -   If tests fail, there are two choices:
         1. Delay the release until the tests pass (preferred choice)
