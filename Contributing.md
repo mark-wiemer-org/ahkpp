@@ -21,11 +21,14 @@ All checks are found in [📄 `package.json`](https://github.com/mark-wiemer/vsc
 
 -   Validate: Make sure everything is working correctly
     -   Lint
+        -   TSC: [TypeScript compiler](https://code.visualstudio.com/docs/typescript/typescript-compiling) checks for compile-time issues
         -   ESLint: [ESLint](https://eslint.org/) checks code quality
         -   Format: [Prettier](https://prettier.io/) checks code formatting
-        -   Package: [`sort-package-json`](https://www.npmjs.com/package/sort-package-json) checks `package.json` property order
+        -   PackageJSON: [`sort-package-json`](https://www.npmjs.com/package/sort-package-json) checks `package.json` property order
     -   Test
-        -   Pretest (compile): [TypeScript compiler](https://code.visualstudio.com/docs/typescript/typescript-compiling) checks for compile-time issues
+        -   Pretest (compile)
+            -   TS: [TypeScript compiler](https://code.visualstudio.com/docs/typescript/typescript-compiling) ["upserts"](https://www.wordnik.com/words/upsert) `.js` files that are executed
+            -   Grammar: [js-yaml](https://www.npmjs.com/package/js-yaml) converts [language syntax](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide#:~:text=USING%20YAML%20TO%20WRITE%20A%20GRAMMAR) from YAML to JSON
         -   Automated tests: [Mocha](https://mochajs.org/) checks functionality
 
 ## Syntax / code color contributions
