@@ -21,12 +21,12 @@ All checks are found in [📄 `package.json`](https://github.com/mark-wiemer/vsc
 
 -   Validate: Make sure everything is working correctly
     -   Lint
-        -   Quality: [ESLint](https://eslint.org/)
-        -   Format: [Prettier](https://prettier.io/)
-        -   Package: [`sort-package-json`](https://www.npmjs.com/package/sort-package-json)
+        -   ESLint: [ESLint](https://eslint.org/) checks code quality
+        -   Format: [Prettier](https://prettier.io/) checks code formatting
+        -   Package: [`sort-package-json`](https://www.npmjs.com/package/sort-package-json) checks `package.json` property order
     -   Test
-        -   Pretest (compile): [TypeScript compiler](https://code.visualstudio.com/docs/typescript/typescript-compiling)
-        -   Automated tests: [Mocha](https://mochajs.org/)
+        -   Pretest (compile): [TypeScript compiler](https://code.visualstudio.com/docs/typescript/typescript-compiling) checks for compile-time issues
+        -   Automated tests: [Mocha](https://mochajs.org/) checks functionality
 
 ## Syntax / code color contributions
 
