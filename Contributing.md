@@ -2,7 +2,9 @@
 
 I welcome any issues or PRs :)
 
-## Running locally
+## Writing code
+
+### Running locally
 
 1. Clone the repo
 1. Install the relevant dependencies
@@ -10,14 +12,45 @@ I welcome any issues or PRs :)
     - [Node 16](https://nodejs.org/en/), which comes automatically bundled with npm 8.
 1. `npm i`
 
+### Recommended VS Code settings
+
+This repo enforces formatting, so it's recommended to format on save:
+
+See [language-specific editor settings](https://code.visualstudio.com/docs/getstarted/settings#_languagespecific-editor-settings)
+
+```jsonc
+// settings.json - https://code.visualstudio.com/docs/getstarted/settings#_settingsjson
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[ahk]": {
+        "editor.defaultFormatter": "mark-wiemer.vscode-autohotkey-plus-plus"
+    }
+}
+```
+
+### Test-driven development
+
+To verify your fix worked as expected, we recommend following [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development)
+
+1. Identify a bug you'd like to fix
+1. Write a test that fails with the current code due to that bug
+1. Update the code to pass the test
+1. Repeat the above process with more and more complex test cases
+1. Clean up the code
+1. Commit the code
+
+This way, we'll alway have a test to ensure we don't [re-introduce a bug](https://en.wikipedia.org/wiki/Software_regression)
+
 ### Validate the build
 
-1. `npm run validate`
-1. Go to `Run and Debug` viewlet (`Ctrl+Shift+D`) and click "Run Extension"
+Please validate the build before opening a PR. Automated checks will have to pass before the PR can be merged.
+
+1. `npm run validate` for automated checks
+1. Go to `Run and Debug` viewlet (`Ctrl+Shift+D`) and click "Run Extension" for manual checks
 
 ### Automated checks
 
-All checks are found in [📄 `package.json`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/package.json).
+All checks are found in [📄 `package.json#scripts`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/package.json).
 
 -   Validate: Make sure everything is working correctly
     -   Lint
