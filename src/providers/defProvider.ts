@@ -51,7 +51,7 @@ export class DefProvider implements vscode.DefinitionProvider {
                 position.line <= method.endLine
             ) {
                 for (const variable of method.variables) {
-                    if (variable.name == word) {
+                    if (variable.name === word) {
                         return new vscode.Location(
                             document.uri,
                             new vscode.Position(
@@ -62,8 +62,7 @@ export class DefProvider implements vscode.DefinitionProvider {
                     }
                 }
                 for (const param of method.params) {
-                    if (param == word) {
-                        // TODO cannot find param character
+                    if (param === word) {
                         return new vscode.Location(
                             document.uri,
                             new vscode.Position(
@@ -77,7 +76,7 @@ export class DefProvider implements vscode.DefinitionProvider {
         }
 
         for (const variable of script.variables) {
-            if (variable.name == word) {
+            if (variable.name === word) {
                 return new vscode.Location(
                     document.uri,
                     new vscode.Position(variable.line, variable.character),
