@@ -27,21 +27,22 @@
         "compile": "npm run compile_ts && npm run compile_grammar",
         "compile_grammar": "js-yaml syntaxes/ahk.tmLanguage.yaml > syntaxes/ahk.tmLanguage.json",
         "compile_ts": "tsc -p ./",
+        "eslint": "npm run eslint_inner -- src && echo ✅ No ESLint problems",
+        "eslint_fix": "npm run eslint_inner -- --fix src",
+        "eslint_inner": "eslint --ext ts --max-warnings=0",
         "format": "npm run format_inner -- --check .",
         "format_fix": "npm run format_inner -- --write .",
         "format_inner": "prettier",
-        "lint": "npm run quality && npm run format && npm run packagejson",
+        "lint": "npm run tsc && npm run eslint && npm run format && npm run packagejson",
         "packagejson": "sort-package-json --check",
         "packagejson_fix": "sort-package-json",
         "prepare": "husky install",
-        "quality": "npm run quality_inner -- src && echo ✅ No problems",
-        "quality_fix": "npm run quality_inner -- --fix src",
-        "quality_inner": "eslint --ext ts --max-warnings=0",
         "pretest": "npm run compile",
         "test": "npm run test_unit && npm run test_grammar_inner",
         "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",
         "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
         "test_unit": "node ./out/test/runTest.js",
+        "tsc": "tsc --noEmit --skipLibCheck && echo ✅ No TSC problems",
         "validate": "npm run lint && npm run test",
         "vscode:prepublish": "npm run compile",
         "watch": "tsc -watch -p ./"
@@ -276,9 +277,9 @@
     ],
     "lint-staged": {
         "*": "prettier --check",
-        "src/*": [
-            "npm run quality_inner",
-            "tsc --noEmit"
+        "src/**": [
+            "npm run eslint_inner",
+            "npm run tsc"
         ],
         "package.json": "npm run packagejson"
     },
@@ -303,7 +304,7 @@
         "js-yaml": "^4.1.0",
         "lint-staged": "^13.0.3",
         "mocha": "^10.0.0",
-        "prettier": "^2.6.1",
+        "prettier": "2.6.1",
         "sort-package-json": "^1.57.0",
         "source-map-support": "^0.5.19",
         "typescript": "~4.7.4",

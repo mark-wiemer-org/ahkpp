@@ -36,7 +36,7 @@ export class AhkHoverProvider implements HoverProvider {
         token: CancellationToken,
     ) {
         const context = this.buildContext(document, position);
-        if (context === undefined) {
+        if (!context) {
             return null;
         }
 

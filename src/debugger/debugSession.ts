@@ -14,10 +14,10 @@ import { Continue } from './struct/command';
 import { VscodeScope } from './struct/scope';
 
 /**
- * This interface describes the mock-debug specific launch attr
+ * This interface describes the mock-debug specific launch attributes
  * (which are not part of the Debug Adapter Protocol).
- * The schema for these attr lives in the package.json of the mock-debug extension.
- * The interface should always match the package.json.
+ * The schema for these attributes lives in the package.json of the mock-debug extension.
+ * The interface should always match the one in package.json.
  */
 export interface LaunchRequestArguments
     extends DebugProtocol.LaunchRequestArguments {
