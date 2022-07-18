@@ -7,6 +7,7 @@ export class CodeUtil {
         if (!original) {
             return '';
         }
+        // Generated list of commands from SciTE4AutoHotkey -> Options -> Open ahk.keywords.properties
         let commandList = [
             'autotrim',
             'blockinput',
