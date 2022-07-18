@@ -23,7 +23,7 @@ export class CodeUtil {
      * or another array to concat to the end of @see array
      */
     public static join(array: unknown[], items: unknown) {
-        if (array == undefined || items == undefined) {
+        if (!array || !items) {
             return;
         }
         if (Array.isArray(items)) {
