@@ -13,11 +13,11 @@ export class SignatureProvider implements vscode.SignatureHelpProvider {
         let splitCount = 0;
         for (let index = position.character - 1; index > 0; index--) {
             const char = lineText.charAt(index);
-            if (char == '(') {
+            if (char === '(') {
                 methodPosition = new vscode.Position(position.line, index);
                 break;
             }
-            if (char == ',') {
+            if (char === ',') {
                 splitCount++;
             }
         }
