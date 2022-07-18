@@ -141,7 +141,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            if (moreCloseParens) depth--;
+            if (moreCloseParens) {
+                depth--;
+            }
 
             // One command code and open braces
             if (oneCommandCode && purifiedLine.match(/{/) != null) {
@@ -204,7 +206,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            if (moreOpenParens) depth++;
+            if (moreOpenParens) {
+                depth++;
+            }
 
             // default or hotkey
             if (!moreOpenParens && purifiedLine.match(/:\s*$/)) {

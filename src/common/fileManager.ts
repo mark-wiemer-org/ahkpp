@@ -13,7 +13,9 @@ export class FileManager {
     }
 
     private static check(path: string) {
-        if (!fs.existsSync(path)) fs.mkdirSync(path);
+        if (!fs.existsSync(path)) {
+            fs.mkdirSync(path);
+        }
     }
 
     public static show(fileName: string) {

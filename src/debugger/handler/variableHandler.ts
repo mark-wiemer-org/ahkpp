@@ -24,7 +24,7 @@ export class VariableHandler {
 
     public getScopeByRef(ref: number): number {
         const scopeOrVar = this.variableHandles.get(ref);
-        if (typeof scopeOrVar == 'string') {
+        if (typeof scopeOrVar === 'string') {
             return scopeOrVar == 'Local' ? VarScope.LOCAL : VarScope.GLOBAL;
         }
         return (scopeOrVar as AhkVariable).scope;
@@ -77,7 +77,9 @@ export class VariableHandler {
         count: number,
     ): Variable[] | PromiseLike<Variable[]> {
         const ahkVar = this.getVarByRef(ref);
-        if (!Array.isArray(ahkVar?.value)) return [];
+        if (!Array.isArray(ahkVar?.value)) {
+            return [];
+        }
 
         return (ahkVar.value as any[])
             .slice(start, start + count)

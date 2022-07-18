@@ -4,7 +4,9 @@ export class CodeUtil {
      * @param original Original line of code
      */
     public static purify(original: string): string {
-        if (!original) return '';
+        if (!original) {
+            return '';
+        }
         return original
             .replace(/;.+/, '')
             .replace(/".*?"/g, '""') // replace string literals with empty string literal

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export interface DbgpResponse {
     attr: {
         /** only one stack */

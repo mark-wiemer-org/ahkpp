@@ -91,10 +91,14 @@ export class Method {
         }
         loop: for (const variable of variables) {
             for (const curVariable of this.variables) {
-                if (curVariable.name == variable.name) continue loop;
+                if (curVariable.name == variable.name) {
+                    continue loop;
+                }
             }
             for (const paramStr of this.params) {
-                if (paramStr == variable.name) continue loop;
+                if (paramStr == variable.name) {
+                    continue loop;
+                }
             }
             this.variables.push(variable);
         }

@@ -12,7 +12,9 @@ export class Parser {
      * @param buildPath
      */
     public static async buildByPath(buildPath: string) {
-        if (!buildPath) return;
+        if (!buildPath) {
+            return;
+        }
         if (fs.statSync(buildPath).isDirectory()) {
             fs.readdir(buildPath, (err, files) => {
                 if (err) {
@@ -79,7 +81,9 @@ export class Parser {
                         ),
                     );
                     currentMethod = methodOrRef;
-                    if (methodOrRef.withQuote) deep++;
+                    if (methodOrRef.withQuote) {
+                        deep++;
+                    }
                     continue;
                 } else {
                     CodeUtil.join(refs, methodOrRef);
@@ -206,8 +210,9 @@ export class Parser {
             if (
                 labelName.toLowerCase() == 'case' ||
                 labelName.toLowerCase() == 'default'
-            )
+            ) {
                 return;
+            }
             return new Label(label[1], document, line, text.indexOf(labelName));
         }
     }
@@ -240,7 +245,9 @@ export class Parser {
                 lineText.replace(/\(.+?\)/g, ''),
             );
             for (let index = 0; index < commandMatchAll.length; index++) {
-                if (index == 0) continue;
+                if (index == 0) {
+                    continue;
+                }
                 const varName = commandMatchAll[index][1];
                 if (this.keywords.includes(varName.toLowerCase())) {
                     continue;
