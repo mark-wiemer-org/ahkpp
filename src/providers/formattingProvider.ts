@@ -109,7 +109,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 purifiedLine.match(/\b(return|ExitApp)\b/i) &&
                 tagDepth === depth
             ) {
-                tagDepth == 0;
+                tagDepth === 0;
                 depth--;
                 atTopLevel = false;
             }
@@ -129,7 +129,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             // Check close braces
-            if (purifiedLine.match(/}/) != null) {
+            if (purifiedLine.includes('}')) {
                 let temp = purifiedLine.match(/}/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
                 if (t2) {
@@ -146,7 +146,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             // One command code and open braces
-            if (oneCommandCode && purifiedLine.match(/{/) != null) {
+            if (oneCommandCode && purifiedLine.includes('{')) {
                 let temp = purifiedLine.match(/{/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
                 if (t2) {
@@ -166,10 +166,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             const indentationChars = options.insertSpaces
                 ? ' '.repeat(depth * options.tabSize)
                 : '\t'.repeat(depth);
-            formattedDocument +=
-                !formattedLine || formattedLine.trim() == ''
-                    ? formattedLine
-                    : indentationChars + formattedLine;
+            formattedDocument += !formattedLine?.trim()
+                ? formattedLine
+                : indentationChars + formattedLine;
 
             // If not last line, add newline
             if (lineIndex !== document.lineCount - 1) {
@@ -194,7 +193,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             // Check open braces
-            if (purifiedLine.match(/{/) != null) {
+            if (purifiedLine.includes('{')) {
                 let temp = purifiedLine.match(/{/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
                 if (t2) {
@@ -223,7 +222,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     if (
                         (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
                             purifiedLine,
-                        )) != null &&
+                        )) &&
                         !temp[1].includes('/')
                     ) {
                         oneCommandCode = true;
