@@ -55,7 +55,7 @@ export class FileManager {
             const recordPath = `${this.storagePath}/${fileName}`;
             this.check(this.storagePath);
             this.check(path.resolve(recordPath, '..'));
-            if (model == FileModel.WRITE) {
+            if (model === FileModel.write) {
                 fs.writeFileSync(recordPath, `${content}`, {
                     encoding: 'utf8',
                 });
@@ -70,6 +70,6 @@ export class FileManager {
 }
 
 export enum FileModel {
-    WRITE,
-    APPEND,
+    write,
+    append,
 }
