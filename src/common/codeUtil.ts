@@ -196,7 +196,7 @@ export class CodeUtil {
         // Watch below three variables (set breakpoint on function exit)
         // original : purified : result
         let purified = original;
-        // Command may have many text fields; they may have braces, words identical to commands, comment character, etc...
+        // Command may have many text fields, they may have braces, words identical to commands, comment character, etc...
         // Remove all characters after command keyword by detecting first word in string that not followed by open brace '('
         // This will purify command but not function with same name
         //  IN: ControlSend, Control, Keys, WinTitle, WinText, ExcludeTitle, ExcludeText
@@ -223,7 +223,7 @@ export class CodeUtil {
             .replace(/".*?"/g, '""') // replace string literals with empty string literal
             .replace(/{.*}/g, '') // remove matching braces
             .replace(/\s+/g, ' ') // collaps all spaces and tabs to single space
-            .replace(/;.+/, '') // remove comments; must be last, semicolon may be inside string (expression) or 'MsgBox, { ; comment with close brace }'
+            .replace(/;.+/, '') // remove comments; must be last, semicolon may be inside string (expression)
             .trim();
         return result;
     }
