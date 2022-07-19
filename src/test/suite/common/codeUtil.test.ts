@@ -3,66 +3,24 @@ import { CodeUtil } from '../../../common/codeUtil';
 
 suite('Code utils', () => {
     suite('purify', () => {
-        test('foo("; not comment") => foo("")', () => {
-            assert.strictEqual(
-                CodeUtil.purify('foo("; not comment")'),
-                'foo("")',
-            );
+        // List of test data
+        let dataList = [
+            // ['input test string', 'expected result']
+            ['foo("; not comment")', 'foo("")'],
+            ['MsgBox, { ; comment with close brace }', 'MsgBox'],
+            ['MsgBox % "; not comment"', 'MsgBox'],
+            ['str = "`; not comment"', 'str = ""'],
+            ['str = "; comment with double quote"', 'str = ""'],
+            ['str = "; comment', 'str = "'],
+            ['Gui, %id%: Color, % color', 'Gui'],
+            ['Send(Gui)', 'Send(Gui)'],
+            ['Send(foo)', 'Send(foo)'],
+            ['foo(Gui)', 'foo(Gui)'],
+        ];
+        dataList.forEach((data) => {
+            test(data[0] + ' => ' + data[1], () => {
+                assert.strictEqual(CodeUtil.purify(data[0]), data[1]);
+            });
         });
-
-        test('MsgBox, { ; comment with close brace } => MsgBox', () => {
-            assert.strictEqual(
-                CodeUtil.purify('MsgBox, { ; comment with close brace }'),
-                'MsgBox',
-            );
-        });
-
-        test('MsgBox % "; not comment" => MsgBox', () => {
-            assert.strictEqual(
-                CodeUtil.purify('MsgBox % "; not comment"'),
-                'MsgBox',
-            );
-        });
-
-        test('str = "`; not comment" => str = ""', () => {
-            assert.strictEqual(
-                CodeUtil.purify('str = "`; not comment"'),
-                'str = ""',
-            );
-        });
-
-        test('str = "; comment with double quote" => str = ""', () => {
-            assert.strictEqual(
-                CodeUtil.purify('str = "; comment with double quote"'),
-                'str = ""',
-            );
-        });
-
-        test('str = "; comment => str = "', () => {
-            assert.strictEqual(CodeUtil.purify('str = "; comment'), 'str = "');
-        });
-
-        test('Gui, %id%: Color, % color => Gui', () => {
-            assert.strictEqual(
-                CodeUtil.purify('Gui, %id%: Color, % color'),
-                'Gui',
-            );
-        });
-
-        test('Send(Gui) => Send(Gui)', () => {
-            assert.strictEqual(CodeUtil.purify('Send(Gui)'), 'Send(Gui)');
-        });
-
-        test('Send(foo) => Send(foo)', () => {
-            assert.strictEqual(CodeUtil.purify('Send(foo)'), 'Send(foo)');
-        });
-
-        test('foo(Gui) => foo(Gui)', () => {
-            assert.strictEqual(CodeUtil.purify('foo(Gui)'), 'foo(Gui)');
-        });
-
-        // test(' => ', () => {
-        //     assert.strictEqual(CodeUtil.purify(''), '');
-        // });
     });
 });
