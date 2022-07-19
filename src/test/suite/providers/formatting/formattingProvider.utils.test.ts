@@ -10,32 +10,32 @@ suite('FormattingProvider utils', () => {
         let dataList = [
             // {
             //     in: , // input test string
-            //     out: , // expected result
+            //     rs: , // expected result
             // },
             {
                 in: ')',
-                out: true,
+                rs: true,
             },
             {
                 in: '()',
-                out: false,
+                rs: false,
             },
             {
                 in: '())',
-                out: true,
+                rs: true,
             },
             {
                 in: '(::',
-                out: false,
+                rs: false,
             },
             {
                 in: '',
-                out: false,
+                rs: false,
             },
         ];
         dataList.forEach((data) => {
-            test("'" + data.in + "'" + ' => ' + data.out.toString(), () => {
-                assert.strictEqual(hasMoreCloseParens(data.in), data.out);
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(hasMoreCloseParens(data.in), data.rs);
             });
         });
     });
@@ -45,32 +45,32 @@ suite('FormattingProvider utils', () => {
         let dataList = [
             // {
             //     in: , // input test string
-            //     out: , // expected result
+            //     rs: , // expected result
             // },
             {
                 in: '(',
-                out: true,
+                rs: true,
             },
             {
                 in: '()',
-                out: false,
+                rs: false,
             },
             {
                 in: '(()',
-                out: true,
+                rs: true,
             },
             {
                 in: '(::',
-                out: true,
+                rs: true,
             },
             {
                 in: '',
-                out: false,
+                rs: false,
             },
         ];
         dataList.forEach((data) => {
-            test("'" + data.in + "'" + ' => ' + data.out.toString(), () => {
-                assert.strictEqual(hasMoreOpenParens(data.in), data.out);
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(hasMoreOpenParens(data.in), data.rs);
             });
         });
     });
