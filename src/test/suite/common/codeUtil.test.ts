@@ -5,21 +5,54 @@ suite('Code utils', () => {
     suite('purify', () => {
         // List of test data
         let dataList = [
-            // ['input test string', 'expected result']
-            ['foo("; not comment")', 'foo("")'],
-            ['MsgBox, { ; comment with close brace }', 'MsgBox'],
-            ['MsgBox % "; not comment"', 'MsgBox'],
-            ['str = "`; not comment"', 'str = ""'],
-            ['str = "; comment with double quote"', 'str = ""'],
-            ['str = "; comment', 'str = "'],
-            ['Gui, %id%: Color, % color', 'Gui'],
-            ['Send(Gui)', 'Send(Gui)'],
-            ['Send(foo)', 'Send(foo)'],
-            ['foo(Gui)', 'foo(Gui)'],
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            // },
+            {
+                in: 'foo("; not comment")',
+                rs: 'foo("")',
+            },
+            {
+                in: 'MsgBox, { ; comment with close brace }',
+                rs: 'MsgBox',
+            },
+            {
+                in: 'MsgBox % "; not comment"',
+                rs: 'MsgBox',
+            },
+            {
+                in: 'str = "`; not comment"',
+                rs: 'str = ""',
+            },
+            {
+                in: 'str = "; comment with double quote"',
+                rs: 'str = ""',
+            },
+            {
+                in: 'str = "; comment',
+                rs: 'str = "',
+            },
+            {
+                in: 'Gui, %id%: Color, % color',
+                rs: 'Gui',
+            },
+            {
+                in: 'Send(Gui)',
+                rs: 'Send(Gui)',
+            },
+            {
+                in: 'Send(foo)',
+                rs: 'Send(foo)',
+            },
+            {
+                in: 'foo(Gui)',
+                rs: 'foo(Gui)',
+            },
         ];
         dataList.forEach((data) => {
-            test(data[0] + ' => ' + data[1], () => {
-                assert.strictEqual(CodeUtil.purify(data[0]), data[1]);
+            test(data.in + ' => ' + data.rs, () => {
+                assert.strictEqual(CodeUtil.purify(data.in), data.rs);
             });
         });
     });
