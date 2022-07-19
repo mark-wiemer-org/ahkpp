@@ -193,10 +193,10 @@ export class CodeUtil {
             'winwaitclose',
             'winwaitnotactive',
         ];
-        // Create new variable for better visibility in debugger
+        // Create new variables for better visibility in debugger
         // Watch below three variables (set breakpoint on function exit)
-        // original : purified : result
-        let purified = original;
+        // original : cmdTrim : pure
+        let cmdTrim = original;
         // Command may have many text fields, they may have braces, words identical to commands, comment character, etc...
         // Remove all characters after command keyword by detecting first word in string that not followed by open brace '('
         // This will purify command but not function with same name
@@ -215,18 +215,18 @@ export class CodeUtil {
                 '.*'; // this will be removed from string
             var re = new RegExp(reStr, 'i');
             if (original.search(re) !== -1) {
-                purified = original.replace(re, '$1');
+                cmdTrim = original.replace(re, '$1');
                 break;
             }
         }
-
-        let result = purified
+        //
+        let pure = cmdTrim
             .replace(/".*?"/g, '""') // replace string literals with empty string literal
             .replace(/{.*}/g, '') // remove matching braces
             .replace(/\s+/g, ' ') // collaps all spaces and tabs to single space
             .replace(/;.+/, '') // remove comments; must be last, semicolon may be inside string (expression)
             .trim();
-        return result;
+        return pure;
     }
 
     /**
