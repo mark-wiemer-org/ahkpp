@@ -277,7 +277,7 @@
     ],
     "lint-staged": {
         "*": "prettier --check",
-        "src/**": [
+        "src/**/*.ts": [
             "npm run eslint_inner",
             "npm run tsc"
         ],
