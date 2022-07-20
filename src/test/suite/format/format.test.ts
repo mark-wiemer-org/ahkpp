@@ -20,6 +20,7 @@ const defaultOptions: vscode.FormattingOptions = {
 const formatTests: FormatTest[] = [
     { filenameRoot: '25-multiline-string' },
     { filenameRoot: '40-command-inside-text' },
+    { filenameRoot: '56-return-command-after-label' },
     { filenameRoot: '58-parentheses-indentation' },
     { filenameRoot: '72-paren-hotkey' },
     { filenameRoot: '119-semicolon-inside-string' },
