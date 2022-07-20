@@ -6,46 +6,72 @@ import {
 
 suite('FormattingProvider utils', () => {
     suite('hasMoreCloseParens', () => {
-        test("(')') => true", () => {
-            assert.strictEqual(hasMoreCloseParens(')'), true);
-        });
-
-        test("('()') => false", () => {
-            assert.strictEqual(hasMoreCloseParens('()'), false);
-        });
-
-        test("('())') => true", () => {
-            assert.strictEqual(hasMoreCloseParens('())'), true);
-        });
-
-        test("('(::') => false", () => {
-            assert.strictEqual(hasMoreCloseParens('(::'), false);
-        });
-
-        test("('') => false", () => {
-            assert.strictEqual(hasMoreCloseParens(''), false);
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            // },
+            {
+                in: ')',
+                rs: true,
+            },
+            {
+                in: '()',
+                rs: false,
+            },
+            {
+                in: '())',
+                rs: true,
+            },
+            {
+                in: '(::',
+                rs: false,
+            },
+            {
+                in: '',
+                rs: false,
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(hasMoreCloseParens(data.in), data.rs);
+            });
         });
     });
 
     suite('hasMoreOpenParens', () => {
-        test("('(') => true", () => {
-            assert.strictEqual(hasMoreOpenParens('('), true);
-        });
-
-        test("('()') => false", () => {
-            assert.strictEqual(hasMoreOpenParens('()'), false);
-        });
-
-        test("('(()') => true", () => {
-            assert.strictEqual(hasMoreOpenParens('(()'), true);
-        });
-
-        test("('(::') => true", () => {
-            assert.strictEqual(hasMoreOpenParens('(::'), true);
-        });
-
-        test("('') => false", () => {
-            assert.strictEqual(hasMoreOpenParens(''), false);
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            // },
+            {
+                in: '(',
+                rs: true,
+            },
+            {
+                in: '()',
+                rs: false,
+            },
+            {
+                in: '(()',
+                rs: true,
+            },
+            {
+                in: '(::',
+                rs: true,
+            },
+            {
+                in: '',
+                rs: false,
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(hasMoreOpenParens(data.in), data.rs);
+            });
         });
     });
 });

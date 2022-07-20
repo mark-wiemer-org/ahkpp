@@ -129,7 +129,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             // Check close braces
-            if (!!purifiedLine.match(/}/)) {
+            if (purifiedLine.includes('}')) {
                 let temp = purifiedLine.match(/}/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
                 if (t2) {
@@ -146,7 +146,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             // One command code and open braces
-            if (!!oneCommandCode && !!purifiedLine.match(/{/)) {
+            if (oneCommandCode && purifiedLine.includes('{')) {
                 let temp = purifiedLine.match(/{/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
                 if (t2) {
@@ -193,7 +193,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             // Check open braces
-            if (!!purifiedLine.match(/{/)) {
+            if (purifiedLine.includes('{')) {
                 let temp = purifiedLine.match(/{/).length;
                 const t2 = purifiedLine.match(/{[^{}]*}/);
                 if (t2) {
@@ -223,9 +223,11 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 for (const oneCommand of FormatProvider.oneCommandList) {
                     let temp: RegExpExecArray;
                     if (
-                        !!(temp = new RegExp(
-                            '\\b' + oneCommand + '\\b(.*)',
-                        ).exec(purifiedLine)) &&
+                        // if the regex matches the purified line
+                        (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
+                            purifiedLine,
+                        )) &&
+                        // and the captured group includes a slash
                         !temp[1].includes('/')
                     ) {
                         oneCommandCode = true;

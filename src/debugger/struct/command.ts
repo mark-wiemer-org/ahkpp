@@ -1,7 +1,7 @@
 export enum Continue {
     break = 'break',
     run = 'run',
-    stepOver = 'stepOver',
-    stepOut = 'stepOut',
-    stepInto = 'stepInto',
+    stepOver = 'step_over',
+    stepOut = 'step_out',
+    stepInto = 'step_into',
 }

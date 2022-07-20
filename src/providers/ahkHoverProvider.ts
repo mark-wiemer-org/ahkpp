@@ -36,7 +36,7 @@ export class AhkHoverProvider implements HoverProvider {
         token: CancellationToken,
     ) {
         const context = this.buildContext(document, position);
-        if (context === undefined) {
+        if (!context) {
             return null;
         }
 
@@ -116,7 +116,6 @@ export class AhkHoverProvider implements HoverProvider {
             ),
         );
         this.snippetCache = new Map<string, Snippet>();
-        // tslint:disable-next-line: forin
         for (const key in ahk) {
             const snip = ahk[key] as Snippet;
             if (typeof snip.body === 'string') {
