@@ -18,15 +18,9 @@ const defaultOptions: vscode.FormattingOptions = {
     insertSpaces: true,
 };
 const formatTests: FormatTest[] = [
-    {
-        filenameRoot: '25-multiline-string',
-    },
-    {
-        filenameRoot: '58-parentheses-indentation',
-    },
-    {
-        filenameRoot: '72-paren-hotkey',
-    },
+    { filenameRoot: '25-multiline-string' },
+    { filenameRoot: '58-parentheses-indentation' },
+    { filenameRoot: '72-paren-hotkey' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'demo' },
     {

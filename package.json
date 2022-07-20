@@ -24,7 +24,8 @@
     "publisher": "mark-wiemer",
     "main": "./out/extension",
     "scripts": {
-        "compile": "npm run compile_ts && npm run compile_grammar",
+        "clean": "rm -rf out",
+        "compile": "npm run clean && npm run compile_ts && npm run compile_grammar",
         "compile_grammar": "js-yaml syntaxes/ahk.tmLanguage.yaml > syntaxes/ahk.tmLanguage.json",
         "compile_ts": "tsc -p ./",
         "eslint": "npm run eslint_inner -- src && echo ✅ No ESLint problems",
