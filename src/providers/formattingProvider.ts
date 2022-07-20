@@ -213,7 +213,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (
                 !moreOpenParens &&
                 // Label name may consist of any characters other than space,
-                // tab, comma and the escape character(`)
+                // tab, comma and the escape character (`)
                 purifiedLine.match(/^(?:\s*[^\s\t,`]+):\s*$/)
             ) {
                 depth++;
