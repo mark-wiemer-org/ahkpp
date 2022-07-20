@@ -21,6 +21,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '25-multiline-string' },
     { filenameRoot: '58-parentheses-indentation' },
     { filenameRoot: '72-paren-hotkey' },
+    { filenameRoot: '161-colon-on-last-position' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'demo' },
     {
