@@ -136,9 +136,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     temp = temp - t2.length;
                 }
                 depth -= temp;
-                if (temp > 0) {
-                    atTopLevel = false;
-                }
             }
 
             if (moreCloseParens) {
