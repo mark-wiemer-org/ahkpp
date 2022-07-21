@@ -19,6 +19,7 @@ const defaultOptions: vscode.FormattingOptions = {
 };
 const formatTests: FormatTest[] = [
     { filenameRoot: '25-multiline-string' },
+    { filenameRoot: '40-one-command-code' },
     { filenameRoot: '58-parentheses-indentation' },
     { filenameRoot: '72-paren-hotkey' },
     { filenameRoot: '180-if-else-braces' },
