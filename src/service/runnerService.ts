@@ -23,7 +23,7 @@ export class RunnerService {
             ? vscode.Uri.file(script)
             : vscode.window.activeTextEditor.document.uri;
         script = script ? script : await this.getPathByActive();
-        const debugPlusExists = !!vscode.extensions.getExtension(
+        const debugPlusExists = vscode.extensions.getExtension(
             'zero-plusplus.vscode-autohotkey-debug',
         );
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {

@@ -69,7 +69,7 @@ export class Method {
             if (paramsMatch) {
                 this.params = paramsMatch[1]
                     .split(',')
-                    .filter((param) => param.trim() !== '')
+                    .filter((param) => param.trim())
                     .map((param) => {
                         const paramMatch = param.match(/[^:=* \t]+/);
                         return paramMatch?.[0] ?? param;

@@ -44,7 +44,7 @@ export class Parser {
         document: vscode.TextDocument,
         usingCache = false,
     ): Promise<Script> {
-        if (usingCache && !!this.documentCache.get(document.uri.path)) {
+        if (usingCache && this.documentCache.get(document.uri.path)) {
             return this.documentCache.get(document.uri.path);
         }
 
@@ -98,12 +98,12 @@ export class Parser {
             if (block) {
                 blocks.push(block);
             }
-            if (lineText.indexOf('{') !== -1) {
+            if (lineText.includes('{')) {
                 deep++;
             }
-            if (lineText.indexOf('}') !== -1) {
+            if (lineText.includes('}')) {
                 deep--;
-                if (!!currentMethod) {
+                if (currentMethod) {
                     currentMethod.endLine = line;
                 }
             }
