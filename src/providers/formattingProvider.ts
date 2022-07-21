@@ -71,7 +71,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             const formattedLine = originalLine
                 .replace(/^\s*/, '')
                 .replace(/;.+/, '')
-                .replace(/\s{2,}/g, ' ')
+                .replace(/ {2,}/g, ' ')
                 .concat(comment);
             const emptyLine = purifiedLine === '';
 
