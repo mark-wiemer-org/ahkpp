@@ -2176,11 +2176,11 @@ compareTwoStrings(para_string1,para_string2)
     oArray := {base:{__Get:Func("Abs").Bind(0)}} ;make default key value 0 instead of a blank string
     Loop, % vCount1 := StrLen(para_string1)
         ; Loop, % vCount1 := StrLen(para_string1) - 1
-    oArray["z" SubStr(para_string1, A_Index, 1)]++
+        oArray["z" SubStr(para_string1, A_Index, 1)]++
     ; oArray["z" SubStr(para_string1, A_Index, 2)]++
     Loop, % vCount2 := StrLen(para_string2)
         ; Loop, % vCount2 := StrLen(para_string2) - 1
-    ; p(oArray)
+        ; p(oArray)
     if (oArray["z" SubStr(para_string2, A_Index, 1)] > 0) {
         ; if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
         oArray["z" SubStr(para_string2, A_Index, 1)]--
@@ -2815,21 +2815,21 @@ renderCurrentDir()
         ; Formatter ignores block comments for now, nbd
         /*
         typedef struct _CMINVOKECOMMANDINFOEX {
-            DWORD   cbSize;          0
-            DWORD   fMask;           4
-            HWND    hwnd;            8
-            LPCSTR  lpVerb;          8+A_PtrSize
-            LPCSTR  lpParameters;    8+2*A_PtrSize
-            LPCSTR  lpDirectory;     8+3*A_PtrSize
-            int     nShow;           8+4*A_PtrSize
-            DWORD   dwHotKey;        12+4*A_PtrSize
-            HANDLE  hIcon;           16+4*A_PtrSize
-            LPCSTR  lpTitle;         16+5*A_PtrSize
+            DWORD cbSize;          0
+            DWORD fMask;           4
+            HWND hwnd;            8
+            LPCSTR lpVerb;          8+A_PtrSize
+            LPCSTR lpParameters;    8+2*A_PtrSize
+            LPCSTR lpDirectory;     8+3*A_PtrSize
+            int nShow;           8+4*A_PtrSize
+            DWORD dwHotKey;        12+4*A_PtrSize
+            HANDLE hIcon;           16+4*A_PtrSize
+            LPCSTR lpTitle;         16+5*A_PtrSize
             LPCWSTR lpVerbW;         16+6*A_PtrSize
             LPCWSTR lpParametersW;   16+7*A_PtrSize
             LPCWSTR lpDirectoryW;    16+8*A_PtrSize
             LPCWSTR lpTitleW;        16+9*A_PtrSize
-            POINT   ptInvoke;        16+10*A_PtrSize
+            POINT ptInvoke;        16+10*A_PtrSize
         } CMINVOKECOMMANDINFOEX, *LPCMINVOKECOMMANDINFOEX;
         http://msdn.microsoft.com/en-us/library/bb773217%28v=VS.85%29.aspx
         */
@@ -3493,25 +3493,25 @@ return
 #if winactive("renamingWinTitle ahk_class AutoHotkeyGUI")
 
 $esc::
-    if (focused="flistView") {
-        if (canRename) {
-            canRename:=false
-            ; gui, renameSimple:Default
-            ; gui, submit
-            gui, main:Default
-            ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
+if (focused="flistView") {
+    if (canRename) {
+        canRename:=false
+        ; gui, renameSimple:Default
+        ; gui, submit
+        gui, main:Default
+        ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
 
-            gui, renameSimple:Default
-            gui, destroy
-        }
-        return
+        gui, renameSimple:Default
+        gui, destroy
     }
-    send, {enter}
+    return
+}
+send, {enter}
 return
 
 #if winactive("create_folder ahk_class AutoHotkeyGUI")
 
-$enter::
+    $enter::
     Gosub, createLabel
 
 return
