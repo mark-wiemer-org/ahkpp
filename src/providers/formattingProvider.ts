@@ -222,8 +222,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     if (
                         // if the regex matches the purified line
                         (temp = new RegExp(
-                            // no words before 'one command code'
-                            '^\\s*' + oneCommand + '\\b(.*)',
+                            // before 'one command code' allowed only close brace
+                            // example: '} else' or '} if'
+                            '^}\\s*' + oneCommand + '\\b(.*)',
                         ).exec(purifiedLine)) &&
                         // and the captured group not includes a slash
                         !temp[1].includes('/')
