@@ -3,7 +3,9 @@ import { CodeUtil } from '../common/codeUtil';
 import {
     hasMoreCloseParens,
     hasMoreOpenParens,
+    trimExtraSpaces,
 } from './formattingProvider.utils';
+import { Global, ConfigKey } from '../common/global';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
@@ -58,16 +60,18 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let blockComment = false;
         let atTopLevel = true;
 
+        const trimSpaces = Global.getConfig<boolean>(ConfigKey.trimExtraSpaces);
+
         for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
             const originalLine = document.lineAt(lineIndex).text;
             const purifiedLine = CodeUtil.purify(originalLine.toLowerCase());
             /** The line comment. Empty string if no line comment exists */
             const comment = /;.+/.exec(originalLine)?.[0] ?? '';
-            const formattedLine = originalLine
-                .replace(/^\s*/, '')
-                .replace(/;.+/, '')
-                .replace(/ {2,}/g, ' ')
-                .concat(comment);
+            let formattedLine = originalLine;
+            formattedLine = formattedLine.replace(/;.+/, ''); // Remove single line comment
+            formattedLine = formattedLine.replace(/^\s*/, ''); // Remove leading spaces/tabs
+            formattedLine = trimExtraSpaces(formattedLine, trimSpaces); // Remove extra spaces between words
+            formattedLine = formattedLine.concat(comment); // Add removed single line comment back
 
             atTopLevel = true;
 

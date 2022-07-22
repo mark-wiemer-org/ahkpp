@@ -31,4 +31,5 @@ export enum ConfigKey {
     helpPath = 'helpPath',
     enableIntellisense = 'enableIntellisense',
     executePath = 'executePath',
+    trimExtraSpaces = 'trimExtraSpaces',
 }

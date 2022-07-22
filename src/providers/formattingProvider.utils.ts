@@ -17,3 +17,13 @@ export function hasMoreOpenParens(line: string): boolean {
     const closeCount = line.match(/\)/g)?.length ?? 0;
     return openCount > closeCount;
 }
+
+/** @return string with trimmed extra spaces between words*/
+export function trimExtraSpaces(
+    line: string,
+    trimExtraSpaces: boolean,
+): string {
+    return trimExtraSpaces
+        ? line.replace(/ {2,}/g, ' ') // Remove extra spaces between words
+        : line;
+}

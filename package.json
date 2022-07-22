@@ -111,6 +111,11 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Show the Debug button in the editor title menu"
+                },
+                "ahk++.trimExtraSpaces": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Formatter: Trim extra spaces between words"
                 }
             }
         },
