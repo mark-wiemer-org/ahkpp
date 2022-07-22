@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
 import {
+    buildIndentedLine,
     hasMoreCloseParens,
     hasMoreOpenParens,
 } from './formattingProvider.utils';
@@ -186,7 +187,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
 
             // Save indented line
-            formattedDocument += FormatProvider.buildIndentedLine(
+            formattedDocument += buildIndentedLine(
                 lineIndex,
                 document.lineCount,
                 formattedLine,
@@ -267,63 +268,5 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 formattedDocument.replace(/\n{2,}/g, '\n\n'),
             ),
         ];
-    }
-
-    /**
-     * Build indentation chars
-     * @param depth Depth of indent
-     * @param options VS Code formatting options
-     */
-    static buildIndentationChars(
-        depth: number,
-        options: vscode.FormattingOptions,
-    ): string {
-        return options.insertSpaces
-            ? ' '.repeat(depth * options.tabSize)
-            : '\t'.repeat(depth);
-    }
-
-    /**
-     * Build indented line of code (not ready for saving)
-     * @param indentationChars Indentation chars
-     * @param formattedLine Formatted line of code
-     */
-    static buildIndentedString(
-        indentationChars: string,
-        formattedLine: string,
-    ): string {
-        return !formattedLine?.trim()
-            ? formattedLine
-            : indentationChars + formattedLine;
-    }
-
-    /**
-     * Build indented line of code (ready for saving)
-     * @param lineIndex Line index of passed formattedLine
-     * @param lastLineIndex Index of last line of document
-     * @param formattedLine Formatted line of code
-     * @param depth Depth of indent
-     * @param options VS Code formatting options
-     */
-    static buildIndentedLine(
-        lineIndex: number,
-        lastLineIndex: number,
-        formattedLine: string,
-        depth: number,
-        options: vscode.FormattingOptions,
-    ) {
-        const indentationChars = FormatProvider.buildIndentationChars(
-            depth,
-            options,
-        );
-        let indentedLine = FormatProvider.buildIndentedString(
-            indentationChars,
-            formattedLine,
-        );
-        // If not last line, add newline
-        if (lineIndex !== lastLineIndex - 1) {
-            indentedLine += '\n';
-        }
-        return indentedLine;
     }
 }
