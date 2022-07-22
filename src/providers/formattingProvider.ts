@@ -1,11 +1,11 @@
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
+import { ConfigKey, Global } from '../common/global';
 import {
     hasMoreCloseParens,
     hasMoreOpenParens,
     trimExtraSpaces,
 } from './formattingProvider.utils';
-import { Global, ConfigKey } from '../common/global';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
