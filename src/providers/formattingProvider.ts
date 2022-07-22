@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
+import { ConfigKey, Global } from '../common/global';
 import {
     hasMoreCloseParens,
     hasMoreOpenParens,
@@ -57,6 +58,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let oneCommandCode = false;
         let blockComment = false;
         let atTopLevel = true;
+
+        const preserveIndentOnEmptyString = Global.getConfig<boolean>(
+            ConfigKey.preserveIndent,
+        );
 
         for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
             const originalLine = document.lineAt(lineIndex).text;
@@ -166,9 +171,11 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             const indentationChars = options.insertSpaces
                 ? ' '.repeat(depth * options.tabSize)
                 : '\t'.repeat(depth);
-            formattedDocument += !formattedLine?.trim()
-                ? formattedLine
-                : indentationChars + formattedLine;
+            let indentedLine = indentationChars + formattedLine;
+            if (!preserveIndentOnEmptyString) {
+                indentedLine = indentedLine.trim();
+            }
+            formattedDocument += indentedLine;
 
             // If not last line, add newline
             if (lineIndex !== document.lineCount - 1) {
