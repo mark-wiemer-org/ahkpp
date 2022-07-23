@@ -31,10 +31,14 @@ export class RunnerService {
                 endLinePosition.character,
             ),
         );
-        const text = document.getText(range);
         editor
             .edit((editBuilder) => {
-                editBuilder.replace(range, CodeUtil.alignText(text));
+                const fullSelection = new vscode.Selection(
+                    range.start,
+                    range.end,
+                );
+                const text = CodeUtil.alignText(fullSelection);
+                editBuilder.replace(range, text);
             })
             // The edit call returns a promise. When that resolves you can set
             // the selection otherwise you interfere with the edit itself.
