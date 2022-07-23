@@ -57,7 +57,7 @@
         "commands": [
             {
                 "command": "ahk++.alignSelection",
-                "title": "Align Variables Assignment",
+                "title": "Align Selected Variables Assignment",
                 "category": "AHK++"
             },
             {
