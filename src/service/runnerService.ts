@@ -37,7 +37,7 @@ export class RunnerService {
                     range.start,
                     range.end,
                 );
-                const text = CodeUtil.alignText(fullSelection);
+                const text = CodeUtil.alignTextAssignOperator(fullSelection);
                 editBuilder.replace(range, text);
             })
             // The edit call returns a promise. When that resolves you can set

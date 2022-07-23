@@ -55,7 +55,7 @@ export class CodeUtil {
     /** Align variable assignment by := operator in selected text
      * @param selection Text selection in editor
      */
-    public static alignText(selection: Selection): string {
+    public static alignTextAssignOperator(selection: Selection): string {
         const document = vscode.window.activeTextEditor.document;
         let maxPosition = 0; // Right-most := operator position in line from all assignments
         for (
@@ -63,7 +63,7 @@ export class CodeUtil {
             lineIndex <= selection.end.line;
             lineIndex++
         ) {
-            const line = this.prepareLineAssignmentOperator(
+            const line = this.prepareLineAssignOperator(
                 document.lineAt(lineIndex).text,
             );
 
@@ -81,7 +81,7 @@ export class CodeUtil {
             lineIndex++
         ) {
             let line = document.lineAt(lineIndex).text;
-            text += this.alignLine(line, maxPosition);
+            text += this.alignLineAssignOperator(line, maxPosition);
             if (lineIndex !== selection.end.line) {
                 text += '\n';
             }
@@ -94,7 +94,7 @@ export class CodeUtil {
      * add spaces around := operator if they missing.
      * @param original Original line of code
      */
-    public static prepareLineAssignmentOperator(original: string): string {
+    public static prepareLineAssignOperator(original: string): string {
         return (
             original // Clean up text with regex
                 // Remove single line comment
@@ -111,10 +111,13 @@ export class CodeUtil {
      * @param original Original line of code
      * @param targetPosition Target position of := operator
      */
-    public static alignLine(original: string, targetPosition: number) {
+    public static alignLineAssignOperator(
+        original: string,
+        targetPosition: number,
+    ) {
         // The line comment. Empty string if no line comment exists
         const comment = /;.+/.exec(original)?.[0] ?? ''; // Save comment
-        original = this.prepareLineAssignmentOperator(original);
+        original = this.prepareLineAssignOperator(original);
         let position = original.search(':='); // := operator position
         return original
             .replace(/\s(?=:=)/, ' '.repeat(targetPosition - position + 1)) // Align assignment
