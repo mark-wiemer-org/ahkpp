@@ -48,4 +48,8 @@ export class CodeUtil {
 
         return regs;
     }
+
+    public static alignText(text: string): string {
+        return text;
+    }
 }

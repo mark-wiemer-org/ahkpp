@@ -56,6 +56,11 @@
         ],
         "commands": [
             {
+                "command": "ahk++.alignSelection",
+                "title": "Align Variables Assignment",
+                "category": "AHK++"
+            },
+            {
                 "command": "ahk++.compile",
                 "title": "Compile AHK Script",
                 "category": "AHK++",
@@ -198,6 +203,11 @@
         ],
         "keybindings": [
             {
+                "command": "ahk++.alignSelection",
+                "key": "shift+win+f",
+                "when": "editorLangId == ahk"
+            },
+            {
                 "command": "ahk++.compile",
                 "key": "ctrl+shift+f9",
                 "when": "editorLangId == ahk"
@@ -240,6 +250,11 @@
         ],
         "menus": {
             "editor/context": [
+                {
+                    "command": "ahk++.alignSelection",
+                    "when": "editorLangId == ahk && editorHasSelection",
+                    "group": "1_modification"
+                },
                 {
                     "command": "ahk++.compile",
                     "when": "editorLangId == ahk",

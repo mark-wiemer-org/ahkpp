@@ -1,10 +1,57 @@
 import { resolve as res } from 'path';
 import * as vscode from 'vscode';
+import { CodeUtil } from '../common/codeUtil';
 import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
 import { Process } from '../common/processWrapper';
 
 export class RunnerService {
+    /** Align assignments and comments in selection. */
+    public static async alignSelection(): Promise<void> {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showErrorMessage('No active editor found!');
+            return;
+        }
+
+        const document = editor.document;
+        const selection = editor.selection;
+        // User can select part of first and/or last line of text. For example:
+        //      this text not selected [this text selected on first line
+        //      this text selected on second line] this text is not selected
+        // 'selection.end' is position of last character in selection,
+        // not last character of second line! Same problem with start position of 'selection.start'.
+        // Get position of last character in second line.
+        const endLinePosition = document.lineAt(selection.end.line).range.end;
+        const range = document.validateRange(
+            new vscode.Range(
+                selection.start.line,
+                0,
+                selection.end.line,
+                endLinePosition.character,
+            ),
+        );
+        const text = document.getText(range);
+        editor
+            .edit((editBuilder) => {
+                editBuilder.replace(range, CodeUtil.alignText(text));
+            })
+            // The edit call returns a promise. When that resolves you can set
+            // the selection otherwise you interfere with the edit itself.
+            // So use "then" to sure edit call is done;
+            .then((success) => {
+                // Out.log('success: ' + success);
+                // Deselect selection after replace and set cursor to end of last line.
+                // Change the selection: start and end position of the new
+                // selection is same, so it is not to select replaced text.
+                editor.selection = new vscode.Selection(
+                    endLinePosition,
+                    endLinePosition,
+                );
+                // P.S. You can move cursor to absolute position in editor by setting selection like above!
+            });
+    }
+
     /** Runs the editor selection as a standalone script. */
     public static async runSelection(): Promise<void> {
         const editor = vscode.window.activeTextEditor;
