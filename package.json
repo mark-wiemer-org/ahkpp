@@ -111,6 +111,11 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Show the Debug button in the editor title menu"
+                },
+                "ahk++.formatter.allowedNumberOfEmptyLines": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "Allowed number of empty lines."
                 }
             }
         },

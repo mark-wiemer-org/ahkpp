@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
+import { ConfigKey, Global } from '../common/global';
 import {
     hasMoreCloseParens,
     hasMoreOpenParens,
@@ -235,10 +236,23 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
         }
 
+        const allowedNumberOfEmptyLines = Global.getConfig<number>(
+            ConfigKey.allowedNumberOfEmptyLines,
+        );
+        const newLineCharacterNumber =
+            allowedNumberOfEmptyLines > 1 ? allowedNumberOfEmptyLines + 1 : 2; // + 1 new line character from previous string with text
+        const newLineCharacter = new RegExp(
+            `\\n{${newLineCharacterNumber},}`,
+            'g',
+        );
+
         return [
             new vscode.TextEdit(
                 fullDocumentRange(document),
-                formattedDocument.replace(/\n{2,}/g, '\n\n'),
+                formattedDocument.replace(
+                    newLineCharacter,
+                    '\n'.repeat(newLineCharacterNumber),
+                ),
             ),
         ];
     }
