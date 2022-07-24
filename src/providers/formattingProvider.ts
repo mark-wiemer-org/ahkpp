@@ -249,10 +249,14 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         return [
             new vscode.TextEdit(
                 fullDocumentRange(document),
-                formattedDocument.replace(
-                    newLineCharacter,
-                    '\n'.repeat(newLineCharacterNumber),
-                ),
+                formattedDocument
+                    // remove extra empty lines
+                    .replace(
+                        newLineCharacter,
+                        '\n'.repeat(newLineCharacterNumber),
+                    )
+                    // remove empty lines in start of file
+                    .replace(/^\n*/, ''),
             ),
         ];
     }
