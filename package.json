@@ -102,6 +102,11 @@
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
                     "description": "Path to the AHK runner."
                 },
+                "ahk++.formatter.preserveIndent": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Preserve indentation on empty line"
+                },
                 "ahk++.helpPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
@@ -111,11 +116,6 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Show the Debug button in the editor title menu"
-                },
-                "ahk++.preserveIndent": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Formatter: Preserve indentation on empty line"
                 }
             }
         },
