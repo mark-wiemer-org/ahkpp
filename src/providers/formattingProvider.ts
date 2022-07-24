@@ -73,6 +73,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 .replace(/;.+/, '')
                 .replace(/ {2,}/g, ' ')
                 .concat(comment);
+            const emptyLine = purifiedLine === '';
 
             atTopLevel = true;
 
@@ -172,7 +173,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 ? ' '.repeat(depth * options.tabSize)
                 : '\t'.repeat(depth);
             let indentedLine = indentationChars + formattedLine;
-            if (!preserveIndentOnEmptyString) {
+            if (emptyLine && !preserveIndentOnEmptyString) {
                 indentedLine = indentedLine.trim();
             }
             formattedDocument += indentedLine;

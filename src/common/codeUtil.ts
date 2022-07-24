@@ -13,7 +13,8 @@ export class CodeUtil {
             .replace(/{.*}/g, '') // remove matching braces
             .replace(/ +/g, ' ')
             .replace(/\bgui\b.*/gi, '')
-            .replace(/\b(msgbox)\b.+?%/gi, '$1');
+            .replace(/\b(msgbox)\b.+?%/gi, '$1')
+            .trim();
     }
 
     /**
