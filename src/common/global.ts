@@ -28,7 +28,7 @@ export class Global {
 
 export enum ConfigKey {
     compilePath = 'file.compilePath',
-    helpPath = 'file.helpPath',
     enableIntellisense = 'language.enableIntellisense',
     executePath = 'file.executePath',
+    helpPath = 'file.helpPath',
 }

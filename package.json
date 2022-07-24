@@ -92,11 +92,6 @@
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "Path to the AHK compiler."
                 },
-                "ahk++.language.enableIntellisense": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
-                },
                 "ahk++.file.executePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
@@ -106,6 +101,11 @@
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
                     "description": "Path to the AHK Help document."
+                },
+                "ahk++.language.enableIntellisense": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
                 },
                 "ahk++.ui.showDebugButton": {
                     "type": "boolean",
