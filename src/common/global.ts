@@ -31,5 +31,5 @@ export enum ConfigKey {
     helpPath = 'helpPath',
     enableIntellisense = 'enableIntellisense',
     executePath = 'executePath',
-    allowedNumberOfEmptyLines = 'allowedNumberOfEmptyLines',
+    allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
 }
