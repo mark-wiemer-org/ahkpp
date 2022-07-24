@@ -105,7 +105,7 @@
                 "ahk++.formatter.preserveIndent": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Preserve indentation on empty line"
+                    "description": "Preserve indentation on empty line."
                 },
                 "ahk++.helpPath": {
                     "type": "string",
