@@ -103,8 +103,9 @@
                     "description": "Path to the AHK runner."
                 },
                 "ahk++.formatter.allowedNumberOfEmptyLines": {
-                    "type": "number",
+                    "type": "integer",
                     "default": 1,
+                    "minimum": 1,
                     "description": "Allowed number of empty lines."
                 },
                 "ahk++.helpPath": {
