@@ -105,7 +105,7 @@
                 "ahk++.formatter.trimExtraSpaces": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Trim extra spaces between words"
+                    "description": "Trim extra spaces between words."
                 },
                 "ahk++.helpPath": {
                     "type": "string",
