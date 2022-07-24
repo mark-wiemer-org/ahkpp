@@ -52,12 +52,12 @@ export class CodeUtil {
         return regs;
     }
 
-    /** Align variable assignment by := operator in selected text
+    /** Align variable assignment by = operator in selected text
      * @param selection Text selection in editor
      */
     public static alignTextAssignOperator(selection: Selection): string {
         const document = vscode.window.activeTextEditor.document;
-        let maxPosition = 0; // Right-most := operator position in line from all assignments
+        let maxPosition = 0; // Right-most = operator position in line from all assignments
         for (
             let lineIndex = selection.start.line;
             lineIndex <= selection.end.line;
@@ -67,8 +67,8 @@ export class CodeUtil {
                 document.lineAt(lineIndex).text,
             );
 
-            // Find right-most := operator position
-            let position = line.search(':='); // := operator position
+            // Find right-most = operator position
+            let position = line.search('='); // = operator position
             if (position > maxPosition) {
                 maxPosition = position;
             }
@@ -90,8 +90,8 @@ export class CodeUtil {
         return text;
     }
 
-    /** Remove comment, extra spaces around := operator and
-     * add spaces around := operator if they missing.
+    /** Remove comment, extra spaces around = operator and
+     * add spaces around = and := operators (if they missing).
      * @param original Original line of code
      */
     public static prepareLineAssignOperator(original: string): string {
@@ -99,17 +99,17 @@ export class CodeUtil {
             original // Clean up text with regex
                 // Remove single line comment
                 .replace(/;.+/, '')
-                // Remove extra spaces before := operator,
-                // add space before:= operator(if it absent)
-                .replace(/\s*(?=:=)/, ' ')
-                // Same process after := operator
-                .replace(/(?<=:=)\s*/, ' ')
+                // Remove extra spaces before = and := operators,
+                // add space before = and := operators (if it absent).
+                .replace(/\s*(?=:?=)/, ' ')
+                // Same process after = operator
+                .replace(/(?<=:?=)\s*/, ' ')
         );
     }
 
-    /** Add spaces before := operator to move it to target position
+    /** Add spaces before = and := operators to move it to target position
      * @param original Original line of code
-     * @param targetPosition Target position of := operator
+     * @param targetPosition Target position of = operator
      */
     public static alignLineAssignOperator(
         original: string,
@@ -118,9 +118,9 @@ export class CodeUtil {
         // The line comment. Empty string if no line comment exists
         const comment = /;.+/.exec(original)?.[0] ?? ''; // Save comment
         original = this.prepareLineAssignOperator(original);
-        let position = original.search(':='); // := operator position
+        let position = original.search('='); // = operator position
         return original
-            .replace(/\s(?=:=)/, ' '.repeat(targetPosition - position + 1)) // Align assignment
+            .replace(/\s(?=:?=)/, ' '.repeat(targetPosition - position + 1)) // Align assignment
             .concat(comment) // Restore comment
             .trimEnd();
     }

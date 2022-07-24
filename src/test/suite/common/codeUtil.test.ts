@@ -10,24 +10,32 @@ suite('Code utils', () => {
             //     rs: , // expected result
             // },
             {
-                in: '    InputFile  :=  "movie.mkv"',
-                rs: '    InputFile := "movie.mkv"',
+                in: '    InputFile  =  movie.mkv  ',
+                rs: '    InputFile = movie.mkv  ',
+            },
+            {
+                in: '    a = 5 ; beautiful operator =',
+                rs: '    a = 5 ',
+            },
+            {
+                in: '    abc=text',
+                rs: '    abc = text',
+            },
+            {
+                in: '    InputFile  :=  "movie.mkv"  ',
+                rs: '    InputFile := "movie.mkv"  ',
             },
             {
                 in: '    a := 5 ; beautiful operator :=',
                 rs: '    a := 5 ',
             },
             {
-                in: '    abc:="abc"',
-                rs: '    abc := "abc"',
+                in: '    abc:="text"',
+                rs: '    abc := "text"',
             },
             {
                 in: '    ; beautiful operator :=',
                 rs: '    ',
-            },
-            {
-                in: '    str = text',
-                rs: '    str = text',
             },
             {
                 in: '    ToolTip, text',
@@ -65,34 +73,44 @@ suite('Code utils', () => {
             //     rs: , // expected result
             // },
             {
+                in: '    InputFile  =  movie.mkv  ',
+                rs: '    InputFile = movie.mkv',
+                tp: 14,
+            },
+            {
+                in: '    a = 5 ; beautiful operator =',
+                rs: '    a         = 5 ; beautiful operator =',
+                tp: 14,
+            },
+            {
+                in: '    abc=text',
+                rs: '    abc       = text',
+                tp: 14,
+            },
+            {
                 in: '    InputFile  :=  "movie.mkv"  ',
                 rs: '    InputFile := "movie.mkv"',
-                tp: 14,
+                tp: 15,
             },
             {
                 in: '    a := 5 ; beautiful operator :=',
                 rs: '    a         := 5 ; beautiful operator :=',
-                tp: 14,
+                tp: 15,
             },
             {
-                in: '    abc:="abc"',
-                rs: '    abc       := "abc"',
-                tp: 14,
+                in: '    abc:="text"',
+                rs: '    abc       := "text"',
+                tp: 15,
             },
             {
                 in: '    ; beautiful operator :=',
                 rs: '    ; beautiful operator :=',
-                tp: 14,
-            },
-            {
-                in: '    str = text',
-                rs: '    str = text',
-                tp: 14,
+                tp: 15,
             },
             {
                 in: '    ToolTip, text',
                 rs: '    ToolTip, text',
-                tp: 14,
+                tp: 15,
             },
         ];
         dataList.forEach((data) => {
