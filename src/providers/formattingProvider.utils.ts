@@ -18,6 +18,8 @@ export function hasMoreOpenParens(line: string): boolean {
     return openCount > closeCount;
 }
 
+/** Remove empty lines at start of document and empty lines,
+ *  that exceed allowed number of empty lines. */
 export function removeEmptyLines(
     document: string,
     allowedNumberOfEmptyLines: number,
