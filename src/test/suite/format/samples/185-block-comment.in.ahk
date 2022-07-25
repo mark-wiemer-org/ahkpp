@@ -23,6 +23,15 @@ MsgBox
 }
 if (true)
 ToolTip
+MsgBox
 */
 MsgBox
 }
+
+if (true)
+/*
+ MsgBox
+*/
+; Comment
+ToolTip
+MsgBox
