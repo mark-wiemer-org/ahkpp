@@ -59,10 +59,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let blockComment = false;
         let atTopLevel = true;
         /** Save important values to this variables on block comment enter, restore them on exit */
-        let blockCommentDepth = 0;
-        let blockCommentTagDepth = 0;
-        let blockCommentAtTopLevel = true;
-        let blockCommentOneCommandCode = false;
+        let preBlockCommentDepth = 0;
+        let preBlockCommentTagDepth = 0;
+        let preBlockCommentAtTopLevel = true;
+        let preBlockCommentOneCommandCode = false;
 
         for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
             const originalLine = document.lineAt(lineIndex).text;
@@ -96,20 +96,20 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 // found start '/*' pattern
                 blockComment = true;
                 // save indent values on block comment enter
-                blockCommentDepth = depth;
-                blockCommentTagDepth = tagDepth;
-                blockCommentAtTopLevel = atTopLevel;
-                blockCommentOneCommandCode = oneCommandCode;
+                preBlockCommentDepth = depth;
+                preBlockCommentTagDepth = tagDepth;
+                preBlockCommentAtTopLevel = atTopLevel;
+                preBlockCommentOneCommandCode = oneCommandCode;
                 // reset indent values to default values with added current 'depth' indent
                 oneCommandCode = false;
             }
             if (blockComment && originalLine.match(/^\s*\*\//)) {
                 // found end '*/' pattern
                 // restore indent values on block comment exit
-                depth = blockCommentDepth;
-                tagDepth = blockCommentTagDepth;
-                atTopLevel = blockCommentAtTopLevel;
-                oneCommandCode = blockCommentOneCommandCode;
+                depth = preBlockCommentDepth;
+                tagDepth = preBlockCommentTagDepth;
+                atTopLevel = preBlockCommentAtTopLevel;
+                oneCommandCode = preBlockCommentOneCommandCode;
             }
 
             // #IfWinActive, #IfWinNotActive
@@ -182,8 +182,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (depth < 0) {
                 depth = 0;
             }
-            if (blockCommentDepth < 0) {
-                blockCommentDepth = 0;
+            if (preBlockCommentDepth < 0) {
+                preBlockCommentDepth = 0;
             }
 
             // Save indented line
