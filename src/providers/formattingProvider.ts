@@ -255,7 +255,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                         newLineCharacter,
                         '\n'.repeat(newLineCharacterNumber),
                     )
-                    // remove empty lines in start of file
+                    // remove empty lines at start of file
                     .replace(/^\n*/, ''),
             ),
         ];
