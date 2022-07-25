@@ -4,6 +4,7 @@ import { ConfigKey, Global } from '../common/global';
 import {
     hasMoreCloseParens,
     hasMoreOpenParens,
+    removeEmptyLines,
 } from './formattingProvider.utils';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
@@ -236,28 +237,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
         }
 
-        const allowedNumberOfEmptyLines = Global.getConfig<number>(
-            ConfigKey.allowedNumberOfEmptyLines,
-        );
-        const newLineCharacterNumber =
-            allowedNumberOfEmptyLines > 1 ? allowedNumberOfEmptyLines + 1 : 2; // + 1 new line character from previous string with text
-        const newLineCharacter = new RegExp(
-            `\\n{${newLineCharacterNumber},}`,
-            'g',
+        formattedDocument = removeEmptyLines(
+            formattedDocument,
+            Global.getConfig<number>(ConfigKey.allowedNumberOfEmptyLines),
         );
 
         return [
-            new vscode.TextEdit(
-                fullDocumentRange(document),
-                formattedDocument
-                    // remove extra empty lines
-                    .replace(
-                        newLineCharacter,
-                        '\n'.repeat(newLineCharacterNumber),
-                    )
-                    // remove empty lines at start of file
-                    .replace(/^\n*/, ''),
-            ),
+            new vscode.TextEdit(fullDocumentRange(document), formattedDocument),
         ];
     }
 }

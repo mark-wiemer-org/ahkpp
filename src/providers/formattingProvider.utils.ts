@@ -17,3 +17,18 @@ export function hasMoreOpenParens(line: string): boolean {
     const closeCount = line.match(/\)/g)?.length ?? 0;
     return openCount > closeCount;
 }
+
+export function removeEmptyLines(
+    document: string,
+    allowedNumberOfEmptyLines: number,
+): string {
+    const newLineCharacterNumber = allowedNumberOfEmptyLines + 1; // + 1 new line character from previous string with text
+    const newLineCharacter = new RegExp(`\\n{${newLineCharacterNumber},}`, 'g');
+    return (
+        document
+            // remove extra empty lines
+            .replace(newLineCharacter, '\n'.repeat(newLineCharacterNumber))
+            // remove empty lines at start of file
+            .replace(/^\n*/, '')
+    );
+}
