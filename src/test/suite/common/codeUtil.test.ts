@@ -26,8 +26,8 @@ suite('Code utils', () => {
                 rs: '    InputFile := "movie.mkv"  ',
             },
             {
-                in: '    a := 5 ; beautiful operator :=',
-                rs: '    a := 5 ',
+                in: '    a := 5    ; beautiful operator :=',
+                rs: '    a := 5    ',
             },
             {
                 in: '    abc:="text"',
@@ -61,13 +61,13 @@ suite('Code utils', () => {
         /*
         Input Data
             InputFile  :=  "movie.mkv"  
-            a := 5 ; beautiful operator :=
+            a := 5    ; beautiful operator :=
             abc:="abc"
             abc:=a  +  b
             ; beautiful operator :=
         Output Data
             InputFile := "movie.mkv"
-            a         := 5 ; beautiful operator :=
+            a         := 5    ; beautiful operator :=
             abc       := "abc"
             abc       := a + b
             ; beautiful operator :=
@@ -99,8 +99,8 @@ suite('Code utils', () => {
                 tp: 15,
             },
             {
-                in: '    a := 5 ; beautiful operator :=',
-                rs: '    a         := 5 ; beautiful operator :=',
+                in: '    a := 5    ; beautiful operator :=',
+                rs: '    a         := 5    ; beautiful operator :=',
                 tp: 15,
             },
             {
