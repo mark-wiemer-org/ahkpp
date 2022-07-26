@@ -92,7 +92,7 @@ export class CodeUtil {
 
     /** Remove comment, extra spaces around = operator and
      * add spaces around = and := operators (if they missing).
-     * Remove extra spaces.
+     * Remove extra spaces, but not touch leading and trailing spaces.
      * @param original Original line of code
      */
     public static normalizeLineAssignOperator(original: string): string {
@@ -106,11 +106,17 @@ export class CodeUtil {
                 // Same process after = and := operators.
                 .replace(/(?<=:?=)\s*/, ' ')
                 // Remove extra spaces, but not touch leading and trailing spaces.
+                // Leading spaces - saves code indent.
+                // Trailing spaces - saves comment indent. User can add new variable
+                // assignment, align assignments and comments will stay in place
+                // (manually aligned before).
                 .replace(/(?<=\S) {2,}(?=\S)/g, ' ')
         );
     }
 
     /** Add spaces before = and := operators to move it to target position.
+     * Remove extra spaces except leading spaces and spaces before comment (if present),
+     * trim end spaces.
      * @param original Original line of code
      * @param targetPosition Target position of = operator
      */
