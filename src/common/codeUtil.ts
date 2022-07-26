@@ -100,17 +100,16 @@ export class CodeUtil {
             original // Clean up text with regex
                 // Remove single line comment
                 .replace(/;.+/, '')
-                // Remove extra spaces before = and := operators,
-                // add space before = and := operators (if it absent).
-                .replace(/\s*(?=:?=)/, ' ')
-                // Same process after = and := operators.
-                .replace(/(?<=:?=)\s*/, ' ')
                 // Remove extra spaces, but not touch leading and trailing spaces.
                 // Leading spaces - saves code indent.
                 // Trailing spaces - saves comment indent. User can add new variable
                 // assignment, align assignments and comments will stay in place
                 // (manually aligned before).
                 .replace(/(?<=\S) {2,}(?=\S)/g, ' ')
+                // Add space before = and := operators (if it absent).
+                .replace(/\s?(?=:?=)/, ' ')
+                // Same process after = and := operators.
+                .replace(/(?<=:?=)\s?/, ' ')
         );
     }
 
