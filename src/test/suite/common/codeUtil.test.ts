@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import { CodeUtil } from '../../../common/codeUtil';
 
 suite('Code utils', () => {
-    suite('prepareLineAssignOperator', () => {
+    suite('normalizeLineAssignOperator', () => {
         // List of test data
         let dataList = [
             // {
@@ -34,6 +34,10 @@ suite('Code utils', () => {
                 rs: '    abc := "text"',
             },
             {
+                in: '    abc:=a  +  b',
+                rs: '    abc := a + b',
+            },
+            {
                 in: '    ; beautiful operator :=',
                 rs: '    ',
             },
@@ -45,7 +49,7 @@ suite('Code utils', () => {
         dataList.forEach((data) => {
             test("'" + data.in + "' => '" + data.rs + "'", () => {
                 assert.strictEqual(
-                    CodeUtil.prepareLineAssignOperator(data.in),
+                    CodeUtil.normalizeLineAssignOperator(data.in),
                     data.rs,
                 );
             });
@@ -59,11 +63,13 @@ suite('Code utils', () => {
             InputFile  :=  "movie.mkv"  
             a := 5 ; beautiful operator :=
             abc:="abc"
+            abc:=a  +  b
             ; beautiful operator :=
         Output Data
             InputFile := "movie.mkv"
             a         := 5 ; beautiful operator :=
             abc       := "abc"
+            abc       := a + b
             ; beautiful operator :=
         */
         let dataList = [
@@ -95,6 +101,11 @@ suite('Code utils', () => {
             {
                 in: '    a := 5 ; beautiful operator :=',
                 rs: '    a         := 5 ; beautiful operator :=',
+                tp: 15,
+            },
+            {
+                in: '    abc:=a  +  b',
+                rs: '    abc       := a + b',
                 tp: 15,
             },
             {

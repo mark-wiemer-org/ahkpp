@@ -63,7 +63,7 @@ export class CodeUtil {
             lineIndex <= selection.end.line;
             lineIndex++
         ) {
-            const line = this.prepareLineAssignOperator(
+            const line = this.normalizeLineAssignOperator(
                 document.lineAt(lineIndex).text,
             );
 
@@ -92,9 +92,10 @@ export class CodeUtil {
 
     /** Remove comment, extra spaces around = operator and
      * add spaces around = and := operators (if they missing).
+     * Remove extra spaces.
      * @param original Original line of code
      */
-    public static prepareLineAssignOperator(original: string): string {
+    public static normalizeLineAssignOperator(original: string): string {
         return (
             original // Clean up text with regex
                 // Remove single line comment
@@ -102,12 +103,14 @@ export class CodeUtil {
                 // Remove extra spaces before = and := operators,
                 // add space before = and := operators (if it absent).
                 .replace(/\s*(?=:?=)/, ' ')
-                // Same process after = operator
+                // Same process after = and := operators.
                 .replace(/(?<=:?=)\s*/, ' ')
+                // Remove extra spaces, but not touch leading and trailing spaces.
+                .replace(/(?<=\S) {2,}(?=\S)/g, ' ')
         );
     }
 
-    /** Add spaces before = and := operators to move it to target position
+    /** Add spaces before = and := operators to move it to target position.
      * @param original Original line of code
      * @param targetPosition Target position of = operator
      */
@@ -117,7 +120,7 @@ export class CodeUtil {
     ) {
         // The line comment. Empty string if no line comment exists
         const comment = /;.+/.exec(original)?.[0] ?? ''; // Save comment
-        original = this.prepareLineAssignOperator(original);
+        original = this.normalizeLineAssignOperator(original);
         let position = original.search('='); // = operator position
         return original
             .replace(/\s(?=:?=)/, ' '.repeat(targetPosition - position + 1)) // Align assignment
