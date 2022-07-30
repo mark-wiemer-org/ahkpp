@@ -27,6 +27,7 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
     -   [Find References](#find-symbol-references)
     -   [Hover Tip](#hover-tip)
     -   [Code Format](#code-format)
+    -   [Align Selected Assignments](#align-selected-assignments)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
