@@ -54,10 +54,12 @@ export class CodeUtil {
 
     /** Align variable assignment by = operator in selected text
      * @param selection Text selection in editor
+     * @returns aligned selection
      */
     public static alignTextAssignOperator(selection: Selection): string {
         const document = vscode.window.activeTextEditor.document;
-        let maxPosition = 0; // Right-most = operator position in line from all assignments
+        /** Right-most `=` operator position in line from all assignments */
+        let maxPosition = 0;
         for (
             let lineIndex = selection.start.line;
             lineIndex <= selection.end.line;
@@ -68,7 +70,7 @@ export class CodeUtil {
             );
 
             // Find right-most = operator position
-            let position = line.search('='); // = operator position
+            let position = line.indexOf('='); // = operator position
             if (position > maxPosition) {
                 maxPosition = position;
             }
@@ -94,6 +96,7 @@ export class CodeUtil {
      * add spaces around = and := operators (if they missing).
      * Remove extra spaces, but not touch leading and trailing spaces.
      * @param original Original line of code
+     * @returns normalized line of code
      */
     public static normalizeLineAssignOperator(original: string): string {
         return (
@@ -114,16 +117,18 @@ export class CodeUtil {
     }
 
     /** Add spaces before = and := operators to move it to target position.
-     * Remove extra spaces except leading spaces and spaces before comment (if present),
+     * Remove extra spaces between symbol and operator,
+     * remove spaces before comment (if present),
      * trim end spaces.
      * @param original Original line of code
      * @param targetPosition Target position of = operator
+     * @returns aligned line
      */
     public static alignLineAssignOperator(
         original: string,
         targetPosition: number,
     ) {
-        // The line comment. Empty string if no line comment exists
+        /** The line comment. Empty string if no line comment exists */
         const comment = /;.+/.exec(original)?.[0] ?? ''; // Save comment
         original = this.normalizeLineAssignOperator(original);
         let position = original.search('='); // = operator position

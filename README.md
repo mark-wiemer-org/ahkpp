@@ -51,7 +51,7 @@ With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts
 -   Open Help: `Ctrl + F1`
 -   Run: `Ctrl + F9`
 -   Run Selection: `Ctrl + F8`
--   Align Selected Variables Assignment: `Shift+win+F`
+-   Align Selected Assignments: `Shift + Win + F`
 
 ## Debug
 
@@ -112,16 +112,16 @@ Supports standard VS Code formatting.
 
 ![Code Format](image/codeFormat.jpg)
 
-### Align Selected Variables Assignment
+### Align Selected Assignments
 
-Select variables assignment:
+Select assignments:
 
--   Right-click and select `Align Selected Variables Assignment`.
--   Or press `Shift+Win+F`.
+-   Right-click and select `Align Selected Assignments` from the context menu.
+-   Or press `Shift + Win + F`.
 
-![Align Assignment](image/align.gif)
+![](image/align.gif)
 
-Comments indentation are preserved during alignment. You can add new variable assignment, re-align all assignments. Your manually align comments will stay in old place.
+Comments' indentations are preserved during alignment. You can add new variable assignment and re-align all assignments. Your manually aligned comments will stay in their original place.
 
 ## Credits
 

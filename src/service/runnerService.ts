@@ -21,7 +21,7 @@ export class RunnerService {
         //      this text selected on second line] this text is not selected
         // 'selection.end' is position of last character in selection,
         // not last character of second line! Same problem with start position of 'selection.start'.
-        // Get position of last character in second line.
+        /** Position of last character in last selected line */
         const endLinePosition = document.lineAt(selection.end.line).range.end;
         const range = document.validateRange(
             new vscode.Range(
@@ -41,13 +41,12 @@ export class RunnerService {
                 editBuilder.replace(range, text);
             })
             // The edit call returns a promise. When that resolves you can set
-            // the selection otherwise you interfere with the edit itself.
-            // So use "then" to sure edit call is done;
+            // the selection, otherwise you interfere with the edit itself.
+            // So use "then" to execute once the edit is done;
             .then((success) => {
-                // Out.log('success: ' + success);
-                // Deselect selection after replace and set cursor to end of last line.
-                // Change the selection: start and end position of the new
-                // selection is same, so it is not to select replaced text.
+                // Deselect selection after replace, set cursor to end of last selected line.
+                // Since the selection's start position and end position are the same,
+                // it's not highlighting any text any more.
                 editor.selection = new vscode.Selection(
                     endLinePosition,
                     endLinePosition,
