@@ -54,7 +54,7 @@ export class CodeUtil {
 
     /** Align variable assignment by = operator in selected text
      * @param selection Text selection in editor
-     * @returns aligned selection
+     * @returns Aligned selection
      */
     public static alignTextAssignOperator(selection: Selection): string {
         const document = vscode.window.activeTextEditor.document;
@@ -96,7 +96,7 @@ export class CodeUtil {
      * add spaces around = and := operators (if they missing).
      * Remove extra spaces, but not touch leading and trailing spaces.
      * @param original Original line of code
-     * @returns normalized line of code
+     * @returns Normalized line of code
      */
     public static normalizeLineAssignOperator(original: string): string {
         return (
@@ -122,12 +122,12 @@ export class CodeUtil {
      * trim end spaces.
      * @param original Original line of code
      * @param targetPosition Target position of = operator
-     * @returns aligned line
+     * @returns Aligned line
      */
     public static alignLineAssignOperator(
         original: string,
         targetPosition: number,
-    ) {
+    ): string {
         /** The line comment. Empty string if no line comment exists */
         const comment = /;.+/.exec(original)?.[0] ?? ''; // Save comment
         original = this.normalizeLineAssignOperator(original);

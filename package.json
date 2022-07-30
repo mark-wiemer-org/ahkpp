@@ -205,7 +205,7 @@
             {
                 "command": "ahk++.alignSelection",
                 "key": "shift+win+f",
-                "when": "editorLangId == ahk" && editorHasSelection
+                "when": "editorLangId == ahk && editorHasSelection"
             },
             {
                 "command": "ahk++.compile",
