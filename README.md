@@ -124,6 +124,8 @@ Select assignments:
 
 Comments' indentations are preserved during alignment. You can add new variable assignment and re-align all assignments. Your manually aligned comments will stay in their original place.
 
+![](image/alignAddVar.gif)
+
 ## Credits
 
 Previous extensions:
