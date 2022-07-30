@@ -92,8 +92,8 @@ export class CodeUtil {
         return text;
     }
 
-    /** Remove comment, extra spaces around = operator and
-     * add spaces around = and := operators (if they missing).
+    /** Remove comment, remove extra spaces around first = or := operator,
+     * add spaces around first = or := operator (if they missing).
      * Remove extra spaces, but not touch leading and trailing spaces.
      * @param original Original line of code
      * @returns Normalized line of code
