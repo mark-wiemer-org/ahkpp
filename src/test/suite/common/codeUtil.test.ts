@@ -45,6 +45,18 @@ suite('Code utils', () => {
                 in: '    ToolTip, text',
                 rs: '    ToolTip, text',
             },
+            {
+                in: 'x := "1+1=2"',
+                rs: 'x := "1+1=2"',
+            },
+            {
+                in: 'val = "="',
+                rs: 'val = "="',
+            },
+            {
+                in: 'withSpaces = "x = y"',
+                rs: 'withSpaces = "x = y"',
+            },
         ];
         dataList.forEach((data) => {
             test("'" + data.in + "' => '" + data.rs + "'", () => {
