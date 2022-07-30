@@ -102,7 +102,7 @@ export class CodeUtil {
         return (
             original // Clean up text with regex
                 // Remove single line comment
-                .replace(/;.+/, '')
+                .replace(/(?<!`);.+/, '') // skip escaped semicolon '`;', it's text, not comment
                 // Remove extra spaces, but not touch leading and trailing spaces.
                 // Leading spaces - saves code indent.
                 // Trailing spaces - saves comment indent. User can add new variable
