@@ -27,6 +27,7 @@ export class Global {
 }
 
 export enum ConfigKey {
+    dropSelectionAndMoveCursor = 'alignAssignment.dropSelectionAndMoveCursor',
     compilePath = 'compilePath',
     helpPath = 'helpPath',
     enableIntellisense = 'enableIntellisense',

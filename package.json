@@ -92,6 +92,11 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
+                "ahk++.alignAssignment.dropSelectionAndMoveCursor": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Drop selection and move cursor to end of last selected line after align assignments."
+                },
                 "ahk++.compilePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",

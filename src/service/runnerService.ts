@@ -44,14 +44,29 @@ export class RunnerService {
             // the selection, otherwise you interfere with the edit itself.
             // So use "then" to execute once the edit is done;
             .then((success) => {
-                // Deselect selection after replace, set cursor to end of last selected line.
-                // Since the selection's start position and end position are the same,
-                // it's not highlighting any text any more.
-                editor.selection = new vscode.Selection(
-                    endLinePosition,
-                    endLinePosition,
-                );
-                // P.S. You can move cursor to absolute position in editor by setting selection like above!
+                if (
+                    Global.getConfig<number>(
+                        ConfigKey.dropSelectionAndMoveCursor,
+                    )
+                ) {
+                    // Deselect selection after replace, set cursor to end of last selected line.
+                    // Since the selection's start position and end position are the same,
+                    // it's not highlighting any text any more.
+                    editor.selection = new vscode.Selection(
+                        endLinePosition,
+                        endLinePosition,
+                    );
+                    // P.S. You can move cursor to absolute position in editor by setting selection like above!
+                } else {
+                    // After text replacement selection in editor will keep same character number as before replacement.
+                    // New aligned text may be shorter or longer, then original selected text. So selection end position
+                    // may be in wrong position. Explicity set selection range to keep selection of replaced text more-less
+                    // equal to original selection.
+                    editor.selection = new vscode.Selection(
+                        selection.start,
+                        selection.end,
+                    );
+                }
             });
     }
 
