@@ -28,7 +28,7 @@ export class RunnerService {
                 selection.start.line,
                 0,
                 selection.end.line,
-                endLinePosition.character,
+                Infinity,
             ),
         );
         editor
