@@ -2,8 +2,10 @@
     "AhkTemplate": {
         "prefix": "#TEMPLATE",
         "body": [
+            "#NoEnv",
             "#SingleInstance, Force",
-            "SendMode Input",
+            "SendMode, Input",
+            "SetBatchLines, -1",
             "SetWorkingDir, %A_ScriptDir%",
             ""
         ]
