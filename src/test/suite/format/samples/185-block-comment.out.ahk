@@ -3,13 +3,13 @@ foo () {
     ;@AHK++FormatBlockCommentOn
     /*
     typedef struct TEST {
-        DWORD cbSize;          0
+        DWORD cbSize ; 0
     } CMINVOKECOMMANDINFOEX;
     */
     /*
     MsgBox, This line is commented out (disabled).
     MsgBox, Common mistake: */ this does not end the comment.
-    MsgBox, This line is commented out. 
+    MsgBox, This line is commented out.
     */
     /*
     bar() {
