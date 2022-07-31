@@ -57,8 +57,17 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
          */
         let oneCommandCode = false;
         let blockComment = false;
+        /** Base indent, that block comment had in original code */
+        let blockCommentIndent = '';
         let atTopLevel = true;
-        /** Save important values to this variables on block comment enter, restore them on exit */
+        /** Formatter's directive:
+         * ```ahk
+         * ;@AHK++FormatBlockCommentOn
+         * ;@AHK++FormatBlockCommentOff
+         * ```
+         * Format text inside block comment like regular code */
+        let formatBlockComment = false;
+        // Save important values to this variables on block comment enter, restore them on exit
         let preBlockCommentDepth = 0;
         let preBlockCommentTagDepth = 0;
         let preBlockCommentAtTopLevel = true;
@@ -83,6 +92,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // This line
 
+            // Start directives for formatter
+            if (emptyLine) {
+                if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOn/i)) {
+                    formatBlockComment = true;
+                }
+            }
+
             // Block comments
             // The /* and */ symbols can be used to comment out an entire section,
             // but only if the symbols appear at the beginning of a line (excluding whitespace),
@@ -95,21 +111,52 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (!blockComment && originalLine.match(/^\s*\/\*/)) {
                 // found start '/*' pattern
                 blockComment = true;
-                // save indent values on block comment enter
-                preBlockCommentDepth = depth;
-                preBlockCommentTagDepth = tagDepth;
-                preBlockCommentAtTopLevel = atTopLevel;
-                preBlockCommentOneCommandCode = oneCommandCode;
-                // reset indent values to default values with added current 'depth' indent
-                oneCommandCode = false;
+                // Save first capture group (original indent)
+                blockCommentIndent = originalLine.match(/(^\s*)\/\*/)?.[1];
+                if (formatBlockComment) {
+                    // save indent values on block comment enter
+                    preBlockCommentDepth = depth;
+                    preBlockCommentTagDepth = tagDepth;
+                    preBlockCommentAtTopLevel = atTopLevel;
+                    preBlockCommentOneCommandCode = oneCommandCode;
+                    // reset indent values to default values with added current 'depth' indent
+                    oneCommandCode = false;
+                }
             }
-            if (blockComment && originalLine.match(/^\s*\*\//)) {
-                // found end '*/' pattern
-                // restore indent values on block comment exit
-                depth = preBlockCommentDepth;
-                tagDepth = preBlockCommentTagDepth;
-                atTopLevel = preBlockCommentAtTopLevel;
-                oneCommandCode = preBlockCommentOneCommandCode;
+
+            if (blockComment) {
+                // Save block comment line only if user don't want format it content
+                if (!formatBlockComment) {
+                    let blockCommentLine = '';
+                    if (originalLine.indexOf(blockCommentIndent) === 0) {
+                        blockCommentLine = originalLine.substring(
+                            blockCommentIndent.length,
+                        );
+                    } else {
+                        blockCommentLine = originalLine;
+                    }
+                    formattedDocument += buildIndentedLine(
+                        lineIndex,
+                        document.lineCount,
+                        blockCommentLine,
+                        depth,
+                        options,
+                    );
+                }
+                if (originalLine.match(/^\s*\*\//)) {
+                    // found end '*/' pattern
+                    blockComment = false;
+                    if (formatBlockComment) {
+                        // restore indent values on block comment exit
+                        depth = preBlockCommentDepth;
+                        tagDepth = preBlockCommentTagDepth;
+                        atTopLevel = preBlockCommentAtTopLevel;
+                        oneCommandCode = preBlockCommentOneCommandCode;
+                    }
+                }
+                if (!formatBlockComment) {
+                    continue;
+                }
             }
 
             // #IfWinActive, #IfWinNotActive
@@ -197,18 +244,32 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // Next line
 
+            // Stop directives for formatter
+            if (emptyLine) {
+                if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)) {
+                    formatBlockComment = false;
+                }
+            }
+
             // One command code
-            // Don't change indentation on empty lines (single line comments are equal to empty line) or block comment after one command code
-            if (oneCommandCode && !emptyLine && !blockComment) {
+            if (
+                oneCommandCode &&
+                // Don't change indentation on empty lines (single line comment is equal to empty line) after one command code.
+                !emptyLine &&
+                // Don't change indentation on block comment after one command code.
+                // Change indentation inside block comment, if user wants to format block comment.
+                (!blockComment || formatBlockComment)
+            ) {
                 oneCommandCode = false;
                 depth--;
             }
 
-            // Block comments (must be after 'One command code' check!)
-            if (blockComment && originalLine.match(/^\s*\*\//)) {
-                // found end '*/' pattern
-                blockComment = false;
-            }
+            // Block comments
+            // Must be after 'One command code' check, because it reset flag 'blockComment' that tests there!
+            // if (blockComment && originalLine.match(/^\s*\*\//)) {
+            //     // found end '*/' pattern
+            //     blockComment = false;
+            // }
 
             // #IfWinActive, #IfWinNotActive
             if (

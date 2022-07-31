@@ -1,5 +1,6 @@
 ; [Issue #185](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/185)
 foo () {
+    ;@AHK++FormatBlockCommentOn
     /*
     typedef struct TEST {
         DWORD cbSize;          0
@@ -25,13 +26,14 @@ foo () {
         ToolTip
     MsgBox
     */
+    ;@AHK++FormatBlockCommentOff
     MsgBox
-}
-
-if (true)
     /*
-    MsgBox
+        All text in this block comment must save original indent
+    bar() {
+            Loop, 4 {
+                    MsgBox % A_Index
+            }
+    }
     */
-    ; Comment
-    ToolTip
-MsgBox
+}
