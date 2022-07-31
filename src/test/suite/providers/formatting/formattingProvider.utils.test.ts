@@ -94,6 +94,11 @@ suite('FormattingProvider utils', () => {
                 rs: 'InputFile    :=    "movie.mkv"',
                 ts: false,
             },
+            {
+                in: 'MsgBox,  4,   , testing   testing',
+                rs: 'MsgBox, 4, , testing testing',
+                ts: true,
+            },
         ];
         dataList.forEach((data) => {
             test(
