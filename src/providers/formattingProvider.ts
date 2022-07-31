@@ -83,6 +83,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 .replace(/;.+/, '')
                 .replace(/ {2,}/g, ' ')
                 .concat(comment);
+            /** Line is empty or this is single comment line */
             const emptyLine = purifiedLine === '';
 
             atTopLevel = true;
