@@ -205,7 +205,8 @@ export class CodeUtil {
         //  IN: ControlSend(params)
         // OUT: ControlSend(params)
         for (const command of commandList) {
-            var reStr =
+            /** String with regular expression pattern */
+            let pattern =
                 '(' + // begin 1st capture group
                 '^\\s*' + // \b will do this: foo(Gui) { => foo(Gui
                 command +
@@ -213,9 +214,9 @@ export class CodeUtil {
                 '(?!\\()' + // after command must not be open brace '(', otherwise it's function
                 ')' + // end 1st capture group
                 '.*'; // this will be removed from string
-            var re = new RegExp(reStr, 'i');
-            if (original.search(re) !== -1) {
-                cmdTrim = original.replace(re, '$1');
+            let regExp = new RegExp(pattern, 'i');
+            if (original.search(regExp) !== -1) {
+                cmdTrim = original.replace(regExp, '$1');
                 break;
             }
         }
