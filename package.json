@@ -107,7 +107,7 @@
                     "default": true,
                     "description": "Enable IntelliSense (Preview). Changes take effect after reload."
                 },
-                "ahk++.ui.showDebugButton": {
+                "ahk++.menu.showDebugButton": {
                     "type": "boolean",
                     "default": true,
                     "description": "Show the Debug button in the editor title menu"
@@ -259,7 +259,7 @@
             "editor/title": [
                 {
                     "command": "ahk++.debug",
-                    "when": "editorLangId == ahk && config.ahk++.ui.showDebugButton",
+                    "when": "editorLangId == ahk && config.ahk++.menu.showDebugButton",
                     "group": "navigation@1"
                 }
             ]
