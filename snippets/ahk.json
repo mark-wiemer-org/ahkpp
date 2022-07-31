@@ -305,7 +305,7 @@
     },
     "DriveSpaceFree": {
         "prefix": "DriveSpaceFree",
-        "body": "DriveSpaceFree, ${1:OutputVar}, ${2:C:\\}",
+        "body": "DriveSpaceFree, ${1:OutputVar}, ${2:C:\\\\}",
         "description": "Retrieves the free disk space of a drive, in Megabytes."
     },
     "Edit": {
