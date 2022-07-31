@@ -23,6 +23,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '59-one-command-indentation' },
     { filenameRoot: '72-paren-hotkey' },
     { filenameRoot: '185-block-comment' },
+    { filenameRoot: '189-space-at-end-of-line' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'demo' },
     {
