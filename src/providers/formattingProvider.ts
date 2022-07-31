@@ -71,7 +71,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             formattedLine = formattedLine.replace(/;.+/, ''); // Remove single line comment
             formattedLine = formattedLine.replace(/^\s*/, ''); // Remove leading spaces/tabs
             formattedLine = trimExtraSpaces(formattedLine, trimSpaces); // Remove extra spaces between words
-            formattedLine = formattedLine.concat(comment); // Add removed single line comment back
+            formattedLine = formattedLine
+                .trim() // Trim line to remove extra spaces before comment
+                .concat(' ' + comment) // Add removed single line comment back
+                .trim(); // Trim spaces after comment text
 
             atTopLevel = true;
 
