@@ -110,7 +110,7 @@
                 "ahk++.showDebugButton": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Show the Debug button in the editor title menu"
+                    "description": "Show the Debug button in the editor title menu."
                 }
             }
         },
