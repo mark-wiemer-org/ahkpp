@@ -24,6 +24,9 @@ export function removeEmptyLines(
     document: string,
     allowedNumberOfEmptyLines: number,
 ): string {
+    if (allowedNumberOfEmptyLines === -1) {
+        return document;
+    }
     const newLineCharacterNumber = allowedNumberOfEmptyLines + 1; // + 1 new line character from previous string with text
     const newLineCharacter = new RegExp(`\\n{${newLineCharacterNumber},}`, 'g');
     return (

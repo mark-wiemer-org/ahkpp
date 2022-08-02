@@ -105,8 +105,8 @@
                 "ahk++.formatter.allowedNumberOfEmptyLines": {
                     "type": "integer",
                     "default": 1,
-                    "minimum": 1,
-                    "description": "Allowed number of empty lines."
+                    "minimum": -1,
+                    "description": "Allowed number of empty lines.\n-1: ignore empty lines.\n0: no empty lines."
                 },
                 "ahk++.helpPath": {
                     "type": "string",
