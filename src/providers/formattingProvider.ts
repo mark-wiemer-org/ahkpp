@@ -66,10 +66,11 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             /** The line comment. Empty string if no line comment exists */
             const comment = /;.+/.exec(originalLine)?.[0] ?? '';
             const formattedLine = originalLine
-                .replace(/^\s*/, '')
                 .replace(/;.+/, '')
                 .replace(/ {2,}/g, ' ')
-                .concat(comment);
+                .trim()
+                .concat(' ' + comment)
+                .trim();
 
             atTopLevel = true;
 
