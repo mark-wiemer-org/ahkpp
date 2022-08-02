@@ -85,14 +85,34 @@ suite('FormattingProvider utils', () => {
             //     rs: , // expected result
             // },
             {
-                in: '\ntext\n\n\n\ntext\n\n\n\n',
+                in: 'text\n\n\n\n\ntext\n\n\n\n\n',
+                ln: -1,
+                rs: 'text\n\n\n\n\ntext\n\n\n\n\n',
+            },
+            {
+                in: 'text\n\n\n\n\ntext\n\n\n\n\n',
+                ln: 0,
+                rs: 'text\ntext\n',
+            },
+            {
+                in: 'text\n\n\n\n\ntext\n\n\n\n\n',
                 ln: 1,
                 rs: 'text\n\ntext\n\n',
             },
             {
-                in: '\ntext\n\n\n\ntext\n\n\n\n',
+                in: 'text\n\n\n\n\ntext\n\n\n\n\n',
                 ln: 2,
                 rs: 'text\n\n\ntext\n\n\n',
+            },
+            {
+                in: 'text\n\n\n\n\ntext\n\n\n\n\n',
+                ln: 3,
+                rs: 'text\n\n\n\ntext\n\n\n\n',
+            },
+            {
+                in: '\n\n\ntext',
+                ln: 1,
+                rs: 'text',
             },
             {
                 in: 'text\ntext',
@@ -107,7 +127,9 @@ suite('FormattingProvider utils', () => {
         ];
         dataList.forEach((data) => {
             test(
-                "'" +
+                'ln:' +
+                    data.ln +
+                    " '" +
                     data.in.replace(/\n/g, '\\n') +
                     "' => '" +
                     data.rs.replace(/\n/g, '\\n') +
