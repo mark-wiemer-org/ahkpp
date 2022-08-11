@@ -26,6 +26,7 @@ export class Global {
 }
 
 export enum ConfigKey {
-    compilePath = "compilePath", executePath = "executePath", enableIntelliSense = "enableIntelliSense",
+    compilePath = "compilePath", compileIcon = "compileIcon", compileBaseFile = "compileBaseFile",
+    compileMpress = "compileMpress", executePath = "executePath", enableIntelliSense = "enableIntelliSense",
     documentPath = "documentPath"
 }
