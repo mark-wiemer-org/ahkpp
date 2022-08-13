@@ -87,27 +87,27 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk++.compilePath": {
+                "ahk++.file.compilePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "Path to the AHK compiler."
                 },
-                "ahk++.enableIntellisense": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
-                },
-                "ahk++.executePath": {
+                "ahk++.file.executePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
                     "description": "Path to the AHK runner."
                 },
-                "ahk++.helpPath": {
+                "ahk++.file.helpPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
                     "description": "Path to the AHK Help document."
                 },
-                "ahk++.showDebugButton": {
+                "ahk++.language.enableIntellisense": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
+                },
+                "ahk++.menu.showDebugButton": {
                     "type": "boolean",
                     "default": true,
                     "description": "Show the Debug button in the editor title menu."
@@ -259,7 +259,7 @@
             "editor/title": [
                 {
                     "command": "ahk++.debug",
-                    "when": "editorLangId == ahk && config.ahk++.showDebugButton",
+                    "when": "editorLangId == ahk && config.ahk++.menu.showDebugButton",
                     "group": "navigation@1"
                 }
             ]
