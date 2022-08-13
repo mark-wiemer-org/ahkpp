@@ -27,6 +27,7 @@ export class Global {
 }
 
 export enum ConfigKey {
+    allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
     compilePath = 'file.compilePath',
     enableIntellisense = 'language.enableIntellisense',
     executePath = 'file.executePath',

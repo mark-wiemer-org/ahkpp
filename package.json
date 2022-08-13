@@ -97,6 +97,12 @@
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
                     "description": "Path to the AHK runner."
                 },
+                "ahk++.formatter.allowedNumberOfEmptyLines": {
+                    "type": "integer",
+                    "default": 1,
+                    "minimum": -1,
+                    "description": "Allowed number of empty lines.\n-1: ignore empty lines.\n0: no empty lines."
+                },
                 "ahk++.file.helpPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",

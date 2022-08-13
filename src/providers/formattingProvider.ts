@@ -1,8 +1,10 @@
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
+import { ConfigKey, Global } from '../common/global';
 import {
     hasMoreCloseParens,
     hasMoreOpenParens,
+    removeEmptyLines,
 } from './formattingProvider.utils';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
@@ -235,11 +237,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
         }
 
+        formattedDocument = removeEmptyLines(
+            formattedDocument,
+            Global.getConfig<number>(ConfigKey.allowedNumberOfEmptyLines),
+        );
+
         return [
-            new vscode.TextEdit(
-                fullDocumentRange(document),
-                formattedDocument.replace(/\n{2,}/g, '\n\n'),
-            ),
+            new vscode.TextEdit(fullDocumentRange(document), formattedDocument),
         ];
     }
 }
