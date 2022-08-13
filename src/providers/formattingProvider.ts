@@ -66,8 +66,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             const formattedLine = originalLine
                 .replace(/;.+/, '')
                 .replace(/ {2,}/g, ' ')
-                .trim()
-                .concat(' ' + comment)
+                .concat(comment)
                 .trim();
 
             atTopLevel = true;
@@ -110,7 +109,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 purifiedLine.match(/\b(return|ExitApp)\b/i) &&
                 tagDepth === depth
             ) {
-                tagDepth === 0;
+                tagDepth = 0;
                 depth--;
                 atTopLevel = false;
             }
