@@ -2813,25 +2813,25 @@ ShellContextMenu(folderPath, files, win_hwnd = 0 )
     ; p(idn)
     ; return
     ; Formatter ignores block comments for now, nbd
-        /*
-        typedef struct _CMINVOKECOMMANDINFOEX {
-            DWORD   cbSize;          0
-            DWORD   fMask;           4
-            HWND    hwnd;            8
-            LPCSTR  lpVerb;          8+A_PtrSize
-            LPCSTR  lpParameters;    8+2*A_PtrSize
-            LPCSTR  lpDirectory;     8+3*A_PtrSize
-            int     nShow;           8+4*A_PtrSize
-            DWORD   dwHotKey;        12+4*A_PtrSize
-            HANDLE  hIcon;           16+4*A_PtrSize
-            LPCSTR  lpTitle;         16+5*A_PtrSize
-            LPCWSTR lpVerbW;         16+6*A_PtrSize
-            LPCWSTR lpParametersW;   16+7*A_PtrSize
-            LPCWSTR lpDirectoryW;    16+8*A_PtrSize
-            LPCWSTR lpTitleW;        16+9*A_PtrSize
-            POINT   ptInvoke;        16+10*A_PtrSize
-        } CMINVOKECOMMANDINFOEX, *LPCMINVOKECOMMANDINFOEX;
-        http://msdn.microsoft.com/en-us/library/bb773217%28v=VS.85%29.aspx
+    /*
+    typedef struct _CMINVOKECOMMANDINFOEX {
+        DWORD   cbSize;          0
+        DWORD   fMask;           4
+        HWND    hwnd;            8
+        LPCSTR  lpVerb;          8+A_PtrSize
+        LPCSTR  lpParameters;    8+2*A_PtrSize
+        LPCSTR  lpDirectory;     8+3*A_PtrSize
+        int     nShow;           8+4*A_PtrSize
+        DWORD   dwHotKey;        12+4*A_PtrSize
+        HANDLE  hIcon;           16+4*A_PtrSize
+        LPCSTR  lpTitle;         16+5*A_PtrSize
+        LPCWSTR lpVerbW;         16+6*A_PtrSize
+        LPCWSTR lpParametersW;   16+7*A_PtrSize
+        LPCWSTR lpDirectoryW;    16+8*A_PtrSize
+        LPCWSTR lpTitleW;        16+9*A_PtrSize
+        POINT   ptInvoke;        16+10*A_PtrSize
+    } CMINVOKECOMMANDINFOEX, *LPCMINVOKECOMMANDINFOEX;
+    http://msdn.microsoft.com/en-us/library/bb773217%28v=VS.85%29.aspx
     */
     struct_size := 16+11*A_PtrSize
     VarSetCapacity(pici,struct_size,0)
@@ -3492,21 +3492,21 @@ return
 
 #if winactive("renamingWinTitle ahk_class AutoHotkeyGUI")
 
-$esc::
-if (focused="flistView") {
-    if (canRename) {
-        canRename:=false
-        ; gui, renameSimple:Default
-        ; gui, submit
-        gui, main:Default
-        ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
+    $esc::
+    if (focused="flistView") {
+        if (canRename) {
+            canRename:=false
+            ; gui, renameSimple:Default
+            ; gui, submit
+            gui, main:Default
+            ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
 
-        gui, renameSimple:Default
-        gui, destroy
+            gui, renameSimple:Default
+            gui, destroy
+        }
+        return
     }
-    return
-}
-send, {enter}
+    send, {enter}
 return
 
 #if winactive("create_folder ahk_class AutoHotkeyGUI")
