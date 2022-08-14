@@ -37,3 +37,13 @@ export function removeEmptyLines(
             .replace(/^\n*/, '')
     );
 }
+
+/** @return string with trimmed extra spaces between words*/
+export function trimExtraSpaces(
+    line: string,
+    trimExtraSpaces: boolean,
+): string {
+    return trimExtraSpaces
+        ? line.replace(/ {2,}/g, ' ') // Remove extra spaces between words
+        : line;
+}
