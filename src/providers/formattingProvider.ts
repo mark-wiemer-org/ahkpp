@@ -130,7 +130,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 // Save block comment line only if user don't want format it content
                 if (!formatBlockComment) {
                     let blockCommentLine = '';
-                    if (originalLine.indexOf(blockCommentIndent) === 0) {
+                    if (originalLine.startsWith(blockCommentIndent)) {
                         blockCommentLine = originalLine.substring(
                             blockCommentIndent.length,
                         );
