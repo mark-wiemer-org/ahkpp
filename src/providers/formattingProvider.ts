@@ -68,13 +68,12 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             const purifiedLine = CodeUtil.purify(originalLine.toLowerCase());
             /** The line comment. Empty string if no line comment exists */
             const comment = /;.+/.exec(originalLine)?.[0] ?? '';
-            let formattedLine = originalLine;
-            formattedLine = formattedLine.replace(/;.+/, ''); // Remove single line comment
-            formattedLine = formattedLine.replace(/^\s*/, ''); // Remove leading spaces/tabs
-            formattedLine = trimExtraSpaces(formattedLine, trimSpaces); // Remove extra spaces between words
-            formattedLine = formattedLine
+            let formattedLine = originalLine
+                .replace(/;.+/, '') // Remove single line comment
+                .trimStart();
+            formattedLine = trimExtraSpaces(formattedLine, trimSpaces) // Remove extra spaces between words
                 .concat(comment) // Add removed single line comment back
-                .trim(); // Trim spaces after comment text
+                .trimEnd();
 
             atTopLevel = true;
 
