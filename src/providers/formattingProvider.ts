@@ -4,6 +4,7 @@ import { ConfigKey, Global } from '../common/global';
 import {
     hasMoreCloseParens,
     hasMoreOpenParens,
+    removeEmptyLines,
     trimExtraSpaces,
 } from './formattingProvider.utils';
 
@@ -72,8 +73,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             formattedLine = formattedLine.replace(/^\s*/, ''); // Remove leading spaces/tabs
             formattedLine = trimExtraSpaces(formattedLine, trimSpaces); // Remove extra spaces between words
             formattedLine = formattedLine
-                .trim() // Trim line to remove extra spaces before comment
-                .concat(' ' + comment) // Add removed single line comment back
+                .concat(comment) // Add removed single line comment back
                 .trim(); // Trim spaces after comment text
 
             atTopLevel = true;
@@ -116,7 +116,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 purifiedLine.match(/\b(return|ExitApp)\b/i) &&
                 tagDepth === depth
             ) {
-                tagDepth === 0;
+                tagDepth = 0;
                 depth--;
                 atTopLevel = false;
             }
@@ -242,11 +242,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             }
         }
 
+        formattedDocument = removeEmptyLines(
+            formattedDocument,
+            Global.getConfig<number>(ConfigKey.allowedNumberOfEmptyLines),
+        );
+
         return [
-            new vscode.TextEdit(
-                fullDocumentRange(document),
-                formattedDocument.replace(/\n{2,}/g, '\n\n'),
-            ),
+            new vscode.TextEdit(fullDocumentRange(document), formattedDocument),
         ];
     }
 }

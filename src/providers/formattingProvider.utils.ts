@@ -18,6 +18,26 @@ export function hasMoreOpenParens(line: string): boolean {
     return openCount > closeCount;
 }
 
+/** Remove empty lines at start of document and empty lines,
+ *  that exceed allowed number of empty lines. */
+export function removeEmptyLines(
+    document: string,
+    allowedNumberOfEmptyLines: number,
+): string {
+    if (allowedNumberOfEmptyLines === -1) {
+        return document;
+    }
+    const newLineCharacterNumber = allowedNumberOfEmptyLines + 1; // + 1 new line character from previous string with text
+    const newLineCharacter = new RegExp(`\\n{${newLineCharacterNumber},}`, 'g');
+    return (
+        document
+            // remove extra empty lines
+            .replace(newLineCharacter, '\n'.repeat(newLineCharacterNumber))
+            // remove empty lines at start of file
+            .replace(/^\n*/, '')
+    );
+}
+
 /** @return string with trimmed extra spaces between words*/
 export function trimExtraSpaces(
     line: string,
