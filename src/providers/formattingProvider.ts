@@ -95,10 +95,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // This line
 
-            // Start directives for formatter
+            // Stop directives for formatter
             if (emptyLine) {
-                if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOn/i)) {
-                    formatBlockComment = true;
+                if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)) {
+                    formatBlockComment = false;
                 }
             }
 
@@ -247,10 +247,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // Next line
 
-            // Stop directives for formatter
+            // Start directives for formatter
             if (emptyLine) {
-                if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)) {
-                    formatBlockComment = false;
+                if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOn/i)) {
+                    formatBlockComment = true;
                 }
             }
 
