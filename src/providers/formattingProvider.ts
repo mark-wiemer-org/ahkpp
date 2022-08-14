@@ -140,9 +140,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     temp = temp - t2.length;
                 }
                 depth -= temp;
-                if (temp > 0) {
-                    atTopLevel = false;
-                }
             }
 
             if (moreCloseParens) {
@@ -225,10 +222,12 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     let temp: RegExpExecArray;
                     if (
                         // if the regex matches the purified line
-                        (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
-                            purifiedLine,
-                        )) &&
-                        // and the captured group includes a slash
+                        (temp = new RegExp(
+                            // before 'one command code' allowed only optional close brace
+                            // example: '} else' or '} if'
+                            '^}?\\s*' + oneCommand + '\\b(.*)',
+                        ).exec(purifiedLine)) &&
+                        // and the captured group not includes a slash
                         !temp[1].includes('/')
                     ) {
                         oneCommandCode = true;

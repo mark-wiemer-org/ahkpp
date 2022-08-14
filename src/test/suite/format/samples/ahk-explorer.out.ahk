@@ -2992,7 +2992,7 @@ sortArrayByArray(toSort, sortWith, reverse=false, key=false)
 ;end of functions
 ;hotkeys
 #if winactive(thisUniqueWintitle)
-    ^e::
+^e::
     ; revealFileInExplorer(EcurrentDir%whichSide%, getSelectedNames())
     path:=getSelectedPaths()[1]
     if (path) {
