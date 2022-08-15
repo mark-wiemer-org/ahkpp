@@ -3,6 +3,7 @@ import {
     hasMoreCloseParens,
     hasMoreOpenParens,
     removeEmptyLines,
+    trimExtraSpaces,
 } from '../../../../providers/formattingProvider.utils';
 
 suite('FormattingProvider utils', () => {
@@ -137,6 +138,49 @@ suite('FormattingProvider utils', () => {
                 () => {
                     assert.strictEqual(
                         removeEmptyLines(data.in, data.ln),
+                        data.rs,
+                    );
+                },
+            );
+        });
+    });
+
+    suite('trimExtraSpaces', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            //     ts: , // trim extra spaces
+            // },
+            {
+                in: 'InputFile    :=    "movie.mkv"',
+                rs: 'InputFile := "movie.mkv"',
+                ts: true,
+            },
+            {
+                in: 'InputFile    :=    "movie.mkv"',
+                rs: 'InputFile    :=    "movie.mkv"',
+                ts: false,
+            },
+            {
+                in: 'MsgBox,  4,   , testing   testing',
+                rs: 'MsgBox, 4, , testing testing',
+                ts: true,
+            },
+        ];
+        dataList.forEach((data) => {
+            test(
+                'Trim(' +
+                    data.ts.toString() +
+                    "): '" +
+                    data.in +
+                    "' => '" +
+                    data.rs +
+                    "'",
+                () => {
+                    assert.strictEqual(
+                        trimExtraSpaces(data.in, data.ts),
                         data.rs,
                     );
                 },

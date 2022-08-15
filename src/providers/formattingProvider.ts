@@ -6,6 +6,7 @@ import {
     hasMoreCloseParens,
     hasMoreOpenParens,
     removeEmptyLines,
+    trimExtraSpaces,
 } from './formattingProvider.utils';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
@@ -75,15 +76,16 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let preBlockCommentAtTopLevel = true;
         let preBlockCommentOneCommandCode = false;
 
+        const trimSpaces = Global.getConfig<boolean>(ConfigKey.trimExtraSpaces);
+
         for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
             const originalLine = document.lineAt(lineIndex).text;
             const purifiedLine = CodeUtil.purify(originalLine.toLowerCase());
             /** The line comment. Empty string if no line comment exists */
             const comment = /;.+/.exec(originalLine)?.[0] ?? '';
-            const formattedLine = originalLine
-                .replace(/;.+/, '')
-                .replace(/ {2,}/g, ' ')
-                .concat(comment)
+            let formattedLine = originalLine.replace(/;.+/, ''); // Remove single line comment
+            formattedLine = trimExtraSpaces(formattedLine, trimSpaces) // Remove extra spaces between words
+                .concat(comment) // Add removed single line comment back
                 .trim();
             /** Line is empty or this is single comment line */
             const emptyLine = purifiedLine === '';
@@ -207,9 +209,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     temp = temp - t2.length;
                 }
                 depth -= temp;
-                if (temp > 0) {
-                    atTopLevel = false;
-                }
             }
 
             if (moreCloseParens) {
@@ -312,10 +311,12 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     let temp: RegExpExecArray;
                     if (
                         // if the regex matches the purified line
-                        (temp = new RegExp('\\b' + oneCommand + '\\b(.*)').exec(
-                            purifiedLine,
-                        )) &&
-                        // and the captured group includes a slash
+                        (temp = new RegExp(
+                            // before 'one command code' allowed only optional close brace
+                            // example: '} else' or '} if'
+                            '^}?\\s*' + oneCommand + '\\b(.*)',
+                        ).exec(purifiedLine)) &&
+                        // and the captured group not includes a slash
                         !temp[1].includes('/')
                     ) {
                         oneCommandCode = true;
