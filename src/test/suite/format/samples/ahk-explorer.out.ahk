@@ -3492,7 +3492,7 @@ return
 
 #if winactive("renamingWinTitle ahk_class AutoHotkeyGUI")
 
-    $esc::
+$esc::
     if (focused="flistView") {
         if (canRename) {
             canRename:=false
@@ -3511,7 +3511,7 @@ return
 
 #if winactive("create_folder ahk_class AutoHotkeyGUI")
 
-    $enter::
+$enter::
     Gosub, createLabel
 
 return
