@@ -7,7 +7,7 @@ import * as vscode from 'vscode';
  */
 export function buildIndentationChars(
     depth: number,
-    options: vscode.FormattingOptions,
+    options: Pick<vscode.FormattingOptions, 'insertSpaces' | 'tabSize'>,
 ): string {
     return options.insertSpaces
         ? ' '.repeat(depth * options.tabSize)
@@ -41,7 +41,7 @@ export function buildIndentedLine(
     lastLineIndex: number,
     formattedLine: string,
     depth: number,
-    options: vscode.FormattingOptions,
+    options: Pick<vscode.FormattingOptions, 'insertSpaces' | 'tabSize'>,
 ) {
     const indentationChars = buildIndentationChars(depth, options);
     let indentedLine = buildIndentedString(indentationChars, formattedLine);
