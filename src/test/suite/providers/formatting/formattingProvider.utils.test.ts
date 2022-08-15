@@ -1,5 +1,7 @@
 import * as assert from 'assert';
 import {
+    buildIndentationChars,
+    buildIndentedLine,
     hasMoreCloseParens,
     hasMoreOpenParens,
     removeEmptyLines,
@@ -7,6 +9,120 @@ import {
 } from '../../../../providers/formattingProvider.utils';
 
 suite('FormattingProvider utils', () => {
+    suite('buildIndentationChars', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     dp: , // depth of indentation
+            //     op: , // formatting options
+            //     rs: , // expected result
+            // },
+            {
+                dp: 0,
+                op: { insertSpaces: true, tabSize: 4 },
+                rs: '',
+            },
+            {
+                dp: 1,
+                op: { insertSpaces: true, tabSize: 4 },
+                rs: '    ',
+            },
+            {
+                dp: 2,
+                op: { insertSpaces: true, tabSize: 4 },
+                rs: '        ',
+            },
+            {
+                dp: 1,
+                op: { insertSpaces: false, tabSize: 4 },
+                rs: '\t',
+            },
+            {
+                dp: 2,
+                op: { insertSpaces: false, tabSize: 4 },
+                rs: '\t\t',
+            },
+        ];
+        dataList.forEach((data) => {
+            test(
+                'depth:' +
+                    data.dp +
+                    ' spaces:' +
+                    data.op.insertSpaces.toString() +
+                    " => '" +
+                    data.rs.replace(/\t/g, '\\t') +
+                    "'",
+                () => {
+                    assert.strictEqual(
+                        buildIndentationChars(data.dp, data.op),
+                        data.rs,
+                    );
+                },
+            );
+        });
+    });
+
+    suite('buildIndentedLine', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     dp: , // depth of indentation
+            //     fl: , // formatted line
+            //     op: , // formatting options
+            //     rs: , // expected result
+            // },
+            {
+                dp: 0,
+                fl: 'SoundBeep',
+                op: { insertSpaces: true, tabSize: 4 },
+                rs: 'SoundBeep',
+            },
+            {
+                dp: 1,
+                fl: 'SoundBeep',
+                op: { insertSpaces: true, tabSize: 4 },
+                rs: '    SoundBeep',
+            },
+            {
+                dp: 2,
+                fl: 'SoundBeep',
+                op: { insertSpaces: true, tabSize: 4 },
+                rs: '        SoundBeep',
+            },
+            {
+                dp: 1,
+                fl: 'SoundBeep',
+                op: { insertSpaces: false, tabSize: 4 },
+                rs: '\tSoundBeep',
+            },
+            {
+                dp: 2,
+                fl: 'SoundBeep',
+                op: { insertSpaces: false, tabSize: 4 },
+                rs: '\t\tSoundBeep',
+            },
+        ];
+        dataList.forEach((data) => {
+            test(
+                'depth:' +
+                    data.dp +
+                    ' spaces:' +
+                    data.op.insertSpaces.toString() +
+                    " '" +
+                    data.fl +
+                    "' => '" +
+                    data.rs.replace(/\t/g, '\\t') +
+                    "'",
+                () => {
+                    assert.strictEqual(
+                        buildIndentedLine(0, 1, data.fl, data.dp, data.op),
+                        data.rs,
+                    );
+                },
+            );
+        });
+    });
+
     suite('hasMoreCloseParens', () => {
         // List of test data
         let dataList = [
