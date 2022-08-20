@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
 import { ConfigKey, Global } from '../common/global';
 import {
+    buildIndentedLine,
     hasMoreCloseParens,
     hasMoreOpenParens,
     removeEmptyLines,
@@ -59,7 +60,21 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
          */
         let oneCommandCode = false;
         let blockComment = false;
+        /** Base indent, that block comment had in original code */
+        let blockCommentIndent = '';
         let atTopLevel = true;
+        /** Formatter's directive:
+         * ```ahk
+         * ;@AHK++FormatBlockCommentOn
+         * ;@AHK++FormatBlockCommentOff
+         * ```
+         * Format text inside block comment like regular code */
+        let formatBlockComment = false;
+        // Save important values to this variables on block comment enter, restore them on exit
+        let preBlockCommentDepth = 0;
+        let preBlockCommentTagDepth = 0;
+        let preBlockCommentAtTopLevel = true;
+        let preBlockCommentOneCommandCode = false;
 
         const trimSpaces = Global.getConfig<boolean>(ConfigKey.trimExtraSpaces);
 
@@ -72,6 +87,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             formattedLine = trimExtraSpaces(formattedLine, trimSpaces) // Remove extra spaces between words
                 .concat(comment) // Add removed single line comment back
                 .trim();
+            /** Line is empty or this is single comment line */
+            const emptyLine = purifiedLine === '';
 
             atTopLevel = true;
 
@@ -80,19 +97,71 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // This line
 
-            // Block comments
-            if (originalLine.match(/ *\/\*/)) {
-                blockComment = true;
-            }
-            if (originalLine.match(/ *\*\//)) {
-                blockComment = false;
-            }
-            if (blockComment) {
-                formattedDocument += originalLine;
-                if (lineIndex !== document.lineCount - 1) {
-                    formattedDocument += '\n';
+            // Stop directives for formatter
+            if (emptyLine) {
+                if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)) {
+                    formatBlockComment = false;
                 }
-                continue;
+            }
+
+            // Block comments
+            // The /* and */ symbols can be used to comment out an entire section,
+            // but only if the symbols appear at the beginning of a line (excluding whitespace),
+            // as in this example:
+            // /*
+            // MsgBox, This line is commented out (disabled).
+            // MsgBox, Common mistake: */ this does not end the comment.
+            // MsgBox, This line is commented out.
+            // */
+            if (!blockComment && originalLine.match(/^\s*\/\*/)) {
+                // found start '/*' pattern
+                blockComment = true;
+                // Save first capture group (original indent)
+                blockCommentIndent = originalLine.match(/(^\s*)\/\*/)?.[1];
+                if (formatBlockComment) {
+                    // save indent values on block comment enter
+                    preBlockCommentDepth = depth;
+                    preBlockCommentTagDepth = tagDepth;
+                    preBlockCommentAtTopLevel = atTopLevel;
+                    preBlockCommentOneCommandCode = oneCommandCode;
+                    // reset indent values to default values with added current 'depth' indent
+                    oneCommandCode = false;
+                }
+            }
+
+            if (blockComment) {
+                // Save block comment line only if user don't want format it content
+                if (!formatBlockComment) {
+                    let blockCommentLine = '';
+                    if (originalLine.startsWith(blockCommentIndent)) {
+                        blockCommentLine = originalLine.substring(
+                            blockCommentIndent.length,
+                        );
+                    } else {
+                        blockCommentLine = originalLine;
+                    }
+                    formattedDocument += buildIndentedLine(
+                        lineIndex,
+                        document.lineCount,
+                        blockCommentLine,
+                        depth,
+                        options,
+                    );
+                }
+                if (originalLine.match(/^\s*\*\//)) {
+                    // found end '*/' pattern
+                    blockComment = false;
+                    if (formatBlockComment) {
+                        // restore indent values on block comment exit
+                        depth = preBlockCommentDepth;
+                        tagDepth = preBlockCommentTagDepth;
+                        atTopLevel = preBlockCommentAtTopLevel;
+                        oneCommandCode = preBlockCommentOneCommandCode;
+                    }
+                }
+                if (!formatBlockComment) {
+                    continue;
+                }
             }
 
             // #IfWinActive, #IfWinNotActive
@@ -162,27 +231,47 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (depth < 0) {
                 depth = 0;
             }
-
-            // Add the indented line to the file
-            const indentationChars = options.insertSpaces
-                ? ' '.repeat(depth * options.tabSize)
-                : '\t'.repeat(depth);
-            formattedDocument += !formattedLine?.trim()
-                ? formattedLine
-                : indentationChars + formattedLine;
-
-            // If not last line, add newline
-            if (lineIndex !== document.lineCount - 1) {
-                formattedDocument += '\n';
+            if (preBlockCommentDepth < 0) {
+                preBlockCommentDepth = 0;
             }
+
+            // Save indented line
+            formattedDocument += buildIndentedLine(
+                lineIndex,
+                document.lineCount,
+                formattedLine,
+                depth,
+                options,
+            );
 
             // Next line
 
+            // Start directives for formatter
+            if (emptyLine) {
+                if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOn/i)) {
+                    formatBlockComment = true;
+                }
+            }
+
             // One command code
-            if (oneCommandCode) {
+            if (
+                oneCommandCode &&
+                // Don't change indentation on empty lines (single line comment is equal to empty line) after one command code.
+                !emptyLine &&
+                // Don't change indentation on block comment after one command code.
+                // Change indentation inside block comment, if user wants to format block comment.
+                (!blockComment || formatBlockComment)
+            ) {
                 oneCommandCode = false;
                 depth--;
             }
+
+            // Block comments
+            // Must be after 'One command code' check, because it reset flag 'blockComment' that tests there!
+            // if (blockComment && originalLine.match(/^\s*\*\//)) {
+            //     // found end '*/' pattern
+            //     blockComment = false;
+            // }
 
             // #IfWinActive, #IfWinNotActive
             if (

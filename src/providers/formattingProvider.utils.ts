@@ -1,3 +1,57 @@
+import * as vscode from 'vscode';
+
+/**
+ * Build indentation chars
+ * @param depth Depth of indent
+ * @param options VS Code formatting options
+ */
+export function buildIndentationChars(
+    depth: number,
+    options: Pick<vscode.FormattingOptions, 'insertSpaces' | 'tabSize'>,
+): string {
+    return options.insertSpaces
+        ? ' '.repeat(depth * options.tabSize)
+        : '\t'.repeat(depth);
+}
+
+/**
+ * Build indented line of code (not ready for saving)
+ * @param indentationChars Indentation chars
+ * @param formattedLine Formatted line of code
+ */
+export function buildIndentedString(
+    indentationChars: string,
+    formattedLine: string,
+): string {
+    return !formattedLine?.trim()
+        ? formattedLine
+        : indentationChars + formattedLine;
+}
+
+/**
+ * Build indented line of code (ready for saving)
+ * @param lineIndex Line index of passed formattedLine
+ * @param lastLineIndex Index of last line of document
+ * @param formattedLine Formatted line of code
+ * @param depth Depth of indent
+ * @param options VS Code formatting options
+ */
+export function buildIndentedLine(
+    lineIndex: number,
+    lastLineIndex: number,
+    formattedLine: string,
+    depth: number,
+    options: Pick<vscode.FormattingOptions, 'insertSpaces' | 'tabSize'>,
+) {
+    const indentationChars = buildIndentationChars(depth, options);
+    let indentedLine = buildIndentedString(indentationChars, formattedLine);
+    // If not last line, add newline
+    if (lineIndex !== lastLineIndex - 1) {
+        indentedLine += '\n';
+    }
+    return indentedLine;
+}
+
 /** @return true iff this line has more closing parens than opening parens (round brackets) */
 export function hasMoreCloseParens(line: string): boolean {
     if (!line.includes(')')) {

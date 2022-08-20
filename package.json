@@ -279,6 +279,10 @@
             {
                 "language": "ahk",
                 "path": "./snippets/ahk.json"
+            },
+            {
+                "language": "ahk",
+                "path": "./snippets/ahk++.json"
             }
         ]
     },
