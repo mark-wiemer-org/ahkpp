@@ -27,9 +27,11 @@ export class Global {
 }
 
 export enum ConfigKey {
-    compilePath = 'compilePath',
-    helpPath = 'helpPath',
-    enableIntellisense = 'enableIntellisense',
-    executePath = 'executePath',
+    allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
+    compilePath = 'file.compilePath',
+    enableIntellisense = 'language.enableIntellisense',
+    executePath = 'file.executePath',
+    helpPath = 'file.helpPath',
     preserveIndent = 'formatter.preserveIndent',
+    trimExtraSpaces = 'formatter.trimExtraSpaces',
 }

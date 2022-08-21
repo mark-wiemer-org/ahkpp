@@ -27,6 +27,7 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
     -   [Find References](#find-symbol-references)
     -   [Hover Tip](#hover-tip)
     -   [Code Format](#code-format)
+    -   [Formatter Directives](#formatter-directives)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
@@ -110,6 +111,16 @@ Supports standard VS Code formatting.
 > The formatter is not currently customizable.
 
 ![Code Format](image/codeFormat.jpg)
+
+### Formatter Directives
+
+```autohotkey
+;@AHK++FormatBlockCommentOn
+/*
+;All text inside block comment will be formatted like regular code.
+*/
+;@AHK++FormatBlockCommentOff
+```
 
 ## Credits
 
