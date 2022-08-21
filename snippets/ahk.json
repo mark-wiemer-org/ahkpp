@@ -2,8 +2,10 @@
     "AhkTemplate": {
         "prefix": "#TEMPLATE",
         "body": [
+            "#NoEnv",
             "#SingleInstance, Force",
-            "SendMode Input",
+            "SendMode, Input",
+            "SetBatchLines, -1",
             "SetWorkingDir, %A_ScriptDir%",
             ""
         ]
@@ -305,7 +307,7 @@
     },
     "DriveSpaceFree": {
         "prefix": "DriveSpaceFree",
-        "body": "DriveSpaceFree, ${1:OutputVar}, ${2:C:\\}",
+        "body": "DriveSpaceFree, ${1:OutputVar}, ${2:C:\\\\}",
         "description": "Retrieves the free disk space of a drive, in Megabytes."
     },
     "Edit": {
