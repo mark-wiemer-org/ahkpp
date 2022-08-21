@@ -149,6 +149,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                         blockCommentLine,
                         depth,
                         options,
+                        preserveIndentOnEmptyString,
                     );
                 }
                 if (originalLine.match(/^\s*\*\//)) {
@@ -245,6 +246,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 formattedLine,
                 depth,
                 options,
+                preserveIndentOnEmptyString,
             );
 
             // Next line

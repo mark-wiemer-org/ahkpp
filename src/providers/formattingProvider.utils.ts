@@ -18,11 +18,16 @@ export function buildIndentationChars(
  * Build indented line of code (not ready for saving)
  * @param indentationChars Indentation chars
  * @param formattedLine Formatted line of code
+ * @param preserveIndentOnEmptyString Preserve indent on empty string
  */
 export function buildIndentedString(
     indentationChars: string,
     formattedLine: string,
+    preserveIndentOnEmptyString: boolean,
 ): string {
+    if (preserveIndentOnEmptyString) {
+        return indentationChars + formattedLine;
+    }
     return !formattedLine?.trim()
         ? formattedLine
         : indentationChars + formattedLine;
@@ -35,6 +40,7 @@ export function buildIndentedString(
  * @param formattedLine Formatted line of code
  * @param depth Depth of indent
  * @param options VS Code formatting options
+ * @param preserveIndentOnEmptyString Preserve indent on empty string
  */
 export function buildIndentedLine(
     lineIndex: number,
@@ -42,9 +48,14 @@ export function buildIndentedLine(
     formattedLine: string,
     depth: number,
     options: Pick<vscode.FormattingOptions, 'insertSpaces' | 'tabSize'>,
+    preserveIndentOnEmptyString: boolean,
 ) {
     const indentationChars = buildIndentationChars(depth, options);
-    let indentedLine = buildIndentedString(indentationChars, formattedLine);
+    let indentedLine = buildIndentedString(
+        indentationChars,
+        formattedLine,
+        preserveIndentOnEmptyString,
+    );
     // If not last line, add newline
     if (lineIndex !== lastLineIndex - 1) {
         indentedLine += '\n';
@@ -81,14 +92,19 @@ export function removeEmptyLines(
     if (allowedNumberOfEmptyLines === -1) {
         return document;
     }
-    const newLineCharacterNumber = allowedNumberOfEmptyLines + 1; // + 1 new line character from previous string with text
-    const newLineCharacter = new RegExp(`\\n{${newLineCharacterNumber},}`, 'g');
+    const emptyLines = new RegExp(
+        // We need not greedy quantifier for whitespaces (\s*?),
+        // because (\s) matches [\r\n\t\f\v ],
+        // it interfere with last \n in regex.
+        `\\n(\\s*?\\n){${allowedNumberOfEmptyLines},}`,
+        'g',
+    );
     return (
         document
             // remove extra empty lines
-            .replace(newLineCharacter, '\n'.repeat(newLineCharacterNumber))
+            .replace(emptyLines, '\n' + '$1'.repeat(allowedNumberOfEmptyLines))
             // remove empty lines at start of file
-            .replace(/^\n*/, '')
+            .replace(/^\s*\n+/, '')
     );
 }
 
