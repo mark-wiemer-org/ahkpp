@@ -1157,7 +1157,7 @@ LV_Colors_SubclassProc(H, M, W, L, S, R) {
             Return True
         }
     }
-Return DllCall("Comctl32.dll\DefSubclassProc", "Ptr", H, "UInt", M, "Ptr", W, "Ptr", L, "UInt")
+    Return DllCall("Comctl32.dll\DefSubclassProc", "Ptr", H, "UInt", M, "Ptr", W, "Ptr", L, "UInt")
 }
 ; ======================================================================================================================
 ;start of functions start
@@ -1167,7 +1167,7 @@ URItoPath(vPathUrl)
     vChars := 300 ;300 is an arbitrary number
     VarSetCapacity(vPath, vChars*2)
     DllCall("shlwapi\PathCreateFromUrl" (A_IsUnicode?"W":"A"), "Str",vPathUrl, "Str",vPath, "UInt*",vChars, "UInt",0)
-return vPath
+    return vPath
 }
 
 decodeStrAs(source,encoding)
@@ -1176,7 +1176,7 @@ decodeStrAs(source,encoding)
     sourceSize := VarSetCapacity(target,StrLen(source),0)
     Loop % sourceSize
         NumPut(NumGet(&source, A_Index*2-1-1, "UChar"), &target, A_Index-1, "UChar")
-return StrGet(&target, encoding)
+    return StrGet(&target, encoding)
 }
 
 sortArrByKey(ar, byref key,byref reverse:=false) {
@@ -1212,7 +1212,7 @@ sortArrByKey(ar, byref key,byref reverse:=false) {
     ; }
     ; }
 
-return finalAr
+    return finalAr
 }
 
 hashFiles(algorithm)
@@ -1275,7 +1275,7 @@ randomName(length)
         Random, randInt , 1, charsLength
         strng.=chars[randInt]
     }
-return strng
+    return strng
 }
 
 loadSettings()
@@ -1334,7 +1334,7 @@ bothSameDir(whichSide)
     otherSide:=(whichSide=1) ? 2 : 1
     if (EcurrentDir%whichSide%=EcurrentDir%otherSide%)
         return otherSide
-return false
+    return false
 }
 
 revealFileInExplorer(folderPath, files)
@@ -1355,7 +1355,7 @@ revealFileInExplorer(folderPath, files)
 }
 COM_CoInitialize()
 {
-Return	DllCall("ole32\CoInitialize", "Uint", 0)
+    Return	DllCall("ole32\CoInitialize", "Uint", 0)
 }
 COM_CoUninitialize()
 {
@@ -1720,7 +1720,7 @@ paddedNumber(number, howManyChars)
 {
     VarSetCapacity(ZeroPaddedNumber, 20) ; Ensure the variable is large enough to accept the new string.
     DllCall("wsprintf", "Str", ZeroPaddedNumber, "Str", "%0" howManyChars "d", "Int", number, "Cdecl") ; Requires the Cdecl calling convention.
-return ZeroPaddedNumber
+    return ZeroPaddedNumber
 }
 
 setWhichSideFromDir(dir)
@@ -1815,7 +1815,7 @@ getMultiRenameNames()
         previewNames.Push(nameInstance)
 
     }
-return previewNames
+    return previewNames
 }
 
 getTextWidth(text)
@@ -1825,7 +1825,7 @@ getTextWidth(text)
     Gui,Fake:Add,Text, -Wrap vDummy,% text
     GuiControlGet,Pos,Fake:Pos,Dummy
     Gui,Fake:Destroy
-return posw
+    return posw
 }
 calculateStuff(ByRef date:="", ByRef size:="", ByRef name:="", Byref k:="") {
     global
@@ -2137,7 +2137,7 @@ submitAndRenderDir()
 Bin(x){
     while x
         r:=1&x r,x>>=1
-return r
+    return r
 }
 compareTwoStrings2(para_string1,para_string2) {
     ;Sørensen-Dice coefficient
@@ -2162,7 +2162,7 @@ compareTwoStrings2(para_string1,para_string2) {
         return 1
     }
     SetBatchLines, % savedBatchLines
-return vSDC
+    return vSDC
 }
 
 compareTwoStrings(para_string1,para_string2)
@@ -2176,11 +2176,11 @@ compareTwoStrings(para_string1,para_string2)
     oArray := {base:{__Get:Func("Abs").Bind(0)}} ;make default key value 0 instead of a blank string
     Loop, % vCount1 := StrLen(para_string1)
         ; Loop, % vCount1 := StrLen(para_string1) - 1
-    oArray["z" SubStr(para_string1, A_Index, 1)]++
+        oArray["z" SubStr(para_string1, A_Index, 1)]++
     ; oArray["z" SubStr(para_string1, A_Index, 2)]++
     Loop, % vCount2 := StrLen(para_string2)
         ; Loop, % vCount2 := StrLen(para_string2) - 1
-    ; p(oArray)
+        ; p(oArray)
     if (oArray["z" SubStr(para_string2, A_Index, 1)] > 0) {
         ; if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
         oArray["z" SubStr(para_string2, A_Index, 1)]--
@@ -2198,7 +2198,7 @@ compareTwoStrings(para_string1,para_string2)
         return 1
     }
     SetBatchLines, % savedBatchLines
-return vSDC
+    return vSDC
 }
 
 autoMegaByteFormat(size, decimalPlaces = 2)
@@ -2216,8 +2216,8 @@ autoMegaByteFormat(size, decimalPlaces = 2)
             break
     }
 
-return (sizeIndex = 0) ? size " MB"
-: round(size, decimalPlaces) . " " . sizes[sizeIndex]
+    return (sizeIndex = 0) ? size " MB"
+    : round(size, decimalPlaces) . " " . sizes[sizeIndex]
 }
 
 autoByteFormat(size, decimalPlaces = 2)
@@ -2235,8 +2235,8 @@ autoByteFormat(size, decimalPlaces = 2)
             break
     }
 
-return (sizeIndex = 0) ? size " B"
-: round(size, decimalPlaces) . " " . sizes[sizeIndex]
+    return (sizeIndex = 0) ? size " B"
+    : round(size, decimalPlaces) . " " . sizes[sizeIndex]
 }
 
 sortColumn(column, sortMethod)
@@ -2266,7 +2266,7 @@ getSelectedNames()
         selectedNames.Push(OutputVar)
 
     }
-return selectedNames
+    return selectedNames
 }
 
 getSelectedPaths()
@@ -2276,7 +2276,7 @@ getSelectedPaths()
     for k, v in getSelectedNames() {
         selectedPaths.Push(EcurrentDir%whichSide% "\" v)
     }
-return selectedPaths
+    return selectedPaths
 }
 
 doubleClickedNormal(ByRef index)
@@ -2542,7 +2542,7 @@ getinsertPoint(index)
     if (index<1)
         return 1
 
-return rowBak[index]+1
+    return rowBak[index]+1
 
 }
 
@@ -2752,7 +2752,7 @@ findNextDirNameNumberIteration(path)
         pathToCheck:=OutDir "\" left incrementNumber right
         incrementNumber++
     }
-return pathToCheck
+    return pathToCheck
 }
 
 getLeftRight(string, needle)
@@ -2813,25 +2813,25 @@ ShellContextMenu(folderPath, files, win_hwnd = 0 )
     ; p(idn)
     ; return
     ; Formatter ignores block comments for now, nbd
-        /*
-        typedef struct _CMINVOKECOMMANDINFOEX {
-            DWORD   cbSize;          0
-            DWORD   fMask;           4
-            HWND    hwnd;            8
-            LPCSTR  lpVerb;          8+A_PtrSize
-            LPCSTR  lpParameters;    8+2*A_PtrSize
-            LPCSTR  lpDirectory;     8+3*A_PtrSize
-            int     nShow;           8+4*A_PtrSize
-            DWORD   dwHotKey;        12+4*A_PtrSize
-            HANDLE  hIcon;           16+4*A_PtrSize
-            LPCSTR  lpTitle;         16+5*A_PtrSize
-            LPCWSTR lpVerbW;         16+6*A_PtrSize
-            LPCWSTR lpParametersW;   16+7*A_PtrSize
-            LPCWSTR lpDirectoryW;    16+8*A_PtrSize
-            LPCWSTR lpTitleW;        16+9*A_PtrSize
-            POINT   ptInvoke;        16+10*A_PtrSize
-        } CMINVOKECOMMANDINFOEX, *LPCMINVOKECOMMANDINFOEX;
-        http://msdn.microsoft.com/en-us/library/bb773217%28v=VS.85%29.aspx
+    /*
+    typedef struct _CMINVOKECOMMANDINFOEX {
+        DWORD   cbSize;          0
+        DWORD   fMask;           4
+        HWND    hwnd;            8
+        LPCSTR  lpVerb;          8+A_PtrSize
+        LPCSTR  lpParameters;    8+2*A_PtrSize
+        LPCSTR  lpDirectory;     8+3*A_PtrSize
+        int     nShow;           8+4*A_PtrSize
+        DWORD   dwHotKey;        12+4*A_PtrSize
+        HANDLE  hIcon;           16+4*A_PtrSize
+        LPCSTR  lpTitle;         16+5*A_PtrSize
+        LPCWSTR lpVerbW;         16+6*A_PtrSize
+        LPCWSTR lpParametersW;   16+7*A_PtrSize
+        LPCWSTR lpDirectoryW;    16+8*A_PtrSize
+        LPCWSTR lpTitleW;        16+9*A_PtrSize
+        POINT   ptInvoke;        16+10*A_PtrSize
+    } CMINVOKECOMMANDINFOEX, *LPCMINVOKECOMMANDINFOEX;
+    http://msdn.microsoft.com/en-us/library/bb773217%28v=VS.85%29.aspx
     */
     struct_size := 16+11*A_PtrSize
     VarSetCapacity(pici,struct_size,0)
@@ -2847,13 +2847,13 @@ ShellContextMenu(folderPath, files, win_hwnd = 0 )
 
     DllCall("GlobalFree", "Ptr", DllCall("SetWindowLongPtr", "Ptr", win_hwnd, "int", -4, "Ptr", WPOld,"UPtr"))
     DllCall("DestroyMenu", "Ptr", hMenu)
-StopContextMenu:
-    ObjRelease(pIContextMenu3)
-    ObjRelease(pIContextMenu2)
-    ObjRelease(pIContextMenu)
-    pIContextMenu2:=pIContextMenu3:=WPOld:=0
-    Gui,SHELL_CONTEXT:Destroy
-return idn
+    StopContextMenu:
+        ObjRelease(pIContextMenu3)
+        ObjRelease(pIContextMenu2)
+        ObjRelease(pIContextMenu)
+        pIContextMenu2:=pIContextMenu3:=WPOld:=0
+        Gui,SHELL_CONTEXT:Destroy
+    return idn
 }
 WindowProc(hWnd, nMsg, wParam, lParam)
 {
@@ -2868,21 +2868,21 @@ WindowProc(hWnd, nMsg, wParam, lParam)
         If !DllCall(VTable(pIContextMenu2, 6), "Ptr", pIContextMenu2, "Uint", nMsg, "Ptr", wParam, "Ptr", lParam)
             Return 0
     }
-Return DllCall("user32.dll\CallWindowProcW", "Ptr", WPOld, "Ptr", hWnd, "Uint", nMsg, "Ptr", wParam, "Ptr", lParam)
+    Return DllCall("user32.dll\CallWindowProcW", "Ptr", WPOld, "Ptr", hWnd, "Uint", nMsg, "Ptr", wParam, "Ptr", lParam)
 }
 VTable(ppv, idx)
 {
-Return NumGet(NumGet(1*ppv)+A_PtrSize*idx)
+    Return NumGet(NumGet(1*ppv)+A_PtrSize*idx)
 }
 
 other_vtable(ptr, n) {
-return NumGet(NumGet(ptr+0), n*A_PtrSize)
+    return NumGet(NumGet(ptr+0), n*A_PtrSize)
 }
 
 GUID4String(ByRef CLSID, String)
 {
     VarSetCapacity(CLSID, 16,0)
-return DllCall("ole32\CLSIDFromString", "wstr", String, "Ptr", &CLSID) >= 0 ? &CLSID : ""
+    return DllCall("ole32\CLSIDFromString", "wstr", String, "Ptr", &CLSID) >= 0 ? &CLSID : ""
 }
 Guid_FromStr(sGuid, ByRef VarOrAddress)
 {
@@ -2891,7 +2891,7 @@ Guid_FromStr(sGuid, ByRef VarOrAddress)
     pGuid := IsByRef(VarOrAddress) ? &VarOrAddress : VarOrAddress
     if ( DllCall("ole32\CLSIDFromString", "WStr", sGuid, "Ptr", pGuid) < 0 )
         throw Exception("Invalid GUID", -1, sGuid)
-return pGuid ; return address of GUID struct
+    return pGuid ; return address of GUID struct
 }
 Guid_ToStr(ByRef VarOrAddress)
 {
@@ -2899,11 +2899,11 @@ Guid_ToStr(ByRef VarOrAddress)
     VarSetCapacity(sGuid, 78) ; (38 + 1) * 2
     if !DllCall("ole32\StringFromGUID2", "Ptr", pGuid, "Ptr", &sGuid, "Int", 39)
         throw Exception("Invalid GUID", -1, Format("<at {1:p}>", pGuid))
-return StrGet(&sGuid, "UTF-16")
+    return StrGet(&sGuid, "UTF-16")
 }
 CoTaskMemFree(pv)
 {
-Return DllCall("ole32\CoTaskMemFree", "Ptr", pv)
+    Return DllCall("ole32\CoTaskMemFree", "Ptr", pv)
 }
 FileToClipboard(PathToCopy,Method="copy")
 {
@@ -2959,7 +2959,7 @@ FileToClipboard(PathToCopy,Method="copy")
     cfFormat := DllCall("RegisterClipboardFormat","Str","Preferred DropEffect")
     DllCall("SetClipboardData","uint",cfFormat,"UPtr",mem)
     DllCall("CloseClipboard")
-return
+    return
 }
 
 sortArrayByArray(toSort, sortWith, reverse=false, key=false)
@@ -2986,20 +2986,20 @@ sortArrayByArray(toSort, sortWith, reverse=false, key=false)
             finalAr.Push(v[1])
         }
     }
-return finalAr
+    return finalAr
 }
 
 ;end of functions
 ;hotkeys
 #if winactive(thisUniqueWintitle)
 ^e::
-; revealFileInExplorer(EcurrentDir%whichSide%, getSelectedNames())
-path:=getSelectedPaths()[1]
-if (path) {
-    Run, % "explorer.exe /select,""" path """"
-} else {
-    Run, % "explorer.exe """ EcurrentDir%whichSide% """"
-}
+    ; revealFileInExplorer(EcurrentDir%whichSide%, getSelectedNames())
+    path:=getSelectedPaths()[1]
+    if (path) {
+        Run, % "explorer.exe /select,""" path """"
+    } else {
+        Run, % "explorer.exe """ EcurrentDir%whichSide% """"
+    }
 return
 
 #d::
