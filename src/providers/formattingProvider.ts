@@ -199,6 +199,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             } else if (purifiedLine.match(/:\s*$/)) {
                 // default or hotkey
                 if (tagDepth > 0 && tagDepth === depth) {
+                    // De-indent label or hotkey, if they not end with 'return' command.
+                    // This is fall-through scenario. Example:
+                    // Label1:
+                    //     code
+                    // Label2:
+                    //     code
+                    // return
                     depth--;
                     // atTopLevel = false;
                 }
