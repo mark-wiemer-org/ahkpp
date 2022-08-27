@@ -76,8 +76,17 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let preBlockCommentAtTopLevel = true;
         let preBlockCommentOneCommandCode = false;
 
-        /** This line is #IfWinActive, #IfWinExist with params OR #If with expression*/
+        /** This line is `#IfWinActive`, `#IfWinExist` with params or `#If` with expression*/
         let sharpDirective = false;
+        /** User setting: enable/disable indentation of code after `#Directives`, that creates context-sensitive hotkeys and hotstrings.
+         * Example of `#Directives`:
+         * ```ahk
+         * #IfWinActive
+         * #IfWinNotActive
+         * #IfWinExist
+         * #IfWinNotExist
+         * #If
+         * ```*/
         const indentCodeAfterSharpDirective = Global.getConfig<boolean>(
             ConfigKey.indentCodeAfterSharpDirective,
         );
