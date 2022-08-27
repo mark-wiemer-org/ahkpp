@@ -30,6 +30,7 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
     -   [Folding](#folding)
     -   [Code Format](#code-format)
         -   [Formatter Directives](#formatter-directives)
+        -   [Formatter Known Issues](#formatter-known-issues)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
@@ -145,6 +146,46 @@ The only directive currently supported is `FormatBlockComment` and it's used as 
 ;All text inside block comment will be formatted like regular code.
 */
 ;@AHK++FormatBlockCommentOff
+```
+
+#### Formatter Known Issues
+
+There are commands, that can produce indent on single next line. For example:
+
+```autohotkey
+if (true)
+    MsgBox
+
+Loop % n
+    SoundBeep
+```
+
+Such code will be well formatted.
+
+But do not nest such commands. The next code will be formatted incorrectly:
+
+```autohotkey
+if (true)
+    if (true)
+        MsgBox
+
+Loop % n
+    if (true)
+        SoundBeep
+```
+
+Use their variants with braces:
+
+```autohotkey
+if (true) {
+    if (true)
+        MsgBox
+}
+
+Loop % n {
+    if (true)
+        SoundBeep
+}
 ```
 
 ## Credits
