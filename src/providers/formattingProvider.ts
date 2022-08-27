@@ -62,7 +62,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let blockComment = false;
         /** Base indent, that block comment had in original code */
         let blockCommentIndent = '';
-        let atTopLevel = true;
+        let detectOneCommandCode = true;
         /** Formatter's directive:
          * ```ahk
          * ;@AHK++FormatBlockCommentOn
@@ -73,7 +73,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         // Save important values to this variables on block comment enter, restore them on exit
         let preBlockCommentDepth = 0;
         let preBlockCommentTagDepth = 0;
-        let preBlockCommentAtTopLevel = true;
+        let preBlockCommentDetectOneCommandCode = true;
         let preBlockCommentOneCommandCode = false;
 
         const trimSpaces = Global.getConfig<boolean>(ConfigKey.trimExtraSpaces);
@@ -90,7 +90,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             /** Line is empty or this is single comment line */
             const emptyLine = purifiedLine === '';
 
-            atTopLevel = true;
+            detectOneCommandCode = true;
 
             const moreCloseParens = hasMoreCloseParens(purifiedLine);
             const moreOpenParens = hasMoreOpenParens(purifiedLine);
@@ -122,7 +122,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     // save indent values on block comment enter
                     preBlockCommentDepth = depth;
                     preBlockCommentTagDepth = tagDepth;
-                    preBlockCommentAtTopLevel = atTopLevel;
+                    preBlockCommentDetectOneCommandCode = detectOneCommandCode;
                     preBlockCommentOneCommandCode = oneCommandCode;
                     // reset indent values to default values with added current 'depth' indent
                     oneCommandCode = false;
@@ -155,7 +155,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                         // restore indent values on block comment exit
                         depth = preBlockCommentDepth;
                         tagDepth = preBlockCommentTagDepth;
-                        atTopLevel = preBlockCommentAtTopLevel;
+                        detectOneCommandCode =
+                            preBlockCommentDetectOneCommandCode;
                         oneCommandCode = preBlockCommentOneCommandCode;
                     }
                 }
@@ -296,7 +297,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     // |   |   wrong_extra_indented_code
                     // |   code
                     // }
-                    atTopLevel = false;
+                    detectOneCommandCode = false;
                 }
             }
 
@@ -311,7 +312,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 // atTopLevel = false;
             }
 
-            if (atTopLevel) {
+            if (detectOneCommandCode) {
                 for (const oneCommand of FormatProvider.oneCommandList) {
                     let temp: RegExpExecArray;
                     if (
