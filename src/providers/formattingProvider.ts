@@ -174,7 +174,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 } else {
                     depth--;
                 }
-                atTopLevel = false;
+                // atTopLevel = false;
             }
 
             // return or ExitApp
@@ -184,7 +184,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ) {
                 tagDepth = 0;
                 depth--;
-                atTopLevel = false;
+                // atTopLevel = false;
             }
 
             // switch-case, hotkeys
@@ -192,12 +192,12 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 // case
                 tagDepth--;
                 depth--;
-                atTopLevel = false;
+                // atTopLevel = false;
             } else if (purifiedLine.match(/:\s*$/)) {
                 // default or hotkey
                 if (tagDepth > 0 && tagDepth === depth) {
                     depth--;
-                    atTopLevel = false;
+                    // atTopLevel = false;
                 }
             }
 
@@ -279,7 +279,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 purifiedLine.match(/#ifwinnotactive.*?\s/)
             ) {
                 depth++;
-                atTopLevel = false;
+                // atTopLevel = false;
             }
 
             // Check open braces
@@ -291,6 +291,11 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
                 depth += temp;
                 if (temp > 0) {
+                    // Do not detect oneCommandCode, because it will produce extra indent for next line:
+                    // if (true) {
+                    // |   |   wrong_extra_indented_code
+                    // |   code
+                    // }
                     atTopLevel = false;
                 }
             }
@@ -303,7 +308,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (!moreOpenParens && purifiedLine.match(/:\s*$/)) {
                 depth++;
                 tagDepth = depth;
-                atTopLevel = false;
+                // atTopLevel = false;
             }
 
             if (atTopLevel) {
