@@ -76,15 +76,16 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let preBlockCommentAtTopLevel = true;
         let preBlockCommentOneCommandCode = false;
 
-        const trimSpaces = Global.getConfig<boolean>(ConfigKey.trimExtraSpaces);
-
         for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
             const originalLine = document.lineAt(lineIndex).text;
             const purifiedLine = CodeUtil.purify(originalLine.toLowerCase());
             /** The line comment. Empty string if no line comment exists */
             const comment = /;.+/.exec(originalLine)?.[0] ?? '';
             let formattedLine = originalLine.replace(/;.+/, ''); // Remove single line comment
-            formattedLine = trimExtraSpaces(formattedLine, trimSpaces) // Remove extra spaces between words
+            formattedLine = trimExtraSpaces(
+                formattedLine,
+                Global.getConfig<boolean>(ConfigKey.trimExtraSpaces),
+            ) // Remove extra spaces between words
                 .concat(comment) // Add removed single line comment back
                 .trim();
             /** Line is empty or this is single comment line */
