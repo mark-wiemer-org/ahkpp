@@ -62,6 +62,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let blockComment = false;
         /** Base indent, that block comment had in original code */
         let blockCommentIndent = '';
+        /** Every iteration it's `true`, but become `false` if formatter increase indent for next line for open brace `{`.
+         * It prevents wrong extra indent, if `{` present after `oneCommandCode` code:
+         * one indent for `{` and additional indent for `oneCommandCode`.
+         */
         let detectOneCommandCode = true;
         /** Formatter's directive:
          * ```ahk
