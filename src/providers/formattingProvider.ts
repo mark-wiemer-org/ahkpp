@@ -179,7 +179,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // return or ExitApp
             if (
-                purifiedLine.match(/\b(return|ExitApp)\b/i) &&
+                purifiedLine.match(/\b(return|exitapp)\b/) &&
                 tagDepth === depth
             ) {
                 tagDepth = 0;
