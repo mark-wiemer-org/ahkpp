@@ -177,7 +177,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 } else {
                     depth--;
                 }
-                // atTopLevel = false;
             }
 
             // return or ExitApp
@@ -187,7 +186,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ) {
                 tagDepth = 0;
                 depth--;
-                // atTopLevel = false;
             }
 
             // switch-case, hotkeys
@@ -195,7 +193,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 // case
                 tagDepth--;
                 depth--;
-                // atTopLevel = false;
             } else if (purifiedLine.match(/:\s*$/)) {
                 // default or hotkey
                 if (tagDepth > 0 && tagDepth === depth) {
@@ -207,7 +204,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     //     code
                     // return
                     depth--;
-                    // atTopLevel = false;
                 }
             }
 
@@ -289,7 +285,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 purifiedLine.match(/#ifwinnotactive.*?\s/)
             ) {
                 depth++;
-                // atTopLevel = false;
             }
 
             // Check open braces
@@ -318,7 +313,6 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (!moreOpenParens && purifiedLine.match(/:\s*$/)) {
                 depth++;
                 tagDepth = depth;
-                // atTopLevel = false;
             }
 
             if (detectOneCommandCode) {
