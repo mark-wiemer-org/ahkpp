@@ -76,6 +76,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let preBlockCommentAtTopLevel = true;
         let preBlockCommentOneCommandCode = false;
 
+        /** This line is #IfWinActive, #IfWinExist with params OR #If with expression*/
+        let sharpDirective = false;
         const trimSpaces = Global.getConfig<boolean>(ConfigKey.trimExtraSpaces);
 
         for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
@@ -91,6 +93,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             const emptyLine = purifiedLine === '';
 
             atTopLevel = true;
+            sharpDirective = false;
 
             const moreCloseParens = hasMoreCloseParens(purifiedLine);
             const moreOpenParens = hasMoreOpenParens(purifiedLine);
@@ -164,10 +167,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 }
             }
 
-            // #IfWinActive, #IfWinNotActive
+            // #IfWinActive, #IfWinExist with omit params OR #If without expression
             if (
                 purifiedLine.match(/#ifwinactive$/) ||
-                purifiedLine.match(/#ifwinnotactive$/)
+                purifiedLine.match(/#ifwinnotactive$/) ||
+                purifiedLine.match(/#ifwinexist$/) ||
+                purifiedLine.match(/#ifwinnotexist$/) ||
+                purifiedLine.match(/#if$/)
             ) {
                 if (tagDepth > 0) {
                     depth -= tagDepth;
@@ -175,6 +181,23 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     depth--;
                 }
                 atTopLevel = false;
+            }
+
+            // #IfWinActive, #IfWinExist with params OR #If with expression
+            if (
+                purifiedLine.match(/#ifwinactive\b.+/) ||
+                purifiedLine.match(/#ifwinnotactive\b.+/) ||
+                purifiedLine.match(/#ifwinexist\b.+/) ||
+                purifiedLine.match(/#ifwinnotexist\b.+/) ||
+                purifiedLine.match(/#if\b.+/)
+            ) {
+                if (tagDepth > 0) {
+                    depth -= tagDepth;
+                } else {
+                    depth--;
+                }
+                atTopLevel = false;
+                sharpDirective = true;
             }
 
             // return or ExitApp
@@ -273,11 +296,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             //     blockComment = false;
             // }
 
-            // #IfWinActive, #IfWinNotActive
-            if (
-                purifiedLine.match(/#ifwinactive.*?\s/) ||
-                purifiedLine.match(/#ifwinnotactive.*?\s/)
-            ) {
+            // #IfWinActive, #IfWinExist with params OR #If with expression
+            if (sharpDirective) {
                 depth++;
                 atTopLevel = false;
             }
