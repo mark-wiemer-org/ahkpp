@@ -78,7 +78,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
         /** This line is #IfWinActive, #IfWinExist with params OR #If with expression*/
         let sharpDirective = false;
-        const settingIndentCodeAfterSharpDirective = Global.getConfig<boolean>(
+        const indentCodeAfterSharpDirective = Global.getConfig<boolean>(
             ConfigKey.indentCodeAfterSharpDirective,
         );
         const trimSpaces = Global.getConfig<boolean>(ConfigKey.trimExtraSpaces);
@@ -178,7 +178,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 purifiedLine.match(/#ifwinnotexist$/) ||
                 purifiedLine.match(/#if$/)
             ) {
-                if (settingIndentCodeAfterSharpDirective) {
+                if (indentCodeAfterSharpDirective) {
                     if (tagDepth > 0) {
                         depth -= tagDepth;
                     } else {
@@ -196,7 +196,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 purifiedLine.match(/#ifwinnotexist\b.+/) ||
                 purifiedLine.match(/#if\b.+/)
             ) {
-                if (settingIndentCodeAfterSharpDirective) {
+                if (indentCodeAfterSharpDirective) {
                     if (tagDepth > 0) {
                         depth -= tagDepth;
                     } else {
@@ -304,7 +304,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             // }
 
             // #IfWinActive, #IfWinExist with params OR #If with expression
-            if (sharpDirective && settingIndentCodeAfterSharpDirective) {
+            if (sharpDirective && indentCodeAfterSharpDirective) {
                 depth++;
                 atTopLevel = false;
             }
