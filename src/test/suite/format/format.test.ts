@@ -35,6 +35,7 @@ const formatTests: FormatTest[] = [
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
     },
+    { filenameRoot: 'label-fall-through' },
     {
         filenameRoot: 'tab-size-2',
         options: { tabSize: 2 },
