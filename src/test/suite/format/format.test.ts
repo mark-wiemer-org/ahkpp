@@ -21,6 +21,7 @@ const defaultOptions = {
     tabSize: 4,
     insertSpaces: true,
     allowedNumberOfEmptyLines: 1,
+    indentCodeAfterLabel: true,
     preserveIndent: false,
     trimExtraSpaces: true,
 };
@@ -51,6 +52,14 @@ const formatTests: FormatTest[] = [
     },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'demo' },
+    {
+        filenameRoot: 'indent-code-after-label-false',
+        options: { indentCodeAfterLabel: false },
+    },
+    {
+        filenameRoot: 'indent-code-after-label-true',
+        options: { indentCodeAfterLabel: true },
+    },
     {
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
