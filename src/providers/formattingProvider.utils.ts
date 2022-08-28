@@ -101,3 +101,22 @@ export function trimExtraSpaces(
         ? line.replace(/ {2,}/g, ' ') // Remove extra spaces between words
         : line;
 }
+
+/**
+ * Count open/close brace, that not match by corresponding close/open brace
+ * @param line
+ * @param braceChar Brace character to count: `{` or `}`
+ * @return Number of not matched braces
+ */
+export function braceNumber(line: string, braceChar: string): number {
+    let braceRegEx = new RegExp(braceChar, 'g');
+    let braceNum = line.match(braceRegEx).length;
+    /** Number of matched braces: `{...}` */
+    const matchedBrace = line.match(/{[^{}]*}/g);
+    if (matchedBrace) {
+        // Remove number of matched braces from overall number of braceChar
+        // to get only unique not matched braceChar
+        braceNum = braceNum - matchedBrace.length;
+    }
+    return braceNum;
+}

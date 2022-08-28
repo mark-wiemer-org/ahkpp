@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
 import { ConfigKey, Global } from '../common/global';
 import {
+    braceNumber,
     buildIndentedLine,
     hasMoreCloseParens,
     hasMoreOpenParens,
@@ -209,12 +210,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // Check close braces
             if (purifiedLine.includes('}')) {
-                let temp = purifiedLine.match(/}/).length;
-                const t2 = purifiedLine.match(/{[^{}]*}/);
-                if (t2) {
-                    temp = temp - t2.length;
-                }
-                depth -= temp;
+                const braceNum = braceNumber(purifiedLine, '}');
+                depth -= braceNum;
             }
 
             if (moreCloseParens) {
@@ -223,12 +220,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // One command code and open braces
             if (oneCommandCode && purifiedLine.includes('{')) {
-                let temp = purifiedLine.match(/{/).length;
-                const t2 = purifiedLine.match(/{[^{}]*}/);
-                if (t2) {
-                    temp = temp - t2.length;
-                }
-                if (temp > 0) {
+                const braceNum = braceNumber(purifiedLine, '{');
+                if (braceNum > 0) {
                     oneCommandCode = false;
                     depth--;
                 }
@@ -289,13 +282,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
             // Check open braces
             if (purifiedLine.includes('{')) {
-                let temp = purifiedLine.match(/{/).length;
-                const t2 = purifiedLine.match(/{[^{}]*}/);
-                if (t2) {
-                    temp = temp - t2.length;
-                }
-                depth += temp;
-                if (temp > 0) {
+                const braceNum = braceNumber(purifiedLine, '{');
+                depth += braceNum;
+                if (braceNum > 0) {
                     // Do not detect oneCommandCode, because it will produce extra indent for next line:
                     // if (true) {
                     // |   |   wrong_extra_indented_code

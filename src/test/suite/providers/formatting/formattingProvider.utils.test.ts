@@ -1,5 +1,6 @@
 import * as assert from 'assert';
 import {
+    braceNumber,
     buildIndentationChars,
     buildIndentedLine,
     hasMoreCloseParens,
@@ -9,6 +10,50 @@ import {
 } from '../../../../providers/formattingProvider.utils';
 
 suite('FormattingProvider utils', () => {
+    suite('braceNum', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     bc: , // brace character
+            //     bn: , // brace number
+            // },
+            {
+                in: '{}',
+                bc: '{',
+                bn: 0,
+            },
+            {
+                in: '{',
+                bc: '{',
+                bn: 1,
+            },
+            {
+                in: '{}{',
+                bc: '{',
+                bn: 1,
+            },
+            {
+                in: '}',
+                bc: '}',
+                bn: 1,
+            },
+            {
+                in: '{}}',
+                bc: '}',
+                bn: 1,
+            },
+        ];
+        dataList.forEach((data) => {
+            test(
+                data.bc + ": '" + data.in + "'" + ' => ' + data.bn.toString(),
+                () => {
+                    assert.strictEqual(braceNumber(data.in, data.bc), data.bn);
+                },
+            );
+        });
+    });
+
     suite('buildIndentationChars', () => {
         // List of test data
         let dataList = [
