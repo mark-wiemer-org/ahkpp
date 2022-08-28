@@ -5,6 +5,7 @@ import {
     buildIndentedLine,
     hasMoreCloseParens,
     hasMoreOpenParens,
+    isLabel,
     removeEmptyLines,
     trimExtraSpaces,
 } from './formattingProvider.utils';
@@ -187,19 +188,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 atTopLevel = false;
             }
 
-            // switch-case, hotkeys
+            // switch-case, label
             if (purifiedLine.match(/^\s*case.+?:\s*$/)) {
                 // case
                 tagDepth--;
                 depth--;
                 atTopLevel = false;
-            } else if (
-                // Label name may consist of any characters other than space,
-                // tab, comma and the escape character (`).
-                // Generally, aside from whitespace and comments,
-                // no other code can be written on the same line as a label.
-                purifiedLine.match(/^\s*[^\s\t,`]+:\s*$/)
-            ) {
+            } else if (isLabel(purifiedLine)) {
                 // default or hotkey
                 if (tagDepth > 0 && tagDepth === depth) {
                     depth--;
@@ -305,15 +300,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 depth++;
             }
 
-            // default or hotkey or label
-            if (
-                !moreOpenParens &&
-                // Label name may consist of any characters other than space,
-                // tab, comma and the escape character (`).
-                // Generally, aside from whitespace and comments,
-                // no other code can be written on the same line as a label.
-                purifiedLine.match(/^\s*[^\s\t,`]+:\s*$/)
-            ) {
+            // default or label
+            if (!moreOpenParens && isLabel(purifiedLine)) {
                 depth++;
                 tagDepth = depth;
                 atTopLevel = false;
