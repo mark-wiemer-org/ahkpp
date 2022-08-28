@@ -8,6 +8,8 @@ foo()
 Not`label:
 foo()
 F1::
+    foo()
+return
 Label:
     foo()
 return
