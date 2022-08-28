@@ -47,7 +47,39 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let formattedDocument = '';
         /** Current level of indentation. 0 = top-level, no indentation */
         let depth = 0;
-        /** ??? */
+        /**
+         * It's marker for `Return`, `ExitApp`, `#Directive` commands, which allow/disallow for them to be un-indented.
+         *
+         * `tagDepth === 0`:
+         *
+         *      Indentation level was brutally decreased by `Return` or `ExitApp` command, so they placed
+         *      on same indentation level as `Label`.
+         *      Any brutal decrease of indentation level by `Label` is disallowed.
+         *      Decrement indentation by one level for `#Directive` is allowed.
+         *
+         * `tagDepth === depth`:
+         *
+         *      Current indentation level is in sync with `Label` indentation level (not additionally indented
+         *      by block `{}`, `oneCommandCode`, etc...).
+         *      `Return` or `ExitApp` commands allowed to be un-indented, so they will be placed on same
+         *      indentation level as `Label`.
+         *      `Label` allowed to be un-indented for fall-through scenario.
+         *
+         * `tagDepth !== depth`:
+         *
+         *      `Return` or `ExitApp` commands disallowed to be un-indented, so they will obey indentation rules
+         *      as code above them (`Return` inside function, block `{}`, `oneCommandCode`, etc...).
+         *
+         * `tagDepth > 0` :
+         *
+         *      `#Directive` allowed to be un-indented by `tagDepth` value (jump several indentation levels).
+         *
+         * `tagDepth = depth`:
+         *
+         *      Only `Label` makes syncing `tagDepth` with `depth`.
+         *      `Case:` and `Default:` must not make syncing to disallow `Return` and `ExitApp` un-indent
+         *      inside `Switch-Case` block.
+         */
         let tagDepth = 0;
         /**
          * `True` if this line is an one-statement block. Example:
@@ -196,6 +228,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             // switch-case, hotkeys
             if (purifiedLine.match(/^\s*case.+?:\s*$/)) {
                 // case
+                // Do not make syncing (tagDepth = depth) here! Read tagDepth comment.
                 tagDepth--;
                 depth--;
             } else if (purifiedLine.match(/:\s*$/)) {
