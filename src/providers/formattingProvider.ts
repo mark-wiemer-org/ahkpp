@@ -307,9 +307,14 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             if (detectOneCommandCode) {
                 for (const oneCommand of FormatProvider.oneCommandList) {
                     let temp: RegExpExecArray;
-                    // before 'one command code' allowed only optional close brace
-                    // example: '} else' or '} if'
-                    if (purifiedLine.match('^}?\\s*' + oneCommand + '\\b')) {
+                    // 1. Before 'oneCommandCode' allowed only optional close brace
+                    //    Example: '} else' or '} if'
+                    // 2. After 'oneCommandCode' not allowed semicolon
+                    //    Example: 'If:', 'Else:', 'Loop:', etc are valid labels, not 'oneCommandCode'
+                    //    Skip such labels, because they produce wrong additional level of indent
+                    if (
+                        purifiedLine.match('^}?\\s*' + oneCommand + '\\b(?!:)')
+                    ) {
                         oneCommandCode = true;
                         depth++;
                         break;
