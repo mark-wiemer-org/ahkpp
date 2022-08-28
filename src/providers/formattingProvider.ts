@@ -52,14 +52,15 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
          *
          * `tagDepth === 0`:
          *
-         *      Indentation level was brutally decreased by `Return` or `ExitApp` command, so they placed
-         *      on same indentation level as `Label`.
-         *      Any brutal decrease of indentation level by `Label` is disallowed.
+         *      Indentation level was decreased by `Return` or `ExitApp` command, so they placed on same
+         *      indentation level as `Label`.
+         *      Decrement of indentation level by `Label` is disallowed (previous `Label` finished with `Return`
+         *      or `ExitApp` command and un-indent for fall-through scenario not needed).
          *      Decrement indentation by one level for `#Directive` is allowed.
          *
          * `tagDepth === depth`:
          *
-         *      Current indentation level is in sync with `Label` indentation level (not additionally indented
+         *      Current indentation level is in sync with `Label` indentation level (no additional indent added
          *      by block `{}`, `oneCommandCode`, etc...).
          *      `Return` or `ExitApp` commands allowed to be un-indented, so they will be placed on same
          *      indentation level as `Label`.
@@ -68,7 +69,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
          * `tagDepth !== depth`:
          *
          *      `Return` or `ExitApp` commands disallowed to be un-indented, so they will obey indentation rules
-         *      as code above them (`Return` inside function, block `{}`, `oneCommandCode`, etc...).
+         *      as code above them (`Return` inside function, block `{}`, `oneCommandCode`, etc... stay on same
+         *      indentation level as code above them).
          *
          * `tagDepth > 0` :
          *
@@ -241,6 +243,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     // Label2:
                     //     code
                     // return
+                    // No need to make 'tagDepth' in sync with 'depth', 'Label' check for next line will do it.
                     depth--;
                 }
             }
