@@ -61,17 +61,21 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let blockComment = false;
         /** Base indent, that block comment had in original code */
         let blockCommentIndent = '';
-        /** Every iteration it's `true`, but become `false` if formatter increase indent for next line for open brace `{`.
-         * It prevents wrong extra indent, if `{` present after `oneCommandCode` code:
+        /**
+         * Detect or not detect `oneCommandCode`.
+         * Every iteration it's `true`, but become `false` if formatter increase indent for next line for open brace `{`.
+         * It's prevents wrong extra indent, if `{` present after `oneCommandCode` code:
          * one indent for `{` and additional indent for `oneCommandCode`.
          */
         let detectOneCommandCode = true;
-        /** Formatter's directive:
+        /**
+         * Formatter's directive:
          * ```ahk
          * ;@AHK++FormatBlockCommentOn
          * ;@AHK++FormatBlockCommentOff
          * ```
-         * Format text inside block comment like regular code */
+         * Format text inside block comment like regular code
+         */
         let formatBlockComment = false;
         // Save important values to this variables on block comment enter, restore them on exit
         let preBlockCommentDepth = 0;
@@ -285,7 +289,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 const braceNum = braceNumber(purifiedLine, '{');
                 depth += braceNum;
                 if (braceNum > 0) {
-                    // Do not detect oneCommandCode, because it will produce extra indent for next line:
+                    // Do not detect 'oneCommandCode', because it will produce extra indent for next line:
                     // if (true) {
                     // |   |   wrong_extra_indented_code
                     // |   code
