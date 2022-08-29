@@ -32,5 +32,6 @@ export enum ConfigKey {
     enableIntellisense = 'language.enableIntellisense',
     executePath = 'file.executePath',
     helpPath = 'file.helpPath',
+    preserveIndent = 'formatter.preserveIndent',
     trimExtraSpaces = 'formatter.trimExtraSpaces',
 }
