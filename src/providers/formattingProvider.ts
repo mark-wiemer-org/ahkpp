@@ -76,6 +76,9 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let preBlockCommentAtTopLevel = true;
         let preBlockCommentOneCommandCode = false;
 
+        const preserveIndentOnEmptyString = Global.getConfig<boolean>(
+            ConfigKey.preserveIndent,
+        );
         const trimSpaces = Global.getConfig<boolean>(ConfigKey.trimExtraSpaces);
 
         /** Label name may consist of any characters other than `space`,
@@ -153,6 +156,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                         blockCommentLine,
                         depth,
                         options,
+                        preserveIndentOnEmptyString,
                     );
                 }
                 if (originalLine.match(/^\s*\*\//)) {
@@ -249,6 +253,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 formattedLine,
                 depth,
                 options,
+                preserveIndentOnEmptyString,
             );
 
             // Next line

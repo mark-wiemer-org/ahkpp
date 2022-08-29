@@ -69,37 +69,57 @@ suite('FormattingProvider utils', () => {
             //     dp: , // depth of indentation
             //     fl: , // formatted line
             //     op: , // formatting options
+            //     pi: , // preserve indent
             //     rs: , // expected result
             // },
             {
                 dp: 0,
                 fl: 'SoundBeep',
                 op: { insertSpaces: true, tabSize: 4 },
+                pi: false,
                 rs: 'SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
                 op: { insertSpaces: true, tabSize: 4 },
+                pi: false,
                 rs: '    SoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
                 op: { insertSpaces: true, tabSize: 4 },
+                pi: false,
                 rs: '        SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
                 op: { insertSpaces: false, tabSize: 4 },
+                pi: false,
                 rs: '\tSoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
                 op: { insertSpaces: false, tabSize: 4 },
+                pi: false,
                 rs: '\t\tSoundBeep',
+            },
+            {
+                dp: 1,
+                fl: '',
+                op: { insertSpaces: true, tabSize: 4 },
+                pi: true,
+                rs: '    ',
+            },
+            {
+                dp: 2,
+                fl: '',
+                op: { insertSpaces: false, tabSize: 4 },
+                pi: true,
+                rs: '\t\t',
             },
         ];
         dataList.forEach((data) => {
@@ -108,6 +128,8 @@ suite('FormattingProvider utils', () => {
                     data.dp +
                     ' spaces:' +
                     data.op.insertSpaces.toString() +
+                    ' preserveIndent:' +
+                    data.pi.toString() +
                     " '" +
                     data.fl +
                     "' => '" +
@@ -115,7 +137,14 @@ suite('FormattingProvider utils', () => {
                     "'",
                 () => {
                     assert.strictEqual(
-                        buildIndentedLine(0, 1, data.fl, data.dp, data.op),
+                        buildIndentedLine(
+                            0,
+                            1,
+                            data.fl,
+                            data.dp,
+                            data.op,
+                            data.pi,
+                        ),
                         data.rs,
                     );
                 },
@@ -227,9 +256,39 @@ suite('FormattingProvider utils', () => {
                 rs: 'text\n\n\n\ntext\n\n\n\n',
             },
             {
+                in: 'text\n    \n    \n    \n    \ntext\n    \n    \n    \n    \n',
+                ln: 0,
+                rs: 'text\ntext\n',
+            },
+            {
+                in: 'text\n    \n    \n    \n    \ntext\n    \n    \n    \n    \n',
+                ln: 1,
+                rs: 'text\n    \ntext\n    \n',
+            },
+            {
+                in: 'text\n    \n    \n    \n    \ntext\n    \n    \n    \n    \n',
+                ln: 2,
+                rs: 'text\n    \n    \ntext\n    \n    \n',
+            },
+            {
+                in: 'text\n    \n    \n    \n    \ntext\n    \n    \n    \n    \n',
+                ln: 3,
+                rs: 'text\n    \n    \n    \ntext\n    \n    \n    \n',
+            },
+            {
                 in: '\n\n\ntext',
                 ln: 1,
                 rs: 'text',
+            },
+            {
+                in: '    \n',
+                ln: 1,
+                rs: '',
+            },
+            {
+                in: '\t\n',
+                ln: 1,
+                rs: '',
             },
             {
                 in: 'text\ntext',
