@@ -76,6 +76,17 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         let preBlockCommentAtTopLevel = true;
         let preBlockCommentOneCommandCode = false;
 
+        const preserveIndentOnEmptyString = Global.getConfig<boolean>(
+            ConfigKey.preserveIndent,
+        );
+
+        /** Label name may consist of any characters other than `space`,
+         * `tab`, `comma` and the escape character (`).
+         * Generally, aside from whitespace and comments,
+         * no other code can be written on the same line as a label.
+         */
+        const label = /^\s*[^\s\t,`]+:\s*$/;
+
         for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
             const originalLine = document.lineAt(lineIndex).text;
             const purifiedLine = CodeUtil.purify(originalLine.toLowerCase());
@@ -147,6 +158,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                         blockCommentLine,
                         depth,
                         options,
+                        preserveIndentOnEmptyString,
                     );
                 }
                 if (originalLine.match(/^\s*\*\//)) {
@@ -188,13 +200,13 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 atTopLevel = false;
             }
 
-            // switch-case, hotkeys
+            // switch-case, label
             if (purifiedLine.match(/^\s*case.+?:\s*$/)) {
                 // case
                 tagDepth--;
                 depth--;
                 atTopLevel = false;
-            } else if (purifiedLine.match(/:\s*$/)) {
+            } else if (purifiedLine.match(label)) {
                 // default or hotkey
                 if (tagDepth > 0 && tagDepth === depth) {
                     depth--;
@@ -243,6 +255,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 formattedLine,
                 depth,
                 options,
+                preserveIndentOnEmptyString,
             );
 
             // Next line
@@ -300,8 +313,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                 depth++;
             }
 
-            // default or hotkey
-            if (!moreOpenParens && purifiedLine.match(/:\s*$/)) {
+            // default or label
+            if (!moreOpenParens && purifiedLine.match(label)) {
                 depth++;
                 tagDepth = depth;
                 atTopLevel = false;
