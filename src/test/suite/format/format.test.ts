@@ -42,6 +42,13 @@ const formatTests: FormatTest[] = [
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'demo' },
     {
+        filenameRoot: 'indent-code-after-sharp-directive-false',
+        extensionOption: {
+            key: ConfigKey.indentCodeAfterSharpDirective,
+            value: false,
+        },
+    },
+    {
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
     },
