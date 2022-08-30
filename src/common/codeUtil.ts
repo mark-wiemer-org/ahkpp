@@ -1,6 +1,6 @@
 export class CodeUtil {
     /**
-     * Trim non-formatted chars out of original lines of code
+     * Trim non-formatted chars out of original line of code
      * @param original Original line of code
      */
     public static purify(original: string): string {
@@ -8,7 +8,7 @@ export class CodeUtil {
             return '';
         }
         // Generated list of commands from SciTE4AutoHotkey -> Options -> Open ahk.keywords.properties
-        let commandList = [
+        const commandList = [
             'autotrim',
             'blockinput',
             'click',
