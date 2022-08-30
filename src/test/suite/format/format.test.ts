@@ -2,15 +2,24 @@ import * as assert from 'assert';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as vscode from 'vscode';
+import { Global, ConfigKey } from '../../../common/global';
 import { FormatProvider } from '../../../providers/formattingProvider';
 
 const inFilenameSuffix = '.in.ahk';
 const outFilenameSuffix = '.out.ahk';
+interface ExtensionOption {
+    /** Configuration name */
+    key: string;
+    /** New value */
+    value: any;
+}
 interface FormatTest {
     /** Name of the file, excluding the suffix (@see inFilenameSuffix, @see outFilenameSuffix) */
     filenameRoot: string;
     /** If not provided, file will be formatted with 4 spaces. */
     options?: Partial<vscode.FormattingOptions>;
+    /**  */
+    extensionOption?: ExtensionOption;
 }
 /** Default formatting options */
 const defaultOptions: vscode.FormattingOptions = {
@@ -74,6 +83,18 @@ suite('Formatter', () => {
             );
             const formatter = new FormatProvider();
 
+            // Set extension's option
+            let prevValue = null;
+            if (formatTest.extensionOption) {
+                prevValue = Global.getConfig<
+                    typeof formatTest.extensionOption.value
+                >(formatTest.extensionOption.key);
+                await Global.setConfig(
+                    formatTest.extensionOption.key,
+                    formatTest.extensionOption.value,
+                );
+            }
+
             // Act
             const edits = formatter.provideDocumentFormattingEdits(
                 unformattedSampleFile,
@@ -89,6 +110,14 @@ suite('Formatter', () => {
                     editBuilder.replace(edit.range, edit.newText),
                 );
             });
+
+            // Restore extension's option
+            if (formatTest.extensionOption) {
+                await Global.setConfig(
+                    formatTest.extensionOption.key,
+                    prevValue,
+                );
+            }
 
             // Assert
             assert.strictEqual(textEditor.document.getText(), outFileString);
