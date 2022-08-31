@@ -68,7 +68,7 @@ export class Parser {
             if (blockComment) {
                 continue;
             }
-            const methodOrRef = Parser.detechMethodByLine(document, line);
+            const methodOrRef = Parser.detectMethodByLine(document, line);
             if (methodOrRef) {
                 if (methodOrRef instanceof Method) {
                     methods.push(methodOrRef);
@@ -272,7 +272,7 @@ export class Parser {
      * @param document
      * @param line
      */
-    private static detechMethodByLine(
+    private static detectMethodByLine(
         document: vscode.TextDocument,
         line: number,
         origin?: string,
@@ -289,7 +289,7 @@ export class Parser {
         const character = origin.indexOf(methodName);
         if (text.length !== methodMatch[0].length) {
             let refs = [new Ref(methodName, document, line, character)];
-            const newRef = this.detechMethodByLine(
+            const newRef = this.detectMethodByLine(
                 document,
                 line,
                 origin.replace(new RegExp(methodName + '\\s*\\('), ''),
