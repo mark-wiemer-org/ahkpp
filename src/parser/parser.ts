@@ -107,7 +107,7 @@ export class Parser {
                     currentMethod.endLine = line;
                 }
             }
-            const variable = Parser.detechVariableByLine(document, line);
+            const variable = Parser.detectVariableByLine(document, line);
             if (variable) {
                 if (deep === 0 || !currentMethod) {
                     this.joinVars(variables, variable);
@@ -221,7 +221,7 @@ export class Parser {
         /[ \t]*(\w+?)\s*([+\-*/.:])?(?<![=!])=(?![=!]).+/;
     private static varCommandPattern = /(\w+)[ \t,]+/g;
     private static keywords = ['and', 'or', 'new', 'extends', 'if', 'loop'];
-    private static detechVariableByLine(
+    private static detectVariableByLine(
         document: vscode.TextDocument,
         line: number,
     ): Variable | Variable[] {
@@ -332,7 +332,7 @@ export class Parser {
     }
 
     /**
-     * detech remark, remark format: ;any
+     * detect remark, remark format: ;any
      * @param document
      * @param line
      */
