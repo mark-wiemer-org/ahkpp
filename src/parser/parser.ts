@@ -202,6 +202,7 @@ export class Parser {
 
     private static getLabelByLine(document: vscode.TextDocument, line: number) {
         const text = CodeUtil.purify(document.lineAt(line).text);
+        // [\u4e00-\u9fa5] Chinese unicode characters
         const label = /^[ \t]*([\u4e00-\u9fa5_a-zA-Z0-9]+) *:{1}(?!(:|=))/.exec(
             text,
         );
@@ -279,6 +280,7 @@ export class Parser {
     ) {
         origin ??= document.lineAt(line).text;
         const text = CodeUtil.purify(origin);
+        // [\u4e00-\u9fa5] Chinese unicode characters
         const refPattern =
             /\s*(([\u4e00-\u9fa5_a-zA-Z0-9]+)(?<!if|while)\(.*?\))\s*(\{)?\s*/i;
         const methodMatch = text.match(refPattern);
