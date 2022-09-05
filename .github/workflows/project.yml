@@ -1,0 +1,28 @@
+# Move issues and pull requests to the 
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  pull_request:
+    branches: [ "main" ]
+  issues:
+    types:
+      - opened
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  assign_one_project:
+    runs-on: ubuntu-latest
+    name: Assign to One Project
+    steps:
+    - name: Assign new issues and new pull requests to project
+      uses: srggrs/assign-one-project-github-action@1.2.1
+      if: github.event.action == 'opened'
+      with:
+        project: 'https://github.com/users/mark-wiemer/projects/1' # AHK++ project
+  
+
