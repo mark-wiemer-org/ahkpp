@@ -308,7 +308,7 @@ export function purify(original: string): string {
     let pure = cmdTrim
         .replace(/".*?"/g, '""') // replace string literals with empty string literal
         .replace(/{.*}/g, '') // remove matching braces
-        .replace(/\s+/g, ' ') // collaps all spaces and tabs to single space
+        .replace(/\s+/g, ' ') // collapse all spaces and tabs to single space
         .replace(/;.+/, '') // remove comments; must be last, semicolon may be inside string (expression)
         .trim();
     return pure;
