@@ -26,6 +26,8 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
     -   [Go To Definition](#go-to-definition)
     -   [Find References](#find-symbol-references)
     -   [Hover Tip](#hover-tip)
+    -   [Outline](#outline)
+    -   [Folding](#folding)
     -   [Code Format](#code-format)
     -   [Formatter Directives](#formatter-directives)
 -   [Credits](#credits)
@@ -103,6 +105,27 @@ Select a symbol, then:
 Usage: Hover over symbol to see IntelliSense documentation.
 
 ![Hover](image/hover.png)
+
+### Outline
+
+Assign name to block of code via double semicolon comment `;;Name` and go to it from outline.
+
+![Block Name](image/blockName.png)
+
+### Folding
+
+Custom folding regions:
+
+```autohotkey
+;region
+MsgBox % "Collapse me!"
+;endregion
+
+; Block comments with regions
+/* ;region
+Collapse me!
+*/ ;endregion
+```
 
 ### Code Format
 
