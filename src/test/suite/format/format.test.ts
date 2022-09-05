@@ -25,6 +25,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '59-one-command-indentation' },
     { filenameRoot: '72-paren-hotkey' },
     { filenameRoot: '119-semicolon-inside-string' },
+    { filenameRoot: '161-colon-on-last-position' },
     { filenameRoot: '180-if-else-braces' },
     { filenameRoot: '185-block-comment' },
     { filenameRoot: '188-one-command-code-in-text' },
