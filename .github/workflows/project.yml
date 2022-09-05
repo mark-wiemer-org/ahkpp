@@ -2,9 +2,7 @@
 
 name: Project management
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   pull_request:
     types:
       - opened
@@ -12,19 +10,12 @@ on:
     types:
       - opened
 
-env:
-  # MY_GITHUB_TOKEN: Magic value for srggrs/assign-one-project-github-action@1.2.1, see https://github.com/srggrs/assign-one-project-github-action/search?q=MY_GITHUB_TOKEN
-  # secrets.GITHUB_TOKEN: Magic value created by GitHub, see https://docs.github.com/en/actions/security-guides/automatic-token-authentication
-  MY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
-  assign_one_project:
+  add-to-project:
+    name: Add issue to project
     runs-on: ubuntu-latest
-    name: Assign to One Project
     steps:
-      - name: Assign new issues and new pull requests to project
-        uses: srggrs/assign-one-project-github-action@1.2.1
-        if: github.event.action == 'opened'
+      - uses: actions/add-to-project@0.3.0
         with:
-          project: 'https://github.com/users/mark-wiemer/projects/1' # AHK++ project
-
+          project-url: https://github.com/users/mark-wiemer/projects/1
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
