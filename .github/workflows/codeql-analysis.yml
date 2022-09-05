@@ -10,6 +10,7 @@ on:
     branches: ['main']
   schedule:
     - cron: '42 9 * * 3' # 09:42 UTC Wednesdays
+  workflow_dispatch:
 
 jobs:
   analyze:
