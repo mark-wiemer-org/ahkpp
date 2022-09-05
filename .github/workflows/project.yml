@@ -1,6 +1,6 @@
 # Move issues and pull requests to the project
 
-name: CI
+name: Project management
 
 # Controls when the workflow will run
 on:
