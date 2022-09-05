@@ -1,4 +1,4 @@
-# Move issues and pull requests to the 
+# Move issues and pull requests to the project
 
 name: CI
 
@@ -12,7 +12,9 @@ on:
       - opened
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # MY_GITHUB_TOKEN: Magic value for srggrs/assign-one-project-github-action@1.2.1, see https://github.com/srggrs/assign-one-project-github-action/search?q=MY_GITHUB_TOKEN
+  # secrets.GITHUB_TOKEN: Magic value created by GitHub, see https://docs.github.com/en/actions/security-guides/automatic-token-authentication
+  MY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   assign_one_project:
