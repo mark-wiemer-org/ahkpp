@@ -43,7 +43,7 @@
         "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",
         "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
         "test_unit": "node ./out/test/runTest.js",
-        "tsc": "tsc --noEmit --skipLibCheck && echo ✅ No TSC problems",
+        "tsc": "tsc --noEmit --skipLibCheck",
         "validate": "npm run lint && npm run test",
         "vscode:prepublish": "npm run compile",
         "watch": "tsc -watch -p ./"
