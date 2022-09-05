@@ -22,10 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Assign to One Project
     steps:
-    - name: Assign new issues and new pull requests to project
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: github.event.action == 'opened'
-      with:
-        project: 'https://github.com/users/mark-wiemer/projects/1' # AHK++ project
-  
+      - name: Assign new issues and new pull requests to project
+        uses: srggrs/assign-one-project-github-action@1.2.1
+        if: github.event.action == 'opened'
+        with:
+          project: 'https://github.com/users/mark-wiemer/projects/1' # AHK++ project
 
