@@ -33,6 +33,10 @@ suite('Code utils', () => {
                 in: 'MsgBox % str . (var + 1)',
                 rs: 'MsgBox str . (var + 1)',
             },
+            {
+                in: 'MouseGetPos, OutputVarX, OutputVarY, OutputVarWin, OutputVarControl',
+                rs: 'MouseGetPos, OutputVarX, OutputVarY, OutputVarWin, OutputVarControl',
+            },
         ];
         dataList.forEach((data) => {
             test("'" + data.in + "' => '" + data.rs + "'", () => {
