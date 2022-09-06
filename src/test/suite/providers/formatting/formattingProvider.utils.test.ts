@@ -272,7 +272,7 @@ suite('FormattingProvider utils', () => {
             },
         ];
         dataList.forEach((data) => {
-            test(data.in + ' => ' + data.rs, () => {
+            test("'" + data.in + "' => '" + data.rs + "'", () => {
                 assert.strictEqual(purify(data.in), data.rs);
             });
         });
