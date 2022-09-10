@@ -1,5 +1,14 @@
 import * as vscode from 'vscode';
 
+export const documentToString = (document: {
+    lineCount: number;
+    lineAt(i: number): Pick<vscode.TextLine, 'text'>;
+}): string =>
+    new Array(document.lineCount)
+        .fill(0)
+        .map((_v, i) => document.lineAt(i).text)
+        .join('\n');
+
 /**
  * Build indentation chars
  * @param depth Depth of indent

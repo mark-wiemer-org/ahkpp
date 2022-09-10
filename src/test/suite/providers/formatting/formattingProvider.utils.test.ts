@@ -2,6 +2,7 @@ import * as assert from 'assert';
 import {
     buildIndentationChars,
     buildIndentedLine,
+    documentToString,
     hasMoreCloseParens,
     hasMoreOpenParens,
     purify,
@@ -417,5 +418,77 @@ suite('FormattingProvider utils', () => {
                 },
             );
         });
+    });
+
+    suite('internal documentToString', () => {
+        const myTests = [
+            {
+                in: {
+                    lineCount: 0,
+                    lineAt(i: number): { text: string } {
+                        throw new Error('Argument out of bounds');
+                    },
+                },
+                out: '',
+            },
+            {
+                in: {
+                    lineCount: 1,
+                    lineAt(i: number): { text: string } {
+                        return { text: 'hi' };
+                    },
+                },
+                out: 'hi',
+            },
+            {
+                in: {
+                    lineCount: 2,
+                    lineAt(i: number): { text: string } {
+                        const result = !i ? 'hello' : 'world';
+                        return { text: result };
+                    },
+                },
+                out: 'hello\nworld',
+            },
+            {
+                in: {
+                    lineCount: 3,
+                    lineAt(i: 0 | 1 | 2): { text: string } {
+                        const map: Record<0 | 1 | 2, string> = {
+                            [0]: 'how',
+                            [1]: 'are',
+                            [2]: 'you',
+                        };
+                        const result = map[i];
+                        return { text: result };
+                    },
+                },
+                out: 'how\nare\nyou',
+            },
+            {
+                in: {
+                    lineCount: 1,
+                    lineAt(i: 0): { text: string } {
+                        return { text: '' };
+                    },
+                },
+                out: '',
+            },
+            {
+                in: {
+                    lineCount: 2,
+                    lineAt(i: number): { text: string } {
+                        return { text: '' };
+                    },
+                },
+                out: '\n',
+            },
+        ];
+
+        myTests.forEach((myTest, i) =>
+            test(`#${i} documentToString`, () => {
+                assert.strictEqual(documentToString(myTest.in), myTest.out);
+            }),
+        );
     });
 });
