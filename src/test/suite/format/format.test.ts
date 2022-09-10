@@ -49,6 +49,13 @@ const formatTests: FormatTest[] = [
         },
     },
     {
+        filenameRoot: 'indent-code-after-sharp-directive-true',
+        extensionOption: {
+            key: ConfigKey.indentCodeAfterSharpDirective,
+            value: true,
+        },
+    },
+    {
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
     },
