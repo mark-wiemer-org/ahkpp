@@ -503,7 +503,7 @@ suite('FormattingProvider utils', () => {
 
     // External tests use real VS Code behavior to ensure extension works end-to-end
     const externalDocumentToString = 'external documentToString';
-    suite.only(externalDocumentToString, () => {
+    suite(externalDocumentToString, () => {
         // Currently in `out` folder, need to get back to main `src` folder
         const filesParentPath = path.join(
             __dirname,

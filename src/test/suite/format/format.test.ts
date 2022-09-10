@@ -2,7 +2,10 @@ import * as assert from 'assert';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { FormatProvider } from '../../../providers/formattingProvider';
+import {
+    FormatProvider,
+    internalFormat,
+} from '../../../providers/formattingProvider';
 
 const inFilenameSuffix = '.in.ahk';
 const outFilenameSuffix = '.out.ahk';
@@ -13,9 +16,12 @@ interface FormatTest {
     options?: Partial<vscode.FormattingOptions>;
 }
 /** Default formatting options */
-const defaultOptions: vscode.FormattingOptions = {
+const defaultOptions = {
     tabSize: 4,
     insertSpaces: true,
+    allowedNumberOfEmptyLines: 1,
+    preserveIndent: false,
+    trimExtraSpaces: true,
 };
 const formatTests: FormatTest[] = [
     { filenameRoot: '25-multiline-string' },
@@ -42,6 +48,7 @@ const formatTests: FormatTest[] = [
     },
 ];
 
+// Currently in `out` folder, need to get back to main `src` folder
 const filesParentPath = path.join(
     __dirname,
     '..',
@@ -55,9 +62,41 @@ const filesParentPath = path.join(
     'samples',
 );
 
-suite('Formatter', () => {
+const fileToString = (path: string): string => fs.readFileSync(path).toString();
+
+suite('Internal formatter', () => {
     formatTests.forEach((formatTest) => {
-        test(`Format ${formatTest.filenameRoot}`, async () => {
+        test(`${formatTest.filenameRoot} internal format`, async () => {
+            const inFileString = fileToString(
+                path.join(
+                    filesParentPath,
+                    `${formatTest.filenameRoot}${inFilenameSuffix}`,
+                ),
+            );
+            const outFileString = fileToString(
+                path.join(
+                    filesParentPath,
+                    `${formatTest.filenameRoot}${outFilenameSuffix}`,
+                ),
+            );
+            const options = { ...defaultOptions, ...formatTest.options };
+
+            const actual = internalFormat(inFileString, options);
+
+            assert.strictEqual(actual, outFileString);
+        });
+    });
+});
+
+suite('External formatter', () => {
+    // we only have to test one external formatter to make sure the connection is working
+    // in the future we should add tests for various config values
+    const externalFormatTests: FormatTest[] = [
+        { filenameRoot: '25-multiline-string' },
+    ];
+
+    externalFormatTests.forEach((formatTest) => {
+        test(`${formatTest.filenameRoot} external format`, async () => {
             // Arrange
             const inFilename = formatTest.filenameRoot + inFilenameSuffix;
             const outFilename = formatTest.filenameRoot + outFilenameSuffix;

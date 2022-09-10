@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 
+/** Stringify a document, using consistent `\n` line separators */
 export const documentToString = (document: {
     lineCount: number;
     lineAt(i: number): Pick<vscode.TextLine, 'text'>;
