@@ -1,4 +1,6 @@
+import * as vscode from 'vscode';
 import * as assert from 'assert';
+import path = require('path');
 import {
     buildIndentationChars,
     buildIndentedLine,
@@ -420,9 +422,11 @@ suite('FormattingProvider utils', () => {
         });
     });
 
+    // Internal tests mock VS Code behavior to isolate flaws and run faster
     suite('internal documentToString', () => {
         const myTests = [
             {
+                // no lines at all, potential edge case
                 in: {
                     lineCount: 0,
                     lineAt(i: number): { text: string } {
@@ -432,6 +436,7 @@ suite('FormattingProvider utils', () => {
                 out: '',
             },
             {
+                // single line
                 in: {
                     lineCount: 1,
                     lineAt(i: number): { text: string } {
@@ -441,6 +446,7 @@ suite('FormattingProvider utils', () => {
                 out: 'hi',
             },
             {
+                // two lines
                 in: {
                     lineCount: 2,
                     lineAt(i: number): { text: string } {
@@ -451,6 +457,7 @@ suite('FormattingProvider utils', () => {
                 out: 'hello\nworld',
             },
             {
+                // three lines
                 in: {
                     lineCount: 3,
                     lineAt(i: 0 | 1 | 2): { text: string } {
@@ -466,6 +473,7 @@ suite('FormattingProvider utils', () => {
                 out: 'how\nare\nyou',
             },
             {
+                // empty file, one empty line
                 in: {
                     lineCount: 1,
                     lineAt(i: 0): { text: string } {
@@ -475,6 +483,7 @@ suite('FormattingProvider utils', () => {
                 out: '',
             },
             {
+                // two empty lines
                 in: {
                     lineCount: 2,
                     lineAt(i: number): { text: string } {
@@ -486,8 +495,59 @@ suite('FormattingProvider utils', () => {
         ];
 
         myTests.forEach((myTest, i) =>
-            test(`#${i} documentToString`, () => {
+            test(`#${i} internal documentToString`, () => {
                 assert.strictEqual(documentToString(myTest.in), myTest.out);
+            }),
+        );
+    });
+
+    // External tests use real VS Code behavior to ensure extension works end-to-end
+    const externalDocumentToString = 'external documentToString';
+    suite.only(externalDocumentToString, () => {
+        // Currently in `out` folder, need to get back to main `src` folder
+        const filesParentPath = path.join(
+            __dirname,
+            '..',
+            '..',
+            '..',
+            '..',
+            '..',
+            'src',
+            'test',
+            'suite',
+            'providers',
+            'formatting',
+            'samples',
+        );
+
+        const myTests = [
+            { filename: '1-one-empty-line.txt', expected: '' },
+            { filename: '2-two-empty-lines.txt', expected: '\n' },
+            { filename: '3-three-empty-lines.txt', expected: '\n\n' },
+            {
+                filename: '4-multiline-ends-with-newline.txt',
+                expected: 'hello\nworld\nhow are you\n',
+            },
+            {
+                filename: '5-multiline-no-newline.txt',
+                expected: 'hello\nworld\nhow are you',
+            },
+            {
+                filename: '6-single-line-ends-with-newline.txt',
+                expected: 'hello\n',
+            },
+            { filename: '7-single-line-no-newline.txt', expected: 'hello' },
+        ];
+
+        myTests.forEach((myTest, i) =>
+            test(`#${i + 1} ${externalDocumentToString}`, async () => {
+                const vscodeDocument = await vscode.workspace.openTextDocument(
+                    path.join(filesParentPath, myTest.filename),
+                );
+
+                const actual = documentToString(vscodeDocument);
+
+                assert.strictEqual(actual, myTest.expected);
             }),
         );
     });
