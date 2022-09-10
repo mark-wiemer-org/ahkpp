@@ -5,6 +5,7 @@ import {
     buildIndentedLine,
     hasMoreCloseParens,
     hasMoreOpenParens,
+    purify,
     removeEmptyLines,
     trimExtraSpaces,
 } from './formattingProvider.utils';
@@ -90,7 +91,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
 
         for (let lineIndex = 0; lineIndex < document.lineCount; lineIndex++) {
             const originalLine = document.lineAt(lineIndex).text;
-            const purifiedLine = CodeUtil.purify(originalLine).toLowerCase();
+            const purifiedLine = purify(originalLine).toLowerCase();
             /** The line comment. Empty string if no line comment exists */
             const comment = /;.+/.exec(originalLine)?.[0] ?? '';
             let formattedLine = originalLine.replace(/;.+/, ''); // Remove single line comment
