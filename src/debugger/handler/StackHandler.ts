@@ -1,6 +1,6 @@
 import { DbgpResponse } from "../struct/dbgpResponse";
-import { DebugProtocol } from 'vscode-debugprotocol';
-import { StackFrame, Source } from "vscode-debugadapter";
+import { DebugProtocol } from '@vscode/debugprotocol';
+import { StackFrame, Source } from '@vscode/debugadapter';
 import { basename } from "path";
 
 export class StackHandler {

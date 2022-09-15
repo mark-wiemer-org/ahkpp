@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import { Scope, StackFrame, Variable } from 'vscode-debugadapter';
-import { DebugProtocol } from 'vscode-debugprotocol';
+import { Scope, StackFrame, Variable } from '@vscode/debugadapter';
+import { DebugProtocol } from '@vscode/debugprotocol';
 import { RunnerService } from '../service/runnerService';
 import { DebugServer } from './debugServer';
 import { LaunchRequestArguments } from './debugSession';
@@ -10,7 +10,6 @@ import { StackHandler } from './handler/StackHandler';
 import { VariableHandler } from './handler/variableHandler';
 import { DbgpResponse } from './struct/dbgpResponse';
 import { VarScope } from './struct/scope';
-
 import * as portfinder from 'portfinder'
 import { spawn } from 'child_process';
 import { resolve } from 'path';

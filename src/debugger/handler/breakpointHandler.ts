@@ -1,6 +1,6 @@
 import { basename } from 'path';
-import { DebugProtocol } from 'vscode-debugprotocol';
-import { Breakpoint, Source } from "vscode-debugadapter";
+import { DebugProtocol } from '@vscode/debugprotocol';
+import { Breakpoint, Source } from '@vscode/debugadapter';
 import { readFileSync, existsSync } from 'fs';
 
 type Callback = (breakPoint: DebugProtocol.Breakpoint) => void;

@@ -1,4 +1,4 @@
-import { Handles, Scope, Variable } from 'vscode-debugadapter';
+import { Handles, Scope, Variable } from '@vscode/debugadapter';
 import { DbgpProperty, DbgpResponse } from '../struct/dbgpResponse';
 import { VarScope } from '../struct/scope';
 import { Util } from '../util/util';
