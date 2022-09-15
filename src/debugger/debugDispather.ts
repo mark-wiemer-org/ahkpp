@@ -23,6 +23,7 @@ import { Global, ConfigKey } from '../common/global';
  */
 export class DebugDispather extends EventEmitter {
 
+	private port: number;
 	private debugServer: DebugServer;
 	private breakPointHandler: BreakPointHandler;
 	private commandHandler: CommandHandler;
@@ -35,33 +36,53 @@ export class DebugDispather extends EventEmitter {
 	 */
 	public async start(args: LaunchRequestArguments) {
 
-		const { runtime = Global.getConfig(ConfigKey.executePath), dbgpSettings = {} } = args;
-		const { max_children, max_data } = { max_children: 300, max_data: 131072, ...dbgpSettings };
+		await this.initDebugger(args, args.dbgpSettings);
 
+		const runtime = args.runtime ?? Global.getConfig(ConfigKey.executePath);
+		if (!args.program) {
+			args.program = await RunnerService.getPathByActive()
+		}
+		if (!existsSync(runtime)) {
+			Out.log(`Autohotkey Execute Bin Not Found : ${runtime}`)
+			this.end();
+			return;
+		}
+		const ahkArgs = ["/ErrorStdOut", `/debug=localhost:${this.port}`, args.program];
+		const ahkProcess = spawn(runtime, ahkArgs, { cwd: `${resolve(args.program, '..')}` })
+		this.emit('output', `${runtime} ${ahkArgs.join(" ")}`)
+		ahkProcess.stderr.on("data", err => {
+			this.emit('output', err.toString("utf8"))
+			this.end()
+		})
+	}
+
+	private async initDebugger(args: LaunchRequestArguments, dbgpSettings: { max_children?: number; max_data?: number; } = {}) {
+		if (this.port) return;
+		const { max_children = 300, max_data = 131072 } = dbgpSettings;
 		this.breakPointHandler = new BreakPointHandler();
-		this.stackHandler = new StackHandler()
-		this.variableHandler = new VariableHandler()
+		this.stackHandler = new StackHandler();
+		this.variableHandler = new VariableHandler();
 		this.startArgs = args;
 		const port = await portfinder.getPortPromise({ port: 9000, stopPort: 9100 });
-		Out.debug(`Creating debug server, port is ${port}`)
-		this.debugServer = new DebugServer(port)
-		this.commandHandler = new CommandHandler(this.debugServer)
+		Out.debug(`Creating debug server, port is ${port}`);
+		this.debugServer = new DebugServer(port);
+		this.commandHandler = new CommandHandler(this.debugServer);
 		this.debugServer.start()
 			.on("init", () => {
-				this.breakPointHandler.loopPoints((bp) => { this.setBreakPonit(bp) })
+				this.breakPointHandler.loopPoints((bp) => { this.setBreakPonit(bp); });
 				this.sendComand(`feature_set -n max_children -v ${max_children}`);
 				this.sendComand(`feature_set -n max_data -v ${max_data}`);
 				this.sendComand(`feature_set -n max_depth -v 2`); // Get properties recursively. Therefore fixed at 2
-				this.sendComand('stdout -c 1')
-				this.sendComand('stderr -c 1')
+				this.sendComand('stdout -c 1');
+				this.sendComand('stderr -c 1');
 				this.sendComand('run');
 			})
 			.on("stream", (stream) => {
-				this.emit('output', Buffer.from(stream.content, 'base64').toString())
+				this.emit('output', Buffer.from(stream.content, 'base64').toString());
 			})
 			.on("response", (response: DbgpResponse) => {
 				if (response.attr.command) {
-					this.commandHandler.callback(response.attr.transaction_id, response)
+					this.commandHandler.callback(response.attr.transaction_id, response);
 					switch (response.attr.command) {
 						case 'run':
 						case 'step_into':
@@ -74,30 +95,9 @@ export class DebugDispather extends EventEmitter {
 							break;
 					}
 				}
-			})
-		if (!args.program) {
-			args.program = await RunnerService.getPathByActive()
-		}
-
-		if (!existsSync(runtime)) {
-			Out.log(`Autohotkey Execute Bin Not Found : ${runtime}`)
-			this.end();
-			return;
-		}
-
-		const ahkArgs = ["/ErrorStdOut", `/debug=localhost:${port}`, args.program];
-		const ahkProcess = spawn(runtime, ahkArgs, { cwd: `${resolve(args.program, '..')}` })
-		this.emit('output', `${runtime} ${ahkArgs.join(" ")}`)
-		ahkProcess.stderr.on("data", err => {
-			this.emit('output', err.toString("utf8"))
-			this.end()
-		})
-	}
-
-	public async restart() {
-		this.sendComand('stop');
-		this.end()
-		RunnerService.startDebugger(this.startArgs.program)
+			});
+		this.port = port;
+		return port;
 	}
 
 	/**
@@ -109,6 +109,12 @@ export class DebugDispather extends EventEmitter {
 			return this.commandHandler.sendComand(command, data)
 		}
 		return null;
+	}
+
+	public async restart() {
+		this.sendComand('stop');
+		this.debugServer.prepareNewConnection()
+		this.start(this.startArgs)
 	}
 
 	/**
@@ -124,7 +130,9 @@ export class DebugDispather extends EventEmitter {
 	 * receive end message from script, send event to stop the debug session.
 	 */
 	public end() {
-		this.emit('end');
+		if (!this.debugServer.hasNew) {
+			this.emit('end');
+		}
 		this.debugServer.shutdown()
 	}
 
