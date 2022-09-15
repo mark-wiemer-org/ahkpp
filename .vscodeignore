@@ -9,3 +9,4 @@ node_modules/
 tsconfig.json
 .eslintrc.js
 build.js
+.github/

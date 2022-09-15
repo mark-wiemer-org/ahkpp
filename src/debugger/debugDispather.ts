@@ -30,10 +30,6 @@ export class DebugDispather extends EventEmitter {
 	private variableHandler: VariableHandler;
 	private startArgs: LaunchRequestArguments;
 
-	public constructor() {
-		super();
-	}
-
 	/**
 	 * Start executing the given program.
 	 */
@@ -59,7 +55,6 @@ export class DebugDispather extends EventEmitter {
 				this.sendComand('stdout -c 1')
 				this.sendComand('stderr -c 1')
 				this.sendComand('run');
-				this.emit('output', `${runtime} ${args.program}`)
 			})
 			.on("stream", (stream) => {
 				this.emit('output', Buffer.from(stream.content, 'base64').toString())
@@ -90,7 +85,9 @@ export class DebugDispather extends EventEmitter {
 			return;
 		}
 
-		const ahkProcess = spawn(runtime, ["/ErrorStdOut", `/debug=localhost:${port}`, args.program], { cwd: `${resolve(args.program, '..')}` })
+		const ahkArgs = ["/ErrorStdOut", `/debug=localhost:${port}`, args.program];
+		const ahkProcess = spawn(runtime, ahkArgs, { cwd: `${resolve(args.program, '..')}` })
+		this.emit('output', `${runtime} ${ahkArgs.join(" ")}`)
 		ahkProcess.stderr.on("data", err => {
 			this.emit('output', err.toString("utf8"))
 			this.end()
@@ -120,6 +117,7 @@ export class DebugDispather extends EventEmitter {
 	public stop() {
 		this.sendComand('stop');
 		this.debugServer.shutdown()
+		this.emit('output', `The debugger has stopped.`)
 	}
 
 	/**
