@@ -165,10 +165,7 @@
 				"command": "debug.ahk",
 				"title": "Debug Script",
 				"category": "AHK",
-				"icon": {
-					"light": "./image/run.png",
-					"dark": "./image/run-dark.png"
-				}
+				"icon": "$(debug-alt)"
 			}
 		],
 		"menus": {
