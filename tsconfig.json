@@ -1,16 +1,16 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-		"target": "es2019",
-		"outDir": "out",
-		"experimentalDecorators": true,
-		"lib": [
-			"es6",
-			"es2017",
-			"es2019"
-		],
-		"sourceMap": true,
-		"paths": {
+        "target": "es2019",
+        "outDir": "out",
+        "experimentalDecorators": true,
+        "lib": [
+            "es6",
+            "es2017",
+            "es2019"
+        ],
+        "sourceMap": true,
+        "paths": {
             "@/*": [
                 "./src/*"
             ]
