@@ -60,7 +60,16 @@ export class RunnerService {
         this.checkAndSaveActive();
         const pos = currentPath.lastIndexOf(".");
         const compilePath = currentPath.substr(0, pos < 0 ? currentPath.length : pos) + ".exe";
-        if (await Process.exec(`"${Global.getConfig(ConfigKey.compilePath)}" /in "${currentPath}" /out "${compilePath}"`, { cwd: `${res(currentPath, '..')}` })) {
+
+        let compileIcon = Global.getConfig(ConfigKey.compileIcon);
+        compileIcon = compileIcon ? `/icon "${compileIcon}"` : "";
+        let compileBaseFile = Global.getConfig(ConfigKey.compileBaseFile);
+        compileBaseFile = compileBaseFile ? `/bin "${compileBaseFile}"` : "";
+        let compileMpress = Global.getConfig(ConfigKey.compileMpress);
+        compileMpress = compileMpress ? "/mpress 1" : "";
+
+        const compileCommand = `"${Global.getConfig(ConfigKey.compilePath)}" /in "${currentPath}" /out "${compilePath}" ${compileIcon} ${compileBaseFile}" ${compileMpress}"`;
+        if (await Process.exec(compileCommand, { cwd: `${res(currentPath, '..')}` })) {
             vscode.window.showInformationMessage("compile success!");
         }
     }

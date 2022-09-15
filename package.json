@@ -244,6 +244,21 @@
 					"default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
 					"description": "Compiler path of autohotkey."
 				},
+				"vscode-ahk-plus.compileIcon": {
+					"type": "string",
+					"default": "",
+					"description": "Icon path for the compiled file."
+				},
+				"vscode-ahk-plus.compileBaseFile": {
+					"type": "string",
+					"default": "",
+					"description": "Base File (.bin) path for compiling (optional)."
+				},
+				"vscode-ahk-plus.compileMpress": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use MPRESS (if present) to compress resulting exe."
+				},
 				"vscode-ahk-plus.documentPath": {
 					"type": "string",
 					"default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
