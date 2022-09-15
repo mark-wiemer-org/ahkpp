@@ -278,8 +278,9 @@
 		"vscode:prepublish": "npm run build"
 	},
 	"dependencies": {
-		"get-port": "^5.1.1",
-		"vscode-debugadapter": "1.40.0-pre.1",
+		"date-format": "^4.0.13",
+		"portfinder": "^1.0.32",
+		"vscode-debugadapter": "1.51.0",
 		"xml2js": "^0.4.23"
 	},
 	"devDependencies": {

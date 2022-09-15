@@ -11,7 +11,7 @@ import { VariableHandler } from './handler/variableHandler';
 import { DbgpResponse } from './struct/dbgpResponse';
 import { VarScope } from './struct/scope';
 
-import getPort = require('get-port');
+import * as portfinder from 'portfinder'
 import { spawn } from 'child_process';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
@@ -47,7 +47,8 @@ export class DebugDispather extends EventEmitter {
 		this.stackHandler = new StackHandler()
 		this.variableHandler = new VariableHandler()
 		this.startArgs = args;
-		const port = await getPort({ port: getPort.makeRange(9000, 9100) });
+		const port = await portfinder.getPortPromise({ port: 9000, stopPort: 9100 });
+		Out.debug(`Creating debug server, port is ${port}`)
 		this.debugServer = new DebugServer(port)
 		this.commandHandler = new CommandHandler(this.debugServer)
 		this.debugServer.start()
