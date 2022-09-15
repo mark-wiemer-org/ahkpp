@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 2.7.0 - 2022-9-15
+
+- Reduce extension size.
+- Modify the debug icon.
+- Output program path after debugging is started.
+
 ## 2.6.2 - 2020/12/6
 
 - Update ahk language config @fade2gray.

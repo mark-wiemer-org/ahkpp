@@ -59,6 +59,7 @@ export class DebugDispather extends EventEmitter {
 				this.sendComand('stdout -c 1')
 				this.sendComand('stderr -c 1')
 				this.sendComand('run');
+				this.emit('output', `${runtime} ${args.program}`)
 			})
 			.on("stream", (stream) => {
 				this.emit('output', Buffer.from(stream.content, 'base64').toString())

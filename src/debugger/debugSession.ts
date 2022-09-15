@@ -1,6 +1,6 @@
 import { commands } from 'vscode';
 import { BreakpointEvent, InitializedEvent, LoggingDebugSession, OutputEvent, StoppedEvent, TerminatedEvent, Thread } from '@vscode/debugadapter';
-import { DebugProtocol } from 'vscode-debugprotocol';
+import { DebugProtocol } from '@vscode/debugprotocol';
 import { DebugDispather } from './debugDispather';
 import { Continue } from './struct/command';
 import { VscodeScope } from './struct/scope';
