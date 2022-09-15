@@ -17,8 +17,8 @@ export interface LaunchRequestArguments extends DebugProtocol.LaunchRequestArgum
 	/** An absolute path to the AutoHotkey.exe. */
 	runtime: string;
 	dbgpSettings: {
-		max_children: number;
-		max_data: number;
+		max_children?: number;
+		max_data?: number;
 	};
 }
 
@@ -62,6 +62,7 @@ export class DebugSession extends LoggingDebugSession {
 			supportsDataBreakpoints: false,
 			supportsCompletionsRequest: true,
 			supportsCancelRequest: true,
+			supportsTerminateRequest: true,
 			supportsRestartRequest: true,
 			supportsBreakpointLocationsRequest: false,
 			supportsSetVariable: true,
@@ -82,6 +83,11 @@ export class DebugSession extends LoggingDebugSession {
 	}
 
 	protected disconnectRequest(response: DebugProtocol.DisconnectResponse, args: DebugProtocol.DisconnectArguments, request?: DebugProtocol.Request): void {
+		// this.dispather.stop();
+		this.sendResponse(response);
+	}
+
+	protected terminateRequest(response: DebugProtocol.TerminateResponse, args: DebugProtocol.TerminateArguments, request?: DebugProtocol.Request): void {
 		this.dispather.stop();
 		this.sendResponse(response);
 	}
