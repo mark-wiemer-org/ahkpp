@@ -129,14 +129,18 @@
 					".ahk",
 					".ext"
 				],
-				"configuration": "./ahk.configuration.json"
+				"configuration": "./language/ahk.configuration.json",
+				"icon": {
+					"dark": "./language/autohotkey.svg",
+					"light": "./language/autohotkey.svg"
+				}
 			}
 		],
 		"grammars": [
 			{
 				"language": "ahk",
 				"scopeName": "source.ahk",
-				"path": "./syntaxes/ahk.tmLanguage.json"
+				"path": "./language/ahk.tmLanguage.json"
 			}
 		],
 		"commands": [
@@ -224,7 +228,7 @@
 		"snippets": [
 			{
 				"language": "ahk",
-				"path": "./snippets/ahk.json"
+				"path": "./language/snippets.json"
 			}
 		],
 		"configuration": {
