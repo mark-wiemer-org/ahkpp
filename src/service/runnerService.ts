@@ -65,10 +65,9 @@ export class RunnerService {
         compileIcon = compileIcon ? `/icon "${compileIcon}"` : "";
         let compileBaseFile = Global.getConfig(ConfigKey.compileBaseFile);
         compileBaseFile = compileBaseFile ? `/bin "${compileBaseFile}"` : "";
-        let compileMpress = Global.getConfig(ConfigKey.compileMpress);
-        compileMpress = compileMpress ? "/mpress 1" : "";
+        const compileMpress = Global.getConfig(ConfigKey.compileMpress) ? "/mpress 1" : "";
 
-        const compileCommand = `"${Global.getConfig(ConfigKey.compilePath)}" /in "${currentPath}" /out "${compilePath}" ${compileIcon} ${compileBaseFile}" ${compileMpress}"`;
+        const compileCommand = `"${Global.getConfig(ConfigKey.compilePath)}" /in "${currentPath}" /out "${compilePath}" ${compileIcon} ${compileBaseFile} ${compileMpress}`;
         if (await Process.exec(compileCommand, { cwd: `${res(currentPath, '..')}` })) {
             vscode.window.showInformationMessage("compile success!");
         }
