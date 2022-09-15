@@ -33,7 +33,7 @@ export class CodeUtil {
             throw new Error("Only support global regex!");
         }
 
-        let regs = [];
+        const regs = [];
         let temp: RegExpExecArray;
         while ((temp = regex.exec(text)) != null) {
             regs.push(temp)

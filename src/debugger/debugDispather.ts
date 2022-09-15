@@ -40,11 +40,8 @@ export class DebugDispather extends EventEmitter {
 	 */
 	public async start(args: LaunchRequestArguments) {
 
-		let { runtime, dbgpSettings = {} } = args;
+		const { runtime = Global.getConfig(ConfigKey.executePath), dbgpSettings = {} } = args;
 		const { max_children, max_data } = { max_children: 300, max_data: 131072, ...dbgpSettings };
-		if (!runtime) {
-			runtime = Global.getConfig(ConfigKey.executePath);
-		}
 
 		this.breakPointHandler = new BreakPointHandler();
 		this.stackHandler = new StackHandler()
@@ -206,7 +203,7 @@ export class DebugDispather extends EventEmitter {
 			}
 
 			const response: DbgpResponse = await this.sendComand(`property_set -d ${frameId} -c ${scope} -n ${fullname} -t ${type}`, value);
-			const success: boolean = !!parseInt(response.attr.success);
+			const success = !!parseInt(response.attr.success);
 			if (success === false) {
 				throw new Error(`"${fullname}" cannot be written. Probably read-only.`);
 			}

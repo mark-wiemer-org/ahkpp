@@ -45,7 +45,7 @@ export class Parser {
         }
 
         const methods: Method[] = [];
-        let refs: Ref[] = [];
+        const refs: Ref[] = [];
         const labels: Label[] = [];
         const variables: Variable[] = [];
         const blocks: Block[] = [];
@@ -197,7 +197,7 @@ export class Parser {
                 line, document, isGlobal: true, method: null, name: varName, character: lineText.indexOf(varName)
             }
         } else {
-            let vars = [];
+            const vars = [];
             const commandMatchAll = CodeUtil.matchAll(Parser.varCommandPattern, lineText.replace(/\(.+?\)/g,""))
             for (let index = 0; index < commandMatchAll.length; index++) {
                 if (index == 0) continue;
@@ -232,7 +232,7 @@ export class Parser {
         const methodName = methodMatch[2];
         const character = origin.indexOf(methodName);
         if (text.length != methodMatch[0].length) {
-            let refs = [new Ref(methodName, document, line, character)];
+            const refs = [new Ref(methodName, document, line, character)];
             const newRef = this.detechMethodByLine(document, line, origin.replace(new RegExp(methodName + "\\s*\\("), ""));
             CodeUtil.join(refs, newRef)
             return refs

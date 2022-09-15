@@ -17,7 +17,7 @@
 		"Programming Languages",
 		"Snippets"
 	],
-	"license": "SEE LICENSE IN LICENSE.md",
+	"license": "LICENSE",
 	"icon": "icon.png",
 	"bugs": {
 		"url": "https://github.com/cweijan/vscode-autohotkey/issues"
@@ -271,20 +271,26 @@
 	},
 	"scripts": {
 		"dev": "rimraf out && node build.js",
+		"lint": "eslint src/**/*.ts",
+		"lint:fix": "eslint src/**/*.ts --fix",
 		"build": "rimraf out && node build.js --mode=production",
 		"publish": "vsce publish",
 		"vscode:prepublish": "npm run build"
 	},
 	"dependencies": {
-		"esbuild": "^0.15.7",
 		"get-port": "^5.1.1",
-		"rimraf": "^3.0.2",
 		"vscode-debugadapter": "1.40.0-pre.1",
 		"xml2js": "^0.4.23"
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.23",
 		"@types/vscode": "^1.50.0",
+		"@typescript-eslint/eslint-plugin": "^5.37.0",
+		"@typescript-eslint/parser": "^5.37.0",
+		"esbuild": "^0.15.7",
+		"esbuild-plugin-eslint": "^0.1.1",
+		"eslint": "^8.23.1",
+		"rimraf": "^3.0.2",
 		"typescript": "^4.6.3"
 	}
 }

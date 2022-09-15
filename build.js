@@ -1,4 +1,5 @@
 const { build } = require("esbuild")
+const eslint = require('esbuild-plugin-eslint');
 const isProd = process.argv.indexOf('--mode=production') >= 0;
 
 build({
@@ -15,6 +16,7 @@ build({
     watch: !isProd,
     sourcemap: !isProd,
     plugins: [
+        eslint(),
         {
             name: 'build notice',
             setup(build) {

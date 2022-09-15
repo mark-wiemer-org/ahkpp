@@ -35,7 +35,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
                     formatDocument += "\n";
                 }
                 continue;
-            };
+            }
             const purityText = CodeUtil.purity(originText.toLowerCase());
             let notDeep = true;
 

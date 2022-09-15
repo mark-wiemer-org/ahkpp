@@ -17,7 +17,7 @@ export class AhkRenameProvider implements vscode.RenameProvider {
             if (ref.document.uri.scheme != "file") {
                 continue;
             }
-            let uriEdits = []
+            const uriEdits = []
             uriEdits.push(new vscode.TextEdit(
                 new vscode.Range(
                     new vscode.Position(ref.line, ref.character),

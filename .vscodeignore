@@ -1,13 +1,11 @@
 .vscode/**
-.vscode-test/**
 out/test/**
 out/**/*.map
-src/**
+src/
 demos/
 images/**
-.idea/
+node_modules/
 .gitignore
 tsconfig.json
-vsc-extension-quickstart.md
-tsconfig.json
-tslint.json
+.eslintrc.js
+build.js
