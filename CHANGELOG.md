@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 2.7.1 - 2022-9-16
+
+- Better debugger interaction.
+
 # 2.7.0 - 2022-9-15
 
 - Reduce extension size.
