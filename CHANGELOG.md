@@ -4,7 +4,7 @@
 
 - Reduce extension size.
 - Modify the debug icon.
-- Output program path after debugging is started.
+- Output program args after debugging is started.
 
 ## 2.6.2 - 2020/12/6
 
