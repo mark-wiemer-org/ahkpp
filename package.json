@@ -1,47 +1,114 @@
 {
 	"name": "vscode-autohotkey-plus",
 	"displayName": "AutoHotkey Plus",
-	"description": "AutoHotkey language support for VS Code",
 	"version": "2.7.1",
-	"publisher": "cweijan",
-	"engines": {
-		"vscode": "^1.50.0"
-	},
-	"activationEvents": [
-		"onLanguage:ahk",
-		"onCommand:run.ahk",
-		"onDebug"
-	],
-	"main": "./out/extension",
+	"description": "AutoHotkey language support for VS Code",
 	"categories": [
 		"Programming Languages",
 		"Snippets"
 	],
-	"license": "LICENSE",
-	"icon": "icon.png",
-	"bugs": {
-		"url": "https://github.com/cweijan/vscode-autohotkey/issues"
-	},
-	"homepage": "https://github.com/cweijan/vscode-autohotkey/blob/master/README.md",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/cweijan/vscode-autohotkey.git"
-	},
-	"galleryBanner": {
-		"color": "#5c2d91",
-		"theme": "dark"
-	},
 	"keywords": [
 		"vscode",
 		"autohotkey",
 		"ahk"
 	],
+	"homepage": "https://github.com/cweijan/vscode-autohotkey/blob/master/README.md",
+	"bugs": {
+		"url": "https://github.com/cweijan/vscode-autohotkey/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cweijan/vscode-autohotkey.git"
+	},
+	"license": "LICENSE",
+	"publisher": "cweijan",
+	"main": "./out/extension",
+	"scripts": {
+		"build": "rimraf out && node build.js --mode=production",
+		"dev": "rimraf out && node build.js",
+		"lint": "eslint src/**/*.ts",
+		"lint:fix": "eslint src/**/*.ts --fix",
+		"package:check": "sort-package-json --check",
+		"package:fix": "sort-package-json",
+		"publish": "vsce publish",
+		"vscode:prepublish": "npm run build"
+	},
 	"contributes": {
 		"breakpoints": [
 			{
 				"language": "ahk"
 			}
 		],
+		"commands": [
+			{
+				"command": "document.open",
+				"title": "Open AutoHotkey Document",
+				"category": "AHK"
+			},
+			{
+				"command": "compile.ahk",
+				"title": "Compile Script",
+				"category": "AHK",
+				"icon": "./image/build.svg"
+			},
+			{
+				"command": "run.ahk",
+				"title": "Run Script",
+				"category": "AHK"
+			},
+			{
+				"command": "run.selection.ahk",
+				"title": "Run Selection Script",
+				"category": "AHK"
+			},
+			{
+				"command": "debug.ahk",
+				"title": "Debug Script",
+				"category": "AHK",
+				"icon": "$(debug-alt)"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Ahk Plus",
+			"properties": {
+				"vscode-ahk-plus.executePath": {
+					"type": "string",
+					"default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+					"description": "Execute path of autohotkey."
+				},
+				"vscode-ahk-plus.compilePath": {
+					"type": "string",
+					"default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
+					"description": "Compiler path of autohotkey."
+				},
+				"vscode-ahk-plus.compileIcon": {
+					"type": "string",
+					"default": "",
+					"description": "Icon path for the compiled file."
+				},
+				"vscode-ahk-plus.compileBaseFile": {
+					"type": "string",
+					"default": "",
+					"description": "Base File (.bin) path for compiling (optional)."
+				},
+				"vscode-ahk-plus.compileMpress": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use MPRESS (if present) to compress resulting exe."
+				},
+				"vscode-ahk-plus.documentPath": {
+					"type": "string",
+					"default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+					"description": "Document path of autohotkey."
+				},
+				"vscode-ahk-plus.enableIntelliSense": {
+					"type": "boolean",
+					"default": true,
+					"description": "EnableIntelliSense(Preview)."
+				}
+			}
+		},
 		"debuggers": [
 			{
 				"type": "ahk",
@@ -117,6 +184,40 @@
 				]
 			}
 		],
+		"grammars": [
+			{
+				"language": "ahk",
+				"scopeName": "source.ahk",
+				"path": "./language/ahk.tmLanguage.json"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "document.open",
+				"key": "f1",
+				"when": "editorLangId == ahk"
+			},
+			{
+				"command": "debug.ahk",
+				"key": "f9",
+				"when": "editorLangId == ahk"
+			},
+			{
+				"command": "run.selection.ahk",
+				"key": "f8",
+				"when": "editorLangId == ahk"
+			},
+			{
+				"command": "run.ahk",
+				"key": "ctrl+f9",
+				"when": "editorLangId == ahk"
+			},
+			{
+				"command": "compile.ahk",
+				"key": "ctrl+shift+f9",
+				"when": "editorLangId == ahk"
+			}
+		],
 		"languages": [
 			{
 				"id": "ahk",
@@ -134,42 +235,6 @@
 					"dark": "./language/autohotkey.svg",
 					"light": "./language/autohotkey.svg"
 				}
-			}
-		],
-		"grammars": [
-			{
-				"language": "ahk",
-				"scopeName": "source.ahk",
-				"path": "./language/ahk.tmLanguage.json"
-			}
-		],
-		"commands": [
-			{
-				"command": "document.open",
-				"title": "Open AutoHotkey Document",
-				"category": "AHK"
-			},
-			{
-				"command": "compile.ahk",
-				"title": "Compile Script",
-				"category": "AHK",
-				"icon": "./image/build.svg"
-			},
-			{
-				"command": "run.ahk",
-				"title": "Run Script",
-				"category": "AHK"
-			},
-			{
-				"command": "run.selection.ahk",
-				"title": "Run Selection Script",
-				"category": "AHK"
-			},
-			{
-				"command": "debug.ahk",
-				"title": "Debug Script",
-				"category": "AHK",
-				"icon": "$(debug-alt)"
 			}
 		],
 		"menus": {
@@ -198,89 +263,18 @@
 				}
 			]
 		},
-		"keybindings": [
-			{
-				"command": "document.open",
-				"key": "f1",
-				"when": "editorLangId == ahk"
-			},
-			{
-				"command": "debug.ahk",
-				"key": "f9",
-				"when": "editorLangId == ahk"
-			},
-			{
-				"command": "run.selection.ahk",
-				"key": "f8",
-				"when": "editorLangId == ahk"
-			},
-			{
-				"command": "run.ahk",
-				"key": "ctrl+f9",
-				"when": "editorLangId == ahk"
-			},
-			{
-				"command": "compile.ahk",
-				"key": "ctrl+shift+f9",
-				"when": "editorLangId == ahk"
-			}
-		],
 		"snippets": [
 			{
 				"language": "ahk",
 				"path": "./language/snippets.json"
 			}
-		],
-		"configuration": {
-			"type": "object",
-			"title": "Ahk Plus",
-			"properties": {
-				"vscode-ahk-plus.executePath": {
-					"type": "string",
-					"default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-					"description": "Execute path of autohotkey."
-				},
-				"vscode-ahk-plus.compilePath": {
-					"type": "string",
-					"default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-					"description": "Compiler path of autohotkey."
-				},
-				"vscode-ahk-plus.compileIcon": {
-					"type": "string",
-					"default": "",
-					"description": "Icon path for the compiled file."
-				},
-				"vscode-ahk-plus.compileBaseFile": {
-					"type": "string",
-					"default": "",
-					"description": "Base File (.bin) path for compiling (optional)."
-				},
-				"vscode-ahk-plus.compileMpress": {
-					"type": "boolean",
-					"default": false,
-					"description": "Use MPRESS (if present) to compress resulting exe."
-				},
-				"vscode-ahk-plus.documentPath": {
-					"type": "string",
-					"default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-					"description": "Document path of autohotkey."
-				},
-				"vscode-ahk-plus.enableIntelliSense": {
-					"type": "boolean",
-					"default": true,
-					"description": "EnableIntelliSense(Preview)."
-				}
-			}
-		}
+		]
 	},
-	"scripts": {
-		"dev": "rimraf out && node build.js",
-		"lint": "eslint src/**/*.ts",
-		"lint:fix": "eslint src/**/*.ts --fix",
-		"build": "rimraf out && node build.js --mode=production",
-		"publish": "vsce publish",
-		"vscode:prepublish": "npm run build"
-	},
+	"activationEvents": [
+		"onLanguage:ahk",
+		"onCommand:run.ahk",
+		"onDebug"
+	],
 	"dependencies": {
 		"@vscode/debugadapter": "^1.57.0",
 		"date-format": "^4.0.13",
@@ -296,6 +290,15 @@
 		"esbuild-plugin-eslint": "^0.1.1",
 		"eslint": "^8.23.1",
 		"rimraf": "^3.0.2",
+		"sort-package-json": "^1.57.0",
 		"typescript": "^4.6.3"
+	},
+	"engines": {
+		"vscode": "^1.50.0"
+	},
+	"icon": "icon.png",
+	"galleryBanner": {
+		"color": "#5c2d91",
+		"theme": "dark"
 	}
 }
