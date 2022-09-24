@@ -31,6 +31,7 @@
 		"packagejson": "sort-package-json --check",
 		"packagejson:fix": "sort-package-json",
 		"publish": "vsce publish",
+		"validate": "npm run packagejson && npm run build",
 		"vscode:prepublish": "npm run build"
 	},
 	"contributes": {
