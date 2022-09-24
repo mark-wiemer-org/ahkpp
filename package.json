@@ -28,8 +28,8 @@
 		"dev": "rimraf out && node build.js",
 		"lint": "eslint src/**/*.ts",
 		"lint:fix": "eslint src/**/*.ts --fix",
-		"package:check": "sort-package-json --check",
-		"package:fix": "sort-package-json",
+		"packagejson": "sort-package-json --check",
+		"packagejson:fix": "sort-package-json",
 		"publish": "vsce publish",
 		"vscode:prepublish": "npm run build"
 	},
@@ -275,6 +275,9 @@
 		"onCommand:run.ahk",
 		"onDebug"
 	],
+	"lint-staged": {
+		"package.json": "npm run packagejson"
+	},
 	"dependencies": {
 		"@vscode/debugadapter": "^1.57.0",
 		"date-format": "^4.0.13",
@@ -289,6 +292,8 @@
 		"esbuild": "^0.15.7",
 		"esbuild-plugin-eslint": "^0.1.1",
 		"eslint": "^8.23.1",
+		"husky": "^8.0.1",
+		"lint-staged": "^13.0.3",
 		"rimraf": "^3.0.2",
 		"sort-package-json": "^1.57.0",
 		"typescript": "^4.6.3"
