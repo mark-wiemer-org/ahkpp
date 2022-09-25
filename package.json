@@ -12,13 +12,13 @@
 		"autohotkey",
 		"ahk"
 	],
-	"homepage": "https://github.com/cweijan/vscode-autohotkey/blob/master/README.md",
+	"homepage": "https://github.com/vscode-autohotkey/autohotkey-plus/blob/master/README.md",
 	"bugs": {
-		"url": "https://github.com/cweijan/vscode-autohotkey/issues"
+		"url": "https://github.com/vscode-autohotkey/autohotkey-plus/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cweijan/vscode-autohotkey.git"
+		"url": "https://github.com/vscode-autohotkey/autohotkey-plus.git"
 	},
 	"license": "LICENSE",
 	"publisher": "cweijan",
