@@ -47,7 +47,7 @@ export const internalFormat = (
         'catch',
     ];
 
-    let formattedDocument = '';
+    let formattedString = '';
     /** Current level of indentation. 0 = top-level, no indentation */
     let depth = 0;
     /** ??? */
@@ -153,7 +153,7 @@ export const internalFormat = (
                 } else {
                     blockCommentLine = originalLine;
                 }
-                formattedDocument += buildIndentedLine(
+                formattedString += buildIndentedLine(
                     lineIndex,
                     lines.length,
                     blockCommentLine,
@@ -247,7 +247,7 @@ export const internalFormat = (
         }
 
         // Save indented line
-        formattedDocument += buildIndentedLine(
+        formattedString += buildIndentedLine(
             lineIndex,
             lines.length,
             formattedLine,
@@ -339,12 +339,12 @@ export const internalFormat = (
         }
     });
 
-    formattedDocument = removeEmptyLines(
-        formattedDocument,
+    formattedString = removeEmptyLines(
+        formattedString,
         options.allowedNumberOfEmptyLines,
     );
 
-    return formattedDocument;
+    return formattedString;
 };
 
 export class FormatProvider implements vscode.DocumentFormattingEditProvider {
@@ -367,7 +367,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ConfigKey.trimExtraSpaces,
         );
 
-        const formattedDocument = internalFormat(stringToFormat, {
+        const formattedString = internalFormat(stringToFormat, {
             ...options,
             allowedNumberOfEmptyLines,
             preserveIndent,
@@ -375,7 +375,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         });
 
         return [
-            new vscode.TextEdit(fullDocumentRange(document), formattedDocument),
+            new vscode.TextEdit(fullDocumentRange(document), formattedString),
         ];
     }
 }
