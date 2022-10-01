@@ -46,7 +46,7 @@ suite('Code utils', () => {
     });
 
     // Test against length for now
-    suite.only('matchAll', () => {
+    suite('matchAll', () => {
         const tests = [
             {
                 name: 'no match',
