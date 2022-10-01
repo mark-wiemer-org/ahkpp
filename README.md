@@ -135,6 +135,10 @@ Supports standard VS Code formatting with a few options.
 
 #### Formatter Directives
 
+Formatter directives instruct the formatter to behave a certain way on sections of code.
+
+The only directive currently supported is `FormatBlockComment` and it's used as below:
+
 ```autohotkey
 ;@AHK++FormatBlockCommentOn
 /*
