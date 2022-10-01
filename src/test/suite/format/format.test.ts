@@ -46,6 +46,10 @@ const formatTests: FormatTest[] = [
         filenameRoot: 'tab-size-2',
         options: { tabSize: 2 },
     },
+    {
+        filenameRoot: '182-multiple-newlines',
+        options: { allowedNumberOfEmptyLines: 2 },
+    },
 ];
 
 // Currently in `out` folder, need to get back to main `src` folder
@@ -90,10 +94,18 @@ suite('Internal formatter', () => {
 });
 
 suite('External formatter', () => {
-    // we only have to test one external formatter to make sure the connection is working
-    // in the future we should add tests for various config values
+    // test external formatter a few times to make sure the connection is working
+    // advanced tests are for internal formatter only
     const externalFormatTests: FormatTest[] = [
         { filenameRoot: '25-multiline-string' },
+        {
+            filenameRoot: 'insert-spaces-false',
+            options: { insertSpaces: false },
+        },
+        {
+            filenameRoot: 'tab-size-2',
+            options: { tabSize: 2 },
+        },
     ];
 
     externalFormatTests.forEach((formatTest) => {
