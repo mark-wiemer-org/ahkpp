@@ -6,16 +6,17 @@ import {
     FormatProvider,
     internalFormat,
 } from '../../../providers/formattingProvider';
+import { FormatOptions } from '../../../providers/formattingProvider.types';
 
 const inFilenameSuffix = '.in.ahk';
 const outFilenameSuffix = '.out.ahk';
 interface FormatTest {
     /** Name of the file, excluding the suffix (@see inFilenameSuffix, @see outFilenameSuffix) */
     filenameRoot: string;
-    /** If not provided, file will be formatted with 4 spaces. */
-    options?: Partial<vscode.FormattingOptions>;
+    // Any properties not provided will use `defaultOptions` below
+    options?: Partial<FormatOptions>;
 }
-/** Default formatting options */
+/** Default formatting options, meant to match default extension settings */
 const defaultOptions = {
     tabSize: 4,
     insertSpaces: true,
@@ -38,6 +39,10 @@ const formatTests: FormatTest[] = [
         options: { allowedNumberOfEmptyLines: 2 },
     },
     { filenameRoot: '185-block-comment' },
+    {
+        filenameRoot: '187-comments-at-end-of-line',
+        options: { trimExtraSpaces: false },
+    },
     { filenameRoot: '188-one-command-code-in-text' },
     { filenameRoot: '189-space-at-end-of-line' },
     {

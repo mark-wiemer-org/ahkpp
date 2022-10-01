@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { CodeUtil } from '../common/codeUtil';
 import { ConfigKey, Global } from '../common/global';
+import { FormatOptions } from './formattingProvider.types';
 import {
     buildIndentedLine,
     documentToString,
@@ -23,11 +23,7 @@ function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
 
 export const internalFormat = (
     stringToFormat: string,
-    options: Pick<vscode.FormattingOptions, 'tabSize' | 'insertSpaces'> & {
-        preserveIndent: boolean;
-        trimExtraSpaces: boolean;
-        allowedNumberOfEmptyLines: number;
-    },
+    options: FormatOptions,
 ): string => {
     /** Special keywords that can trigger one-line commands */
     const oneCommandList = [
