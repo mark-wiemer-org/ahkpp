@@ -324,15 +324,21 @@ export function purify(original: string): string {
     return pure;
 }
 
-/** Remove empty lines at start of document and empty lines,
- *  that exceed allowed number of empty lines. */
+/**
+ * Remove empty lines at the start of the string.
+ * Replace sets of too many empty lines with the maximum allowed empty lines.
+ * Uses end of line sequence from first empty line throughout all empty lines.
+ * Nothing is changed if `allowedNumberOfEmptyLines === -1` or if there
+ * are no sets of empty lines that meet or exceed the allowed number.
+ */
 export function removeEmptyLines(
-    document: string,
+    docString: string,
     allowedNumberOfEmptyLines: number,
 ): string {
     if (allowedNumberOfEmptyLines === -1) {
-        return document;
+        return docString;
     }
+    /** Match all sets of more than the allowed number of empty lines */
     const emptyLines = new RegExp(
         // We need not greedy quantifier for whitespaces (\s*?),
         // because (\s) matches [\r\n\t\f\v ],
@@ -340,8 +346,10 @@ export function removeEmptyLines(
         `\\n(\\s*?\\n){${allowedNumberOfEmptyLines},}`,
         'g',
     );
+    // Replace sets of too many empty lines with just the allowed number of newlines
+    // `$1` => uses end of line sequence from first empty line across all lines
     return (
-        document
+        docString
             // remove extra empty lines
             .replace(emptyLines, '\n' + '$1'.repeat(allowedNumberOfEmptyLines))
             // remove empty lines at start of file

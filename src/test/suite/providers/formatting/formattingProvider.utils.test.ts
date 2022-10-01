@@ -359,15 +359,41 @@ suite('FormattingProvider utils', () => {
                 ln: 1,
                 rs: 'text\n',
             },
+            {
+                // First empty line is \n -> use \n everywhere
+                in: 'a\r\n\n\r\n\n\nb',
+                ln: 2,
+                rs: 'a\r\n\n\nb',
+            },
+            {
+                // First empty line is \r\n -> use \r\n everywhere
+                in: 'a\n\r\n\n\r\nb',
+                ln: 2,
+                rs: 'a\n\r\n\r\nb',
+            },
+            {
+                // First empty line is \r\n -> use \r\n everywhere
+                // Even though we have not exceeded count of empty lines
+                in: 'a\n\r\n\n\r\nb',
+                ln: 3,
+                rs: 'a\n\r\n\r\n\r\nb',
+            },
+            {
+                // 4 lines allowed, 3 found
+                // Make no change since we have not met or exceeded allowed count
+                in: 'a\n\r\n\n\r\nb',
+                ln: 4,
+                rs: 'a\n\r\n\n\r\nb',
+            },
         ];
         dataList.forEach((data) => {
             test(
                 'ln:' +
                     data.ln +
                     " '" +
-                    data.in.replace(/\n/g, '\\n') +
+                    data.in.replace(/\r/g, '\\r').replace(/\n/g, '\\n') +
                     "' => '" +
-                    data.rs.replace(/\n/g, '\\n') +
+                    data.rs.replace(/\r/g, '\\r').replace(/\n/g, '\\n') +
                     "'",
                 () => {
                     assert.strictEqual(
