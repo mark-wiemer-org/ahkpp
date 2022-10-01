@@ -4,7 +4,7 @@ import { CodeUtil } from '../../../common/codeUtil';
 suite('Code utils', () => {
     suite('purify', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result
@@ -41,6 +41,27 @@ suite('Code utils', () => {
         dataList.forEach((data) => {
             test("'" + data.in + "' => '" + data.rs + "'", () => {
                 assert.strictEqual(CodeUtil.purify(data.in), data.rs);
+            });
+        });
+    });
+
+    // Test against length for now
+    suite.only('matchAll', () => {
+        const tests = [
+            {
+                name: 'no match',
+                regex: /hi/g,
+                text: 'bye',
+                expected: [],
+            },
+        ];
+
+        tests.forEach((myTest) => {
+            test(myTest.name, () => {
+                assert.strictEqual(
+                    CodeUtil.matchAll(myTest.regex, myTest.text).length,
+                    myTest.expected.length,
+                );
             });
         });
     });
