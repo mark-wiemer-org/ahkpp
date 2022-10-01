@@ -8,7 +8,7 @@ AutoHotkey Plus Plus (AHK++) provides AutoHotkey language support for VS Code. T
 -   code formatting
 -   ...and more!
 
-> Currently, AHK++ officially supports only AHK v1. AHK v2 will likely work, but please open issues and be patient if complex workflows are not supported. See [issue #146: Support AHK v2](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/146)
+> Currently, AHK++ officially supports only AHK v1. AHK v2 will likely work, but please open issues and be patient if complex workflows are not supported. See [issue 146: Support AHK v2](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/146)
 
 AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Plus/vscode-autohotkey), with the primary goal of fixing bugs and adding user-requested features.
 
@@ -29,7 +29,7 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
     -   [Outline](#outline)
     -   [Folding](#folding)
     -   [Code Format](#code-format)
-    -   [Formatter Directives](#formatter-directives)
+        -   [Formatter Directives](#formatter-directives)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
@@ -129,13 +129,11 @@ Collapse me!
 
 ### Code Format
 
-Supports standard VS Code formatting.
-
-> The formatter is not currently customizable.
+Supports standard VS Code formatting with a few options.
 
 ![Code Format](image/codeFormat.jpg)
 
-### Formatter Directives
+#### Formatter Directives
 
 ```autohotkey
 ;@AHK++FormatBlockCommentOn
