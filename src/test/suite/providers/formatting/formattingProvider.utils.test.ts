@@ -452,7 +452,7 @@ suite('FormattingProvider utils', () => {
     suite('internal documentToString', () => {
         const myTests = [
             {
-                // no lines at all, potential edge case
+                name: '0 lines (empty string)',
                 in: {
                     lineCount: 0,
                     lineAt(i: number): { text: string } {
@@ -462,7 +462,7 @@ suite('FormattingProvider utils', () => {
                 out: '',
             },
             {
-                // single line
+                name: '1 non-empty line',
                 in: {
                     lineCount: 1,
                     lineAt(i: number): { text: string } {
@@ -472,7 +472,7 @@ suite('FormattingProvider utils', () => {
                 out: 'hi',
             },
             {
-                // two lines
+                name: '2 non-empty lines',
                 in: {
                     lineCount: 2,
                     lineAt(i: number): { text: string } {
@@ -483,7 +483,7 @@ suite('FormattingProvider utils', () => {
                 out: 'hello\nworld',
             },
             {
-                // three lines
+                name: '3 non-empty lines',
                 in: {
                     lineCount: 3,
                     lineAt(i: 0 | 1 | 2): { text: string } {
@@ -499,7 +499,7 @@ suite('FormattingProvider utils', () => {
                 out: 'how\nare\nyou',
             },
             {
-                // empty file, one empty line
+                name: '1 empty line, nothing else',
                 in: {
                     lineCount: 1,
                     lineAt(i: 0): { text: string } {
@@ -509,7 +509,7 @@ suite('FormattingProvider utils', () => {
                 out: '',
             },
             {
-                // two empty lines
+                name: '2 empty lines, nothing else',
                 in: {
                     lineCount: 2,
                     lineAt(i: number): { text: string } {
@@ -520,8 +520,8 @@ suite('FormattingProvider utils', () => {
             },
         ];
 
-        myTests.forEach((myTest, i) =>
-            test(`#${i} internal documentToString`, () => {
+        myTests.forEach((myTest) =>
+            test(myTest.name, () => {
                 assert.strictEqual(documentToString(myTest.in), myTest.out);
             }),
         );
@@ -566,7 +566,7 @@ suite('FormattingProvider utils', () => {
         ];
 
         myTests.forEach((myTest, i) =>
-            test(`#${i + 1} ${externalDocumentToString}`, async () => {
+            test(myTest.filename, async () => {
                 const vscodeDocument = await vscode.workspace.openTextDocument(
                     path.join(filesParentPath, myTest.filename),
                 );
