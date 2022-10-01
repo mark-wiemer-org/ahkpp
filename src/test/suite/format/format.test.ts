@@ -67,22 +67,23 @@ const fileToString = (path: string): string => fs.readFileSync(path).toString();
 suite('Internal formatter', () => {
     formatTests.forEach((formatTest) => {
         test(`${formatTest.filenameRoot} internal format`, async () => {
-            const inFileString = fileToString(
-                path.join(
-                    filesParentPath,
-                    `${formatTest.filenameRoot}${inFilenameSuffix}`,
-                ),
+            // Arrange
+            const inFilePath = path.join(
+                filesParentPath,
+                `${formatTest.filenameRoot}${inFilenameSuffix}`,
             );
-            const outFileString = fileToString(
-                path.join(
-                    filesParentPath,
-                    `${formatTest.filenameRoot}${outFilenameSuffix}`,
-                ),
+            const inFileString = fileToString(inFilePath);
+            const outFilePath = path.join(
+                filesParentPath,
+                `${formatTest.filenameRoot}${outFilenameSuffix}`,
             );
+            const outFileString = fileToString(outFilePath);
             const options = { ...defaultOptions, ...formatTest.options };
 
+            // Act
             const actual = internalFormat(inFileString, options);
 
+            // Assert
             assert.strictEqual(actual, outFileString);
         });
     });
