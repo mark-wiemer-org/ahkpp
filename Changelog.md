@@ -1,8 +1,44 @@
 # Changelog
 
-## 2.8.3 - 2022-07-04 🦅
+## 3.0.0 - 2022-10-01 👻
+
+This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you!
+
+The `#nnn` values in this release are links to PRs, not to issues.
+
+Breaking changes:
+
+-   Update file template: Add `#NoEnv` and `SetBatchLines, -1` (#202)
+
+> Formatter bugfixes may be considered breaking if you wanted the old behaviors. If you want the old behavior, please [open an issue](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/new?assignees=mark-wiemer&labels=bug%2C+formatter&template=formatting-bug.md&title=).
+
+Features:
+
+-   Add [formatter directive](./README.md#formatter-directives) for "Format Block Comment" (#164)
+-   Add "allowed number of empty lines" setting to preserve any number of lines. Defaults to `1`, `-1` means "preserve all empty lines" (#194)
+-   Add "preserve indent" setting to preserve spaces before a comment. Defaults to `false`. (#192)
+-   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. (#191)
+-   Trim end of line when formatting (#190)
+
+Fixes:
+
+-   Fix some snippets (#138, #201, #210)
+-   Fix formatting bugs with semi-colon as part of a string (#159)
+-   Fix some formatting bugs with `if`, `else`, etc. without braces (#181)
+-   Fix formatter issue with non-label colon at end of line (#162)
+-   Even more formatter fixes (#164)
+
+## 2.8.4 - 2022-07-07
+
+-   Revert to v2.8.2 due to unexpected breaking change in v2.8.3
+
+## 2.8.3 (YANKED) - 2022-07-04 🦅
+
+> This release has been yanked, meaning it's not supported. Use v2.8.2 instead.
 
 -   Change to use default debug icon ([#100](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/100))
+
+-   Unexpected change: Break "step into" function of debugger. :(
 
 ## 2.8.2 - 2022-06-11 🎂
 

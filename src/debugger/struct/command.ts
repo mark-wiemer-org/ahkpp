@@ -1,3 +1,4 @@
+// These enum values are sent directly to AHK. Do not change!
 export enum Continue {
     break = 'break',
     run = 'run',
