@@ -62,6 +62,7 @@ export class DebugDispatcher extends EventEmitter {
 
     private async initDebugger(
         args: LaunchRequestArguments,
+        // names may used by AHK, let's not change them for now
         // eslint-disable-next-line @typescript-eslint/naming-convention
         dbgpSettings: { max_children?: number; max_data?: number } = {},
     ) {
