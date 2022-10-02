@@ -265,7 +265,7 @@ export class DebugDispatcher extends EventEmitter {
                     const isIndex: boolean =
                         fullname.includes('[') && fullname.includes(']');
                     fullname =
-                        isIndex === true
+                        isIndex
                             ? `${parentFullName}${fullname}`
                             : `${parentFullName}.${fullname}`;
                 }
