@@ -17,7 +17,7 @@ Features:
 -   Add [formatter directive](./README.md#formatter-directives) for "Format Block Comment" (#164)
 -   Add "allowed number of empty lines" setting to preserve any number of lines. Defaults to `1`, `-1` means "preserve all empty lines" (#194)
 -   Add "preserve indent" setting to preserve spaces before a comment. Defaults to `false`. (#192)
--   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. (#187)
+-   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. (#191)
 -   Trim end of line when formatting (#190)
 
 Fixes:
