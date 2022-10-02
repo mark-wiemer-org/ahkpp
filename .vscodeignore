@@ -1,3 +1,4 @@
+# Files to be excluded from the built package
 .vscode/**
 .@vscode/test-electron/**
 out/test/**
