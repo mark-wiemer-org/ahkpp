@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-All versions
+All non-[yanked](./Changelog.md#283-yanked---2022-07-04-🦅) versions.
 
 ## Reporting a Vulnerability
 

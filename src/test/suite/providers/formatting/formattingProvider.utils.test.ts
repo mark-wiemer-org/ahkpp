@@ -1,7 +1,10 @@
+import * as vscode from 'vscode';
 import * as assert from 'assert';
+import path = require('path');
 import {
     buildIndentationChars,
     buildIndentedLine,
+    documentToString,
     hasMoreCloseParens,
     hasMoreOpenParens,
     purify,
@@ -356,15 +359,41 @@ suite('FormattingProvider utils', () => {
                 ln: 1,
                 rs: 'text\n',
             },
+            {
+                // First empty line is \n -> use \n everywhere
+                in: 'a\r\n\n\r\n\n\nb',
+                ln: 2,
+                rs: 'a\r\n\n\nb',
+            },
+            {
+                // First empty line is \r\n -> use \r\n everywhere
+                in: 'a\n\r\n\n\r\nb',
+                ln: 2,
+                rs: 'a\n\r\n\r\nb',
+            },
+            {
+                // First empty line is \r\n -> use \r\n everywhere
+                // Even though we have not exceeded count of empty lines
+                in: 'a\n\r\n\n\r\nb',
+                ln: 3,
+                rs: 'a\n\r\n\r\n\r\nb',
+            },
+            {
+                // 4 lines allowed, 3 found
+                // Make no change since we have not met or exceeded allowed count
+                in: 'a\n\r\n\n\r\nb',
+                ln: 4,
+                rs: 'a\n\r\n\n\r\nb',
+            },
         ];
         dataList.forEach((data) => {
             test(
                 'ln:' +
                     data.ln +
                     " '" +
-                    data.in.replace(/\n/g, '\\n') +
+                    data.in.replace(/\r/g, '\\r').replace(/\n/g, '\\n') +
                     "' => '" +
-                    data.rs.replace(/\n/g, '\\n') +
+                    data.rs.replace(/\r/g, '\\r').replace(/\n/g, '\\n') +
                     "'",
                 () => {
                     assert.strictEqual(
@@ -417,5 +446,135 @@ suite('FormattingProvider utils', () => {
                 },
             );
         });
+    });
+
+    // Internal tests mock VS Code behavior to isolate flaws and run faster
+    suite('internal documentToString', () => {
+        const myTests = [
+            {
+                name: '0 lines (empty string)',
+                in: {
+                    lineCount: 0,
+                    lineAt(i: number): { text: string } {
+                        throw new Error('Argument out of bounds');
+                    },
+                },
+                out: '',
+            },
+            {
+                name: '1 non-empty line',
+                in: {
+                    lineCount: 1,
+                    lineAt(i: number): { text: string } {
+                        return { text: 'hi' };
+                    },
+                },
+                out: 'hi',
+            },
+            {
+                name: '2 non-empty lines',
+                in: {
+                    lineCount: 2,
+                    lineAt(i: number): { text: string } {
+                        const result = !i ? 'hello' : 'world';
+                        return { text: result };
+                    },
+                },
+                out: 'hello\nworld',
+            },
+            {
+                name: '3 non-empty lines',
+                in: {
+                    lineCount: 3,
+                    lineAt(i: 0 | 1 | 2): { text: string } {
+                        const map: Record<0 | 1 | 2, string> = {
+                            [0]: 'how',
+                            [1]: 'are',
+                            [2]: 'you',
+                        };
+                        const result = map[i];
+                        return { text: result };
+                    },
+                },
+                out: 'how\nare\nyou',
+            },
+            {
+                name: '1 empty line, nothing else',
+                in: {
+                    lineCount: 1,
+                    lineAt(i: 0): { text: string } {
+                        return { text: '' };
+                    },
+                },
+                out: '',
+            },
+            {
+                name: '2 empty lines, nothing else',
+                in: {
+                    lineCount: 2,
+                    lineAt(i: number): { text: string } {
+                        return { text: '' };
+                    },
+                },
+                out: '\n',
+            },
+        ];
+
+        myTests.forEach((myTest) =>
+            test(myTest.name, () => {
+                assert.strictEqual(documentToString(myTest.in), myTest.out);
+            }),
+        );
+    });
+
+    // External tests use real VS Code behavior to ensure extension works end-to-end
+    const externalDocumentToString = 'external documentToString';
+    suite(externalDocumentToString, () => {
+        // Currently in `out` folder, need to get back to main `src` folder
+        const filesParentPath = path.join(
+            __dirname,
+            '..',
+            '..',
+            '..',
+            '..',
+            '..',
+            'src',
+            'test',
+            'suite',
+            'providers',
+            'formatting',
+            'samples',
+        );
+
+        const myTests = [
+            { filename: '1-one-empty-line.txt', expected: '' },
+            { filename: '2-two-empty-lines.txt', expected: '\n' },
+            { filename: '3-three-empty-lines.txt', expected: '\n\n' },
+            {
+                filename: '4-multiline-ends-with-newline.txt',
+                expected: 'hello\nworld\nhow are you\n',
+            },
+            {
+                filename: '5-multiline-no-newline.txt',
+                expected: 'hello\nworld\nhow are you',
+            },
+            {
+                filename: '6-single-line-ends-with-newline.txt',
+                expected: 'hello\n',
+            },
+            { filename: '7-single-line-no-newline.txt', expected: 'hello' },
+        ];
+
+        myTests.forEach((myTest, i) =>
+            test(myTest.filename, async () => {
+                const vscodeDocument = await vscode.workspace.openTextDocument(
+                    path.join(filesParentPath, myTest.filename),
+                );
+
+                const actual = documentToString(vscodeDocument);
+
+                assert.strictEqual(actual, myTest.expected);
+            }),
+        );
     });
 });
