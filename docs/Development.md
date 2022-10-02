@@ -42,10 +42,7 @@ The tests should run automatically, and you should see passing output in the Deb
     1. Select `Install Extension VSIX`.
     1. Reload the window. (`Ctrl + Shift + R` or `F1` -> Developer: Reload Window)
 1.  Perform final pre-release tests.
-    -   If tests fail, there are two choices:
-        1. Delay the release until the tests pass (preferred choice)
-            > Changes can be made on the same release branch, same package version
-        1. Create issues for the newly-introduced failures before releasing, then publish the release anyway
+1.  If tests fail, delay the release.
 
 ### Publishing
 

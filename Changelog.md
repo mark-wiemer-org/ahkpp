@@ -27,6 +27,7 @@ Fixes:
 -   Fix some formatting bugs with `if`, `else`, etc. without braces (#181)
 -   Fix formatter issue with non-label colon at end of line (#162)
 -   Even more formatter fixes (#164)
+-   Use default debug icon (was yanked in 2.8.3, now it returns!) (#149)
 
 ## 2.8.4 - 2022-07-07
 
