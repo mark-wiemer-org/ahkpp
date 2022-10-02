@@ -275,7 +275,7 @@ export class DebugDispatcher extends EventEmitter {
                     value,
                 );
                 const success = !!parseInt(response.attr.success);
-                if (success === false) {
+                if (!success) {
                     throw new Error(
                         `"${fullname}" cannot be written. Probably read-only.`,
                     );
