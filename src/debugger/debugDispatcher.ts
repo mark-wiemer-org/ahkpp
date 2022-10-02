@@ -264,10 +264,9 @@ export class DebugDispatcher extends EventEmitter {
                 if (parentFullName) {
                     const isIndex: boolean =
                         fullname.includes('[') && fullname.includes(']');
-                    fullname =
-                        isIndex
-                            ? `${parentFullName}${fullname}`
-                            : `${parentFullName}.${fullname}`;
+                    fullname = isIndex
+                        ? `${parentFullName}${fullname}`
+                        : `${parentFullName}.${fullname}`;
                 }
 
                 const response: DbgpResponse = await this.sendComand(
