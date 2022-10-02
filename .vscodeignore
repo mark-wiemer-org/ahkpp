@@ -2,10 +2,10 @@
 .@vscode/test-electron/**
 out/test/**
 out/**/*.map
-src/**
+src/
 demos/
 images/**
-.idea/
+node_modules/
 .gitignore
 tsconfig.json
 vsc-extension-quickstart.md

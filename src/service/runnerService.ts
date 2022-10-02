@@ -13,8 +13,8 @@ export class RunnerService {
             return;
         }
 
-        var selection = editor.selection;
-        var text = editor.document.getText(selection);
+        const selection = editor.selection;
+        const text = editor.document.getText(selection);
         this.run(await this.createTemplate(text));
     }
 

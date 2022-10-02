@@ -1,6 +1,7 @@
 import { commands } from 'vscode';
 import {
     BreakpointEvent,
+    ExitedEvent,
     InitializedEvent,
     LoggingDebugSession,
     OutputEvent,
@@ -27,9 +28,9 @@ export interface LaunchRequestArguments
     runtime: string;
     dbgpSettings: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        max_children: number;
+        max_children?: number;
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        max_data: number;
+        max_data?: number;
     };
 }
 
@@ -82,6 +83,7 @@ export class DebugSession extends LoggingDebugSession {
             supportsDataBreakpoints: false,
             supportsCompletionsRequest: true,
             supportsCancelRequest: true,
+            supportsTerminateRequest: true,
             supportsRestartRequest: true,
             supportsBreakpointLocationsRequest: false,
             supportsSetVariable: true,
@@ -111,6 +113,14 @@ export class DebugSession extends LoggingDebugSession {
     protected disconnectRequest(
         response: DebugProtocol.DisconnectResponse,
         args: DebugProtocol.DisconnectArguments,
+        request?: DebugProtocol.Request,
+    ): void {
+        this.sendResponse(response);
+    }
+
+    protected terminateRequest(
+        response: DebugProtocol.TerminateResponse,
+        args: DebugProtocol.TerminateArguments,
         request?: DebugProtocol.Request,
     ): void {
         this.dispatcher.stop();

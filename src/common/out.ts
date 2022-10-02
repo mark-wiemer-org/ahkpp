@@ -1,14 +1,30 @@
+import format from 'date-format';
 import * as vscode from 'vscode';
-import { OutputChannel } from 'vscode';
+
+function formatDate(date: Date) {
+    if (!date) {
+        return '';
+    }
+    return format('yyyy-MM-dd hh:mm:ss', date);
+}
 
 export class Out {
-    public static log(value: any) {
-        if (!this.channel) {
-            this.channel = vscode.window.createOutputChannel('AHK');
-        }
-        this.channel.show(true);
-        this.channel.appendLine(value + '');
+    private static outputChannel: vscode.OutputChannel =
+        vscode.window.createOutputChannel('AHK');
+
+    public static debug(value: any) {
+        this.log(value, false);
     }
 
-    private static channel: OutputChannel;
+    public static log(value: any, focus = true) {
+        if (value instanceof Error) {
+            console.trace(value);
+            value = value.message;
+        }
+        if (focus) {
+            this.outputChannel.show(focus);
+        }
+        const begin = formatDate(new Date());
+        this.outputChannel.appendLine(`${begin} ${value}`);
+    }
 }
