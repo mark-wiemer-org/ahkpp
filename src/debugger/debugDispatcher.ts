@@ -18,7 +18,7 @@ import { Out } from '../common/out';
 import { Global, ConfigKey } from '../common/global';
 
 /**
- * A Ahk runtime debugger.
+ * An AHK runtime debugger.
  * refrence: https://xdebug.org/docs/dbgp
  */
 export class DebugDispatcher extends EventEmitter {
@@ -41,7 +41,7 @@ export class DebugDispatcher extends EventEmitter {
             args.program = await RunnerService.getPathByActive();
         }
         if (!existsSync(runtime)) {
-            Out.log(`Autohotkey Execute Bin Not Found : ${runtime}`);
+            Out.log(`AutoHotkey execute bin not found: ${runtime}`);
             this.end();
             return;
         }
@@ -62,6 +62,7 @@ export class DebugDispatcher extends EventEmitter {
 
     private async initDebugger(
         args: LaunchRequestArguments,
+        // names may used by AHK, let's not change them for now
         // eslint-disable-next-line @typescript-eslint/naming-convention
         dbgpSettings: { max_children?: number; max_data?: number } = {},
     ) {
@@ -264,7 +265,7 @@ export class DebugDispatcher extends EventEmitter {
                     const isIndex: boolean =
                         fullname.includes('[') && fullname.includes(']');
                     fullname =
-                        isIndex === true
+                        isIndex
                             ? `${parentFullName}${fullname}`
                             : `${parentFullName}.${fullname}`;
                 }
@@ -274,7 +275,7 @@ export class DebugDispatcher extends EventEmitter {
                     value,
                 );
                 const success = !!parseInt(response.attr.success);
-                if (success === false) {
+                if (!success) {
                     throw new Error(
                         `"${fullname}" cannot be written. Probably read-only.`,
                     );
