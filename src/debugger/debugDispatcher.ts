@@ -41,7 +41,7 @@ export class DebugDispatcher extends EventEmitter {
             args.program = await RunnerService.getPathByActive();
         }
         if (!existsSync(runtime)) {
-            Out.log(`Autohotkey Execute Bin Not Found : ${runtime}`);
+            Out.log(`AutoHotkey execute bin not found: ${runtime}`);
             this.end();
             return;
         }
