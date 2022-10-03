@@ -188,7 +188,7 @@ export const internalFormat = (
         }
 
         // return or ExitApp
-        if (purifiedLine.match(/\b(return|ExitApp)\b/i) && tagDepth === depth) {
+        if (purifiedLine.match(/\b(return|exitapp)\b/) && tagDepth === depth) {
             tagDepth = 0;
             depth--;
             atTopLevel = false;

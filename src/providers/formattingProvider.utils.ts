@@ -102,7 +102,7 @@ export function purify(original: string): string {
         return '';
     }
     // Generated list of commands from SciTE4AutoHotkey -> Options -> Open ahk.keywords.properties
-    let commandList = [
+    const commandList = [
         'autotrim',
         'blockinput',
         'click',
