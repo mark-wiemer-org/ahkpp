@@ -8,7 +8,7 @@ AutoHotkey Plus Plus (AHK++) provides AutoHotkey language support for VS Code. T
 -   code formatting
 -   ...and more!
 
-> Currently, AHK++ officially supports only AHK v1. AHK v2 will likely work, but please open issues and be patient if complex workflows are not supported. See [issue #146: Support AHK v2](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/146)
+> Currently, AHK++ officially supports only AHK v1. AHK v2 will likely work, but please open issues and be patient if complex workflows are not supported. See [issue 146: Support AHK v2](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/146)
 
 AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Plus/vscode-autohotkey), with the primary goal of fixing bugs and adding user-requested features.
 
@@ -26,8 +26,10 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
     -   [Go To Definition](#go-to-definition)
     -   [Find References](#find-symbol-references)
     -   [Hover Tip](#hover-tip)
+    -   [Outline](#outline)
+    -   [Folding](#folding)
     -   [Code Format](#code-format)
-    -   [Formatter Directives](#formatter-directives)
+        -   [Formatter Directives](#formatter-directives)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
@@ -104,15 +106,38 @@ Usage: Hover over symbol to see IntelliSense documentation.
 
 ![Hover](image/hover.png)
 
+### Outline
+
+Assign name to block of code via double semicolon comment `;;Name` and go to it from outline.
+
+![Block Name](image/blockName.png)
+
+### Folding
+
+Custom folding regions:
+
+```autohotkey
+;region
+MsgBox % "Collapse me!"
+;endregion
+
+; Block comments with regions
+/* ;region
+Collapse me!
+*/ ;endregion
+```
+
 ### Code Format
 
-Supports standard VS Code formatting.
-
-> The formatter is not currently customizable.
+Supports standard VS Code formatting with a few options.
 
 ![Code Format](image/codeFormat.jpg)
 
-### Formatter Directives
+#### Formatter Directives
+
+Formatter directives instruct the formatter to behave a certain way on sections of code.
+
+The only directive currently supported is `FormatBlockComment` and it's used as below:
 
 ```autohotkey
 ;@AHK++FormatBlockCommentOn
