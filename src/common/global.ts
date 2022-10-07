@@ -4,22 +4,11 @@ export class Global {
     public static configPrefix = 'ahk++';
     private static statusBarItem: vscode.StatusBarItem;
     /**
-     * Get a value from the configuration (VSCode setting).
-     * @param key Configuration name
+     * get configuration from vscode setting.
+     * @param key config key
      */
     public static getConfig<T>(key: string): T {
         return vscode.workspace.getConfiguration(this.configPrefix).get<T>(key);
-    }
-    /**
-     * Set a value in the global configuration (VSCode setting).
-     * @param key Configuration name
-     * @param value New value
-     * @return Promise (to use with 'await' in test suits)
-     */
-    public static setConfig(key: string, value: any): Thenable<void> {
-        return vscode.workspace
-            .getConfiguration(this.configPrefix)
-            .update(key, value, true);
     }
 
     public static updateStatusBarItems(text: string) {
