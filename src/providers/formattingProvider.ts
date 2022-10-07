@@ -76,6 +76,7 @@ export const internalFormat = (
     let preBlockCommentAtTopLevel = true;
     let preBlockCommentOneCommandCode = false;
 
+    const indentCodeAfterLabel = options.indentCodeAfterLabel;
     const preserveIndentOnEmptyString = options.preserveIndent;
     const trimSpaces = options.trimExtraSpaces;
 
@@ -202,7 +203,7 @@ export const internalFormat = (
             atTopLevel = false;
         } else if (purifiedLine.match(label)) {
             // default or hotkey
-            if (options.indentCodeAfterLabel) {
+            if (indentCodeAfterLabel) {
                 if (tagDepth > 0 && tagDepth === depth) {
                     depth--;
                     atTopLevel = false;
@@ -311,7 +312,7 @@ export const internalFormat = (
 
         // default or label
         if (!moreOpenParens && purifiedLine.match(label)) {
-            if (options.indentCodeAfterLabel) {
+            if (indentCodeAfterLabel) {
                 depth++;
                 tagDepth = depth;
                 atTopLevel = false;
