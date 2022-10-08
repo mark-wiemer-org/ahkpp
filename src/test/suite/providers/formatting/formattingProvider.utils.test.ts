@@ -1,10 +1,14 @@
+import * as vscode from 'vscode';
 import * as assert from 'assert';
+import path = require('path');
 import {
     braceNumber,
     buildIndentationChars,
     buildIndentedLine,
+    documentToString,
     hasMoreCloseParens,
     hasMoreOpenParens,
+    purify,
     removeEmptyLines,
     trimExtraSpaces,
 } from '../../../../providers/formattingProvider.utils';
@@ -114,37 +118,57 @@ suite('FormattingProvider utils', () => {
             //     dp: , // depth of indentation
             //     fl: , // formatted line
             //     op: , // formatting options
+            //     pi: , // preserve indent
             //     rs: , // expected result
             // },
             {
                 dp: 0,
                 fl: 'SoundBeep',
                 op: { insertSpaces: true, tabSize: 4 },
+                pi: false,
                 rs: 'SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
                 op: { insertSpaces: true, tabSize: 4 },
+                pi: false,
                 rs: '    SoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
                 op: { insertSpaces: true, tabSize: 4 },
+                pi: false,
                 rs: '        SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
                 op: { insertSpaces: false, tabSize: 4 },
+                pi: false,
                 rs: '\tSoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
                 op: { insertSpaces: false, tabSize: 4 },
+                pi: false,
                 rs: '\t\tSoundBeep',
+            },
+            {
+                dp: 1,
+                fl: '',
+                op: { insertSpaces: true, tabSize: 4 },
+                pi: true,
+                rs: '    ',
+            },
+            {
+                dp: 2,
+                fl: '',
+                op: { insertSpaces: false, tabSize: 4 },
+                pi: true,
+                rs: '\t\t',
             },
         ];
         dataList.forEach((data) => {
@@ -153,6 +177,8 @@ suite('FormattingProvider utils', () => {
                     data.dp +
                     ' spaces:' +
                     data.op.insertSpaces.toString() +
+                    ' preserveIndent:' +
+                    data.pi.toString() +
                     " '" +
                     data.fl +
                     "' => '" +
@@ -160,7 +186,14 @@ suite('FormattingProvider utils', () => {
                     "'",
                 () => {
                     assert.strictEqual(
-                        buildIndentedLine(0, 1, data.fl, data.dp, data.op),
+                        buildIndentedLine(
+                            0,
+                            1,
+                            data.fl,
+                            data.dp,
+                            data.op,
+                            data.pi,
+                        ),
                         data.rs,
                     );
                 },
@@ -238,6 +271,61 @@ suite('FormattingProvider utils', () => {
         });
     });
 
+    suite('purify', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            // },
+            {
+                in: 'foo("; not comment")',
+                rs: 'foo("")',
+            },
+            {
+                in: 'MsgBox, { ; comment with close brace }',
+                rs: 'MsgBox',
+            },
+            {
+                in: 'MsgBox % "; not comment"',
+                rs: 'MsgBox',
+            },
+            {
+                in: 'str = "`; not comment"',
+                rs: 'str = ""',
+            },
+            {
+                in: 'str = "; comment with double quote"',
+                rs: 'str = ""',
+            },
+            {
+                in: 'str = "; comment',
+                rs: 'str = "',
+            },
+            {
+                in: 'Gui, %id%: Color, % color',
+                rs: 'Gui',
+            },
+            {
+                in: 'Send(Gui)',
+                rs: 'Send(Gui)',
+            },
+            {
+                in: 'Send(foo)',
+                rs: 'Send(foo)',
+            },
+            {
+                in: 'foo(Gui)',
+                rs: 'foo(Gui)',
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "' => '" + data.rs + "'", () => {
+                assert.strictEqual(purify(data.in), data.rs);
+            });
+        });
+    });
+
     suite('removeEmptyLines', () => {
         // List of test data
         let dataList = [
@@ -272,9 +360,39 @@ suite('FormattingProvider utils', () => {
                 rs: 'text\n\n\n\ntext\n\n\n\n',
             },
             {
+                in: 'text\n    \n    \n    \n    \ntext\n    \n    \n    \n    \n',
+                ln: 0,
+                rs: 'text\ntext\n',
+            },
+            {
+                in: 'text\n    \n    \n    \n    \ntext\n    \n    \n    \n    \n',
+                ln: 1,
+                rs: 'text\n    \ntext\n    \n',
+            },
+            {
+                in: 'text\n    \n    \n    \n    \ntext\n    \n    \n    \n    \n',
+                ln: 2,
+                rs: 'text\n    \n    \ntext\n    \n    \n',
+            },
+            {
+                in: 'text\n    \n    \n    \n    \ntext\n    \n    \n    \n    \n',
+                ln: 3,
+                rs: 'text\n    \n    \n    \ntext\n    \n    \n    \n',
+            },
+            {
                 in: '\n\n\ntext',
                 ln: 1,
                 rs: 'text',
+            },
+            {
+                in: '    \n',
+                ln: 1,
+                rs: '',
+            },
+            {
+                in: '\t\n',
+                ln: 1,
+                rs: '',
             },
             {
                 in: 'text\ntext',
@@ -286,15 +404,41 @@ suite('FormattingProvider utils', () => {
                 ln: 1,
                 rs: 'text\n',
             },
+            {
+                // First empty line is \n -> use \n everywhere
+                in: 'a\r\n\n\r\n\n\nb',
+                ln: 2,
+                rs: 'a\r\n\n\nb',
+            },
+            {
+                // First empty line is \r\n -> use \r\n everywhere
+                in: 'a\n\r\n\n\r\nb',
+                ln: 2,
+                rs: 'a\n\r\n\r\nb',
+            },
+            {
+                // First empty line is \r\n -> use \r\n everywhere
+                // Even though we have not exceeded count of empty lines
+                in: 'a\n\r\n\n\r\nb',
+                ln: 3,
+                rs: 'a\n\r\n\r\n\r\nb',
+            },
+            {
+                // 4 lines allowed, 3 found
+                // Make no change since we have not met or exceeded allowed count
+                in: 'a\n\r\n\n\r\nb',
+                ln: 4,
+                rs: 'a\n\r\n\n\r\nb',
+            },
         ];
         dataList.forEach((data) => {
             test(
                 'ln:' +
                     data.ln +
                     " '" +
-                    data.in.replace(/\n/g, '\\n') +
+                    data.in.replace(/\r/g, '\\r').replace(/\n/g, '\\n') +
                     "' => '" +
-                    data.rs.replace(/\n/g, '\\n') +
+                    data.rs.replace(/\r/g, '\\r').replace(/\n/g, '\\n') +
                     "'",
                 () => {
                     assert.strictEqual(
@@ -347,5 +491,135 @@ suite('FormattingProvider utils', () => {
                 },
             );
         });
+    });
+
+    // Internal tests mock VS Code behavior to isolate flaws and run faster
+    suite('internal documentToString', () => {
+        const myTests = [
+            {
+                name: '0 lines (empty string)',
+                in: {
+                    lineCount: 0,
+                    lineAt(i: number): { text: string } {
+                        throw new Error('Argument out of bounds');
+                    },
+                },
+                out: '',
+            },
+            {
+                name: '1 non-empty line',
+                in: {
+                    lineCount: 1,
+                    lineAt(i: number): { text: string } {
+                        return { text: 'hi' };
+                    },
+                },
+                out: 'hi',
+            },
+            {
+                name: '2 non-empty lines',
+                in: {
+                    lineCount: 2,
+                    lineAt(i: number): { text: string } {
+                        const result = !i ? 'hello' : 'world';
+                        return { text: result };
+                    },
+                },
+                out: 'hello\nworld',
+            },
+            {
+                name: '3 non-empty lines',
+                in: {
+                    lineCount: 3,
+                    lineAt(i: 0 | 1 | 2): { text: string } {
+                        const map: Record<0 | 1 | 2, string> = {
+                            [0]: 'how',
+                            [1]: 'are',
+                            [2]: 'you',
+                        };
+                        const result = map[i];
+                        return { text: result };
+                    },
+                },
+                out: 'how\nare\nyou',
+            },
+            {
+                name: '1 empty line, nothing else',
+                in: {
+                    lineCount: 1,
+                    lineAt(i: 0): { text: string } {
+                        return { text: '' };
+                    },
+                },
+                out: '',
+            },
+            {
+                name: '2 empty lines, nothing else',
+                in: {
+                    lineCount: 2,
+                    lineAt(i: number): { text: string } {
+                        return { text: '' };
+                    },
+                },
+                out: '\n',
+            },
+        ];
+
+        myTests.forEach((myTest) =>
+            test(myTest.name, () => {
+                assert.strictEqual(documentToString(myTest.in), myTest.out);
+            }),
+        );
+    });
+
+    // External tests use real VS Code behavior to ensure extension works end-to-end
+    const externalDocumentToString = 'external documentToString';
+    suite(externalDocumentToString, () => {
+        // Currently in `out` folder, need to get back to main `src` folder
+        const filesParentPath = path.join(
+            __dirname,
+            '..',
+            '..',
+            '..',
+            '..',
+            '..',
+            'src',
+            'test',
+            'suite',
+            'providers',
+            'formatting',
+            'samples',
+        );
+
+        const myTests = [
+            { filename: '1-one-empty-line.txt', expected: '' },
+            { filename: '2-two-empty-lines.txt', expected: '\n' },
+            { filename: '3-three-empty-lines.txt', expected: '\n\n' },
+            {
+                filename: '4-multiline-ends-with-newline.txt',
+                expected: 'hello\nworld\nhow are you\n',
+            },
+            {
+                filename: '5-multiline-no-newline.txt',
+                expected: 'hello\nworld\nhow are you',
+            },
+            {
+                filename: '6-single-line-ends-with-newline.txt',
+                expected: 'hello\n',
+            },
+            { filename: '7-single-line-no-newline.txt', expected: 'hello' },
+        ];
+
+        myTests.forEach((myTest, i) =>
+            test(myTest.filename, async () => {
+                const vscodeDocument = await vscode.workspace.openTextDocument(
+                    path.join(filesParentPath, myTest.filename),
+                );
+
+                const actual = documentToString(vscodeDocument);
+
+                assert.strictEqual(actual, myTest.expected);
+            }),
+        );
     });
 });

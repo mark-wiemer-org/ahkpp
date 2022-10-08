@@ -4,55 +4,64 @@ import { CodeUtil } from '../../../common/codeUtil';
 suite('Code utils', () => {
     suite('purify', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result
             // },
             {
-                in: 'foo("; not comment")',
-                rs: 'foo("")',
+                in: 'a := 5 ; comment',
+                rs: 'a := 5 ',
             },
             {
-                in: 'MsgBox, { ; comment with close brace }',
-                rs: 'MsgBox',
+                in: 'str := "string"',
+                rs: 'str := ""',
             },
             {
-                in: 'MsgBox % "; not comment"',
-                rs: 'MsgBox',
+                in: 'b := {str: "object"}',
+                rs: 'b := ',
             },
             {
-                in: 'str = "`; not comment"',
-                rs: 'str = ""',
-            },
-            {
-                in: 'str = "; comment with double quote"',
-                rs: 'str = ""',
-            },
-            {
-                in: 'str = "; comment',
-                rs: 'str = "',
+                in: 'str = legacy    text',
+                rs: 'str = legacy text',
             },
             {
                 in: 'Gui, %id%: Color, % color',
-                rs: 'Gui',
+                rs: '',
             },
             {
-                in: 'Send(Gui)',
-                rs: 'Send(Gui)',
+                in: 'MsgBox % str . (var + 1)',
+                rs: 'MsgBox str . (var + 1)',
             },
             {
-                in: 'Send(foo)',
-                rs: 'Send(foo)',
-            },
-            {
-                in: 'foo(Gui)',
-                rs: 'foo(Gui)',
+                in: 'MouseGetPos, OutputVarX, OutputVarY, OutputVarWin, OutputVarControl',
+                rs: 'MouseGetPos, OutputVarX, OutputVarY, OutputVarWin, OutputVarControl',
             },
         ];
         dataList.forEach((data) => {
-            test(data.in + ' => ' + data.rs, () => {
+            test("'" + data.in + "' => '" + data.rs + "'", () => {
                 assert.strictEqual(CodeUtil.purify(data.in), data.rs);
+            });
+        });
+    });
+
+    // Test against length for now
+    suite('matchAll', () => {
+        const tests = [
+            {
+                name: 'no match',
+                regex: /hi/g,
+                text: 'bye',
+                expected: [],
+            },
+        ];
+
+        tests.forEach((myTest) => {
+            test(myTest.name, () => {
+                assert.strictEqual(
+                    CodeUtil.matchAll(myTest.regex, myTest.text).length,
+                    myTest.expected.length,
+                );
             });
         });
     });

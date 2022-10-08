@@ -1,0 +1,21 @@
+# Move issues and pull requests to the project
+
+name: Project management
+
+on:
+  pull_request:
+    types:
+      - opened
+  issues:
+    types:
+      - opened
+
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/users/mark-wiemer/projects/1
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
