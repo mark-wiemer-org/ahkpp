@@ -89,6 +89,7 @@ export const internalFormat = (
      */
     let sharpDirective = false;
 
+    const indentCodeAfterLabel = options.indentCodeAfterLabel;
     const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
     const trimSpaces = options.trimExtraSpaces;
 
@@ -239,9 +240,11 @@ export const internalFormat = (
             atTopLevel = false;
         } else if (purifiedLine.match(label)) {
             // default or hotkey
-            if (tagDepth > 0 && tagDepth === depth) {
-                depth--;
-                atTopLevel = false;
+            if (indentCodeAfterLabel) {
+                if (tagDepth > 0 && tagDepth === depth) {
+                    depth--;
+                    atTopLevel = false;
+                }
             }
         }
 
@@ -342,9 +345,11 @@ export const internalFormat = (
 
         // default or label
         if (!moreOpenParens && purifiedLine.match(label)) {
-            depth++;
-            tagDepth = depth;
-            atTopLevel = false;
+            if (indentCodeAfterLabel) {
+                depth++;
+                tagDepth = depth;
+                atTopLevel = false;
+            }
         }
 
         if (atTopLevel) {
@@ -388,6 +393,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ConfigKey.allowedNumberOfEmptyLines,
         );
 
+        const indentCodeAfterLabel = Global.getConfig<boolean>(
+            ConfigKey.indentCodeAfterLabel,
+        );
+
         const indentCodeAfterSharpDirective = Global.getConfig<boolean>(
             ConfigKey.indentCodeAfterSharpDirective,
         );
@@ -403,6 +412,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         const formattedString = internalFormat(stringToFormat, {
             ...options,
             allowedNumberOfEmptyLines,
+            indentCodeAfterLabel,
             indentCodeAfterSharpDirective,
             preserveIndent,
             trimExtraSpaces,
