@@ -76,6 +76,7 @@ export const internalFormat = (
     let preBlockCommentAtTopLevel = true;
     let preBlockCommentOneCommandCode = false;
 
+    const indentCodeAfterLabel = options.indentCodeAfterLabel;
     const preserveIndentOnEmptyString = options.preserveIndent;
     const trimSpaces = options.trimExtraSpaces;
 
@@ -202,9 +203,11 @@ export const internalFormat = (
             atTopLevel = false;
         } else if (purifiedLine.match(label)) {
             // default or hotkey
-            if (tagDepth > 0 && tagDepth === depth) {
-                depth--;
-                atTopLevel = false;
+            if (indentCodeAfterLabel) {
+                if (tagDepth > 0 && tagDepth === depth) {
+                    depth--;
+                    atTopLevel = false;
+                }
             }
         }
 
@@ -309,9 +312,11 @@ export const internalFormat = (
 
         // default or label
         if (!moreOpenParens && purifiedLine.match(label)) {
-            depth++;
-            tagDepth = depth;
-            atTopLevel = false;
+            if (indentCodeAfterLabel) {
+                depth++;
+                tagDepth = depth;
+                atTopLevel = false;
+            }
         }
 
         if (atTopLevel) {
@@ -355,6 +360,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ConfigKey.allowedNumberOfEmptyLines,
         );
 
+        const indentCodeAfterLabel = Global.getConfig<boolean>(
+            ConfigKey.indentCodeAfterLabel,
+        );
+
         const preserveIndent = Global.getConfig<boolean>(
             ConfigKey.preserveIndent,
         );
@@ -366,6 +375,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         const formattedString = internalFormat(stringToFormat, {
             ...options,
             allowedNumberOfEmptyLines,
+            indentCodeAfterLabel,
             preserveIndent,
             trimExtraSpaces,
         });
