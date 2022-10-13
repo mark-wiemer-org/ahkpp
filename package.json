@@ -108,6 +108,16 @@
                     "minimum": -1,
                     "description": "Allowed number of empty lines.\n-1: ignore empty lines.\n0: no empty lines."
                 },
+                "ahk++.formatter.indentCodeAfterLabel": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indent code after label."
+                },
+                "ahk++.formatter.indentCodeAfterSharpDirective": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indent code after directives, that creates context-sensitive hotkeys and hotstrings.\nExample: #If / #IfWinActive / #IfWinNotActive / #IfWinExist / #IfWinNotExist."
+                },
                 "ahk++.formatter.preserveIndent": {
                     "type": "boolean",
                     "default": false,

@@ -2992,531 +2992,531 @@ sortArrayByArray(toSort, sortWith, reverse=false, key=false)
 ;end of functions
 ;hotkeys
 #if winactive(thisUniqueWintitle)
-^e::
-    ; revealFileInExplorer(EcurrentDir%whichSide%, getSelectedNames())
-    path:=getSelectedPaths()[1]
-    if (path) {
-        Run, % "explorer.exe /select,""" path """"
-    } else {
-        Run, % "explorer.exe """ EcurrentDir%whichSide% """"
-    }
-return
+    ^e::
+        ; revealFileInExplorer(EcurrentDir%whichSide%, getSelectedNames())
+        path:=getSelectedPaths()[1]
+        if (path) {
+            Run, % "explorer.exe /select,""" path """"
+        } else {
+            Run, % "explorer.exe """ EcurrentDir%whichSide% """"
+        }
+    return
 
-#d::
-    if (focused="changePath") {
-        focused:="flistView"
-        GuiControl, Focus, vlistView%whichSide%
-        ComObjCreate("Shell.Application").ToggleDesktop()
-        submitAndRenderDir()
-    } else {
-        ComObjCreate("Shell.Application").ToggleDesktop()
-    }
-return
-$^+left::
-    if (focused="changePath" or focused="searchCurrentDirEdit") {
-        send, ^+{left}
-        return
-    }
-    gui, main:default
-    whichSide:=1
-    Gui, Show,NA,% EcurrentDir%whichSide% " - ahk_explorer"
-    GuiControl, Focus, vlistView1 ;bad code
-    ControlFocus,, ahk_id %ListviewHwnd1%
-    GuiControl, +Background%BGColorOfSelectedPane%, vlistView1
-    GuiControl, +BackgroundWhite, vlistView2
-    EcurrentDir1:=EcurrentDir2
-    renderCurrentDir()
-return
-$^+right::
-    if (focused="changePath") {
-        send, ^+{right}
-        return
-    }
-    gui, main:default
-    whichSide:=2
-    Gui, Show,NA,% EcurrentDir%whichSide% " - ahk_explorer"
-    GuiControl, Focus, vlistView2 ;bad code
-    ControlFocus,, ahk_id %ListviewHwnd2%
-    GuiControl, +Background%BGColorOfSelectedPane%, vlistView2
-    GuiControl, +BackgroundWhite, vlistView1
-    EcurrentDir2:=EcurrentDir1
-    renderCurrentDir()
-return
-left:: ;always uses keyboard hook
-^left::
-    if (focused="changePath" or focused="searchCurrentDirEdit") {
-        thisHotkey:=StrReplace(A_ThisHotkey, "left", "{left}")
-        send, %thisHotkey%
-        return
-    }
-^1::
-selectPanel1:
-    gui, main:default
-    whichSide:=1
-    Gui, Show,NA,% EcurrentDir%whichSide% " - ahk_explorer"
-    GuiControl, Focus, vlistView1 ;bad code
-    ControlFocus,, ahk_id %ListviewHwnd1%
-    GuiControl, +Background%BGColorOfSelectedPane%, vlistView1
-    GuiControl, +BackgroundWhite, vlistView2
-return
+    #d::
+        if (focused="changePath") {
+            focused:="flistView"
+            GuiControl, Focus, vlistView%whichSide%
+            ComObjCreate("Shell.Application").ToggleDesktop()
+            submitAndRenderDir()
+        } else {
+            ComObjCreate("Shell.Application").ToggleDesktop()
+        }
+    return
+    $^+left::
+        if (focused="changePath" or focused="searchCurrentDirEdit") {
+            send, ^+{left}
+            return
+        }
+        gui, main:default
+        whichSide:=1
+        Gui, Show,NA,% EcurrentDir%whichSide% " - ahk_explorer"
+        GuiControl, Focus, vlistView1 ;bad code
+        ControlFocus,, ahk_id %ListviewHwnd1%
+        GuiControl, +Background%BGColorOfSelectedPane%, vlistView1
+        GuiControl, +BackgroundWhite, vlistView2
+        EcurrentDir1:=EcurrentDir2
+        renderCurrentDir()
+    return
+    $^+right::
+        if (focused="changePath") {
+            send, ^+{right}
+            return
+        }
+        gui, main:default
+        whichSide:=2
+        Gui, Show,NA,% EcurrentDir%whichSide% " - ahk_explorer"
+        GuiControl, Focus, vlistView2 ;bad code
+        ControlFocus,, ahk_id %ListviewHwnd2%
+        GuiControl, +Background%BGColorOfSelectedPane%, vlistView2
+        GuiControl, +BackgroundWhite, vlistView1
+        EcurrentDir2:=EcurrentDir1
+        renderCurrentDir()
+    return
+    left:: ;always uses keyboard hook
+    ^left::
+        if (focused="changePath" or focused="searchCurrentDirEdit") {
+            thisHotkey:=StrReplace(A_ThisHotkey, "left", "{left}")
+            send, %thisHotkey%
+            return
+        }
+    ^1::
+    selectPanel1:
+        gui, main:default
+        whichSide:=1
+        Gui, Show,NA,% EcurrentDir%whichSide% " - ahk_explorer"
+        GuiControl, Focus, vlistView1 ;bad code
+        ControlFocus,, ahk_id %ListviewHwnd1%
+        GuiControl, +Background%BGColorOfSelectedPane%, vlistView1
+        GuiControl, +BackgroundWhite, vlistView2
+    return
 
-right:: ;always uses keyboard hook
-^right::
-    if (focused="changePath" or focused="searchCurrentDirEdit") {
-        thisHotkey:=StrReplace(A_ThisHotkey, "Right", "{Right}")
-        send, %thisHotkey%
-        return
-    }
-^2::
-selectPanel2:
-    gui, main:default
-    whichSide:=2
-    Gui, Show,NA,% EcurrentDir%whichSide% " - ahk_explorer"
-    GuiControl, Focus, vlistView2 ;bad code
-    ControlFocus,, ahk_id %ListviewHwnd2%
-    GuiControl, +Background%BGColorOfSelectedPane%, vlistView2
-    GuiControl, +BackgroundWhite, vlistView1
+    right:: ;always uses keyboard hook
+    ^right::
+        if (focused="changePath" or focused="searchCurrentDirEdit") {
+            thisHotkey:=StrReplace(A_ThisHotkey, "Right", "{Right}")
+            send, %thisHotkey%
+            return
+        }
+    ^2::
+    selectPanel2:
+        gui, main:default
+        whichSide:=2
+        Gui, Show,NA,% EcurrentDir%whichSide% " - ahk_explorer"
+        GuiControl, Focus, vlistView2 ;bad code
+        ControlFocus,, ahk_id %ListviewHwnd2%
+        GuiControl, +Background%BGColorOfSelectedPane%, vlistView2
+        GuiControl, +BackgroundWhite, vlistView1
 
-return
-$RAlt::
-    if (focused="searchCurrentDirEdit" or focused="flistView" or focused="listViewInSearch") {
-        Run,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe", % EcurrentDir%whichSide%
-    }
-return
+    return
+    $RAlt::
+        if (focused="searchCurrentDirEdit" or focused="flistView" or focused="listViewInSearch") {
+            Run,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe", % EcurrentDir%whichSide%
+        }
+    return
 
-$RCtrl::
-    if (focused="searchCurrentDirEdit" or focused="flistView" or focused="listViewInSearch") {
-        Run,"%ComSpec%", % EcurrentDir%whichSide%
-    }
-return
-$RShift::
-    if (focused="searchCurrentDirEdit" or focused="flistView" or focused="listViewInSearch") {
-        toRun:= """" vscodePath """ """ EcurrentDir%whichSide% """"
-        run, %toRun%
-    } else {
-        send, +\
-    }
-return
+    $RCtrl::
+        if (focused="searchCurrentDirEdit" or focused="flistView" or focused="listViewInSearch") {
+            Run,"%ComSpec%", % EcurrentDir%whichSide%
+        }
+    return
+    $RShift::
+        if (focused="searchCurrentDirEdit" or focused="flistView" or focused="listViewInSearch") {
+            toRun:= """" vscodePath """ """ EcurrentDir%whichSide% """"
+            run, %toRun%
+        } else {
+            send, +\
+        }
+    return
 
-$\::
-    Gui, main:Default
-    if (focused="searchCurrentDirEdit" or focused="flistView" or focused="listViewInSearch") {
-        selectedPaths:=getSelectedPaths()
-        if (selectedPaths.Length()) {
-            for k,v in selectedPaths {
-                ; toRun:= """" vscodePath """ """ v """"
-                toRun:= """" A_AhkPath """ /CP65001 ""lib\vscode_runner.ahk"" """ v """"
-                ;  d(toRun)
-                run, %toRun%
+    $\::
+        Gui, main:Default
+        if (focused="searchCurrentDirEdit" or focused="flistView" or focused="listViewInSearch") {
+            selectedPaths:=getSelectedPaths()
+            if (selectedPaths.Length()) {
+                for k,v in selectedPaths {
+                    ; toRun:= """" vscodePath """ """ v """"
+                    toRun:= """" A_AhkPath """ /CP65001 ""lib\vscode_runner.ahk"" """ v """"
+                    ;  d(toRun)
+                    run, %toRun%
+                }
+            }
+        } else {
+            send, \
+        }
+
+    return
+
+    ; $`::
+    p(watching1,watching2)
+    Return
+
+    $^+r::
+        namesToMultiRename:=getSelectedNames()
+        multiRenameDir:=EcurrentDir%whichSide%
+        multiRenamelength:=namesToMultiRename.Length()
+        Gui, multiRenameGui:Default
+        ; Gui,Font, s10, Segoe UI
+        Gui,Font, s10, Consolas
+
+        Gui, Add, Edit, w400 vmultiRenameTheName
+        Gui, Add, Edit, x+5 w300 vmultiRenameStartingNums
+
+        Gui, Add, Button, h30 w200 y+5 x+-705 ggmultiRenamePreview,preview
+        Gui, Add, Button, h30 w200 x+5 ggmultiRenameApply,apply
+
+        Gui, Add, ListBox, r%multiRenamelength% w500 y+5 vvmultiRenameTargets x+-405 , % array_ToVerticleBarString(selectedNames)
+        Gui, Add, ListBox, r%multiRenamelength% w500 x+5 vvmultiRenamePreview,
+        Gui, show,,multiRenameGui
+    return
+
+    $^r::
+    $esc::
+        stopSearching()
+    return
+
+    $^n::
+
+    return
+    $^+n::
+        Gui, createFolder:Default
+
+        creatingNewFolder:=true
+        dontSearch:=true
+        newFolderPath:=findNextDirNameNumberIteration(EcurrentDir%whichSide% "\New Folder *")
+        SplitPath, newFolderPath, newFolderName
+        strLen:=StrLen(newFolderName)
+        if (SubStr(newFolderName, 0)=" " and strLen > 1) {
+            newFolderName:=SubStr(newFolderName, 1, strLen-1)
+        }
+
+        if (!notFirstTimeCreatingFolder) {
+            notFirstTimeCreatingFolder:=true
+            Gui, createFolder: Font, s10, Segoe UI
+            ;Segoe UI
+            gui, createFolder: add, text,, Folder Name: ; Save this control's position and start a new section.
+            gui, createFolder: add, edit, w250 vcreateFolderName hwndfolderCreationHwnd, %newFolderName%
+            gui, createFolder: add, button, Default w125 x11 vcreate gcreateLabel,Create Folder`n{Enter}
+            gui, createFolder: add, button, w125 x+2 vcreateAndOpen gcreateAndOpenLabel,Create and Open`n{Shift + Enter}
+        } else {
+            ; GuiControl, text, createFolderName, %newFolderName%
+            ControlSetText,, %newFolderName%, ahk_id %folderCreationHwnd%
+            SendMessage, 0xB1, 0, -1,, % "ahk_id " folderCreationHwnd
+        }
+        gui, createFolder: show,, create_folder
+        dontSearch:=false
+
+    return
+    ^s::
+        selectedNames:=getSelectedNames()
+        for notUsed, name in selectedNames {
+            Run, "%spekPath%" "%name%", % EcurrentDir%whichSide%
+        }
+    return
+
+    !h::
+        hashFiles("sha256")
+    return
+
+    ^h::
+        hashFiles("md5")
+    return
+
+    ^+e::
+        selectedNames:=getSelectedNames()
+        for notUsed, name in selectedNames {
+            SplitPath, name,,,, OutNameNoExt
+            FileRecycle, % EcurrentDir%whichSide% "\" OutNameNoExt ".exe"
+            Run, "%Ahk2ExePath%" /in "%name%" /bin "%Ahk2ExePath%\..\Unicode 32-bit.bin", % EcurrentDir%whichSide%
+        }
+    return
+    !c::
+    copySelectedNames:
+        Gui, main:Default
+        dontSearch:=true
+        selectedNames:=getSelectedNames()
+        finalStr=
+        length:=selectedNames.Length()
+        for k, v in selectedNames {
+            if (k=length) {
+                finalStr.=v
+            }
+            else {
+                finalStr.=v "`n"
             }
         }
-    } else {
-        send, \
-    }
+        clipboard:=finalStr
+        dontSearch:=false
 
-return
+        #Persistent
+        ToolTip, % length
+        SetTimer, RemoveToolTip,-1000
+    return
 
-; $`::
-p(watching1,watching2)
-Return
-
-$^+r::
-    namesToMultiRename:=getSelectedNames()
-    multiRenameDir:=EcurrentDir%whichSide%
-    multiRenamelength:=namesToMultiRename.Length()
-    Gui, multiRenameGui:Default
-    ; Gui,Font, s10, Segoe UI
-    Gui,Font, s10, Consolas
-
-    Gui, Add, Edit, w400 vmultiRenameTheName
-    Gui, Add, Edit, x+5 w300 vmultiRenameStartingNums
-
-    Gui, Add, Button, h30 w200 y+5 x+-705 ggmultiRenamePreview,preview
-    Gui, Add, Button, h30 w200 x+5 ggmultiRenameApply,apply
-
-    Gui, Add, ListBox, r%multiRenamelength% w500 y+5 vvmultiRenameTargets x+-405 , % array_ToVerticleBarString(selectedNames)
-    Gui, Add, ListBox, r%multiRenamelength% w500 x+5 vvmultiRenamePreview,
-    Gui, show,,multiRenameGui
-return
-
-$^r::
-$esc::
-    stopSearching()
-return
-
-$^n::
-
-return
-$^+n::
-    Gui, createFolder:Default
-
-    creatingNewFolder:=true
-    dontSearch:=true
-    newFolderPath:=findNextDirNameNumberIteration(EcurrentDir%whichSide% "\New Folder *")
-    SplitPath, newFolderPath, newFolderName
-    strLen:=StrLen(newFolderName)
-    if (SubStr(newFolderName, 0)=" " and strLen > 1) {
-        newFolderName:=SubStr(newFolderName, 1, strLen-1)
-    }
-
-    if (!notFirstTimeCreatingFolder) {
-        notFirstTimeCreatingFolder:=true
-        Gui, createFolder: Font, s10, Segoe UI
-        ;Segoe UI
-        gui, createFolder: add, text,, Folder Name: ; Save this control's position and start a new section.
-        gui, createFolder: add, edit, w250 vcreateFolderName hwndfolderCreationHwnd, %newFolderName%
-        gui, createFolder: add, button, Default w125 x11 vcreate gcreateLabel,Create Folder`n{Enter}
-        gui, createFolder: add, button, w125 x+2 vcreateAndOpen gcreateAndOpenLabel,Create and Open`n{Shift + Enter}
-    } else {
-        ; GuiControl, text, createFolderName, %newFolderName%
-        ControlSetText,, %newFolderName%, ahk_id %folderCreationHwnd%
-        SendMessage, 0xB1, 0, -1,, % "ahk_id " folderCreationHwnd
-    }
-    gui, createFolder: show,, create_folder
-    dontSearch:=false
-
-return
-^s::
-    selectedNames:=getSelectedNames()
-    for notUsed, name in selectedNames {
-        Run, "%spekPath%" "%name%", % EcurrentDir%whichSide%
-    }
-return
-
-!h::
-    hashFiles("sha256")
-return
-
-^h::
-    hashFiles("md5")
-return
-
-^+e::
-    selectedNames:=getSelectedNames()
-    for notUsed, name in selectedNames {
-        SplitPath, name,,,, OutNameNoExt
-        FileRecycle, % EcurrentDir%whichSide% "\" OutNameNoExt ".exe"
-        Run, "%Ahk2ExePath%" /in "%name%" /bin "%Ahk2ExePath%\..\Unicode 32-bit.bin", % EcurrentDir%whichSide%
-    }
-return
-!c::
-copySelectedNames:
-    Gui, main:Default
-    dontSearch:=true
-    selectedNames:=getSelectedNames()
-    finalStr=
-    length:=selectedNames.Length()
-    for k, v in selectedNames {
-        if (k=length) {
-            finalStr.=v
+    copySelectedPaths:
+    ^+c::
+        Gui, main:Default
+        dontSearch:=true
+        selectedNames:=getSelectedNames()
+        finalStr=
+        length:=selectedNames.Length()
+        for k, v in selectedNames {
+            if (k=length) {
+                finalStr.=EcurrentDir%whichSide% "\" v
+            }
+            else {
+                finalStr.=EcurrentDir%whichSide% "\" v "`n"
+            }
         }
-        else {
-            finalStr.=v "`n"
+        clipboard:=finalStr
+        dontSearch:=false
+
+        #Persistent
+        ToolTip, % length
+        SetTimer, RemoveToolTip,-1000
+    return
+
+    return
+
+    $!left::
+        focusDirOnBack:=true
+    goToParentDir:
+        Gui, main:Default
+        SplitPath, % EcurrentDir%whichSide%,OutDirName, ParentDir1
+        if (focusDirOnBack) {
+            focusDirOnBack:=false
+            toFocus:=OutDirName
         }
-    }
-    clipboard:=finalStr
-    dontSearch:=false
 
-    #Persistent
-    ToolTip, % length
-    SetTimer, RemoveToolTip,-1000
-return
+        EcurrentDir%whichSide%:=ParentDir1
+        renderCurrentDir()
+    return
 
-copySelectedPaths:
-^+c::
-    Gui, main:Default
-    dontSearch:=true
-    selectedNames:=getSelectedNames()
-    finalStr=
-    length:=selectedNames.Length()
-    for k, v in selectedNames {
-        if (k=length) {
-            finalStr.=EcurrentDir%whichSide% "\" v
-        }
-        else {
-            finalStr.=EcurrentDir%whichSide% "\" v "`n"
-        }
-    }
-    clipboard:=finalStr
-    dontSearch:=false
+    $!right::
+        Gui, main:Default
+        undoHistory%whichSide%.Push(EcurrentDir%whichSide%)
+        EcurrentDir%whichSide%:=dirHistory%whichSide%[dirHistory%whichSide%.Length()]
+        dirHistory%whichSide%.RemoveAt(dirHistory%whichSide%.Length())
+        cannotDirHistory%whichSide%:=true
+        renderCurrentDir()
+    return
 
-    #Persistent
-    ToolTip, % length
-    SetTimer, RemoveToolTip,-1000
-return
+    $!up::
+        Gui, main:Default
+        EcurrentDir%whichSide%:=undoHistory%whichSide%[undoHistory%whichSide%.Length()]
+        undoHistory%whichSide%.RemoveAt(undoHistory%whichSide%.Length())
+        renderCurrentDir()
+    return
 
-return
+    ^l::
+    /::
+        ; p(434)
+        focused:="changePath"
+        ControlFocus,, % "ahk_id " Edithwnd%whichSide%
+        SendMessage, 177, 0, -1,, % "ahk_id " Edithwnd%whichSide%
+    return
 
-$!left::
-    focusDirOnBack:=true
-goToParentDir:
-    Gui, main:Default
-    SplitPath, % EcurrentDir%whichSide%,OutDirName, ParentDir1
-    if (focusDirOnBack) {
-        focusDirOnBack:=false
-        toFocus:=OutDirName
-    }
-
-    EcurrentDir%whichSide%:=ParentDir1
-    renderCurrentDir()
-return
-
-$!right::
-    Gui, main:Default
-    undoHistory%whichSide%.Push(EcurrentDir%whichSide%)
-    EcurrentDir%whichSide%:=dirHistory%whichSide%[dirHistory%whichSide%.Length()]
-    dirHistory%whichSide%.RemoveAt(dirHistory%whichSide%.Length())
-    cannotDirHistory%whichSide%:=true
-    renderCurrentDir()
-return
-
-$!up::
-    Gui, main:Default
-    EcurrentDir%whichSide%:=undoHistory%whichSide%[undoHistory%whichSide%.Length()]
-    undoHistory%whichSide%.RemoveAt(undoHistory%whichSide%.Length())
-    renderCurrentDir()
-return
-
-^l::
-/::
-    ; p(434)
-    focused:="changePath"
-    ControlFocus,, % "ahk_id " Edithwnd%whichSide%
-    SendMessage, 177, 0, -1,, % "ahk_id " Edithwnd%whichSide%
-return
-
-$backspace::
-    Gui, main:Default
-    if (focused="changePath" or focused="renaming") {
-        send, {backspace}
-    } else if (focused="listViewInSearch") {
-        if (searchString%whichSide%="") {
-            stopSearching()
-        } else {
-            GuiControl, focus,vcurrentDirEdit%whichSide%
-            SendMessage, 0xB1, -2, -1,, % "ahk_id " Edithwnd%whichSide%
+    $backspace::
+        Gui, main:Default
+        if (focused="changePath" or focused="renaming") {
             send, {backspace}
+        } else if (focused="listViewInSearch") {
+            if (searchString%whichSide%="") {
+                stopSearching()
+            } else {
+                GuiControl, focus,vcurrentDirEdit%whichSide%
+                SendMessage, 0xB1, -2, -1,, % "ahk_id " Edithwnd%whichSide%
+                send, {backspace}
+            }
+        } else if (focused="searchCurrentDirEdit") {
+            if (searchString%whichSide%="") {
+                stopSearching()
+            } else {
+                send, {backspace}
+            }
+        } else if (focused="flistView") {
+            gosub,goToParentDir
         }
-    } else if (focused="searchCurrentDirEdit") {
-        if (searchString%whichSide%="") {
-            stopSearching()
+    return
+    $^+up::
+        gosub, shiftUp
+        gosub, shiftUp
+    return
+
+    shiftUp:
+    $+up::
+        Gui, main:Default
+        Gui, ListView, vlistView%whichSide%
+
+        focusRow:=LV_GetNext(0, "F")
+
+        before:=LV_GetNext(focusRow - 2)
+        if (focusRow - 1 > 0) {
+            if (before=focusRow - 1) {
+                LV_Modify(focusRow, "-Select -Focus")
+                LV_Modify(focusRow - 1,"+Select +Focus Vis")
+            } else {
+                LV_Modify(focusRow - 1,"+Select +Focus Vis")
+            }
         } else {
-            send, {backspace}
+            numberOfRows:=LV_GetCount()
+            LV_Modify(numberOfRows,"+Select +Focus Vis")
         }
-    } else if (focused="flistView") {
-        gosub,goToParentDir
-    }
-return
-$^+up::
-    gosub, shiftUp
-    gosub, shiftUp
-return
+    return
+    $^up::
+        Gui, main:Default
+        Gui, ListView, vlistView%whichSide%
+        selectedRow:=LV_GetNext()
+        rowToSelect:=selectedRow-1
 
-shiftUp:
-$+up::
-    Gui, main:Default
-    Gui, ListView, vlistView%whichSide%
-
-    focusRow:=LV_GetNext(0, "F")
-
-    before:=LV_GetNext(focusRow - 2)
-    if (focusRow - 1 > 0) {
-        if (before=focusRow - 1) {
-            LV_Modify(focusRow, "-Select -Focus")
-            LV_Modify(focusRow - 1,"+Select +Focus Vis")
-        } else {
-            LV_Modify(focusRow - 1,"+Select +Focus Vis")
+        if (rowToSelect>0) {
+            LV_Modify(rowToSelect, "+Select +Focus Vis") ; select
         }
-    } else {
+    return
+    $up::
+        Gui, main:Default
+        Gui, ListView, vlistView%whichSide%
+        selectedRow:=LV_GetNext()
         numberOfRows:=LV_GetCount()
-        LV_Modify(numberOfRows,"+Select +Focus Vis")
-    }
-return
-$^up::
-    Gui, main:Default
-    Gui, ListView, vlistView%whichSide%
-    selectedRow:=LV_GetNext()
-    rowToSelect:=selectedRow-1
-
-    if (rowToSelect>0) {
-        LV_Modify(rowToSelect, "+Select +Focus Vis") ; select
-    }
-return
-$up::
-    Gui, main:Default
-    Gui, ListView, vlistView%whichSide%
-    selectedRow:=LV_GetNext()
-    numberOfRows:=LV_GetCount()
-    loop % numberOfRows
-    {
-        LV_Modify(A_Index, "-Select -Focus") ; select
-    }
-
-    if (selectedRow<2) {
-        LV_Modify(numberOfRows, "+Select +Focus Vis") ; select
-    }
-    else {
-        LV_Modify(selectedRow-1, "+Select +Focus Vis") ; select
-    }
-return
-$+home::
-    if (focused="changePath" or focused="searchCurrentDirEdit") {
-        send, +{home}
-        return
-    }
-    Gui, main:Default
-    Gui, ListView, vlistView%whichSide%
-    selectedRow:=LV_GetNext()
-    loop % selectedRow - 1 {
-        LV_Modify(A_Index, "+Select +Focus Vis") ; select
-    }
-
-return
-$+end::
-    if (focused="changePath" or focused="searchCurrentDirEdit") {
-        send, +{end}
-        return
-    }
-    Gui, main:Default
-    Gui, ListView, vlistView%whichSide%
-    selectedRow:=LV_GetNext()
-    numberOfRows:=LV_GetCount()
-    loop % numberOfRows - selectedRow
-    {
-        LV_Modify(A_Index + selectedRow, "+Select +Focus Vis") ; select
-    }
-
-return
-selectCurrent:
-    Gui, main:Default
-    Gui, ListView, vlistView%whichSide%
-    selectedRow:=LV_GetNext(,"F")
-    LV_Modify(selectedRow, "-Select -Focus") ; select
-    LV_Modify(selectedRow, "+Select +Focus Vis") ; select
-return
-
-$^+down::
-    gosub, shiftDown
-    gosub, shiftDown
-return
-shiftDown:
-$+down::
-    Gui, main:Default
-    Gui, ListView, vlistView%whichSide%
-
-    focusRow:=LV_GetNext(0, "F")
-    after:=LV_GetNext(focusRow)
-    numberOfRows:=LV_GetCount()
-
-    if (focusRow < numberOfRows) {
-        if (after=focusRow + 1) {
-            LV_Modify(focusRow, "-Select -Focus")
-            LV_Modify(focusRow + 1,"+Select +Focus Vis")
-        } else {
-            LV_Modify(focusRow + 1,"+Select +Focus Vis")
+        loop % numberOfRows
+        {
+            LV_Modify(A_Index, "-Select -Focus") ; select
         }
-    } else {
-        LV_Modify(1,"+Select +Focus Vis")
-    }
 
-return
-$^down::
-    Gui, main:Default
-    Gui, ListView, vlistView%whichSide%
+        if (selectedRow<2) {
+            LV_Modify(numberOfRows, "+Select +Focus Vis") ; select
+        }
+        else {
+            LV_Modify(selectedRow-1, "+Select +Focus Vis") ; select
+        }
+    return
+    $+home::
+        if (focused="changePath" or focused="searchCurrentDirEdit") {
+            send, +{home}
+            return
+        }
+        Gui, main:Default
+        Gui, ListView, vlistView%whichSide%
+        selectedRow:=LV_GetNext()
+        loop % selectedRow - 1 {
+            LV_Modify(A_Index, "+Select +Focus Vis") ; select
+        }
 
-    selectedRow:=0
-    index:=0
-    loop {
-        index:=LV_GetNext(index)
-        if (!index)
-            break
-        selectedRow:=index
-    }
-    LV_Modify(selectedRow+1, "+Select +Focus Vis") ; select
-return
+    return
+    $+end::
+        if (focused="changePath" or focused="searchCurrentDirEdit") {
+            send, +{end}
+            return
+        }
+        Gui, main:Default
+        Gui, ListView, vlistView%whichSide%
+        selectedRow:=LV_GetNext()
+        numberOfRows:=LV_GetCount()
+        loop % numberOfRows - selectedRow
+        {
+            LV_Modify(A_Index + selectedRow, "+Select +Focus Vis") ; select
+        }
 
-$down::
-    SetTimer, downLabel ,-0
-return
-downLabel:
-    Gui, main:Default
-    Gui, ListView, vlistView%whichSide%
+    return
+    selectCurrent:
+        Gui, main:Default
+        Gui, ListView, vlistView%whichSide%
+        selectedRow:=LV_GetNext(,"F")
+        LV_Modify(selectedRow, "-Select -Focus") ; select
+        LV_Modify(selectedRow, "+Select +Focus Vis") ; select
+    return
 
-    selectedRows:=[]
-    selectedRow:=0
-    index:=0
-    loop {
-        index:=LV_GetNext(index)
-        if (!index)
-            break
-        selectedRow:=index
-        selectedRows.Push(index)
-    }
-    for k, v in selectedRows {
-        LV_Modify(v, "-Select -Focus") ; select
-    }
+    $^+down::
+        gosub, shiftDown
+        gosub, shiftDown
+    return
+    shiftDown:
+    $+down::
+        Gui, main:Default
+        Gui, ListView, vlistView%whichSide%
 
-    numberOfRows:=LV_GetCount()
-    if (selectedRow=0) {
-        LV_Modify(1, "+Select +Focus Vis") ; select
-    }
-    else if (selectedRow < numberOfRows) {
-        LV_Modify(selectedRow+1, "+Select +Focus Vis") ; select
-    }
-    else {
-        LV_Modify(1, "+Select +Focus Vis") ; select
-    }
-return
-;how to fix $enter not working ? why ?
-;sign out and sign in fixed it
-$enter::
-    Gui, main:Default
-    if (!canRename) {
-        if (focused="flistView" or focused="searchCurrentDirEdit" or focused="listViewInSearch") {
-            stopSizes:=false
-            gui, ListView, vlistView%whichSide%
-            for unused, fullPath in getSelectedPaths() {
-                doubleClickedFolderOrFile(fullPath)
+        focusRow:=LV_GetNext(0, "F")
+        after:=LV_GetNext(focusRow)
+        numberOfRows:=LV_GetCount()
+
+        if (focusRow < numberOfRows) {
+            if (after=focusRow + 1) {
+                LV_Modify(focusRow, "-Select -Focus")
+                LV_Modify(focusRow + 1,"+Select +Focus Vis")
+            } else {
+                LV_Modify(focusRow + 1,"+Select +Focus Vis")
             }
-            ; row:=LV_GetNext("")
-            ; doubleClickedNormal(row)
-            ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
-        } else if (focused="changePath" or focused="renaming") {
-            ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
+        } else {
+            LV_Modify(1,"+Select +Focus Vis")
         }
-    } else {
-        send, {enter}
-    }
 
-return
+    return
+    $^down::
+        Gui, main:Default
+        Gui, ListView, vlistView%whichSide%
+
+        selectedRow:=0
+        index:=0
+        loop {
+            index:=LV_GetNext(index)
+            if (!index)
+                break
+            selectedRow:=index
+        }
+        LV_Modify(selectedRow+1, "+Select +Focus Vis") ; select
+    return
+
+    $down::
+        SetTimer, downLabel ,-0
+    return
+    downLabel:
+        Gui, main:Default
+        Gui, ListView, vlistView%whichSide%
+
+        selectedRows:=[]
+        selectedRow:=0
+        index:=0
+        loop {
+            index:=LV_GetNext(index)
+            if (!index)
+                break
+            selectedRow:=index
+            selectedRows.Push(index)
+        }
+        for k, v in selectedRows {
+            LV_Modify(v, "-Select -Focus") ; select
+        }
+
+        numberOfRows:=LV_GetCount()
+        if (selectedRow=0) {
+            LV_Modify(1, "+Select +Focus Vis") ; select
+        }
+        else if (selectedRow < numberOfRows) {
+            LV_Modify(selectedRow+1, "+Select +Focus Vis") ; select
+        }
+        else {
+            LV_Modify(1, "+Select +Focus Vis") ; select
+        }
+    return
+    ;how to fix $enter not working ? why ?
+    ;sign out and sign in fixed it
+    $enter::
+        Gui, main:Default
+        if (!canRename) {
+            if (focused="flistView" or focused="searchCurrentDirEdit" or focused="listViewInSearch") {
+                stopSizes:=false
+                gui, ListView, vlistView%whichSide%
+                for unused, fullPath in getSelectedPaths() {
+                    doubleClickedFolderOrFile(fullPath)
+                }
+                ; row:=LV_GetNext("")
+                ; doubleClickedNormal(row)
+                ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
+            } else if (focused="changePath" or focused="renaming") {
+                ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
+            }
+        } else {
+            send, {enter}
+        }
+
+    return
 
 #if winactive("renamingWinTitle ahk_class AutoHotkeyGUI")
 
-$esc::
-    if (focused="flistView") {
-        if (canRename) {
-            canRename:=false
-            ; gui, renameSimple:Default
-            ; gui, submit
-            gui, main:Default
-            ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
+    $esc::
+        if (focused="flistView") {
+            if (canRename) {
+                canRename:=false
+                ; gui, renameSimple:Default
+                ; gui, submit
+                gui, main:Default
+                ControlFocus,, % "ahk_id " ListviewHwnd%whichSide%
 
-            gui, renameSimple:Default
-            gui, destroy
+                gui, renameSimple:Default
+                gui, destroy
+            }
+            return
         }
-        return
-    }
-    send, {enter}
-return
+        send, {enter}
+    return
 
 #if winactive("create_folder ahk_class AutoHotkeyGUI")
 
-$enter::
-    Gosub, createLabel
+    $enter::
+        Gosub, createLabel
 
-return
+    return
 
-$+enter::
-$^+enter::
-    Gosub, createAndOpenLabel
-return
+    $+enter::
+    $^+enter::
+        Gosub, createAndOpenLabel
+    return

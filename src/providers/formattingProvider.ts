@@ -117,7 +117,21 @@ export const internalFormat = (
     let preBlockCommentDetectOneCommandCode = true;
     let preBlockCommentOneCommandCode = false;
 
-    const preserveIndentOnEmptyString = options.preserveIndent;
+    /**
+     * This line is `#Directive`, that will create context-sensitive hotkeys and hotstrings.
+     * Example of `#Directives`:
+     * ```ahk
+     * #IfWinActive WinTitle
+     * #IfWinNotActive WinTitle
+     * #IfWinExist WinTitle
+     * #IfWinNotExist WinTitle
+     * #If Expression
+     * ```
+     */
+    let sharpDirective = false;
+
+    const indentCodeAfterLabel = options.indentCodeAfterLabel;
+    const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
     const trimSpaces = options.trimExtraSpaces;
 
     /** Label name may consist of any characters other than `space`,
@@ -141,6 +155,7 @@ export const internalFormat = (
         const emptyLine = purifiedLine === '';
 
         detectOneCommandCode = true;
+        sharpDirective = false;
 
         const moreCloseParens = hasMoreCloseParens(purifiedLine);
         const moreOpenParens = hasMoreOpenParens(purifiedLine);
@@ -196,7 +211,6 @@ export const internalFormat = (
                     blockCommentLine,
                     depth,
                     options,
-                    preserveIndentOnEmptyString,
                 );
             }
             if (originalLine.match(/^\s*\*\//)) {
@@ -215,15 +229,38 @@ export const internalFormat = (
             }
         }
 
-        // #IfWinActive, #IfWinNotActive
+        // #IfWinActive, #IfWinExist with omit params OR #If without expression
         if (
             purifiedLine.match(/#ifwinactive$/) ||
-            purifiedLine.match(/#ifwinnotactive$/)
+            purifiedLine.match(/#ifwinnotactive$/) ||
+            purifiedLine.match(/#ifwinexist$/) ||
+            purifiedLine.match(/#ifwinnotexist$/) ||
+            purifiedLine.match(/#if$/)
         ) {
-            if (tagDepth > 0) {
-                depth -= tagDepth;
-            } else {
-                depth--;
+            if (indentCodeAfterSharpDirective) {
+                if (tagDepth > 0) {
+                    depth -= tagDepth;
+                } else {
+                    depth--;
+                }
+            }
+        }
+
+        // #IfWinActive, #IfWinExist with params OR #If with expression
+        if (
+            purifiedLine.match(/#ifwinactive\b.+/) ||
+            purifiedLine.match(/#ifwinnotactive\b.+/) ||
+            purifiedLine.match(/#ifwinexist\b.+/) ||
+            purifiedLine.match(/#ifwinnotexist\b.+/) ||
+            purifiedLine.match(/#if\b.+/)
+        ) {
+            if (indentCodeAfterSharpDirective) {
+                if (tagDepth > 0) {
+                    depth -= tagDepth;
+                } else {
+                    depth--;
+                }
+                sharpDirective = true;
             }
         }
 
@@ -241,16 +278,18 @@ export const internalFormat = (
             depth--;
         } else if (purifiedLine.match(label)) {
             // default or hotkey
-            if (tagDepth === depth) {
-                // De-indent label or hotkey, if they not end with 'return' command.
-                // This is fall-through scenario. Example:
-                // Label1:
-                //     code
-                // Label2:
-                //     code
-                // return
-                // No need to make 'tagDepth' in sync with 'depth', 'Label' check for next line will do it.
-                depth--;
+            if (indentCodeAfterLabel) {
+                if (tagDepth === depth) {
+                    // De-indent label or hotkey, if they not end with 'return' command.
+                    // This is fall-through scenario. Example:
+                    // Label1:
+                    //     code
+                    // Label2:
+                    //     code
+                    // return
+                    // No need to make 'tagDepth' in sync with 'depth', 'Label' check for next line will do it.
+                    depth--;
+                }
             }
         }
 
@@ -287,7 +326,6 @@ export const internalFormat = (
             formattedLine,
             depth,
             options,
-            preserveIndentOnEmptyString,
         );
 
         // Next line
@@ -319,11 +357,8 @@ export const internalFormat = (
         //     blockComment = false;
         // }
 
-        // #IfWinActive, #IfWinNotActive
-        if (
-            purifiedLine.match(/#ifwinactive.*?\s/) ||
-            purifiedLine.match(/#ifwinnotactive.*?\s/)
-        ) {
+        // #IfWinActive, #IfWinExist with params OR #If with expression
+        if (sharpDirective && indentCodeAfterSharpDirective) {
             depth++;
         }
 
@@ -347,8 +382,10 @@ export const internalFormat = (
 
         // default or label
         if (!moreOpenParens && purifiedLine.match(label)) {
-            depth++;
-            tagDepth = depth;
+            if (indentCodeAfterLabel) {
+                depth++;
+                tagDepth = depth;
+            }
         }
 
         if (detectOneCommandCode) {
@@ -388,6 +425,14 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ConfigKey.allowedNumberOfEmptyLines,
         );
 
+        const indentCodeAfterLabel = Global.getConfig<boolean>(
+            ConfigKey.indentCodeAfterLabel,
+        );
+
+        const indentCodeAfterSharpDirective = Global.getConfig<boolean>(
+            ConfigKey.indentCodeAfterSharpDirective,
+        );
+
         const preserveIndent = Global.getConfig<boolean>(
             ConfigKey.preserveIndent,
         );
@@ -399,6 +444,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
         const formattedString = internalFormat(stringToFormat, {
             ...options,
             allowedNumberOfEmptyLines,
+            indentCodeAfterLabel,
+            indentCodeAfterSharpDirective,
             preserveIndent,
             trimExtraSpaces,
         });
