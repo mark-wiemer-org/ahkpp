@@ -33,6 +33,7 @@ export enum ConfigKey {
     executePath = 'file.executePath',
     helpPath = 'file.helpPath',
     indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',
+    indentCodeAfterSharpDirective = 'formatter.indentCodeAfterSharpDirective',
     preserveIndent = 'formatter.preserveIndent',
     trimExtraSpaces = 'formatter.trimExtraSpaces',
 }

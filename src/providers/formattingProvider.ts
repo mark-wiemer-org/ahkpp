@@ -76,8 +76,21 @@ export const internalFormat = (
     let preBlockCommentAtTopLevel = true;
     let preBlockCommentOneCommandCode = false;
 
+    /**
+     * This line is `#Directive`, that will create context-sensitive hotkeys and hotstrings.
+     * Example of `#Directives`:
+     * ```ahk
+     * #IfWinActive WinTitle
+     * #IfWinNotActive WinTitle
+     * #IfWinExist WinTitle
+     * #IfWinNotExist WinTitle
+     * #If Expression
+     * ```
+     */
+    let sharpDirective = false;
+
     const indentCodeAfterLabel = options.indentCodeAfterLabel;
-    const preserveIndentOnEmptyString = options.preserveIndent;
+    const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
     const trimSpaces = options.trimExtraSpaces;
 
     /** Label name may consist of any characters other than `space`,
@@ -101,6 +114,7 @@ export const internalFormat = (
         const emptyLine = purifiedLine === '';
 
         atTopLevel = true;
+        sharpDirective = false;
 
         const moreCloseParens = hasMoreCloseParens(purifiedLine);
         const moreOpenParens = hasMoreOpenParens(purifiedLine);
@@ -156,7 +170,6 @@ export const internalFormat = (
                     blockCommentLine,
                     depth,
                     options,
-                    preserveIndentOnEmptyString,
                 );
             }
             if (originalLine.match(/^\s*\*\//)) {
@@ -175,17 +188,41 @@ export const internalFormat = (
             }
         }
 
-        // #IfWinActive, #IfWinNotActive
+        // #IfWinActive, #IfWinExist with omit params OR #If without expression
         if (
             purifiedLine.match(/#ifwinactive$/) ||
-            purifiedLine.match(/#ifwinnotactive$/)
+            purifiedLine.match(/#ifwinnotactive$/) ||
+            purifiedLine.match(/#ifwinexist$/) ||
+            purifiedLine.match(/#ifwinnotexist$/) ||
+            purifiedLine.match(/#if$/)
         ) {
-            if (tagDepth > 0) {
-                depth -= tagDepth;
-            } else {
-                depth--;
+            if (indentCodeAfterSharpDirective) {
+                if (tagDepth > 0) {
+                    depth -= tagDepth;
+                } else {
+                    depth--;
+                }
+                atTopLevel = false;
             }
-            atTopLevel = false;
+        }
+
+        // #IfWinActive, #IfWinExist with params OR #If with expression
+        if (
+            purifiedLine.match(/#ifwinactive\b.+/) ||
+            purifiedLine.match(/#ifwinnotactive\b.+/) ||
+            purifiedLine.match(/#ifwinexist\b.+/) ||
+            purifiedLine.match(/#ifwinnotexist\b.+/) ||
+            purifiedLine.match(/#if\b.+/)
+        ) {
+            if (indentCodeAfterSharpDirective) {
+                if (tagDepth > 0) {
+                    depth -= tagDepth;
+                } else {
+                    depth--;
+                }
+                atTopLevel = false;
+                sharpDirective = true;
+            }
         }
 
         // return or ExitApp
@@ -252,7 +289,6 @@ export const internalFormat = (
             formattedLine,
             depth,
             options,
-            preserveIndentOnEmptyString,
         );
 
         // Next line
@@ -284,11 +320,8 @@ export const internalFormat = (
         //     blockComment = false;
         // }
 
-        // #IfWinActive, #IfWinNotActive
-        if (
-            purifiedLine.match(/#ifwinactive.*?\s/) ||
-            purifiedLine.match(/#ifwinnotactive.*?\s/)
-        ) {
+        // #IfWinActive, #IfWinExist with params OR #If with expression
+        if (sharpDirective && indentCodeAfterSharpDirective) {
             depth++;
             atTopLevel = false;
         }
@@ -364,6 +397,10 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ConfigKey.indentCodeAfterLabel,
         );
 
+        const indentCodeAfterSharpDirective = Global.getConfig<boolean>(
+            ConfigKey.indentCodeAfterSharpDirective,
+        );
+
         const preserveIndent = Global.getConfig<boolean>(
             ConfigKey.preserveIndent,
         );
@@ -376,6 +413,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ...options,
             allowedNumberOfEmptyLines,
             indentCodeAfterLabel,
+            indentCodeAfterSharpDirective,
             preserveIndent,
             trimExtraSpaces,
         });

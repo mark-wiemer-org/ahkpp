@@ -73,56 +73,48 @@ suite('FormattingProvider utils', () => {
             //     dp: , // depth of indentation
             //     fl: , // formatted line
             //     op: , // formatting options
-            //     pi: , // preserve indent
             //     rs: , // expected result
             // },
             {
                 dp: 0,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
                 rs: 'SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
                 rs: '    SoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
                 rs: '        SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                op: { insertSpaces: false, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
                 rs: '\tSoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                op: { insertSpaces: false, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
                 rs: '\t\tSoundBeep',
             },
             {
                 dp: 1,
                 fl: '',
-                op: { insertSpaces: true, tabSize: 4 },
-                pi: true,
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: true },
                 rs: '    ',
             },
             {
                 dp: 2,
                 fl: '',
-                op: { insertSpaces: false, tabSize: 4 },
-                pi: true,
+                op: { insertSpaces: false, tabSize: 4, preserveIndent: true },
                 rs: '\t\t',
             },
         ];
@@ -133,7 +125,7 @@ suite('FormattingProvider utils', () => {
                     ' spaces:' +
                     data.op.insertSpaces.toString() +
                     ' preserveIndent:' +
-                    data.pi.toString() +
+                    data.op.preserveIndent.toString() +
                     " '" +
                     data.fl +
                     "' => '" +
@@ -141,14 +133,7 @@ suite('FormattingProvider utils', () => {
                     "'",
                 () => {
                     assert.strictEqual(
-                        buildIndentedLine(
-                            0,
-                            1,
-                            data.fl,
-                            data.dp,
-                            data.op,
-                            data.pi,
-                        ),
+                        buildIndentedLine(0, 1, data.fl, data.dp, data.op),
                         data.rs,
                     );
                 },

@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { FormatOptions } from './formattingProvider.types';
 
 /** Stringify a document, using consistent `\n` line separators */
 export const documentToString = (document: {
@@ -50,21 +51,19 @@ export function buildIndentedString(
  * @param formattedLine Formatted line of code
  * @param depth Depth of indent
  * @param options VS Code formatting options
- * @param preserveIndentOnEmptyString Preserve indent on empty string
  */
 export function buildIndentedLine(
     lineIndex: number,
     lastLineIndex: number,
     formattedLine: string,
     depth: number,
-    options: Pick<vscode.FormattingOptions, 'insertSpaces' | 'tabSize'>,
-    preserveIndentOnEmptyString: boolean,
+    options: Pick<FormatOptions, 'insertSpaces' | 'tabSize' | 'preserveIndent'>,
 ) {
     const indentationChars = buildIndentationChars(depth, options);
     let indentedLine = buildIndentedString(
         indentationChars,
         formattedLine,
-        preserveIndentOnEmptyString,
+        options.preserveIndent,
     );
     // If not last line, add newline
     if (lineIndex !== lastLineIndex - 1) {
