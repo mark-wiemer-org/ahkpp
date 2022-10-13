@@ -52,7 +52,7 @@ export class RunnerService {
     /**
      * Compiles current script
      */
-    public static async compile() {
+    public static async compile(showGui: Boolean) {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
         if (!currentPath) {
             vscode.window.showErrorMessage('Cannot compile never-saved files.');
@@ -62,11 +62,12 @@ export class RunnerService {
         const pos = currentPath.lastIndexOf('.');
         const compilePath =
             currentPath.substr(0, pos < 0 ? currentPath.length : pos) + '.exe';
+        const guiKey = showGui ? '/gui' : '';
         if (
             await Process.exec(
                 `"${Global.getConfig(
                     ConfigKey.compilePath,
-                )}" /in "${currentPath}" /out "${compilePath}"`,
+                )}" ${guiKey} /in "${currentPath}" /out "${compilePath}"`,
                 { cwd: `${res(currentPath, '..')}` },
             )
         ) {

@@ -62,6 +62,11 @@
                 "icon": "./image/build.svg"
             },
             {
+                "command": "ahk++.compilerGui",
+                "title": "Compiler GUI",
+                "category": "AHK++"
+            },
+            {
                 "command": "ahk++.debug",
                 "title": "Debug AHK Script",
                 "category": "AHK++",
@@ -268,6 +273,11 @@
             "editor/context": [
                 {
                     "command": "ahk++.compile",
+                    "when": "editorLangId == ahk",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "ahk++.compilerGui",
                     "when": "editorLangId == ahk",
                     "group": "navigation@1"
                 },
