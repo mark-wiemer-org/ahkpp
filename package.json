@@ -63,7 +63,7 @@
             },
             {
                 "command": "ahk++.compilerGui",
-                "title": "Compiler GUI",
+                "title": "Compile AHK Script (GUI)",
                 "category": "AHK++"
             },
             {
