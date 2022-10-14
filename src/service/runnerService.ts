@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
 import { Process } from '../common/processWrapper';
+import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
 
 export class RunnerService {
     /** Runs the editor selection as a standalone script. */
@@ -77,7 +78,8 @@ export class RunnerService {
      */
     public static async compile(showGui: boolean) {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
-        if (!currentPath) {
+        // if (!currentPath) {
+        if (!fs.existsSync(currentPath)) {
             vscode.window.showErrorMessage('Cannot compile never-saved files.');
             return;
         }
@@ -91,7 +93,12 @@ export class RunnerService {
             vscode.window.showErrorMessage('Cannot build compile command.');
             return;
         }
-        if (await Process.exec(command, { cwd: `${res(currentPath, '..')}` })) {
+        if (
+            (await Process.exec(command, {
+                cwd: `${res(currentPath, '..')}`,
+            })) &&
+            !showGui
+        ) {
             vscode.window.showInformationMessage('Compile success!');
         }
     }
