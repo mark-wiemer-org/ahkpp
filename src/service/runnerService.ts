@@ -50,6 +50,29 @@ export class RunnerService {
     }
 
     /**
+     * Build compile command
+     * @param compilePath Compiler path
+     * @param scriptPath Script path
+     * @param showGui Flag to show compiler GUI
+     * @returns Compile command
+     */
+    public static compileCommand(
+        compilePath: string,
+        scriptPath: string,
+        showGui: boolean,
+    ) {
+        if (!compilePath || !scriptPath) {
+            return '';
+        }
+        const pos = scriptPath.lastIndexOf('.');
+        const exePath =
+            scriptPath.substring(0, pos < 0 ? scriptPath.length : pos) + '.exe';
+        const guiKey = showGui ? ' /gui' : '';
+        const compileCommand = `"${compilePath}"${guiKey} /in "${scriptPath}" /out "${exePath}"`;
+        return compileCommand;
+    }
+
+    /**
      * Compiles current script
      */
     public static async compile(showGui: boolean) {
@@ -59,19 +82,17 @@ export class RunnerService {
             return;
         }
         this.checkAndSaveActive();
-        const pos = currentPath.lastIndexOf('.');
-        const compilePath =
-            currentPath.substr(0, pos < 0 ? currentPath.length : pos) + '.exe';
-        const guiKey = showGui ? '/gui' : '';
-        if (
-            await Process.exec(
-                `"${Global.getConfig(
-                    ConfigKey.compilePath,
-                )}" ${guiKey} /in "${currentPath}" /out "${compilePath}"`,
-                { cwd: `${res(currentPath, '..')}` },
-            )
-        ) {
-            vscode.window.showInformationMessage('compile success!');
+        const command = this.compileCommand(
+            Global.getConfig(ConfigKey.compilePath),
+            currentPath,
+            showGui,
+        );
+        if (!command) {
+            vscode.window.showErrorMessage('Cannot build compile command.');
+            return;
+        }
+        if (await Process.exec(command, { cwd: `${res(currentPath, '..')}` })) {
+            vscode.window.showInformationMessage('Compile success!');
         }
     }
 
