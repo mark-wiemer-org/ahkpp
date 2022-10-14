@@ -52,7 +52,7 @@ suite('FormattingProvider utils', () => {
             test(
                 data.bc + ": '" + data.in + "'" + ' => ' + data.bn.toString(),
                 () => {
-                    assert.strictEqual(braceNumber(data.in, data.bc), data.bn);
+                    assert.strictEqual(braceNumber(data.in, data.bc as '{' | '}'), data.bn);
                 },
             );
         });
