@@ -377,10 +377,6 @@ export function braceNumber(line: string, braceChar: '{' | '}'): number {
     let braceNum = line.match(braceRegEx).length;
     /** Number of matched braces: `{...}` */
     const matchedBrace = line.match(/{[^{}]*}/g);
-    if (matchedBrace) {
-        // Remove number of matched braces from overall number of braceChar
-        // to get only unique not matched braceChar
-        braceNum = braceNum - matchedBrace.length;
-    }
+    braceNum -= matchedBrace?.length ?? 0;
     return braceNum;
 }
