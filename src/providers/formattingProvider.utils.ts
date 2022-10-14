@@ -366,13 +366,15 @@ export function trimExtraSpaces(
         : line;
 }
 
+export type BraceChar = '{' | '}';
+
 /**
  * Count open/close brace, that not match by corresponding close/open brace
  * @param line
  * @param braceChar Brace character to count: `{` or `}`
  * @return Number of not matched braces
  */
-export function braceNumber(line: string, braceChar: '{' | '}'): number {
+export function braceNumber(line: string, braceChar: BraceChar): number {
     let braceRegEx = new RegExp(braceChar, 'g');
     let braceNum = line.match(braceRegEx).length;
     /** Number of matched braces: `{...}` */
