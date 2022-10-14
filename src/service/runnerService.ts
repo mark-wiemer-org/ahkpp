@@ -52,7 +52,7 @@ export class RunnerService {
     /**
      * Compiles current script
      */
-    public static async compile(showGui: Boolean) {
+    public static async compile(showGui: boolean) {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
         if (!currentPath) {
             vscode.window.showErrorMessage('Cannot compile never-saved files.');
