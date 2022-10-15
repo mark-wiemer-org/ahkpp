@@ -356,7 +356,7 @@ export function removeEmptyLines(
     );
 }
 
-/** @return string with trimmed extra spaces between words*/
+/** @return string with trimmed extra spaces between words */
 export function trimExtraSpaces(
     line: string,
     trimExtraSpaces: boolean,
@@ -364,4 +364,21 @@ export function trimExtraSpaces(
     return trimExtraSpaces
         ? line.replace(/ {2,}/g, ' ') // Remove extra spaces between words
         : line;
+}
+
+export type BraceChar = '{' | '}';
+
+/**
+ * Count open/close brace, that not match by corresponding close/open brace
+ * @param line
+ * @param braceChar Brace character to count: `{` or `}`
+ * @return Number of not matched braces
+ */
+export function braceNumber(line: string, braceChar: BraceChar): number {
+    let braceRegEx = new RegExp(braceChar, 'g');
+    let braceNum = line.match(braceRegEx).length;
+    /** Number of matched braces: `{...}` */
+    const matchedBrace = line.match(/{[^{}]*}/g);
+    braceNum -= matchedBrace?.length ?? 0;
+    return braceNum;
 }
