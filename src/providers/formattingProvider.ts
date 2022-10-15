@@ -52,35 +52,35 @@ export const internalFormat = (
      *
      * `tagDepth === 0`:
      *
-     *      Indentation level was decreased by `Return` or `ExitApp` command, so they placed on same
-     *      indentation level as `Label`.
-     *      Decrement of indentation level by `Label` is disallowed (previous `Label` finished with `Return`
-     *      or `ExitApp` command and un-indent for fall-through scenario not needed).
-     *      Decrement indentation by one level for `#Directive` is allowed.
+     *    Indentation level was decreased by `Return` or `ExitApp` command, so they placed on same
+     *    indentation level as `Label`.
+     *    Decrement of indentation level by `Label` is disallowed (previous `Label` finished with `Return`
+     *    or `ExitApp` command and un-indent for fall-through scenario not needed).
+     *    Decrement indentation by one level for `#Directive` is allowed.
      *
      * `tagDepth === depth`:
      *
-     *      Current indentation level is in sync with `Label` indentation level (no additional indent added
-     *      by block `{}`, `oneCommandCode`, etc...).
-     *      `Return` or `ExitApp` commands allowed to be un-indented, so they will be placed on same
-     *      indentation level as `Label`.
-     *      `Label` allowed to be un-indented for fall-through scenario.
+     *    Current indentation level is in sync with `Label` indentation level (no additional indent added
+     *    by block `{}`, `oneCommandCode`, etc...).
+     *    `Return` or `ExitApp` commands allowed to be un-indented, so they will be placed on same
+     *    indentation level as `Label`.
+     *    `Label` allowed to be un-indented for fall-through scenario.
      *
      * `tagDepth !== depth`:
      *
-     *      `Return` or `ExitApp` commands disallowed to be un-indented, so they will obey indentation rules
-     *      as code above them (`Return` inside function, block `{}`, `oneCommandCode`, etc... stay on same
-     *      indentation level as code above them).
+     *    `Return` or `ExitApp` commands disallowed to be un-indented, so they will obey indentation rules
+     *    as code above them (`Return` inside function, block `{}`, `oneCommandCode`, etc... stay on same
+     *    indentation level as code above them).
      *
      * `tagDepth > 0` :
      *
-     *      `#Directive` allowed to be un-indented by `tagDepth` value (jump several indentation levels).
+     *    `#Directive` allowed to be un-indented by `tagDepth` value (jump several indentation levels).
      *
      * `tagDepth = depth`:
      *
-     *      Only `Label` makes syncing `tagDepth` with `depth`.
-     *      `Case:` and `Default:` must not make syncing to disallow `Return` and `ExitApp` un-indent
-     *      inside `Switch-Case` block.
+     *    Only `Label` makes syncing `tagDepth` with `depth`.
+     *    `Case:` and `Default:` must not make syncing to disallow `Return` and `ExitApp` un-indent
+     *    inside `Switch-Case` block.
      */
     let tagDepth = 0;
     /**
