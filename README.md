@@ -150,7 +150,7 @@ The only directive currently supported is `FormatBlockComment` and it's used as 
 
 #### Formatter Known Issues
 
-There are commands, that can produce indent on single next line. For example:
+Some commands cause the next line to be indented. For example:
 
 ```autohotkey
 if (true)
@@ -162,7 +162,7 @@ Loop % n
 
 Such code will be well formatted.
 
-But do not nest such commands. The next code will be formatted incorrectly:
+However, the formatter doesn't work with nested commands:
 
 ```autohotkey
 if (true)
@@ -174,7 +174,7 @@ Loop % n
         SoundBeep
 ```
 
-Use their variants with braces:
+As a workaround, use braces:
 
 ```autohotkey
 if (true) {
