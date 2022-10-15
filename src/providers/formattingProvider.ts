@@ -134,10 +134,18 @@ export const internalFormat = (
     const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
     const trimSpaces = options.trimExtraSpaces;
 
+    /**
+     * Special labels in `Switch` construction.
+     *
+     * Example: `Case valA[, valB]: [Statement]` or `Default: [Statement]`
+     */
+    const switchCaseDefault = /^(case\s*.+?:|default:)\s*.*/;
     /** Label name may consist of any characters other than `space`,
      * `tab`, `comma` and the escape character (`).
      * Generally, aside from whitespace and comments,
      * no other code can be written on the same line as a label.
+     *
+     * Example: `Label:`
      */
     const label = /^[^\s\t,`]+:$/;
 
@@ -270,14 +278,12 @@ export const internalFormat = (
             depth--;
         }
 
-        // Switch-Case, Label:
-        if (purifiedLine.match(/^\s*case.+?:\s*$/)) {
-            // Case:
-            // Do not make syncing (tagDepth = depth) here! Read tagDepth comment.
-            tagDepth--;
+        // Switch-Case-Default: or Label:
+        if (purifiedLine.match(switchCaseDefault)) {
+            // Case: or Default:
             depth--;
         } else if (purifiedLine.match(label)) {
-            // Default: or Hotkey::
+            // Label:
             if (indentCodeAfterLabel) {
                 if (tagDepth === depth) {
                     // De-indent label or hotkey, if they not end with 'return' command.
@@ -380,9 +386,15 @@ export const internalFormat = (
             depth++;
         }
 
-        // Default: or Label:
-        if (!moreOpenParens && purifiedLine.match(label)) {
-            if (indentCodeAfterLabel) {
+        // Switch-Case-Default: or Label:
+        if (!moreOpenParens) {
+            if (purifiedLine.match(switchCaseDefault)) {
+                // Case: or Default:
+                depth++;
+                // Do not sync 'tagDepth' with 'depth' to prevent 'Return' and 'ExitApp' to un-indent
+                // inside 'Switch-Case-Default' construction
+            } else if (purifiedLine.match(label) && indentCodeAfterLabel) {
+                // Label:
                 depth++;
                 tagDepth = depth;
             }
