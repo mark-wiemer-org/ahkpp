@@ -264,20 +264,20 @@ export const internalFormat = (
             }
         }
 
-        // return or ExitApp
+        // Return or ExitApp
         if (purifiedLine.match(/\b(return|exitapp)\b/) && tagDepth === depth) {
             tagDepth = 0;
             depth--;
         }
 
-        // switch-case, label
+        // Switch-Case, Label:
         if (purifiedLine.match(/^\s*case.+?:\s*$/)) {
-            // case
+            // Case:
             // Do not make syncing (tagDepth = depth) here! Read tagDepth comment.
             tagDepth--;
             depth--;
         } else if (purifiedLine.match(label)) {
-            // default or hotkey
+            // Default: or Hotkey::
             if (indentCodeAfterLabel) {
                 if (tagDepth === depth) {
                     // De-indent label or hotkey, if they not end with 'return' command.
@@ -380,7 +380,7 @@ export const internalFormat = (
             depth++;
         }
 
-        // default or label
+        // Default: or Label:
         if (!moreOpenParens && purifiedLine.match(label)) {
             if (indentCodeAfterLabel) {
                 depth++;
