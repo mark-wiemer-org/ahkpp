@@ -28,6 +28,7 @@ const defaultOptions = {
 };
 const formatTests: FormatTest[] = [
     { filenameRoot: '25-multiline-string' },
+    { filenameRoot: '28-switch-case' },
     { filenameRoot: '40-command-inside-text' },
     { filenameRoot: '55-sharp-directive' },
     { filenameRoot: '56-return-command-after-label' },
