@@ -139,7 +139,7 @@ export const internalFormat = (
      * Generally, aside from whitespace and comments,
      * no other code can be written on the same line as a label.
      */
-    const label = /^\s*[^\s\t,`]+:\s*$/;
+    const label = /^[^\s\t,`]+:$/;
 
     const lines = stringToFormat.split('\n');
 
@@ -265,7 +265,7 @@ export const internalFormat = (
         }
 
         // Return or ExitApp
-        if (purifiedLine.match(/\b(return|exitapp)\b/) && tagDepth === depth) {
+        if (purifiedLine.match(/^(return|exitapp)\b/) && tagDepth === depth) {
             tagDepth = 0;
             depth--;
         }
