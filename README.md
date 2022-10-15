@@ -150,43 +150,7 @@ The only directive currently supported is `FormatBlockComment` and it's used as 
 
 #### Formatter Known Issues
 
-Some commands cause the next line to be indented. For example:
-
-```autohotkey
-if (true)
-    MsgBox
-
-Loop % n
-    SoundBeep
-```
-
-Such code will be well formatted.
-
-However, the formatter doesn't work with nested commands:
-
-```autohotkey
-if (true)
-    if (true)
-        MsgBox
-
-Loop % n
-    if (true)
-        SoundBeep
-```
-
-As a workaround, use braces:
-
-```autohotkey
-if (true) {
-    if (true)
-        MsgBox
-}
-
-Loop % n {
-    if (true)
-        SoundBeep
-}
-```
+Look at [GitHub](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues?q=is%3Aopen+is%3Aissue+label%3Aformatter)
 
 ## Credits
 
