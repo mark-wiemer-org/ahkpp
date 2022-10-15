@@ -2,6 +2,8 @@ import * as vscode from 'vscode';
 import * as assert from 'assert';
 import path = require('path');
 import {
+    BraceChar,
+    braceNumber,
     buildIndentationChars,
     buildIndentedLine,
     documentToString,
@@ -13,6 +15,55 @@ import {
 } from '../../../../providers/formattingProvider.utils';
 
 suite('FormattingProvider utils', () => {
+    suite('braceNum', () => {
+        interface TestBraceData {
+            in: string;
+            bc: BraceChar;
+            bn: number;
+        }
+        // List of test data
+        let dataList: TestBraceData[] = [
+            // {
+            //     in: , // input test string
+            //     bc: , // brace character
+            //     bn: , // brace number
+            // },
+            {
+                in: '{}',
+                bc: '{',
+                bn: 0,
+            },
+            {
+                in: '{',
+                bc: '{',
+                bn: 1,
+            },
+            {
+                in: '{}{',
+                bc: '{',
+                bn: 1,
+            },
+            {
+                in: '}',
+                bc: '}',
+                bn: 1,
+            },
+            {
+                in: '{}}',
+                bc: '}',
+                bn: 1,
+            },
+        ];
+        dataList.forEach((data) => {
+            test(
+                data.bc + ": '" + data.in + "'" + ' => ' + data.bn.toString(),
+                () => {
+                    assert.strictEqual(braceNumber(data.in, data.bc), data.bn);
+                },
+            );
+        });
+    });
+
     suite('buildIndentationChars', () => {
         // List of test data
         let dataList = [
