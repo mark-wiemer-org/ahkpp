@@ -231,11 +231,11 @@ export const internalFormat = (
 
         // #IfWinActive, #IfWinExist with omit params OR #If without expression
         if (
-            purifiedLine.match(/#ifwinactive$/) ||
-            purifiedLine.match(/#ifwinnotactive$/) ||
-            purifiedLine.match(/#ifwinexist$/) ||
-            purifiedLine.match(/#ifwinnotexist$/) ||
-            purifiedLine.match(/#if$/)
+            purifiedLine.match(/^#ifwinactive$/) ||
+            purifiedLine.match(/^#ifwinnotactive$/) ||
+            purifiedLine.match(/^#ifwinexist$/) ||
+            purifiedLine.match(/^#ifwinnotexist$/) ||
+            purifiedLine.match(/^#if$/)
         ) {
             if (indentCodeAfterSharpDirective) {
                 if (tagDepth > 0) {
@@ -248,11 +248,11 @@ export const internalFormat = (
 
         // #IfWinActive, #IfWinExist with params OR #If with expression
         if (
-            purifiedLine.match(/#ifwinactive\b.+/) ||
-            purifiedLine.match(/#ifwinnotactive\b.+/) ||
-            purifiedLine.match(/#ifwinexist\b.+/) ||
-            purifiedLine.match(/#ifwinnotexist\b.+/) ||
-            purifiedLine.match(/#if\b.+/)
+            purifiedLine.match(/^#ifwinactive\b.+/) ||
+            purifiedLine.match(/^#ifwinnotactive\b.+/) ||
+            purifiedLine.match(/^#ifwinexist\b.+/) ||
+            purifiedLine.match(/^#ifwinnotexist\b.+/) ||
+            purifiedLine.match(/^#if\b.+/)
         ) {
             if (indentCodeAfterSharpDirective) {
                 if (tagDepth > 0) {

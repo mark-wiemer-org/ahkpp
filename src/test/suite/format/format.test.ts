@@ -75,6 +75,7 @@ const formatTests: FormatTest[] = [
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
     },
+    { filenameRoot: 'legacy-text-sharp-directive' },
     { filenameRoot: 'label-fall-through' },
     { filenameRoot: 'label-specific-name' },
     {
