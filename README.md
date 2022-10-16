@@ -30,7 +30,6 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
     -   [Folding](#folding)
     -   [Code Format](#code-format)
         -   [Formatter Directives](#formatter-directives)
-        -   [Formatter Known Issues](#formatter-known-issues)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
@@ -130,6 +129,8 @@ Collapse me!
 
 ### Code Format
 
+> There are some [known issues with the formatter](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues?q=is%3Aopen+is%3Aissue+label%3Aformatter), and we're always working to improve.
+
 Supports standard VS Code formatting with a few options.
 
 ![Code Format](image/codeFormat.jpg)
@@ -147,10 +148,6 @@ The only directive currently supported is `FormatBlockComment` and it's used as 
 */
 ;@AHK++FormatBlockCommentOff
 ```
-
-#### Formatter Known Issues
-
-Look at [GitHub](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues?q=is%3Aopen+is%3Aissue+label%3Aformatter)
 
 ## Credits
 
