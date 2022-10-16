@@ -30,7 +30,7 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
     -   [Folding](#folding)
     -   [Code Format](#code-format)
         -   [Formatter Directives](#formatter-directives)
-    -   [Align Selected Assignments](#align-selected-assignments)
+        -   [Align Selected Assignments](#align-selected-assignments)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
@@ -149,7 +149,7 @@ The only directive currently supported is `FormatBlockComment` and it's used as 
 ;@AHK++FormatBlockCommentOff
 ```
 
-### Align Selected Assignments
+#### Align Selected Assignments
 
 Select assignments:
 
