@@ -1,6 +1,3 @@
-import * as vscode from 'vscode';
-import { Selection } from 'vscode';
-
 export class CodeUtil {
     /**
      * Trim non-formatted chars out of original line of code
@@ -52,44 +49,28 @@ export class CodeUtil {
         return regs;
     }
 
-    /** Align variable assignment by = operator in selected text
-     * @param selection Text selection in editor
-     * @returns Aligned selection
+    /** Align variable assignment by = operator
+     * @param text Text to align
+     * @returns Aligned text
      */
-    public static alignTextAssignOperator(selection: Selection): string {
-        const document = vscode.window.activeTextEditor.document;
+    public static alignTextAssignOperator(text: string[]): string[] {
         /** Right-most `=` operator position in line from all assignments */
         let maxPosition = 0;
-        for (
-            let lineIndex = selection.start.line;
-            lineIndex <= selection.end.line;
-            lineIndex++
-        ) {
-            const line = this.normalizeLineAssignOperator(
-                document.lineAt(lineIndex).text,
-            );
-
+        text.forEach((line) => {
+            const normalizedLine = this.normalizeLineAssignOperator(line);
             // Find right-most = operator position
-            let position = line.indexOf('='); // = operator position
+            let position = normalizedLine.indexOf('='); // = operator position
             if (position > maxPosition) {
                 maxPosition = position;
             }
-        }
+        });
 
-        let text = '';
-        for (
-            let lineIndex = selection.start.line;
-            lineIndex <= selection.end.line;
-            lineIndex++
-        ) {
-            let line = document.lineAt(lineIndex).text;
-            text += this.alignLineAssignOperator(line, maxPosition);
-            if (lineIndex !== selection.end.line) {
-                text += '\n';
-            }
-        }
+        let alignedText: string[] = [];
+        text.forEach((line) => {
+            alignedText.push(this.alignLineAssignOperator(line, maxPosition));
+        });
 
-        return text;
+        return alignedText;
     }
 
     /** Remove comment, remove extra spaces around first = or := operator,

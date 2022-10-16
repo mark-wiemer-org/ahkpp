@@ -75,9 +75,6 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('ahk++.runSelection', () =>
             RunnerService.runSelection(),
         ),
-        vscode.commands.registerCommand('ahk++.alignSelection', () =>
-            RunnerService.alignSelection(),
-        ),
     );
 
     if (Global.getConfig<boolean>(ConfigKey.enableIntellisense)) {
