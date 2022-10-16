@@ -139,15 +139,27 @@ Supports standard VS Code formatting with a few options.
 
 Formatter directives instruct the formatter to behave a certain way on sections of code.
 
-The only directive currently supported is `FormatBlockComment` and it's used as below:
+1. `FormatBlockComment`:
 
-```autohotkey
-;@AHK++FormatBlockCommentOn
-/*
-;All text inside block comment will be formatted like regular code.
-*/
-;@AHK++FormatBlockCommentOff
-```
+    ```autohotkey
+    ;@AHK++FormatBlockCommentOn
+    /*
+    ;All text inside block comment will be formatted like regular code.
+    */
+    ;@AHK++FormatBlockCommentOff
+    ```
+
+2. `AlignAssignment`:
+
+    ```autohotkey
+    ;@AHK++AlignAssignmentOn
+    a          = 5 ; number five
+    str        = legacy text = with equal symbol
+    inputFile := "movie.mkv"
+    abc       := "abc" ; string
+    abc       := a + b
+    ;@AHK++AlignAssignmentOff
+    ```
 
 #### Align Selected Assignments
 
