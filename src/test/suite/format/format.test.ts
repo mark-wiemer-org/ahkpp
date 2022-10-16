@@ -78,6 +78,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: 'legacy-text-sharp-directive' },
     { filenameRoot: 'label-fall-through' },
     { filenameRoot: 'label-specific-name' },
+    { filenameRoot: 'return-exit-exitapp' },
     {
         filenameRoot: 'tab-size-2',
         options: { tabSize: 2 },

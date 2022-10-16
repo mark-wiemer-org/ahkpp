@@ -273,7 +273,10 @@ export const internalFormat = (
         }
 
         // Return or ExitApp
-        if (purifiedLine.match(/^(return|exitapp)\b/) && tagDepth === depth) {
+        if (
+            purifiedLine.match(/^(return|exit|exitapp)\b/) &&
+            tagDepth === depth
+        ) {
             tagDepth = 0;
             depth--;
         }
