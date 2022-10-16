@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { ConfigKey, Global } from '../common/global';
+import { CodeUtil } from '../common/codeUtil';
 import { FormatOptions } from './formattingProvider.types';
 import {
     braceNumber,
@@ -105,6 +106,17 @@ export const internalFormat = (
     /**
      * Formatter's directive:
      * ```ahk
+     * ;@AHK++AlignAssignmentOn
+     * ;@AHK++AlignAssignmentOff
+     * ```
+     * Align assignment between this directives
+     */
+    let alignAssignment = false;
+    /** Code block with assignment to be aligned */
+    let assignmentBlock: string[] = [];
+    /**
+     * Formatter's directive:
+     * ```ahk
      * ;@AHK++FormatBlockCommentOn
      * ;@AHK++FormatBlockCommentOff
      * ```
@@ -164,8 +176,46 @@ export const internalFormat = (
 
         // Stop directives for formatter
         if (emptyLine) {
-            if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)) {
+            if (comment.match(/;\s*@AHK\+\+AlignAssignmentOff/i)) {
+                alignAssignment = false;
+                assignmentBlock =
+                    CodeUtil.alignTextAssignOperator(assignmentBlock);
+                // Save aligned block
+                assignmentBlock.forEach((alignedFormattedLine, index) => {
+                    formattedString += buildIndentedLine(
+                        // return 'lineIndex' before 'assignmentBlock' and increment with 'index'
+                        lineIndex - assignmentBlock.length + index + 1,
+                        lines.length,
+                        alignedFormattedLine,
+                        depth,
+                        options,
+                    );
+                });
+                assignmentBlock = [];
+            } else if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)) {
                 formatBlockComment = false;
+            }
+        }
+
+        // Align Assignment:
+        if (alignAssignment) {
+            assignmentBlock.push(formattedLine);
+            if (lineIndex !== lines.length - 1) {
+                // skip to the next iteration
+                return;
+            } else {
+                // Save aligned block if we reach end of text, but didn't find stop directive ';@AHK++AlignAssignmentOff'
+                assignmentBlock.forEach((alignedFormattedLine, index) => {
+                    formattedString += buildIndentedLine(
+                        // return 'lineIndex' before 'assignmentBlock' and increment with 'index'
+                        lineIndex - assignmentBlock.length + index + 1,
+                        lines.length,
+                        alignedFormattedLine,
+                        depth,
+                        options,
+                    );
+                });
+                assignmentBlock = [];
             }
         }
 
@@ -332,7 +382,9 @@ export const internalFormat = (
 
         // Start directives for formatter
         if (emptyLine) {
-            if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOn/i)) {
+            if (comment.match(/;\s*@AHK\+\+AlignAssignmentOn/i)) {
+                alignAssignment = true;
+            } else if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOn/i)) {
                 formatBlockComment = true;
             }
         }
