@@ -1,4 +1,12 @@
 {
+    "AlignAssignmentOn": {
+        "prefix": "@AHK++AlignAssignmentOn",
+        "body": ";@AHK++AlignAssignmentOn"
+    },
+    "AlignAssignmentOff": {
+        "prefix": "@AHK++AlignAssignmentOff",
+        "body": ";@AHK++AlignAssignmentOff"
+    },
     "FormatBlockCommentOn": {
         "prefix": "@AHK++FormatBlockCommentOn",
         "body": ";@AHK++FormatBlockCommentOn"
