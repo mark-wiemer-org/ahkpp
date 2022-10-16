@@ -2,37 +2,87 @@ import * as assert from 'assert';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { FormatProvider } from '../../../providers/formattingProvider';
+import {
+    FormatProvider,
+    internalFormat,
+} from '../../../providers/formattingProvider';
+import { FormatOptions } from '../../../providers/formattingProvider.types';
 
 const inFilenameSuffix = '.in.ahk';
 const outFilenameSuffix = '.out.ahk';
 interface FormatTest {
     /** Name of the file, excluding the suffix (@see inFilenameSuffix, @see outFilenameSuffix) */
     filenameRoot: string;
-    /** If not provided, file will be formatted with 4 spaces. */
-    options?: Partial<vscode.FormattingOptions>;
+    // Any properties not provided will use `defaultOptions` below
+    options?: Partial<FormatOptions>;
 }
-/** Default formatting options */
-const defaultOptions: vscode.FormattingOptions = {
+/** Default formatting options, meant to match default extension settings */
+const defaultOptions = {
     tabSize: 4,
     insertSpaces: true,
+    allowedNumberOfEmptyLines: 1,
+    indentCodeAfterLabel: true,
+    indentCodeAfterSharpDirective: true,
+    preserveIndent: false,
+    trimExtraSpaces: true,
 };
 const formatTests: FormatTest[] = [
     { filenameRoot: '25-multiline-string' },
+    { filenameRoot: '40-command-inside-text' },
+    { filenameRoot: '55-sharp-directive' },
+    { filenameRoot: '56-return-command-after-label' },
     { filenameRoot: '58-parentheses-indentation' },
+    { filenameRoot: '59-one-command-indentation' },
     { filenameRoot: '72-paren-hotkey' },
+    { filenameRoot: '119-semicolon-inside-string' },
+    { filenameRoot: '161-colon-on-last-position' },
+    { filenameRoot: '180-if-else-braces' },
+    {
+        filenameRoot: '182-multiple-newlines',
+        options: { allowedNumberOfEmptyLines: 2 },
+    },
+    { filenameRoot: '185-block-comment' },
+    {
+        filenameRoot: '187-comments-at-end-of-line',
+        options: { trimExtraSpaces: false },
+    },
+    { filenameRoot: '188-one-command-code-in-text' },
+    { filenameRoot: '189-space-at-end-of-line' },
+    {
+        filenameRoot: '192-preserve-indent-true',
+        options: { preserveIndent: true },
+    },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'demo' },
+    {
+        filenameRoot: 'indent-code-after-label-false',
+        options: { indentCodeAfterLabel: false },
+    },
+    {
+        filenameRoot: 'indent-code-after-label-true',
+        options: { indentCodeAfterLabel: true },
+    },
+    {
+        filenameRoot: 'indent-code-after-sharp-directive-false',
+        options: { indentCodeAfterSharpDirective: false },
+    },
+    {
+        filenameRoot: 'indent-code-after-sharp-directive-true',
+        options: { indentCodeAfterSharpDirective: true },
+    },
     {
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
     },
+    { filenameRoot: 'label-fall-through' },
+    { filenameRoot: 'label-specific-name' },
     {
         filenameRoot: 'tab-size-2',
         options: { tabSize: 2 },
     },
 ];
 
+// Currently in `out` folder, need to get back to main `src` folder
 const filesParentPath = path.join(
     __dirname,
     '..',
@@ -46,9 +96,50 @@ const filesParentPath = path.join(
     'samples',
 );
 
-suite('Formatter', () => {
+const fileToString = (path: string): string => fs.readFileSync(path).toString();
+
+suite('Internal formatter', () => {
     formatTests.forEach((formatTest) => {
-        test(`Format ${formatTest.filenameRoot}`, async () => {
+        test(`${formatTest.filenameRoot} internal format`, async () => {
+            // Arrange
+            const inFilePath = path.join(
+                filesParentPath,
+                `${formatTest.filenameRoot}${inFilenameSuffix}`,
+            );
+            const inFileString = fileToString(inFilePath);
+            const outFilePath = path.join(
+                filesParentPath,
+                `${formatTest.filenameRoot}${outFilenameSuffix}`,
+            );
+            const outFileString = fileToString(outFilePath);
+            const options = { ...defaultOptions, ...formatTest.options };
+
+            // Act
+            const actual = internalFormat(inFileString, options);
+
+            // Assert
+            assert.strictEqual(actual, outFileString);
+        });
+    });
+});
+
+suite('External formatter', () => {
+    // test external formatter a few times to make sure the connection is working
+    // advanced tests are for internal formatter only
+    const externalFormatTests: FormatTest[] = [
+        { filenameRoot: '25-multiline-string' },
+        {
+            filenameRoot: 'insert-spaces-false',
+            options: { insertSpaces: false },
+        },
+        {
+            filenameRoot: 'tab-size-2',
+            options: { tabSize: 2 },
+        },
+    ];
+
+    externalFormatTests.forEach((formatTest) => {
+        test(`${formatTest.filenameRoot} external format`, async () => {
             // Arrange
             const inFilename = formatTest.filenameRoot + inFilenameSuffix;
             const outFilename = formatTest.filenameRoot + outFilenameSuffix;

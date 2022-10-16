@@ -27,9 +27,14 @@ export class Global {
 }
 
 export enum ConfigKey {
+    allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
+    compilePath = 'file.compilePath',
     dropSelectionAndMoveCursor = 'alignAssignment.dropSelectionAndMoveCursor',
-    compilePath = 'compilePath',
-    helpPath = 'helpPath',
-    enableIntellisense = 'enableIntellisense',
-    executePath = 'executePath',
+    enableIntellisense = 'language.enableIntellisense',
+    executePath = 'file.executePath',
+    helpPath = 'file.helpPath',
+    indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',
+    indentCodeAfterSharpDirective = 'formatter.indentCodeAfterSharpDirective',
+    preserveIndent = 'formatter.preserveIndent',
+    trimExtraSpaces = 'formatter.trimExtraSpaces',
 }

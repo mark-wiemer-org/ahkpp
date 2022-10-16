@@ -31,8 +31,8 @@ The tests should run automatically, and you should see passing output in the Deb
 1.  Update the changelog.
 1.  Open a draft PR to merge to `main`. The title of the PR should be e.g. `v2.8.2`, lowercase 'v'. The PR description should contain the changelog entry.
 1.  Fix any remaining issues with the code (but only make changes already logged in the changelog). Use the draft PR to easily detect issues.
-1.  Bump the version in `package.json`. The message of the commit should be e.g. `v2.8.2`.
-1.  Push the changes.
+1.  Bump the version in `package.json`.
+1.  Commit and push the changes. Commit message doesn't matter.
 1.  Merge the PR. The body of the commit message should be the changelog entry.
 1.  `git checkout main && git pull`
 1.  Package the new version using `vsce package`.
@@ -42,10 +42,7 @@ The tests should run automatically, and you should see passing output in the Deb
     1. Select `Install Extension VSIX`.
     1. Reload the window. (`Ctrl + Shift + R` or `F1` -> Developer: Reload Window)
 1.  Perform final pre-release tests.
-    -   If tests fail, there are two choices:
-        1. Delay the release until the tests pass (preferred choice)
-            > Changes can be made on the same release branch, same package version
-        1. Create issues for the newly-introduced failures before releasing, then publish the release anyway
+1.  If tests fail, delay the release.
 
 ### Publishing
 

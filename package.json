@@ -1,7 +1,7 @@
 {
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
-    "version": "2.8.3",
+    "version": "3.0.0",
     "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
     "categories": [
         "Programming Languages",
@@ -28,7 +28,7 @@
         "compile": "npm run clean && npm run compile_ts && npm run compile_grammar",
         "compile_grammar": "js-yaml syntaxes/ahk.tmLanguage.yaml > syntaxes/ahk.tmLanguage.json",
         "compile_ts": "tsc -p ./",
-        "eslint": "npm run eslint_inner -- src && echo ✅ No ESLint problems",
+        "eslint": "npm run eslint_inner -- src && echo No ESLint problems",
         "eslint_fix": "npm run eslint_inner -- --fix src",
         "eslint_inner": "eslint --ext ts --max-warnings=0",
         "format": "npm run format_inner -- --check .",
@@ -43,7 +43,7 @@
         "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",
         "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
         "test_unit": "node ./out/test/runTest.js",
-        "tsc": "tsc --noEmit --skipLibCheck && echo ✅ No TSC problems",
+        "tsc": "tsc --noEmit --skipLibCheck && echo No TSC problems",
         "validate": "npm run lint && npm run test",
         "vscode:prepublish": "npm run compile",
         "watch": "tsc -watch -p ./"
@@ -65,6 +65,11 @@
                 "title": "Compile AHK Script",
                 "category": "AHK++",
                 "icon": "./image/build.svg"
+            },
+            {
+                "command": "ahk++.compilerGui",
+                "title": "Compile AHK Script (GUI)",
+                "category": "AHK++"
             },
             {
                 "command": "ahk++.debug",
@@ -97,27 +102,53 @@
                     "default": false,
                     "description": "Drop selection and move cursor to end of last selected line after align assignments."
                 },
-                "ahk++.compilePath": {
+                "ahk++.file.compilePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "Path to the AHK compiler."
                 },
-                "ahk++.enableIntellisense": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
-                },
-                "ahk++.executePath": {
+                "ahk++.file.executePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
                     "description": "Path to the AHK runner."
                 },
-                "ahk++.helpPath": {
+                "ahk++.file.helpPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
                     "description": "Path to the AHK Help document."
                 },
-                "ahk++.showDebugButton": {
+                "ahk++.formatter.allowedNumberOfEmptyLines": {
+                    "type": "integer",
+                    "default": 1,
+                    "minimum": -1,
+                    "description": "Allowed number of empty lines.\n-1: ignore empty lines.\n0: no empty lines."
+                },
+                "ahk++.formatter.indentCodeAfterLabel": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indent code after label."
+                },
+                "ahk++.formatter.indentCodeAfterSharpDirective": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indent code after directives, that creates context-sensitive hotkeys and hotstrings.\nExample: #If / #IfWinActive / #IfWinNotActive / #IfWinExist / #IfWinNotExist."
+                },
+                "ahk++.formatter.preserveIndent": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Preserve indentation on empty line."
+                },
+                "ahk++.formatter.trimExtraSpaces": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Trim extra spaces between words."
+                },
+                "ahk++.language.enableIntellisense": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
+                },
+                "ahk++.menu.showDebugButton": {
                     "type": "boolean",
                     "default": true,
                     "description": "Show the Debug button in the editor title menu."
@@ -266,6 +297,11 @@
                     "group": "navigation@1"
                 },
                 {
+                    "command": "ahk++.compilerGui",
+                    "when": "editorLangId == ahk",
+                    "group": "navigation@1"
+                },
+                {
                     "command": "ahk++.run",
                     "when": "editorLangId == ahk",
                     "group": "navigation@0"
@@ -279,7 +315,7 @@
             "editor/title": [
                 {
                     "command": "ahk++.debug",
-                    "when": "editorLangId == ahk && config.ahk++.showDebugButton",
+                    "when": "editorLangId == ahk && config.ahk++.menu.showDebugButton",
                     "group": "navigation@1"
                 }
             ]
@@ -288,6 +324,10 @@
             {
                 "language": "ahk",
                 "path": "./snippets/ahk.json"
+            },
+            {
+                "language": "ahk",
+                "path": "./snippets/ahk++.json"
             }
         ]
     },

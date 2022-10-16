@@ -2,8 +2,10 @@
     "AhkTemplate": {
         "prefix": "#TEMPLATE",
         "body": [
+            "#NoEnv",
             "#SingleInstance, Force",
-            "SendMode Input",
+            "SendMode, Input",
+            "SetBatchLines, -1",
             "SetWorkingDir, %A_ScriptDir%",
             ""
         ]
@@ -295,7 +297,7 @@
     },
     "Drive": {
         "prefix": "Drive",
-        "body": "Drive, ${1:Sub-command [}, ${2:Drive}, ${3:Value]}",
+        "body": "Drive, ${1:SubCommand [}, ${2:Drive}, ${3:Value]}",
         "description": "Ejects/retracts the tray in a CD or DVD drive, or sets a drive's volume label."
     },
     "DriveGet": {
@@ -305,7 +307,7 @@
     },
     "DriveSpaceFree": {
         "prefix": "DriveSpaceFree",
-        "body": "DriveSpaceFree, ${1:OutputVar}, ${2:C:\\}",
+        "body": "DriveSpaceFree, ${1:OutputVar}, ${2:C:\\\\}",
         "description": "Retrieves the free disk space of a drive, in Megabytes."
     },
     "Edit": {
@@ -535,17 +537,17 @@
     },
     "Gui": {
         "prefix": "Gui",
-        "body": "Gui, ${1:sub-command [}, ${2:Param2}, ${3:Param3}, ${4:Param4]}",
+        "body": "Gui, ${1:SubCommand [}, ${2:Value1}, ${3:Value2}, ${4:Value3]}",
         "description": "Creates and manages windows and controls. Such windows can be used as data entry forms or custom user interfaces."
     },
     "GuiControl": {
         "prefix": "GuiControl",
-        "body": "GuiControl, ${1:Sub-command}, ${2:ControlID [}, ${3:Param3]}",
+        "body": "GuiControl, ${1:SubCommand}, ${2:ControlID [}, ${3:Value]}",
         "description": "Makes a variety of changes to a control in a GUI window."
     },
     "GuiControlGet": {
         "prefix": "GuiControlGet",
-        "body": "GuiControlGet, ${1:OutputVar [}, ${2:Sub-command}, ${3:ControlID}, ${4:Param4]}",
+        "body": "GuiControlGet, ${1:OutputVar [}, ${2:SubCommand}, ${3:ControlID}, ${4:Value]}",
         "description": "Retrieves various types of information about a control in a GUI window."
     },
     "Hotkey": {
@@ -795,7 +797,7 @@
     },
     "Process": {
         "prefix": "Process",
-        "body": "Process, ${1:Cmd}, ${2:PID-or-Name [}, ${3:Param3]}",
+        "body": "Process, ${1:Cmd}, ${2:PID-or-Name [}, ${3:Value]}",
         "description": "Performs one of the following operations on a process: checks if it exists; changes its priority; closes it; waits for it to close."
     },
     "Progress": {
@@ -1110,7 +1112,7 @@
     },
     "SysGet": {
         "prefix": "SysGet",
-        "body": "SysGet, ${1:OutputVar}, ${2:Sub-command [}, ${3:Param3]}",
+        "body": "SysGet, ${1:OutputVar}, ${2:SubCommand [}, ${3:Value]}",
         "description": "Retrieves screen resolution, multi-monitor info, dimensions of system objects, and other system properties."
     },
     "Thread": {

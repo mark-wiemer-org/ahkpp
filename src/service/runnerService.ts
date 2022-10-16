@@ -4,6 +4,7 @@ import { CodeUtil } from '../common/codeUtil';
 import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
 import { Process } from '../common/processWrapper';
+import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
 
 export class RunnerService {
     /** Align assignments and comments in selection. */
@@ -115,27 +116,54 @@ export class RunnerService {
     }
 
     /**
+     * Build compile command
+     * @param compilePath Compiler path
+     * @param scriptPath Script path
+     * @param showGui Flag to show compiler GUI
+     * @returns Compile command
+     */
+    public static compileCommand(
+        compilePath: string,
+        scriptPath: string,
+        showGui: boolean,
+    ) {
+        if (!compilePath || !scriptPath) {
+            return '';
+        }
+        const pos = scriptPath.lastIndexOf('.');
+        const exePath =
+            scriptPath.substring(0, pos < 0 ? scriptPath.length : pos) + '.exe';
+        const guiKey = showGui ? ' /gui' : '';
+        const compileCommand = `"${compilePath}"${guiKey} /in "${scriptPath}" /out "${exePath}"`;
+        return compileCommand;
+    }
+
+    /**
      * Compiles current script
      */
-    public static async compile() {
+    public static async compile(showGui: boolean) {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
-        if (!currentPath) {
+        if (!fs.existsSync(currentPath)) {
             vscode.window.showErrorMessage('Cannot compile never-saved files.');
             return;
         }
         this.checkAndSaveActive();
-        const pos = currentPath.lastIndexOf('.');
-        const compilePath =
-            currentPath.substr(0, pos < 0 ? currentPath.length : pos) + '.exe';
+        const command = this.compileCommand(
+            Global.getConfig(ConfigKey.compilePath),
+            currentPath,
+            showGui,
+        );
+        if (!command) {
+            vscode.window.showErrorMessage('Cannot build compile command.');
+            return;
+        }
         if (
-            await Process.exec(
-                `"${Global.getConfig(
-                    ConfigKey.compilePath,
-                )}" /in "${currentPath}" /out "${compilePath}"`,
-                { cwd: `${res(currentPath, '..')}` },
-            )
+            (await Process.exec(command, {
+                cwd: `${res(currentPath, '..')}`,
+            })) &&
+            !showGui
         ) {
-            vscode.window.showInformationMessage('compile success!');
+            vscode.window.showInformationMessage('Compile success!');
         }
     }
 

@@ -3,7 +3,7 @@ import { Selection } from 'vscode';
 
 export class CodeUtil {
     /**
-     * Trim non-formatted chars out of original lines of code
+     * Trim non-formatted chars out of original line of code
      * @param original Original line of code
      */
     public static purify(original: string): string {

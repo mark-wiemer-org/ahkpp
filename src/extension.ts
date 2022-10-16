@@ -60,7 +60,10 @@ export function activate(context: vscode.ExtensionContext) {
         ),
         TemplateService.createEditorListener(),
         vscode.commands.registerCommand('ahk++.compile', () =>
-            RunnerService.compile(),
+            RunnerService.compile(false),
+        ),
+        vscode.commands.registerCommand('ahk++.compilerGui', () =>
+            RunnerService.compile(true),
         ),
         vscode.commands.registerCommand('ahk++.debug', () =>
             RunnerService.startDebugger(),
