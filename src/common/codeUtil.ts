@@ -55,20 +55,10 @@ export class CodeUtil {
      */
     public static alignTextAssignOperator(text: string[]): string[] {
         /** Right-most `=` operator position in line from all assignments */
-        let maxPosition = 0;
-        text.forEach((line) => {
-            const normalizedLine = this.normalizeLineAssignOperator(line);
-            // Find right-most = operator position
-            let position = normalizedLine.indexOf('='); // = operator position
-            if (position > maxPosition) {
-                maxPosition = position;
-            }
+        return Math.max(...lines.map(line => this.normalizeLineAssignOperator(line).indexOf('=')));
         });
 
-        let alignedText: string[] = [];
-        text.forEach((line) => {
-            alignedText.push(this.alignLineAssignOperator(line, maxPosition));
-        });
+        const alignedText: string[] = text.map((line) => this.alignLineAssignOperator(line, maxPosition)));
 
         return alignedText;
     }
@@ -112,7 +102,7 @@ export class CodeUtil {
         /** The line comment. Empty string if no line comment exists */
         const comment = /;.+/.exec(original)?.[0] ?? ''; // Save comment
         original = this.normalizeLineAssignOperator(original);
-        let position = original.search('='); // = operator position
+        let position = original.indexOf('='); // = operator position
         return original
             .replace(/\s(?=:?=)/, ' '.repeat(targetPosition - position + 1)) // Align assignment
             .concat(comment) // Restore comment

@@ -203,20 +203,19 @@ export const internalFormat = (
             if (lineIndex !== lines.length - 1) {
                 // skip to the next iteration
                 return;
-            } else {
-                // Save aligned block if we reach end of text, but didn't find stop directive ';@AHK++AlignAssignmentOff'
-                assignmentBlock.forEach((alignedFormattedLine, index) => {
-                    formattedString += buildIndentedLine(
-                        // return 'lineIndex' before 'assignmentBlock' and increment with 'index'
-                        lineIndex - assignmentBlock.length + index + 1,
-                        lines.length,
-                        alignedFormattedLine,
-                        depth,
-                        options,
-                    );
-                });
-                assignmentBlock = [];
             }
+            // Save aligned block if we reach end of text, but didn't find stop directive ';@AHK++AlignAssignmentOff'
+            assignmentBlock.forEach((alignedFormattedLine, index) => {
+                formattedString += buildIndentedLine(
+                    // return 'lineIndex' before 'assignmentBlock' and increment with 'index'
+                    lineIndex - assignmentBlock.length + index + 1,
+                    lines.length,
+                    alignedFormattedLine,
+                    depth,
+                    options,
+                );
+            });
+            assignmentBlock = [];
         }
 
         // Block comments
