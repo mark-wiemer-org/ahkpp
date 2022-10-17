@@ -54,35 +54,35 @@ export const internalFormat = (
      *
      * `tagDepth === 0`:
      *
-     *      Indentation level was decreased by `Return` or `ExitApp` command, so they placed on same
-     *      indentation level as `Label`.
-     *      Decrement of indentation level by `Label` is disallowed (previous `Label` finished with `Return`
-     *      or `ExitApp` command and un-indent for fall-through scenario not needed).
-     *      Decrement indentation by one level for `#Directive` is allowed.
+     *    Indentation level was decreased by `Return` or `ExitApp` command, so they placed on same
+     *    indentation level as `Label`.
+     *    Decrement of indentation level by `Label` is disallowed (previous `Label` finished with `Return`
+     *    or `ExitApp` command and un-indent for fall-through scenario not needed).
+     *    Decrement indentation by one level for `#Directive` is allowed.
      *
      * `tagDepth === depth`:
      *
-     *      Current indentation level is in sync with `Label` indentation level (no additional indent added
-     *      by block `{}`, `oneCommandCode`, etc...).
-     *      `Return` or `ExitApp` commands allowed to be un-indented, so they will be placed on same
-     *      indentation level as `Label`.
-     *      `Label` allowed to be un-indented for fall-through scenario.
+     *    Current indentation level is in sync with `Label` indentation level (no additional indent added
+     *    by block `{}`, `oneCommandCode`, etc...).
+     *    `Return` or `ExitApp` commands allowed to be un-indented, so they will be placed on same
+     *    indentation level as `Label`.
+     *    `Label` allowed to be un-indented for fall-through scenario.
      *
      * `tagDepth !== depth`:
      *
-     *      `Return` or `ExitApp` commands disallowed to be un-indented, so they will obey indentation rules
-     *      as code above them (`Return` inside function, block `{}`, `oneCommandCode`, etc... stay on same
-     *      indentation level as code above them).
+     *    `Return` or `ExitApp` commands disallowed to be un-indented, so they will obey indentation rules
+     *    as code above them (`Return` inside function, block `{}`, `oneCommandCode`, etc... stay on same
+     *    indentation level as code above them).
      *
      * `tagDepth > 0` :
      *
-     *      `#Directive` allowed to be un-indented by `tagDepth` value (jump several indentation levels).
+     *    `#Directive` allowed to be un-indented by `tagDepth` value (jump several indentation levels).
      *
      * `tagDepth = depth`:
      *
-     *      Only `Label` makes syncing `tagDepth` with `depth`.
-     *      `Case:` and `Default:` must not make syncing to disallow `Return` and `ExitApp` un-indent
-     *      inside `Switch-Case` block.
+     *    Only `Label` makes syncing `tagDepth` with `depth`.
+     *    `Case:` and `Default:` must not make syncing to disallow `Return` and `ExitApp` un-indent
+     *    inside `Switch-Case` block.
      */
     let tagDepth = 0;
     /**
@@ -147,12 +147,20 @@ export const internalFormat = (
     const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
     const trimSpaces = options.trimExtraSpaces;
 
+    /**
+     * Special labels in `Switch` construction.
+     *
+     * Example: `Case valA[, valB]: [Statement]` or `Default: [Statement]`
+     */
+    const switchCaseDefault = /^(case\s*.+?:|default:)\s*.*/;
     /** Label name may consist of any characters other than `space`,
      * `tab`, `comma` and the escape character (`).
      * Generally, aside from whitespace and comments,
      * no other code can be written on the same line as a label.
+     *
+     * Example: `Label:`
      */
-    const label = /^\s*[^\s\t,`]+:\s*$/;
+    const label = /^[^\s\t,`]+:$/;
 
     const lines = stringToFormat.split('\n');
 
@@ -280,11 +288,11 @@ export const internalFormat = (
 
         // #IfWinActive, #IfWinExist with omit params OR #If without expression
         if (
-            purifiedLine.match(/#ifwinactive$/) ||
-            purifiedLine.match(/#ifwinnotactive$/) ||
-            purifiedLine.match(/#ifwinexist$/) ||
-            purifiedLine.match(/#ifwinnotexist$/) ||
-            purifiedLine.match(/#if$/)
+            purifiedLine.match(/^#ifwinactive$/) ||
+            purifiedLine.match(/^#ifwinnotactive$/) ||
+            purifiedLine.match(/^#ifwinexist$/) ||
+            purifiedLine.match(/^#ifwinnotexist$/) ||
+            purifiedLine.match(/^#if$/)
         ) {
             if (indentCodeAfterSharpDirective) {
                 if (tagDepth > 0) {
@@ -297,11 +305,11 @@ export const internalFormat = (
 
         // #IfWinActive, #IfWinExist with params OR #If with expression
         if (
-            purifiedLine.match(/#ifwinactive\b.+/) ||
-            purifiedLine.match(/#ifwinnotactive\b.+/) ||
-            purifiedLine.match(/#ifwinexist\b.+/) ||
-            purifiedLine.match(/#ifwinnotexist\b.+/) ||
-            purifiedLine.match(/#if\b.+/)
+            purifiedLine.match(/^#ifwinactive\b.+/) ||
+            purifiedLine.match(/^#ifwinnotactive\b.+/) ||
+            purifiedLine.match(/^#ifwinexist\b.+/) ||
+            purifiedLine.match(/^#ifwinnotexist\b.+/) ||
+            purifiedLine.match(/^#if\b.+/)
         ) {
             if (indentCodeAfterSharpDirective) {
                 if (tagDepth > 0) {
@@ -313,20 +321,21 @@ export const internalFormat = (
             }
         }
 
-        // return or ExitApp
-        if (purifiedLine.match(/\b(return|exitapp)\b/) && tagDepth === depth) {
+        // Return or ExitApp
+        if (
+            purifiedLine.match(/^(return|exit|exitapp)\b/) &&
+            tagDepth === depth
+        ) {
             tagDepth = 0;
             depth--;
         }
 
-        // switch-case, label
-        if (purifiedLine.match(/^\s*case.+?:\s*$/)) {
-            // case
-            // Do not make syncing (tagDepth = depth) here! Read tagDepth comment.
-            tagDepth--;
+        // Switch-Case-Default: or Label:
+        if (purifiedLine.match(switchCaseDefault)) {
+            // Case: or Default:
             depth--;
         } else if (purifiedLine.match(label)) {
-            // default or hotkey
+            // Label:
             if (indentCodeAfterLabel) {
                 if (tagDepth === depth) {
                     // De-indent label or hotkey, if they not end with 'return' command.
@@ -431,9 +440,15 @@ export const internalFormat = (
             depth++;
         }
 
-        // default or label
-        if (!moreOpenParens && purifiedLine.match(label)) {
-            if (indentCodeAfterLabel) {
+        // Switch-Case-Default: or Label:
+        if (!moreOpenParens) {
+            if (purifiedLine.match(switchCaseDefault)) {
+                // Case: or Default:
+                depth++;
+                // Do not sync 'tagDepth' with 'depth' to prevent 'Return' and 'ExitApp' to un-indent
+                // inside 'Switch-Case-Default' construction
+            } else if (purifiedLine.match(label) && indentCodeAfterLabel) {
+                // Label:
                 depth++;
                 tagDepth = depth;
             }

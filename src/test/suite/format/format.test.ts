@@ -28,6 +28,7 @@ const defaultOptions = {
 };
 const formatTests: FormatTest[] = [
     { filenameRoot: '25-multiline-string' },
+    { filenameRoot: '28-switch-case' },
     { filenameRoot: '40-command-inside-text' },
     { filenameRoot: '55-sharp-directive' },
     { filenameRoot: '56-return-command-after-label' },
@@ -75,8 +76,10 @@ const formatTests: FormatTest[] = [
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
     },
+    { filenameRoot: 'legacy-text-sharp-directive' },
     { filenameRoot: 'label-fall-through' },
     { filenameRoot: 'label-specific-name' },
+    { filenameRoot: 'return-exit-exitapp' },
     {
         filenameRoot: 'tab-size-2',
         options: { tabSize: 2 },
