@@ -54,12 +54,15 @@ export class CodeUtil {
      * @returns Aligned text
      */
     public static alignTextAssignOperator(text: string[]): string[] {
-        /** Right-most `=` operator position in line from all assignments */
-        return Math.max(...lines.map(line => this.normalizeLineAssignOperator(line).indexOf('=')));
-        });
-
-        const alignedText: string[] = text.map((line) => this.alignLineAssignOperator(line, maxPosition)));
-
+        /** Right-most position of first `=` operator in line from all assignments */
+        const maxPosition = Math.max(
+            ...text.map((line) =>
+                this.normalizeLineAssignOperator(line).indexOf('='),
+            ),
+        );
+        const alignedText = text.map((line) =>
+            this.alignLineAssignOperator(line, maxPosition),
+        );
         return alignedText;
     }
 
