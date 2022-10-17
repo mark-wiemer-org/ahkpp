@@ -3,6 +3,7 @@ import { ConfigKey, Global } from '../common/global';
 import { CodeUtil } from '../common/codeUtil';
 import { FormatOptions } from './formattingProvider.types';
 import {
+    alignTextAssignOperator,
     braceNumber,
     buildIndentedLine,
     documentToString,
@@ -178,8 +179,7 @@ export const internalFormat = (
         if (emptyLine) {
             if (comment.match(/;\s*@AHK\+\+AlignAssignmentOff/i)) {
                 alignAssignment = false;
-                assignmentBlock =
-                    CodeUtil.alignTextAssignOperator(assignmentBlock);
+                assignmentBlock = alignTextAssignOperator(assignmentBlock);
                 // Save aligned block
                 assignmentBlock.forEach((alignedFormattedLine, index) => {
                     formattedString += buildIndentedLine(
