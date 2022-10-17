@@ -54,6 +54,7 @@ const formatTests: FormatTest[] = [
         options: { preserveIndent: true },
     },
     { filenameRoot: 'ahk-explorer' },
+    { filenameRoot: 'align-assignment' },
     { filenameRoot: 'demo' },
     {
         filenameRoot: 'indent-code-after-label-false',

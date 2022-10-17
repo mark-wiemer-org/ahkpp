@@ -1,5 +1,6 @@
 import { resolve as res } from 'path';
 import * as vscode from 'vscode';
+import { CodeUtil } from '../common/codeUtil';
 import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
 import { Process } from '../common/processWrapper';
