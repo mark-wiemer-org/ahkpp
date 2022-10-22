@@ -178,8 +178,8 @@ export const internalFormat = (
         detectOneCommandCode = true;
         sharpDirective = false;
 
-        const moreCloseParens = hasMoreCloseParens(purifiedLine);
         const moreOpenParens = hasMoreOpenParens(purifiedLine);
+        const moreCloseParens = hasMoreCloseParens(purifiedLine);
 
         // This line
 
@@ -205,7 +205,7 @@ export const internalFormat = (
             }
         }
 
-        // Align Assignment:
+        // Align Assignment
         if (alignAssignment) {
             assignmentBlock.push(formattedLine);
             if (lineIndex !== lines.length - 1) {
@@ -409,13 +409,6 @@ export const internalFormat = (
             oneCommandCode = false;
             depth--;
         }
-
-        // Block comments
-        // Must be after 'One command code' check, because it reset flag 'blockComment' that tests there!
-        // if (blockComment && originalLine.match(/^\s*\*\//)) {
-        //     // found end '*/' pattern
-        //     blockComment = false;
-        // }
 
         // #IfWinActive, #IfWinExist with params OR #If with expression
         if (sharpDirective && indentCodeAfterSharpDirective) {
