@@ -311,6 +311,26 @@ suite('FormattingProvider utils', () => {
                 in: 'foo(Gui)',
                 rs: 'foo(Gui)',
             },
+            {
+                in: '{}',
+                rs: '',
+            },
+            {
+                in: '{}{}',
+                rs: '',
+            },
+            {
+                in: 'a{b{c}d}e',
+                rs: 'ae',
+            },
+            {
+                in: '{{}',
+                rs: '{',
+            },
+            {
+                in: '{}}',
+                rs: '}',
+            },
         ];
         dataList.forEach((data) => {
             test("'" + data.in + "' => '" + data.rs + "'", () => {
