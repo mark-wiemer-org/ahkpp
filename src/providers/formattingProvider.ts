@@ -7,12 +7,13 @@ import {
     braceNumber,
     buildIndentedLine,
     documentToString,
-    hasMoreCloseParens,
-    hasMoreOpenParens,
+    // hasMoreCloseParens,
+    // hasMoreOpenParens,
     purify,
     removeEmptyLines,
     trimExtraSpaces,
 } from './formattingProvider.utils';
+import { on } from 'events';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
@@ -142,6 +143,44 @@ export const internalFormat = (
      * ```
      */
     let sharpDirective = false;
+    /**
+     * Continuation section: Expression, Object
+     * ```ahk
+     * obj := { a: 1 ; false
+     *     , b: 2 } ; true
+     * if a = 1 ; false
+     *     and b = 2 ; true
+     * ```
+     */
+    let continuationSectionExpression = false;
+    /**
+     * Continuation section: Text [Formatted]
+     * ```ahk
+     * ( LTrim
+     *     Indented line of text
+     * )
+     * ```
+     */
+    let continuationSectionTextFormat = false;
+    /**
+     * Continuation section: Text [Not Formatted]
+     * ```ahk
+     * ( [NO LTrim option!]
+     * Line of text with preserved user formatting
+     * )
+     * ```
+     */
+    let continuationSectionTextNotFormat = false;
+    /**
+     * Indent was increased by brace `{`, but not inside expression continuation section
+     */
+    let braceIndent = false;
+    /**
+     * The indentation of `oneCommandCode` is delayed because the current line is
+     * an expression continuation section. The indentation is delayed by temporarily
+     * disabling `oneCommandCode`.
+     */
+    let deferredOneCommandCode = false;
 
     const indentCodeAfterLabel = options.indentCodeAfterLabel;
     const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
@@ -175,13 +214,16 @@ export const internalFormat = (
         /** Line is empty or this is single comment line */
         const emptyLine = purifiedLine === '';
 
+        continuationSectionExpression = false;
         detectOneCommandCode = true;
         sharpDirective = false;
 
-        const moreOpenParens = hasMoreOpenParens(purifiedLine);
-        const moreCloseParens = hasMoreCloseParens(purifiedLine);
+        // const moreOpenParens = hasMoreOpenParens(purifiedLine);
+        // const moreCloseParens = hasMoreCloseParens(purifiedLine);
 
-        // This line
+        // ==========================================================================
+        // |                               THIS LINE                                |
+        // ==========================================================================
 
         // Stop directives for formatter
         if (emptyLine) {
@@ -286,6 +328,24 @@ export const internalFormat = (
             }
         }
 
+        // Continuation section: Text [Not Formatted]
+        // ( [NO LTrim option!] <-- check this parenthesis
+        // Line of text with preserved user formatting
+        // )
+        // Skip hotkey: (::
+        if (purifiedLine.match(/^\((?!::)(?!.*\bltrim\b)/)) {
+            continuationSectionTextNotFormat = true;
+        }
+
+        // Continuation section: Text [Not Formatted] Save with original user's formatting
+        if (continuationSectionTextNotFormat) {
+            formattedString += originalLine + '\n';
+            if (purifiedLine.match(/^\)/)) {
+                continuationSectionTextNotFormat = false;
+            }
+            return;
+        }
+
         // #IfWinActive, #IfWinExist with omit params OR #If without expression
         if (
             purifiedLine.match(/^#ifwinactive$/) ||
@@ -351,23 +411,100 @@ export const internalFormat = (
             }
         }
 
+        // Continuation section: Expression, Object
+        // obj := { a: 1
+        //     , b: 2 }
+        // if a = 1
+        //     and b = 2
+        if (
+            // skip increment ++, decrement --, block comments /* and */
+            purifiedLine.match(
+                /^(((and|or|not)\b)|[\^!~?:&<>=.,|]|\+(?!\+)|-(?!-)|\/(?!\*)|\*(?!\/))/,
+            ) &&
+            // skip Hotkeys and Hotstrings (they has '::')
+            !purifiedLine.match(/::/)
+        ) {
+            continuationSectionExpression = true;
+            // obj := { a: 1
+            //     , b: 2 ; revert indent after brace
+            //     , c: 3 }
+            if (braceIndent) {
+                depth--;
+            }
+            // if a = 1
+            //     or b = 2 ; revert indent for oneCommandCode
+            //     or c = 3
+            //     MsgBox
+            if (oneCommandCode) {
+                deferredOneCommandCode = true;
+                oneCommandCode = false;
+                depth--;
+            }
+            depth++;
+        }
+
+        // Deferred (by expression continuation section) oneCommandCode indent
+        if (deferredOneCommandCode && !continuationSectionExpression) {
+            deferredOneCommandCode = false;
+            oneCommandCode = true;
+            depth++;
+        }
+
         // Check close braces
-        if (purifiedLine.includes('}')) {
+        // obj := { a: 1
+        //     , b: 2
+        //     , c: 3 } ; skip de-indent by brace in continuation section
+        if (purifiedLine.includes('}') && !continuationSectionExpression) {
             const braceNum = braceNumber(purifiedLine, '}');
             depth -= braceNum;
         }
 
-        if (moreCloseParens) {
+        // if (moreCloseParens) {
+        //     depth--;
+        // }
+
+        // One command code and open braces
+        if (
+            (oneCommandCode || deferredOneCommandCode) &&
+            purifiedLine.includes('{')
+        ) {
+            const braceNum = braceNumber(purifiedLine, '{');
+            // if (a = 1) {
+            //     MsgBox ; revert indent for oneCommandCode
+            // }
+            if (braceNum > 0) {
+                oneCommandCode = false;
+                // if (a = 4
+                //     and b = 5) {
+                //     MsgBox ; disable deferredOneCommandCode indent
+                // }
+                if (deferredOneCommandCode) {
+                    deferredOneCommandCode = false;
+                } else {
+                    depth--;
+                }
+            }
+        }
+
+        // Continuation section: Text [Formatted]
+        // ( LTrim
+        //     Line of text
+        // ) <-- check this parenthesis
+        if (continuationSectionTextFormat && purifiedLine.match(/^\)/)) {
+            continuationSectionTextFormat = false;
             depth--;
         }
 
-        // One command code and open braces
-        if (oneCommandCode && purifiedLine.includes('{')) {
-            const braceNum = braceNumber(purifiedLine, '{');
-            if (braceNum > 0) {
-                oneCommandCode = false;
-                depth--;
-            }
+        // Continuation section: Text [Formatted] Save with original user's formatting
+        if (continuationSectionTextFormat) {
+            formattedString += buildIndentedLine(
+                lineIndex,
+                lines.length,
+                originalLine.trim(),
+                depth,
+                options,
+            );
+            return;
         }
 
         if (depth < 0) {
@@ -386,7 +523,9 @@ export const internalFormat = (
             options,
         );
 
-        // Next line
+        // ==========================================================================
+        // |                               NEXT LINE                                |
+        // ==========================================================================
 
         // Start directives for formatter
         if (emptyLine) {
@@ -426,25 +565,52 @@ export const internalFormat = (
                 // |   code
                 // }
                 detectOneCommandCode = false;
+                // // Continuation section: Nested Objects
+                if (!continuationSectionExpression) {
+                    braceIndent = true;
+                }
             }
+        } else {
+            braceIndent = false;
         }
 
-        if (moreOpenParens) {
-            depth++;
+        // Continuation section: Nested Objects [Check close braces]
+        if (continuationSectionExpression && purifiedLine.includes('}')) {
+            const braceNum = braceNumber(purifiedLine, '}');
+            depth -= braceNum;
         }
+
+        // if (moreOpenParens) {
+        //     depth++;
+        // }
 
         // Switch-Case-Default: or Label:
-        if (!moreOpenParens) {
-            if (purifiedLine.match(switchCaseDefault)) {
-                // Case: or Default:
-                depth++;
-                // Do not sync 'tagDepth' with 'depth' to prevent 'Return' and 'ExitApp' to un-indent
-                // inside 'Switch-Case-Default' construction
-            } else if (purifiedLine.match(label) && indentCodeAfterLabel) {
-                // Label:
-                depth++;
-                tagDepth = depth;
-            }
+        // if (!moreOpenParens) {
+        if (purifiedLine.match(switchCaseDefault)) {
+            // Case: or Default:
+            depth++;
+            // Do not sync 'tagDepth' with 'depth' to prevent 'Return' and 'ExitApp' to un-indent
+            // inside 'Switch-Case-Default' construction
+        } else if (purifiedLine.match(label) && indentCodeAfterLabel) {
+            // Label:
+            depth++;
+            tagDepth = depth;
+        }
+        // }
+
+        if (continuationSectionExpression) {
+            continuationSectionExpression = false;
+            depth--;
+        }
+
+        // Continuation section: Text [Formatted]
+        // ( LTrim <-- check this parenthesis
+        //     Indented line of text
+        // )
+        // Skip hotkey: (::
+        if (purifiedLine.match(/^\((?!::)(?=.*\bltrim\b)/)) {
+            continuationSectionTextFormat = true;
+            depth++;
         }
 
         if (detectOneCommandCode) {
