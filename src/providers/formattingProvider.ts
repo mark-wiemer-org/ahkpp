@@ -6,8 +6,7 @@ import {
     braceNumber,
     buildIndentedLine,
     documentToString,
-    // hasMoreCloseParens,
-    // hasMoreOpenParens,
+    FlowOfControlNestDepth,
     purify,
     removeEmptyLines,
     trimExtraSpaces,
@@ -27,82 +26,166 @@ export const internalFormat = (
     stringToFormat: string,
     options: FormatOptions,
 ): string => {
-    /** Special keywords that can trigger one-line commands */
-    const oneCommandList = [
-        'ifnotexist',
-        'ifexist',
-        'ifwinactive',
-        'ifwinnotactive',
-        'ifwinexist',
-        'ifwinnotexist',
-        'ifinstring',
-        'ifnotinstring',
-        'if',
-        'else',
-        'loop',
-        'for',
-        'while',
-        'catch',
-    ];
-
     let formattedString = '';
+
+    // INDENTATION
     /** Current level of indentation. 0 = top-level, no indentation */
     let depth = 0;
     /**
-     * It's marker for `Return`, `ExitApp`, `#Directive` commands, which allow/disallow for them to be un-indented.
+     * It's marker for `Return`, `ExitApp`, `#Directive` commands, which
+     * allow/disallow for them to be un-indented.
      *
+     * -------------------------------------------------------------------------
      * `tagDepth === 0`:
      *
-     *    Indentation level was decreased by `Return` or `ExitApp` command, so they placed on same
-     *    indentation level as `Label`.
-     *    Decrement of indentation level by `Label` is disallowed (previous `Label` finished with `Return`
-     *    or `ExitApp` command and un-indent for fall-through scenario not needed).
+     *    Indentation level was decreased by `Return` or `ExitApp` command,
+     *    so they placed on same indentation level as `Label`.
+     *
+     *    Decrement of indentation level by `Label` is disallowed (previous
+     *    `Label` finished with `Return` or `ExitApp` command and un-indent for
+     *    fall-through scenario not needed).
+     *
      *    Decrement indentation by one level for `#Directive` is allowed.
      *
+     * -------------------------------------------------------------------------
      * `tagDepth === depth`:
      *
-     *    Current indentation level is in sync with `Label` indentation level (no additional indent added
-     *    by block `{}`, `oneCommandCode`, etc...).
-     *    `Return` or `ExitApp` commands allowed to be un-indented, so they will be placed on same
-     *    indentation level as `Label`.
+     *    Current indentation level is in sync with `Label` indentation level
+     *    (no additional indent added by block `{}`, `oneCommandCode`, etc...).
+     *
+     *    `Return` or `ExitApp` commands allowed to be un-indented, so they will
+     *    be placed on same indentation level as `Label`.
+     *
      *    `Label` allowed to be un-indented for fall-through scenario.
      *
+     * -------------------------------------------------------------------------
      * `tagDepth !== depth`:
      *
-     *    `Return` or `ExitApp` commands disallowed to be un-indented, so they will obey indentation rules
-     *    as code above them (`Return` inside function, block `{}`, `oneCommandCode`, etc... stay on same
+     *    `Return` or `ExitApp` commands disallowed to be un-indented, so they
+     *    will obey indentation rules as code above them (`Return` inside
+     *    function, block `{}`, `oneCommandCode`, etc... stay on same
      *    indentation level as code above them).
      *
+     * -------------------------------------------------------------------------
      * `tagDepth > 0` :
      *
-     *    `#Directive` allowed to be un-indented by `tagDepth` value (jump several indentation levels).
+     *    `#Directive` allowed to be un-indented by `tagDepth` value (jump
+     *    several indentation levels).
      *
+     * -------------------------------------------------------------------------
      * `tagDepth = depth`:
      *
      *    Only `Label` makes syncing `tagDepth` with `depth`.
-     *    `Case:` and `Default:` must not make syncing to disallow `Return` and `ExitApp` un-indent
-     *    inside `Switch-Case` block.
+     *
+     *    `Case:` and `Default:` must not make syncing to disallow `Return` and
+     *    `ExitApp` un-indent inside `Switch-Case` block.
      */
     let tagDepth = 0;
+
+    // FLOW OF CONTROL and IF-ELSE nesting
     /**
      * `True` if this line is an one-statement block. Example:
      * ```ahk
      * if (var)   ; false
      *     MsgBox ; true
      * SoundBeep  ; false
-     *  ```
+     * ```
      */
     let oneCommandCode = false;
-    let blockComment = false;
-    /** Base indent, that block comment had in original code */
-    let blockCommentIndent = '';
     /**
      * Detect or not detect `oneCommandCode`.
-     * Every iteration it's `true`, but become `false` if formatter increase indent for next line for open brace `{`.
-     * It's prevents wrong extra indent, if `{` present after `oneCommandCode` code:
-     * one indent for `{` and additional indent for `oneCommandCode`.
+     * Every iteration it's `true`, but becomes `false` when formatter increase
+     * indent for next line by open brace `{`.
+     * It's prevent wrong extra indent, when `{` present after flow of control
+     * statement: one indent for `{` and additional indent for `oneCommandCode`.
      */
     let detectOneCommandCode = true;
+    /**
+     * Array of indent level of `if` not completed by `else`.
+     *
+     * Allow us to de-indent (jump several indentation levels) `else` to last
+     * not complete `if` and de-indent (jump several indentation levels) code
+     * that exit nested flow of control statements inside block of code `{}`.
+     *
+     * Every time we meet `{` we `push` delimiter `-1`.
+     *
+     * Every time we meet `if` we `push` current `depth` to array.
+     *
+     * `splice` (delete) element(s) after last delimiter when code leaves flow
+     * of control nesting.
+     *
+     * Every time we meet `else` or code after close brace `}` we `pop` element
+     * from array.
+     *
+     * Every time we meet `}` we delete last delimiter `-1` and all elements
+     * after it.
+     *
+     * Example:
+     * ```ahk
+     *                  ; [-1]
+     * if (var)         ; [-1, 0]
+     * {                ; [-1, 0, -1]
+     *     if (var)     ; [-1, 0, -1, 1]
+     *         if (var) ; [-1, 0, -1, 1, 2]
+     *             code
+     *         else     ; [-1, 0, -1, 1], de-indent to last not complete IF,
+     *             code ;                  complete it by deleting last element
+     *     code         ; [-1, 0, -1] de-indent to first not complete IF inside
+     * }                ; [-1, 0]                                    code block
+     * code             ; [-1]
+     * ```
+     */
+    let ifDepth = new FlowOfControlNestDepth();
+    /**
+     * Array of indent level of first flow of control statement without open
+     * brace `{` with nested code inside it.
+     *
+     * Allow us to de-indent (jump several indentation levels) code
+     * that exit nested flow of control statements inside block of code `{}`.
+     *
+     * Every time we meet `{`, check did we add by mistake flow of control
+     * before, revert changes, `push` delimiter `-1`.
+     *
+     * Every time we meet flow of control statement without `{` we `push`
+     * current `depth` to array, only if last element is delimiter.
+     *
+     * `splice` (delete) element(s) after last delimiter when code leaves flow
+     * of control nesting.
+     *
+     * Every time we meet `}` we delete last delimiter `-1` and all elements
+     * after it.
+     *
+     * Example:
+     * ```ahk
+     *                  ; [-1]
+     * loop             ; [-1, 0] added by mistake
+     * {                ; [-1, -1] revert changes and add delimiter
+     *     loop         ; [-1, -1, 1]
+     *         loop     ; [-1, -1, 1] not added
+     *             code
+     *     code         ; [-1, -1] de-indent to first flow of control inside
+     * }                ; [-1]                                       code block
+     * code             ; [-1]
+     * ```
+     */
+    let occDepth = new FlowOfControlNestDepth();
+    /** Array of depth of open brace `{` that belongs to `if` statement. */
+    let waitCloseBraceIf: number[] = [];
+    /**
+     * Formatter waits `else` statement right after close brace `}`, that
+     * belongs to corresponding `if`'s open brace `{`.
+     *
+     * If formatter not meet `else`, it will remove last not complete `if` from
+     * `ifDepth` object.
+     *
+     * If formatter meet `else`, it will not remove not complete `if` from
+     * `ifDepth` object, because `else` statement will do it later.
+     */
+    let waitElse = false;
+    /** Previous line is `if` statement */
+    let prevLineIsIf = false;
+
+    // ALIGN ASSIGNMENT
     /**
      * Formatter's directive:
      * ```ahk
@@ -114,38 +197,14 @@ export const internalFormat = (
     let alignAssignment = false;
     /** Code block with assignment to be aligned */
     let assignmentBlock: string[] = [];
-    /**
-     * Formatter's directive:
-     * ```ahk
-     * ;@AHK++FormatBlockCommentOn
-     * ;@AHK++FormatBlockCommentOff
-     * ```
-     * Format text inside block comment like regular code
-     */
-    let formatBlockComment = false;
-    // Save important values to this variables on block comment enter, restore them on exit
-    let preBlockCommentDepth = 0;
-    let preBlockCommentTagDepth = 0;
-    let preBlockCommentOneCommandCode = false;
 
-    /**
-     * This line is `#Directive`, that will create context-sensitive hotkeys and hotstrings.
-     * Example of `#Directives`:
-     * ```ahk
-     * #IfWinActive WinTitle
-     * #IfWinNotActive WinTitle
-     * #IfWinExist WinTitle
-     * #IfWinNotExist WinTitle
-     * #If Expression
-     * ```
-     */
-    let sharpDirectiveLine = false;
+    // CONTINUATION SECTION
     /**
      * Continuation section: Expression, Object
      * ```ahk
      * obj := { a: 1 ; false
-     *     , b: 2 } ; true
-     * if a = 1 ; false
+     *     , b: 2 }  ; true
+     * if a = 1      ; false
      *     and b = 2 ; true
      * ```
      */
@@ -169,13 +228,14 @@ export const internalFormat = (
      */
     let continuationSectionTextNotFormat = false;
     /**
-     * Indent was increased by brace `{`, but not inside expression continuation section
+     * Indent was increased by brace `{`, but not inside expression
+     * continuation section
      */
     let braceIndent = false;
     /**
-     * The indentation of `oneCommandCode` is delayed because the current line is
-     * an expression continuation section. The indentation is delayed by temporarily
-     * disabling `oneCommandCode`.
+     * The indentation of `oneCommandCode` is delayed, because the current line
+     * is an expression continuation section. The indentation is delayed by
+     * temporarily disabling `oneCommandCode`.
      */
     let deferredOneCommandCode = false;
     /**
@@ -184,10 +244,56 @@ export const internalFormat = (
      */
     let waitCloseBraceObject: number[] = [];
 
+    // OTHER
+    /**
+     * This line is `#Directive`, that will create context-sensitive hotkeys
+     * and hotstrings.
+     * Example of `#Directives`:
+     * ```ahk
+     * #IfWinActive WinTitle
+     * #IfWinNotActive WinTitle
+     * #IfWinExist WinTitle
+     * #IfWinNotExist WinTitle
+     * #If Expression
+     * ```
+     */
+    let sharpDirectiveLine = false;
+
+    // BLOCK COMMENT
+    /** This line is block comment */
+    let blockComment = false;
+    /** Base indent, that block comment had in original code */
+    let blockCommentIndent = '';
+    /**
+     * Formatter's directive:
+     * ```ahk
+     * ;@AHK++FormatBlockCommentOn
+     * ;@AHK++FormatBlockCommentOff
+     * ```
+     * Format text inside block comment like regular code
+     */
+    let formatBlockComment = false;
+    // Save formatter state to this variables on enter of block comment and
+    // restore them on exit of block comment
+    let preBlockCommentDepth = 0;
+    let preBlockCommentTagDepth = 0;
+    let preBlockCommentOneCommandCode = false;
+
+    // SETTINGS' ALIASES
     const indentCodeAfterLabel = options.indentCodeAfterLabel;
     const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
     const trimSpaces = options.trimExtraSpaces;
 
+    // REGULAR EXPRESSION
+    /** Label name may consist of any characters other than `space`,
+     * `tab`, `comma` and the escape character (`).
+     *
+     * Generally, aside from whitespace and comments,
+     * no other code can be written on the same line as a label.
+     *
+     * Example: `Label:`
+     */
+    const label = /^[^\s\t,`]+:$/;
     /**
      * `#Directive`, that will create context-sensitive hotkeys and hotstrings.
      * Example of `#Directives`:
@@ -201,21 +307,12 @@ export const internalFormat = (
      */
     const sharpDirective =
         '#(ifwinactive|ifwinnotactive|ifwinexist|ifwinnotexist|if)';
-
     /**
      * Special labels in `Switch` construction.
      *
      * Example: `Case valA[, valB]: [Statement]` or `Default: [Statement]`
      */
     const switchCaseDefault = /^(case\s*.+?:|default:)\s*.*/;
-    /** Label name may consist of any characters other than `space`,
-     * `tab`, `comma` and the escape character (`).
-     * Generally, aside from whitespace and comments,
-     * no other code can be written on the same line as a label.
-     *
-     * Example: `Label:`
-     */
-    const label = /^[^\s\t,`]+:$/;
 
     const lines = stringToFormat.split('\n');
 
@@ -227,7 +324,7 @@ export const internalFormat = (
         formattedLine = trimExtraSpaces(formattedLine, trimSpaces) // Remove extra spaces between words
             .concat(comment) // Add removed single line comment back
             .trim();
-        /** Line is empty or this is single comment line */
+        /** Line is empty or this is a single comment line */
         const emptyLine = purifiedLine === '';
 
         continuationSectionExpression = false;
@@ -237,11 +334,11 @@ export const internalFormat = (
         // const moreOpenParens = hasMoreOpenParens(purifiedLine);
         // const moreCloseParens = hasMoreCloseParens(purifiedLine);
 
-        // ==========================================================================
-        // |                               THIS LINE                                |
-        // ==========================================================================
+        // =====================================================================
+        // |                            THIS LINE                              |
+        // =====================================================================
 
-        // Stop directives for formatter
+        // STOP DIRECTIVE for formatter
         if (emptyLine) {
             if (comment.match(/;\s*@AHK\+\+AlignAssignmentOff/i)) {
                 alignAssignment = false;
@@ -249,7 +346,8 @@ export const internalFormat = (
                 // Save aligned block
                 assignmentBlock.forEach((alignedFormattedLine, index) => {
                     formattedString += buildIndentedLine(
-                        // return 'lineIndex' before 'assignmentBlock' and increment with 'index'
+                        // restore 'lineIndex' before 'assignmentBlock' and add
+                        // 'index + 1'
                         lineIndex - assignmentBlock.length + index + 1,
                         lines.length,
                         alignedFormattedLine,
@@ -263,17 +361,19 @@ export const internalFormat = (
             }
         }
 
-        // Align Assignment
+        // ALIGN ASSIGNMENT
         if (alignAssignment) {
             assignmentBlock.push(formattedLine);
             if (lineIndex !== lines.length - 1) {
                 // skip to the next iteration
                 return;
             }
-            // Save aligned block if we reach end of text, but didn't find stop directive ';@AHK++AlignAssignmentOff'
+            // Save aligned block if we reach end of text, but didn't find stop
+            // directive ';@AHK++AlignAssignmentOff'
             assignmentBlock.forEach((alignedFormattedLine, index) => {
                 formattedString += buildIndentedLine(
-                    // return 'lineIndex' before 'assignmentBlock' and increment with 'index'
+                    // restore 'lineIndex' before 'assignmentBlock' and add
+                    // 'index + 1'
                     lineIndex - assignmentBlock.length + index + 1,
                     lines.length,
                     alignedFormattedLine,
@@ -284,10 +384,11 @@ export const internalFormat = (
             assignmentBlock = [];
         }
 
-        // Block comments
+        // TODO: Block comments will be broken when one command code nesting fixed!
+        // BLOCK COMMENT
         // The /* and */ symbols can be used to comment out an entire section,
-        // but only if the symbols appear at the beginning of a line (excluding whitespace),
-        // as in this example:
+        // but only if the symbols appear at the beginning of a line (excluding
+        // whitespace), like in this example:
         // /*
         // MsgBox, This line is commented out (disabled).
         // MsgBox, Common mistake: */ this does not end the comment.
@@ -303,12 +404,13 @@ export const internalFormat = (
                 preBlockCommentDepth = depth;
                 preBlockCommentTagDepth = tagDepth;
                 preBlockCommentOneCommandCode = oneCommandCode;
-                // reset indent values to default values with added current 'depth' indent
+                // reset indent values to default values
                 oneCommandCode = false;
                 tagDepth = depth;
             }
         }
 
+        // BLOCK COMMENT
         if (blockComment) {
             // Save block comment line only if user don't want format it content
             if (!formatBlockComment) {
@@ -343,7 +445,7 @@ export const internalFormat = (
             }
         }
 
-        // Continuation section: Text [Not Formatted] Start
+        // CONTINUATION SECTION: Text [Not Formatted] Start
         // ( [NO LTrim option!] <-- check this START parenthesis
         // Line of text with preserved user formatting
         // )
@@ -352,10 +454,10 @@ export const internalFormat = (
             continuationSectionTextNotFormat = true;
         }
 
-        // Continuation section: Text [Not Formatted] Save with original indent
+        // CONTINUATION SECTION: Text [Not Formatted] Save with original indent
         if (continuationSectionTextNotFormat) {
             formattedString += originalLine.trimEnd() + '\n';
-            // Continuation section: Text [Not Formatted] Stop
+            // CONTINUATION SECTION: Text [Not Formatted] Stop
             // ( [NO LTrim option!]
             // Line of text with preserved user formatting
             // ) <-- check this STOP parenthesis
@@ -365,7 +467,7 @@ export const internalFormat = (
             return;
         }
 
-        // Continuation section: Text [Formatted] Stop
+        // CONTINUATION SECTION: Text [Formatted] Stop
         // ( LTrim
         //     Line of text
         // ) <-- check this STOP parenthesis
@@ -374,7 +476,7 @@ export const internalFormat = (
             depth--;
         }
 
-        // Continuation section: Text [Formatted] Save indented
+        // CONTINUATION SECTION: Text [Formatted] Save indented
         if (continuationSectionTextFormat) {
             formattedString += buildIndentedLine(
                 lineIndex,
@@ -386,7 +488,7 @@ export const internalFormat = (
             return;
         }
 
-        // Continuation section: Expression, Object
+        // CONTINUATION SECTION: Expression, Object
         // obj := { a: 1
         //     , b: 2 }
         // if a = 1
@@ -408,8 +510,8 @@ export const internalFormat = (
                 waitCloseBraceObject.push(depth);
             }
             // if a = 1
-            //     or b = 2 <-- revert indent for oneCommandCode and make it deferred
-            //     MsgBox
+            //     or b = 2 <-- revert indent for oneCommandCode and make it
+            //     MsgBox                                               deferred
             if (oneCommandCode) {
                 deferredOneCommandCode = true;
                 oneCommandCode = false;
@@ -418,7 +520,7 @@ export const internalFormat = (
             depth++;
         }
 
-        // Continuation section: Expression - Deferred oneCommandCode indent
+        // CONTINUATION SECTION: Expression - Deferred oneCommandCode indent
         // if a = 1
         //     or b = 2
         //     MsgBox <-- restore deferred oneCommandCode
@@ -428,7 +530,127 @@ export const internalFormat = (
             depth++;
         }
 
-        // #IfWinActive, #IfWinExist with omit params OR #If without expression
+        // IF-ELSE complete tracking
+        if (waitElse && !emptyLine) {
+            waitElse = false;
+            //TODO: Common regexp to vars? Change "}? ?" --> "(} )?"
+            // if { <-- pop IF, if we not meet ELSE
+            //     code
+            // }
+            // code <-- pop IF, if we not meet ELSE
+            if (!purifiedLine.match(/^}? ?else\b(?!:)/)) {
+                ifDepth.pop();
+            }
+        }
+
+        // CLOSE BRACE
+        // obj := { a: 1
+        //     , b: 2
+        //     , c: 3 } <-- skip de-indent by brace in Continuation Section: Object
+        if (purifiedLine.includes('}') && !continuationSectionExpression) {
+            const braceNum = braceNumber(purifiedLine, '}');
+            depth -= braceNum;
+            if (braceNum > 0) {
+                ifDepth.exit();
+                occDepth.exit();
+                // IF-ELSE complete tracking
+                // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
+                // if {
+                //     code
+                // } if { <-- pop previous IF, if we meet another IF
+                //     code
+                // }
+                if (
+                    purifiedLine.match(/} ?if\b/) &&
+                    waitCloseBraceIf.last() === depth
+                ) {
+                    waitCloseBraceIf.pop();
+                    ifDepth.pop();
+                }
+            }
+        }
+
+        // OPEN BRACE
+        if (purifiedLine.includes('{')) {
+            const braceNum = braceNumber(purifiedLine, '{');
+            if (braceNum > 0) {
+                // ONE COMMAND CODE
+                if (
+                    (oneCommandCode || deferredOneCommandCode) &&
+                    !nextLineIsOneCommandCode(purifiedLine)
+                ) {
+                    oneCommandCode = false;
+                    if (deferredOneCommandCode) {
+                        // if (a = 4
+                        //     and b = 5) {
+                        //     MsgBox <-- disable deferredOneCommandCode indent
+                        // }
+                        deferredOneCommandCode = false;
+                    } else {
+                        // if (var)
+                        // { <-- revert oneCommandCode indent for open brace
+                        //     MsgBox
+                        // }
+                        depth -= braceNum;
+                    }
+                    // FLOW OF CONTROL revert added by mistake
+                    // Loop, %var%
+                    // { <-- check open brace below flow of control statement
+                    //     code
+                    // }
+                    if (depth === occDepth.last()) {
+                        occDepth.pop();
+                    }
+                }
+            }
+        }
+
+        // FLOW OF CONTROL de-indent from all nesting
+        if (
+            !emptyLine &&
+            !oneCommandCode &&
+            !continuationSectionExpression &&
+            (ifDepth.last() > -1 || occDepth.last() > -1)
+        ) {
+            if (purifiedLine.match(/^}? ?else\b(?!:)/)) {
+                // {
+                //     if
+                //         if
+                //             loop
+                //                 loop
+                //                     code
+                //         else   <-- de-indent "ELSE" to last not complete "IF"
+                //             code
+                //     else       <-- de-indent "ELSE" to last not complete "IF"
+                //         code
+                //     code
+                // }
+                depth = ifDepth.pop();
+            } else if (
+                // TODO: this will fail on VAR := {}, use braceNumber()? or regex "^{|}$"?
+                !(purifiedLine.includes('{') || purifiedLine.includes('}'))
+            ) {
+                // if                                   |  loop
+                //     if                               |      loop
+                //         code                         |          code
+                // code <-- de-indent from all nesting  |  code <-- de-indent from all nesting
+                const restoreIfDepth: number | undefined = ifDepth.restore();
+                const restoreOccDepth: number | undefined = occDepth.restore();
+                if (
+                    restoreIfDepth !== undefined &&
+                    restoreOccDepth !== undefined
+                ) {
+                    depth = Math.min(restoreIfDepth, restoreOccDepth);
+                } else {
+                    depth = restoreIfDepth ?? restoreOccDepth;
+                }
+            }
+        }
+
+        // #DIRECTIVE without parameters
+        // #IfWinActive WinTitle
+        //     Hotkey::
+        // #If <-- de-indent #Directive without parameters
         if (purifiedLine.match('^' + sharpDirective + '$')) {
             if (indentCodeAfterSharpDirective) {
                 if (tagDepth > 0) {
@@ -439,7 +661,11 @@ export const internalFormat = (
             }
         }
 
-        // #IfWinActive, #IfWinExist with params OR #If with expression
+        // #DIRECTIVE with parameters
+        // #IfWinActive WinTitle1
+        //     Hotkey::
+        // #IfWinActive WinTitle2 <-- fall-through scenario for #Directive with
+        //     Hotkey::                                               parameters
         if (purifiedLine.match('^' + sharpDirective + '\\b.+')) {
             if (indentCodeAfterSharpDirective) {
                 if (tagDepth > 0) {
@@ -463,60 +689,30 @@ export const internalFormat = (
             depth--;
         }
 
-        // Switch-Case-Default: or Label:
+        // SWITCH-CASE-DEFAULT or LABEL:
         if (purifiedLine.match(switchCaseDefault)) {
             // Case: or Default:
             depth--;
         } else if (purifiedLine.match(label)) {
             // Label:
             if (indentCodeAfterLabel) {
+                // De-indent label or hotkey, if they not end with 'return'
+                // command.
+                // This is fall-through scenario. Example:
+                // Label1: <-- de-indent
+                //     code
+                // Label2: <-- de-indent
+                //     code
+                // return
+                // No need to make 'tagDepth' in sync with 'depth', 'Label'
+                // check for next line will do it.
                 if (tagDepth === depth) {
-                    // De-indent label or hotkey, if they not end with 'return' command.
-                    // This is fall-through scenario. Example:
-                    // Label1:
-                    //     code
-                    // Label2:
-                    //     code
-                    // return
-                    // No need to make 'tagDepth' in sync with 'depth', 'Label' check for next line will do it.
                     depth--;
                 }
             }
         }
 
-        // Check close braces
-        // obj := { a: 1
-        //     , b: 2
-        //     , c: 3 } <-- skip de-indent by brace in Continuation Section: Object
-        if (purifiedLine.includes('}') && !continuationSectionExpression) {
-            const braceNum = braceNumber(purifiedLine, '}');
-            depth -= braceNum;
-        }
-
-        // One command code and open braces
-        if (
-            (oneCommandCode || deferredOneCommandCode) &&
-            purifiedLine.includes('{')
-        ) {
-            const braceNum = braceNumber(purifiedLine, '{');
-            // if (a = 1)
-            // { <-- revert indent (for brace) added by oneCommandCode
-            //     MsgBox
-            // }
-            if (braceNum > 0) {
-                oneCommandCode = false;
-                // if (a = 4
-                //     and b = 5) {
-                //     MsgBox <-- disable deferredOneCommandCode indent
-                // }
-                if (deferredOneCommandCode) {
-                    deferredOneCommandCode = false;
-                } else {
-                    depth--;
-                }
-            }
-        }
-
+        // De-indent by label may produce negative 'depth', it's normal behavior
         if (depth < 0) {
             depth = 0;
         }
@@ -533,11 +729,11 @@ export const internalFormat = (
             options,
         );
 
-        // ==========================================================================
-        // |                               NEXT LINE                                |
-        // ==========================================================================
+        // =====================================================================
+        // |                            NEXT LINE                              |
+        // =====================================================================
 
-        // Start directives for formatter
+        // START DIRECTIVE for formatter
         if (emptyLine) {
             if (comment.match(/;\s*@AHK\+\+AlignAssignmentOn/i)) {
                 alignAssignment = true;
@@ -546,59 +742,158 @@ export const internalFormat = (
             }
         }
 
-        // One command code
+        // ONE COMMAND CODE
         if (
             oneCommandCode &&
-            // Don't change indentation on empty lines (single line comment is equal to empty line) after one command code.
+            // Don't change indentation on empty lines (single line comment is
+            // equal to empty line) after one command code.
             !emptyLine &&
             // Don't change indentation on block comment after one command code.
-            // Change indentation inside block comment, if user wants to format block comment.
+            // Change indentation inside block comment, if user wants to format
+            // block comment.
             (!blockComment || formatBlockComment)
         ) {
             oneCommandCode = false;
-            depth--;
+            // FLOW OF CONTROL
+            // if (var)
+            //    if (var) <-- don't de-indent nested flow of control statement
+            if (!nextLineIsOneCommandCode(purifiedLine)) {
+                depth--;
+            }
         }
 
-        // #IfWinActive, #IfWinExist with params OR #If with expression
-        if (sharpDirectiveLine && indentCodeAfterSharpDirective) {
-            depth++;
+        // CLOSE BRACE
+        if (purifiedLine.includes('}')) {
+            const braceNum = braceNumber(purifiedLine, '}');
+            if (braceNum > 0) {
+                // IF-ELSE complete tracking
+                // if {
+                //     code
+                // } <-- check close brace ('depth' equal to '{' indent above)
+                if (waitCloseBraceIf.last() === depth) {
+                    waitCloseBraceIf.pop();
+                    // if {
+                    //     code
+                    // } else <-- check this ELSE
+                    if (!purifiedLine.match(/}? ?else\b/)) {
+                        waitElse = true;
+                    }
+                }
+            }
         }
 
-        // Check open braces
+        // FLOW OF CONTROL
+        // Loop, %var% <-- flow of control statement without open brace
+        //     code
+        // code
+        if (nextLineIsOneCommandCode(purifiedLine)) {
+            let braceNum = 0;
+            if (purifiedLine.includes('{')) {
+                braceNum = braceNumber(purifiedLine, '{');
+            }
+            if (braceNum === 0) {
+                if (occDepth.last() === -1) {
+                    occDepth.push(depth);
+                }
+            }
+        }
+
+        // IF-ELSE complete tracking
+        // if {        <-- check IF
+        //     code
+        // } if {      <-- TODO: who will format like that??? Simplify regex
+        //     code
+        // } else if { <-- check IF
+        //     code
+        // } else if   <-- check IF
+        //     code
+        if (
+            purifiedLine.match(/^}? ?if\b(?!:)/) ||
+            purifiedLine.match(/^}? ?else if\b/)
+        ) {
+            ifDepth.push(depth);
+        }
+        // if {  <-- check IF with open brace
+        //     code
+        // } else if { <-- check IF with open brace
+        //     code
+        // }
+        if (
+            purifiedLine.match(/^}? ?if\b.*{/) ||
+            purifiedLine.match(/^}? ?else if\b.*{/)
+        ) {
+            waitCloseBraceIf.push(depth);
+        }
+        // if (var)
+        // { <-- check open brace if above was IF
+        //     code
+        // }
+        if (prevLineIsIf && purifiedLine.includes('{')) {
+            const braceNum = braceNumber(purifiedLine, '{');
+            if (braceNum > 0) {
+                waitCloseBraceIf.push(depth);
+            }
+        }
+        // if (var)   <-- IF without open brace
+        // {
+        //     code
+        // } if (var) <-- TODO: who will format like that??? Simplify regex
+        //     code
+        if (purifiedLine.match(/^}? ?if\b(?!:)(.(?!{))*$/)) {
+            prevLineIsIf = true;
+        } else if (!emptyLine) {
+            prevLineIsIf = false;
+        }
+
+        // OPEN BRACE
         if (purifiedLine.includes('{')) {
             const braceNum = braceNumber(purifiedLine, '{');
             depth += braceNum;
             if (braceNum > 0) {
-                // Do not detect 'oneCommandCode', because it will produce extra indent for next line:
-                // if (true) {
-                // |   |   wrong_extra_indented_code
+                // Do not detect 'oneCommandCode', because it will produce extra
+                // indent for next line like in example below:
+                // if {
+                // |   |   wrong_extra_indented_code_by_oneCommandCode
                 // |   code
                 // }
                 detectOneCommandCode = false;
-                // Continuation section: Nested Objects
+                // CONTINUATION SECTION: Nested Objects
                 if (!continuationSectionExpression) {
                     braceIndent = true;
                 }
+                // FLOW OF CONTROL
+                ifDepth.enter();
+                occDepth.enter();
             }
         } else {
             braceIndent = false;
         }
 
-        // Switch-Case-Default: or Label:
-        // if (!moreOpenParens) {
-        if (purifiedLine.match(switchCaseDefault)) {
-            // Case: or Default:
+        // #DIRECTIVE with parameters
+        // #If Expression <-- indent next line after '#Directive'
+        //     F1:: MsgBox Help
+        if (sharpDirectiveLine && indentCodeAfterSharpDirective) {
             depth++;
-            // Do not sync 'tagDepth' with 'depth' to prevent 'Return' and 'ExitApp' to un-indent
-            // inside 'Switch-Case-Default' construction
+        }
+
+        // SWITCH-CASE-DEFAULT or LABEL:
+        if (purifiedLine.match(switchCaseDefault)) {
+            // Case: or Default: <-- indent next line
+            //     code
+            depth++;
+            // Do not sync here 'tagDepth' with 'depth' to prevent 'Return' and
+            // 'ExitApp' to de-indent inside 'Switch-Case-Default' construction!
         } else if (purifiedLine.match(label) && indentCodeAfterLabel) {
-            // Label:
+            // Label: <-- indent next line
+            //     code
             depth++;
             tagDepth = depth;
         }
-        // }
 
-        // Continuation section: Expression, Object
+        // CONTINUATION SECTION: Expression, Object
+        // isPositive := x > 0
+        //     and y > 0 <-- de-indent next line after continuation section
+        // x++
         if (continuationSectionExpression) {
             continuationSectionExpression = false;
             // Objects - Check close braces of nested objects
@@ -623,7 +918,7 @@ export const internalFormat = (
             depth--;
         }
 
-        // Continuation section: Text [Formatted] Start
+        // CONTINUATION SECTION: Text [Formatted] Start
         // ( LTrim <-- check this START parenthesis
         //     Indented line of text
         // )
@@ -633,24 +928,26 @@ export const internalFormat = (
             depth++;
         }
 
-        // One command code
-        // Loop, %var%
-        //     code <-- indent for one line
+        // ONE COMMAND CODE
+        // Loop, %var% <-- indent next line
+        //     code
         // code
-        if (detectOneCommandCode) {
-            for (const oneCommand of oneCommandList) {
-                let temp: RegExpExecArray;
-                // 1. Before 'oneCommandCode' allowed only optional close brace
-                //    Example: '} else' or '} if'
-                // 2. After 'oneCommandCode' not allowed semicolon
-                //    Example: 'If:', 'Else:', 'Loop:', etc are valid labels, not 'oneCommandCode'
-                //    Skip such labels, because they produce wrong additional level of indent
-                if (purifiedLine.match('^}?\\s*' + oneCommand + '\\b(?!:)')) {
-                    oneCommandCode = true;
-                    depth++;
-                    break;
-                }
-            }
+        if (detectOneCommandCode && nextLineIsOneCommandCode(purifiedLine)) {
+            oneCommandCode = true;
+            depth++;
+        }
+
+        // DEBUG OUTPUT
+        if (lineIndex === lines.length - 1) {
+            // First call after restart by "Ctrl + R" not clear DEBUG CONSOLE!!!
+            console.clear();
+            console.log(
+                'Below arrays must be equal to [-1], if code is syntax correct.',
+            );
+            console.log('ifDepth:');
+            console.log(ifDepth.depth);
+            console.log('occDepth:');
+            console.log(occDepth.depth);
         }
     });
 
@@ -661,6 +958,54 @@ export const internalFormat = (
 
     return formattedString;
 };
+
+/**
+ * Is next line is one command code triggered by flow of control statement.
+ *
+ * Example:
+ * ```ahk
+ * if (var)   ; false
+ *     MsgBox ; true
+ * SoundBeep  ; false
+ * ```
+ * @return is next line is one command code
+ */
+function nextLineIsOneCommandCode(text: string, skipIf = false): boolean {
+    /** Special keywords that can trigger one-line commands */
+    const oneCommandList = [
+        'ifnotexist',
+        'ifexist',
+        'ifwinactive',
+        'ifwinnotactive',
+        'ifwinexist',
+        'ifwinnotexist',
+        'ifinstring',
+        'ifnotinstring',
+        'if',
+        'else',
+        'loop',
+        'for',
+        'while',
+        'catch',
+    ];
+
+    for (const oneCommand of oneCommandList) {
+        if (skipIf && oneCommand === 'if') {
+            continue;
+        }
+        // 1. Before 'oneCommandCode' allowed only optional close brace
+        //    Example: '} else' or '} if'
+        // 2. After 'oneCommandCode' not allowed semicolon
+        //    Example: 'If:', 'Else:', 'Loop:', etc are valid labels, not 'oneCommandCode'
+        //    Skip such labels, because they produce wrong additional level of indent
+        // TODO: change \\s* to " ?" and "}?\\s*" to "(} )?"
+        if (text.match('^}?\\s*' + oneCommand + '\\b(?!:)')) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 export class FormatProvider implements vscode.DocumentFormattingEditProvider {
     public provideDocumentFormattingEdits(

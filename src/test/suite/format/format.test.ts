@@ -54,6 +54,7 @@ const formatTests: FormatTest[] = [
         filenameRoot: '192-preserve-indent-true',
         options: { preserveIndent: true },
     },
+    { filenameRoot: '255-nested-one-command-code' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'align-assignment' },
     { filenameRoot: 'demo' },

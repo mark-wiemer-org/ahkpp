@@ -38,6 +38,21 @@ String.prototype.replaceAll = function (
     return str;
 };
 
+declare global {
+    interface Array<T> {
+        /**
+         * Get the last element of the array.
+         *
+         * @return The last element of the array
+         */
+        last(): T;
+    }
+}
+
+Array.prototype.last = function () {
+    return this[this.length - 1];
+};
+
 /** Stringify a document, using consistent `\n` line separators */
 export const documentToString = (document: {
     lineCount: number;
@@ -413,10 +428,8 @@ export type BraceChar = '{' | '}';
  */
 export function braceNumber(line: string, braceChar: BraceChar): number {
     let braceRegEx = new RegExp(braceChar, 'g');
-    let braceNum = line.match(braceRegEx).length;
-    /** Number of matched braces: `{...}` */
-    const matchedBrace = line.match(/{[^{}]*}/g);
-    braceNum -= matchedBrace?.length ?? 0;
+    let braceNum =
+        line.replaceAll(/{[^{}]*}/g, '').match(braceRegEx)?.length ?? 0;
     return braceNum;
 }
 
@@ -479,4 +492,68 @@ export function alignLineAssignOperator(
         .replace(/\s(?=:?=)/, ' '.repeat(targetPosition - position + 1)) // Align assignment
         .concat(comment) // Restore comment
         .trimEnd();
+}
+
+export class FlowOfControlNestDepth {
+    depth: number[];
+
+    constructor(array?: number[]) {
+        this.depth = array ?? [-1];
+    }
+
+    /**
+     * Push `-1` delimiter to array.
+     *
+     * @return The array
+     */
+    enter() {
+        this.depth.push(-1);
+        return this;
+    }
+
+    /**
+     * Cut last element equal to `-1` and all elements after it.
+     *
+     * Example: `[-1,0,-1,1,2]` => `[-1,0]`
+     *
+     * @return The array
+     */
+    exit() {
+        this.depth.splice(this.depth.lastIndexOf(-1));
+        return this.depth;
+    }
+
+    /**
+     * Get the last element of the array.
+     *
+     * @return The element of the array
+     */
+    last() {
+        return this.depth[this.depth.length - 1];
+    }
+
+    push(items: number) {
+        return this.depth.push(items);
+    }
+
+    pop() {
+        return this.depth.pop();
+    }
+
+    /**
+     * Get element right after last `-1` element and delete all elements after last `-1` element.
+     *
+     * Example: `[-1,0,-1,1,2]` => `1`
+     *
+     * Internal changes: `[-1,0,-1,1,2]` => `[-1,0,-1]`
+     *
+     * @return The element of the array
+     */
+    restore() {
+        /** Index of element right after last `-1` element. */
+        let index = this.depth.lastIndexOf(-1) + 1;
+        let element = this.depth[index];
+        this.depth.splice(index);
+        return element;
+    }
 }

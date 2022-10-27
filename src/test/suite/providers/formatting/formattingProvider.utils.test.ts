@@ -8,6 +8,7 @@ import {
     buildIndentationChars,
     buildIndentedLine,
     documentToString,
+    FlowOfControlNestDepth,
     hasMoreCloseParens,
     hasMoreOpenParens,
     normalizeLineAssignOperator,
@@ -651,6 +652,49 @@ suite('FormattingProvider utils', () => {
                     alignLineAssignOperator(data.in, data.tp),
                     data.rs,
                 );
+            });
+        });
+    });
+
+    suite('FlowOfControlDepth.exit', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     rs: , // expected result
+            // },
+            {
+                in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
+                rs: [-1, 0],
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "' => '" + data.rs + "'", () => {
+                assert.deepStrictEqual(data.in.exit(), data.rs);
+            });
+        });
+    });
+
+    suite('FlowOfControlDepth.restore', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     rs: , // expected result
+            // },
+            {
+                in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
+                rs: 1,
+                rd: [-1, 0, -1],
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "' => '" + data.rs + "'", () => {
+                assert.strictEqual(data.in.restore(), data.rs);
+            });
+            test("'" + data.in + "' => '" + data.rd + "'", () => {
+                data.in.restore();
+                assert.deepStrictEqual(data.in.depth, data.rd);
             });
         });
     });

@@ -2150,10 +2150,10 @@ compareTwoStrings2(para_string1,para_string2) {
     Loop, % vCount1 := StrLen(para_string1) - 1
         oArray["z" SubStr(para_string1, A_Index, 2)]++
     Loop, % vCount2 := StrLen(para_string2) - 1
-    if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
-        oArray["z" SubStr(para_string2, A_Index, 2)]--
-        vCount++
-    }
+        if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
+            oArray["z" SubStr(para_string2, A_Index, 2)]--
+            vCount++
+        }
     vSDC := Round((2 * vCount) / (vCount1 + vCount2),2)
     ; if (!vSDC || vSDC < 0.005) { ;round to 0 if less than 0.005
     ; return 0
@@ -2181,13 +2181,13 @@ compareTwoStrings(para_string1,para_string2)
     Loop, % vCount2 := StrLen(para_string2)
         ; Loop, % vCount2 := StrLen(para_string2) - 1
         ; p(oArray)
-    if (oArray["z" SubStr(para_string2, A_Index, 1)] > 0) {
-        ; if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
-        oArray["z" SubStr(para_string2, A_Index, 1)]--
-        ; oArray["z" SubStr(para_string2, A_Index, 2)]--
-        vCount++
-    }
-    ; p(vCount)
+        if (oArray["z" SubStr(para_string2, A_Index, 1)] > 0) {
+            ; if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
+            oArray["z" SubStr(para_string2, A_Index, 1)]--
+            ; oArray["z" SubStr(para_string2, A_Index, 2)]--
+            vCount++
+        }
+        ; p(vCount)
     vSDC := (vCount) / (vCount2)
     ; vSDC := (2 * vCount) / (vCount1 + vCount2)
     ; vSDC := Round((2 * vCount) / (vCount1 + vCount2),2)
