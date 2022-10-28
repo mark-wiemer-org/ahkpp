@@ -390,18 +390,18 @@ export const internalFormat = (
             purifiedLine.match(
                 /^(((and|or|not)\b)|[\^!~?:&<>=.,|]|\+(?!\+)|-(?!-)|\/(?!\*)|\*(?!\/))/,
             ) &&
-            // skip Hotkeys and Hotstrings (they has '::')
+            // skip Hotkeys:: and ::Hotstrings:: (they has '::')
             !purifiedLine.match(/::/)
         ) {
             continuationSectionExpression = true;
             // obj := { a: 1
-            //     , b: 2 ; revert indent after brace
+            //     , b: 2 <-- revert indent after brace
             //     , c: 3 }
             if (braceIndent) {
                 depth--;
             }
             // if a = 1
-            //     or b = 2 ; revert indent for oneCommandCode and make it deferred
+            //     or b = 2 <-- revert indent for oneCommandCode and make it deferred
             //     or c = 3
             //     MsgBox
             if (oneCommandCode) {
@@ -442,7 +442,7 @@ export const internalFormat = (
             }
         }
 
-        // Return or ExitApp
+        // Return, Exit, ExitApp
         if (
             purifiedLine.match(/^(return|exit|exitapp)\b/) &&
             tagDepth === depth
@@ -475,7 +475,7 @@ export const internalFormat = (
         // Check close braces
         // obj := { a: 1
         //     , b: 2
-        //     , c: 3 } ; skip de-indent by brace in Continuation Section: Object
+        //     , c: 3 } <-- skip de-indent by brace in Continuation Section: Object
         if (purifiedLine.includes('}') && !continuationSectionExpression) {
             const braceNum = braceNumber(purifiedLine, '}');
             depth -= braceNum;
@@ -487,14 +487,15 @@ export const internalFormat = (
             purifiedLine.includes('{')
         ) {
             const braceNum = braceNumber(purifiedLine, '{');
-            // if (a = 1) {
-            //     MsgBox ; revert indent for oneCommandCode
+            // if (a = 1)
+            // { <-- revert indent (for brace) added by oneCommandCode
+            //     MsgBox
             // }
             if (braceNum > 0) {
                 oneCommandCode = false;
                 // if (a = 4
                 //     and b = 5) {
-                //     MsgBox ; disable deferredOneCommandCode indent
+                //     MsgBox <-- disable deferredOneCommandCode indent
                 // }
                 if (deferredOneCommandCode) {
                     deferredOneCommandCode = false;
@@ -600,7 +601,7 @@ export const internalFormat = (
         // ( LTrim <-- check this parenthesis
         //     Indented line of text
         // )
-        // Skip hotkey: (::
+        // Skip hotkey "open parenthesis" (::
         if (purifiedLine.match(/^\((?!::)(?=.*\bltrim\b)/)) {
             continuationSectionTextFormat = true;
             depth++;
