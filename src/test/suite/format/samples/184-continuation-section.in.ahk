@@ -72,6 +72,20 @@ Text must be indented with preserved    extra    spaces between words.
 )"
 }
 
+var =
+(LTrim
+{
+    text
+}
+)
+
+var =
+(LTrim
+`(
+text
+`)
+)
+
 ++i
 --i
 ;comment must be not indented
