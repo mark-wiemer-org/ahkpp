@@ -142,7 +142,7 @@ export const internalFormat = (
      * #If Expression
      * ```
      */
-    let sharpDirective = false;
+    let sharpDirectiveLine = false;
     /**
      * Continuation section: Expression, Object
      * ```ahk
@@ -187,6 +187,20 @@ export const internalFormat = (
     const trimSpaces = options.trimExtraSpaces;
 
     /**
+     * `#Directive`, that will create context-sensitive hotkeys and hotstrings.
+     * Example of `#Directives`:
+     * ```ahk
+     * #IfWinActive WinTitle
+     * #IfWinNotActive WinTitle
+     * #IfWinExist WinTitle
+     * #IfWinNotExist WinTitle
+     * #If Expression
+     * ```
+     */
+    const sharpDirective =
+        '#(ifwinactive|ifwinnotactive|ifwinexist|ifwinnotexist|if)';
+
+    /**
      * Special labels in `Switch` construction.
      *
      * Example: `Case valA[, valB]: [Statement]` or `Default: [Statement]`
@@ -216,7 +230,7 @@ export const internalFormat = (
 
         continuationSectionExpression = false;
         detectOneCommandCode = true;
-        sharpDirective = false;
+        sharpDirectiveLine = false;
 
         // const moreOpenParens = hasMoreOpenParens(purifiedLine);
         // const moreCloseParens = hasMoreCloseParens(purifiedLine);
@@ -408,13 +422,7 @@ export const internalFormat = (
         }
 
         // #IfWinActive, #IfWinExist with omit params OR #If without expression
-        if (
-            purifiedLine.match(/^#ifwinactive$/) ||
-            purifiedLine.match(/^#ifwinnotactive$/) ||
-            purifiedLine.match(/^#ifwinexist$/) ||
-            purifiedLine.match(/^#ifwinnotexist$/) ||
-            purifiedLine.match(/^#if$/)
-        ) {
+        if (purifiedLine.match('^' + sharpDirective + '$')) {
             if (indentCodeAfterSharpDirective) {
                 if (tagDepth > 0) {
                     depth -= tagDepth;
@@ -425,20 +433,14 @@ export const internalFormat = (
         }
 
         // #IfWinActive, #IfWinExist with params OR #If with expression
-        if (
-            purifiedLine.match(/^#ifwinactive\b.+/) ||
-            purifiedLine.match(/^#ifwinnotactive\b.+/) ||
-            purifiedLine.match(/^#ifwinexist\b.+/) ||
-            purifiedLine.match(/^#ifwinnotexist\b.+/) ||
-            purifiedLine.match(/^#if\b.+/)
-        ) {
+        if (purifiedLine.match('^' + sharpDirective + '\\b.+')) {
             if (indentCodeAfterSharpDirective) {
                 if (tagDepth > 0) {
                     depth -= tagDepth;
                 } else {
                     depth--;
                 }
-                sharpDirective = true;
+                sharpDirectiveLine = true;
             }
         }
 
@@ -547,7 +549,7 @@ export const internalFormat = (
         }
 
         // #IfWinActive, #IfWinExist with params OR #If with expression
-        if (sharpDirective && indentCodeAfterSharpDirective) {
+        if (sharpDirectiveLine && indentCodeAfterSharpDirective) {
             depth++;
         }
 
