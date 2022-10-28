@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import { ConfigKey, Global } from '../common/global';
-import { CodeUtil } from '../common/codeUtil';
 import { FormatOptions } from './formattingProvider.types';
 import {
     alignTextAssignOperator,
@@ -13,7 +12,6 @@ import {
     removeEmptyLines,
     trimExtraSpaces,
 } from './formattingProvider.utils';
-import { on } from 'events';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;
