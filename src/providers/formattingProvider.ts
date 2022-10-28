@@ -592,6 +592,7 @@ export const internalFormat = (
         }
         // }
 
+        // Continuation section: Expression
         if (continuationSectionExpression) {
             continuationSectionExpression = false;
             depth--;
