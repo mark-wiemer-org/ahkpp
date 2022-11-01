@@ -341,7 +341,7 @@ export const internalFormat = (
         }
 
         // Continuation section: Text [Not Formatted] Start
-        // ( [NO LTrim option!] <-- check this parenthesis
+        // ( [NO LTrim option!] <-- check this START parenthesis
         // Line of text with preserved user formatting
         // )
         // Skip hotkey: (::
@@ -351,8 +351,11 @@ export const internalFormat = (
 
         // Continuation section: Text [Not Formatted] Save with original indent
         if (continuationSectionTextNotFormat) {
-            formattedString += originalLine + '\n';
+            formattedString += originalLine.trimEnd() + '\n';
             // Continuation section: Text [Not Formatted] Stop
+            // ( [NO LTrim option!]
+            // Line of text with preserved user formatting
+            // ) <-- check this STOP parenthesis
             if (purifiedLine.match(/^\)/)) {
                 continuationSectionTextNotFormat = false;
             }
@@ -362,7 +365,7 @@ export const internalFormat = (
         // Continuation section: Text [Formatted] Stop
         // ( LTrim
         //     Line of text
-        // ) <-- check this parenthesis
+        // ) <-- check this STOP parenthesis
         if (continuationSectionTextFormat && purifiedLine.match(/^\)/)) {
             continuationSectionTextFormat = false;
             depth--;
@@ -402,7 +405,6 @@ export const internalFormat = (
             }
             // if a = 1
             //     or b = 2 <-- revert indent for oneCommandCode and make it deferred
-            //     or c = 3
             //     MsgBox
             if (oneCommandCode) {
                 deferredOneCommandCode = true;
@@ -413,6 +415,9 @@ export const internalFormat = (
         }
 
         // Continuation section: Expression - Deferred oneCommandCode indent
+        // if a = 1
+        //     or b = 2
+        //     MsgBox <-- restore deferred oneCommandCode
         if (deferredOneCommandCode && !continuationSectionExpression) {
             deferredOneCommandCode = false;
             oneCommandCode = true;
@@ -443,6 +448,9 @@ export const internalFormat = (
         }
 
         // Return, Exit, ExitApp
+        // Label:
+        //     code
+        // Return <-- force de-indent by one level for labels
         if (
             purifiedLine.match(/^(return|exit|exitapp)\b/) &&
             tagDepth === depth
@@ -573,6 +581,9 @@ export const internalFormat = (
         }
 
         // Continuation section: Nested Objects - Check close braces
+        // obj = { a: 1
+        //     , b : { c: 2
+        //         , d: { e: 3 } } <-- multiply close brace in nested objects
         if (continuationSectionExpression && purifiedLine.includes('}')) {
             const braceNum = braceNumber(purifiedLine, '}');
             depth -= braceNum;
@@ -599,7 +610,7 @@ export const internalFormat = (
         }
 
         // Continuation section: Text [Formatted] Start
-        // ( LTrim <-- check this parenthesis
+        // ( LTrim <-- check this START parenthesis
         //     Indented line of text
         // )
         // Skip hotkey "open parenthesis" (::
@@ -608,6 +619,10 @@ export const internalFormat = (
             depth++;
         }
 
+        // One command code
+        // Loop, %var%
+        //     code <-- indent for one line
+        // code
         if (detectOneCommandCode) {
             for (const oneCommand of oneCommandList) {
                 let temp: RegExpExecArray;
