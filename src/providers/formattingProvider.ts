@@ -583,7 +583,7 @@ export const internalFormat = (
         // Continuation section: Nested Objects - Check close braces
         // obj = { a: 1
         //     , b : { c: 2
-        //         , d: { e: 3 } } <-- multiply close brace in nested objects
+        //         , d: 3 } } <-- multiply close brace in nested objects
         if (continuationSectionExpression && purifiedLine.includes('}')) {
             const braceNum = braceNumber(purifiedLine, '}');
             depth -= braceNum;
