@@ -285,8 +285,9 @@ export const internalFormat = (
     const trimSpaces = options.trimExtraSpaces;
 
     // REGULAR EXPRESSION
-    /** Label name may consist of any characters other than `space`,
-     * `tab`, `comma` and the escape character (`).
+    /**
+     * Label name may consist of any characters other than `space`, `tab`,
+     * `comma` and the escape character (`).
      *
      * Generally, aside from whitespace and comments,
      * no other code can be written on the same line as a label.
