@@ -126,14 +126,7 @@ export const internalFormat = (
     // Save important values to this variables on block comment enter, restore them on exit
     let preBlockCommentDepth = 0;
     let preBlockCommentTagDepth = 0;
-    let preBlockCommentDetectOneCommandCode = true;
     let preBlockCommentOneCommandCode = false;
-    let preBlockCommentContinuationSectionExpression = false;
-    let preBlockCommentContinuationSectionTextFormat = false;
-    let preBlockCommentContinuationSectionTextNotFormat = false;
-    let preBlockCommentBraceIndent = false;
-    let preBlockCommentDeferredOneCommandCode = false;
-    let preBlockCommentWaitCloseBraceObject: number[] = [];
 
     /**
      * This line is `#Directive`, that will create context-sensitive hotkeys and hotstrings.
@@ -309,19 +302,10 @@ export const internalFormat = (
                 // save indent values on block comment enter
                 preBlockCommentDepth = depth;
                 preBlockCommentTagDepth = tagDepth;
-                preBlockCommentDetectOneCommandCode = detectOneCommandCode;
                 preBlockCommentOneCommandCode = oneCommandCode;
-                preBlockCommentContinuationSectionExpression =
-                    continuationSectionExpression;
-                preBlockCommentContinuationSectionTextFormat =
-                    continuationSectionTextFormat;
-                preBlockCommentContinuationSectionTextNotFormat =
-                    continuationSectionTextNotFormat;
-                preBlockCommentBraceIndent = braceIndent;
-                preBlockCommentDeferredOneCommandCode = deferredOneCommandCode;
-                preBlockCommentWaitCloseBraceObject = waitCloseBraceObject;
                 // reset indent values to default values with added current 'depth' indent
                 oneCommandCode = false;
+                tagDepth = depth;
             }
         }
 
@@ -351,18 +335,7 @@ export const internalFormat = (
                     // restore indent values on block comment exit
                     depth = preBlockCommentDepth;
                     tagDepth = preBlockCommentTagDepth;
-                    detectOneCommandCode = preBlockCommentDetectOneCommandCode;
                     oneCommandCode = preBlockCommentOneCommandCode;
-                    continuationSectionExpression =
-                        preBlockCommentContinuationSectionExpression;
-                    continuationSectionTextFormat =
-                        preBlockCommentContinuationSectionTextFormat;
-                    continuationSectionTextNotFormat =
-                        preBlockCommentContinuationSectionTextNotFormat;
-                    braceIndent = preBlockCommentBraceIndent;
-                    deferredOneCommandCode =
-                        preBlockCommentDeferredOneCommandCode;
-                    waitCloseBraceObject = preBlockCommentWaitCloseBraceObject;
                 }
             }
             if (!formatBlockComment) {
