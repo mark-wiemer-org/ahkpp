@@ -26,6 +26,17 @@ foo () {
         ToolTip
     MsgBox
     */
+    /*
+    obj := { a: 4
+        , b: "string" }
+    isPositive := x > 0
+        ? true
+        : false
+    var =
+    ( LTrim
+        Text must be indented with preserved    extra    spaces between words.
+    )
+    */
     ;@AHK++FormatBlockCommentOff
     MsgBox
     /*

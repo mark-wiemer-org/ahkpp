@@ -128,6 +128,12 @@ export const internalFormat = (
     let preBlockCommentTagDepth = 0;
     let preBlockCommentDetectOneCommandCode = true;
     let preBlockCommentOneCommandCode = false;
+    let preBlockCommentContinuationSectionExpression = false;
+    let preBlockCommentContinuationSectionTextFormat = false;
+    let preBlockCommentContinuationSectionTextNotFormat = false;
+    let preBlockCommentBraceIndent = false;
+    let preBlockCommentDeferredOneCommandCode = false;
+    let preBlockCommentWaitCloseBraceObject: number[] = [];
 
     /**
      * This line is `#Directive`, that will create context-sensitive hotkeys and hotstrings.
@@ -179,6 +185,11 @@ export const internalFormat = (
      * disabling `oneCommandCode`.
      */
     let deferredOneCommandCode = false;
+    /**
+     * Array of depth of open brace `{` that belongs to object initialization
+     * with continuation section.
+     */
+    let waitCloseBraceObject: number[] = [];
 
     const indentCodeAfterLabel = options.indentCodeAfterLabel;
     const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
@@ -300,6 +311,15 @@ export const internalFormat = (
                 preBlockCommentTagDepth = tagDepth;
                 preBlockCommentDetectOneCommandCode = detectOneCommandCode;
                 preBlockCommentOneCommandCode = oneCommandCode;
+                preBlockCommentContinuationSectionExpression =
+                    continuationSectionExpression;
+                preBlockCommentContinuationSectionTextFormat =
+                    continuationSectionTextFormat;
+                preBlockCommentContinuationSectionTextNotFormat =
+                    continuationSectionTextNotFormat;
+                preBlockCommentBraceIndent = braceIndent;
+                preBlockCommentDeferredOneCommandCode = deferredOneCommandCode;
+                preBlockCommentWaitCloseBraceObject = waitCloseBraceObject;
                 // reset indent values to default values with added current 'depth' indent
                 oneCommandCode = false;
             }
@@ -333,6 +353,16 @@ export const internalFormat = (
                     tagDepth = preBlockCommentTagDepth;
                     detectOneCommandCode = preBlockCommentDetectOneCommandCode;
                     oneCommandCode = preBlockCommentOneCommandCode;
+                    continuationSectionExpression =
+                        preBlockCommentContinuationSectionExpression;
+                    continuationSectionTextFormat =
+                        preBlockCommentContinuationSectionTextFormat;
+                    continuationSectionTextNotFormat =
+                        preBlockCommentContinuationSectionTextNotFormat;
+                    braceIndent = preBlockCommentBraceIndent;
+                    deferredOneCommandCode =
+                        preBlockCommentDeferredOneCommandCode;
+                    waitCloseBraceObject = preBlockCommentWaitCloseBraceObject;
                 }
             }
             if (!formatBlockComment) {
@@ -398,10 +428,11 @@ export const internalFormat = (
         ) {
             continuationSectionExpression = true;
             // obj := { a: 1
-            //     , b: 2 <-- revert indent after brace
+            //     , b: 2 <-- revert indent after open brace
             //     , c: 3 }
             if (braceIndent) {
                 depth--;
+                waitCloseBraceObject.push(depth);
             }
             // if a = 1
             //     or b = 2 <-- revert indent for oneCommandCode and make it deferred
@@ -580,15 +611,6 @@ export const internalFormat = (
             braceIndent = false;
         }
 
-        // Continuation section: Nested Objects - Check close braces
-        // obj = { a: 1
-        //     , b : { c: 2
-        //         , d: 3 } } <-- multiply close brace in nested objects
-        if (continuationSectionExpression && purifiedLine.includes('}')) {
-            const braceNum = braceNumber(purifiedLine, '}');
-            depth -= braceNum;
-        }
-
         // Switch-Case-Default: or Label:
         // if (!moreOpenParens) {
         if (purifiedLine.match(switchCaseDefault)) {
@@ -603,9 +625,28 @@ export const internalFormat = (
         }
         // }
 
-        // Continuation section: Expression
+        // Continuation section: Expression, Object
         if (continuationSectionExpression) {
             continuationSectionExpression = false;
+            // Objects - Check close braces of nested objects
+            // obj = { a: 1
+            //     , b : { c: 2
+            //         , d: 3 } } <-- multiply close brace in nested objects
+            if (purifiedLine.includes('}')) {
+                const braceNum = braceNumber(purifiedLine, '}');
+                depth -= braceNum;
+                // obj = { a: 1
+                //     , b : { c: 2
+                //         , d: 3 } } <-- revert indent after last close brace
+                if (
+                    waitCloseBraceObject[waitCloseBraceObject.length - 1] ===
+                    depth
+                ) {
+                    waitCloseBraceObject.pop();
+                    depth++;
+                }
+            }
+            // Expression
             depth--;
         }
 
