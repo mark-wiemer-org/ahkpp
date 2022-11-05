@@ -332,8 +332,8 @@ export const internalFormat = (
         detectOneCommandCode = true;
         sharpDirectiveLine = false;
 
-        // const moreOpenParens = hasMoreOpenParens(purifiedLine);
-        // const moreCloseParens = hasMoreCloseParens(purifiedLine);
+        const openBraceNum = braceNumber(purifiedLine, '{');
+        const closeBraceNum = braceNumber(purifiedLine, '}');
 
         // =====================================================================
         // |                            THIS LINE                              |
@@ -548,60 +548,54 @@ export const internalFormat = (
         // obj := { a: 1
         //     , b: 2
         //     , c: 3 } <-- skip de-indent by brace in Continuation Section: Object
-        if (purifiedLine.includes('}') && !continuationSectionExpression) {
-            const braceNum = braceNumber(purifiedLine, '}');
-            depth -= braceNum;
-            if (braceNum > 0) {
-                ifDepth.exit();
-                occDepth.exit();
-                // IF-ELSE complete tracking
-                // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
-                // if {
-                //     code
-                // } if { <-- pop previous IF, if we meet another IF
-                //     code
-                // }
-                if (
-                    purifiedLine.match(/} ?if\b/) &&
-                    waitCloseBraceIf.last() === depth
-                ) {
-                    waitCloseBraceIf.pop();
-                    ifDepth.pop();
-                }
+        if (closeBraceNum && !continuationSectionExpression) {
+            depth -= closeBraceNum;
+            ifDepth.exit();
+            occDepth.exit();
+            // IF-ELSE complete tracking
+            // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
+            // if {
+            //     code
+            // } if { <-- pop previous IF, if we meet another IF
+            //     code
+            // }
+            if (
+                purifiedLine.match(/} ?if\b/) &&
+                waitCloseBraceIf.last() === depth
+            ) {
+                waitCloseBraceIf.pop();
+                ifDepth.pop();
             }
         }
 
         // OPEN BRACE
-        if (purifiedLine.includes('{')) {
-            const braceNum = braceNumber(purifiedLine, '{');
-            if (braceNum > 0) {
-                // ONE COMMAND CODE
-                if (
-                    (oneCommandCode || deferredOneCommandCode) &&
-                    !nextLineIsOneCommandCode(purifiedLine)
-                ) {
-                    oneCommandCode = false;
-                    if (deferredOneCommandCode) {
-                        // if (a = 4
-                        //     and b = 5) {
-                        //     MsgBox <-- disable deferredOneCommandCode indent
-                        // }
-                        deferredOneCommandCode = false;
-                    } else {
-                        // if (var)
-                        // { <-- revert oneCommandCode indent for open brace
-                        //     MsgBox
-                        // }
-                        depth -= braceNum;
-                    }
-                    // FLOW OF CONTROL revert added by mistake
-                    // Loop, %var%
-                    // { <-- check open brace below flow of control statement
-                    //     code
+        if (openBraceNum) {
+            // ONE COMMAND CODE
+            if (
+                (oneCommandCode || deferredOneCommandCode) &&
+                !nextLineIsOneCommandCode(purifiedLine)
+            ) {
+                oneCommandCode = false;
+                if (deferredOneCommandCode) {
+                    // if (a = 4
+                    //     and b = 5) {
+                    //     MsgBox <-- disable deferredOneCommandCode indent
                     // }
-                    if (depth === occDepth.last()) {
-                        occDepth.pop();
-                    }
+                    deferredOneCommandCode = false;
+                } else {
+                    // if (var)
+                    // { <-- revert oneCommandCode indent for open brace
+                    //     MsgBox
+                    // }
+                    depth -= openBraceNum;
+                }
+                // FLOW OF CONTROL revert added by mistake
+                // Loop, %var%
+                // { <-- check open brace below flow of control statement
+                //     code
+                // }
+                if (depth === occDepth.last()) {
+                    occDepth.pop();
                 }
             }
         }
@@ -627,10 +621,7 @@ export const internalFormat = (
                 //     code
                 // }
                 depth = ifDepth.pop();
-            } else if (
-                // TODO: this will fail on VAR := {}, use braceNumber()? or regex "^{|}$"?
-                !(purifiedLine.includes('{') || purifiedLine.includes('}'))
-            ) {
+            } else if (!(openBraceNum || closeBraceNum)) {
                 // if                                   |  loop
                 //     if                               |      loop
                 //         code                         |          code
@@ -764,21 +755,18 @@ export const internalFormat = (
         }
 
         // CLOSE BRACE
-        if (purifiedLine.includes('}')) {
-            const braceNum = braceNumber(purifiedLine, '}');
-            if (braceNum > 0) {
-                // IF-ELSE complete tracking
+        if (closeBraceNum) {
+            // IF-ELSE complete tracking
+            // if {
+            //     code
+            // } <-- check close brace ('depth' equal to '{' indent above)
+            if (waitCloseBraceIf.last() === depth) {
+                waitCloseBraceIf.pop();
                 // if {
                 //     code
-                // } <-- check close brace ('depth' equal to '{' indent above)
-                if (waitCloseBraceIf.last() === depth) {
-                    waitCloseBraceIf.pop();
-                    // if {
-                    //     code
-                    // } else <-- check this ELSE
-                    if (!purifiedLine.match(/}? ?else\b/)) {
-                        waitElse = true;
-                    }
+                // } else <-- check this ELSE
+                if (!purifiedLine.match(/}? ?else\b/)) {
+                    waitElse = true;
                 }
             }
         }
@@ -787,16 +775,12 @@ export const internalFormat = (
         // Loop, %var% <-- flow of control statement without open brace
         //     code
         // code
-        if (nextLineIsOneCommandCode(purifiedLine)) {
-            let braceNum = 0;
-            if (purifiedLine.includes('{')) {
-                braceNum = braceNumber(purifiedLine, '{');
-            }
-            if (braceNum === 0) {
-                if (occDepth.last() === -1) {
-                    occDepth.push(depth);
-                }
-            }
+        if (
+            nextLineIsOneCommandCode(purifiedLine) &&
+            openBraceNum === 0 &&
+            occDepth.last() === -1
+        ) {
+            occDepth.push(depth);
         }
 
         // IF-ELSE complete tracking
@@ -829,11 +813,8 @@ export const internalFormat = (
         // { <-- check open brace if above was IF
         //     code
         // }
-        if (prevLineIsIf && purifiedLine.includes('{')) {
-            const braceNum = braceNumber(purifiedLine, '{');
-            if (braceNum > 0) {
-                waitCloseBraceIf.push(depth);
-            }
+        if (prevLineIsIf && openBraceNum) {
+            waitCloseBraceIf.push(depth);
         }
         // if (var)   <-- IF without open brace
         // {
@@ -847,25 +828,22 @@ export const internalFormat = (
         }
 
         // OPEN BRACE
-        if (purifiedLine.includes('{')) {
-            const braceNum = braceNumber(purifiedLine, '{');
-            depth += braceNum;
-            if (braceNum > 0) {
-                // Do not detect 'oneCommandCode', because it will produce extra
-                // indent for next line like in example below:
-                // if {
-                // |   |   wrong_extra_indented_code_by_oneCommandCode
-                // |   code
-                // }
-                detectOneCommandCode = false;
-                // CONTINUATION SECTION: Nested Objects
-                if (!continuationSectionExpression) {
-                    braceIndent = true;
-                }
-                // FLOW OF CONTROL
-                ifDepth.enter();
-                occDepth.enter();
+        if (openBraceNum) {
+            depth += openBraceNum;
+            // Do not detect 'oneCommandCode', because it will produce extra
+            // indent for next line like in example below:
+            // if {
+            // |   |   wrong_extra_indented_code_by_oneCommandCode
+            // |   code
+            // }
+            detectOneCommandCode = false;
+            // CONTINUATION SECTION: Nested Objects
+            if (!continuationSectionExpression) {
+                braceIndent = true;
             }
+            // FLOW OF CONTROL
+            ifDepth.enter();
+            occDepth.enter();
         } else {
             braceIndent = false;
         }
@@ -892,30 +870,26 @@ export const internalFormat = (
         }
 
         // CONTINUATION SECTION: Expression, Object
-        // isPositive := x > 0
-        //     and y > 0 <-- de-indent next line after continuation section
-        // x++
         if (continuationSectionExpression) {
             continuationSectionExpression = false;
-            // Objects - Check close braces of nested objects
+            // Object - Check close braces of nested objects
             // obj = { a: 1
             //     , b : { c: 2
             //         , d: 3 } } <-- multiply close brace in nested objects
-            if (purifiedLine.includes('}')) {
-                const braceNum = braceNumber(purifiedLine, '}');
-                depth -= braceNum;
+            if (closeBraceNum) {
+                depth -= closeBraceNum;
                 // obj = { a: 1
                 //     , b : { c: 2
                 //         , d: 3 } } <-- revert indent after last close brace
-                if (
-                    waitCloseBraceObject[waitCloseBraceObject.length - 1] ===
-                    depth
-                ) {
+                if (waitCloseBraceObject.last() === depth) {
                     waitCloseBraceObject.pop();
                     depth++;
                 }
             }
-            // Expression
+            // Expression - De-indent next line
+            // isPositive := x > 0
+            //     and y > 0 <-- de-indent next line after continuation section
+            // x++
             depth--;
         }
 
