@@ -37,6 +37,15 @@ var =
 Text must be indented with preserved    extra    spaces between words.
 )
 */
+/*
+loop
+if
+loop
+code
+else
+code
+code
+*/
 ;@AHK++FormatBlockCommentOff
 MsgBox
 /*

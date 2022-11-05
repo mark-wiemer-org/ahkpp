@@ -278,6 +278,10 @@ export const internalFormat = (
     let preBlockCommentDepth = 0;
     let preBlockCommentTagDepth = 0;
     let preBlockCommentOneCommandCode = false;
+    let preBlockCommentIfDepth: FlowOfControlNestDepth;
+    let preBlockCommentOccDepth: FlowOfControlNestDepth;
+    let preBlockCommentWaitCloseBraceIf: number[] = [];
+    let preBlockCommentWaitElse = false;
 
     // SETTINGS' ALIASES
     const indentCodeAfterLabel = options.indentCodeAfterLabel;
@@ -341,7 +345,10 @@ export const internalFormat = (
 
         // STOP DIRECTIVE for formatter
         if (emptyLine) {
-            if (comment.match(/;\s*@AHK\+\+AlignAssignmentOff/i)) {
+            if (
+                alignAssignment &&
+                comment.match(/;\s*@AHK\+\+AlignAssignmentOff/i)
+            ) {
                 alignAssignment = false;
                 assignmentBlock = alignTextAssignOperator(assignmentBlock);
                 // Save aligned block
@@ -357,8 +364,19 @@ export const internalFormat = (
                     );
                 });
                 assignmentBlock = [];
-            } else if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)) {
+            } else if (
+                formatBlockComment &&
+                comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)
+            ) {
                 formatBlockComment = false;
+                // restore indent values on block comment exit
+                depth = preBlockCommentDepth;
+                tagDepth = preBlockCommentTagDepth;
+                oneCommandCode = preBlockCommentOneCommandCode;
+                ifDepth = preBlockCommentIfDepth;
+                occDepth = preBlockCommentOccDepth;
+                waitCloseBraceIf = preBlockCommentWaitCloseBraceIf;
+                waitElse = preBlockCommentWaitElse;
             }
         }
 
@@ -385,7 +403,6 @@ export const internalFormat = (
             assignmentBlock = [];
         }
 
-        // TODO: Block comments will be broken when one command code nesting fixed!
         // BLOCK COMMENT
         // The /* and */ symbols can be used to comment out an entire section,
         // but only if the symbols appear at the beginning of a line (excluding
@@ -405,9 +422,17 @@ export const internalFormat = (
                 preBlockCommentDepth = depth;
                 preBlockCommentTagDepth = tagDepth;
                 preBlockCommentOneCommandCode = oneCommandCode;
+                preBlockCommentIfDepth = ifDepth;
+                preBlockCommentOccDepth = occDepth;
+                preBlockCommentWaitCloseBraceIf = waitCloseBraceIf;
+                preBlockCommentWaitElse = waitElse;
                 // reset indent values to default values
-                oneCommandCode = false;
                 tagDepth = depth;
+                oneCommandCode = false;
+                ifDepth = new FlowOfControlNestDepth();
+                occDepth = new FlowOfControlNestDepth();
+                waitCloseBraceIf = [];
+                waitElse = false;
             }
         }
 
@@ -426,7 +451,7 @@ export const internalFormat = (
                 formattedString += buildIndentedLine(
                     lineIndex,
                     lines.length,
-                    blockCommentLine,
+                    blockCommentLine.trimEnd(),
                     depth,
                     options,
                 );
@@ -434,12 +459,6 @@ export const internalFormat = (
             if (originalLine.match(/^\s*\*\//)) {
                 // found end '*/' pattern
                 blockComment = false;
-                if (formatBlockComment) {
-                    // restore indent values on block comment exit
-                    depth = preBlockCommentDepth;
-                    tagDepth = preBlockCommentTagDepth;
-                    oneCommandCode = preBlockCommentOneCommandCode;
-                }
             }
             if (!formatBlockComment) {
                 return;
@@ -534,7 +553,7 @@ export const internalFormat = (
         // IF-ELSE complete tracking
         if (waitElse && !emptyLine) {
             waitElse = false;
-            //TODO: Common regexp to vars? Change "}? ?" --> "(} )?"
+            // TODO: Common regexp to vars? Change "}? ?" --> "(} )?"
             // if { <-- pop IF, if we not meet ELSE
             //     code
             // }
@@ -784,6 +803,7 @@ export const internalFormat = (
         }
 
         // IF-ELSE complete tracking
+        // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
         // if {        <-- check IF
         //     code
         // } if {      <-- TODO: who will format like that??? Simplify regex
@@ -816,6 +836,7 @@ export const internalFormat = (
         if (prevLineIsIf && openBraceNum) {
             waitCloseBraceIf.push(depth);
         }
+        // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
         // if (var)   <-- IF without open brace
         // {
         //     code
