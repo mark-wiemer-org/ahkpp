@@ -1,3 +1,4 @@
+import { isDeepStrictEqual } from 'util';
 import * as vscode from 'vscode';
 import { ConfigKey, Global } from '../common/global';
 import { FormatOptions } from './formattingProvider.types';
@@ -940,17 +941,28 @@ export const internalFormat = (
             depth++;
         }
 
-        // DEBUG OUTPUT
+        // DEBUG CONSOLE OUTPUT
         if (lineIndex === lines.length - 1) {
-            // First call after restart by "Ctrl + R" not clear DEBUG CONSOLE!!!
-            console.clear();
-            console.log(
-                'Below arrays must be equal to [-1], if code is syntax correct.',
-            );
-            console.log('ifDepth:');
-            console.log(ifDepth.depth);
-            console.log('occDepth:');
-            console.log(occDepth.depth);
+            if (
+                !(
+                    isDeepStrictEqual(ifDepth.depth, [-1]) ||
+                    isDeepStrictEqual(ifDepth.depth, [-1, 0])
+                ) &&
+                !(
+                    isDeepStrictEqual(occDepth.depth, [-1]) ||
+                    isDeepStrictEqual(occDepth.depth, [-1, 0])
+                )
+            ) {
+                // If code is finished (number of open and close braces are
+                // equal) arrays must be equal [-1] or [-1, 0]. Last zero in
+                // array stays, because formatter waits code after close brace,
+                // but it reaches EOF.
+                console.error('Internal formatter data:');
+                console.log(' ifDepth:');
+                console.log(ifDepth.depth);
+                console.log('occDepth:');
+                console.log(occDepth.depth);
+            }
         }
     });
 
