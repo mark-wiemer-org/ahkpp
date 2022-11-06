@@ -46,6 +46,11 @@ foo () {
             code
     code
     */
+    /*
+    if {
+        code
+        code
+    */
     ;@AHK++FormatBlockCommentOff
     MsgBox
     /*

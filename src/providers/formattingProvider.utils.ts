@@ -49,7 +49,7 @@ declare global {
     }
 }
 
-Array.prototype.last = function () {
+Array.prototype.last = function <T>(this: T[]): T {
     return this[this.length - 1];
 };
 

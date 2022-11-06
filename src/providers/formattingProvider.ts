@@ -278,8 +278,8 @@ export const internalFormat = (
     let preBlockCommentDepth = 0;
     let preBlockCommentTagDepth = 0;
     let preBlockCommentOneCommandCode = false;
-    let preBlockCommentIfDepth: FlowOfControlNestDepth;
-    let preBlockCommentOccDepth: FlowOfControlNestDepth;
+    let preBlockCommentIfDepth = new FlowOfControlNestDepth();
+    let preBlockCommentOccDepth = new FlowOfControlNestDepth();
     let preBlockCommentWaitCloseBraceIf: number[] = [];
     let preBlockCommentWaitElse = false;
 
@@ -364,19 +364,12 @@ export const internalFormat = (
                     );
                 });
                 assignmentBlock = [];
-            } else if (
+            }
+            if (
                 formatBlockComment &&
                 comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)
             ) {
                 formatBlockComment = false;
-                // restore indent values on block comment exit
-                depth = preBlockCommentDepth;
-                tagDepth = preBlockCommentTagDepth;
-                oneCommandCode = preBlockCommentOneCommandCode;
-                ifDepth = preBlockCommentIfDepth;
-                occDepth = preBlockCommentOccDepth;
-                waitCloseBraceIf = preBlockCommentWaitCloseBraceIf;
-                waitElse = preBlockCommentWaitElse;
             }
         }
 
@@ -459,6 +452,16 @@ export const internalFormat = (
             if (originalLine.match(/^\s*\*\//)) {
                 // found end '*/' pattern
                 blockComment = false;
+                if (formatBlockComment) {
+                    // restore indent values on block comment exit
+                    depth = preBlockCommentDepth;
+                    tagDepth = preBlockCommentTagDepth;
+                    oneCommandCode = preBlockCommentOneCommandCode;
+                    ifDepth = preBlockCommentIfDepth;
+                    occDepth = preBlockCommentOccDepth;
+                    waitCloseBraceIf = preBlockCommentWaitCloseBraceIf;
+                    waitElse = preBlockCommentWaitElse;
+                }
             }
             if (!formatBlockComment) {
                 return;
