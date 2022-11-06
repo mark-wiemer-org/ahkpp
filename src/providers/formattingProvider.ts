@@ -6,8 +6,6 @@ import {
     braceNumber,
     buildIndentedLine,
     documentToString,
-    // hasMoreCloseParens,
-    // hasMoreOpenParens,
     purify,
     removeEmptyLines,
     trimExtraSpaces,
@@ -151,7 +149,7 @@ export const internalFormat = (
      */
     let continuationSectionExpression = false;
     /**
-     * Continuation section: Text [Formatted]
+     * True iff continuation section is for text and should be formatted
      * ```ahk
      * ( LTrim
      *     Indented line of text
@@ -160,7 +158,7 @@ export const internalFormat = (
      */
     let continuationSectionTextFormat = false;
     /**
-     * Continuation section: Text [Not Formatted]
+     * True iff continuation section is for text but should **not** be formatted
      * ```ahk
      * ( [NO LTrim option!]
      * Line of text with preserved user formatting
@@ -233,9 +231,6 @@ export const internalFormat = (
         continuationSectionExpression = false;
         detectOneCommandCode = true;
         sharpDirectiveLine = false;
-
-        // const moreOpenParens = hasMoreOpenParens(purifiedLine);
-        // const moreCloseParens = hasMoreCloseParens(purifiedLine);
 
         // ==========================================================================
         // |                               THIS LINE                                |
@@ -585,7 +580,6 @@ export const internalFormat = (
         }
 
         // Switch-Case-Default: or Label:
-        // if (!moreOpenParens) {
         if (purifiedLine.match(switchCaseDefault)) {
             // Case: or Default:
             depth++;
@@ -596,7 +590,6 @@ export const internalFormat = (
             depth++;
             tagDepth = depth;
         }
-        // }
 
         // Continuation section: Expression, Object
         if (continuationSectionExpression) {

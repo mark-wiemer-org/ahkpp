@@ -1,43 +1,6 @@
 import * as vscode from 'vscode';
 import { FormatOptions } from './formattingProvider.types';
 
-declare global {
-    interface String {
-        /**
-         * Indefinitely replace text until replace fails.
-         *
-         * Important: search string length must be not equal replace string length!
-         *
-         * Important: if `search regex` matches `replace string` function stops
-         * before all text replaced!
-         *
-         * Example: replace nested or sequential `{text}` or `"text"` with empty string.
-         * @param regex Search value
-         * @param replace Replace string
-         * @return Result string
-         */
-        replaceAll(regex: RegExp, replace: string): string;
-    }
-}
-
-String.prototype.replaceAll = function (
-    regex: RegExp,
-    replace: string,
-): string {
-    let str: string = String(this);
-    while (true) {
-        let len = str.length;
-        str = str.replace(regex, replace);
-        if (len === str.length) {
-            // Nothing was replaced, break loop.
-            // Or replaced by text of the same length (not desired behavior, bug, how to fix it?).
-            // If check, does replace occur or not, we can go to infinite loop, if search regex matches replace string (not desired behavior, bug).
-            break;
-        }
-    }
-    return str;
-};
-
 /** Stringify a document, using consistent `\n` line separators */
 export const documentToString = (document: {
     lineCount: number;
@@ -350,10 +313,9 @@ export function purify(original: string): string {
             break;
         }
     }
-    //
-    let pure = cmdTrim
-        .replace(/".*?"/g, '""') // replace string literals with empty string literal
-        .replaceAll(/{[^{}]*}/g, '') // remove matching braces
+    let pure = cmdTrim.replace(/".*?"/g, '""'); // replace string literals with empty string literal
+    pure = replaceAll(pure, /{[^{}]*}/g, ''); // remove matching braces
+    pure = pure
         .replace(/\s+/g, ' ') // collapse all spaces and tabs to single space
         .replace(/;.+/, '') // remove comments; must be last, semicolon may be inside string (expression)
         .trim();
@@ -479,4 +441,36 @@ export function alignLineAssignOperator(
         .replace(/\s(?=:?=)/, ' '.repeat(targetPosition - position + 1)) // Align assignment
         .concat(comment) // Restore comment
         .trimEnd();
+}
+
+/**
+ * Indefinitely replace text until replace fails.
+ *
+ * Important: search string length must be not equal replace string length!
+ *
+ * Important: if `search regex` matches `replace string` function stops
+ * before all text replaced!
+ *
+ * Example: replace nested or sequential `{text}` or `"text"` with empty string.
+ *
+ * @param text Input string
+ * @param search Search regexp
+ * @param replace Replace string
+ * @return Result string
+ */
+export function replaceAll(
+    text: string,
+    search: RegExp,
+    replace: string,
+): string {
+    while (true) {
+        let len = text.length;
+        text = text.replace(search, replace);
+        if (len === text.length) {
+            // Nothing was replaced, break loop.
+            // Or replaced by text of the same length (not desired behavior, bug).
+            break;
+        }
+    }
+    return text;
 }
