@@ -102,7 +102,7 @@ export const internalFormat = (
      */
     let detectOneCommandCode = true;
     /**
-     * Array of indent level of `if` not completed by `else`.
+     * Object with array of indent level of `if` not completed by `else`.
      *
      * Allow us to de-indent (jump several indentation levels) `else` to last
      * not complete `if` and de-indent (jump several indentation levels) code
@@ -138,8 +138,8 @@ export const internalFormat = (
      */
     let ifDepth = new FlowOfControlNestDepth();
     /**
-     * Array of indent level of first flow of control statement without open
-     * brace `{` with nested code inside it.
+     * Object with array of indent level of first flow of control statement
+     * without open brace `{` with nested code inside it.
      *
      * Allow us to de-indent (jump several indentation levels) code
      * that exit nested flow of control statements inside block of code `{}`.
@@ -170,7 +170,7 @@ export const internalFormat = (
      * ```
      */
     let occDepth = new FlowOfControlNestDepth();
-    /** Array of depth of open brace `{` that belongs to `if` statement. */
+    /** Array of indent level of open brace `{` that belongs to `if` statement. */
     let waitCloseBraceIf: number[] = [];
     /**
      * Formatter waits `else` statement right after close brace `}`, that
@@ -240,8 +240,8 @@ export const internalFormat = (
      */
     let deferredOneCommandCode = false;
     /**
-     * Array of depth of open brace `{` that belongs to object initialization
-     * with continuation section.
+     * Array of indent level of open brace `{` that belongs to object
+     * initialization with continuation section.
      */
     let waitCloseBraceObject: number[] = [];
 
@@ -561,7 +561,7 @@ export const internalFormat = (
             // if { <-- pop IF, if we not meet ELSE
             //     code
             // }
-            // code <-- pop IF, if we not meet ELSE
+            // code <-- pop IF above, if we not meet ELSE
             if (!purifiedLine.match(/^}? ?else\b(?!:)/)) {
                 ifDepth.pop();
             }
