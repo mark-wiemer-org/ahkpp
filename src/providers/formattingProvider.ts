@@ -567,26 +567,30 @@ export const internalFormat = (
         }
 
         // CLOSE BRACE
-        // obj := { a: 1
-        //     , b: 2
-        //     , c: 3 } <-- skip de-indent by brace in Continuation Section: Object
-        if (closeBraceNum && !continuationSectionExpression) {
-            depth -= closeBraceNum;
+        if (closeBraceNum) {
+            // FLOW OF CONTROL
             ifDepth.exit();
             occDepth.exit();
-            // IF-ELSE complete tracking
-            // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
-            // if {
-            //     code
-            // } if { <-- pop previous IF, if we meet another IF
-            //     code
-            // }
-            if (
-                purifiedLine.match(/} ?if\b/) &&
-                waitCloseBraceIf.last() === depth
-            ) {
-                waitCloseBraceIf.pop();
-                ifDepth.pop();
+            // CONTINUATION SECTION: Object
+            // obj := { a: 1
+            //     , b: 2
+            //     , c: 3 } <-- skip de-indent by brace in Continuation Section: Object
+            if (!continuationSectionExpression) {
+                depth -= closeBraceNum;
+                if (
+                    purifiedLine.match(/} ?if\b/) &&
+                    waitCloseBraceIf.last() === depth
+                ) {
+                    // IF-ELSE complete tracking
+                    // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
+                    // if {
+                    //     code
+                    // } if { <-- pop previous IF, if we meet another IF
+                    //     code
+                    // }
+                    waitCloseBraceIf.pop();
+                    ifDepth.pop();
+                }
             }
         }
 
