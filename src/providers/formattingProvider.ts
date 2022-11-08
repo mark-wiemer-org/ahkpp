@@ -100,6 +100,8 @@ export const internalFormat = (
      * It's prevent wrong extra indent, when `{` present after flow of control
      * statement: one indent for `{` and additional indent for `oneCommandCode`.
      */
+    /** Previous line is one command code */
+    let prevLineIsOneCommandCode = false;
     let detectOneCommandCode = true;
     /**
      * Object with array of indent level of `if` not completed by `else`.
@@ -511,7 +513,7 @@ export const internalFormat = (
             return;
         }
 
-        // CONTINUATION SECTION: Expression, Object
+        // CONTINUATION SECTION: Expression, Object, Flow of Control nesting
         // obj := { a: 1
         //     , b: 2 }
         // if a = 1
@@ -540,7 +542,17 @@ export const internalFormat = (
             if (oneCommandCode) {
                 deferredOneCommandCode = true;
                 oneCommandCode = false;
+                prevLineIsOneCommandCode = false;
                 depth--;
+            }
+            // CONTINUATION SECTION: Flow of Control nesting
+            // Loop
+            //     code         ; previous line is one command code
+            //         , code <-- restore oneCommandCode depth
+            // code
+            if (prevLineIsOneCommandCode) {
+                oneCommandCode = true;
+                depth++;
             }
             depth++;
         }
@@ -783,12 +795,15 @@ export const internalFormat = (
             (!blockComment || formatBlockComment)
         ) {
             oneCommandCode = false;
+            prevLineIsOneCommandCode = true;
             // FLOW OF CONTROL
             // if (var)
             //    if (var) <-- don't de-indent nested flow of control statement
             if (!nextLineIsOneCommandCode(purifiedLine)) {
                 depth--;
             }
+        } else {
+            prevLineIsOneCommandCode = false;
         }
 
         // CLOSE BRACE

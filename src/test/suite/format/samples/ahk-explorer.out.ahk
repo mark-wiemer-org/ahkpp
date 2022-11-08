@@ -894,7 +894,7 @@ Class LV_Colors {
                 NumPut(ClrTx, L + ClrTxP, 0, "UInt"), This[H].CurTX := ClrTx
             If (ClrBk <> "")
                 NumPut(ClrBk, L + ClrTxBkP, 0, "UInt") , NumPut(ClrBk, L + ClrBkP, 0, "UInt")
-                , This[H].CurTB := ClrBk, This[H].CurBk := ClrBk
+                    , This[H].CurTB := ClrBk, This[H].CurBk := ClrBk
             If This[H].Cells.HasKey(Row)
                 Return CDRF_NOTIFYSUBITEMDRAW
             Return CDRF_DODEFAULT

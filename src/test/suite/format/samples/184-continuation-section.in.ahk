@@ -40,6 +40,19 @@ and b = 5
 MsgBox
 MsgBox
 
+Loop
+Code
+, Code
+, Code
+Code
+
+Loop
+if a > 0
+and b > 0
+and c > 0
+Code
+Code
+
 ProductIsAvailable := (Color = "Red")
 ? false
 : ProductIsAvailableInColor(Product, Color)
