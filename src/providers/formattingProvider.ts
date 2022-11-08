@@ -856,6 +856,7 @@ export const internalFormat = (
         // } else if { <-- check IF with open brace
         //     code
         // }
+        // TODO: Common regexp to vars? Change "}? ?" --> "(} )?"
         if (
             purifiedLine.match(/^}? ?if\b.*{/) ||
             purifiedLine.match(/^}? ?else if\b.*{/)
