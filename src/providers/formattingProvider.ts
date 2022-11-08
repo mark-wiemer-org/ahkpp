@@ -661,7 +661,7 @@ export const internalFormat = (
                 //     code
                 // }
                 depth = ifDepth.pop();
-            } else if (!(openBraceNum || closeBraceNum)) {
+            } else if (!purifiedLine.match(/^{/) && !purifiedLine.match(/^}/)) {
                 // Example (skip irrelevant braces):
                 // if       <-- relevant
                 // {        <-- skip irrelevant
