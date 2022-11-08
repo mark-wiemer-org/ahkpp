@@ -656,7 +656,7 @@ suite('FormattingProvider utils', () => {
         });
     });
 
-    suite('FlowOfControlDepth.exit', () => {
+    suite('FlowOfControlNestDepth.exitBlockOfCode', () => {
         // List of test data
         let dataList = [
             // {
@@ -670,31 +670,32 @@ suite('FormattingProvider utils', () => {
         ];
         dataList.forEach((data) => {
             test("'" + data.in + "' => '" + data.rs + "'", () => {
-                assert.deepStrictEqual(data.in.exit(), data.rs);
+                assert.deepStrictEqual(data.in.exitBlockOfCode(), data.rs);
             });
         });
     });
 
-    suite('FlowOfControlDepth.restore', () => {
+    suite('FlowOfControlNestDepth.restoreDepth', () => {
         // List of test data
         let dataList = [
             // {
             //     in: , // input array
             //     rs: , // expected result
+            //     dp: , // depth
             // },
             {
                 in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
                 rs: 1,
-                rd: [-1, 0, -1],
+                dp: [-1, 0, -1],
             },
         ];
         dataList.forEach((data) => {
             test("'" + data.in + "' => '" + data.rs + "'", () => {
-                assert.strictEqual(data.in.restore(), data.rs);
+                assert.strictEqual(data.in.restoreDepth(), data.rs);
             });
-            test("'" + data.in + "' => '" + data.rd + "'", () => {
-                data.in.restore();
-                assert.deepStrictEqual(data.in.depth, data.rd);
+            test("'" + data.in + "' => '" + data.dp + "'", () => {
+                data.in.restoreDepth();
+                assert.deepStrictEqual(data.in.depth, data.dp);
             });
         });
     });

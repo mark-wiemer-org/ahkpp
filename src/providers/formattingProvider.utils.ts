@@ -494,7 +494,9 @@ export function alignLineAssignOperator(
         .trimEnd();
 }
 
+/** Keep track of indentation level of important flow of control statements. */
 export class FlowOfControlNestDepth {
+    /** Level of indentation. */
     depth: number[];
 
     constructor(array?: number[]) {
@@ -502,23 +504,27 @@ export class FlowOfControlNestDepth {
     }
 
     /**
+     * Enter block of code.
+     *
      * Push `-1` delimiter to array.
      *
      * @return The array
      */
-    enter() {
+    enterBlockOfCode() {
         this.depth.push(-1);
         return this;
     }
 
     /**
+     * Exit block of code.
+     *
      * Cut last element equal to `-1` and all elements after it.
      *
      * Example: `[-1,0,-1,1,2]` => `[-1,0]`
      *
      * @return The array
      */
-    exit() {
+    exitBlockOfCode() {
         this.depth.splice(this.depth.lastIndexOf(-1));
         return this.depth;
     }
@@ -541,7 +547,11 @@ export class FlowOfControlNestDepth {
     }
 
     /**
-     * Get element right after last `-1` element and delete all elements after last `-1` element.
+     * Get depth of first flow of control statement with one command code in
+     * current block of code.
+     *
+     * Get element right after last `-1` element and delete all elements after
+     * last `-1` element.
      *
      * Example: `[-1,0,-1,1,2]` => `1`
      *
@@ -549,7 +559,7 @@ export class FlowOfControlNestDepth {
      *
      * @return The element of the array
      */
-    restore() {
+    restoreDepth() {
         /** Index of element right after last `-1` element. */
         let index = this.depth.lastIndexOf(-1) + 1;
         let element = this.depth[index];

@@ -108,18 +108,17 @@ export const internalFormat = (
      * not complete `if` and de-indent (jump several indentation levels) code
      * that exit nested flow of control statements inside block of code `{}`.
      *
-     * Every time we meet `{` we `push` delimiter `-1`.
+     * Every time we meet `{` we `push` delimiter `-1` to array.
+     *
+     * Every time we meet `}` we delete last delimiter `-1` from array and all
+     * elements after it.
      *
      * Every time we meet `if` we `push` current `depth` to array.
      *
-     * `splice` (delete) element(s) after last delimiter when code leaves flow
-     * of control nesting.
+     * Every time we meet `else` we `pop` element from array.
      *
-     * Every time we meet `else` or code after close brace `}` we `pop` element
-     * from array.
-     *
-     * Every time we meet `}` we delete last delimiter `-1` and all elements
-     * after it.
+     * When code leaves `if` nesting we `splice` (delete) element(s) in array
+     * after last delimiter.
      *
      * Example:
      * ```ahk
@@ -144,17 +143,17 @@ export const internalFormat = (
      * Allow us to de-indent (jump several indentation levels) code
      * that exit nested flow of control statements inside block of code `{}`.
      *
-     * Every time we meet `{`, check did we add by mistake flow of control
-     * before, revert changes, `push` delimiter `-1`.
-     *
-     * Every time we meet flow of control statement without `{` we `push`
-     * current `depth` to array, only if last element is delimiter.
-     *
-     * `splice` (delete) element(s) after last delimiter when code leaves flow
-     * of control nesting.
+     * Every time we meet `{` we check did we add by mistake `depth` of last
+     * flow of control, if yes - revert changes, `push` delimiter `-1` to array.
      *
      * Every time we meet `}` we delete last delimiter `-1` and all elements
      * after it.
+     *
+     * Every time we meet flow of control statement without `{` we `push`
+     * current `depth` to array (only if last element is delimiter).
+     *
+     * When code leaves flow of control nesting we `splice` (delete) element(s)
+     * in array after last delimiter.
      *
      * Example:
      * ```ahk
@@ -169,7 +168,7 @@ export const internalFormat = (
      * code             ; [-1]
      * ```
      */
-    let occDepth = new FlowOfControlNestDepth();
+    let focDepth = new FlowOfControlNestDepth();
     /** Array of indent level of open brace `{` that belongs to `if` statement. */
     let waitCloseBraceIf: number[] = [];
     /**
@@ -280,7 +279,7 @@ export const internalFormat = (
     let preBlockCommentTagDepth = 0;
     let preBlockCommentOneCommandCode = false;
     let preBlockCommentIfDepth = new FlowOfControlNestDepth();
-    let preBlockCommentOccDepth = new FlowOfControlNestDepth();
+    let preBlockCommentFocDepth = new FlowOfControlNestDepth();
     let preBlockCommentWaitCloseBraceIf: number[] = [];
     let preBlockCommentWaitElse = false;
 
@@ -417,14 +416,14 @@ export const internalFormat = (
                 preBlockCommentTagDepth = tagDepth;
                 preBlockCommentOneCommandCode = oneCommandCode;
                 preBlockCommentIfDepth = ifDepth;
-                preBlockCommentOccDepth = occDepth;
+                preBlockCommentFocDepth = focDepth;
                 preBlockCommentWaitCloseBraceIf = waitCloseBraceIf;
                 preBlockCommentWaitElse = waitElse;
                 // reset indent values to default values
                 tagDepth = depth;
                 oneCommandCode = false;
                 ifDepth = new FlowOfControlNestDepth();
-                occDepth = new FlowOfControlNestDepth();
+                focDepth = new FlowOfControlNestDepth();
                 waitCloseBraceIf = [];
                 waitElse = false;
             }
@@ -459,7 +458,7 @@ export const internalFormat = (
                     tagDepth = preBlockCommentTagDepth;
                     oneCommandCode = preBlockCommentOneCommandCode;
                     ifDepth = preBlockCommentIfDepth;
-                    occDepth = preBlockCommentOccDepth;
+                    focDepth = preBlockCommentFocDepth;
                     waitCloseBraceIf = preBlockCommentWaitCloseBraceIf;
                     waitElse = preBlockCommentWaitElse;
                 }
@@ -526,6 +525,7 @@ export const internalFormat = (
             !purifiedLine.match(/::/)
         ) {
             continuationSectionExpression = true;
+            // CONTINUATION SECTION: Object
             // obj := { a: 1
             //     , b: 2 <-- revert indent after open brace
             //     , c: 3 }
@@ -533,6 +533,7 @@ export const internalFormat = (
                 depth--;
                 waitCloseBraceObject.push(depth);
             }
+            // CONTINUATION SECTION: Expression
             // if a = 1
             //     or b = 2 <-- revert indent for oneCommandCode and make it
             //     MsgBox                                               deferred
@@ -558,10 +559,10 @@ export const internalFormat = (
         if (waitElse && !emptyLine) {
             waitElse = false;
             // TODO: Common regexp to vars? Change "}? ?" --> "(} )?"
-            // if { <-- pop IF, if we not meet ELSE
+            // if {
             //     code
             // }
-            // code <-- pop IF above, if we not meet ELSE
+            // code <-- pop last IF, if we not meet ELSE
             if (!purifiedLine.match(/^}? ?else\b(?!:)/)) {
                 ifDepth.pop();
             }
@@ -570,8 +571,8 @@ export const internalFormat = (
         // CLOSE BRACE
         if (closeBraceNum) {
             // FLOW OF CONTROL
-            ifDepth.exit();
-            occDepth.exit();
+            ifDepth.exitBlockOfCode();
+            focDepth.exitBlockOfCode();
             // CONTINUATION SECTION: Object
             // obj := { a: 1
             //     , b: 2
@@ -621,8 +622,8 @@ export const internalFormat = (
                 // { <-- check open brace below flow of control statement
                 //     code
                 // }
-                if (depth === occDepth.last()) {
-                    occDepth.pop();
+                if (depth === focDepth.last()) {
+                    focDepth.pop();
                 }
             }
         }
@@ -632,7 +633,7 @@ export const internalFormat = (
             !emptyLine &&
             !oneCommandCode &&
             !continuationSectionExpression &&
-            (ifDepth.last() > -1 || occDepth.last() > -1)
+            (ifDepth.last() > -1 || focDepth.last() > -1)
         ) {
             if (purifiedLine.match(/^}? ?else\b(?!:)/)) {
                 // {
@@ -649,19 +650,28 @@ export const internalFormat = (
                 // }
                 depth = ifDepth.pop();
             } else if (!(openBraceNum || closeBraceNum)) {
+                // Example (skip irrelevant braces):
+                // if       <-- relevant
+                // {        <-- skip irrelevant
+                //     code <-- relevant
+                // }        <-- skip irrelevant
+                // code     <-- relevant
+                // Example (main logic):
                 // if                                   |  loop
                 //     if                               |      loop
                 //         code                         |          code
                 // code <-- de-indent from all nesting  |  code <-- de-indent from all nesting
-                const restoreIfDepth: number | undefined = ifDepth.restore();
-                const restoreOccDepth: number | undefined = occDepth.restore();
+                const restoreIfDepth: number | undefined =
+                    ifDepth.restoreDepth();
+                const restoreFocDepth: number | undefined =
+                    focDepth.restoreDepth();
                 if (
                     restoreIfDepth !== undefined &&
-                    restoreOccDepth !== undefined
+                    restoreFocDepth !== undefined
                 ) {
-                    depth = Math.min(restoreIfDepth, restoreOccDepth);
+                    depth = Math.min(restoreIfDepth, restoreFocDepth);
                 } else {
-                    depth = restoreIfDepth ?? restoreOccDepth;
+                    depth = restoreIfDepth ?? restoreFocDepth;
                 }
             }
         }
@@ -805,9 +815,9 @@ export const internalFormat = (
         if (
             nextLineIsOneCommandCode(purifiedLine) &&
             openBraceNum === 0 &&
-            occDepth.last() === -1
+            focDepth.last() === -1
         ) {
-            occDepth.push(depth);
+            focDepth.push(depth);
         }
 
         // IF-ELSE complete tracking
@@ -871,8 +881,8 @@ export const internalFormat = (
                 braceIndent = true;
             }
             // FLOW OF CONTROL
-            ifDepth.enter();
-            occDepth.enter();
+            ifDepth.enterBlockOfCode();
+            focDepth.enterBlockOfCode();
         } else {
             braceIndent = false;
         }
@@ -949,19 +959,21 @@ export const internalFormat = (
                     isDeepStrictEqual(ifDepth.depth, [-1, 0])
                 ) &&
                 !(
-                    isDeepStrictEqual(occDepth.depth, [-1]) ||
-                    isDeepStrictEqual(occDepth.depth, [-1, 0])
+                    isDeepStrictEqual(focDepth.depth, [-1]) ||
+                    isDeepStrictEqual(focDepth.depth, [-1, 0])
                 )
             ) {
                 // If code is finished (number of open and close braces are
-                // equal) arrays must be equal [-1] or [-1, 0]. Last zero in
-                // array stays, because formatter waits code after close brace,
-                // but it reaches EOF.
+                // equal, flow of control statements has code after one command
+                // code, etc...) arrays must be equal [-1] or [-1, 0]. Last zero
+                // in array stays, because formatter waits code after close
+                // brace, but instead reaches EOF. If not equal, syntax is
+                // incorrect of there is bug in formatter logic.
                 console.error('Internal formatter data:');
                 console.log(' ifDepth:');
                 console.log(ifDepth.depth);
                 console.log('occDepth:');
-                console.log(occDepth.depth);
+                console.log(focDepth.depth);
             }
         }
     });
