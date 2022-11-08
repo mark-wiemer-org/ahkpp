@@ -173,17 +173,6 @@ export const internalFormat = (
     let focDepth = new FlowOfControlNestDepth();
     /** Array of indent level of open brace `{` that belongs to `if` statement. */
     let waitCloseBraceIf: number[] = [];
-    /**
-     * Formatter waits `else` statement right after close brace `}`, that
-     * belongs to corresponding `if`'s open brace `{`.
-     *
-     * If formatter not meet `else`, it will remove last not complete `if` from
-     * `ifDepth` object.
-     *
-     * If formatter meet `else`, it will not remove not complete `if` from
-     * `ifDepth` object, because `else` statement will do it later.
-     */
-    let waitElse = false;
     /** Previous line is `if` statement */
     let prevLineIsIf = false;
 
@@ -283,7 +272,6 @@ export const internalFormat = (
     let preBlockCommentIfDepth = new FlowOfControlNestDepth();
     let preBlockCommentFocDepth = new FlowOfControlNestDepth();
     let preBlockCommentWaitCloseBraceIf: number[] = [];
-    let preBlockCommentWaitElse = false;
 
     // SETTINGS' ALIASES
     const indentCodeAfterLabel = options.indentCodeAfterLabel;
@@ -420,14 +408,12 @@ export const internalFormat = (
                 preBlockCommentIfDepth = ifDepth;
                 preBlockCommentFocDepth = focDepth;
                 preBlockCommentWaitCloseBraceIf = waitCloseBraceIf;
-                preBlockCommentWaitElse = waitElse;
                 // reset indent values to default values
                 tagDepth = depth;
                 oneCommandCode = false;
                 ifDepth = new FlowOfControlNestDepth();
                 focDepth = new FlowOfControlNestDepth();
                 waitCloseBraceIf = [];
-                waitElse = false;
             }
         }
 
@@ -462,7 +448,6 @@ export const internalFormat = (
                     ifDepth = preBlockCommentIfDepth;
                     focDepth = preBlockCommentFocDepth;
                     waitCloseBraceIf = preBlockCommentWaitCloseBraceIf;
-                    waitElse = preBlockCommentWaitElse;
                 }
             }
             if (!formatBlockComment) {
@@ -565,19 +550,6 @@ export const internalFormat = (
             deferredOneCommandCode = false;
             oneCommandCode = true;
             depth++;
-        }
-
-        // IF-ELSE complete tracking
-        if (waitElse && !emptyLine) {
-            waitElse = false;
-            // TODO: Common regexp to vars? Change "}? ?" --> "(} )?"
-            // if {
-            //     code
-            // }
-            // code <-- pop last IF, if we not meet ELSE
-            if (!purifiedLine.match(/^}? ?else\b(?!:)/)) {
-                ifDepth.pop();
-            }
         }
 
         // CLOSE BRACE
@@ -814,12 +786,6 @@ export const internalFormat = (
             // } <-- check close brace ('depth' equal to '{' indent above)
             if (waitCloseBraceIf.last() === depth) {
                 waitCloseBraceIf.pop();
-                // if {
-                //     code
-                // } else <-- check this ELSE
-                if (!purifiedLine.match(/}? ?else\b/)) {
-                    waitElse = true;
-                }
             }
         }
 
