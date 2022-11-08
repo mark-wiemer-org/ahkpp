@@ -669,7 +669,7 @@ suite('FormattingProvider utils', () => {
             },
         ];
         dataList.forEach((data) => {
-            test("'" + data.in + "' => '" + data.rs + "'", () => {
+            test('[' + data.in.depth + '] => [' + data.rs + ']', () => {
                 assert.deepStrictEqual(data.in.exitBlockOfCode(), data.rs);
             });
         });
@@ -690,10 +690,10 @@ suite('FormattingProvider utils', () => {
             },
         ];
         dataList.forEach((data) => {
-            test("'" + data.in + "' => '" + data.rs + "'", () => {
+            test('[' + data.in.depth + "] => '" + data.rs + "'", () => {
                 assert.strictEqual(data.in.restoreDepth(), data.rs);
             });
-            test("'" + data.in + "' => '" + data.dp + "'", () => {
+            test('[' + data.in.depth + '] => [' + data.dp + ']', () => {
                 data.in.restoreDepth();
                 assert.deepStrictEqual(data.in.depth, data.dp);
             });
