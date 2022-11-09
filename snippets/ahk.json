@@ -1492,7 +1492,7 @@
     },
     "InStr()": {
         "prefix": "InStr()",
-        "body": "InStr(${1:Haystack}, ${2:Needle [}, ${3:CaseSensitive?}, ${4:StartingPos]})",
+        "body": "InStr(${1:Haystack}, ${2:Needle [}, ${3:CaseSensitive?}, ${4:StartingPos}, ${5:Occurrence]})",
         "description": "Searches for a given occurrence of a string, from the left or the right."
     },
     "IsByRef()": {
