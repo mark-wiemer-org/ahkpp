@@ -989,7 +989,7 @@ export const internalFormat = (
  * ```
  * @return is next line is one command code
  */
-function nextLineIsOneCommandCode(text: string, skipIf = false): boolean {
+function nextLineIsOneCommandCode(text: string): boolean {
     /** Special keywords that can trigger one-line commands */
     const oneCommandList = [
         'ifnotexist',
@@ -1009,9 +1009,6 @@ function nextLineIsOneCommandCode(text: string, skipIf = false): boolean {
     ];
 
     for (const oneCommand of oneCommandList) {
-        if (skipIf && oneCommand === 'if') {
-            continue;
-        }
         // 1. Before 'oneCommandCode' allowed only optional close brace
         //    Example: '} else' or '} if'
         // 2. After 'oneCommandCode' not allowed semicolon
