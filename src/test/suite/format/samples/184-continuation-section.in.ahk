@@ -26,10 +26,6 @@ obj := { 0:0, 1: { 0:0
 , j: "close brace" }
 , k: { l: 4 } }
 , m: 0 }
-
-obj := { a: 1
-, b : { c: 2
-, d: 3 } }
 MsgBox
 }
 
