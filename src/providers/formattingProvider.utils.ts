@@ -496,7 +496,7 @@ export function alignLineAssignOperator(
 
 /** Keep track of indentation level of important flow of control statements. */
 export class FlowOfControlNestDepth {
-    /** Level of indentation. */
+    /** Level of indentation. Always must have first element equal `-1`. */
     depth: number[];
 
     constructor(array?: number[]) {
@@ -506,26 +506,36 @@ export class FlowOfControlNestDepth {
     /**
      * Enter block of code.
      *
-     * Push `-1` delimiter to array.
+     * Push `-1` delimiter to array `openBraceNum` times.
      *
+     * @param openBraceNum Number of open braces `{`
      * @return The array
      */
-    enterBlockOfCode() {
-        this.depth.push(-1);
-        return this;
+    enterBlockOfCode(openBraceNum: number) {
+        for (let i = openBraceNum; i > 0; i--) {
+            this.depth.push(-1);
+        }
+        return this.depth;
     }
 
     /**
      * Exit block of code.
      *
-     * Cut last element equal to `-1` and all elements after it.
+     * Cut last element equal to `-1` and all elements after it `closeBraceNum`
+     * times.
      *
      * Example: `[-1,0,-1,1,2]` => `[-1,0]`
      *
+     * @param closeBraceNum Number of close braces `}`
      * @return The array
      */
-    exitBlockOfCode() {
-        this.depth.splice(this.depth.lastIndexOf(-1));
+    exitBlockOfCode(closeBraceNum: number) {
+        for (let i = closeBraceNum; i > 0; i--) {
+            this.depth.splice(this.depth.lastIndexOf(-1));
+        }
+        // If we delete all elements by multiply close brace (without equal
+        // number open brace before them) restore `depth` proberty.
+        this.restoreEmptyDepth();
         return this.depth;
     }
 
@@ -543,7 +553,9 @@ export class FlowOfControlNestDepth {
     }
 
     pop() {
-        return this.depth.pop();
+        let result = this.depth.pop();
+        this.restoreEmptyDepth();
+        return result;
     }
 
     /**
@@ -565,5 +577,12 @@ export class FlowOfControlNestDepth {
         let element = this.depth[index];
         this.depth.splice(index);
         return element;
+    }
+
+    /** If we delete all elements restore `depth` proberty to initial value `[-1]` */
+    restoreEmptyDepth() {
+        if (this.depth.length === 0) {
+            this.depth = [-1];
+        }
     }
 }

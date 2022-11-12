@@ -656,7 +656,65 @@ suite('FormattingProvider utils', () => {
         });
     });
 
+    suite('FlowOfControlNestDepth.enterBlockOfCode', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     bn: , // brace number
+            //     rs: , // expected result
+            // },
+            {
+                in: new FlowOfControlNestDepth([-1]),
+                bn: 1,
+                rs: [-1, -1],
+            },
+            {
+                in: new FlowOfControlNestDepth([-1]),
+                bn: 2,
+                rs: [-1, -1, -1],
+            },
+        ];
+        dataList.forEach((data) => {
+            test('[' + data.in.depth + '] => [' + data.rs + ']', () => {
+                assert.deepStrictEqual(
+                    data.in.enterBlockOfCode(data.bn),
+                    data.rs,
+                );
+            });
+        });
+    });
+
     suite('FlowOfControlNestDepth.exitBlockOfCode', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     bn: , // brace number
+            //     rs: , // expected result
+            // },
+            {
+                in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
+                bn: 1,
+                rs: [-1, 0],
+            },
+            {
+                in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
+                bn: 2,
+                rs: [-1],
+            },
+        ];
+        dataList.forEach((data) => {
+            test('[' + data.in.depth + '] => [' + data.rs + ']', () => {
+                assert.deepStrictEqual(
+                    data.in.exitBlockOfCode(data.bn),
+                    data.rs,
+                );
+            });
+        });
+    });
+
+    suite('FlowOfControlNestDepth.pop', () => {
         // List of test data
         let dataList = [
             // {
@@ -664,13 +722,34 @@ suite('FormattingProvider utils', () => {
             //     rs: , // expected result
             // },
             {
-                in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
-                rs: [-1, 0],
+                in: new FlowOfControlNestDepth([-1]),
+                rs: [-1],
             },
         ];
         dataList.forEach((data) => {
             test('[' + data.in.depth + '] => [' + data.rs + ']', () => {
-                assert.deepStrictEqual(data.in.exitBlockOfCode(), data.rs);
+                data.in.pop();
+                assert.deepStrictEqual(data.in.depth, data.rs);
+            });
+        });
+    });
+
+    suite('FlowOfControlNestDepth.restoreEmptyDepth', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     rs: , // expected result
+            // },
+            {
+                in: new FlowOfControlNestDepth([]),
+                rs: [-1],
+            },
+        ];
+        dataList.forEach((data) => {
+            test('[' + data.in.depth + '] => [' + data.rs + ']', () => {
+                data.in.restoreEmptyDepth();
+                assert.deepStrictEqual(data.in.depth, data.rs);
             });
         });
     });
@@ -687,6 +766,11 @@ suite('FormattingProvider utils', () => {
                 in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
                 rs: 1,
                 dp: [-1, 0, -1],
+            },
+            {
+                in: new FlowOfControlNestDepth([-1]),
+                rs: undefined,
+                dp: [-1],
             },
         ];
         dataList.forEach((data) => {

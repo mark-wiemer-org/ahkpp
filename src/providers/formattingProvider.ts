@@ -555,8 +555,8 @@ export const internalFormat = (
         // CLOSE BRACE
         if (closeBraceNum) {
             // FLOW OF CONTROL
-            ifDepth.exitBlockOfCode();
-            focDepth.exitBlockOfCode();
+            ifDepth.exitBlockOfCode(closeBraceNum);
+            focDepth.exitBlockOfCode(closeBraceNum);
             // CONTINUATION SECTION: Object
             // obj := { a: 1
             //     , b: 2
@@ -863,8 +863,8 @@ export const internalFormat = (
                 braceIndent = true;
             }
             // FLOW OF CONTROL
-            ifDepth.enterBlockOfCode();
-            focDepth.enterBlockOfCode();
+            ifDepth.enterBlockOfCode(openBraceNum);
+            focDepth.enterBlockOfCode(openBraceNum);
         } else {
             braceIndent = false;
         }
