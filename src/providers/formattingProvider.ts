@@ -589,6 +589,9 @@ export const internalFormat = (
         // OPEN BRACE
         if (openBraceNum) {
             // ONE COMMAND CODE
+            // else
+            //     Loop { <-- skip de-indent one command code with open brace
+            //         code
             if (
                 (oneCommandCode || deferredOneCommandCode) &&
                 !nextLineIsOneCommandCode(purifiedLine)
