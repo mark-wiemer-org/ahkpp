@@ -622,6 +622,11 @@ export const internalFormat = (
         }
 
         // FLOW OF CONTROL de-indent from all nesting
+        // if (a > 0
+        //     and b > 0) <-- skip continuation section
+        //     ;comment   <-- skip comment
+        //     code       <-- skip one command code
+        // code           <-- de-indent
         if (
             !emptyLine &&
             !oneCommandCode &&
@@ -650,10 +655,10 @@ export const internalFormat = (
                 // }        <-- skip irrelevant
                 // code     <-- relevant
                 // Example (main logic):
-                // if                                   |  loop
-                //     if                               |      loop
-                //         code                         |          code
-                // code <-- de-indent from all nesting  |  code <-- de-indent from all nesting
+                // if           |  loop
+                //     if       |      loop
+                //         code |          code
+                // code         |  code           <-- de-indent from all nesting
                 const restoreIfDepth: number | undefined =
                     ifDepth.restoreDepth();
                 const restoreFocDepth: number | undefined =
