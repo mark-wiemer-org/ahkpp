@@ -30,7 +30,7 @@ export const internalFormat = (
     let formattedString = '';
 
     // INDENTATION
-    /** Current level of indentation. 0 = top-level, no indentation */
+    /** Current level of indentation. 0 = top-level, no indentation. */
     let depth = 0;
     /**
      * It's marker for `Return`, `ExitApp`, `#Directive` commands, which
@@ -219,8 +219,8 @@ export const internalFormat = (
      */
     let continuationSectionTextNotFormat = false;
     /**
-     * Indent was increased by brace `{`, but not inside expression
-     * continuation section
+     * Level of indentation of current line increased by open brace `{`, but not
+     * inside expression continuation section.
      */
     let braceIndent = false;
     /**
@@ -514,8 +514,8 @@ export const internalFormat = (
             continuationSectionExpression = true;
             // CONTINUATION SECTION: Object
             // obj := { a: 1
-            //     , b: 2 <-- revert indent after open brace
-            //     , c: 3 }
+            //     , b: 2 <-- revert one! indent level after open brace or
+            //     , c: 3 }                                 multiply open braces
             if (braceIndent) {
                 depth--;
                 waitCloseBraceObject.push(depth);
@@ -896,7 +896,7 @@ export const internalFormat = (
             // Object - Check close braces of nested objects
             // obj := { a: 1
             //     , b : { c: 2
-            //         , d: 3 } } <-- multiply close brace in nested objects
+            //         , d: 3 } } <-- multiply close braces in nested objects
             if (closeBraceNum) {
                 depth -= closeBraceNum;
                 // obj := { a: 1
