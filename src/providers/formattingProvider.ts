@@ -93,6 +93,8 @@ export const internalFormat = (
      * ```
      */
     let oneCommandCode = false;
+    /** Previous line is one command code */
+    let prevLineIsOneCommandCode = false;
     /**
      * Detect or not detect `oneCommandCode`.
      * Every iteration it's `true`, but becomes `false` when formatter increase
@@ -100,8 +102,6 @@ export const internalFormat = (
      * It's prevent wrong extra indent, when `{` present after flow of control
      * statement: one indent for `{` and additional indent for `oneCommandCode`.
      */
-    /** Previous line is one command code */
-    let prevLineIsOneCommandCode = false;
     let detectOneCommandCode = true;
     /**
      * Object with array of indent level of `if` not completed by `else`.
@@ -894,12 +894,12 @@ export const internalFormat = (
         if (continuationSectionExpression) {
             continuationSectionExpression = false;
             // Object - Check close braces of nested objects
-            // obj = { a: 1
+            // obj := { a: 1
             //     , b : { c: 2
             //         , d: 3 } } <-- multiply close brace in nested objects
             if (closeBraceNum) {
                 depth -= closeBraceNum;
-                // obj = { a: 1
+                // obj := { a: 1
                 //     , b : { c: 2
                 //         , d: 3 } } <-- revert indent after last close brace
                 if (waitCloseBraceObject.last() === depth) {
