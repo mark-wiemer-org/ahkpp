@@ -291,6 +291,14 @@ export const internalFormat = (
      */
     const continuationSection =
         /^(((and|or|not)\b)|[\^!~?:&<>=.,|]|\+(?!\+)|-(?!-)|\/(?!\*)|\*(?!\/))/;
+    /** Formatter's directive `;@AHK++AlignAssignmentOn` */
+    const ahkAlignAssignmentOn = /;\s*@AHK\+\+AlignAssignmentOn/i;
+    /** Formatter's directive `;@AHK++AlignAssignmentOff` */
+    const ahkAlignAssignmentOff = /;\s*@AHK\+\+AlignAssignmentOff/i;
+    /** Formatter's directive `;@AHK++FormatBlockCommentOn` */
+    const ahkFormatBlockCommentOn = /;\s*@AHK\+\+FormatBlockCommentOn/i;
+    /** Formatter's directive `;@AHK++FormatBlockCommentOff` */
+    const ahkFormatBlockCommentOff = /;\s*@AHK\+\+FormatBlockCommentOff/i;
     /**
      * Label name may consist of any characters other than `space`, `tab`,
      * `comma` and the escape character (`).
@@ -331,7 +339,7 @@ export const internalFormat = (
         formattedLine = trimExtraSpaces(formattedLine, trimSpaces) // Remove extra spaces between words
             .concat(comment) // Add removed single line comment back
             .trim();
-        /** Line is empty or this is a single comment line */
+        /** Line is empty or this is a single line comment */
         const emptyLine = purifiedLine === '';
 
         detectOneCommandCode = true;
@@ -346,10 +354,7 @@ export const internalFormat = (
 
         // STOP DIRECTIVE for formatter
         if (emptyLine) {
-            if (
-                alignAssignment &&
-                comment.match(/;\s*@AHK\+\+AlignAssignmentOff/i)
-            ) {
+            if (alignAssignment && comment.match(ahkAlignAssignmentOff)) {
                 alignAssignment = false;
                 assignmentBlock = alignTextAssignOperator(assignmentBlock);
                 // Save aligned block
@@ -366,10 +371,7 @@ export const internalFormat = (
                 });
                 assignmentBlock = [];
             }
-            if (
-                formatBlockComment &&
-                comment.match(/;\s*@AHK\+\+FormatBlockCommentOff/i)
-            ) {
+            if (formatBlockComment && comment.match(ahkFormatBlockCommentOff)) {
                 formatBlockComment = false;
             }
         }
@@ -467,6 +469,26 @@ export const internalFormat = (
             if (!formatBlockComment) {
                 return;
             }
+        }
+
+        // SINGLE LINE COMMENT
+        if (
+            emptyLine &&
+            // skip formatter's directives
+            !comment.match(ahkAlignAssignmentOn) &&
+            !comment.match(ahkAlignAssignmentOff) &&
+            !comment.match(ahkFormatBlockCommentOn) &&
+            !comment.match(ahkFormatBlockCommentOff)
+        ) {
+            // save with zero indent (indent value don't matter here)
+            formattedString += buildIndentedLine(
+                lineIndex,
+                lines.length,
+                formattedLine,
+                0,
+                options,
+            );
+            return;
         }
 
         // CONTINUATION SECTION: Text [Not Formatted] Start
@@ -629,11 +651,9 @@ export const internalFormat = (
         // FLOW OF CONTROL de-indent from all nesting
         // if (a > 0
         //     and b > 0) <-- skip continuation section
-        //     ;comment   <-- skip comment
         //     code       <-- skip one command code
         // code           <-- de-indent
         if (
-            !emptyLine &&
             !oneCommandCode &&
             !continuationSectionExpression &&
             (ifDepth.last() > -1 || focDepth.last() > -1)
@@ -769,9 +789,9 @@ export const internalFormat = (
 
         // START DIRECTIVE for formatter
         if (emptyLine) {
-            if (comment.match(/;\s*@AHK\+\+AlignAssignmentOn/i)) {
+            if (comment.match(ahkAlignAssignmentOn)) {
                 alignAssignment = true;
-            } else if (comment.match(/;\s*@AHK\+\+FormatBlockCommentOn/i)) {
+            } else if (comment.match(ahkFormatBlockCommentOn)) {
                 formatBlockComment = true;
             }
         }
@@ -779,9 +799,6 @@ export const internalFormat = (
         // ONE COMMAND CODE
         if (
             oneCommandCode &&
-            // Don't change indentation on empty lines (single line comment is
-            // equal to empty line) after one command code.
-            !emptyLine &&
             // Don't change indentation on block comment after one command code.
             // Change indentation inside block comment, if user wants to format
             // block comment.
@@ -865,7 +882,7 @@ export const internalFormat = (
         //     code
         if (purifiedLine.match(/^}? ?if\b(?!:)(.(?!{))*$/)) {
             prevLineIsIf = true;
-        } else if (!emptyLine) {
+        } else {
             prevLineIsIf = false;
         }
 
