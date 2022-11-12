@@ -283,6 +283,15 @@ export const internalFormat = (
 
     // REGULAR EXPRESSION
     /**
+     * A line that starts with `and`, `or`, `||`, `&&`, a comma, or a period is
+     * automatically merged with the line directly above it (the same is true
+     * for all other expression operators except `++` and `--`).
+     *
+     * Skip `++`, `--`, block comments `/ *` and `* /`
+     */
+    const continuationSection =
+        /^(((and|or|not)\b)|[\^!~?:&<>=.,|]|\+(?!\+)|-(?!-)|\/(?!\*)|\*(?!\/))/;
+    /**
      * Label name may consist of any characters other than `space`, `tab`,
      * `comma` and the escape character (`).
      *
@@ -325,7 +334,6 @@ export const internalFormat = (
         /** Line is empty or this is a single comment line */
         const emptyLine = purifiedLine === '';
 
-        continuationSectionExpression = false;
         detectOneCommandCode = true;
         sharpDirectiveLine = false;
 
@@ -510,10 +518,7 @@ export const internalFormat = (
         // if a = 1
         //     and b = 2
         if (
-            // skip increment ++, decrement --, block comments /* and */
-            purifiedLine.match(
-                /^(((and|or|not)\b)|[\^!~?:&<>=.,|]|\+(?!\+)|-(?!-)|\/(?!\*)|\*(?!\/))/,
-            ) &&
+            purifiedLine.match(continuationSection) &&
             // skip Hotkeys:: and ::Hotstrings:: (they has '::')
             !purifiedLine.match(/::/)
         ) {
