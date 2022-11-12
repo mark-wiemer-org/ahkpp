@@ -224,7 +224,7 @@ export const internalFormat = (
      * Level of indentation of current line increased by open brace `{`, but not
      * inside expression continuation section.
      */
-    let braceIndent = false;
+    let openBraceIndent = false;
     /**
      * The indentation of `oneCommandCode` is delayed, because the current line
      * is an expression continuation section. The indentation is delayed by
@@ -232,10 +232,10 @@ export const internalFormat = (
      */
     let deferredOneCommandCode = false;
     /**
-     * Array of indent level of open brace `{` that belongs to object
-     * initialization with continuation section.
+     * Indent level of open brace `{` that belongs to object's initialization
+     * with continuation section.
      */
-    let waitCloseBraceObject: number[] = [];
+    let openBraceObjectDepth = -1;
 
     // OTHER
     /**
@@ -522,9 +522,9 @@ export const internalFormat = (
             // obj := { a: 1
             //     , b: 2 <-- revert one! indent level after open brace or
             //     , c: 3 }                                 multiply open braces
-            if (braceIndent) {
+            if (openBraceIndent) {
                 depth--;
-                waitCloseBraceObject.push(prevLineDepth);
+                openBraceObjectDepth = prevLineDepth;
             }
             // CONTINUATION SECTION: Expression
             // if a = 1
@@ -871,15 +871,15 @@ export const internalFormat = (
             detectOneCommandCode = false;
             // CONTINUATION SECTION: Nested Objects
             if (!continuationSectionExpression) {
-                braceIndent = true;
+                openBraceIndent = true;
             } else {
-                braceIndent = false;
+                openBraceIndent = false;
             }
             // FLOW OF CONTROL
             ifDepth.enterBlockOfCode(openBraceNum);
             focDepth.enterBlockOfCode(openBraceNum);
         } else {
-            braceIndent = false;
+            openBraceIndent = false;
         }
 
         // #DIRECTIVE with parameters
@@ -915,8 +915,8 @@ export const internalFormat = (
                 // obj := { a: 1
                 //     , b : { c: 2
                 //         , d: 3 } } <-- revert indent after last close brace
-                if (waitCloseBraceObject.last() === depth) {
-                    waitCloseBraceObject.pop();
+                if (openBraceObjectDepth === depth) {
+                    openBraceObjectDepth = -1;
                     depth++;
                 }
             }
