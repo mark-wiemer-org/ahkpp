@@ -870,7 +870,7 @@ export const internalFormat = (
             // Do not detect 'oneCommandCode', because it will produce extra
             // indent for next line like in example below:
             // if {
-            // |   |   wrong_extra_indented_code_by_oneCommandCode
+            // |   |   code <-- wrong extra indent by oneCommandCode
             // |   code
             // }
             detectOneCommandCode = false;
