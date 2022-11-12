@@ -10,6 +10,9 @@ obj := { 0:0
 , i: "close brace" }
 , j: "close brace" }
 , k: { l: 4 } }
+obj = { a: 1
+, b : { c: 2
+, d: 3 } }
 MsgBox
 }
 
