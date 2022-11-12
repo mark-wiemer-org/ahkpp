@@ -270,6 +270,7 @@ export const internalFormat = (
     // restore them on exit of block comment
     let preBlockCommentDepth = 0;
     let preBlockCommentTagDepth = 0;
+    let preBlockCommentPrevLineDepth = 0;
     let preBlockCommentOneCommandCode = false;
     let preBlockCommentIfDepth = new FlowOfControlNestDepth();
     let preBlockCommentFocDepth = new FlowOfControlNestDepth();
@@ -406,12 +407,14 @@ export const internalFormat = (
                 // save indent values on block comment enter
                 preBlockCommentDepth = depth;
                 preBlockCommentTagDepth = tagDepth;
+                preBlockCommentPrevLineDepth = prevLineDepth;
                 preBlockCommentOneCommandCode = oneCommandCode;
                 preBlockCommentIfDepth = ifDepth;
                 preBlockCommentFocDepth = focDepth;
                 preBlockCommentWaitCloseBraceIf = waitCloseBraceIf;
                 // reset indent values to default values
                 tagDepth = depth;
+                prevLineDepth = depth;
                 oneCommandCode = false;
                 ifDepth = new FlowOfControlNestDepth();
                 focDepth = new FlowOfControlNestDepth();
@@ -446,6 +449,7 @@ export const internalFormat = (
                     // restore indent values on block comment exit
                     depth = preBlockCommentDepth;
                     tagDepth = preBlockCommentTagDepth;
+                    prevLineDepth = preBlockCommentPrevLineDepth;
                     oneCommandCode = preBlockCommentOneCommandCode;
                     ifDepth = preBlockCommentIfDepth;
                     focDepth = preBlockCommentFocDepth;
