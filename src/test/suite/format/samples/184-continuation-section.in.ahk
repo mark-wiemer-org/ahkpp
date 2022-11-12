@@ -1,6 +1,21 @@
 ; [Issue #184](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/184)
 {
-obj := { 0:0
+obj := {
+, }
+
+obj := { {
+, } }
+
+obj := { {
+, {
+, }
+, } }
+
+obj := { {
+, {
+, } } }
+
+obj := { 0:0, 1: { 0:0
 , a: {}
 , b: "string"
 , c: { d: "open brace"
@@ -10,7 +25,9 @@ obj := { 0:0
 , i: "close brace" }
 , j: "close brace" }
 , k: { l: 4 } }
-obj = { a: 1
+, m: 0 }
+
+obj := { a: 1
 , b : { c: 2
 , d: 3 } }
 MsgBox
@@ -44,17 +61,17 @@ MsgBox
 MsgBox
 
 Loop
-Code
-, Code
-, Code
-Code
+code
+, code
+, code
+code
 
 Loop
 if a > 0
 and b > 0
 and c > 0
-Code
-Code
+code
+code
 
 ProductIsAvailable := (Color = "Red")
 ? false

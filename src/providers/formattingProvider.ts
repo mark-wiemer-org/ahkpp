@@ -32,6 +32,8 @@ export const internalFormat = (
     // INDENTATION
     /** Current level of indentation. 0 = top-level, no indentation. */
     let depth = 0;
+    /** Level of indentation on previous line */
+    let prevLineDepth = 0;
     /**
      * It's marker for `Return`, `ExitApp`, `#Directive` commands, which
      * allow/disallow for them to be un-indented.
@@ -518,7 +520,7 @@ export const internalFormat = (
             //     , c: 3 }                                 multiply open braces
             if (braceIndent) {
                 depth--;
-                waitCloseBraceObject.push(depth);
+                waitCloseBraceObject.push(prevLineDepth);
             }
             // CONTINUATION SECTION: Expression
             // if a = 1
@@ -733,6 +735,8 @@ export const internalFormat = (
             preBlockCommentDepth = 0;
         }
 
+        prevLineDepth = depth;
+
         // Save indented line
         formattedString += buildIndentedLine(
             lineIndex,
@@ -861,6 +865,8 @@ export const internalFormat = (
             // CONTINUATION SECTION: Nested Objects
             if (!continuationSectionExpression) {
                 braceIndent = true;
+            } else {
+                braceIndent = false;
             }
             // FLOW OF CONTROL
             ifDepth.enterBlockOfCode(openBraceNum);
