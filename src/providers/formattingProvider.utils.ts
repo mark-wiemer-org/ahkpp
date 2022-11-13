@@ -592,3 +592,65 @@ export class FlowOfControlNestDepth {
         }
     }
 }
+
+/**
+ * Align single line comment (starts with semicolon `;`) to previous line of code
+ * @param stringToFormat String with whole document
+ * @param options VS Code formatting options
+ * @return String with formatted document
+ */
+export function alignSingleLineComments(
+    stringToFormat: string,
+    options: Pick<FormatOptions, 'insertSpaces' | 'tabSize' | 'preserveIndent'>,
+): string {
+    let depth = 0;
+    let prevLineDepth = 0;
+    const lines = stringToFormat.split('\n');
+    for (let i = lines.length - 1; i >= 0; i--) {
+        const line = lines[i];
+        /** Line is empty or this is a single comment line. */
+        const emptyLine = purify(line) === '';
+        if (emptyLine) {
+            const indentationChars = buildIndentationChars(
+                prevLineDepth,
+                options,
+            );
+            lines[i] = buildIndentedString(
+                indentationChars,
+                // trim formatter directive comments, they saved with indentation
+                line.trim(),
+                options.preserveIndent,
+            );
+        } else {
+            depth = calculateDepth(line, options);
+            // obj := { a: { b: 1
+            //         ; comment
+            //         , c: 2 }} <-- don't match close braces in object's
+            //                                              continuation section
+            // if {
+            //     ; comment
+            // } <-- increase indent for comment above after close brace
+            if (line.match(/^\s*}/)) {
+                const braceNum = braceNumber(purify(line), '}');
+                depth += braceNum;
+            }
+            prevLineDepth = depth;
+        }
+    }
+    return lines.join('\n');
+}
+
+/**
+ * Calculate indent level of current line of code
+ * @param text Line of code
+ * @param options VS Code formatting options
+ * @return Indent level
+ */
+export function calculateDepth(
+    text: string,
+    options: Pick<FormatOptions, 'insertSpaces' | 'tabSize'>,
+): number {
+    const indentationChars = text.match(/^\s+/);
+    const charsNum = indentationChars?.[0].length ?? 0;
+    return options.insertSpaces ? charsNum / options.tabSize : charsNum;
+}

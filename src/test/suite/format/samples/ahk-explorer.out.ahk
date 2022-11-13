@@ -2187,7 +2187,7 @@ compareTwoStrings(para_string1,para_string2)
             ; oArray["z" SubStr(para_string2, A_Index, 2)]--
             vCount++
         }
-        ; p(vCount)
+    ; p(vCount)
     vSDC := (vCount) / (vCount2)
     ; vSDC := (2 * vCount) / (vCount1 + vCount2)
     ; vSDC := Round((2 * vCount) / (vCount1 + vCount2),2)
@@ -2366,7 +2366,7 @@ HandleMessage( p_w, p_l, p_m, p_hw )
             }
 
             if (((p_w >> 16) & 0x200) and not ((p_w >> 16) & 0x100))
-                ; if (If ((p_w >> 16) & 0x200) and not ((p_w >> 16) & 0x100))
+            ; if (If ((p_w >> 16) & 0x200) and not ((p_w >> 16) & 0x100))
             {
                 if ( p_l = Edithwnd%whichSide% )
                 {

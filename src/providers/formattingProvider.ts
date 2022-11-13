@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import { ConfigKey, Global } from '../common/global';
 import { FormatOptions } from './formattingProvider.types';
 import {
+    alignSingleLineComments,
     alignTextAssignOperator,
     braceNumber,
     buildIndentedLine,
@@ -999,6 +1000,8 @@ export const internalFormat = (
             }
         }
     });
+
+    formattedString = alignSingleLineComments(formattedString, options);
 
     formattedString = removeEmptyLines(
         formattedString,
