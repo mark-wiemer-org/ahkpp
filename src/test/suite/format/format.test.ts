@@ -82,6 +82,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: 'label-fall-through' },
     { filenameRoot: 'label-specific-name' },
     { filenameRoot: 'return-exit-exitapp' },
+    { filenameRoot: 'single-line-comment' },
     {
         filenameRoot: 'tab-size-2',
         options: { tabSize: 2 },
