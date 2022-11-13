@@ -67,6 +67,7 @@ export const documentToString = (document: {
  * Build indentation chars
  * @param depth Depth of indent
  * @param options VS Code formatting options
+ * @return String with indentation chars
  */
 export function buildIndentationChars(
     depth: number,
@@ -82,6 +83,7 @@ export function buildIndentationChars(
  * @param indentationChars Indentation chars
  * @param formattedLine Formatted line of code
  * @param preserveIndentOnEmptyString Preserve indent on empty string
+ * @return String without new line character at end
  */
 export function buildIndentedString(
     indentationChars: string,
@@ -103,6 +105,7 @@ export function buildIndentedString(
  * @param formattedLine Formatted line of code
  * @param depth Depth of indent
  * @param options VS Code formatting options
+ * @return Indented string with new line character at end
  */
 export function buildIndentedLine(
     lineIndex: number,
@@ -110,7 +113,7 @@ export function buildIndentedLine(
     formattedLine: string,
     depth: number,
     options: Pick<FormatOptions, 'insertSpaces' | 'tabSize' | 'preserveIndent'>,
-) {
+): string {
     const indentationChars = buildIndentationChars(depth, options);
     let indentedLine = buildIndentedString(
         indentationChars,
@@ -433,7 +436,8 @@ export function braceNumber(line: string, braceChar: BraceChar): number {
     return braceNum;
 }
 
-/** Align variable assignment by = operator
+/**
+ * Align variable assignment by = operator
  * @param text Text to align
  * @returns Aligned text
  */
@@ -448,7 +452,8 @@ export function alignTextAssignOperator(text: string[]): string[] {
     return alignedText;
 }
 
-/** Remove comment, remove extra spaces around first = or := operator,
+/**
+ * Remove comment, remove extra spaces around first = or := operator,
  * add spaces around first = or := operator (if they missing).
  * Remove extra spaces, but not touch leading and trailing spaces.
  * @param original Original line of code
@@ -472,7 +477,8 @@ export function normalizeLineAssignOperator(original: string): string {
     );
 }
 
-/** Add spaces before = and := operators to move it to target position.
+/**
+ * Add spaces before = and := operators to move it to target position.
  * Remove extra spaces between symbol and operator,
  * remove spaces before comment (if present),
  * trim end spaces.
