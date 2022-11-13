@@ -3,10 +3,12 @@ import * as assert from 'assert';
 import path = require('path');
 import {
     alignLineAssignOperator,
+    alignSingleLineComments,
     BraceChar,
     braceNumber,
     buildIndentationChars,
     buildIndentedLine,
+    calculateDepth,
     documentToString,
     FlowOfControlNestDepth,
     hasMoreCloseParens,
@@ -780,6 +782,111 @@ suite('FormattingProvider utils', () => {
             test('[' + data.in.depth + '] => [' + data.dp + ']', () => {
                 data.in.restoreDepth();
                 assert.deepStrictEqual(data.in.depth, data.dp);
+            });
+        });
+    });
+
+    suite('alignSingleLineComments', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     op: , // formatting options
+            //     rs: , // expected result
+            // },
+            {
+                in: '',
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: true },
+                rs: '',
+            },
+            {
+                in: 'MsgBox',
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                rs: 'MsgBox',
+            },
+            {
+                in: 'MsgBox\n',
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                rs: 'MsgBox\n',
+            },
+            {
+                in: ';comment\nMsgBox',
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                rs: ';comment\nMsgBox',
+            },
+            {
+                in: ';comment\n    MsgBox',
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                rs: '    ;comment\n    MsgBox',
+            },
+            {
+                in: ';comment\n\tMsgBox',
+                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
+                rs: '\t;comment\n\tMsgBox',
+            },
+            {
+                in: ';comment\n}\nMsgBox',
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                rs: '    ;comment\n}\nMsgBox',
+            },
+            {
+                in: ';comment\n    , a: 4 }',
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                rs: '    ;comment\n    , a: 4 }',
+            },
+            {
+                in: '\n    MsgBox',
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: true },
+                rs: '    \n    MsgBox',
+            },
+            {
+                in: '\n\tMsgBox',
+                op: { insertSpaces: false, tabSize: 4, preserveIndent: true },
+                rs: '\t\n\tMsgBox',
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(
+                    alignSingleLineComments(data.in, data.op),
+                    data.rs,
+                );
+            });
+        });
+    });
+
+    suite('calculateDepth', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     op: , // formatting options
+            //     rs: , // expected result
+            // },
+            {
+                in: '',
+                op: { insertSpaces: true, tabSize: 4 },
+                rs: 0,
+            },
+            {
+                in: 'MsgBox',
+                op: { insertSpaces: true, tabSize: 4 },
+                rs: 0,
+            },
+            {
+                in: '        MsgBox',
+                op: { insertSpaces: true, tabSize: 4 },
+                rs: 2,
+            },
+            {
+                in: '\t\tMsgBox',
+                op: { insertSpaces: false, tabSize: 4 },
+                rs: 2,
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(calculateDepth(data.in, data.op), data.rs);
             });
         });
     });
