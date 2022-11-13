@@ -15,12 +15,6 @@ loop
     code
 }
 
-if {
-    code
-} if {
-    code
-}
-
 loop
     loop
         loop

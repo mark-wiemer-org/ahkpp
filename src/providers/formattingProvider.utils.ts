@@ -38,21 +38,6 @@ String.prototype.replaceAll = function (
     return str;
 };
 
-declare global {
-    interface Array<T> {
-        /**
-         * Get the last element of the array.
-         *
-         * @return The last element of the array
-         */
-        last(): T;
-    }
-}
-
-Array.prototype.last = function <T>(this: T[]): T {
-    return this[this.length - 1];
-};
-
 /** Stringify a document, using consistent `\n` line separators */
 export const documentToString = (document: {
     lineCount: number;

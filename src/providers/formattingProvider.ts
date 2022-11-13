@@ -174,10 +174,6 @@ export const internalFormat = (
      * ```
      */
     let focDepth = new FlowOfControlNestDepth();
-    /** Array of indent level of open brace `{` that belongs to `if` statement. */
-    let waitCloseBraceIf: number[] = [];
-    /** Previous line is `if` statement */
-    let prevLineIsIf = false;
 
     // ALIGN ASSIGNMENT
     /**
@@ -275,7 +271,6 @@ export const internalFormat = (
     let preBlockCommentOneCommandCode = false;
     let preBlockCommentIfDepth = new FlowOfControlNestDepth();
     let preBlockCommentFocDepth = new FlowOfControlNestDepth();
-    let preBlockCommentWaitCloseBraceIf: number[] = [];
 
     // SETTINGS' ALIASES
     const indentCodeAfterLabel = options.indentCodeAfterLabel;
@@ -422,14 +417,12 @@ export const internalFormat = (
                 preBlockCommentOneCommandCode = oneCommandCode;
                 preBlockCommentIfDepth = ifDepth;
                 preBlockCommentFocDepth = focDepth;
-                preBlockCommentWaitCloseBraceIf = waitCloseBraceIf;
                 // reset indent values to default values
                 tagDepth = depth;
                 prevLineDepth = depth;
                 oneCommandCode = false;
                 ifDepth = new FlowOfControlNestDepth();
                 focDepth = new FlowOfControlNestDepth();
-                waitCloseBraceIf = [];
             }
         }
 
@@ -464,7 +457,6 @@ export const internalFormat = (
                     oneCommandCode = preBlockCommentOneCommandCode;
                     ifDepth = preBlockCommentIfDepth;
                     focDepth = preBlockCommentFocDepth;
-                    waitCloseBraceIf = preBlockCommentWaitCloseBraceIf;
                 }
             }
             if (!formatBlockComment) {
@@ -597,20 +589,6 @@ export const internalFormat = (
             //     , c: 3 } <-- skip de-indent by brace in Continuation Section: Object
             if (!continuationSectionExpression) {
                 depth -= closeBraceNum;
-                if (
-                    purifiedLine.match(/} ?if\b/) &&
-                    waitCloseBraceIf.last() === depth
-                ) {
-                    // IF-ELSE complete tracking
-                    // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
-                    // if {
-                    //     code
-                    // } if { <-- pop previous IF, if we meet another IF
-                    //     code
-                    // }
-                    waitCloseBraceIf.pop();
-                    ifDepth.pop();
-                }
             }
         }
 
@@ -817,17 +795,6 @@ export const internalFormat = (
             prevLineIsOneCommandCode = false;
         }
 
-        // CLOSE BRACE
-        if (closeBraceNum) {
-            // IF-ELSE complete tracking
-            // if {
-            //     code
-            // } <-- check close brace ('depth' equal to '{' indent above)
-            if (waitCloseBraceIf.last() === depth) {
-                waitCloseBraceIf.pop();
-            }
-        }
-
         // FLOW OF CONTROL
         // Loop, %var% <-- flow of control statement without open brace
         //     code
@@ -841,50 +808,17 @@ export const internalFormat = (
         }
 
         // IF-ELSE complete tracking
-        // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
         // if {        <-- check IF
-        //     code
-        // } if {      <-- TODO: who will format like that??? Simplify regex
         //     code
         // } else if { <-- check IF
         //     code
         // } else if   <-- check IF
         //     code
-        if (
-            purifiedLine.match(/^}? ?if\b(?!:)/) ||
-            purifiedLine.match(/^}? ?else if\b/)
-        ) {
+        // else if     <-- check IF
+        //     code
+        // If:         <-- skip valid LABEL
+        if (purifiedLine.match(/^(}? ?else )?if\b(?!:)/)) {
             ifDepth.push(depth);
-        }
-        // if {  <-- check IF with open brace
-        //     code
-        // } else if { <-- check IF with open brace
-        //     code
-        // }
-        // TODO: Common regexp to vars? Change "}? ?" --> "(} )?"
-        if (
-            purifiedLine.match(/^}? ?if\b.*{/) ||
-            purifiedLine.match(/^}? ?else if\b.*{/)
-        ) {
-            waitCloseBraceIf.push(depth);
-        }
-        // if (var)
-        // { <-- check open brace if above was IF
-        //     code
-        // }
-        if (prevLineIsIf && openBraceNum) {
-            waitCloseBraceIf.push(depth);
-        }
-        // TODO: WHO WILL FORMAT LIKE THAT? DELETE!
-        // if (var)   <-- IF without open brace
-        // {
-        //     code
-        // } if (var) <-- TODO: who will format like that??? Simplify regex
-        //     code
-        if (purifiedLine.match(/^}? ?if\b(?!:)(.(?!{))*$/)) {
-            prevLineIsIf = true;
-        } else {
-            prevLineIsIf = false;
         }
 
         // OPEN BRACE
