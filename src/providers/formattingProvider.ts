@@ -629,13 +629,15 @@ export const internalFormat = (
 
         // FLOW OF CONTROL de-indent from all nesting
         // if (a > 0
-        //     and b > 0) <-- skip continuation section
-        //     code       <-- skip one command code
+        //     and b > 0)          <-- skip continuation section
+        //     code                <-- skip one command code
+        //     /* block comment */ <-- skip block comment
         // code           <-- de-indent
         if (
-            !oneCommandCode &&
+            (ifDepth.last() > -1 || focDepth.last() > -1) &&
             !continuationSectionExpression &&
-            (ifDepth.last() > -1 || focDepth.last() > -1)
+            !oneCommandCode &&
+            (!blockComment || formatBlockComment)
         ) {
             if (purifiedLine.match(/^}? ?else\b(?!:)/)) {
                 // {
