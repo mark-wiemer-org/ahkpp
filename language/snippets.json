@@ -4589,5 +4589,13 @@
     "Parent": {
         "prefix": "Parent",
         "body": "Parent"
+    },
+    "FormatBlockCommentOn": {
+        "prefix": "@AHK++FormatBlockCommentOn",
+        "body": ";@AHK++FormatBlockCommentOn"
+    },
+    "FormatBlockCommentOff": {
+        "prefix": "@AHK++FormatBlockCommentOff",
+        "body": ";@AHK++FormatBlockCommentOff"
     }
 }

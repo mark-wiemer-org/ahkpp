@@ -104,7 +104,7 @@
                 "ahk++.compiler.useMpress": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Use MPRESS (if available) to compress the resulting executable."
+                    "markdownDescription": "Use [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm) (if available) to compress the resulting executable."
                 },
                 "ahk++.file.compilePath": {
                     "type": "string",
@@ -306,11 +306,7 @@
         "snippets": [
             {
                 "language": "ahk",
-                "path": "./snippets/ahk.json"
-            },
-            {
-                "language": "ahk",
-                "path": "./snippets/ahk++.json"
+                "path": "./language/snippets.json"
             }
         ]
     },
