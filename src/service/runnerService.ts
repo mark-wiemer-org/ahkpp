@@ -27,6 +27,7 @@ export const makeCompileCommand = (
     const compileMpressCommand = useMpress ? '/mpress 1' : '';
     return `"${compilePath}" ${guiCommand} /in "${currentPath}" /out "${exePath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
 };
+
 export class RunnerService {
     /** Runs the editor selection as a standalone script. */
     public static async runSelection(): Promise<void> {
