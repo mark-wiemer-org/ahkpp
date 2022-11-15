@@ -188,7 +188,7 @@ export class DebugSession extends LoggingDebugSession {
         args: DebugProtocol.PauseArguments,
         request?: DebugProtocol.Request,
     ): void {
-        this.dispatcher.sendComand(Continue.break);
+        this.dispatcher.sendCommand(Continue.break);
         this.sendResponse(response);
     }
 
@@ -196,7 +196,7 @@ export class DebugSession extends LoggingDebugSession {
         response: DebugProtocol.ContinueResponse,
         args: DebugProtocol.ContinueArguments,
     ): void {
-        this.dispatcher.sendComand(Continue.run);
+        this.dispatcher.sendCommand(Continue.run);
         this.sendResponse(response);
     }
 
@@ -204,7 +204,7 @@ export class DebugSession extends LoggingDebugSession {
         response: DebugProtocol.NextResponse,
         args: DebugProtocol.NextArguments,
     ): void {
-        this.dispatcher.sendComand(Continue.stepOver);
+        this.dispatcher.sendCommand(Continue.stepOver);
         this.sendResponse(response);
     }
 
@@ -213,7 +213,7 @@ export class DebugSession extends LoggingDebugSession {
         args: DebugProtocol.StepInArguments,
         request?: DebugProtocol.Request,
     ): void {
-        this.dispatcher.sendComand(Continue.stepInto);
+        this.dispatcher.sendCommand(Continue.stepInto);
         this.sendResponse(response);
     }
 
@@ -222,7 +222,7 @@ export class DebugSession extends LoggingDebugSession {
         args: DebugProtocol.StepOutArguments,
         request?: DebugProtocol.Request,
     ): void {
-        this.dispatcher.sendComand(Continue.stepOut);
+        this.dispatcher.sendCommand(Continue.stepOut);
         this.sendResponse(response);
     }
 

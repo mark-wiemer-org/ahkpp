@@ -11,7 +11,7 @@ export class CommandHandler {
      * send command to the ahk debug proxy.
      * @param command
      */
-    public sendComand(command: string, data?: string): Promise<DbgpResponse> {
+    public sendCommand(command: string, data?: string): Promise<DbgpResponse> {
         if (!this.debugServer) {
             return;
         }
