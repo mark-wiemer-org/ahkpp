@@ -3,21 +3,29 @@ import * as vscode from 'vscode';
 import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
 import { Process } from '../common/processWrapper';
+import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
 
 export const makeCompileCommand = (
     compilePath: string,
     currentPath: string,
-    compileDestPath: string,
+    showGui: boolean,
     compileIcon: string,
     compileBaseFile: string,
     useMpress: boolean,
 ): string => {
+    if (!compilePath || !currentPath) {
+        return '';
+    }
+    const pos = currentPath.lastIndexOf('.');
+    const exePath =
+        currentPath.substring(0, pos < 0 ? currentPath.length : pos) + '.exe';
+    const guiCommand = showGui ? '/gui' : '';
     const compileIconCommand = compileIcon ? `/icon "${compileIcon}"` : '';
     const compileBaseFileCommand = compileBaseFile
         ? `/bin "${compileBaseFile}"`
         : '';
     const compileMpressCommand = useMpress ? '/mpress 1' : '';
-    return `"${compilePath}" /in "${currentPath}" /out "${compileDestPath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
+    return `"${compilePath}" ${guiCommand} /in "${currentPath}" /out "${exePath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
 };
 export class RunnerService {
     /** Runs the editor selection as a standalone script. */
@@ -63,10 +71,12 @@ export class RunnerService {
         });
     }
 
-    /** Compiles current script */
-    public static async compile() {
+    /**
+     * Compiles current script
+     */
+    public static async compile(showGui: boolean) {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
-        if (!currentPath) {
+        if (!fs.existsSync(currentPath)) {
             vscode.window.showErrorMessage('Cannot compile never-saved files.');
             return;
         }
@@ -86,18 +96,24 @@ export class RunnerService {
         const compileCommand = makeCompileCommand(
             compilePath,
             currentPath,
-            compileDestPath,
+            showGui,
             compileIcon,
             compileBaseFile,
             useMpress,
         );
 
+        if (!compileCommand) {
+            vscode.window.showErrorMessage('Cannot build compile command.');
+            return;
+        }
+
         if (
-            await Process.exec(compileCommand, {
+            (await Process.exec(compileCommand, {
                 cwd: `${res(currentPath, '..')}`,
-            })
+            })) &&
+            !showGui
         ) {
-            vscode.window.showInformationMessage('compile success!');
+            vscode.window.showInformationMessage('Compile success!');
         }
     }
 

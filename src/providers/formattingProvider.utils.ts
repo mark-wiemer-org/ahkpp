@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { FormatOptions } from './formattingProvider.types';
 
 /** Stringify a document, using consistent `\n` line separators */
 export const documentToString = (document: {
@@ -50,21 +51,19 @@ export function buildIndentedString(
  * @param formattedLine Formatted line of code
  * @param depth Depth of indent
  * @param options VS Code formatting options
- * @param preserveIndentOnEmptyString Preserve indent on empty string
  */
 export function buildIndentedLine(
     lineIndex: number,
     lastLineIndex: number,
     formattedLine: string,
     depth: number,
-    options: Pick<vscode.FormattingOptions, 'insertSpaces' | 'tabSize'>,
-    preserveIndentOnEmptyString: boolean,
+    options: Pick<FormatOptions, 'insertSpaces' | 'tabSize' | 'preserveIndent'>,
 ) {
     const indentationChars = buildIndentationChars(depth, options);
     let indentedLine = buildIndentedString(
         indentationChars,
         formattedLine,
-        preserveIndentOnEmptyString,
+        options.preserveIndent,
     );
     // If not last line, add newline
     if (lineIndex !== lastLineIndex - 1) {
@@ -102,7 +101,7 @@ export function purify(original: string): string {
         return '';
     }
     // Generated list of commands from SciTE4AutoHotkey -> Options -> Open ahk.keywords.properties
-    let commandList = [
+    const commandList = [
         'autotrim',
         'blockinput',
         'click',
@@ -357,7 +356,7 @@ export function removeEmptyLines(
     );
 }
 
-/** @return string with trimmed extra spaces between words*/
+/** @return string with trimmed extra spaces between words */
 export function trimExtraSpaces(
     line: string,
     trimExtraSpaces: boolean,
@@ -365,4 +364,82 @@ export function trimExtraSpaces(
     return trimExtraSpaces
         ? line.replace(/ {2,}/g, ' ') // Remove extra spaces between words
         : line;
+}
+
+export type BraceChar = '{' | '}';
+
+/**
+ * Count open/close brace, that not match by corresponding close/open brace
+ * @param line
+ * @param braceChar Brace character to count: `{` or `}`
+ * @return Number of not matched braces
+ */
+export function braceNumber(line: string, braceChar: BraceChar): number {
+    let braceRegEx = new RegExp(braceChar, 'g');
+    let braceNum = line.match(braceRegEx).length;
+    /** Number of matched braces: `{...}` */
+    const matchedBrace = line.match(/{[^{}]*}/g);
+    braceNum -= matchedBrace?.length ?? 0;
+    return braceNum;
+}
+
+/** Align variable assignment by = operator
+ * @param text Text to align
+ * @returns Aligned text
+ */
+export function alignTextAssignOperator(text: string[]): string[] {
+    /** Right-most position of first `=` operator in line from all assignments */
+    const maxPosition = Math.max(
+        ...text.map((line) => normalizeLineAssignOperator(line).indexOf('=')),
+    );
+    const alignedText = text.map((line) =>
+        alignLineAssignOperator(line, maxPosition),
+    );
+    return alignedText;
+}
+
+/** Remove comment, remove extra spaces around first = or := operator,
+ * add spaces around first = or := operator (if they missing).
+ * Remove extra spaces, but not touch leading and trailing spaces.
+ * @param original Original line of code
+ * @returns Normalized line of code
+ */
+export function normalizeLineAssignOperator(original: string): string {
+    return (
+        original // Clean up text with regex
+            // Remove single line comment
+            .replace(/(?<!`);.+/, '') // skip escaped semicolon '`;', it's text, not comment
+            // Remove extra spaces, but not touch leading and trailing spaces.
+            // Leading spaces - saves code indent.
+            // Trailing spaces - saves comment indent. User can add new variable
+            // assignment, align assignments and comments will stay in place
+            // (manually aligned before).
+            .replace(/(?<=\S) {2,}(?=\S)/g, ' ')
+            // Add space before = and := operators (if it absent).
+            .replace(/\s?(?=:?=)/, ' ')
+            // Same process after = and := operators.
+            .replace(/(?<=:?=)\s?/, ' ')
+    );
+}
+
+/** Add spaces before = and := operators to move it to target position.
+ * Remove extra spaces between symbol and operator,
+ * remove spaces before comment (if present),
+ * trim end spaces.
+ * @param original Original line of code
+ * @param targetPosition Target position of = operator
+ * @returns Aligned line
+ */
+export function alignLineAssignOperator(
+    original: string,
+    targetPosition: number,
+): string {
+    /** The line comment. Empty string if no line comment exists */
+    const comment = /;.+/.exec(original)?.[0] ?? ''; // Save comment
+    original = normalizeLineAssignOperator(original);
+    let position = original.indexOf('='); // = operator position
+    return original
+        .replace(/\s(?=:?=)/, ' '.repeat(targetPosition - position + 1)) // Align assignment
+        .concat(comment) // Restore comment
+        .trimEnd();
 }

@@ -2,17 +2,70 @@ import * as vscode from 'vscode';
 import * as assert from 'assert';
 import path = require('path');
 import {
+    alignLineAssignOperator,
+    BraceChar,
+    braceNumber,
     buildIndentationChars,
     buildIndentedLine,
     documentToString,
     hasMoreCloseParens,
     hasMoreOpenParens,
+    normalizeLineAssignOperator,
     purify,
     removeEmptyLines,
     trimExtraSpaces,
 } from '../../../../providers/formattingProvider.utils';
 
 suite('FormattingProvider utils', () => {
+    suite('braceNum', () => {
+        interface TestBraceData {
+            in: string;
+            bc: BraceChar;
+            bn: number;
+        }
+        // List of test data
+        let dataList: TestBraceData[] = [
+            // {
+            //     in: , // input test string
+            //     bc: , // brace character
+            //     bn: , // brace number
+            // },
+            {
+                in: '{}',
+                bc: '{',
+                bn: 0,
+            },
+            {
+                in: '{',
+                bc: '{',
+                bn: 1,
+            },
+            {
+                in: '{}{',
+                bc: '{',
+                bn: 1,
+            },
+            {
+                in: '}',
+                bc: '}',
+                bn: 1,
+            },
+            {
+                in: '{}}',
+                bc: '}',
+                bn: 1,
+            },
+        ];
+        dataList.forEach((data) => {
+            test(
+                data.bc + ": '" + data.in + "'" + ' => ' + data.bn.toString(),
+                () => {
+                    assert.strictEqual(braceNumber(data.in, data.bc), data.bn);
+                },
+            );
+        });
+    });
+
     suite('buildIndentationChars', () => {
         // List of test data
         let dataList = [
@@ -73,56 +126,48 @@ suite('FormattingProvider utils', () => {
             //     dp: , // depth of indentation
             //     fl: , // formatted line
             //     op: , // formatting options
-            //     pi: , // preserve indent
             //     rs: , // expected result
             // },
             {
                 dp: 0,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
                 rs: 'SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
                 rs: '    SoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
                 rs: '        SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                op: { insertSpaces: false, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
                 rs: '\tSoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                op: { insertSpaces: false, tabSize: 4 },
-                pi: false,
+                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
                 rs: '\t\tSoundBeep',
             },
             {
                 dp: 1,
                 fl: '',
-                op: { insertSpaces: true, tabSize: 4 },
-                pi: true,
+                op: { insertSpaces: true, tabSize: 4, preserveIndent: true },
                 rs: '    ',
             },
             {
                 dp: 2,
                 fl: '',
-                op: { insertSpaces: false, tabSize: 4 },
-                pi: true,
+                op: { insertSpaces: false, tabSize: 4, preserveIndent: true },
                 rs: '\t\t',
             },
         ];
@@ -133,7 +178,7 @@ suite('FormattingProvider utils', () => {
                     ' spaces:' +
                     data.op.insertSpaces.toString() +
                     ' preserveIndent:' +
-                    data.pi.toString() +
+                    data.op.preserveIndent.toString() +
                     " '" +
                     data.fl +
                     "' => '" +
@@ -141,14 +186,7 @@ suite('FormattingProvider utils', () => {
                     "'",
                 () => {
                     assert.strictEqual(
-                        buildIndentedLine(
-                            0,
-                            1,
-                            data.fl,
-                            data.dp,
-                            data.op,
-                            data.pi,
-                        ),
+                        buildIndentedLine(0, 1, data.fl, data.dp, data.op),
                         data.rs,
                     );
                 },
@@ -445,6 +483,155 @@ suite('FormattingProvider utils', () => {
                     );
                 },
             );
+        });
+    });
+
+    suite('normalizeLineAssignOperator', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            // },
+            {
+                in: 'a = 5 ; beautiful operator =',
+                rs: 'a = 5 ',
+            },
+            {
+                in: 'abc=text',
+                rs: 'abc = text',
+            },
+            {
+                in: 'InputFile  :=  "movie.mkv"',
+                rs: 'InputFile := "movie.mkv"',
+            },
+            {
+                in: 'a := 5    ; beautiful operator :=',
+                rs: 'a := 5    ',
+            },
+            {
+                in: 'abc:="text"',
+                rs: 'abc := "text"',
+            },
+            {
+                in: 'abc:=a  +  b',
+                rs: 'abc := a + b',
+            },
+            {
+                in: '; beautiful operator :=',
+                rs: '',
+            },
+            {
+                in: 'ToolTip, text',
+                rs: 'ToolTip, text',
+            },
+            {
+                in: 'x := "1+1=2"',
+                rs: 'x := "1+1=2"',
+            },
+            {
+                in: 'val = "="',
+                rs: 'val = "="',
+            },
+            {
+                in: 'withSpaces = "x = y"',
+                rs: 'withSpaces = "x = y"',
+            },
+            {
+                in: '    IndentedVariableWithTrailSpaces  =  movie.mkv  ',
+                rs: '    IndentedVariableWithTrailSpaces = movie.mkv  ',
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "' => '" + data.rs + "'", () => {
+                assert.strictEqual(
+                    normalizeLineAssignOperator(data.in),
+                    data.rs,
+                );
+            });
+        });
+    });
+
+    suite('alignLineAssignOperator', () => {
+        // List of test data
+        /*
+        Input Data
+            InputFile  :=  "movie.mkv"
+            a := 5    ; beautiful operator :=
+            abc:="abc"
+            abc:=a  +  b
+            ; beautiful operator :=
+        Output Data
+            InputFile := "movie.mkv"
+            a         := 5    ; beautiful operator :=
+            abc       := "abc"
+            abc       := a + b
+            ; beautiful operator :=
+        */
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     tp: , // target position
+            //     rs: , // expected result
+            // },
+            {
+                in: 'InputFile  =  movie.mkv',
+                rs: 'InputFile = movie.mkv',
+                tp: 10,
+            },
+            {
+                in: 'a = 5 ; beautiful operator =',
+                rs: 'a         = 5 ; beautiful operator =',
+                tp: 10,
+            },
+            {
+                in: 'abc=text',
+                rs: 'abc       = text',
+                tp: 10,
+            },
+            {
+                in: 'InputFile  :=  "movie.mkv"  ',
+                rs: 'InputFile := "movie.mkv"',
+                tp: 11,
+            },
+            {
+                in: 'a := 5    ; beautiful operator :=',
+                rs: 'a         := 5    ; beautiful operator :=',
+                tp: 11,
+            },
+            {
+                in: 'abc:=a  +  b',
+                rs: 'abc       := a + b',
+                tp: 11,
+            },
+            {
+                in: 'abc:="text"',
+                rs: 'abc       := "text"',
+                tp: 11,
+            },
+            {
+                in: '; beautiful operator :=',
+                rs: '; beautiful operator :=',
+                tp: 15,
+            },
+            {
+                in: 'ToolTip, text',
+                rs: 'ToolTip, text',
+                tp: 15,
+            },
+            {
+                in: '    IndentedVarWithTrailSpaces  =  movie.mkv  ',
+                rs: '    IndentedVarWithTrailSpaces = movie.mkv',
+                tp: 31,
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "' => '" + data.rs + "'", () => {
+                assert.strictEqual(
+                    alignLineAssignOperator(data.in, data.tp),
+                    data.rs,
+                );
+            });
         });
     });
 

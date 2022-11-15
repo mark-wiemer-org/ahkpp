@@ -129,6 +129,8 @@ Collapse me!
 
 ### Code Format
 
+> There are some [known issues with the formatter](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues?q=is%3Aopen+is%3Aissue+label%3Aformatter), and we're always working to improve.
+
 Supports standard VS Code formatting with a few options.
 
 ![Code Format](image/codeFormat.jpg)
@@ -137,15 +139,27 @@ Supports standard VS Code formatting with a few options.
 
 Formatter directives instruct the formatter to behave a certain way on sections of code.
 
-The only directive currently supported is `FormatBlockComment` and it's used as below:
+1. `FormatBlockComment`:
 
-```autohotkey
-;@AHK++FormatBlockCommentOn
-/*
-;All text inside block comment will be formatted like regular code.
-*/
-;@AHK++FormatBlockCommentOff
-```
+    ```autohotkey
+    ;@AHK++FormatBlockCommentOn
+    /*
+    ;All text inside block comment will be formatted like regular code.
+    */
+    ;@AHK++FormatBlockCommentOff
+    ```
+
+2. `AlignAssignment`:
+
+    ```autohotkey
+    ;@AHK++AlignAssignmentOn
+    a          = 5 ; number five
+    str        = legacy text = with equal symbol
+    inputFile := "movie.mkv"
+    abc       := "abc" ; string
+    abc       := a + b
+    ;@AHK++AlignAssignmentOff
+    ```
 
 ## Credits
 

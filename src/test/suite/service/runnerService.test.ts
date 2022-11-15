@@ -1,58 +1,97 @@
 import * as assert from 'assert';
 import { makeCompileCommand } from '../../../service/runnerService';
 
-suite.only('runnerService', () => {
+suite('runnerService', () => {
     suite('makeCompileCommand', () => {
-        let tests = [
+        // Declare exact type for exact VS Code hover hints
+        const defaultArgs: {
+            compilePath: 'mockCompilePath';
+            currentPath: 'mockCurrentPath';
+            showGui: false;
+            compileIcon: '';
+            compileBaseFile: '';
+            useMpress: false;
+        } = {
+            compilePath: 'mockCompilePath',
+            currentPath: 'mockCurrentPath',
+            showGui: false,
+            compileIcon: '',
+            compileBaseFile: '',
+            useMpress: false,
+        };
+
+        let tests: {
+            name: string;
+            compilePath: string;
+            currentPath: string;
+            showGui: boolean;
+            compileIcon: string;
+            compileBaseFile: string;
+            useMpress: boolean;
+            expected: string;
+        }[] = [
             {
-                name: 'Happy path',
-                compilePath: 'mockCompilePath',
-                currentPath: 'mockCurrentPath',
-                compileDestPath: 'mockCompileDestPath',
-                compileIcon: 'mockCompileIcon',
-                compileBaseFile: 'mockCompileBaseFile',
-                useMpress: false,
-                expected: `"mockCompilePath" /in "mockCurrentPath" /out "mockCompileDestPath" /icon "mockCompileIcon" /bin "mockCompileBaseFile" `,
+                name: 'Default args',
+                ...defaultArgs,
+                expected: `"mockCompilePath"  /in "mockCurrentPath" /out "mockCurrentPath.exe"   `,
             },
             {
-                name: 'No compile icon',
-                compilePath: 'mockCompilePath',
-                currentPath: 'mockCurrentPath',
-                compileDestPath: 'mockCompileDestPath',
-                compileIcon: '',
-                compileBaseFile: 'mockCompileBaseFile',
-                useMpress: false,
-                expected: `"mockCompilePath" /in "mockCurrentPath" /out "mockCompileDestPath"  /bin "mockCompileBaseFile" `,
+                name: 'Usual current path',
+                ...defaultArgs,
+                currentPath: 'mock/current/path/myFile.ahk',
+                expected: `"mockCompilePath"  /in "mock/current/path/myFile.ahk" /out "mock/current/path/myFile.exe"   `,
             },
             {
-                name: 'No base file',
-                compilePath: 'mockCompilePath',
-                currentPath: 'mockCurrentPath',
-                compileDestPath: 'mockCompileDestPath',
+                name: 'Base file',
+                ...defaultArgs,
+                compileBaseFile: 'mockCompileBaseFile',
+                expected: `"mockCompilePath"  /in "mockCurrentPath" /out "mockCurrentPath.exe"  /bin "mockCompileBaseFile" `,
+            },
+            {
+                name: 'Compile icon',
+                ...defaultArgs,
                 compileIcon: 'mockCompileIcon',
-                compileBaseFile: '',
-                useMpress: false,
-                expected: `"mockCompilePath" /in "mockCurrentPath" /out "mockCompileDestPath" /icon "mockCompileIcon"  `,
+                expected: `"mockCompilePath"  /in "mockCurrentPath" /out "mockCurrentPath.exe" /icon "mockCompileIcon"  `,
+            },
+            {
+                name: 'Compile icon and base file',
+                ...defaultArgs,
+                compileIcon: 'mockCompileIcon',
+                compileBaseFile: 'mockCompileBaseFile',
+                expected: `"mockCompilePath"  /in "mockCurrentPath" /out "mockCurrentPath.exe" /icon "mockCompileIcon" /bin "mockCompileBaseFile" `,
             },
             {
                 name: 'Use MPRESS',
-                compilePath: 'mockCompilePath',
-                currentPath: 'mockCurrentPath',
-                compileDestPath: 'mockCompileDestPath',
-                compileIcon: 'mockCompileIcon',
-                compileBaseFile: 'mockCompileBaseFile',
+                ...defaultArgs,
                 useMpress: true,
-                expected: `"mockCompilePath" /in "mockCurrentPath" /out "mockCompileDestPath" /icon "mockCompileIcon" /bin "mockCompileBaseFile" /mpress 1`,
+                expected: `"mockCompilePath"  /in "mockCurrentPath" /out "mockCurrentPath.exe"   /mpress 1`,
             },
             {
-                name: 'No optional values',
-                compilePath: 'mockCompilePath',
-                currentPath: 'mockCurrentPath',
-                compileDestPath: 'mockCompileDestPath',
-                compileIcon: '',
-                compileBaseFile: '',
-                useMpress: false,
-                expected: `"mockCompilePath" /in "mockCurrentPath" /out "mockCompileDestPath"   `,
+                name: 'Show GUI',
+                ...defaultArgs,
+                showGui: true,
+                expected: `"mockCompilePath" /gui /in "mockCurrentPath" /out "mockCurrentPath.exe"   `,
+            },
+            {
+                name: 'Everthing populated',
+                ...defaultArgs,
+                compileBaseFile: 'mockCompileBaseFile',
+                compileIcon: 'mockCompileIcon',
+                showGui: true,
+                useMpress: true,
+                expected: `"mockCompilePath" /gui /in "mockCurrentPath" /out "mockCurrentPath.exe" /icon "mockCompileIcon" /bin "mockCompileBaseFile" /mpress 1`,
+            },
+            {
+                name: 'Empty compile path',
+                ...defaultArgs,
+                compilePath: '',
+                expected: ``,
+            },
+            {
+                name: 'Empty current path',
+                ...defaultArgs,
+                currentPath: '',
+                expected: ``,
             },
         ];
         tests.forEach((myTest) => {
@@ -61,7 +100,7 @@ suite.only('runnerService', () => {
                     makeCompileCommand(
                         myTest.compilePath,
                         myTest.currentPath,
-                        myTest.compileDestPath,
+                        myTest.showGui,
                         myTest.compileIcon,
                         myTest.compileBaseFile,
                         myTest.useMpress,

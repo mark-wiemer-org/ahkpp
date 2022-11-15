@@ -18,3 +18,11 @@ else {
     foo()
     bar()
 }
+
+{
+    if (true) {
+        return
+    } else
+        return
+    ExitApp
+}
