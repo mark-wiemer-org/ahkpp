@@ -1,7 +1,6 @@
 import { commands } from 'vscode';
 import {
     BreakpointEvent,
-    ExitedEvent,
     InitializedEvent,
     LoggingDebugSession,
     OutputEvent,
