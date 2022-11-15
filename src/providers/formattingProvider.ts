@@ -180,7 +180,7 @@ export const internalFormat = (
      * Array of depth of open brace `{` that belongs to object initialization
      * with continuation section.
      */
-    let waitCloseBraceObject: number[] = [];
+    const waitCloseBraceObject: number[] = [];
 
     const indentCodeAfterLabel = options.indentCodeAfterLabel;
     const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
