@@ -8,6 +8,7 @@ function formatDate(date: Date) {
     return format('yyyy-MM-dd hh:mm:ss', date);
 }
 
+/** Logs messages to VS output channel */
 export class Out {
     private static outputChannel: vscode.OutputChannel =
         vscode.window.createOutputChannel('AHK');
