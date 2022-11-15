@@ -24,8 +24,7 @@ obj := { 0:0, 1: { 0:0
 , h: "double nested object"
 , i: "close brace" }
 , j: "close brace" }
-, k: { l: 4 } }
-, m: 0 }
+, k: { l: 4 } } }
 MsgBox
 }
 
