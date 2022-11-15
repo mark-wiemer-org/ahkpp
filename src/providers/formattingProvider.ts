@@ -200,7 +200,7 @@ export const internalFormat = (
      */
     let continuationSectionExpression = false;
     /**
-     * Continuation section: Text [Formatted]
+     * True iff continuation section is for text and should be formatted
      * ```ahk
      * ( LTrim
      *     Indented line of text
@@ -209,7 +209,7 @@ export const internalFormat = (
      */
     let continuationSectionTextFormat = false;
     /**
-     * Continuation section: Text [Not Formatted]
+     * True iff continuation section is for text but should **not** be formatted
      * ```ahk
      * ( [NO LTrim option!]
      * Line of text with preserved user formatting
