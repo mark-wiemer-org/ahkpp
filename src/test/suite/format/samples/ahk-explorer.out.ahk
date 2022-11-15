@@ -867,14 +867,14 @@ Class LV_Colors {
         ; Offset of clrFace (NMLVCUSTOMDRAW)
         Static ClrBkP := SubItemP + 8
         DrawStage := NumGet(L + NMHDRSize, 0, "UInt")
-        , Row := NumGet(L + ItemSpecP, 0, "UPtr") + 1
-        , Col := NumGet(L + SubItemP, 0, "Int") + 1
+            , Row := NumGet(L + ItemSpecP, 0, "UPtr") + 1
+            , Col := NumGet(L + SubItemP, 0, "Int") + 1
         If This[H].IsStatic
             Row := This.MapIndexToID(H, Row)
         ; SubItemPrepaint ------------------------------------------------------------------------------------------------
         If (DrawStage = CDDS_SUBITEMPREPAINT) {
             NumPut(This[H].CurTX, L + ClrTxP, 0, "UInt"), NumPut(This[H].CurTB, L + ClrTxBkP, 0, "UInt")
-            , NumPut(This[H].CurBK, L + ClrBkP, 0, "UInt")
+                , NumPut(This[H].CurBK, L + ClrBkP, 0, "UInt")
             ClrTx := This[H].Cells[Row][Col].T, ClrBk := This[H].Cells[Row][Col].B
             If (ClrTx <> "")
                 NumPut(ClrTX, L + ClrTxP, 0, "UInt")
@@ -894,7 +894,7 @@ Class LV_Colors {
                 NumPut(ClrTx, L + ClrTxP, 0, "UInt"), This[H].CurTX := ClrTx
             If (ClrBk <> "")
                 NumPut(ClrBk, L + ClrTxBkP, 0, "UInt") , NumPut(ClrBk, L + ClrBkP, 0, "UInt")
-            , This[H].CurTB := ClrBk, This[H].CurBk := ClrBk
+                , This[H].CurTB := ClrBk, This[H].CurBk := ClrBk
             If This[H].Cells.HasKey(Row)
                 Return CDRF_NOTIFYSUBITEMDRAW
             Return CDRF_DODEFAULT
@@ -2217,7 +2217,7 @@ autoMegaByteFormat(size, decimalPlaces = 2)
     }
 
     return (sizeIndex = 0) ? size " MB"
-    : round(size, decimalPlaces) . " " . sizes[sizeIndex]
+        : round(size, decimalPlaces) . " " . sizes[sizeIndex]
 }
 
 autoByteFormat(size, decimalPlaces = 2)
@@ -2236,7 +2236,7 @@ autoByteFormat(size, decimalPlaces = 2)
     }
 
     return (sizeIndex = 0) ? size " B"
-    : round(size, decimalPlaces) . " " . sizes[sizeIndex]
+        : round(size, decimalPlaces) . " " . sizes[sizeIndex]
 }
 
 sortColumn(column, sortMethod)
