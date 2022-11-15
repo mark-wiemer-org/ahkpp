@@ -27,9 +27,9 @@ export interface LaunchRequestArguments
     runtime: string;
     dbgpSettings: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        max_children: number;
+        max_children?: number;
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        max_data: number;
+        max_data?: number;
     };
 }
 
@@ -82,6 +82,7 @@ export class DebugSession extends LoggingDebugSession {
             supportsDataBreakpoints: false,
             supportsCompletionsRequest: true,
             supportsCancelRequest: true,
+            supportsTerminateRequest: true,
             supportsRestartRequest: true,
             supportsBreakpointLocationsRequest: false,
             supportsSetVariable: true,
@@ -111,6 +112,14 @@ export class DebugSession extends LoggingDebugSession {
     protected disconnectRequest(
         response: DebugProtocol.DisconnectResponse,
         args: DebugProtocol.DisconnectArguments,
+        request?: DebugProtocol.Request,
+    ): void {
+        this.sendResponse(response);
+    }
+
+    protected terminateRequest(
+        response: DebugProtocol.TerminateResponse,
+        args: DebugProtocol.TerminateArguments,
         request?: DebugProtocol.Request,
     ): void {
         this.dispatcher.stop();
@@ -178,7 +187,7 @@ export class DebugSession extends LoggingDebugSession {
         args: DebugProtocol.PauseArguments,
         request?: DebugProtocol.Request,
     ): void {
-        this.dispatcher.sendComand(Continue.break);
+        this.dispatcher.sendCommand(Continue.break);
         this.sendResponse(response);
     }
 
@@ -186,7 +195,7 @@ export class DebugSession extends LoggingDebugSession {
         response: DebugProtocol.ContinueResponse,
         args: DebugProtocol.ContinueArguments,
     ): void {
-        this.dispatcher.sendComand(Continue.run);
+        this.dispatcher.sendCommand(Continue.run);
         this.sendResponse(response);
     }
 
@@ -194,7 +203,7 @@ export class DebugSession extends LoggingDebugSession {
         response: DebugProtocol.NextResponse,
         args: DebugProtocol.NextArguments,
     ): void {
-        this.dispatcher.sendComand(Continue.stepOver);
+        this.dispatcher.sendCommand(Continue.stepOver);
         this.sendResponse(response);
     }
 
@@ -203,7 +212,7 @@ export class DebugSession extends LoggingDebugSession {
         args: DebugProtocol.StepInArguments,
         request?: DebugProtocol.Request,
     ): void {
-        this.dispatcher.sendComand(Continue.stepInto);
+        this.dispatcher.sendCommand(Continue.stepInto);
         this.sendResponse(response);
     }
 
@@ -212,7 +221,7 @@ export class DebugSession extends LoggingDebugSession {
         args: DebugProtocol.StepOutArguments,
         request?: DebugProtocol.Request,
     ): void {
-        this.dispatcher.sendComand(Continue.stepOut);
+        this.dispatcher.sendCommand(Continue.stepOut);
         this.sendResponse(response);
     }
 

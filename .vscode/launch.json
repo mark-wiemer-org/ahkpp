@@ -1,15 +1,13 @@
 {
-    "version": "0.1.0",
+    "version": "0.2.0",
     "configurations": [
         {
             "name": "Launch Extension",
             "type": "extensionHost",
             "request": "launch",
-            "runtimeExecutable": "${execPath}",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-            "sourceMaps": true,
-            "outFiles": ["${workspaceRoot}/out/src/**/*.js"],
-            "preLaunchTask": "npm: watch"
+            "outFiles": ["${workspaceRoot}/out/**/*.js"],
+            "preLaunchTask": "dev"
         },
         {
             "name": "Test Extension",
@@ -25,9 +23,9 @@
             "preLaunchTask": "npm: watch"
         },
         {
-            "name": "AutoHotkey v1 Debugger",
             "type": "ahk",
             "request": "launch",
+            "name": "Autohotkey v1 Debugger",
             "program": "${workspaceFolder}/demos/demo_for_ahk_v1.ahk",
             "runtime": "C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe",
             "stopOnEntry": false,
@@ -36,11 +34,11 @@
             }
         },
         {
-            "name": "AutoHotkey v2 Debugger",
             "type": "ahk",
             "request": "launch",
+            "name": "Autohotkey v2 Debugger",
             "program": "${workspaceFolder}/demos/demo_for_ahk_v2.ahk",
-            "runtime": "C:\\Program Files\\AutoHotkey\\v2-alpha\\x64\\AutoHotkey.exe",
+            "runtime": "C:\\Program Files\\AutoHotkey\\v2-alpha\\x64\\AutoHotkey.exe", // Default value of Scite for ahk v2
             "stopOnEntry": false,
             "dbgpSettings": {
                 "max_children": 149
