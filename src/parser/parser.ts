@@ -49,7 +49,7 @@ export class Parser {
         }
 
         const methods: Method[] = [];
-        let refs: Ref[] = [];
+        const refs: Ref[] = [];
         const labels: Label[] = [];
         const variables: Variable[] = [];
         const blocks: Block[] = [];
@@ -240,7 +240,7 @@ export class Parser {
                 character: lineText.indexOf(varName),
             };
         } else {
-            let vars = [];
+            const vars = [];
             const commandMatchAll = CodeUtil.matchAll(
                 Parser.varCommandPattern,
                 lineText.replace(/\(.+?\)/g, ''),
@@ -290,7 +290,7 @@ export class Parser {
         const methodName = methodMatch[2];
         const character = origin.indexOf(methodName);
         if (text.length !== methodMatch[0].length) {
-            let refs = [new Ref(methodName, document, line, character)];
+            const refs = [new Ref(methodName, document, line, character)];
             const newRef = this.detectMethodByLine(
                 document,
                 line,
