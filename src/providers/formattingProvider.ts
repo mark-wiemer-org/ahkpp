@@ -639,6 +639,7 @@ export const internalFormat = (
             !oneCommandCode &&
             (!blockComment || formatBlockComment)
         ) {
+            // Else: <-- skip valid LABEL
             if (purifiedLine.match(/^}? ?else\b(?!:)/)) {
                 // {
                 //     if
@@ -983,8 +984,7 @@ function nextLineIsOneCommandCode(text: string): boolean {
         // 2. After 'oneCommandCode' not allowed semicolon
         //    Example: 'If:', 'Else:', 'Loop:', etc are valid labels, not 'oneCommandCode'
         //    Skip such labels, because they produce wrong additional level of indent
-        // TODO: change \\s* to " ?" and "}?\\s*" to "(} )?"
-        if (text.match('^}?\\s*' + oneCommand + '\\b(?!:)')) {
+        if (text.match('^}? ?' + oneCommand + '\\b(?!:)')) {
             return true;
         }
     }
