@@ -39,6 +39,7 @@ export class RunnerService {
 
         const selection = editor.selection;
         const text = editor.document.getText(selection);
+        // oooo a merge commit
         this.run(await this.createTemplate(text));
     }
 
