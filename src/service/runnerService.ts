@@ -7,25 +7,25 @@ import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
 
 export const makeCompileCommand = (
     compilePath: string,
-    currentPath: string,
+    scriptPath: string,
     showGui: boolean,
     compileIcon: string,
     compileBaseFile: string,
     useMpress: boolean,
 ): string => {
-    if (!compilePath || !currentPath) {
+    if (!compilePath || !scriptPath) {
         return '';
     }
-    const pos = currentPath.lastIndexOf('.');
+    const pos = scriptPath.lastIndexOf('.');
     const exePath =
-        currentPath.substring(0, pos < 0 ? currentPath.length : pos) + '.exe';
+        scriptPath.substring(0, pos < 0 ? scriptPath.length : pos) + '.exe';
     const guiCommand = showGui ? '/gui' : '';
     const compileIconCommand = compileIcon ? `/icon "${compileIcon}"` : '';
     const compileBaseFileCommand = compileBaseFile
         ? `/bin "${compileBaseFile}"`
         : '';
     const compileMpressCommand = useMpress ? '/mpress 1' : '';
-    return `"${compilePath}" ${guiCommand} /in "${currentPath}" /out "${exePath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
+    return `"${compilePath}" ${guiCommand} /in "${scriptPath}" /out "${exePath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
 };
 
 export class RunnerService {
