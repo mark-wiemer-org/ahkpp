@@ -1,5 +1,6 @@
 # Files to be excluded from the built package
 .vscode/**
+.vscode-test/**
 out/test/**
 out/**/*.map
 src/
