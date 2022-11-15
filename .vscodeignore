@@ -1,12 +1,15 @@
+# Files to be excluded from the built package
 .vscode/**
-.@vscode/test-electron/**
+.vscode-test/**
 out/test/**
 out/**/*.map
-src/**
+src/
 demos/
 images/**
-.idea/
+node_modules/
 .gitignore
 tsconfig.json
-vsc-extension-quickstart.md
+.eslintrc
+build.js
+.github/
 tsconfig.json

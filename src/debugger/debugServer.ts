@@ -8,7 +8,8 @@ import { Out } from '../common/out';
  */
 export class DebugServer extends EventEmitter {
     private proxyServer: Net.Server;
-    private proxyConnection: Net.Socket;
+    private ahkConnection: Net.Socket;
+    public hasNew: boolean;
     public constructor(private port: number) {
         super();
     }
@@ -19,7 +20,7 @@ export class DebugServer extends EventEmitter {
         this.proxyServer = new Net.Server()
             .listen(this.port)
             .on('connection', (socket: Net.Socket) => {
-                this.proxyConnection = socket;
+                this.ahkConnection = socket;
                 socket.on('data', (chunk) => {
                     tempData = tempData
                         ? Buffer.concat([tempData, chunk])
@@ -38,18 +39,33 @@ export class DebugServer extends EventEmitter {
         return this;
     }
 
+    public prepareNewConnection() {
+        this.closeAhkConnection();
+        this.hasNew = true;
+    }
+
+    public closeAhkConnection() {
+        if (this.ahkConnection) {
+            this.ahkConnection.end();
+            this.ahkConnection = null;
+        }
+    }
+
     public shutdown() {
-        if (this.proxyConnection) {
-            this.proxyConnection.end();
+        this.closeAhkConnection();
+        if (this.hasNew) {
+            this.hasNew = false;
+            return;
         }
         if (this.proxyServer) {
             this.proxyServer.close();
+            this.proxyServer = null;
         }
     }
 
     public write(data: string) {
-        if (this.proxyConnection) {
-            this.proxyConnection.write(data);
+        if (this.ahkConnection) {
+            this.ahkConnection.write(data);
         }
     }
 
