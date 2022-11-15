@@ -13,6 +13,7 @@ import {
     FlowOfControlNestDepth,
     hasMoreCloseParens,
     hasMoreOpenParens,
+    nextLineIsOneCommandCode,
     normalizeLineAssignOperator,
     purify,
     removeEmptyLines,
@@ -887,6 +888,45 @@ suite('FormattingProvider utils', () => {
         dataList.forEach((data) => {
             test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
                 assert.strictEqual(calculateDepth(data.in, data.op), data.rs);
+            });
+        });
+    });
+
+    suite('nextLineIsOneCommandCode', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            // },
+            {
+                in: 'else',
+                rs: true,
+            },
+            {
+                in: '}else',
+                rs: true,
+            },
+            {
+                in: '} else',
+                rs: true,
+            },
+            {
+                in: 'else{',
+                rs: true,
+            },
+            {
+                in: 'else {',
+                rs: true,
+            },
+            {
+                in: 'Else:',
+                rs: false,
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(nextLineIsOneCommandCode(data.in), data.rs);
             });
         });
     });

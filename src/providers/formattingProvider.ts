@@ -9,6 +9,7 @@ import {
     buildIndentedLine,
     documentToString,
     FlowOfControlNestDepth,
+    nextLineIsOneCommandCode,
     purify,
     removeEmptyLines,
     trimExtraSpaces,
@@ -947,50 +948,6 @@ export const internalFormat = (
 
     return formattedString;
 };
-
-/**
- * Is next line is one command code triggered by flow of control statement.
- *
- * Example:
- * ```ahk
- * if (var)   ; false
- *     MsgBox ; true
- * SoundBeep  ; false
- * ```
- * @return is next line is one command code
- */
-function nextLineIsOneCommandCode(text: string): boolean {
-    /** Special keywords that can trigger one-line commands */
-    const oneCommandList = [
-        'ifnotexist',
-        'ifexist',
-        'ifwinactive',
-        'ifwinnotactive',
-        'ifwinexist',
-        'ifwinnotexist',
-        'ifinstring',
-        'ifnotinstring',
-        'if',
-        'else',
-        'loop',
-        'for',
-        'while',
-        'catch',
-    ];
-
-    for (const oneCommand of oneCommandList) {
-        // 1. Before 'oneCommandCode' allowed only optional close brace
-        //    Example: '} else' or '} if'
-        // 2. After 'oneCommandCode' not allowed semicolon
-        //    Example: 'If:', 'Else:', 'Loop:', etc are valid labels, not 'oneCommandCode'
-        //    Skip such labels, because they produce wrong additional level of indent
-        if (text.match('^}? ?' + oneCommand + '\\b(?!:)')) {
-            return true;
-        }
-    }
-
-    return false;
-}
 
 export class FormatProvider implements vscode.DocumentFormattingEditProvider {
     public provideDocumentFormattingEdits(

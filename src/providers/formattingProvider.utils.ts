@@ -326,6 +326,50 @@ export function purify(original: string): string {
 }
 
 /**
+ * Is next line is one command code triggered by flow of control statement.
+ *
+ * Example:
+ * ```ahk
+ * if (var)   ; false
+ *     MsgBox ; true
+ * SoundBeep  ; false
+ * ```
+ * @return is next line is one command code
+ */
+export function nextLineIsOneCommandCode(text: string): boolean {
+    /** Special keywords that can trigger one-line commands */
+    const oneCommandList = [
+        'ifnotexist',
+        'ifexist',
+        'ifwinactive',
+        'ifwinnotactive',
+        'ifwinexist',
+        'ifwinnotexist',
+        'ifinstring',
+        'ifnotinstring',
+        'if',
+        'else',
+        'loop',
+        'for',
+        'while',
+        'catch',
+    ];
+
+    for (const oneCommand of oneCommandList) {
+        // 1. Before 'oneCommandCode' allowed only optional close brace
+        //    Example: '} else'
+        // 2. After 'oneCommandCode' not allowed semicolon
+        //    Example: 'If:', 'Else:', 'Loop:', etc are valid labels, not 'oneCommandCode'
+        //    Skip such labels, because they produce wrong additional level of indent
+        if (text.match('^}?\\s*' + oneCommand + '\\b(?!:)')) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
  * Remove empty lines at the start of the string.
  * Replace sets of too many empty lines with the maximum allowed empty lines.
  * Uses end of line sequence from first empty line throughout all empty lines.
