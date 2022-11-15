@@ -15,16 +15,16 @@
             , {
                 , } } }
 
-    obj := { 0:0, 1: { 0:0
-            , a: {}
-            , b: "string"
-            , c: { d: "open brace"
-                , e: "nested object"
-                , f: { g: "open brace"
-                    , h: "double nested object"
-                    , i: "close brace" }
-                , j: "close brace" }
-            , k: { l: 4 } } }
+    obj := { 0:0
+        , a: {}
+        , b: "string"
+        , c: { d: "open brace"
+            , e: "nested object"
+            , f: { g: "open brace"
+                , h: "double nested object"
+                , i: "close brace" }
+            , j: "close brace" }
+        , k: { l: 4 } }
     MsgBox
 }
 

@@ -15,7 +15,7 @@ obj := { {
 , {
 , } } }
 
-obj := { 0:0, 1: { 0:0
+obj := { 0:0
 , a: {}
 , b: "string"
 , c: { d: "open brace"
@@ -24,7 +24,7 @@ obj := { 0:0, 1: { 0:0
 , h: "double nested object"
 , i: "close brace" }
 , j: "close brace" }
-, k: { l: 4 } } }
+, k: { l: 4 } }
 MsgBox
 }
 
