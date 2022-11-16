@@ -1492,7 +1492,7 @@
     },
     "InStr()": {
         "prefix": "InStr()",
-        "body": "InStr(${1:Haystack}, ${2:Needle [}, ${3:CaseSensitive?}, ${4:StartingPos]})",
+        "body": "InStr(${1:Haystack}, ${2:Needle [}, ${3:CaseSensitive?}, ${4:StartingPos}, ${5:Occurrence]})",
         "description": "Searches for a given occurrence of a string, from the left or the right."
     },
     "IsByRef()": {
@@ -1514,6 +1514,11 @@
         "prefix": "IsObject()",
         "body": "IsObject(${1:Object})",
         "description": "Returns a non-zero number if the specified value is an object."
+    },
+    "IsSet()": {
+        "prefix": "IsSet()",
+        "body": "IsSet(${1:Var})",
+        "description": "Returns a non-zero number if the specified variable has been assigned a value."
     },
     "Ln()": {
         "prefix": "Ln()",
@@ -2258,6 +2263,10 @@
         "prefix": "A_Index",
         "body": "A_Index"
     },
+    "A_InitialWorkingDir": {
+        "prefix": "A_InitialWorkingDir",
+        "body": "A_InitialWorkingDir"
+    },
     "A_IPAddress1": {
         "prefix": "A_IPAddress1",
         "body": "A_IPAddress1"
@@ -2704,6 +2713,10 @@
     "A_YYYY": {
         "prefix": "A_YYYY",
         "body": "A_YYYY"
+    },
+    "A_Clipboard": {
+        "prefix": "A_Clipboard",
+        "body": "A_Clipboard"
     },
     "Clipboard": {
         "prefix": "Clipboard",
