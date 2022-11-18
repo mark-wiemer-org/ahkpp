@@ -1,0 +1,2 @@
+ToolTip;NotComment
+ToolTip ;Comment
