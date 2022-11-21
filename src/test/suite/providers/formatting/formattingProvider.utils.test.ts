@@ -22,7 +22,7 @@ import {
 
 suite('FormattingProvider utils', () => {
     // Default formatting options
-    const defaultArgs: {
+    const defaultFormattingOptions: {
         insertSpaces: boolean;
         tabSize: number;
         preserveIndent: boolean;
@@ -90,28 +90,28 @@ suite('FormattingProvider utils', () => {
             // },
             {
                 dp: 0,
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: '',
             },
             {
                 dp: 1,
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: '    ',
             },
             {
                 dp: 2,
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: '        ',
             },
             {
                 dp: 1,
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 insertSpaces: false,
                 rs: '\t',
             },
             {
                 dp: 2,
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 insertSpaces: false,
                 rs: '\t\t',
             },
@@ -149,46 +149,46 @@ suite('FormattingProvider utils', () => {
             {
                 dp: 0,
                 fl: 'SoundBeep',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: 'SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: '    SoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: '        SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 insertSpaces: false,
                 rs: '\tSoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 insertSpaces: false,
                 rs: '\t\tSoundBeep',
             },
             {
                 dp: 1,
                 fl: '',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 preserveIndent: true,
                 rs: '    ',
             },
             {
                 dp: 2,
                 fl: '',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 insertSpaces: false,
                 preserveIndent: true,
                 rs: '\t\t',
@@ -819,55 +819,55 @@ suite('FormattingProvider utils', () => {
             // },
             {
                 in: '',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 preserveIndent: true,
                 rs: '',
             },
             {
                 in: 'MsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: 'MsgBox',
             },
             {
                 in: 'MsgBox\n',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: 'MsgBox\n',
             },
             {
                 in: ';comment\nMsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: ';comment\nMsgBox',
             },
             {
                 in: ';comment\n    MsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: '    ;comment\n    MsgBox',
             },
             {
                 in: ';comment\n\tMsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 insertSpaces: false,
                 rs: '\t;comment\n\tMsgBox',
             },
             {
                 in: ';comment\n}\nMsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: '    ;comment\n}\nMsgBox',
             },
             {
                 in: ';comment\n    , a: 4 }',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: '    ;comment\n    , a: 4 }',
             },
             {
                 in: '\n    MsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 preserveIndent: true,
                 rs: '    \n    MsgBox',
             },
             {
                 in: '\n\tMsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 insertSpaces: false,
                 preserveIndent: true,
                 rs: '\t\n\tMsgBox',
@@ -896,22 +896,22 @@ suite('FormattingProvider utils', () => {
             // },
             {
                 in: '',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: 0,
             },
             {
                 in: 'MsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: 0,
             },
             {
                 in: '        MsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 rs: 2,
             },
             {
                 in: '\t\tMsgBox',
-                ...defaultArgs,
+                ...defaultFormattingOptions,
                 insertSpaces: false,
                 rs: 2,
             },
