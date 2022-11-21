@@ -22,7 +22,7 @@
     },
     "#ErrorStdOut": {
         "prefix": "#ErrorStdOut",
-        "body": "#ErrorStdOut",
+        "body": "#ErrorStdOut ${1:[Encoding]}",
         "description": "Sends any syntax error that prevents a script from launching to stderr rather than displaying a dialog."
     },
     "#EscapeChar": {
@@ -169,6 +169,11 @@
         "prefix": "#Persistent",
         "body": "#Persistent",
         "description": "Keeps a script permanently running (that is, until the user closes it or ExitApp is encountered)."
+    },
+    "#Requires": {
+        "prefix": "#Requires",
+        "body": "#Requires ${1:Requirement}",
+        "description": "Displays an error and quits if a version requirement is not met."
     },
     "#SingleInstance": {
         "prefix": "#SingleInstance",
@@ -715,24 +720,24 @@
         "body": "Loop, ${1:[ Count]}",
         "description": "Performs a series of commands repeatedly: either the specified number of times or until break is encountered."
     },
-    "Loop <file>": {
-        "prefix": "Loop <file>",
-        "body": "Loop, ${1:FilePattern [}, ${2:IncludeFolders?}, ${3:Recurse?]}",
+    "Loop files & folders": {
+        "prefix": "Loop files & folders",
+        "body": "Loop, Files, ${1:FilePattern [}, ${2:Mode]}",
         "description": "Retrieves the specified files or folders, one at a time."
     },
     "Loop parse": {
         "prefix": "Loop parse",
-        "body": "Loop, ${1:Parse}, ${2:InputVar [}, ${3:Delimiters|CSV}, ${4:OmitChars]}",
+        "body": "Loop, Parse, ${1:InputVar [}, ${2:Delimiters|CSV}, ${3:OmitChars]}",
         "description": "Retrieves substrings (fields) from a string, one at a time."
     },
     "Loop read": {
         "prefix": "Loop read",
-        "body": "Loop, ${1:Read}, ${2:InputFile [}, ${3:OutputFile]}",
+        "body": "Loop, Read, ${1:InputFile [}, ${2:OutputFile]}",
         "description": "Retrieves the lines in a text file, one at a time (performs better than FileReadLine)."
     },
     "Loop reg": {
         "prefix": "Loop reg",
-        "body": "Loop, ${1:HKLM|HKU|HKCU|HKCR|HKCC [}, ${2:Key}, ${3:IncludeSubkeys?}, ${4:Recurse?]}",
+        "body": "Loop, Reg, ${1:KeyName [}, ${2:Mode]}",
         "description": "Retrieves the contents of the specified registry subkey, one item at a time."
     },
     "Menu": {
@@ -1475,6 +1480,31 @@
         "body": "GetKeyState(${1:KeyName [}, ${2:\"P\" or \"T\"]})",
         "description": "Checks if a keyboard key or mouse/joystick button is down or up. Also retrieves joystick status."
     },
+    "Hotstring()": {
+        "prefix": "Hotstring()",
+        "body": "Hotstring(${1:String [}, ${2:Replacement}, ${3:OnOffToggle]})",
+        "description": "Creates, modifies, enables, or disables a hotstring while the script is running."
+    },
+    "Hotstring(NewOptions)": {
+        "prefix": "Hotstring(NewOptions)",
+        "body": "Hotstring(${1:NewOptions})",
+        "description": "To set new default options for subsequently created hotstrings, pass the options to the Hotstring function without any leading or trailing colon. For example: Hotstring(\"T\")."
+    },
+    "Hotstring(\"EndChars\")": {
+        "prefix": "Hotstring(\"EndChars\")",
+        "body": "Hotstring(\"EndChars\" [, ${1:NewValue]})",
+        "description": "Retrieves or modifies the set of characters used as ending characters by the hotstring recognizer."
+    },
+    "Hotstring(\"MouseReset\")": {
+        "prefix": "Hotstring(\"MouseReset\")",
+        "body": "Hotstring(\"MouseReset\" [, ${1:NewValue]})",
+        "description": "Retrieves or modifies the global setting which controls whether mouse clicks reset the hotstring recognizer."
+    },
+    "Hotstring(\"Reset\")": {
+        "prefix": "Hotstring(\"Reset\")",
+        "body": "Hotstring(\"Reset\")",
+        "description": "Immediately resets the hotstring recognizer. In other words, the script will begin waiting for an entirely new hotstring, eliminating from consideration anything you previously typed."
+    },
     "IL_Add()": {
         "prefix": "IL_Add()",
         "body": "IL_Add(${1:ImageListID}, ${2:Filename [}, ${3:IconNumber}, ${4:ResizeNonIcon?]})",
@@ -1494,6 +1524,11 @@
         "prefix": "InStr()",
         "body": "InStr(${1:Haystack}, ${2:Needle [}, ${3:CaseSensitive?}, ${4:StartingPos}, ${5:Occurrence]})",
         "description": "Searches for a given occurrence of a string, from the left or the right."
+    },
+    "InputHook()": {
+        "prefix": "InputHook()",
+        "body": "InputHook(${1:[Options}, ${2:EndKeys}, ${3:MatchList]})",
+        "description": "Creates an object which can be used to collect or intercept keyboard input."
     },
     "IsByRef()": {
         "prefix": "IsByRef()",
@@ -1524,6 +1559,11 @@
         "prefix": "Ln()",
         "body": "Ln(${1:Number})",
         "description": "Returns the natural logarithm (base e) of Number."
+    },
+    "LoadPicture()": {
+        "prefix": "LoadPicture()",
+        "body": "LoadPicture(${1:Filename [}, ${2:Options}, ByRef ${3:ImageType]})",
+        "description": "Loads a picture from file and returns a bitmap or icon handle."
     },
     "Log()": {
         "prefix": "Log()",
@@ -1590,13 +1630,33 @@
         "body": "LV_SetImageList(${1:ImageListID} [, ${2:0|1|2]})",
         "description": "Sets or replaces the ListView's ImageList."
     },
+    "Max()": {
+        "prefix": "Max()",
+        "body": "Max(${1:Number1 [}, ${2:Number2, ...]})",
+        "description": "Returns the highest value of one or more numbers."
+    },
+    "MenuGetHandle()": {
+        "prefix": "MenuGetHandle()",
+        "body": "MenuGetHandle(${1:MenuName})",
+        "description": "Retrieves the Win32 menu handle of a menu."
+    },
+    "MenuGetName()": {
+        "prefix": "MenuGetName()",
+        "body": "MenuGetName(${1:Handle})",
+        "description": "Retrieves the name of a menu given a handle to its underlying Win32 menu."
+    },
+    "Min()": {
+        "prefix": "Min()",
+        "body": "Min(${1:Number1 [}, ${2:Number2, ...]})",
+        "description": "Returns the lowest value of one or more numbers."
+    },
     "Mod()": {
         "prefix": "Mod()",
         "body": "Mod(${1:Dividend}, ${2:Divisor})",
         "description": "Returns the remainder when Dividend is divided by Divisor."
     },
-    "NumGet() [": {
-        "prefix": "NumGet() [",
+    "NumGet()": {
+        "prefix": "NumGet()",
         "body": "NumGet(${1:VarOrAddress [}, ${2:Offset = 0}, ${3:Type = \"UInt\"]})",
         "description": "Returns the binary number stored at the specified address+offset."
     },
@@ -1605,10 +1665,60 @@
         "body": "NumPut(${1:Number}, ${2:VarOrAddress [}, ${3:Offset = 0}, ${4:Type = \"UInt\"]})",
         "description": "Stores a number in binary format at the specified address+offset."
     },
-    "OnMessage() [": {
-        "prefix": "OnMessage() [",
+    "ObjBindMethod()": {
+        "prefix": "ObjBindMethod()",
+        "body": "ObjBindMethod(${1:Obj}, ${2:Method}, ${3:Params})",
+        "description": "Creates a BoundFunc object which calls a method of a given object."
+    },
+    "ObjCount()": {
+        "prefix": "ObjCount()",
+        "body": "ObjCount(${1:Object})",
+        "description": "Returns the number of key-value pairs present in an object."
+    },
+    "ObjGetBase()": {
+        "prefix": "ObjGetBase()",
+        "body": "ObjGetBase(${1:Object})",
+        "description": "Returns an object's base object."
+    },
+    "ObjSetBase()": {
+        "prefix": "ObjSetBase()",
+        "body": "ObjSetBase(${1:Object}, ${2:BaseObject})",
+        "description": "Sets an object's base object."
+    },
+    "ObjRawGet()": {
+        "prefix": "ObjRawGet()",
+        "body": "ObjRawGet(${1:Object}, ${2:Key})",
+        "description": "Retrieves the value associated with a given key within an object."
+    },
+    "ObjRawSet()": {
+        "prefix": "ObjRawSet()",
+        "body": "ObjRawSet(${1:Object}, ${2:Key}, ${3:Value})",
+        "description": "Stores or overwrites a key-value pair in an object."
+    },
+    "OnClipboardChange()": {
+        "prefix": "OnClipboardChange()",
+        "body": "OnClipboardChange(${1:Func [}, ${2:AddRemove]})",
+        "description": "Registers a function or function object to run whenever the clipboard's content changes."
+    },
+    "OnError()": {
+        "prefix": "OnError()",
+        "body": "OnError(${1:Func [}, ${2:AddRemove]})",
+        "description": "Specifies a function to run automatically when an unhandled error occurs."
+    },
+    "OnExit()": {
+        "prefix": "OnExit()",
+        "body": "OnExit(${1:Func [}, ${2:AddRemove]})",
+        "description": "Specifies a callback function or subroutine to run automatically when the script exits."
+    },
+    "OnMessage()": {
+        "prefix": "OnMessage()",
         "body": "OnMessage(${1:MsgNumber [}, ${2:\"FunctionName\"]})",
         "description": "Specifies a function or function object to call automatically when the script receives the specified message."
+    },
+    "Ord()": {
+        "prefix": "Ord()",
+        "body": "Ord(${1:String})",
+        "description": "Returns the ordinal value (numeric character code) of the first character in the specified string."
     },
     "RegExMatch()": {
         "prefix": "RegExMatch()",
@@ -1677,7 +1787,7 @@
     },
     "StrSplit()": {
         "prefix": "StrSplit()",
-        "body": "StrSplit(${1:String}, ${2:[Delimiters}, ${3:OmitChars]})",
+        "body": "StrSplit(${1:String}, ${2:[Delimiters}, ${3:OmitChars}, ${4:MaxParts]})",
         "description": "Separates a string into an array of substrings using the specified delimiters."
     },
     "StrReplace()": {
@@ -1887,6 +1997,16 @@
         "prefix": ".Delete()",
         "body": ".Delete()"
     },
+    "Bind()": {
+        "prefix": ".Bind()",
+        "body": ".Bind(${1:Param1}, ${2:Param2, ...})",
+        "description": "Binds parameters to the function and returns a BoundFunc object."
+    },
+    "Call()": {
+        "prefix": ".Call()",
+        "body": ".Call(${1:Param1}, ${2:Param2, ...})",
+        "description": "Calls the function."
+    },
     "Insert()": {
         "prefix": ".Insert()",
         "body": ".Insert(${1:Key}, ${2:Value})",
@@ -1949,15 +2069,21 @@
     },
     "IsOptional()": {
         "prefix": ".IsOptional()",
-        "body": ".IsOptional(${1:ParamIndex})"
+        "body": ".IsOptional(${1:[ParamIndex]})",
+        "description": "Determines whether a parameter is optional."
+    },
+    "Length()": {
+        "prefix": ".Length()",
+        "body": ".Length()",
+        "description": "Returns the length of a linear array."
     },
     "Push()": {
-        "prefix": ".Push(",
+        "prefix": ".Push()",
         "body": ".Push(${1:Value})",
         "description": "Appends values to the end of an array."
     },
     "Pop()": {
-        "prefix": ".Pop(",
+        "prefix": ".Pop()",
         "body": ".Pop()",
         "description": "Removes and returns the last array element."
     },
@@ -2321,7 +2447,22 @@
     "A_KeyDelay": {
         "prefix": "A_KeyDelay",
         "body": "A_KeyDelay",
-        "description": "The current delay or duration set by SetKeyDelay (always decimal, not hex). A_KeyDuration requires [v1.1.23+]."
+        "description": "The current delay set by SetKeyDelay (always decimal, not hex)."
+    },
+    "A_KeyDelayPlay": {
+        "prefix": "A_KeyDelayPlay",
+        "body": "A_KeyDelayPlay",
+        "description": "The current delay set by SetKeyDelay for the SendPlay mode (always decimal, not hex)."
+    },
+    "A_KeyDuration": {
+        "prefix": "A_KeyDuration",
+        "body": "A_KeyDuration",
+        "description": "The current duration set by SetKeyDelay (always decimal, not hex)."
+    },
+    "A_KeyDurationPlay": {
+        "prefix": "A_KeyDurationPlay",
+        "body": "A_KeyDurationPlay",
+        "description": "The current duration set by SetKeyDelay for the SendPlay mode (always decimal, not hex)."
     },
     "A_Language": {
         "prefix": "A_Language",
@@ -2377,6 +2518,11 @@
         "prefix": "A_LoopFileName",
         "body": "A_LoopFileName",
         "description": "The name of the file or folder currently retrieved (without the path)."
+    },
+    "A_LoopFilePath": {
+        "prefix": "A_LoopFilePath",
+        "body": "A_LoopFilePath",
+        "description": "The path and name of the file/folder currently retrieved. If FilePattern contains a relative path rather than an absolute path, the path here will also be relative. In addition, any short (8.3) folder names in FilePattern will still be short (see next item to get the long version)."
     },
     "A_LoopFileShortName": {
         "prefix": "A_LoopFileShortName",
@@ -2475,12 +2621,17 @@
     "A_MouseDelay": {
         "prefix": "A_MouseDelay",
         "body": "A_MouseDelay",
-        "description": ""
+        "description": "The current delay set by SetMouseDelay for SendEvent mode (always decimal, not hex)."
+    },
+    "A_MouseDelayPlay": {
+        "prefix": "A_MouseDelayPlay",
+        "body": "A_MouseDelayPlay",
+        "description": "The current delay set by SetMouseDelay for SendPlay mode (always decimal, not hex)."
     },
     "A_MSec": {
         "prefix": "A_MSec",
         "body": "A_MSec",
-        "description": ""
+        "description": "Current 3-digit millisecond (000-999)."
     },
     "A_MyDocuments": {
         "prefix": "A_MyDocuments",
