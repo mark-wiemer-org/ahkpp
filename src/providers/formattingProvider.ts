@@ -831,8 +831,8 @@ export const internalFormat = (
             // Do not detect 'oneCommandCode', because it will produce extra
             // indent for next line like in example below:
             // if {
-            // |   |   code <-- wrong extra indent by oneCommandCode
-            // |   code
+            //         code <-- wrong extra indent by oneCommandCode
+            //     code
             // }
             detectOneCommandCode = false;
             // CONTINUATION SECTION: Nested Objects

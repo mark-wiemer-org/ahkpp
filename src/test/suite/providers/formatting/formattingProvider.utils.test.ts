@@ -21,6 +21,17 @@ import {
 } from '../../../../providers/formattingProvider.utils';
 
 suite('FormattingProvider utils', () => {
+    // Default formatting options
+    const defaultArgs: {
+        insertSpaces: boolean;
+        tabSize: number;
+        preserveIndent: boolean;
+    } = {
+        insertSpaces: true,
+        tabSize: 4,
+        preserveIndent: false,
+    };
+
     suite('braceNum', () => {
         interface TestBraceData {
             in: string;
@@ -75,32 +86,33 @@ suite('FormattingProvider utils', () => {
         let dataList = [
             // {
             //     dp: , // depth of indentation
-            //     op: , // formatting options
             //     rs: , // expected result
             // },
             {
                 dp: 0,
-                op: { insertSpaces: true, tabSize: 4 },
+                ...defaultArgs,
                 rs: '',
             },
             {
                 dp: 1,
-                op: { insertSpaces: true, tabSize: 4 },
+                ...defaultArgs,
                 rs: '    ',
             },
             {
                 dp: 2,
-                op: { insertSpaces: true, tabSize: 4 },
+                ...defaultArgs,
                 rs: '        ',
             },
             {
                 dp: 1,
-                op: { insertSpaces: false, tabSize: 4 },
+                ...defaultArgs,
+                insertSpaces: false,
                 rs: '\t',
             },
             {
                 dp: 2,
-                op: { insertSpaces: false, tabSize: 4 },
+                ...defaultArgs,
+                insertSpaces: false,
                 rs: '\t\t',
             },
         ];
@@ -109,13 +121,16 @@ suite('FormattingProvider utils', () => {
                 'depth:' +
                     data.dp +
                     ' spaces:' +
-                    data.op.insertSpaces.toString() +
+                    data.insertSpaces.toString() +
                     " => '" +
                     data.rs.replace(/\t/g, '\\t') +
                     "'",
                 () => {
                     assert.strictEqual(
-                        buildIndentationChars(data.dp, data.op),
+                        buildIndentationChars(data.dp, {
+                            insertSpaces: data.insertSpaces,
+                            tabSize: data.tabSize,
+                        }),
                         data.rs,
                     );
                 },
@@ -129,49 +144,53 @@ suite('FormattingProvider utils', () => {
             // {
             //     dp: , // depth of indentation
             //     fl: , // formatted line
-            //     op: , // formatting options
             //     rs: , // expected result
             // },
             {
                 dp: 0,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
                 rs: 'SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
                 rs: '    SoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
                 rs: '        SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
+                insertSpaces: false,
                 rs: '\tSoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
+                insertSpaces: false,
                 rs: '\t\tSoundBeep',
             },
             {
                 dp: 1,
                 fl: '',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: true },
+                ...defaultArgs,
+                preserveIndent: true,
                 rs: '    ',
             },
             {
                 dp: 2,
                 fl: '',
-                op: { insertSpaces: false, tabSize: 4, preserveIndent: true },
+                ...defaultArgs,
+                insertSpaces: false,
+                preserveIndent: true,
                 rs: '\t\t',
             },
         ];
@@ -180,9 +199,9 @@ suite('FormattingProvider utils', () => {
                 'depth:' +
                     data.dp +
                     ' spaces:' +
-                    data.op.insertSpaces.toString() +
+                    data.insertSpaces.toString() +
                     ' preserveIndent:' +
-                    data.op.preserveIndent.toString() +
+                    data.preserveIndent.toString() +
                     " '" +
                     data.fl +
                     "' => '" +
@@ -190,7 +209,11 @@ suite('FormattingProvider utils', () => {
                     "'",
                 () => {
                     assert.strictEqual(
-                        buildIndentedLine(0, 1, data.fl, data.dp, data.op),
+                        buildIndentedLine(0, 1, data.fl, data.dp, {
+                            insertSpaces: data.insertSpaces,
+                            tabSize: data.tabSize,
+                            preserveIndent: data.preserveIndent,
+                        }),
                         data.rs,
                     );
                 },
@@ -792,64 +815,72 @@ suite('FormattingProvider utils', () => {
         let dataList = [
             // {
             //     in: , // input test string
-            //     op: , // formatting options
             //     rs: , // expected result
             // },
             {
                 in: '',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: true },
+                ...defaultArgs,
+                preserveIndent: true,
                 rs: '',
             },
             {
                 in: 'MsgBox',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
                 rs: 'MsgBox',
             },
             {
                 in: 'MsgBox\n',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
                 rs: 'MsgBox\n',
             },
             {
                 in: ';comment\nMsgBox',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
                 rs: ';comment\nMsgBox',
             },
             {
                 in: ';comment\n    MsgBox',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
                 rs: '    ;comment\n    MsgBox',
             },
             {
                 in: ';comment\n\tMsgBox',
-                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
+                insertSpaces: false,
                 rs: '\t;comment\n\tMsgBox',
             },
             {
                 in: ';comment\n}\nMsgBox',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
                 rs: '    ;comment\n}\nMsgBox',
             },
             {
                 in: ';comment\n    , a: 4 }',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultArgs,
                 rs: '    ;comment\n    , a: 4 }',
             },
             {
                 in: '\n    MsgBox',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: true },
+                ...defaultArgs,
+                preserveIndent: true,
                 rs: '    \n    MsgBox',
             },
             {
                 in: '\n\tMsgBox',
-                op: { insertSpaces: false, tabSize: 4, preserveIndent: true },
+                ...defaultArgs,
+                insertSpaces: false,
+                preserveIndent: true,
                 rs: '\t\n\tMsgBox',
             },
         ];
         dataList.forEach((data) => {
             test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
                 assert.strictEqual(
-                    alignSingleLineComments(data.in, data.op),
+                    alignSingleLineComments(data.in, {
+                        insertSpaces: data.insertSpaces,
+                        tabSize: data.tabSize,
+                        preserveIndent: data.preserveIndent,
+                    }),
                     data.rs,
                 );
             });
@@ -861,33 +892,39 @@ suite('FormattingProvider utils', () => {
         let dataList = [
             // {
             //     in: , // input test string
-            //     op: , // formatting options
             //     rs: , // expected result
             // },
             {
                 in: '',
-                op: { insertSpaces: true, tabSize: 4 },
+                ...defaultArgs,
                 rs: 0,
             },
             {
                 in: 'MsgBox',
-                op: { insertSpaces: true, tabSize: 4 },
+                ...defaultArgs,
                 rs: 0,
             },
             {
                 in: '        MsgBox',
-                op: { insertSpaces: true, tabSize: 4 },
+                ...defaultArgs,
                 rs: 2,
             },
             {
                 in: '\t\tMsgBox',
-                op: { insertSpaces: false, tabSize: 4 },
+                ...defaultArgs,
+                insertSpaces: false,
                 rs: 2,
             },
         ];
         dataList.forEach((data) => {
             test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
-                assert.strictEqual(calculateDepth(data.in, data.op), data.rs);
+                assert.strictEqual(
+                    calculateDepth(data.in, {
+                        insertSpaces: data.insertSpaces,
+                        tabSize: data.tabSize,
+                    }),
+                    data.rs,
+                );
             });
         });
     });

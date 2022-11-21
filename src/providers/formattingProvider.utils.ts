@@ -649,7 +649,7 @@ export function alignSingleLineComments(
             // obj := { a: { b: 1
             //         ; comment
             //         , c: 2 }} <-- don't match close braces in object's
-            //                                              continuation section
+            //                       continuation section
             // if {
             //     ; comment
             // } <-- increase indent for comment above after close brace
