@@ -10,4 +10,4 @@ out
 # Files
 .vscode/settings.json
 *.vsix
-syntaxes/*.json
+language/*.json

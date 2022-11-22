@@ -27,7 +27,7 @@
         "build": "npm run rebuild -- --mode=production",
         "clean": "rimraf out && npm run compile_grammar",
         "compile": "npm run clean && npm run compile_ts",
-        "compile_grammar": "js-yaml syntaxes/ahk.tmLanguage.yaml > syntaxes/ahk.tmLanguage.json",
+        "compile_grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json",
         "compile_ts": "tsc -p ./",
         "dev": "npm run rebuild",
         "eslint": "npm run eslint_inner -- src && echo No ESLint problems",
@@ -243,7 +243,7 @@
             {
                 "language": "ahk",
                 "scopeName": "source.ahk",
-                "path": "./syntaxes/ahk.tmLanguage.json"
+                "path": "./language/ahk.tmLanguage.json"
             }
         ],
         "keybindings": [

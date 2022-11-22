@@ -83,7 +83,7 @@ All checks are found in [📄 `package.json#scripts`](https://github.com/mark-wi
 
 ## Syntax / code color contributions
 
-The syntax in [📄 `syntaxes/ahk.tmLanguage.yaml`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/syntaxes/ahk.tmLanguage.yaml) determines how the code is colorized.
+The syntax in [📄 `language/ahk.tmLanguage.yaml`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/language/ahk.tmLanguage.yaml) determines how the code is colorized.
 
 ```
 ; No colorization for me 😞
