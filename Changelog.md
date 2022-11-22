@@ -2,29 +2,25 @@
 
 ## 3.1.0 - 2022-11-21 🦃
 
-Compiler:
+**Compiler**:
 
 -   New compiler options in settings: Choose base file, file icon, and "use [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm)"
 -   Add "Compiler GUI" command in context menu to use the AHK GUI when compiling
 
-Snippets:
+**Snippets**: Update snippets for AHK 1.1.35.00 and fix broken `InStr()` snippet ([#263](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/263))
 
--   Update snippets for AHK 1.1.35.00 and fix broken `InStr()` snippet ([#263](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/263))
+**Grammar**: Fix `#Requires` not being recognized ([#268](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/268))
 
-Grammar: Fix `#Requires` not being recognized ([#268](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/268))
+**Editor**: New AHK file icon (green square with white H)
 
-Editor: New AHK file icon (green square with white H)
+**Debugger**: Minor debugger improvements
 
-Debugger: Minor debugger improvements
+**Formatter**: Close the following bugs:
 
-Formatter: Close the following bugs:
+-   Formatter incorrectly indents object literals ([#184](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/184), [#222](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/222))
+-   Nested one command code flow control ([#255](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/255))
 
-    -   Formatter incorrectly indents object literals ([#184](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/184), [#222](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/222))
-    -   Nested one command code flow control ([#255](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/255))
-
-Miscellaneous:
-
--   Extension should start up faster
+**Miscellaneous**: Extension should start up faster
 
 ## 3.0.0 - 2022-10-01 👻
 

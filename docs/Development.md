@@ -34,8 +34,7 @@ The tests should run automatically, and you should see passing output in the Deb
 1.  Bump the version in `package.json`.
 1.  Commit and push the changes. Commit message doesn't matter.
 1.  Merge the PR. The body of the commit message should be the changelog entry.
-1.  `git checkout main && git pull`
-1.  Package the new version using `vsce package`.
+1.  `git checkout main && git pull && vsce package`
 1.  Install the new version:
     1. Select the newly-created `.vsix` file.
     1. Open the context menu (right-click).
