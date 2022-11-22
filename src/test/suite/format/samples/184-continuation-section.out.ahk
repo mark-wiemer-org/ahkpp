@@ -1,5 +1,20 @@
 ; [Issue #184](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/184)
 {
+    obj := {
+        , }
+
+    obj := { {
+            , } }
+
+    obj := { {
+            , {
+                , }
+            , } }
+
+    obj := { {
+            , {
+                , } } }
+
     obj := { 0:0
         , a: {}
         , b: "string"
@@ -39,6 +54,19 @@ if a = 4
     and b = 5
     MsgBox
 MsgBox
+
+Loop
+    code
+        , code
+        , code
+code
+
+Loop
+    if a > 0
+        and b > 0
+        and c > 0
+        code
+code
 
 ProductIsAvailable := (Color = "Red")
     ? false

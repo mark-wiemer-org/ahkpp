@@ -3,13 +3,17 @@ import * as assert from 'assert';
 import path = require('path');
 import {
     alignLineAssignOperator,
+    alignSingleLineComments,
     BraceChar,
     braceNumber,
     buildIndentationChars,
     buildIndentedLine,
+    calculateDepth,
     documentToString,
+    FlowOfControlNestDepth,
     hasMoreCloseParens,
     hasMoreOpenParens,
+    nextLineIsOneCommandCode,
     normalizeLineAssignOperator,
     purify,
     removeEmptyLines,
@@ -17,6 +21,17 @@ import {
 } from '../../../../providers/formattingProvider.utils';
 
 suite('FormattingProvider utils', () => {
+    // Default formatting options
+    const defaultFormattingOptions: {
+        insertSpaces: boolean;
+        tabSize: number;
+        preserveIndent: boolean;
+    } = {
+        insertSpaces: true,
+        tabSize: 4,
+        preserveIndent: false,
+    };
+
     suite('braceNum', () => {
         interface TestBraceData {
             in: string;
@@ -71,32 +86,33 @@ suite('FormattingProvider utils', () => {
         let dataList = [
             // {
             //     dp: , // depth of indentation
-            //     op: , // formatting options
             //     rs: , // expected result
             // },
             {
                 dp: 0,
-                op: { insertSpaces: true, tabSize: 4 },
+                ...defaultFormattingOptions,
                 rs: '',
             },
             {
                 dp: 1,
-                op: { insertSpaces: true, tabSize: 4 },
+                ...defaultFormattingOptions,
                 rs: '    ',
             },
             {
                 dp: 2,
-                op: { insertSpaces: true, tabSize: 4 },
+                ...defaultFormattingOptions,
                 rs: '        ',
             },
             {
                 dp: 1,
-                op: { insertSpaces: false, tabSize: 4 },
+                ...defaultFormattingOptions,
+                insertSpaces: false,
                 rs: '\t',
             },
             {
                 dp: 2,
-                op: { insertSpaces: false, tabSize: 4 },
+                ...defaultFormattingOptions,
+                insertSpaces: false,
                 rs: '\t\t',
             },
         ];
@@ -105,13 +121,16 @@ suite('FormattingProvider utils', () => {
                 'depth:' +
                     data.dp +
                     ' spaces:' +
-                    data.op.insertSpaces.toString() +
+                    data.insertSpaces.toString() +
                     " => '" +
                     data.rs.replace(/\t/g, '\\t') +
                     "'",
                 () => {
                     assert.strictEqual(
-                        buildIndentationChars(data.dp, data.op),
+                        buildIndentationChars(data.dp, {
+                            insertSpaces: data.insertSpaces,
+                            tabSize: data.tabSize,
+                        }),
                         data.rs,
                     );
                 },
@@ -125,49 +144,53 @@ suite('FormattingProvider utils', () => {
             // {
             //     dp: , // depth of indentation
             //     fl: , // formatted line
-            //     op: , // formatting options
             //     rs: , // expected result
             // },
             {
                 dp: 0,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultFormattingOptions,
                 rs: 'SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultFormattingOptions,
                 rs: '    SoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: false },
+                ...defaultFormattingOptions,
                 rs: '        SoundBeep',
             },
             {
                 dp: 1,
                 fl: 'SoundBeep',
-                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
+                ...defaultFormattingOptions,
+                insertSpaces: false,
                 rs: '\tSoundBeep',
             },
             {
                 dp: 2,
                 fl: 'SoundBeep',
-                op: { insertSpaces: false, tabSize: 4, preserveIndent: false },
+                ...defaultFormattingOptions,
+                insertSpaces: false,
                 rs: '\t\tSoundBeep',
             },
             {
                 dp: 1,
                 fl: '',
-                op: { insertSpaces: true, tabSize: 4, preserveIndent: true },
+                ...defaultFormattingOptions,
+                preserveIndent: true,
                 rs: '    ',
             },
             {
                 dp: 2,
                 fl: '',
-                op: { insertSpaces: false, tabSize: 4, preserveIndent: true },
+                ...defaultFormattingOptions,
+                insertSpaces: false,
+                preserveIndent: true,
                 rs: '\t\t',
             },
         ];
@@ -176,9 +199,9 @@ suite('FormattingProvider utils', () => {
                 'depth:' +
                     data.dp +
                     ' spaces:' +
-                    data.op.insertSpaces.toString() +
+                    data.insertSpaces.toString() +
                     ' preserveIndent:' +
-                    data.op.preserveIndent.toString() +
+                    data.preserveIndent.toString() +
                     " '" +
                     data.fl +
                     "' => '" +
@@ -186,7 +209,11 @@ suite('FormattingProvider utils', () => {
                     "'",
                 () => {
                     assert.strictEqual(
-                        buildIndentedLine(0, 1, data.fl, data.dp, data.op),
+                        buildIndentedLine(0, 1, data.fl, data.dp, {
+                            insertSpaces: data.insertSpaces,
+                            tabSize: data.tabSize,
+                            preserveIndent: data.preserveIndent,
+                        }),
                         data.rs,
                     );
                 },
@@ -651,6 +678,292 @@ suite('FormattingProvider utils', () => {
                     alignLineAssignOperator(data.in, data.tp),
                     data.rs,
                 );
+            });
+        });
+    });
+
+    suite('FlowOfControlNestDepth.enterBlockOfCode', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     bn: , // brace number
+            //     rs: , // expected result
+            // },
+            {
+                in: new FlowOfControlNestDepth([-1]),
+                bn: 1,
+                rs: [-1, -1],
+            },
+            {
+                in: new FlowOfControlNestDepth([-1]),
+                bn: 2,
+                rs: [-1, -1, -1],
+            },
+        ];
+        dataList.forEach((data) => {
+            test('[' + data.in.depth + '] => [' + data.rs + ']', () => {
+                assert.deepStrictEqual(
+                    data.in.enterBlockOfCode(data.bn),
+                    data.rs,
+                );
+            });
+        });
+    });
+
+    suite('FlowOfControlNestDepth.exitBlockOfCode', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     bn: , // brace number
+            //     rs: , // expected result
+            // },
+            {
+                in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
+                bn: 1,
+                rs: [-1, 0],
+            },
+            {
+                in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
+                bn: 2,
+                rs: [-1],
+            },
+        ];
+        dataList.forEach((data) => {
+            test('[' + data.in.depth + '] => [' + data.rs + ']', () => {
+                assert.deepStrictEqual(
+                    data.in.exitBlockOfCode(data.bn),
+                    data.rs,
+                );
+            });
+        });
+    });
+
+    suite('FlowOfControlNestDepth.pop', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     rs: , // expected result
+            // },
+            {
+                in: new FlowOfControlNestDepth([-1]),
+                rs: [-1],
+            },
+        ];
+        dataList.forEach((data) => {
+            test('[' + data.in.depth + '] => [' + data.rs + ']', () => {
+                data.in.pop();
+                assert.deepStrictEqual(data.in.depth, data.rs);
+            });
+        });
+    });
+
+    suite('FlowOfControlNestDepth.restoreEmptyDepth', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     rs: , // expected result
+            // },
+            {
+                in: new FlowOfControlNestDepth([]),
+                rs: [-1],
+            },
+        ];
+        dataList.forEach((data) => {
+            test('[' + data.in.depth + '] => [' + data.rs + ']', () => {
+                data.in.restoreEmptyDepth();
+                assert.deepStrictEqual(data.in.depth, data.rs);
+            });
+        });
+    });
+
+    suite('FlowOfControlNestDepth.restoreDepth', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input array
+            //     rs: , // expected result
+            //     dp: , // depth
+            // },
+            {
+                in: new FlowOfControlNestDepth([-1, 0, -1, 1, 2]),
+                rs: 1,
+                dp: [-1, 0, -1],
+            },
+            {
+                in: new FlowOfControlNestDepth([-1]),
+                rs: undefined,
+                dp: [-1],
+            },
+        ];
+        dataList.forEach((data) => {
+            test('[' + data.in.depth + "] => '" + data.rs + "'", () => {
+                assert.strictEqual(data.in.restoreDepth(), data.rs);
+            });
+            test('[' + data.in.depth + '] => [' + data.dp + ']', () => {
+                data.in.restoreDepth();
+                assert.deepStrictEqual(data.in.depth, data.dp);
+            });
+        });
+    });
+
+    suite('alignSingleLineComments', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            // },
+            {
+                in: '',
+                ...defaultFormattingOptions,
+                preserveIndent: true,
+                rs: '',
+            },
+            {
+                in: 'MsgBox',
+                ...defaultFormattingOptions,
+                rs: 'MsgBox',
+            },
+            {
+                in: 'MsgBox\n',
+                ...defaultFormattingOptions,
+                rs: 'MsgBox\n',
+            },
+            {
+                in: ';comment\nMsgBox',
+                ...defaultFormattingOptions,
+                rs: ';comment\nMsgBox',
+            },
+            {
+                in: ';comment\n    MsgBox',
+                ...defaultFormattingOptions,
+                rs: '    ;comment\n    MsgBox',
+            },
+            {
+                in: ';comment\n\tMsgBox',
+                ...defaultFormattingOptions,
+                insertSpaces: false,
+                rs: '\t;comment\n\tMsgBox',
+            },
+            {
+                in: ';comment\n}\nMsgBox',
+                ...defaultFormattingOptions,
+                rs: '    ;comment\n}\nMsgBox',
+            },
+            {
+                in: ';comment\n    , a: 4 }',
+                ...defaultFormattingOptions,
+                rs: '    ;comment\n    , a: 4 }',
+            },
+            {
+                in: '\n    MsgBox',
+                ...defaultFormattingOptions,
+                preserveIndent: true,
+                rs: '    \n    MsgBox',
+            },
+            {
+                in: '\n\tMsgBox',
+                ...defaultFormattingOptions,
+                insertSpaces: false,
+                preserveIndent: true,
+                rs: '\t\n\tMsgBox',
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(
+                    alignSingleLineComments(data.in, {
+                        insertSpaces: data.insertSpaces,
+                        tabSize: data.tabSize,
+                        preserveIndent: data.preserveIndent,
+                    }),
+                    data.rs,
+                );
+            });
+        });
+    });
+
+    suite('calculateDepth', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            // },
+            {
+                in: '',
+                ...defaultFormattingOptions,
+                rs: 0,
+            },
+            {
+                in: 'MsgBox',
+                ...defaultFormattingOptions,
+                rs: 0,
+            },
+            {
+                in: '        MsgBox',
+                ...defaultFormattingOptions,
+                rs: 2,
+            },
+            {
+                in: '\t\tMsgBox',
+                ...defaultFormattingOptions,
+                insertSpaces: false,
+                rs: 2,
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(
+                    calculateDepth(data.in, {
+                        insertSpaces: data.insertSpaces,
+                        tabSize: data.tabSize,
+                    }),
+                    data.rs,
+                );
+            });
+        });
+    });
+
+    suite('nextLineIsOneCommandCode', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: , // input test string
+            //     rs: , // expected result
+            // },
+            {
+                in: 'else',
+                rs: true,
+            },
+            {
+                in: '}else',
+                rs: true,
+            },
+            {
+                in: '} else',
+                rs: true,
+            },
+            {
+                in: 'else{',
+                rs: true,
+            },
+            {
+                in: 'else {',
+                rs: true,
+            },
+            {
+                in: 'Else:',
+                rs: false,
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "'" + ' => ' + data.rs.toString(), () => {
+                assert.strictEqual(nextLineIsOneCommandCode(data.in), data.rs);
             });
         });
     });

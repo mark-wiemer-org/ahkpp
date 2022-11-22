@@ -15,6 +15,7 @@ export const documentToString = (document: {
  * Build indentation chars
  * @param depth Depth of indent
  * @param options VS Code formatting options
+ * @return String with indentation chars
  */
 export function buildIndentationChars(
     depth: number,
@@ -30,6 +31,7 @@ export function buildIndentationChars(
  * @param indentationChars Indentation chars
  * @param formattedLine Formatted line of code
  * @param preserveIndentOnEmptyString Preserve indent on empty string
+ * @return String without new line character at end
  */
 export function buildIndentedString(
     indentationChars: string,
@@ -51,6 +53,7 @@ export function buildIndentedString(
  * @param formattedLine Formatted line of code
  * @param depth Depth of indent
  * @param options VS Code formatting options
+ * @return Indented string with new line character at end
  */
 export function buildIndentedLine(
     lineIndex: number,
@@ -58,7 +61,7 @@ export function buildIndentedLine(
     formattedLine: string,
     depth: number,
     options: Pick<FormatOptions, 'insertSpaces' | 'tabSize' | 'preserveIndent'>,
-) {
+): string {
     const indentationChars = buildIndentationChars(depth, options);
     let indentedLine = buildIndentedString(
         indentationChars,
@@ -323,6 +326,50 @@ export function purify(original: string): string {
 }
 
 /**
+ * Is next line is one command code triggered by flow of control statement.
+ *
+ * Example:
+ * ```ahk
+ * if (var)   ; false
+ *     MsgBox ; true
+ * SoundBeep  ; false
+ * ```
+ * @return is next line is one command code
+ */
+export function nextLineIsOneCommandCode(text: string): boolean {
+    /** Special keywords that can trigger one-line commands */
+    const oneCommandList = [
+        'ifnotexist',
+        'ifexist',
+        'ifwinactive',
+        'ifwinnotactive',
+        'ifwinexist',
+        'ifwinnotexist',
+        'ifinstring',
+        'ifnotinstring',
+        'if',
+        'else',
+        'loop',
+        'for',
+        'while',
+        'catch',
+    ];
+
+    for (const oneCommand of oneCommandList) {
+        // 1. Before 'oneCommandCode' allowed only optional close brace
+        //    Example: '} else'
+        // 2. After 'oneCommandCode' not allowed semicolon
+        //    Example: 'If:', 'Else:', 'Loop:', etc are valid labels, not 'oneCommandCode'
+        //    Skip such labels, because they produce wrong additional level of indent
+        if (text.match('^}?\\s*' + oneCommand + '\\b(?!:)')) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
  * Remove empty lines at the start of the string.
  * Replace sets of too many empty lines with the maximum allowed empty lines.
  * Uses end of line sequence from first empty line throughout all empty lines.
@@ -375,14 +422,13 @@ export type BraceChar = '{' | '}';
  */
 export function braceNumber(line: string, braceChar: BraceChar): number {
     let braceRegEx = new RegExp(braceChar, 'g');
-    let braceNum = line.match(braceRegEx).length;
-    /** Number of matched braces: `{...}` */
-    const matchedBrace = line.match(/{[^{}]*}/g);
-    braceNum -= matchedBrace?.length ?? 0;
+    let braceNum =
+        replaceAll(line, /{[^{}]*}/g, '').match(braceRegEx)?.length ?? 0;
     return braceNum;
 }
 
-/** Align variable assignment by = operator
+/**
+ * Align variable assignment by = operator
  * @param text Text to align
  * @returns Aligned text
  */
@@ -397,7 +443,8 @@ export function alignTextAssignOperator(text: string[]): string[] {
     return alignedText;
 }
 
-/** Remove comment, remove extra spaces around first = or := operator,
+/**
+ * Remove comment, remove extra spaces around first = or := operator,
  * add spaces around first = or := operator (if they missing).
  * Remove extra spaces, but not touch leading and trailing spaces.
  * @param original Original line of code
@@ -421,7 +468,8 @@ export function normalizeLineAssignOperator(original: string): string {
     );
 }
 
-/** Add spaces before = and := operators to move it to target position.
+/**
+ * Add spaces before = and := operators to move it to target position.
  * Remove extra spaces between symbol and operator,
  * remove spaces before comment (if present),
  * trim end spaces.
@@ -473,4 +521,159 @@ export function replaceAll(
         }
     }
     return text;
+}
+
+/** Keep track of indentation level of important flow of control statements. */
+export class FlowOfControlNestDepth {
+    /** Level of indentation. Always must have first element equal `-1`. */
+    depth: number[];
+
+    constructor(array?: number[]) {
+        this.depth = array ?? [-1];
+    }
+
+    /**
+     * Enter block of code.
+     *
+     * Push `-1` delimiter to array `openBraceNum` times.
+     *
+     * @param openBraceNum Number of open braces `{`
+     * @return The array
+     */
+    enterBlockOfCode(openBraceNum: number) {
+        for (let i = openBraceNum; i > 0; i--) {
+            this.depth.push(-1);
+        }
+        return this.depth;
+    }
+
+    /**
+     * Exit block of code.
+     *
+     * Cut last element equal to `-1` and all elements after it `closeBraceNum`
+     * times.
+     *
+     * Example: `[-1,0,-1,1,2]` => `[-1,0]`
+     *
+     * @param closeBraceNum Number of close braces `}`
+     * @return The array
+     */
+    exitBlockOfCode(closeBraceNum: number) {
+        for (let i = closeBraceNum; i > 0; i--) {
+            this.depth.splice(this.depth.lastIndexOf(-1));
+        }
+        // If we delete all elements by multiply close brace (without equal
+        // number open brace before them) restore `depth` proberty.
+        this.restoreEmptyDepth();
+        return this.depth;
+    }
+
+    /**
+     * Get the last element of the array.
+     *
+     * @return The element of the array
+     */
+    last() {
+        return this.depth[this.depth.length - 1];
+    }
+
+    push(items: number) {
+        return this.depth.push(items);
+    }
+
+    pop() {
+        let result = this.depth.pop();
+        this.restoreEmptyDepth();
+        return result;
+    }
+
+    /**
+     * Get depth of first flow of control statement with one command code in
+     * current block of code.
+     *
+     * Get element right after last `-1` element and delete all elements after
+     * last `-1` element.
+     *
+     * Example: `[-1,0,-1,1,2]` => `1`
+     *
+     * Internal changes: `[-1,0,-1,1,2]` => `[-1,0,-1]`
+     *
+     * @return The element of the array
+     */
+    restoreDepth() {
+        /** Index of element right after last `-1` element. */
+        let index = this.depth.lastIndexOf(-1) + 1;
+        let element = this.depth[index];
+        this.depth.splice(index);
+        return element;
+    }
+
+    /** If we delete all elements restore `depth` proberty to initial value `[-1]` */
+    restoreEmptyDepth() {
+        if (this.depth.length === 0) {
+            this.depth = [-1];
+        }
+    }
+}
+
+/**
+ * Align single line comment (starts with semicolon `;`) to previous line of code
+ * @param stringToFormat String with whole document
+ * @param options VS Code formatting options
+ * @return String with formatted document
+ */
+export function alignSingleLineComments(
+    stringToFormat: string,
+    options: Pick<FormatOptions, 'insertSpaces' | 'tabSize' | 'preserveIndent'>,
+): string {
+    let depth = 0;
+    let prevLineDepth = 0;
+    const lines = stringToFormat.split('\n');
+    for (let i = lines.length - 1; i >= 0; i--) {
+        const line = lines[i];
+        /** Line is empty or this is a single comment line. */
+        const emptyLine = purify(line) === '';
+        if (emptyLine) {
+            const indentationChars = buildIndentationChars(
+                prevLineDepth,
+                options,
+            );
+            lines[i] = buildIndentedString(
+                indentationChars,
+                // trim formatter directive comments, they saved with indentation
+                line.trim(),
+                options.preserveIndent,
+            );
+        } else {
+            depth = calculateDepth(line, options);
+            // obj := { a: { b: 1
+            //         ; comment
+            //         , c: 2 }} <-- don't match close braces in object's
+            //                       continuation section
+            // if {
+            //     ; comment
+            // } <-- increase indent for comment above after close brace
+            if (line.match(/^\s*}/)) {
+                const braceNum = braceNumber(purify(line), '}');
+                depth += braceNum;
+            }
+            prevLineDepth = depth;
+        }
+    }
+    return lines.join('\n');
+}
+
+/**
+ * Calculate indent level of current line of code
+ * @param text Line of code
+ * @param options VS Code formatting options
+ * @return Indent level
+ */
+export function calculateDepth(
+    text: string,
+    options: Pick<FormatOptions, 'insertSpaces' | 'tabSize'>,
+): number {
+    const indentationChars = text.match(/^\s+/);
+    const charsNum = indentationChars?.[0].length ?? 0;
+    return options.insertSpaces ? charsNum / options.tabSize : charsNum;
 }

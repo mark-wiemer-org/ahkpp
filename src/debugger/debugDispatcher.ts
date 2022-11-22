@@ -19,7 +19,7 @@ import { Global, ConfigKey } from '../common/global';
 
 /**
  * An AHK runtime debugger.
- * refrence: https://xdebug.org/docs/dbgp
+ * reference: https://xdebug.org/docs/dbgp
  */
 export class DebugDispatcher extends EventEmitter {
     private port: number;

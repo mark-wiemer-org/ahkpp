@@ -894,7 +894,7 @@ Class LV_Colors {
                 NumPut(ClrTx, L + ClrTxP, 0, "UInt"), This[H].CurTX := ClrTx
             If (ClrBk <> "")
                 NumPut(ClrBk, L + ClrTxBkP, 0, "UInt") , NumPut(ClrBk, L + ClrBkP, 0, "UInt")
-                , This[H].CurTB := ClrBk, This[H].CurBk := ClrBk
+                    , This[H].CurTB := ClrBk, This[H].CurBk := ClrBk
             If This[H].Cells.HasKey(Row)
                 Return CDRF_NOTIFYSUBITEMDRAW
             Return CDRF_DODEFAULT
@@ -2150,10 +2150,10 @@ compareTwoStrings2(para_string1,para_string2) {
     Loop, % vCount1 := StrLen(para_string1) - 1
         oArray["z" SubStr(para_string1, A_Index, 2)]++
     Loop, % vCount2 := StrLen(para_string2) - 1
-    if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
-        oArray["z" SubStr(para_string2, A_Index, 2)]--
-        vCount++
-    }
+        if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
+            oArray["z" SubStr(para_string2, A_Index, 2)]--
+            vCount++
+        }
     vSDC := Round((2 * vCount) / (vCount1 + vCount2),2)
     ; if (!vSDC || vSDC < 0.005) { ;round to 0 if less than 0.005
     ; return 0
@@ -2181,12 +2181,12 @@ compareTwoStrings(para_string1,para_string2)
     Loop, % vCount2 := StrLen(para_string2)
         ; Loop, % vCount2 := StrLen(para_string2) - 1
         ; p(oArray)
-    if (oArray["z" SubStr(para_string2, A_Index, 1)] > 0) {
-        ; if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
-        oArray["z" SubStr(para_string2, A_Index, 1)]--
-        ; oArray["z" SubStr(para_string2, A_Index, 2)]--
-        vCount++
-    }
+        if (oArray["z" SubStr(para_string2, A_Index, 1)] > 0) {
+            ; if (oArray["z" SubStr(para_string2, A_Index, 2)] > 0) {
+            oArray["z" SubStr(para_string2, A_Index, 1)]--
+            ; oArray["z" SubStr(para_string2, A_Index, 2)]--
+            vCount++
+        }
     ; p(vCount)
     vSDC := (vCount) / (vCount2)
     ; vSDC := (2 * vCount) / (vCount1 + vCount2)
@@ -2366,7 +2366,7 @@ HandleMessage( p_w, p_l, p_m, p_hw )
             }
 
             if (((p_w >> 16) & 0x200) and not ((p_w >> 16) & 0x100))
-                ; if (If ((p_w >> 16) & 0x200) and not ((p_w >> 16) & 0x100))
+            ; if (If ((p_w >> 16) & 0x200) and not ((p_w >> 16) & 0x100))
             {
                 if ( p_l = Edithwnd%whichSide% )
                 {
