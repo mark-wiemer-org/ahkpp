@@ -57,5 +57,6 @@ The tests should run automatically, and you should see passing output in the Deb
 1. Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
     1. Select the ellipsis `Actions` icon and select `Update`.
     1. Upload the `.vsix` release file packaged in a previous step.
+1. Publish to Open VSX: `npx ovsx <file> -p <token>`
 
 The release is usually available within 5 minutes of uploading.
