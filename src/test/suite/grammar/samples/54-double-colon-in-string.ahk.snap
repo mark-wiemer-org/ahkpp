@@ -1,0 +1,25 @@
+>Hotstring("::ykhis", "you know how it is")
+#^^^^^^^^^^^ source.ahk hotkeyline.ahk entity.name.function.label.ahk
+#           ^^ source.ahk hotkeyline.ahk punctuation.definition.equals.colon
+#             ^^^^^ source.ahk variable.def.ahk
+#                  ^ source.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#                   ^^ source.ahk string.quoted.double.ahk
+#                     ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
+#                      ^^^ source.ahk variable.def.ahk
+#                         ^ source.ahk
+#                          ^^^^ source.ahk variable.def.ahk
+#                              ^ source.ahk
+#                               ^^^ source.ahk variable.def.ahk
+#                                  ^ source.ahk
+#                                   ^^ source.ahk variable.def.ahk
+#                                     ^ source.ahk
+#                                      ^^ source.ahk keyword.other.ahk
+#                                        ^ source.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#                                         ^^ source.ahk string.quoted.double.ahk
+>Hotstring(":C:OOS", "out-of::-spec")
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk hotkeyline.ahk entity.name.function.label.ahk
+#                           ^^ source.ahk hotkeyline.ahk punctuation.definition.equals.colon
+#                             ^ source.ahk keyword.operator.arithmetic.ahk
+#                              ^^^^ source.ahk variable.def.ahk
+#                                  ^ source.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#                                   ^^ source.ahk string.quoted.double.ahk
