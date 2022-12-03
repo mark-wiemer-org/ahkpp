@@ -4,7 +4,7 @@ import { Parser } from './parser/parser';
 import { RunnerService } from './service/runnerService';
 import { DebugSession } from './debugger/debugSession';
 import { DefProvider } from './providers/defProvider';
-import { TemplateService } from './service/templateService';
+import { createEditorListener } from './service/templateService';
 import { FormatProvider } from './providers/formattingProvider';
 import { SymbolProvider } from './providers/symbolProvider';
 import { FileManager } from './common/fileManager';
@@ -58,7 +58,7 @@ export function activate(context: vscode.ExtensionContext) {
             'ahk',
             new InlineDebugAdapterFactory(),
         ),
-        TemplateService.createEditorListener(),
+        createEditorListener(),
         vscode.commands.registerCommand('ahk++.compile', () =>
             RunnerService.compile(false),
         ),
