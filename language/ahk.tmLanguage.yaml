@@ -73,7 +73,7 @@ repository:
             name: entity.name.function.label.ahk
           '2':
             name: punctuation.definition.equals.colon
-        match: ^\s*(.+)(::)
+        match: ^\s*([^\"]+)(::)
         name: hotkeyline.ahk
         example: '^c::'
   function-call:

@@ -1,0 +1,27 @@
+>;[#54 in AHK+](https://github.com/vscode-autohotkey/autohotkey-plus/issues/54)
+#^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>Hotstring("::ykhis", "you know how it is")
+#^^^^^^^^^ source.ahk entity.name.function.ahk
+#         ^ source.ahk punctuation.bracket.ahk
+#          ^ source.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#           ^^^^^^^ source.ahk string.quoted.double.ahk
+#                  ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^ source.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#                      ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
+#                                        ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
+#                                         ^ source.ahk punctuation.bracket.ahk
+>Hotstring(":C:OOS", "out-of::-spec")
+#^^^^^^^^^ source.ahk entity.name.function.ahk
+#         ^ source.ahk punctuation.bracket.ahk
+#          ^ source.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#           ^^^^^^ source.ahk string.quoted.double.ahk
+#                 ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^ source.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#                     ^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
+#                                  ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
+#                                   ^ source.ahk punctuation.bracket.ahk
