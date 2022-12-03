@@ -20,16 +20,16 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
 -   [Install](#install)
 -   [Commands](#commands)
 -   [Debug](#debug)
--   [Language Features](#language-features)
+-   [Language features](#language-features)
     -   [IntelliSense](#intellisense)
-    -   [Function Symbol](#function-symbol)
-    -   [Go To Definition](#go-to-definition)
-    -   [Find References](#find-symbol-references)
-    -   [Hover Tip](#hover-tip)
+    -   [Function symbol](#function-symbol)
+    -   [Go to definition](#go-to-definition)
+    -   [Find references](#find-symbol-references)
+    -   [Hover tip](#hover-tip)
     -   [Outline](#outline)
     -   [Folding](#folding)
-    -   [Code Format](#code-format)
-        -   [Formatter Directives](#formatter-directives)
+    -   [Code format](#code-format)
+        -   [Formatter directives](#formatter-directives)
 -   [Credits](#credits)
 
 ## Why AutoHotkey Plus Plus?
@@ -37,9 +37,9 @@ AHK++ is a fork of [AutoHotkey Plus by cweijan](https://github.com/AutoHotkey-Pl
 AutoHotkey Plus Plus is one of many extensions that offer VS Code language support. So why should you use this one?
 
 -   **IntelliSense**: Smart code completion, syntax highlighting, code navigation, and more.
--   **Actively Maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues).
--   **Debug Support**: Run and debug AHK scripts from VS Code.
--   **New Features**: Another benefit to active maintenance is that AHK++ can add new features as users request them.
+-   **Actively maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues).
+-   **Debug support**: Run and debug AHK scripts from VS Code.
+-   **New features**: Another benefit to active maintenance is that AHK++ can add new features as users request them.
 
 ## Install
 
@@ -47,26 +47,26 @@ Install from VS Code or install from VS Code Marketplace: [Install AutoHotkey Pl
 
 ## Commands
 
-With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts. You can also run a selection as a standalone script. Additionally, you can `Open Help` with `Ctrl + F1`.
+With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts. You can also run a selection as a standalone script.
 
 -   Compile: `Ctrl + Shift + F9`
--   Debug: `F9`
--   Open Help: `Ctrl + F1`
+-   Debug: `Ctrl + Alt + F9`
+-   Open help: `Ctrl + F1`
 -   Run: `Ctrl + F9`
--   Run Selection: `Ctrl + F8`
+-   Run selection: `Ctrl + F8`
 
 ## Debug
 
 > There are some [known issues with the debugger](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues?q=is%3Aopen+is%3Aissue+label%3Adebugger). If you need an advanced setup, we recommend [zero-plusplus.vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
 
-1. Click Run or press F9.
-2. Debugger supports breakpoints, stack tracing, and variable watching
+1. Click the debug button in the editor title menu (at the top right of the editor) or press `Ctrl + Alt + F9`.
+2. The debugger supports breakpoints, stack tracing, and variable watching
 
     ![Debug](image/debug.gif)
 
-### Debug Features
+### Debug features
 
-1. **Output Message**: You can use `OutputDebug` command instead of `MsgBox` to log values.
+1. **Output message**: You can use `OutputDebug` command instead of `MsgBox` to log values.
 
     ![Output](image/output.jpg)
 
@@ -82,25 +82,25 @@ This extension provides basic debugging functions. If you need more debugging fu
 
 Supports IntelliSense for variables and functions.
 
-### Function Symbol
+### Function symbol
 
 1. You can add a comment to the function using a semicolon on the line above the function declaration
 
-### Go to Definition
+### Go to definition
 
 1. Supports navigation to symbol definition.
 2. Usage: Ctrl-click on the symbol to navigate to its definition.
 
 ![Goto Definition](image/gotoDefinition.jpg)
 
-### Find Symbol References
+### Find symbol references
 
 Select a symbol, then:
 
 -   Right-click and select `Find All References`.
 -   Or press `Shift + F12`.
 
-### Hover Tip
+### Hover tip
 
 Usage: Hover over symbol to see IntelliSense documentation.
 
@@ -127,9 +127,7 @@ Collapse me!
 */ ;endregion
 ```
 
-### Code Format
-
-> There are some [known issues with the formatter](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues?q=is%3Aopen+is%3Aissue+label%3Aformatter), and we're always working to improve.
+### Code format
 
 Supports standard VS Code formatting with a few options.
 

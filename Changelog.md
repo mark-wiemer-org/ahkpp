@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.2.0 (unreleased)
+
+-   Debug keyboard shortcut is now `Ctrl + Alt + F9` (was `F9`) to avoid conflicts with VS Code default shortcuts.
+-   New setting: Snippet template name. Create your own template for new AHK files, including no template at all.
+
 ## 3.1.0 - 2022-11-21 🦃
 
 **Compiler**:
