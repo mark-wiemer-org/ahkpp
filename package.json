@@ -259,7 +259,7 @@
             },
             {
                 "command": "ahk++.debug",
-                "key": "f9",
+                "key": "ctrl+alt+f9",
                 "when": "editorLangId == ahk"
             },
             {
