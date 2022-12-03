@@ -3,11 +3,9 @@ import * as vscode from 'vscode';
 export class Global {
     public static configPrefix = 'ahk++';
     private static statusBarItem: vscode.StatusBarItem;
-    /**
-     * get configuration from vscode setting.
-     * @param key config key
-     */
-    public static getConfig<T>(key: string): T {
+
+    /** Get configuration from VS Code setting. */
+    public static getConfig<T>(key: ConfigKey): T {
         return vscode.workspace.getConfiguration(this.configPrefix).get<T>(key);
     }
 
@@ -38,5 +36,6 @@ export enum ConfigKey {
     indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',
     indentCodeAfterSharpDirective = 'formatter.indentCodeAfterSharpDirective',
     preserveIndent = 'formatter.preserveIndent',
+    templateSnippetName = 'file.templateSnippetName',
     trimExtraSpaces = 'formatter.trimExtraSpaces',
 }

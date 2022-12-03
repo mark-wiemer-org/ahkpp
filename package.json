@@ -126,6 +126,11 @@
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
                     "description": "Path to the AHK Help document."
                 },
+                "ahk++.file.templateSnippetName": {
+                    "type": "string",
+                    "default": "AhkTemplate",
+                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/vscode-autohotkey/ahkpp/tree/main/docs/TemplateSnippet.md)."
+                },
                 "ahk++.formatter.allowedNumberOfEmptyLines": {
                     "type": "integer",
                     "default": 1,
