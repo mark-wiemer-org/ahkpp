@@ -1165,6 +1165,11 @@
         "body": "UrlDownloadToFile, ${1:URL}, ${2:Filename}",
         "description": "Downloads a file from the Internet."
     },
+    "VerCompare": {
+        "prefix": "VerCompare",
+        "body": "VerCompare(${1:VersionA}, ${2:VersionB})",
+        "description": "Compares two version strings."
+    },
     "While": {
         "prefix": "While",
         "body": "While, ${1:Expression}",
