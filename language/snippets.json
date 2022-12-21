@@ -1272,7 +1272,7 @@
     },
     "WinSet": {
         "prefix": "WinSet",
-        "body": "WinSet, ${1:AlwaysOnTop|Trans}, ${2:On|Off|Toggle|Value(0-255) [}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}",
+        "body": "WinSet, ${1:AlwaysOnTop|Bottom|Top|Disable|Enable|Redraw|Style|ExStyle|Region|Transparent|TransColor}, ${2:On|Off|Toggle|Value(0-255) [}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}",
         "description": "Makes a variety of changes to the specified window, such as \"always on top\" and transparency."
     },
     "WinSetTitle": {
