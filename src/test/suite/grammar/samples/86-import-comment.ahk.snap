@@ -1,0 +1,17 @@
+>#Include
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+>#Include file.ahk
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+#        ^^^^^^^^^ source.ahk keyword.control.import.ahk string.parameter.import.ahk
+>#Include file.ahk ;comment
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+#        ^^^^^^^^^ source.ahk keyword.control.import.ahk string.parameter.import.ahk
+#                 ^^^^^^^^^ source.ahk keyword.control.import.ahk comment.line.semicolon.import.ahk
+>#Include C:\My Scripts
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+#        ^^^^^^^^^^^^^^ source.ahk keyword.control.import.ahk string.parameter.import.ahk
+>#Include C:\My Scripts ;comment
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+#        ^^^^^^^^^^^^^^ source.ahk keyword.control.import.ahk string.parameter.import.ahk
+#                      ^^^^^^^^^ source.ahk keyword.control.import.ahk comment.line.semicolon.import.ahk
+>
