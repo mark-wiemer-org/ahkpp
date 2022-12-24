@@ -712,12 +712,12 @@ export const internalFormat = (
             }
         }
 
-        // Return, Exit, ExitApp
+        // Return, Exit, ExitApp, Reload
         // Label:
         //     code
         // Return <-- force de-indent by one level for labels
         if (
-            purifiedLine.match(/^(return|exit|exitapp)\b/) &&
+            purifiedLine.match(/^(return|exit|exitapp|reload)\b/) &&
             tagDepth === depth
         ) {
             tagDepth = 0;
