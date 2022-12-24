@@ -42,8 +42,8 @@ repository:
           '5':
             name: support.class.ahk
         match: (?i:\b(class)\b\s*(\w+))\s*((extends)\s+(\w+))?
-        name: labelline.ahk
-        example: 'label:'
+        name: classline.ahk
+        example: 'class A extends B:'
       - captures:
           '1':
             name: entity.name.function.label.ahk
