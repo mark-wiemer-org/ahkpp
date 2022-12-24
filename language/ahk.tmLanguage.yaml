@@ -153,7 +153,7 @@ repository:
             name: punctuation.bracket.curly.ahk
           '6':
             name: comment.line.semicolon.functionline.ahk
-        match: (?i:^(\s*\w+)(?<!if|while)(\()(.*)(\))\s*({)\s*(;?.*)$)
+        match: (?i:^(\s*\w+)(?<!if|while)(\()(.*)(\))\s*({)(\s+;.*)?$)
         name: functionline.ahk
         example: fun(){
   text:
