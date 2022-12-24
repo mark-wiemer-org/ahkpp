@@ -4,17 +4,25 @@ Return
 
 Label:
 Sleep
+Reload
+
+Label:
+Sleep
 Exit, ExitCode
 
 Label:
 Sleep
 ExitApp, ExitCode
 
-foo1() {
+foo() {
 Return
 }
 
-foo2() {
+foo() {
+Reload
+}
+
+foo() {
 Exit, ExitCode
 }
 
