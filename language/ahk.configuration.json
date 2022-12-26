@@ -23,7 +23,7 @@
     "indentationRules": {
         "increaseIndentPattern": "^((?!;).)*\\{[^}]*$",
         "decreaseIndentPattern": "^\\s*((?!;)[^{])*\\}.*$",
-        "indentNextLinePattern": "^\\s*(if|ifmsgbox|else|loop|for|while|catch)\\b"
+        "indentNextLinePattern": "^\\s*(if|ifmsgbox|else|loop|for|while|catch|If|IfMsgBox|Else|Loop|For|While|Catch)\\b"
     },
     "surroundingPairs": [
         ["{", "}"],
