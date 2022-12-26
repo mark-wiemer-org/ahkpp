@@ -20,6 +20,11 @@
             "notIn": ["string"]
         }
     ],
+    "indentationRules": {
+        "increaseIndentPattern": "^((?!;).)*\\{[^}]*$",
+        "decreaseIndentPattern": "^\\s*((?!;)[^{])*\\}.*$",
+        "indentNextLinePattern": "^\\s*(if|ifmsgbox|else|loop|for|while|catch)\\b"
+    },
     "surroundingPairs": [
         ["{", "}"],
         ["[", "]"],
