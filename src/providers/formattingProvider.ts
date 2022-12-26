@@ -235,21 +235,6 @@ export const internalFormat = (
      */
     let openBraceObjectDepth = -1;
 
-    // OTHER
-    /**
-     * This line is `#Directive`, that will create context-sensitive hotkeys
-     * and hotstrings.
-     * Example of `#Directives`:
-     * ```ahk
-     * #IfWinActive WinTitle
-     * #IfWinNotActive WinTitle
-     * #IfWinExist WinTitle
-     * #IfWinNotExist WinTitle
-     * #If Expression
-     * ```
-     */
-    let sharpDirectiveLine = false;
-
     // BLOCK COMMENT
     /** This line is block comment */
     let blockComment = false;
@@ -346,7 +331,6 @@ export const internalFormat = (
         const emptyLine = purifiedLine === '';
 
         detectOneCommandCode = true;
-        sharpDirectiveLine = false;
 
         const openBraceNum = braceNumber(purifiedLine, '{');
         const closeBraceNum = braceNumber(purifiedLine, '}');
@@ -688,30 +672,18 @@ export const internalFormat = (
             }
         }
 
-        // #DIRECTIVE without parameters
-        // #IfWinActive WinTitle
-        //     Hotkey::
-        // #If <-- de-indent #Directive without parameters
-        if (purifiedLine.match('^' + sharpDirective + '$')) {
-            if (tagDepth > 0) {
-                depth -= tagDepth;
-            } else {
-                depth--;
-            }
-        }
-
-        // #DIRECTIVE with parameters
+        // #DIRECTIVE
         // #IfWinActive WinTitle1
         //     Hotkey::
         // #IfWinActive WinTitle2 <-- fall-through scenario for #Directive with
         //     Hotkey::                                               parameters
-        if (purifiedLine.match('^' + sharpDirective + '\\b.+')) {
+        // #If                    <-- de-indent #Directive without parameters
+        if (purifiedLine.match('^' + sharpDirective + '\\b')) {
             if (tagDepth > 0) {
                 depth -= tagDepth;
             } else {
                 depth--;
             }
-            sharpDirectiveLine = true;
         }
 
         // Return, Exit, ExitApp
@@ -853,7 +825,10 @@ export const internalFormat = (
         // #DIRECTIVE with parameters
         // #If Expression <-- indent next line after '#Directive'
         //     F1:: MsgBox Help
-        if (sharpDirectiveLine && indentCodeAfterSharpDirective) {
+        if (
+            purifiedLine.match('^' + sharpDirective + '\\b.+') &&
+            indentCodeAfterSharpDirective
+        ) {
             depth++;
         }
 
