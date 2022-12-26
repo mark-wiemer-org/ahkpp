@@ -1,3 +1,6 @@
+F1::code
+code
+
 !^+F1::
     code
 return

@@ -1,7 +1,10 @@
 ::btw::by the way
 code
+
+::btw::
+code
 return
 
-:*b0:<em>::</em>{left 5}
+:*b0:<em>::
 code
 return
