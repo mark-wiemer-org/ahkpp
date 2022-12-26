@@ -62,6 +62,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '255-style-k-and-r' },
     { filenameRoot: '255-style-mix' },
     { filenameRoot: '255-style-one-true-brace' },
+    { filenameRoot: '290-ifmsgbox' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'align-assignment' },
     { filenameRoot: 'demo' },
