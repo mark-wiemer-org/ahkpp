@@ -15,6 +15,8 @@ export interface Variable {
     character: number;
     method: Method;
     isGlobal: boolean;
+    comment: string;
+    full: string;
 }
 
 export class Label {

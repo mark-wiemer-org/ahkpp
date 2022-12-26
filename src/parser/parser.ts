@@ -170,6 +170,27 @@ export class Parser {
         }
     }
 
+    // TODO getMethodByName() getLabelByName() getVariableByName() combine together
+    public static async getVariableByName(
+        document: vscode.TextDocument,
+        name: string,
+    ) {
+        name = name.toLowerCase();
+        for (const variable of this.documentCache.get(document.uri.path)
+            .variables) {
+            if (variable.name.toLowerCase() === name) {
+                return variable;
+            }
+        }
+        for (const filePath of this.documentCache.keys()) {
+            for (const variable of this.documentCache.get(filePath).variables) {
+                if (variable.name.toLowerCase() === name) {
+                    return variable;
+                }
+            }
+        }
+    }
+
     public static getAllRefByName(name: string): Ref[] {
         const refs = [];
         name = name.toLowerCase();
@@ -226,7 +247,8 @@ export class Parser {
         document: vscode.TextDocument,
         line: number,
     ): Variable | Variable[] {
-        const lineText = CodeUtil.purify(document.lineAt(line).text);
+        const original = document.lineAt(line).text;
+        const lineText = CodeUtil.purify(original);
 
         const defMatch = lineText.match(Parser.varDefPattern);
         if (defMatch) {
@@ -238,6 +260,8 @@ export class Parser {
                 method: null,
                 name: varName,
                 character: lineText.indexOf(varName),
+                comment: Parser.getRemarkByLine(document, line - 1),
+                full: original,
             };
         } else {
             const vars = [];
@@ -260,6 +284,8 @@ export class Parser {
                     method: null,
                     name: varName,
                     character: lineText.indexOf(commandMatchAll[index][0]),
+                    comment: Parser.getRemarkByLine(document, line - 1),
+                    full: original,
                 });
             }
             return vars;
@@ -342,6 +368,7 @@ export class Parser {
         document: vscode.TextDocument,
         line: number,
     ) {
+        // TODO get all continuous comment lines above func\var
         if (line >= 0) {
             const { text } = document.lineAt(line);
             const markMatch = text.match(/^\s*;(.+)/);

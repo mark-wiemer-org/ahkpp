@@ -56,6 +56,17 @@ export class AhkHoverProvider implements HoverProvider {
             return new Hover(contents);
         }
 
+        const variable = await Parser.getVariableByName(document, context.word);
+        if (variable) {
+            const contents = new MarkdownString('', true).appendCodeblock(
+                variable.full,
+            );
+            if (variable.comment) {
+                contents.appendText(variable.comment);
+            }
+            return new Hover(contents);
+        }
+
         return null;
     }
 
