@@ -339,14 +339,15 @@ export function purify(original: string): string {
 export function nextLineIsOneCommandCode(text: string): boolean {
     /** Special keywords that can trigger one-line commands */
     const oneCommandList = [
-        'ifnotexist',
         'ifexist',
-        'ifwinactive',
-        'ifwinnotactive',
-        'ifwinexist',
-        'ifwinnotexist',
         'ifinstring',
+        'ifmsgbox',
+        'ifnotexist',
         'ifnotinstring',
+        'ifwinactive',
+        'ifwinexist',
+        'ifwinnotactive',
+        'ifwinnotexist',
         'if',
         'else',
         'loop',
