@@ -292,11 +292,11 @@ export const internalFormat = (
      */
     const label = /^[^\s\t,`]+:$/;
     /**
-     * Hotkey and hotstring.
+     * Hotkey and hotstring without code after it.
      *
-     * Example: `F1 & F2 Up::` (hotkey), `::btw::by the way` (hotstring)
+     * Example: `F1 & F2 Up::` (hotkey), `::btw::` (hotstring)
      */
-    const hotkey = /^.*::/;
+    const hotkey = /^.*::$/;
     /**
      * `#Directive`, that will create context-sensitive hotkeys and hotstrings.
      * Example of `#Directives`:
