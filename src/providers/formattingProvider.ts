@@ -567,6 +567,16 @@ export const internalFormat = (
                 depth++;
             }
             depth++;
+        } else if (openBraceObjectDepth > -1) {
+            // CONTINUATION SECTION: Object
+            // obj := {
+            //     , {
+            //         , } <-- user forgot close brace
+            //     code    <-- here we waits continuation section for object, but
+            //                 don't have it, increase indent, so user can see his
+            //                 mistake
+            openBraceObjectDepth = -1;
+            depth++;
         }
 
         // CONTINUATION SECTION: Expression - Deferred oneCommandCode indent
