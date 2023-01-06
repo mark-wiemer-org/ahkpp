@@ -279,6 +279,14 @@ export const internalFormat = (
     const trimSpaces = options.trimExtraSpaces;
 
     // REGULAR EXPRESSION
+    /** Formatter's directive `;@AHK++AlignAssignmentOn` */
+    const ahkAlignAssignmentOn = /;\s*@AHK\+\+AlignAssignmentOn/i;
+    /** Formatter's directive `;@AHK++AlignAssignmentOff` */
+    const ahkAlignAssignmentOff = /;\s*@AHK\+\+AlignAssignmentOff/i;
+    /** Formatter's directive `;@AHK++FormatBlockCommentOn` */
+    const ahkFormatBlockCommentOn = /;\s*@AHK\+\+FormatBlockCommentOn/i;
+    /** Formatter's directive `;@AHK++FormatBlockCommentOff` */
+    const ahkFormatBlockCommentOff = /;\s*@AHK\+\+FormatBlockCommentOff/i;
     /**
      * Semicolon must have at least one space or tab to its left or semicolon
      * placed at the beginning of a line.
@@ -298,14 +306,6 @@ export const internalFormat = (
      */
     const continuationSection =
         /^(((and|or|not)\b)|[\^!~?:&<>=.,|]|\+(?!\+)|-(?!-)|\/(?!\*)|\*(?!\/))/;
-    /** Formatter's directive `;@AHK++AlignAssignmentOn` */
-    const ahkAlignAssignmentOn = /;\s*@AHK\+\+AlignAssignmentOn/i;
-    /** Formatter's directive `;@AHK++AlignAssignmentOff` */
-    const ahkAlignAssignmentOff = /;\s*@AHK\+\+AlignAssignmentOff/i;
-    /** Formatter's directive `;@AHK++FormatBlockCommentOn` */
-    const ahkFormatBlockCommentOn = /;\s*@AHK\+\+FormatBlockCommentOn/i;
-    /** Formatter's directive `;@AHK++FormatBlockCommentOff` */
-    const ahkFormatBlockCommentOff = /;\s*@AHK\+\+FormatBlockCommentOff/i;
     /**
      * Label name may consist of any characters other than `space`, `tab`,
      * `comma` and the escape character (`).
