@@ -280,6 +280,16 @@ export const internalFormat = (
 
     // REGULAR EXPRESSION
     /**
+     * Semicolon must have at least one space or tab to its left or semicolon
+     * placed at the beginning of a line.
+     *
+     * Example: `ToolTip;NotComment`, `ToolTip ;Comment`
+     *
+     * Must be in sync with comment regexp in `purify()` (formatting utility
+     * function)!
+     */
+    const commentRegExp = /(?<=^|\s+);.*/;
+    /**
      * A line that starts with `and`, `or`, `||`, `&&`, a comma, or a period is
      * automatically merged with the line directly above it (the same is true
      * for all other expression operators except `++` and `--`).
@@ -331,8 +341,8 @@ export const internalFormat = (
     lines.forEach((originalLine, lineIndex) => {
         const purifiedLine = purify(originalLine).toLowerCase();
         /** The line comment. Empty string if no line comment exists */
-        const comment = /;.+/.exec(originalLine)?.[0] ?? '';
-        let formattedLine = originalLine.replace(/;.+/, ''); // Remove single line comment
+        const comment = commentRegExp.exec(originalLine)?.[0] ?? '';
+        let formattedLine = originalLine.replace(commentRegExp, ''); // Remove single line comment
         formattedLine = trimExtraSpaces(formattedLine, trimSpaces) // Remove extra spaces between words
             .concat(comment) // Add removed single line comment back
             .trim();

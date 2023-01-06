@@ -320,7 +320,7 @@ export function purify(original: string): string {
     pure = replaceAll(pure, /{[^{}]*}/g, ''); // remove matching braces
     pure = pure
         .replace(/\s+/g, ' ') // collapse all spaces and tabs to single space
-        .replace(/;.+/, '') // remove comments; must be last, semicolon may be inside string (expression)
+        .replace(/(?<=^|\s+);.*/, '') // remove comments; must be last, semicolon may be inside string (expression)
         .trim();
     return pure;
 }
