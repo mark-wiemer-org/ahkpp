@@ -29,7 +29,7 @@ repository:
       - begin: ^\s*\((?!.*\))
         end: ^\s*\)
         name: string.ahk
-        comment: I can't get mean.
+        example: I can't get mean.
   script-block:
     patterns:
       - captures:
@@ -43,7 +43,7 @@ repository:
             name: support.class.ahk
         match: (?i:\b(class)\b\s*(\w+))\s*((extends)\s+(\w+))?
         name: classline.ahk
-        example: 'class A extends B:'
+        example: class A extends B
       - captures:
           '1':
             name: entity.name.function.label.ahk
