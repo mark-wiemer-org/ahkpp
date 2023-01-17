@@ -10,16 +10,6 @@ assignees: mark-wiemer
 
 Describe the issue. For example, "Statements in functions are indented one level more than expected."
 
-### Unformatted input snippet
-
-```autohotkey
-; Insert the code you would write before you format it
-; Keep the snippet small and simple so it's easier to analyze
-foo() {
-x := 1
-}
-```
-
 ### Expected formatted output snippet
 
 ```autohotkey

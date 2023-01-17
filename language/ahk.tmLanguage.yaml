@@ -81,7 +81,9 @@ repository:
       - captures:
           '1':
             name: string.parameter.import.ahk
-        match: '#\b(?i:include|includeagain)\b(.*)$'
+          '2':
+            name: comment.line.semicolon.import.ahk
+        match: '#\b(?i:include|includeagain)\b(.*?)(\s+;.*)?$'
         name: keyword.control.import.ahk
         example: '#include'
       - captures:
