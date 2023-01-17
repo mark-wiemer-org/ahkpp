@@ -315,8 +315,12 @@ suite('FormattingProvider utils', () => {
                 rs: 'str = ""',
             },
             {
-                in: 'str = " ; comment with double quote"',
+                in: 'str = "; comment with double quote"',
                 rs: 'str = ""',
+            },
+            {
+                in: 'str = "; comment',
+                rs: 'str = "; comment',
             },
             {
                 in: 'str = " ; comment',
