@@ -5417,7 +5417,7 @@
 #                   ^ source.ahk
 #                    ^ source.ahk punctuation.bracket.ahk
 >files:=array_ToSpacedString(getSelectedPaths())
-#^^^^^ source.ahk variable.def.ahk
+#^^^^^ source.ahk keyword.other.ahk
 #     ^^ source.ahk keyword.operator.assignment.ahk
 #       ^^^^^^^^^^^^^^^^^^^^ source.ahk entity.name.function.ahk
 #                           ^ source.ahk punctuation.bracket.ahk
@@ -5437,7 +5437,7 @@
 #                         ^^^^^^^^^^^ source.ahk variable.def.ahk
 #                                    ^ source.ahk
 #                                     ^ source.ahk punctuation.definition.variable.percent.ahk
-#                                      ^^^^^ source.ahk variable.def.ahk
+#                                      ^^^^^ source.ahk keyword.other.ahk
 #                                           ^ source.ahk punctuation.definition.variable.percent.ahk
 >soundplay, *-1
 #^^^^^^^^^ source.ahk support.function.ahk
@@ -5614,7 +5614,7 @@
 #                             ^ source.ahk
 #                              ^ source.ahk punctuation.bracket.ahk
 >files:=StrSplit(clipboard, "`n","`r")
-#^^^^^ source.ahk variable.def.ahk
+#^^^^^ source.ahk keyword.other.ahk
 #     ^^ source.ahk keyword.operator.assignment.ahk
 #       ^^^^^^^^ source.ahk support.function.ahk
 #               ^ source.ahk punctuation.bracket.ahk
@@ -5639,7 +5639,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >fileExist:=FileExist(v)
@@ -11193,7 +11193,7 @@
 #                     ^^^^^^^^^^ source.ahk variable.def.ahk
 #                               ^ source.ahk punctuation.ahk
 #                                ^ source.ahk
-#                                 ^^^^^ source.ahk variable.def.ahk
+#                                 ^^^^^ source.ahk keyword.other.ahk
 #                                      ^ source.ahk punctuation.bracket.ahk
 >{
 #^ source.ahk punctuation.bracket.ahk
@@ -11329,7 +11329,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >;IShellFolder:ParseDisplayName
@@ -13896,7 +13896,7 @@
 #                             ^ source.ahk
 #                              ^ source.ahk punctuation.bracket.ahk
 >files:=StrSplit(clipboard, "`n","`r")
-#^^^^^ source.ahk variable.def.ahk
+#^^^^^ source.ahk keyword.other.ahk
 #     ^^ source.ahk keyword.operator.assignment.ahk
 #       ^^^^^^^^ source.ahk support.function.ahk
 #               ^ source.ahk punctuation.bracket.ahk
@@ -13921,7 +13921,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >fileExist:=FileExist(v)
@@ -14060,7 +14060,7 @@
 #                                  ^ source.ahk
 #                                   ^ source.ahk punctuation.bracket.ahk
 >files:=StrSplit(clipboard, "`n","`r")
-#^^^^^ source.ahk variable.def.ahk
+#^^^^^ source.ahk keyword.other.ahk
 #     ^^ source.ahk keyword.operator.assignment.ahk
 #       ^^^^^^^^ source.ahk support.function.ahk
 #               ^ source.ahk punctuation.bracket.ahk
@@ -14097,7 +14097,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >fileExist:=FileExist(v)
@@ -17579,10 +17579,10 @@
 #       ^^ source.ahk keyword.operator.assignment.ahk
 #         ^ source.ahk
 #          ^ source.ahk punctuation.bracket.ahk
-#           ^^^^ source.ahk variable.def.ahk
+#           ^^^^ source.ahk keyword.other.ahk
 #               ^ source.ahk punctuation.ahk
 #                ^ source.ahk punctuation.bracket.ahk
-#                 ^^^^^ source.ahk variable.def.ahk
+#                 ^^^^^ source.ahk keyword.keys.ahk
 #                      ^ source.ahk punctuation.ahk
 #                       ^^^^ source.ahk support.function.ahk
 #                           ^ source.ahk punctuation.bracket.ahk
@@ -17822,10 +17822,10 @@
 #       ^^ source.ahk keyword.operator.assignment.ahk
 #         ^ source.ahk
 #          ^ source.ahk punctuation.bracket.ahk
-#           ^^^^ source.ahk variable.def.ahk
+#           ^^^^ source.ahk keyword.other.ahk
 #               ^ source.ahk punctuation.ahk
 #                ^ source.ahk punctuation.bracket.ahk
-#                 ^^^^^ source.ahk variable.def.ahk
+#                 ^^^^^ source.ahk keyword.keys.ahk
 #                      ^ source.ahk punctuation.ahk
 #                       ^^^^ source.ahk support.function.ahk
 #                           ^ source.ahk punctuation.bracket.ahk
@@ -20815,7 +20815,7 @@
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
 #     ^ source.ahk
-#      ^^^^^ source.ahk variable.def.ahk
+#      ^^^^^ source.ahk keyword.other.ahk
 #           ^ source.ahk punctuation.ahk
 #            ^ source.ahk
 #             ^ source.ahk punctuation.definition.variable.percent.ahk
@@ -21122,7 +21122,7 @@
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
 #     ^ source.ahk
-#      ^^^^^ source.ahk variable.def.ahk
+#      ^^^^^ source.ahk keyword.other.ahk
 #           ^ source.ahk punctuation.ahk
 #            ^ source.ahk
 #             ^ source.ahk punctuation.definition.variable.percent.ahk
@@ -21326,7 +21326,7 @@
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
 #     ^ source.ahk
-#      ^^^^^ source.ahk variable.def.ahk
+#      ^^^^^ source.ahk keyword.other.ahk
 #           ^ source.ahk punctuation.ahk
 #            ^ source.ahk
 #             ^ source.ahk punctuation.definition.variable.percent.ahk
@@ -22013,7 +22013,7 @@
 #                 ^^^^^^^^^^ source.ahk variable.def.ahk
 #                           ^ source.ahk punctuation.ahk
 #                            ^ source.ahk
-#                             ^^^^^ source.ahk variable.def.ahk
+#                             ^^^^^ source.ahk keyword.other.ahk
 #                                  ^ source.ahk punctuation.ahk
 #                                   ^ source.ahk
 #                                    ^^^^^^^^ source.ahk variable.def.ahk
@@ -22244,7 +22244,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >;IShellFolder:ParseDisplayName
