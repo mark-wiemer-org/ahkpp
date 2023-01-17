@@ -572,6 +572,16 @@ export const internalFormat = (
         // CLOSE BRACE
         if (closeBraceNum) {
             // FLOW OF CONTROL
+            // Example (restore close brace depth):
+            // foo() {
+            //     for
+            //         if
+            //             return
+            // } ; <-- de-indent from all nesting before loosing information
+            //         about depth via focDepth.exitBlockOfCode() below
+            if (focDepth.last() > -1) {
+                depth = focDepth.last();
+            }
             ifDepth.exitBlockOfCode(closeBraceNum);
             focDepth.exitBlockOfCode(closeBraceNum);
             // CONTINUATION SECTION: Object

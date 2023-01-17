@@ -1165,6 +1165,11 @@
         "body": "UrlDownloadToFile, ${1:URL}, ${2:Filename}",
         "description": "Downloads a file from the Internet."
     },
+    "VerCompare": {
+        "prefix": "VerCompare",
+        "body": "VerCompare(${1:VersionA}, ${2:VersionB})",
+        "description": "Compares two version strings."
+    },
     "While": {
         "prefix": "While",
         "body": "While, ${1:Expression}",
@@ -1267,7 +1272,7 @@
     },
     "WinSet": {
         "prefix": "WinSet",
-        "body": "WinSet, ${1:AlwaysOnTop|Trans}, ${2:On|Off|Toggle|Value(0-255) [}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}",
+        "body": "WinSet, ${1:AlwaysOnTop|Bottom|Top|Disable|Enable|Redraw|Style|ExStyle|Region|Transparent|TransColor}, ${2:On|Off|Toggle|Value(0-255) [}, ${3:WinTitle}, ${4:WinText}, ${5:ExcludeTitle}, ${6:ExcludeText]}",
         "description": "Makes a variety of changes to the specified window, such as \"always on top\" and transparency."
     },
     "WinSetTitle": {
@@ -2014,7 +2019,7 @@
     },
     "InsertAt()": {
         "prefix": ".InsertAt()",
-        "body": ".InsertAt(${1:Key}, ${2:Value})",
+        "body": ".InsertAt(${1:Pos}, ${2:Value1}, ${3:[Value2, ... ValueN]})",
         "description": "Inserts one or more values at a given position within a linear array."
     },
     "MinIndex()": {
@@ -2039,7 +2044,7 @@
     },
     "RemoveAt()": {
         "prefix": ".RemoveAt()",
-        "body": ".RemoveAt(${1:Pos}, ${2:Length})",
+        "body": ".RemoveAt(${1:Pos}, ${2:[Length]})",
         "description": "Removes items from the given position in a linear array."
     },
     "GetCapacity()": {
@@ -2079,8 +2084,8 @@
     },
     "Push()": {
         "prefix": ".Push()",
-        "body": ".Push(${1:Value})",
-        "description": "Appends values to the end of an array."
+        "body": ".Push(${1:[Value, Value2, ..., ValueN]})",
+        "description": "Appends values to the end of an array. Returns the position of the last inserted value."
     },
     "Pop()": {
         "prefix": ".Pop()",
