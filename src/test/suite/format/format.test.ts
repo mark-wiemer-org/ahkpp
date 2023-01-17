@@ -56,6 +56,7 @@ const formatTests: FormatTest[] = [
         filenameRoot: '192-preserve-indent-true',
         options: { preserveIndent: true },
     },
+    { filenameRoot: '255-close-brace' },
     { filenameRoot: '255-else-if' },
     { filenameRoot: '255-if-loop-mix' },
     { filenameRoot: '255-return-function' },
