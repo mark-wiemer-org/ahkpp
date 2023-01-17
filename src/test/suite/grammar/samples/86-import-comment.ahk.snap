@@ -1,0 +1,20 @@
+>; [Issue #86](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/86)
+#^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>#Include
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+>#Include File.ahk
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+#        ^^^^^^^^^ source.ahk keyword.control.import.ahk string.parameter.import.ahk
+>#Include File.ahk ;Comment
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+#        ^^^^^^^^^ source.ahk keyword.control.import.ahk string.parameter.import.ahk
+#                 ^^^^^^^^^ source.ahk keyword.control.import.ahk comment.line.semicolon.import.ahk
+>#Include C:\My Scripts
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+#        ^^^^^^^^^^^^^^ source.ahk keyword.control.import.ahk string.parameter.import.ahk
+>#Include C:\My Scripts ;Comment
+#^^^^^^^^ source.ahk keyword.control.import.ahk
+#        ^^^^^^^^^^^^^^ source.ahk keyword.control.import.ahk string.parameter.import.ahk
+#                      ^^^^^^^^^ source.ahk keyword.control.import.ahk comment.line.semicolon.import.ahk
+>
