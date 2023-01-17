@@ -42,7 +42,9 @@ const formatTests: FormatTest[] = [
         filenameRoot: '182-multiple-newlines',
         options: { allowedNumberOfEmptyLines: 2 },
     },
-    { filenameRoot: '184-continuation-section' },
+    { filenameRoot: '184-continuation-section-expression' },
+    { filenameRoot: '184-continuation-section-object' },
+    { filenameRoot: '184-continuation-section-text' },
     { filenameRoot: '185-block-comment' },
     {
         filenameRoot: '187-comments-at-end-of-line',
