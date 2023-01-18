@@ -1,9 +1,8 @@
-GoTo, If
-ExitApp
+If:
+GoTo Loop
+return
 
 Else:
-GoTo Loop
-If:
 GoTo Loop
 return
 
