@@ -209,6 +209,11 @@ suite('External formatter', () => {
             await textEditor.edit((editBuilder) =>
                 editBuilder.replace(fullDocumentRange, originalText),
             );
+
+            // Close opened file
+            await vscode.commands.executeCommand(
+                'workbench.action.closeActiveEditor',
+            );
         });
     });
 });
