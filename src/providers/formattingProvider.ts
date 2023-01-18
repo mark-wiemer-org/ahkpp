@@ -1,5 +1,6 @@
 import { isDeepStrictEqual } from 'util';
 import * as vscode from 'vscode';
+import { commentRegExp } from '../common/constants';
 import { ConfigKey, Global } from '../common/global';
 import { FormatOptions } from './formattingProvider.types';
 import {
@@ -287,16 +288,6 @@ export const internalFormat = (
     const ahkFormatBlockCommentOn = /;\s*@AHK\+\+FormatBlockCommentOn/i;
     /** Formatter's directive `;@AHK++FormatBlockCommentOff` */
     const ahkFormatBlockCommentOff = /;\s*@AHK\+\+FormatBlockCommentOff/i;
-    /**
-     * Semicolon must have at least one space or tab to its left or semicolon
-     * placed at the beginning of a line.
-     *
-     * Example: `ToolTip;NotComment`, `ToolTip ;Comment`
-     *
-     * Must be in sync with comment regexp in `purify()` (formatting utility
-     * function)!
-     */
-    const commentRegExp = /(?<=^|\s+);.*/;
     /**
      * A line that starts with `and`, `or`, `||`, `&&`, a comma, or a period is
      * automatically merged with the line directly above it (the same is true
