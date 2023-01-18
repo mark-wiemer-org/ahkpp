@@ -1,0 +1,29 @@
+>; [Issue #295](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/295)
+#^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>Foo() {;NotComment
+#^^^ source.ahk entity.name.function.ahk
+#   ^ source.ahk punctuation.bracket.ahk
+#    ^ source.ahk punctuation.bracket.ahk
+#     ^ source.ahk
+#      ^ source.ahk punctuation.bracket.ahk
+#       ^ source.ahk
+#        ^^^^^^^^^^ source.ahk variable.def.ahk
+>    MsgBox
+#^^^^ source.ahk
+#    ^^^^^^ source.ahk support.function.ahk
+>}
+#^ source.ahk punctuation.bracket.ahk
+>Bar() { ;Comment
+#^^^ source.ahk functionline.ahk entity.name.function.ahk
+#   ^ source.ahk functionline.ahk punctuation.bracket.parenthesis.ahk
+#    ^ source.ahk functionline.ahk punctuation.bracket.parenthesis.ahk
+#     ^ source.ahk functionline.ahk
+#      ^ source.ahk functionline.ahk punctuation.bracket.curly.ahk
+#       ^^^^^^^^^ source.ahk functionline.ahk comment.line.semicolon.functionline.ahk
+>    MsgBox
+#^^^^ source.ahk
+#    ^^^^^^ source.ahk support.function.ahk
+>}
+#^ source.ahk punctuation.bracket.ahk
+>

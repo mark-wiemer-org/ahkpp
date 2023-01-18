@@ -1,0 +1,11 @@
+>; [Issue #295](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/295)
+#^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>#KeyHistory MaxEvents ;Comment
+#^^^^^^^^^^^ source.ahk keyword.control.directives.ahk
+#           ^^^^^^^^^^ source.ahk keyword.control.directives.ahk string.parameter.directives.ahk
+#                     ^^^^^^^^^ source.ahk keyword.control.directives.ahk comment.line.semicolon.directive.ahk
+>#KeyHistory MaxEvents;NotComment
+#^^^^^^^^^^^ source.ahk keyword.control.directives.ahk
+#           ^^^^^^^^^^^^^^^^^^^^^ source.ahk keyword.control.directives.ahk string.parameter.directives.ahk
+>
