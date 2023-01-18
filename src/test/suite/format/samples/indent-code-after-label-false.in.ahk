@@ -1,5 +1,3 @@
-Label1:
+Label:
 MsgBox
-Label2:
-SoundBeep
 return

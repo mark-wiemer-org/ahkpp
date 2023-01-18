@@ -6318,10 +6318,10 @@
 #^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Class LV_Colors {
-#^^^^^ source.ahk labelline.ahk keyword.class.ahk
-#     ^ source.ahk labelline.ahk
-#      ^^^^^^^^^ source.ahk labelline.ahk support.class.ahk
-#               ^ source.ahk labelline.ahk
+#^^^^^ source.ahk classline.ahk keyword.class.ahk
+#     ^ source.ahk classline.ahk
+#      ^^^^^^^^^ source.ahk classline.ahk support.class.ahk
+#               ^ source.ahk classline.ahk
 #                ^ source.ahk punctuation.bracket.ahk
 >; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
