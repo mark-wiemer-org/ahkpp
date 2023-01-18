@@ -603,18 +603,21 @@ export const internalFormat = (
                 (oneCommandCode || deferredOneCommandCode) &&
                 !nextLineIsOneCommandCode(purifiedLine)
             ) {
-                oneCommandCode = false;
                 if (deferredOneCommandCode) {
                     // if (a = 4
                     //     and b = 5) {
                     //     MsgBox <-- disable deferredOneCommandCode indent
                     // }
                     deferredOneCommandCode = false;
-                } else {
+                } else if (purifiedLine.match(/^{/)) {
                     // if (var)
                     // { <-- revert oneCommandCode indent for open brace
                     //     MsgBox
                     // }
+                    // if (var)
+                    //     obj := { key1: val1 <-- but not for object continuation
+                    //         , key2: val2 }                            section
+                    oneCommandCode = false;
                     depth -= openBraceNum;
                 }
                 // FLOW OF CONTROL revert added by mistake

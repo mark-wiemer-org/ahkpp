@@ -6,11 +6,17 @@
                 if
                     return
     }
-
     foo() {
         for
             for
                 if
                     return
+    }
+    foo() {
+        if
+            obj := {
+                , {
+                    ,
+                    , } }
     }
 }
