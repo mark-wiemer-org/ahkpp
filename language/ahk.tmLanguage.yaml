@@ -17,7 +17,7 @@ repository:
       - captures:
           '1':
             name: punctuation.definition.comment.ahk
-        match: \s*(;).*
+        match: (?<=^|\s+)(;).*
         name: comment.line.semicolon.ahk
         example: ;comment
       - begin: ^\s*/\*
@@ -49,7 +49,7 @@ repository:
             name: entity.name.function.label.ahk
           '2':
             name: comment.line.semicolon.label.ahk
-        match: ^\s*(\w+:)\s*(;.*)?$
+        match: ^\s*(\w+:)(\s+;.*)?$
         name: labelline.ahk
         example: 'label:'
       - captures:
@@ -92,7 +92,7 @@ repository:
           '2':
             name: comment.line.semicolon.directive.ahk
         match: >-
-          #\b(?i:allowsamelinecomments|clipboardtimeout|commentflag|errorstdout|escapechar|hotkeyinterval|hotkeymodifiertimeout|hotstring|if|iftimeout|ifwinactive|ifwinexist|ifwinnotactive|ifwinnotexist|inputlevel|installkeybdhook|installmousehook|keyhistory|ltrim|maxhotkeysperinterval|maxmem|maxthreads|maxthreadsbuffer|maxthreadsperhotkey|menumaskkey|noenv|notrayicon|persistent|requires|singleinstance|usehook|warn|winactivateforce)\b([^;]*)(\s+;.*)?$
+          #\b(?i:allowsamelinecomments|clipboardtimeout|commentflag|errorstdout|escapechar|hotkeyinterval|hotkeymodifiertimeout|hotstring|if|iftimeout|ifwinactive|ifwinexist|ifwinnotactive|ifwinnotexist|inputlevel|installkeybdhook|installmousehook|keyhistory|ltrim|maxhotkeysperinterval|maxmem|maxthreads|maxthreadsbuffer|maxthreadsperhotkey|menumaskkey|noenv|notrayicon|persistent|requires|singleinstance|usehook|warn|winactivateforce)\b(.*?)(\s+;.*)?$
         name: keyword.control.directives.ahk
         example: '#persistent'
       - match: >-
@@ -155,7 +155,7 @@ repository:
             name: punctuation.bracket.curly.ahk
           '6':
             name: comment.line.semicolon.functionline.ahk
-        match: (?i:^(\s*\w+)(?<!if|while)(\()(.*)(\))\s*({)\s*(;?.*)$)
+        match: (?i:^(\s*\w+)(?<!if|while)(\()(.*)(\))\s*({)(\s+;.*)?$)
         name: functionline.ahk
         example: fun(){
   text:
