@@ -18,7 +18,7 @@
 #^^^^^^^^ source.ahk support.function.ahk
 #        ^ source.ahk
 #         ^^^^^ source.ahk support.function.ahk
-#              ^ source.ahk comment.line.semicolon.ahk
+#              ^ source.ahk
 #               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
@@ -27,7 +27,7 @@
 #              ^ source.ahk punctuation.definition.variable.percent.ahk
 #               ^^^^^^^^^^^ source.ahk constant.language.ahk
 #                          ^ source.ahk punctuation.definition.variable.percent.ahk
-#                           ^ source.ahk comment.line.semicolon.ahk
+#                           ^ source.ahk
 #                            ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >SetBatchLines, -1
@@ -258,7 +258,7 @@
 #             ^^ source.ahk keyword.other.ahk
 #               ^ source.ahk
 #                ^^^^^^ source.ahk constant.language.ahk
-#                      ^ source.ahk comment.line.semicolon.ahk
+#                      ^ source.ahk
 #                       ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                        ^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >{
@@ -1045,7 +1045,7 @@
 #              ^ source.ahk punctuation.ahk
 #               ^ source.ahk constant.numeric.ahk
 #                ^ source.ahk punctuation.bracket.ahk
-#                 ^ source.ahk comment.line.semicolon.ahk
+#                 ^ source.ahk
 #                  ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                   ^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >LV_ModifyCol(6,0) ; hides 3rd row
@@ -1055,7 +1055,7 @@
 #              ^ source.ahk punctuation.ahk
 #               ^ source.ahk constant.numeric.ahk
 #                ^ source.ahk punctuation.bracket.ahk
-#                 ^ source.ahk comment.line.semicolon.ahk
+#                 ^ source.ahk
 #                  ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                   ^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >focused=flistView
@@ -1082,7 +1082,7 @@
 #                            ^^^^^^^ source.ahk constant.language.ahk
 #                                   ^ source.ahk punctuation.definition.variable.percent.ahk
 #                                    ^ source.ahk punctuation.bracket.ahk
-#                                     ^ source.ahk comment.line.semicolon.ahk
+#                                     ^ source.ahk
 #                                      ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                       ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -1210,7 +1210,7 @@
 #                                                           ^ source.ahk
 #                                                            ^ source.ahk constant.numeric.ahk
 #                                                             ^ source.ahk punctuation.bracket.ahk
-#                                                              ^ source.ahk comment.line.semicolon.ahk
+#                                                              ^ source.ahk
 #                                                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >GetCurrentDesktop := vtable(IVirtualDesktopManagerInternal, 6) ; IVirtualDesktop GetCurrentDesktop();
@@ -1225,7 +1225,7 @@
 #                                                           ^ source.ahk
 #                                                            ^ source.ahk constant.numeric.ahk
 #                                                             ^ source.ahk punctuation.bracket.ahk
-#                                                              ^ source.ahk comment.line.semicolon.ahk
+#                                                              ^ source.ahk
 #                                                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >ImmersiveShell := ComObjCreate("{C2F03A33-21F5-47FA-B4BB-156362A2F239}", "{00000000-0000-0000-C000-000000000046}")
@@ -1269,7 +1269,7 @@
 #                                                                                                                                                ^ source.ahk punctuation.bracket.ahk
 #                                                                                                                                                 ^ source.ahk
 #                                                                                                                                                  ^ source.ahk punctuation.bracket.ahk
-#                                                                                                                                                   ^ source.ahk comment.line.semicolon.ahk
+#                                                                                                                                                   ^ source.ahk
 #                                                                                                                                                    ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                                                                                                     ^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >{
@@ -1299,7 +1299,7 @@
 #                                                          ^ source.ahk
 #                                                           ^ source.ahk constant.numeric.ahk
 #                                                            ^ source.ahk punctuation.bracket.ahk
-#                                                             ^ source.ahk comment.line.semicolon.ahk
+#                                                             ^ source.ahk
 #                                                              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >
@@ -2076,7 +2076,7 @@
 #^^^^^^^^^^^^^^^^ source.ahk entity.name.function.ahk
 #                ^ source.ahk punctuation.bracket.ahk
 #                 ^ source.ahk punctuation.bracket.ahk
-#                  ^ source.ahk comment.line.semicolon.ahk
+#                  ^ source.ahk
 #                   ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                    ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -2350,7 +2350,7 @@
 #                                                        ^ source.ahk punctuation.definition.variable.percent.ahk
 #                                                         ^^^^^^^^^^ source.ahk variable.def.ahk
 #                                                                   ^ source.ahk punctuation.definition.variable.percent.ahk
-#                                                                    ^ source.ahk comment.line.semicolon.ahk
+#                                                                    ^ source.ahk
 #                                                                     ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                      ^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >else
@@ -2414,7 +2414,7 @@
 #                      ^ source.ahk punctuation.ahk
 #                       ^ source.ahk
 #                        ^^^^^ source.ahk variable.def.ahk
-#                             ^ source.ahk comment.line.semicolon.ahk
+#                             ^ source.ahk
 #                              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                               ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Postmessage,0xB1,%Outvar%,%Outvar%, Edit1 ;move caret back to end
@@ -2432,7 +2432,7 @@
 #                                  ^ source.ahk punctuation.ahk
 #                                   ^ source.ahk
 #                                    ^^^^^ source.ahk variable.def.ahk
-#                                         ^ source.ahk comment.line.semicolon.ahk
+#                                         ^ source.ahk
 #                                          ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                           ^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >
@@ -2495,7 +2495,7 @@
 #                                       ^ source.ahk punctuation.bracket.ahk
 #                                        ^ source.ahk
 #                                         ^ source.ahk punctuation.bracket.ahk
-#                                          ^ source.ahk comment.line.semicolon.ahk
+#                                          ^ source.ahk
 #                                           ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                            ^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >if (stuffByName[RenamingSimple].Count()) {
@@ -2582,7 +2582,7 @@
 #                                   ^ source.ahk punctuation.bracket.ahk
 #                                    ^ source.ahk
 #                                     ^ source.ahk punctuation.bracket.ahk
-#                                      ^ source.ahk comment.line.semicolon.ahk
+#                                      ^ source.ahk
 #                                       ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >randomPath:=generateRandomUniqueName(SourcePath,isDir)
@@ -3701,7 +3701,7 @@
 #                                                             ^^^^ source.ahk string.quoted.double.ahk
 #                                                                 ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                                                  ^ source.ahk punctuation.bracket.ahk
-#                                                                   ^ source.ahk comment.line.semicolon.ahk
+#                                                                   ^ source.ahk
 #                                                                    ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Cursors[2] := DllCall("LoadCursor", "Ptr", 0, "Ptr", 32516, "UPtr") ; DROPEFFECT_MOVE = IDC_UPARROW
@@ -3739,7 +3739,7 @@
 #                                                             ^^^^ source.ahk string.quoted.double.ahk
 #                                                                 ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                                                  ^ source.ahk punctuation.bracket.ahk
-#                                                                   ^ source.ahk comment.line.semicolon.ahk
+#                                                                   ^ source.ahk
 #                                                                    ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Cursors[3] := DllCall("LoadCursor", "Ptr", 0, "Ptr", 32648, "UPtr") ; Copy or Move = IDC_NO
@@ -3777,7 +3777,7 @@
 #                                                             ^^^^ source.ahk string.quoted.double.ahk
 #                                                                 ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                                                  ^ source.ahk punctuation.bracket.ahk
-#                                                                   ^ source.ahk comment.line.semicolon.ahk
+#                                                                   ^ source.ahk
 #                                                                    ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                     ^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >DoDragDrop(Cursors)
@@ -4202,7 +4202,7 @@
 #                      ^ source.ahk string.quoted.double.ahk
 #                       ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                        ^ source.ahk punctuation.bracket.ahk
-#                         ^ source.ahk comment.line.semicolon.ahk
+#                         ^ source.ahk
 #                          ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                           ^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >{
@@ -4517,7 +4517,7 @@
 #                ^^^^^^^^ source.ahk constant.numeric.ahk
 #                        ^ source.ahk punctuation.ahk
 #                         ^ source.ahk variable.def.ahk
-#                          ^ source.ahk comment.line.semicolon.ahk
+#                          ^ source.ahk
 #                           ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >
@@ -5190,7 +5190,7 @@
 #                    ^^^^^^^ source.ahk string.quoted.double.ahk
 #                           ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                            ^ source.ahk punctuation.bracket.ahk
-#                             ^ source.ahk comment.line.semicolon.ahk
+#                             ^ source.ahk
 #                              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                               ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -5304,7 +5304,7 @@
 #            ^^^^^^^^^^^^^^^^ source.ahk entity.name.function.ahk
 #                            ^ source.ahk punctuation.bracket.ahk
 #                             ^ source.ahk punctuation.bracket.ahk
-#                              ^ source.ahk comment.line.semicolon.ahk
+#                              ^ source.ahk
 #                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >{
@@ -5417,7 +5417,7 @@
 #                   ^ source.ahk
 #                    ^ source.ahk punctuation.bracket.ahk
 >files:=array_ToSpacedString(getSelectedPaths())
-#^^^^^ source.ahk variable.def.ahk
+#^^^^^ source.ahk keyword.other.ahk
 #     ^^ source.ahk keyword.operator.assignment.ahk
 #       ^^^^^^^^^^^^^^^^^^^^ source.ahk entity.name.function.ahk
 #                           ^ source.ahk punctuation.bracket.ahk
@@ -5437,7 +5437,7 @@
 #                         ^^^^^^^^^^^ source.ahk variable.def.ahk
 #                                    ^ source.ahk
 #                                     ^ source.ahk punctuation.definition.variable.percent.ahk
-#                                      ^^^^^ source.ahk variable.def.ahk
+#                                      ^^^^^ source.ahk keyword.other.ahk
 #                                           ^ source.ahk punctuation.definition.variable.percent.ahk
 >soundplay, *-1
 #^^^^^^^^^ source.ahk support.function.ahk
@@ -5450,7 +5450,7 @@
 #^^^^^^^^^^^^^^^^ source.ahk entity.name.function.ahk
 #                ^ source.ahk punctuation.bracket.ahk
 #                 ^ source.ahk punctuation.bracket.ahk
-#                  ^ source.ahk comment.line.semicolon.ahk
+#                  ^ source.ahk
 #                   ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                    ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >return
@@ -5496,7 +5496,7 @@
 #                                                                 ^ source.ahk punctuation.bracket.ahk
 #                                                                  ^ source.ahk
 #                                                                   ^ source.ahk punctuation.bracket.ahk
-#                                                                    ^ source.ahk comment.line.semicolon.ahk
+#                                                                    ^ source.ahk
 #                                                                     ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                      ^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >if (DllCall("IsClipboardFormatAvailable", "UInt", dropEffectFormat)) {
@@ -5614,7 +5614,7 @@
 #                             ^ source.ahk
 #                              ^ source.ahk punctuation.bracket.ahk
 >files:=StrSplit(clipboard, "`n","`r")
-#^^^^^ source.ahk variable.def.ahk
+#^^^^^ source.ahk keyword.other.ahk
 #     ^^ source.ahk keyword.operator.assignment.ahk
 #       ^^^^^^^^ source.ahk support.function.ahk
 #               ^ source.ahk punctuation.bracket.ahk
@@ -5639,7 +5639,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >fileExist:=FileExist(v)
@@ -6318,10 +6318,10 @@
 #^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Class LV_Colors {
-#^^^^^ source.ahk labelline.ahk keyword.class.ahk
-#     ^ source.ahk labelline.ahk
-#      ^^^^^^^^^ source.ahk labelline.ahk support.class.ahk
-#               ^ source.ahk labelline.ahk
+#^^^^^ source.ahk classline.ahk keyword.class.ahk
+#     ^ source.ahk classline.ahk
+#      ^^^^^^^^^ source.ahk classline.ahk support.class.ahk
+#               ^ source.ahk classline.ahk
 #                ^ source.ahk punctuation.bracket.ahk
 >; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
@@ -6404,7 +6404,7 @@
 #^^^^^^ source.ahk keyword.control.ahk
 #      ^ source.ahk
 #       ^^^^^ source.ahk constant.language.ahk
-#            ^ source.ahk comment.line.semicolon.ahk
+#            ^ source.ahk
 #             ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -9616,7 +9616,7 @@
 #       ^^ source.ahk keyword.operator.assignment.ahk
 #         ^ source.ahk
 #          ^^^ source.ahk constant.numeric.ahk
-#             ^ source.ahk comment.line.semicolon.ahk
+#             ^ source.ahk
 #              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #               ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >VarSetCapacity(vPath, vChars*2)
@@ -10097,7 +10097,7 @@
 #                                   ^ source.ahk punctuation.ahk
 #                                    ^ source.ahk
 #                                     ^ source.ahk constant.numeric.ahk
-#                                      ^ source.ahk comment.line.semicolon.ahk
+#                                      ^ source.ahk
 #                                       ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >clipboard:=finalStr
@@ -11193,7 +11193,7 @@
 #                     ^^^^^^^^^^ source.ahk variable.def.ahk
 #                               ^ source.ahk punctuation.ahk
 #                                ^ source.ahk
-#                                 ^^^^^ source.ahk variable.def.ahk
+#                                 ^^^^^ source.ahk keyword.other.ahk
 #                                      ^ source.ahk punctuation.bracket.ahk
 >{
 #^ source.ahk punctuation.bracket.ahk
@@ -11329,7 +11329,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >;IShellFolder:ParseDisplayName
@@ -11689,7 +11689,7 @@
 #                                           ^ source.ahk punctuation.bracket.ahk
 #                                            ^ source.ahk
 #                                             ^ source.ahk punctuation.bracket.ahk
-#                                              ^ source.ahk comment.line.semicolon.ahk
+#                                              ^ source.ahk
 #                                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                ^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >MsgBox, 0, Error, Call of WatchFolder() failed!
@@ -11733,7 +11733,7 @@
 #                                        ^ source.ahk
 #                                         ^^^^^^^^^^^ source.ahk variable.def.ahk
 #                                                    ^ source.ahk punctuation.bracket.ahk
-#                                                     ^ source.ahk comment.line.semicolon.ahk
+#                                                     ^ source.ahk
 #                                                      ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                       ^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -11791,7 +11791,7 @@
 #                                        ^ source.ahk
 #                                         ^^^^^^^^^^^^^^^^^ source.ahk variable.def.ahk
 #                                                          ^ source.ahk punctuation.bracket.ahk
-#                                                           ^ source.ahk comment.line.semicolon.ahk
+#                                                           ^ source.ahk
 #                                                            ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                             ^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -12021,7 +12021,7 @@
 #                                    ^ source.ahk punctuation.bracket.ahk
 #                                     ^ source.ahk
 #                                      ^ source.ahk punctuation.bracket.ahk
-#                                       ^ source.ahk comment.line.semicolon.ahk
+#                                       ^ source.ahk
 #                                        ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                         ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >fileRenamed(whichSide, OutFileNameOld, OutFileNameNew)
@@ -12073,7 +12073,7 @@
 #                                           ^ source.ahk punctuation.bracket.ahk
 #                                            ^ source.ahk
 #                                             ^ source.ahk punctuation.bracket.ahk
-#                                              ^ source.ahk comment.line.semicolon.ahk
+#                                              ^ source.ahk
 #                                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                ^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >fileAdded(whichSide, Name)
@@ -12098,7 +12098,7 @@
 #  ^^^^ source.ahk keyword.control.ahk
 #      ^ source.ahk
 #       ^ source.ahk punctuation.bracket.ahk
-#        ^ source.ahk comment.line.semicolon.ahk
+#        ^ source.ahk
 #         ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #          ^^^^^ source.ahk comment.line.semicolon.ahk
 >
@@ -12763,7 +12763,7 @@
 #                      ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                        ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                         ^ source.ahk punctuation.bracket.ahk
-#                                          ^ source.ahk comment.line.semicolon.ahk
+#                                          ^ source.ahk
 #                                           ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                            ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -12780,7 +12780,7 @@
 #                    ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                      ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                       ^ source.ahk punctuation.bracket.ahk
-#                                        ^ source.ahk comment.line.semicolon.ahk
+#                                        ^ source.ahk
 #                                         ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                          ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -13775,7 +13775,7 @@
 #                                                                 ^ source.ahk punctuation.bracket.ahk
 #                                                                  ^ source.ahk
 #                                                                   ^ source.ahk punctuation.bracket.ahk
-#                                                                    ^ source.ahk comment.line.semicolon.ahk
+#                                                                    ^ source.ahk
 #                                                                     ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                      ^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >if (DllCall("IsClipboardFormatAvailable", "UInt", dropEffectFormat)) {
@@ -13896,7 +13896,7 @@
 #                             ^ source.ahk
 #                              ^ source.ahk punctuation.bracket.ahk
 >files:=StrSplit(clipboard, "`n","`r")
-#^^^^^ source.ahk variable.def.ahk
+#^^^^^ source.ahk keyword.other.ahk
 #     ^^ source.ahk keyword.operator.assignment.ahk
 #       ^^^^^^^^ source.ahk support.function.ahk
 #               ^ source.ahk punctuation.bracket.ahk
@@ -13921,7 +13921,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >fileExist:=FileExist(v)
@@ -14060,7 +14060,7 @@
 #                                  ^ source.ahk
 #                                   ^ source.ahk punctuation.bracket.ahk
 >files:=StrSplit(clipboard, "`n","`r")
-#^^^^^ source.ahk variable.def.ahk
+#^^^^^ source.ahk keyword.other.ahk
 #     ^^ source.ahk keyword.operator.assignment.ahk
 #       ^^^^^^^^ source.ahk support.function.ahk
 #               ^ source.ahk punctuation.bracket.ahk
@@ -14097,7 +14097,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >fileExist:=FileExist(v)
@@ -14276,7 +14276,7 @@
 #                                ^ source.ahk
 #                                 ^^ source.ahk constant.numeric.ahk
 #                                   ^ source.ahk punctuation.bracket.ahk
-#                                    ^ source.ahk comment.line.semicolon.ahk
+#                                    ^ source.ahk
 #                                     ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >DllCall("wsprintf", "Str", ZeroPaddedNumber, "Str", "%0" howManyChars "d", "Int", number, "Cdecl") ; Requires the Cdecl calling convention.
@@ -14323,7 +14323,7 @@
 #                                                                                           ^^^^^ source.ahk string.quoted.double.ahk
 #                                                                                                ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                                                                                 ^ source.ahk punctuation.bracket.ahk
-#                                                                                                  ^ source.ahk comment.line.semicolon.ahk
+#                                                                                                  ^ source.ahk
 #                                                                                                   ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >return ZeroPaddedNumber
@@ -15248,7 +15248,7 @@
 #^^^^^ source.ahk keyword.other.ahk
 #     ^ source.ahk keyword.operator.assignment.ahk
 #      ^^^^^^^^ source.ahk constant.numeric.ahk
-#              ^ source.ahk comment.line.semicolon.ahk
+#              ^ source.ahk
 #               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                ^^^ source.ahk comment.line.semicolon.ahk
 >if (Abs(var1Num)>525599) {
@@ -15292,7 +15292,7 @@
 #                      ^ source.ahk keyword.operator.arithmetic.ahk
 #                       ^^^^^^ source.ahk constant.numeric.ahk
 #                             ^ source.ahk punctuation.bracket.ahk
-#                              ^ source.ahk comment.line.semicolon.ahk
+#                              ^ source.ahk
 #                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >var1:=var1Num " y"
@@ -15307,7 +15307,7 @@
 #^^^^^ source.ahk keyword.other.ahk
 #     ^ source.ahk keyword.operator.assignment.ahk
 #      ^^^^^^^^ source.ahk constant.numeric.ahk
-#              ^ source.ahk comment.line.semicolon.ahk
+#              ^ source.ahk
 #               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                ^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -15355,7 +15355,7 @@
 #                      ^ source.ahk keyword.operator.arithmetic.ahk
 #                       ^^^^^ source.ahk constant.numeric.ahk
 #                            ^ source.ahk punctuation.bracket.ahk
-#                             ^ source.ahk comment.line.semicolon.ahk
+#                             ^ source.ahk
 #                              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >var1:=var1Num " m"
@@ -15370,7 +15370,7 @@
 #^^^^^ source.ahk keyword.other.ahk
 #     ^ source.ahk keyword.operator.assignment.ahk
 #      ^^^^^^^^ source.ahk constant.numeric.ahk
-#              ^ source.ahk comment.line.semicolon.ahk
+#              ^ source.ahk
 #               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                ^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -15421,7 +15421,7 @@
 #^^^^^ source.ahk keyword.other.ahk
 #     ^ source.ahk keyword.operator.assignment.ahk
 #      ^^^^^^^^ source.ahk constant.numeric.ahk
-#              ^ source.ahk comment.line.semicolon.ahk
+#              ^ source.ahk
 #               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                ^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >} else if (Abs(var1Num)>59) {
@@ -15472,7 +15472,7 @@
 #^^^^^ source.ahk keyword.other.ahk
 #     ^ source.ahk keyword.operator.assignment.ahk
 #      ^^^^^^^^ source.ahk constant.numeric.ahk
-#              ^ source.ahk comment.line.semicolon.ahk
+#              ^ source.ahk
 #               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                ^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -17579,10 +17579,10 @@
 #       ^^ source.ahk keyword.operator.assignment.ahk
 #         ^ source.ahk
 #          ^ source.ahk punctuation.bracket.ahk
-#           ^^^^ source.ahk variable.def.ahk
+#           ^^^^ source.ahk keyword.other.ahk
 #               ^ source.ahk punctuation.ahk
 #                ^ source.ahk punctuation.bracket.ahk
-#                 ^^^^^ source.ahk variable.def.ahk
+#                 ^^^^^ source.ahk keyword.keys.ahk
 #                      ^ source.ahk punctuation.ahk
 #                       ^^^^ source.ahk support.function.ahk
 #                           ^ source.ahk punctuation.bracket.ahk
@@ -17597,7 +17597,7 @@
 #                                         ^ source.ahk punctuation.bracket.ahk
 #                                          ^ source.ahk punctuation.bracket.ahk
 #                                           ^ source.ahk punctuation.bracket.ahk
-#                                            ^ source.ahk comment.line.semicolon.ahk
+#                                            ^ source.ahk
 #                                             ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Loop, % vCount1 := StrLen(para_string1) - 1
@@ -17822,10 +17822,10 @@
 #       ^^ source.ahk keyword.operator.assignment.ahk
 #         ^ source.ahk
 #          ^ source.ahk punctuation.bracket.ahk
-#           ^^^^ source.ahk variable.def.ahk
+#           ^^^^ source.ahk keyword.other.ahk
 #               ^ source.ahk punctuation.ahk
 #                ^ source.ahk punctuation.bracket.ahk
-#                 ^^^^^ source.ahk variable.def.ahk
+#                 ^^^^^ source.ahk keyword.keys.ahk
 #                      ^ source.ahk punctuation.ahk
 #                       ^^^^ source.ahk support.function.ahk
 #                           ^ source.ahk punctuation.bracket.ahk
@@ -17840,7 +17840,7 @@
 #                                         ^ source.ahk punctuation.bracket.ahk
 #                                          ^ source.ahk punctuation.bracket.ahk
 #                                           ^ source.ahk punctuation.bracket.ahk
-#                                            ^ source.ahk comment.line.semicolon.ahk
+#                                            ^ source.ahk
 #                                             ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Loop, % vCount1 := StrLen(para_string1)
@@ -18801,7 +18801,7 @@
 #             ^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                      ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                       ^ source.ahk punctuation.bracket.ahk
-#                        ^ source.ahk comment.line.semicolon.ahk
+#                        ^ source.ahk
 #                         ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                          ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >{
@@ -18883,7 +18883,7 @@
 #             ^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                      ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                       ^ source.ahk punctuation.bracket.ahk
-#                        ^ source.ahk comment.line.semicolon.ahk
+#                        ^ source.ahk
 #                         ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                          ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >{
@@ -20001,7 +20001,7 @@
 #                      ^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                    ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                     ^ source.ahk punctuation.bracket.ahk
-#                                      ^ source.ahk comment.line.semicolon.ahk
+#                                      ^ source.ahk
 #                                       ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                        ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -20017,7 +20017,7 @@
 #              ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                 ^ source.ahk punctuation.bracket.ahk
-#                                  ^ source.ahk comment.line.semicolon.ahk
+#                                  ^ source.ahk
 #                                   ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                    ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >
@@ -20815,7 +20815,7 @@
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
 #     ^ source.ahk
-#      ^^^^^ source.ahk variable.def.ahk
+#      ^^^^^ source.ahk keyword.other.ahk
 #           ^ source.ahk punctuation.ahk
 #            ^ source.ahk
 #             ^ source.ahk punctuation.definition.variable.percent.ahk
@@ -21122,7 +21122,7 @@
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
 #     ^ source.ahk
-#      ^^^^^ source.ahk variable.def.ahk
+#      ^^^^^ source.ahk keyword.other.ahk
 #           ^ source.ahk punctuation.ahk
 #            ^ source.ahk
 #             ^ source.ahk punctuation.definition.variable.percent.ahk
@@ -21210,7 +21210,7 @@
 #                               ^ source.ahk punctuation.definition.variable.percent.ahk
 #                                ^^^^^^^^^ source.ahk variable.def.ahk
 #                                         ^ source.ahk punctuation.definition.variable.percent.ahk
-#                                          ^ source.ahk comment.line.semicolon.ahk
+#                                          ^ source.ahk
 #                                           ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                            ^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >LV_Modify(toSelect, "+Select +Focus Vis") ; select
@@ -21223,7 +21223,7 @@
 #                     ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                       ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                        ^ source.ahk punctuation.bracket.ahk
-#                                         ^ source.ahk comment.line.semicolon.ahk
+#                                         ^ source.ahk
 #                                          ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                           ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >} else
@@ -21326,7 +21326,7 @@
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
 #     ^ source.ahk
-#      ^^^^^ source.ahk variable.def.ahk
+#      ^^^^^ source.ahk keyword.other.ahk
 #           ^ source.ahk punctuation.ahk
 #            ^ source.ahk
 #             ^ source.ahk punctuation.definition.variable.percent.ahk
@@ -21414,7 +21414,7 @@
 #                               ^ source.ahk punctuation.definition.variable.percent.ahk
 #                                ^^^^^^^^^ source.ahk variable.def.ahk
 #                                         ^ source.ahk punctuation.definition.variable.percent.ahk
-#                                          ^ source.ahk comment.line.semicolon.ahk
+#                                          ^ source.ahk
 #                                           ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                            ^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >LV_Modify(toSelect, "+Select +Focus Vis") ; select
@@ -21427,7 +21427,7 @@
 #                     ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                       ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                        ^ source.ahk punctuation.bracket.ahk
-#                                         ^ source.ahk comment.line.semicolon.ahk
+#                                         ^ source.ahk
 #                                          ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                           ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -22013,7 +22013,7 @@
 #                 ^^^^^^^^^^ source.ahk variable.def.ahk
 #                           ^ source.ahk punctuation.ahk
 #                            ^ source.ahk
-#                             ^^^^^ source.ahk variable.def.ahk
+#                             ^^^^^ source.ahk keyword.other.ahk
 #                                  ^ source.ahk punctuation.ahk
 #                                   ^ source.ahk
 #                                    ^^^^^^^^ source.ahk variable.def.ahk
@@ -22244,7 +22244,7 @@
 #        ^ source.ahk
 #         ^^ source.ahk keyword.other.ahk
 #           ^ source.ahk
-#            ^^^^^ source.ahk variable.def.ahk
+#            ^^^^^ source.ahk keyword.other.ahk
 #                 ^ source.ahk
 #                  ^ source.ahk punctuation.bracket.ahk
 >;IShellFolder:ParseDisplayName
@@ -22480,7 +22480,7 @@
 #                                                                                                                   ^ source.ahk
 #                                                                                                                    ^^^^^ source.ahk constant.numeric.ahk
 #                                                                                                                         ^ source.ahk punctuation.bracket.ahk
-#                                                                                                                          ^ source.ahk comment.line.semicolon.ahk
+#                                                                                                                          ^ source.ahk
 #                                                                                                                           ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                                                                            ^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >; p(hMenu)
@@ -22533,7 +22533,7 @@
 #  ^^ source.ahk keyword.operator.assignment.ahk
 #    ^ source.ahk
 #     ^^^^^^^^^^^ source.ahk constant.language.ahk
-#                ^ source.ahk comment.line.semicolon.ahk
+#                ^ source.ahk
 #                 ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                  ^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >ComObjError(1)
@@ -22779,7 +22779,7 @@
 #                           ^^^^ source.ahk string.quoted.double.ahk
 #                               ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                ^ source.ahk punctuation.bracket.ahk
-#                                 ^ source.ahk comment.line.semicolon.ahk
+#                                 ^ source.ahk
 #                                  ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                   ^^^^^^ source.ahk comment.line.semicolon.ahk
 >NumPut(0x4000|0x20000000|0x00100000,pici,4,"Uint") ;fMask
@@ -22799,7 +22799,7 @@
 #                                            ^^^^ source.ahk string.quoted.double.ahk
 #                                                ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                                 ^ source.ahk punctuation.bracket.ahk
-#                                                  ^ source.ahk comment.line.semicolon.ahk
+#                                                  ^ source.ahk
 #                                                   ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                    ^^^^^ source.ahk comment.line.semicolon.ahk
 >NumPut(win_hwnd,pici,8,"UPtr") ;hwnd
@@ -22815,7 +22815,7 @@
 #                        ^^^^ source.ahk string.quoted.double.ahk
 #                            ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                             ^ source.ahk punctuation.bracket.ahk
-#                              ^ source.ahk comment.line.semicolon.ahk
+#                              ^ source.ahk
 #                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                ^^^^ source.ahk comment.line.semicolon.ahk
 >NumPut(1,pici,8+4*A_PtrSize,"Uint") ;nShow
@@ -22835,7 +22835,7 @@
 #                             ^^^^ source.ahk string.quoted.double.ahk
 #                                 ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                  ^ source.ahk punctuation.bracket.ahk
-#                                   ^ source.ahk comment.line.semicolon.ahk
+#                                   ^ source.ahk
 #                                    ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                     ^^^^^ source.ahk comment.line.semicolon.ahk
 >NumPut(idn-3,pici,8+A_PtrSize,"UPtr") ;lpVerb
@@ -22855,7 +22855,7 @@
 #                               ^^^^ source.ahk string.quoted.double.ahk
 #                                   ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                    ^ source.ahk punctuation.bracket.ahk
-#                                     ^ source.ahk comment.line.semicolon.ahk
+#                                     ^ source.ahk
 #                                      ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                       ^^^^^^ source.ahk comment.line.semicolon.ahk
 >NumPut(idn-3,pici,16+6*A_PtrSize,"UPtr") ;lpVerbW
@@ -22877,7 +22877,7 @@
 #                                  ^^^^ source.ahk string.quoted.double.ahk
 #                                      ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                       ^ source.ahk punctuation.bracket.ahk
-#                                        ^ source.ahk comment.line.semicolon.ahk
+#                                        ^ source.ahk
 #                                         ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                          ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >NumPut(pt,pici,16+10*A_PtrSize,"Uptr") ;ptInvoke
@@ -22897,7 +22897,7 @@
 #                                ^^^^ source.ahk string.quoted.double.ahk
 #                                    ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                     ^ source.ahk punctuation.bracket.ahk
-#                                      ^ source.ahk comment.line.semicolon.ahk
+#                                      ^ source.ahk
 #                                       ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                        ^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >
@@ -22929,7 +22929,7 @@
 #                                                               ^ source.ahk keyword.operator.arithmetic.ahk
 #                                                                ^^^^ source.ahk variable.def.ahk
 #                                                                    ^ source.ahk punctuation.bracket.ahk
-#                                                                     ^ source.ahk comment.line.semicolon.ahk
+#                                                                     ^ source.ahk
 #                                                                      ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                                       ^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >
@@ -23066,7 +23066,7 @@
 #   ^^^^^^^^^^^^^^ source.ahk variable.def.ahk
 >{ ;IContextMenu3->HandleMenuMsg2
 #^ source.ahk punctuation.bracket.ahk
-# ^ source.ahk comment.line.semicolon.ahk
+# ^ source.ahk
 #  ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >If !DllCall(VTable(pIContextMenu3, 7), "Ptr", pIContextMenu3, "Uint", nMsg, "Ptr", wParam, "Ptr", lParam, "Ptr*", lResult)
@@ -23137,7 +23137,7 @@
 #        ^^^^^^^^^^^^^^ source.ahk variable.def.ahk
 >{ ;IContextMenu2->HandleMenuMsg
 #^ source.ahk punctuation.bracket.ahk
-# ^ source.ahk comment.line.semicolon.ahk
+# ^ source.ahk
 #  ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >If !DllCall(VTable(pIContextMenu2, 6), "Ptr", pIContextMenu2, "Uint", nMsg, "Ptr", wParam, "Ptr", lParam)
@@ -23407,7 +23407,7 @@
 #                            ^ source.ahk
 #                             ^^ source.ahk constant.numeric.ahk
 #                               ^ source.ahk punctuation.bracket.ahk
-#                                ^ source.ahk comment.line.semicolon.ahk
+#                                ^ source.ahk
 #                                 ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                  ^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >pGuid := IsByRef(VarOrAddress) ? &VarOrAddress : VarOrAddress
@@ -23481,7 +23481,7 @@
 #^^^^^^ source.ahk keyword.control.ahk
 #      ^ source.ahk
 #       ^^^^^ source.ahk variable.def.ahk
-#            ^ source.ahk comment.line.semicolon.ahk
+#            ^ source.ahk
 #             ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -23521,7 +23521,7 @@
 #                     ^ source.ahk
 #                      ^^ source.ahk constant.numeric.ahk
 #                        ^ source.ahk punctuation.bracket.ahk
-#                         ^ source.ahk comment.line.semicolon.ahk
+#                         ^ source.ahk
 #                          ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                           ^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >if !DllCall("ole32\StringFromGUID2", "Ptr", pGuid, "Ptr", &sGuid, "Int", 39)
@@ -23798,7 +23798,7 @@
 #                          ^ source.ahk keyword.operator.assignment.ahk
 #                           ^ source.ahk
 #                            ^^ source.ahk constant.numeric.ahk
-#                              ^ source.ahk comment.line.semicolon.ahk
+#                              ^ source.ahk
 #                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >NumPut(1,pPath+0),pPath += 4 ; fWide = 0 -->ANSI,fWide = 1 -->Unicode
@@ -23817,7 +23817,7 @@
 #                         ^ source.ahk keyword.operator.assignment.ahk
 #                          ^ source.ahk
 #                           ^ source.ahk constant.numeric.ahk
-#                            ^ source.ahk comment.line.semicolon.ahk
+#                            ^ source.ahk
 #                             ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Offset:=0
@@ -23928,7 +23928,7 @@
 #                                            ^ source.ahk punctuation.ahk
 #                                             ^^^^^ source.ahk variable.def.ahk
 #                                                  ^ source.ahk punctuation.bracket.ahk
-#                                                   ^ source.ahk comment.line.semicolon.ahk
+#                                                   ^ source.ahk
 #                                                    ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                     ^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >
@@ -24560,7 +24560,7 @@
 #                 ^ source.ahk punctuation.ahk
 #                  ^ source.ahk
 #                   ^^^^^^^^^^ source.ahk variable.def.ahk
-#                             ^ source.ahk comment.line.semicolon.ahk
+#                             ^ source.ahk
 #                              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                               ^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >ControlFocus,, ahk_id %ListviewHwnd1%
@@ -24669,7 +24669,7 @@
 #                 ^ source.ahk punctuation.ahk
 #                  ^ source.ahk
 #                   ^^^^^^^^^^ source.ahk variable.def.ahk
-#                             ^ source.ahk comment.line.semicolon.ahk
+#                             ^ source.ahk
 #                              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                               ^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >ControlFocus,, ahk_id %ListviewHwnd2%
@@ -24716,7 +24716,7 @@
 >left:: ;always uses keyboard hook
 #^^^^ source.ahk hotkeyline.ahk entity.name.function.label.ahk
 #    ^^ source.ahk hotkeyline.ahk punctuation.definition.equals.colon
-#      ^ source.ahk comment.line.semicolon.ahk
+#      ^ source.ahk
 #       ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #        ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >^left::
@@ -24812,7 +24812,7 @@
 #                 ^ source.ahk punctuation.ahk
 #                  ^ source.ahk
 #                   ^^^^^^^^^^ source.ahk variable.def.ahk
-#                             ^ source.ahk comment.line.semicolon.ahk
+#                             ^ source.ahk
 #                              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                               ^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >ControlFocus,, ahk_id %ListviewHwnd1%
@@ -24852,7 +24852,7 @@
 >right:: ;always uses keyboard hook
 #^^^^^ source.ahk hotkeyline.ahk entity.name.function.label.ahk
 #     ^^ source.ahk hotkeyline.ahk punctuation.definition.equals.colon
-#       ^ source.ahk comment.line.semicolon.ahk
+#       ^ source.ahk
 #        ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #         ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >^right::
@@ -24948,7 +24948,7 @@
 #                 ^ source.ahk punctuation.ahk
 #                  ^ source.ahk
 #                   ^^^^^^^^^^ source.ahk variable.def.ahk
-#                             ^ source.ahk comment.line.semicolon.ahk
+#                             ^ source.ahk
 #                              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                               ^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >ControlFocus,, ahk_id %ListviewHwnd2%
@@ -25657,7 +25657,7 @@
 #                                     ^ source.ahk
 #                                      ^^^^ source.ahk variable.def.ahk
 #                                          ^ source.ahk punctuation.ahk
-#                                           ^ source.ahk comment.line.semicolon.ahk
+#                                           ^ source.ahk
 #                                            ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >gui, createFolder: add, edit, w250 vcreateFolderName hwndfolderCreationHwnd, %newFolderName%
@@ -26871,7 +26871,7 @@
 #                        ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                          ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                           ^ source.ahk punctuation.bracket.ahk
-#                                            ^ source.ahk comment.line.semicolon.ahk
+#                                            ^ source.ahk
 #                                             ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                              ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -26929,7 +26929,7 @@
 #                    ^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                  ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                   ^ source.ahk punctuation.bracket.ahk
-#                                    ^ source.ahk comment.line.semicolon.ahk
+#                                    ^ source.ahk
 #                                     ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                      ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -26955,7 +26955,7 @@
 #                         ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                           ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                            ^ source.ahk punctuation.bracket.ahk
-#                                             ^ source.ahk comment.line.semicolon.ahk
+#                                             ^ source.ahk
 #                                              ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                               ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -26976,7 +26976,7 @@
 #                          ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                            ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                             ^ source.ahk punctuation.bracket.ahk
-#                                              ^ source.ahk comment.line.semicolon.ahk
+#                                              ^ source.ahk
 #                                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -27064,7 +27064,7 @@
 #                    ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                      ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                       ^ source.ahk punctuation.bracket.ahk
-#                                        ^ source.ahk comment.line.semicolon.ahk
+#                                        ^ source.ahk
 #                                         ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                          ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -27163,7 +27163,7 @@
 #                                  ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                                    ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                                     ^ source.ahk punctuation.bracket.ahk
-#                                                      ^ source.ahk comment.line.semicolon.ahk
+#                                                      ^ source.ahk
 #                                                       ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                        ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -27211,7 +27211,7 @@
 #                        ^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                      ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                       ^ source.ahk punctuation.bracket.ahk
-#                                        ^ source.ahk comment.line.semicolon.ahk
+#                                        ^ source.ahk
 #                                         ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                          ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >LV_Modify(selectedRow, "+Select +Focus Vis") ; select
@@ -27224,7 +27224,7 @@
 #                        ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                          ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                           ^ source.ahk punctuation.bracket.ahk
-#                                            ^ source.ahk comment.line.semicolon.ahk
+#                                            ^ source.ahk
 #                                             ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                              ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >return
@@ -27451,7 +27451,7 @@
 #                          ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                            ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                             ^ source.ahk punctuation.bracket.ahk
-#                                              ^ source.ahk comment.line.semicolon.ahk
+#                                              ^ source.ahk
 #                                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >return
@@ -27561,7 +27561,7 @@
 #              ^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                            ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                             ^ source.ahk punctuation.bracket.ahk
-#                              ^ source.ahk comment.line.semicolon.ahk
+#                              ^ source.ahk
 #                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -27593,7 +27593,7 @@
 #              ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                 ^ source.ahk punctuation.bracket.ahk
-#                                  ^ source.ahk comment.line.semicolon.ahk
+#                                  ^ source.ahk
 #                                   ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                    ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -27624,7 +27624,7 @@
 #                          ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                            ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                             ^ source.ahk punctuation.bracket.ahk
-#                                              ^ source.ahk comment.line.semicolon.ahk
+#                                              ^ source.ahk
 #                                               ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}
@@ -27643,7 +27643,7 @@
 #              ^^^^^^^^^^^^^^^^^^ source.ahk string.quoted.double.ahk
 #                                ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                 ^ source.ahk punctuation.bracket.ahk
-#                                  ^ source.ahk comment.line.semicolon.ahk
+#                                  ^ source.ahk
 #                                   ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                    ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >}

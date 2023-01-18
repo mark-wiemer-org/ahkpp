@@ -235,21 +235,6 @@ export const internalFormat = (
      */
     let openBraceObjectDepth = -1;
 
-    // OTHER
-    /**
-     * This line is `#Directive`, that will create context-sensitive hotkeys
-     * and hotstrings.
-     * Example of `#Directives`:
-     * ```ahk
-     * #IfWinActive WinTitle
-     * #IfWinNotActive WinTitle
-     * #IfWinExist WinTitle
-     * #IfWinNotExist WinTitle
-     * #If Expression
-     * ```
-     */
-    let sharpDirectiveLine = false;
-
     // BLOCK COMMENT
     /** This line is block comment */
     let blockComment = false;
@@ -307,6 +292,12 @@ export const internalFormat = (
      */
     const label = /^[^\s\t,`]+:$/;
     /**
+     * Hotkey and hotstring without code after it.
+     *
+     * Example: `F1 & F2 Up::` (hotkey), `::btw::` (hotstring)
+     */
+    const hotkey = /^.*::$/;
+    /**
      * `#Directive`, that will create context-sensitive hotkeys and hotstrings.
      * Example of `#Directives`:
      * ```ahk
@@ -340,7 +331,6 @@ export const internalFormat = (
         const emptyLine = purifiedLine === '';
 
         detectOneCommandCode = true;
-        sharpDirectiveLine = false;
 
         const openBraceNum = braceNumber(purifiedLine, '{');
         const closeBraceNum = braceNumber(purifiedLine, '}');
@@ -582,6 +572,16 @@ export const internalFormat = (
         // CLOSE BRACE
         if (closeBraceNum) {
             // FLOW OF CONTROL
+            // Example (restore close brace depth):
+            // foo() {
+            //     for
+            //         if
+            //             return
+            // } ; <-- de-indent from all nesting before loosing information
+            //         about depth via focDepth.exitBlockOfCode() below
+            if (focDepth.last() > -1) {
+                depth = focDepth.last();
+            }
             ifDepth.exitBlockOfCode(closeBraceNum);
             focDepth.exitBlockOfCode(closeBraceNum);
             // CONTINUATION SECTION: Object
@@ -603,18 +603,21 @@ export const internalFormat = (
                 (oneCommandCode || deferredOneCommandCode) &&
                 !nextLineIsOneCommandCode(purifiedLine)
             ) {
-                oneCommandCode = false;
                 if (deferredOneCommandCode) {
                     // if (a = 4
                     //     and b = 5) {
                     //     MsgBox <-- disable deferredOneCommandCode indent
                     // }
                     deferredOneCommandCode = false;
-                } else {
+                } else if (purifiedLine.match(/^{/)) {
                     // if (var)
                     // { <-- revert oneCommandCode indent for open brace
                     //     MsgBox
                     // }
+                    // if (var)
+                    //     obj := { key1: val1 <-- but not for object continuation
+                    //         , key2: val2 }                            section
+                    oneCommandCode = false;
                     depth -= openBraceNum;
                 }
                 // FLOW OF CONTROL revert added by mistake
@@ -682,33 +685,17 @@ export const internalFormat = (
             }
         }
 
-        // #DIRECTIVE without parameters
-        // #IfWinActive WinTitle
-        //     Hotkey::
-        // #If <-- de-indent #Directive without parameters
-        if (purifiedLine.match('^' + sharpDirective + '$')) {
-            if (indentCodeAfterSharpDirective) {
-                if (tagDepth > 0) {
-                    depth -= tagDepth;
-                } else {
-                    depth--;
-                }
-            }
-        }
-
-        // #DIRECTIVE with parameters
+        // #DIRECTIVE
         // #IfWinActive WinTitle1
         //     Hotkey::
         // #IfWinActive WinTitle2 <-- fall-through scenario for #Directive with
         //     Hotkey::                                               parameters
-        if (purifiedLine.match('^' + sharpDirective + '\\b.+')) {
-            if (indentCodeAfterSharpDirective) {
-                if (tagDepth > 0) {
-                    depth -= tagDepth;
-                } else {
-                    depth--;
-                }
-                sharpDirectiveLine = true;
+        // #If                    <-- de-indent #Directive without parameters
+        if (purifiedLine.match('^' + sharpDirective + '\\b')) {
+            if (tagDepth > 0) {
+                depth -= tagDepth;
+            } else {
+                depth--;
             }
         }
 
@@ -724,13 +711,13 @@ export const internalFormat = (
             depth--;
         }
 
-        // SWITCH-CASE-DEFAULT or LABEL:
+        // SWITCH-CASE-DEFAULT or LABEL: or HOTKEY::
         if (purifiedLine.match(switchCaseDefault)) {
             // Case: or Default:
             depth--;
-        } else if (purifiedLine.match(label)) {
-            // Label:
+        } else if (purifiedLine.match(label) || purifiedLine.match(hotkey)) {
             if (indentCodeAfterLabel) {
+                // Label: or Hotkey::
                 // De-indent label or hotkey, if they not end with 'return'
                 // command.
                 // This is fall-through scenario. Example:
@@ -851,22 +838,27 @@ export const internalFormat = (
         // #DIRECTIVE with parameters
         // #If Expression <-- indent next line after '#Directive'
         //     F1:: MsgBox Help
-        if (sharpDirectiveLine && indentCodeAfterSharpDirective) {
+        if (
+            purifiedLine.match('^' + sharpDirective + '\\b.+') &&
+            indentCodeAfterSharpDirective
+        ) {
             depth++;
         }
 
-        // SWITCH-CASE-DEFAULT or LABEL:
+        // SWITCH-CASE-DEFAULT or LABEL: or HOTKEY::
         if (purifiedLine.match(switchCaseDefault)) {
             // Case: or Default: <-- indent next line
             //     code
             depth++;
             // Do not sync here 'tagDepth' with 'depth' to prevent 'Return' and
             // 'ExitApp' to de-indent inside 'Switch-Case-Default' construction!
-        } else if (purifiedLine.match(label) && indentCodeAfterLabel) {
-            // Label: <-- indent next line
-            //     code
-            depth++;
-            tagDepth = depth;
+        } else if (purifiedLine.match(label) || purifiedLine.match(hotkey)) {
+            if (indentCodeAfterLabel) {
+                // Label: or Hotkey:: <-- indent next line
+                //     code
+                depth++;
+                tagDepth = depth;
+            }
         }
 
         // CONTINUATION SECTION: Expression, Object
