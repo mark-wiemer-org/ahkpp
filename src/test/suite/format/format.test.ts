@@ -90,6 +90,7 @@ const formatTests: FormatTest[] = [
         options: { insertSpaces: false },
     },
     { filenameRoot: 'legacy-text-sharp-directive' },
+    { filenameRoot: 'label-combination' },
     { filenameRoot: 'label-fall-through' },
     { filenameRoot: 'label-specific-name' },
     { filenameRoot: 'return-exit-exitapp' },
