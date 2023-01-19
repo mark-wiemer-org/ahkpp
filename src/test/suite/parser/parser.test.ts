@@ -35,4 +35,41 @@ suite('Parser', () => {
             });
         });
     });
+
+    suite('getRemarkByLine', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: // input test string
+            //     rs: // expected result
+            // },
+            {
+                in: ';comment',
+                rs: 'comment',
+            },
+            {
+                in: '; comment',
+                rs: 'comment',
+            },
+            {
+                in: ' ;comment',
+                rs: 'comment',
+            },
+            {
+                in: ' ; comment',
+                rs: 'comment',
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "' => '" + data.rs + "'", async () => {
+                const document = await vscode.workspace.openTextDocument({
+                    language: 'ahk',
+                    content: data.in,
+                });
+                // Use array access for the private members
+                const comment = Parser['getRemarkByLine'](document, 0);
+                assert.strictEqual(comment, data.rs);
+            });
+        });
+    });
 });
