@@ -170,7 +170,6 @@ export class Parser {
         }
     }
 
-    // TODO getMethodByName() getLabelByName() getVariableByName() combine together
     public static async getVariableByName(
         document: vscode.TextDocument,
         name: string,
@@ -368,7 +367,6 @@ export class Parser {
         document: vscode.TextDocument,
         line: number,
     ) {
-        // TODO get all continuous comment lines above func\var
         if (line >= 0) {
             const { text } = document.lineAt(line);
             const markMatch = text.match(/^\s*;(.+)/);
