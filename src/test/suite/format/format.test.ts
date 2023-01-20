@@ -42,7 +42,9 @@ const formatTests: FormatTest[] = [
         filenameRoot: '182-multiple-newlines',
         options: { allowedNumberOfEmptyLines: 2 },
     },
-    { filenameRoot: '184-continuation-section' },
+    { filenameRoot: '184-continuation-section-expression' },
+    { filenameRoot: '184-continuation-section-object' },
+    { filenameRoot: '184-continuation-section-text' },
     { filenameRoot: '185-block-comment' },
     {
         filenameRoot: '187-comments-at-end-of-line',
@@ -54,6 +56,7 @@ const formatTests: FormatTest[] = [
         filenameRoot: '192-preserve-indent-true',
         options: { preserveIndent: true },
     },
+    { filenameRoot: '255-close-brace' },
     { filenameRoot: '255-else-if' },
     { filenameRoot: '255-if-loop-mix' },
     { filenameRoot: '255-return-function' },
@@ -62,6 +65,9 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '255-style-k-and-r' },
     { filenameRoot: '255-style-mix' },
     { filenameRoot: '255-style-one-true-brace' },
+    { filenameRoot: '290-ifmsgbox' },
+    { filenameRoot: '291-single-line-comment' },
+    { filenameRoot: '316-if-object-continuation-section' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'align-assignment' },
     { filenameRoot: 'demo' },
@@ -86,6 +92,7 @@ const formatTests: FormatTest[] = [
         options: { insertSpaces: false },
     },
     { filenameRoot: 'legacy-text-sharp-directive' },
+    { filenameRoot: 'label-combination' },
     { filenameRoot: 'label-fall-through' },
     { filenameRoot: 'label-specific-name' },
     { filenameRoot: 'return-exit-exitapp' },
@@ -203,6 +210,11 @@ suite('External formatter', () => {
             // editing the file also saves the file
             await textEditor.edit((editBuilder) =>
                 editBuilder.replace(fullDocumentRange, originalText),
+            );
+
+            // Close opened file
+            await vscode.commands.executeCommand(
+                'workbench.action.closeActiveEditor',
             );
         });
     });

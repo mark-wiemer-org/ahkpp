@@ -369,7 +369,7 @@ export class Parser {
     ) {
         if (line >= 0) {
             const { text } = document.lineAt(line);
-            const markMatch = text.match(/^\s*;(.+)/);
+            const markMatch = text.match(/^\s*;\s*(.+)/);
             if (markMatch) {
                 return markMatch[1];
             }
