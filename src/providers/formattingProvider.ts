@@ -1,5 +1,6 @@
 import { isDeepStrictEqual } from 'util';
 import * as vscode from 'vscode';
+import { commentRegExp } from '../common/constants';
 import { ConfigKey, Global } from '../common/global';
 import { FormatOptions } from './formattingProvider.types';
 import {
@@ -264,6 +265,14 @@ export const internalFormat = (
     const trimSpaces = options.trimExtraSpaces;
 
     // REGULAR EXPRESSION
+    /** Formatter's directive `;@AHK++AlignAssignmentOn` */
+    const ahkAlignAssignmentOn = /;\s*@AHK\+\+AlignAssignmentOn/i;
+    /** Formatter's directive `;@AHK++AlignAssignmentOff` */
+    const ahkAlignAssignmentOff = /;\s*@AHK\+\+AlignAssignmentOff/i;
+    /** Formatter's directive `;@AHK++FormatBlockCommentOn` */
+    const ahkFormatBlockCommentOn = /;\s*@AHK\+\+FormatBlockCommentOn/i;
+    /** Formatter's directive `;@AHK++FormatBlockCommentOff` */
+    const ahkFormatBlockCommentOff = /;\s*@AHK\+\+FormatBlockCommentOff/i;
     /**
      * A line that starts with `and`, `or`, `||`, `&&`, a comma, or a period is
      * automatically merged with the line directly above it (the same is true
@@ -273,14 +282,6 @@ export const internalFormat = (
      */
     const continuationSection =
         /^(((and|or|not)\b)|[\^!~?:&<>=.,|]|\+(?!\+)|-(?!-)|\/(?!\*)|\*(?!\/))/;
-    /** Formatter's directive `;@AHK++AlignAssignmentOn` */
-    const ahkAlignAssignmentOn = /;\s*@AHK\+\+AlignAssignmentOn/i;
-    /** Formatter's directive `;@AHK++AlignAssignmentOff` */
-    const ahkAlignAssignmentOff = /;\s*@AHK\+\+AlignAssignmentOff/i;
-    /** Formatter's directive `;@AHK++FormatBlockCommentOn` */
-    const ahkFormatBlockCommentOn = /;\s*@AHK\+\+FormatBlockCommentOn/i;
-    /** Formatter's directive `;@AHK++FormatBlockCommentOff` */
-    const ahkFormatBlockCommentOff = /;\s*@AHK\+\+FormatBlockCommentOff/i;
     /**
      * Label name may consist of any characters other than `space`, `tab`,
      * `comma` and the escape character (`).
@@ -322,8 +323,8 @@ export const internalFormat = (
     lines.forEach((originalLine, lineIndex) => {
         const purifiedLine = purify(originalLine).toLowerCase();
         /** The line comment. Empty string if no line comment exists */
-        const comment = /;.+/.exec(originalLine)?.[0] ?? '';
-        let formattedLine = originalLine.replace(/;.+/, ''); // Remove single line comment
+        const comment = commentRegExp.exec(originalLine)?.[0] ?? '';
+        let formattedLine = originalLine.replace(commentRegExp, ''); // Remove single line comment
         formattedLine = trimExtraSpaces(formattedLine, trimSpaces) // Remove extra spaces between words
             .concat(comment) // Add removed single line comment back
             .trim();

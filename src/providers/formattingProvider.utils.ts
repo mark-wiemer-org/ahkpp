@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { commentRegExp } from '../common/constants';
 import { FormatOptions } from './formattingProvider.types';
 
 /** Stringify a document, using consistent `\n` line separators */
@@ -320,7 +321,7 @@ export function purify(original: string): string {
     pure = replaceAll(pure, /{[^{}]*}/g, ''); // remove matching braces
     pure = pure
         .replace(/\s+/g, ' ') // collapse all spaces and tabs to single space
-        .replace(/;.+/, '') // remove comments; must be last, semicolon may be inside string (expression)
+        .replace(commentRegExp, '') // remove comments; must be last, semicolon may be inside string (expression)
         .trim();
     return pure;
 }
@@ -339,14 +340,15 @@ export function purify(original: string): string {
 export function nextLineIsOneCommandCode(text: string): boolean {
     /** Special keywords that can trigger one-line commands */
     const oneCommandList = [
-        'ifnotexist',
         'ifexist',
-        'ifwinactive',
-        'ifwinnotactive',
-        'ifwinexist',
-        'ifwinnotexist',
         'ifinstring',
+        'ifmsgbox',
+        'ifnotexist',
         'ifnotinstring',
+        'ifwinactive',
+        'ifwinexist',
+        'ifwinnotactive',
+        'ifwinnotexist',
         'if',
         'else',
         'loop',

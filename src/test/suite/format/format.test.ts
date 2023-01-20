@@ -65,6 +65,8 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '255-style-k-and-r' },
     { filenameRoot: '255-style-mix' },
     { filenameRoot: '255-style-one-true-brace' },
+    { filenameRoot: '290-ifmsgbox' },
+    { filenameRoot: '291-single-line-comment' },
     { filenameRoot: '316-if-object-continuation-section' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'align-assignment' },
@@ -208,6 +210,11 @@ suite('External formatter', () => {
             // editing the file also saves the file
             await textEditor.edit((editBuilder) =>
                 editBuilder.replace(fullDocumentRange, originalText),
+            );
+
+            // Close opened file
+            await vscode.commands.executeCommand(
+                'workbench.action.closeActiveEditor',
             );
         });
     });
