@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
 import { Out } from '../common/out';
-import { Script, Method, Ref, Label, Block, Variable } from './model';
+import { Script, Method, Ref, Label, Hotkey, Block, Variable } from './model';
 
 export class Parser {
     private static documentCache = new Map<string, Script>();
@@ -51,6 +51,7 @@ export class Parser {
         const methods: Method[] = [];
         const refs: Ref[] = [];
         const labels: Label[] = [];
+        const hotkeys: Hotkey[] = [];
         const variables: Variable[] = [];
         const blocks: Block[] = [];
         let currentMethod: Method;
@@ -94,6 +95,11 @@ export class Parser {
                 labels.push(label);
                 continue;
             }
+            const hotkey = Parser.getHotkeyByLine(document, line);
+            if (hotkey) {
+                hotkeys.push(hotkey);
+                continue;
+            }
             const block = Parser.getBlockByLine(document, line);
             if (block) {
                 blocks.push(block);
@@ -116,7 +122,14 @@ export class Parser {
                 }
             }
         }
-        const script: Script = { methods, labels, refs, variables, blocks };
+        const script: Script = {
+            methods,
+            labels,
+            hotkeys,
+            refs,
+            variables,
+            blocks,
+        };
         this.documentCache.set(document.uri.path, script);
         return script;
     }
@@ -149,6 +162,32 @@ export class Parser {
             }
         }
         return methods;
+    }
+
+    public static async getHotkeyByName(
+        document: vscode.TextDocument,
+        name: string,
+    ) {
+        name = name.toLowerCase();
+        for (const hotkey of this.documentCache.get(document.uri.path)
+            .hotkeys) {
+            // remove hotstring's leading colons with options (:*:btw) from name
+            const hotkeyName = hotkey.name.toLowerCase().replace(/^:.*?:/, '');
+            if (hotkeyName === name) {
+                return hotkey;
+            }
+        }
+        // DO NOT SEARCH IN ALL FILES, SCRIPTS CAN HAVE DUPLICATE HOTKEYS!
+        // for (const filePath of this.documentCache.keys()) {
+        //     for (const hotkey of this.documentCache.get(filePath).hotkeys) {
+        //         const hotkeyName = hotkey.name
+        //             .toLowerCase()
+        //             .replace(/^:.*?:/, '');
+        //         if (hotkeyName === name) {
+        //             return hotkey;
+        //         }
+        //     }
+        // }
     }
 
     public static async getLabelByName(
@@ -200,12 +239,28 @@ export class Parser {
         }
     }
 
+    private static getHotkeyByLine(
+        document: vscode.TextDocument,
+        line: number,
+    ) {
+        const text = CodeUtil.purify(document.lineAt(line).text).trim();
+        // captures hotkeys and hotstrings
+        const hotkey = /^(.+?)::/.exec(text);
+        if (hotkey) {
+            const hotkeyName = hotkey[1];
+            return new Hotkey(
+                hotkeyName,
+                document,
+                line,
+                text.indexOf(hotkeyName),
+            );
+        }
+    }
+
     private static getLabelByLine(document: vscode.TextDocument, line: number) {
-        const text = CodeUtil.purify(document.lineAt(line).text);
+        const text = CodeUtil.purify(document.lineAt(line).text).trim();
         // [\u4e00-\u9fa5] Chinese unicode characters
-        const label = /^[ \t]*([\u4e00-\u9fa5_a-zA-Z0-9]+) *:{1}(?!(:|=))/.exec(
-            text,
-        );
+        const label = /^([\u4e00-\u9fa5_a-zA-Z0-9]+):{1}(?!(:|=))/.exec(text);
         if (label) {
             const labelName = label[1];
             if (
@@ -214,7 +269,12 @@ export class Parser {
             ) {
                 return;
             }
-            return new Label(label[1], document, line, text.indexOf(labelName));
+            return new Label(
+                labelName,
+                document,
+                line,
+                text.indexOf(labelName),
+            );
         }
     }
 

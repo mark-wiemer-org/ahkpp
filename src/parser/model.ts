@@ -4,6 +4,7 @@ export interface Script {
     methods: Method[];
     refs: Ref[];
     labels: Label[];
+    hotkeys: Hotkey[];
     variables: Variable[];
     blocks: Block[];
 }
@@ -18,6 +19,15 @@ export interface Variable {
 }
 
 export class Label {
+    constructor(
+        public name: string,
+        public document: vscode.TextDocument,
+        public line: number,
+        public character: number,
+    ) {}
+}
+
+export class Hotkey {
     constructor(
         public name: string,
         public document: vscode.TextDocument,

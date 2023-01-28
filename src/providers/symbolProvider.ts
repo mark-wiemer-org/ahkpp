@@ -38,6 +38,20 @@ export class SymbolProvider implements vscode.DocumentSymbolProvider {
             );
         }
 
+        for (const hotkey of script.hotkeys) {
+            result.push(
+                new vscode.SymbolInformation(
+                    hotkey.name,
+                    vscode.SymbolKind.Event,
+                    null,
+                    new vscode.Location(
+                        hotkey.document.uri,
+                        new vscode.Position(hotkey.line, hotkey.character),
+                    ),
+                ),
+            );
+        }
+
         for (const block of script.blocks) {
             result.push(
                 new vscode.SymbolInformation(

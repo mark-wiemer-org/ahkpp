@@ -33,13 +33,27 @@ export class DefProvider implements vscode.DefinitionProvider {
             }
         }
 
-        // getlabel
+        // get label
         const label = await Parser.getLabelByName(document, word);
         if (label) {
             const tempDocument = label.document;
             return new vscode.Location(
                 tempDocument.uri,
                 new vscode.Position(label.line, label.character),
+            );
+        }
+
+        // "get hotkey" must be below "get label"!
+        // If label and hotkey has same names, label can be placed only above
+        // hotkey (below hotkey will generate error). AutoHotkey's
+        // "Goto duplicateLabelName" command will jump to label!
+        // So we must "get label" before "get hotkey" location.
+        const hotkey = await Parser.getHotkeyByName(document, word);
+        if (hotkey) {
+            const tempDocument = hotkey.document;
+            return new vscode.Location(
+                tempDocument.uri,
+                new vscode.Position(hotkey.line, hotkey.character),
             );
         }
 

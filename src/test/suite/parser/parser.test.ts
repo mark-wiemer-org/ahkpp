@@ -36,6 +36,35 @@ suite('Parser', () => {
         });
     });
 
+    suite('getHotkeyByLine', () => {
+        // List of test data
+        let dataList = [
+            // {
+            //     in: // input test string
+            //     hn: // hotkey's name
+            // },
+            {
+                in: 'F1:: Goto ::btw', // GoTo HotString ::btw::
+                hn: 'F1',
+            },
+            {
+                in: 'F1:: Goto :*:btw', // GoTo HotString :*:btw::
+                hn: 'F1',
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "' => '" + data.hn + "'", async () => {
+                const document = await vscode.workspace.openTextDocument({
+                    language: 'ahk',
+                    content: data.in,
+                });
+                // Use array access for the private members
+                const hotkey = Parser['getHotkeyByLine'](document, 0);
+                assert.strictEqual(hotkey.name, data.hn);
+            });
+        });
+    });
+
     suite('getRemarkByLine', () => {
         // List of test data
         let dataList = [
