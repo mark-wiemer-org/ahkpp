@@ -51,6 +51,38 @@ suite('Parser', () => {
                 in: 'F1:: Goto :*:btw', // GoTo HotString :*:btw::
                 hn: 'F1',
             },
+            {
+                in: 'Hotkey If True',
+                hn: '',
+            },
+            {
+                in: 'Hotkey, If True',
+                hn: '',
+            },
+            {
+                in: 'Hotkey IfWinActive, Untitled',
+                hn: '',
+            },
+            {
+                in: 'Hotkey, IfWinActive, Untitled',
+                hn: '',
+            },
+            {
+                in: 'Hotkey F1',
+                hn: 'F1',
+            },
+            {
+                in: 'Hotkey, F1',
+                hn: 'F1',
+            },
+            {
+                in: 'Hotkey F1, Label',
+                hn: 'F1',
+            },
+            {
+                in: 'Hotkey, F1, Label',
+                hn: 'F1',
+            },
         ];
         dataList.forEach((data) => {
             test("'" + data.in + "' => '" + data.hn + "'", async () => {
@@ -60,7 +92,11 @@ suite('Parser', () => {
                 });
                 // Use array access for the private members
                 const hotkey = Parser['getHotkeyByLine'](document, 0);
-                assert.strictEqual(hotkey.name, data.hn);
+                if (data.hn) {
+                    assert.strictEqual(hotkey.name, data.hn);
+                } else {
+                    assert.strictEqual(hotkey, undefined);
+                }
             });
         });
     });

@@ -245,9 +245,9 @@ export class Parser {
     ) {
         const text = CodeUtil.purify(document.lineAt(line).text).trim();
         // captures hotkeys and hotstrings
-        const hotkey = /^(.+?)::/.exec(text);
+        const hotkey = /^(.+?)::|hotkey(?:\s|,)\s*(?!\s*if)([^,]+)/i.exec(text);
         if (hotkey) {
-            const hotkeyName = hotkey[1];
+            const hotkeyName = hotkey[1] ?? hotkey[2];
             return new Hotkey(
                 hotkeyName,
                 document,
