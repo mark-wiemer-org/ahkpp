@@ -284,20 +284,20 @@ export const internalFormat = (
         /^(((and|or|not)\b)|[\^!~?:&<>=.,|]|\+(?!\+)|-(?!-)|\/(?!\*)|\*(?!\/))/;
     /**
      * Label name may consist of any characters other than `space`, `tab`,
-     * `comma` and the escape character (`).
+     * `comma` and the escape character (`). Not ended by double colon `::`.
      *
      * Generally, aside from whitespace and comments,
      * no other code can be written on the same line as a label.
      *
      * Example: `Label:`
      */
-    const label = /^[^\s\t,`]+:$/;
+    const label = /^[^\s\t,`]+(?<!:):$/;
     /**
      * Hotkey and hotstring without code after it.
      *
      * Example: `F1 & F2 Up::` (hotkey), `::btw::` (hotstring)
      */
-    const hotkey = /^.*::$/;
+    const hotkey = /^.+::$/;
     /**
      * `#Directive`, that will create context-sensitive hotkeys and hotstrings.
      * Example of `#Directives`:
