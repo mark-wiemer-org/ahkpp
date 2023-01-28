@@ -1,0 +1,21 @@
+>; [Issue #69](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/69)
+#^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>#If WinActive("ahk_class Notepad") or WinActive(MyWindowTitle) ;Comment
+#^^^ source.ahk keyword.control.if.ahk
+#   ^ source.ahk keyword.control.if.ahk
+#    ^^^^^^^^^ source.ahk keyword.control.if.ahk support.function.ahk
+#             ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
+#              ^ source.ahk keyword.control.if.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#               ^^^^^^^^^^^^^^^^^ source.ahk keyword.control.if.ahk string.quoted.double.ahk
+#                                ^ source.ahk keyword.control.if.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
+#                                 ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
+#                                  ^ source.ahk keyword.control.if.ahk
+#                                   ^^ source.ahk keyword.control.if.ahk keyword.other.ahk
+#                                     ^ source.ahk keyword.control.if.ahk
+#                                      ^^^^^^^^^ source.ahk keyword.control.if.ahk support.function.ahk
+#                                               ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
+#                                                ^^^^^^^^^^^^^ source.ahk keyword.control.if.ahk variable.def.ahk
+#                                                             ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
+#                                                              ^^^^^^^^^ source.ahk keyword.control.if.ahk comment.line.semicolon.if.ahk
+>
