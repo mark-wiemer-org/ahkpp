@@ -46,17 +46,18 @@ The tests should run automatically, and you should see passing output in the Deb
 ### Publishing
 
 1. Tag the release
-    1. `git checkout main`
-    1. e.g. `git tag v2.8.2`
-    1. `git push origin v2.8.2`
-    1. [Create a new release for this tag](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tags)
+    1. `git checkout main && git tag v2.8.2 && git push origin v2.8.2`
+    1. [Create a new GitHub release for this tag](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tags)
         1. Release title: Same as in [Changelog.md](../Changelog.md)
         1. Description: Same as in changelog
         1. Attach binary
         1. Publish release
-1. Publish the release through [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
-    1. Select the ellipsis `Actions` icon and select `Update`.
-    1. Upload the `.vsix` release file packaged in a previous step.
-1. Publish to Open VSX: `npx ovsx <file> -p <token>`
 
 The release is usually available within 5 minutes of uploading.
+
+### Validating deployment
+
+1. [Deploy workflow](https://github.com/mark-wiemer/ahkpp/actions/workflows/deploy.yml)
+1. [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus)
+    1. [Publisher view](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer)
+1. [Open VSX Marketplace](https://open-vsx.org/extension/mark-wiemer/vscode-autohotkey-plus-plus)
