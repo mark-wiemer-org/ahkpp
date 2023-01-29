@@ -6,27 +6,27 @@
 
 -   Debug keyboard shortcut is now `Ctrl + Alt + F9` (was `F9`) to avoid conflicts with VS Code default shortcuts.
 -   New setting: Snippet template name. Create your own template for new AHK files, including no template at all.
--   [Moving lines of code via commands](https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing) now (almost) correctly indents (PR [PR #306](https://github.com/vscode-autohotkey/ahkpp/pull/306), issue [PR #319](https://github.com/vscode-autohotkey/ahkpp/issue/319))
--   Snippets and keywords updated to AutoHotkey v1.1.36.0 (PRs [PR #288](https://github.com/vscode-autohotkey/ahkpp/pull/288), [PR #298](https://github.com/vscode-autohotkey/ahkpp/pull/298))
+-   [Moving lines of code via commands](https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing) now (almost) correctly indents ([PR #306](https://github.com/vscode-autohotkey/ahkpp/pull/306), issue [#319](https://github.com/vscode-autohotkey/ahkpp/issue/319))
+-   Snippets and keywords updated to AutoHotkey v1.1.36.0 ([PR #288](https://github.com/vscode-autohotkey/ahkpp/pull/288), [PR #298](https://github.com/vscode-autohotkey/ahkpp/pull/298))
 
 Fixes:
 
 -   Fix syntax highlighting for:
 
     -   strings with double colons in them ([PR #278](https://github.com/vscode-autohotkey/ahkpp/pull/278))
-    -   conditional directives ([PR #69](https://github.com/vscode-autohotkey/ahkpp/issue/69))
-    -   #Include and #IncludeAgain ([PR #86](https://github.com/vscode-autohotkey/ahkpp/issue/86))
-    -   semi-colons without a preceding space (usually meant to be comments) ([PR #295](https://github.com/vscode-autohotkey/ahkpp/issue/295))
+    -   conditional directives ([#69](https://github.com/vscode-autohotkey/ahkpp/issue/69))
+    -   #Include and #IncludeAgain ([#86](https://github.com/vscode-autohotkey/ahkpp/issue/86))
+    -   semi-colons without a preceding space (usually meant to be comments) ([#295](https://github.com/vscode-autohotkey/ahkpp/issue/295))
 
 -   Fix formatting for:
 
     -   comments at the beginning of a code block ([#291](https://github.com/vscode-autohotkey/ahkpp/issue/291))
-    -   `IfMsgBox` ([PR #290](https://github.com/vscode-autohotkey/ahkpp/issue/290))
-    -   hotstrings and complex hotkeys ([PR #303](https://github.com/vscode-autohotkey/ahkpp/issue/303))
-    -   object assignment within unbraced code blocks ([PR #316](https://github.com/vscode-autohotkey/ahkpp/issue/316))
-    -   nested, unbraced code blocks (PR [PR #287](https://github.com/vscode-autohotkey/ahkpp/pull/287))
+    -   `IfMsgBox` ([#290](https://github.com/vscode-autohotkey/ahkpp/issue/290))
+    -   hotstrings and complex hotkeys ([#303](https://github.com/vscode-autohotkey/ahkpp/issue/303))
+    -   object assignment within unbraced code blocks ([#316](https://github.com/vscode-autohotkey/ahkpp/issue/316))
+    -   nested, unbraced code blocks ([PR #287](https://github.com/vscode-autohotkey/ahkpp/pull/287))
 
--   Fix hover message for doc comments to always be trimmed (PR [PR #308](https://github.com/vscode-autohotkey/ahkpp/pull/308))
+-   Fix hover message for doc comments to always be trimmed ([PR #308](https://github.com/vscode-autohotkey/ahkpp/pull/308))
 
 ## 3.1.0 - 2022-11-21 🦃
 
