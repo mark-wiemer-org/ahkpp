@@ -23,7 +23,7 @@ Fixes:
 
     -   comments at the beginning of a code block ([#291](https://github.com/vscode-autohotkey/ahkpp/issues/291))
     -   `IfMsgBox` ([#290](https://github.com/vscode-autohotkey/ahkpp/issues/290))
-    -   hotstrings and complex hotkeys ([#303](https://github.com/vscode-autohotkey/ahkpp/issues/303))
+    -   complex hotkeys ([#303](https://github.com/vscode-autohotkey/ahkpp/issues/303))
     -   object assignment within unbraced code blocks ([#316](https://github.com/vscode-autohotkey/ahkpp/issues/316))
     -   nested, unbraced code blocks ([PR #287](https://github.com/vscode-autohotkey/ahkpp/pull/287))
 
