@@ -28,24 +28,27 @@ The tests should run automatically, and you should see passing output in the Deb
 
 ## Starting a release
 
-1.  Ensure all tests pass, including manual ones on the new changes.
-1.  Update the changelog.
-1.  Bump the version in `package.json`.
-1.  Open a draft PR to merge to `main`. The title of the PR should be e.g. `v2.8.2`, lowercase 'v'. The PR description should contain the changelog entry.
-1.  Fix any remaining issues with the code (but only make changes already logged in the changelog). Use the draft PR to easily detect issues.
-1.  Commit and push the changes. Commit message doesn't matter.
-1.  Merge the PR. Commit message doesn't matter.
-1.  `git checkout main && git pull && vsce package`
-1.  Install the new version:
+Unless otherwise specified, commit messages don't matter.
+
+1. Create a new branch with name e.g. `release-1.2.3` or similar. Don't use e.g. `v1.2.3`, that's used as a tag later.
+1. Update the changelog.
+1. Bump the version in `package.json`.
+1. Commit the changes.
+1. Open a PR. For style, the title of the PR should be e.g. `v1.2.3`. The PR description should contain the changelog entry, including the heading for this version.
+1. Fix any remaining issues with the PR.
+1. Merge the PR. Commit message should be e.g. `v1.2.3`
+1. `git checkout main && git pull && vsce package`
+1. Install the new version:
     1. Select the newly-created `.vsix` file.
     1. Open the context menu (right-click).
     1. Select `Install Extension VSIX`.
-    1. Reload the window. (`Ctrl + Shift + R` or `F1` -> Developer: Reload Window)
+    1. Reload the window. (`F1` -> Developer: Reload Window)
+1. Ensure all tests pass, including manual ones on the new changes.
 
 ### Publishing
 
 1. Tag the release
-    1. e.g. `git checkout main && git pull && git tag v2.8.2 && git push origin v2.8.2`
+    1. e.g. `git checkout main && git pull && git tag v1.2.3 && git push origin v1.2.3`
     1. [Create a new GitHub release for this tag](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tags)
         1. Release title: Same as in [Changelog.md](../Changelog.md)
         1. Description: Same as in changelog
