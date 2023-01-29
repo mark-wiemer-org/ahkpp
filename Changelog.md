@@ -1,9 +1,32 @@
 # Changelog
 
-## 3.2.0 (unreleased)
+<!-- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
+
+## 3.2.0 - 2023-01-29 ❄️
 
 -   Debug keyboard shortcut is now `Ctrl + Alt + F9` (was `F9`) to avoid conflicts with VS Code default shortcuts.
 -   New setting: Snippet template name. Create your own template for new AHK files, including no template at all.
+-   [Moving lines of code via commands](https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing) now (almost) correctly indents (PR [PR #306](https://github.com/vscode-autohotkey/ahkpp/pull/306), issue [PR #319](https://github.com/vscode-autohotkey/ahkpp/issue/319))
+-   Snippets and keywords updated to AutoHotkey v1.1.36.0 (PRs [PR #288](https://github.com/vscode-autohotkey/ahkpp/pull/288), [PR #298](https://github.com/vscode-autohotkey/ahkpp/pull/298))
+
+Fixes:
+
+-   Fix syntax highlighting for:
+
+    -   strings with double colons in them ([PR #278](https://github.com/vscode-autohotkey/ahkpp/pull/278))
+    -   conditional directives ([PR #69](https://github.com/vscode-autohotkey/ahkpp/issue/69))
+    -   #Include and #IncludeAgain ([PR #86](https://github.com/vscode-autohotkey/ahkpp/issue/86))
+    -   semi-colons without a preceding space (usually meant to be comments) ([PR #295](https://github.com/vscode-autohotkey/ahkpp/issue/295))
+
+-   Fix formatting for:
+
+    -   comments at the beginning of a code block ([#291](https://github.com/vscode-autohotkey/ahkpp/issue/291))
+    -   `IfMsgBox` ([PR #290](https://github.com/vscode-autohotkey/ahkpp/issue/290))
+    -   hotstrings and complex hotkeys ([PR #303](https://github.com/vscode-autohotkey/ahkpp/issue/303))
+    -   object assignment within unbraced code blocks ([PR #316](https://github.com/vscode-autohotkey/ahkpp/issue/316))
+    -   nested, unbraced code blocks (PR [PR #287](https://github.com/vscode-autohotkey/ahkpp/pull/287))
+
+-   Fix hover message for doc comments to always be trimmed (PR [PR #308](https://github.com/vscode-autohotkey/ahkpp/pull/308))
 
 ## 3.1.0 - 2022-11-21 🦃
 
@@ -12,9 +35,9 @@
 -   New compiler options in settings: Choose base file, file icon, and "use [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm)"
 -   Add "Compiler GUI" command in context menu to use the AHK GUI when compiling
 
-**Snippets**: Update snippets for AHK 1.1.35.00 and fix broken `InStr()` snippet ([#263](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/263))
+**Snippets**: Update snippets for AHK 1.1.35.00 and fix broken `InStr()` snippet ([#263](https://github.com/vscode-autohotkey/ahkpp/issues/263))
 
-**Grammar**: Fix `#Requires` not being recognized ([#268](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/268))
+**Grammar**: Fix `#Requires` not being recognized ([#268](https://github.com/vscode-autohotkey/ahkpp/issues/268))
 
 **Editor**: New AHK file icon (green square with white H)
 
@@ -22,8 +45,8 @@
 
 **Formatter**: Close the following bugs:
 
--   Formatter incorrectly indents object literals ([#184](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/184), [#222](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/222))
--   Nested one command code flow control ([#255](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/255))
+-   Formatter incorrectly indents object literals ([#184](https://github.com/vscode-autohotkey/ahkpp/issues/184), [#222](https://github.com/vscode-autohotkey/ahkpp/issues/222))
+-   Nested one command code flow control ([#255](https://github.com/vscode-autohotkey/ahkpp/issues/255))
 
 **Miscellaneous**: Extension should start up faster
 
@@ -31,30 +54,28 @@
 
 This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you!
 
-The `#nnn` values in this release are links to PRs, not to issues.
-
 Breaking changes:
 
--   Update file template: Add `#NoEnv` and `SetBatchLines, -1` (#202)
+-   Update file template: Add `#NoEnv` and `SetBatchLines, -1` ([PR #202](https://github.com/vscode-autohotkey/ahkpp/pull/202))
 
-> Formatter bugfixes may be considered breaking if you wanted the old behaviors. If you want the old behavior, please [open an issue](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/new?assignees=mark-wiemer&labels=bug%2C+formatter&template=formatting-bug.md&title=).
+> Formatter bugfixes may be considered breaking if you wanted the old behaviors. If you want the old behavior, please [open an issue](https://github.com/vscode-autohotkey/ahkpp/issues/new?assignees=mark-wiemer&labels=bug%2C+formatter&template=formatting-bug.md&title=).
 
 Features:
 
--   Add [formatter directive](./README.md#formatter-directives) for "Format Block Comment" (#164)
--   Add "allowed number of empty lines" setting to preserve any number of lines. Defaults to `1`, `-1` means "preserve all empty lines" (#194)
--   Add "preserve indent" setting to preserve spaces before a comment. Defaults to `false`. (#192)
--   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. (#191)
--   Trim end of line when formatting (#190)
+-   Add [formatter directive](./README.md#formatter-directives) for "Format Block Comment" ([PR #164](https://github.com/vscode-autohotkey/ahkpp/pull/164))
+-   Add "allowed number of empty lines" setting to preserve any number of lines. Defaults to `1`, `-1` means "preserve all empty lines" ([PR #194](https://github.com/vscode-autohotkey/ahkpp/pull/194))
+-   Add "preserve indent" setting to preserve spaces before a comment. Defaults to `false`. ([PR #192](https://github.com/vscode-autohotkey/ahkpp/pull/192))
+-   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. ([PR #191](https://github.com/vscode-autohotkey/ahkpp/pull/191))
+-   Trim end of line when formatting ([PR #190](https://github.com/vscode-autohotkey/ahkpp/pull/190))
 
 Fixes:
 
--   Fix some snippets (#138, #201, #210)
--   Fix formatting bugs with semi-colon as part of a string (#159)
--   Fix some formatting bugs with `if`, `else`, etc. without braces (#181)
--   Fix formatter issue with non-label colon at end of line (#162)
--   Even more formatter fixes (#164)
--   Use default debug icon (was yanked in 2.8.3, now it returns!) (#149)
+-   Fix some snippets ([PR #138](https://github.com/vscode-autohotkey/ahkpp/pull/138), [PR #201](https://github.com/vscode-autohotkey/ahkpp/pull/201), [PR #210](https://github.com/vscode-autohotkey/ahkpp/pull/210))
+-   Fix formatting bugs with semi-colon as part of a string ([PR #159](https://github.com/vscode-autohotkey/ahkpp/pull/159))
+-   Fix some formatting bugs with `if`, `else`, etc. without braces ([PR #181](https://github.com/vscode-autohotkey/ahkpp/pull/181))
+-   Fix formatter issue with non-label colon at end of line ([PR #162](https://github.com/vscode-autohotkey/ahkpp/pull/162))
+-   Even more formatter fixes ([PR #164](https://github.com/vscode-autohotkey/ahkpp/pull/164))
+-   Use default debug icon (was yanked in 2.8.3, now it returns!) ([PR #149](https://github.com/vscode-autohotkey/ahkpp/pull/149))
 
 ## 2.8.4 - 2022-07-07
 
@@ -64,7 +85,7 @@ Fixes:
 
 > This release has been yanked, meaning it's not supported. Use v2.8.2 instead.
 
--   Change to use default debug icon ([#100](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/100))
+-   Change to use default debug icon ([#100](https://github.com/vscode-autohotkey/ahkpp/issues/100))
 
 -   Unexpected change: Break "step into" function of debugger. :(
 
@@ -77,37 +98,37 @@ Fixes:
 
 ## 2.8.1 - 2021-05-09
 
--   Fix indentation with `(::` ([#72](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/72))
+-   Fix indentation with `(::` ([#72](https://github.com/vscode-autohotkey/ahkpp/issues/72))
 
 ## 2.8.0 - 2021-03-14
 
--   Add setting to toggle debug button in editor title menu ([#10](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/10))
+-   Add setting to toggle debug button in editor title menu ([#10](https://github.com/vscode-autohotkey/ahkpp/issues/10))
 
 ## 2.7.2 - 2021-03-02
 
--   Fix indentation with parentheses again (sorry!) ([#58](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/58))
+-   Fix indentation with parentheses again (sorry!) ([#58](https://github.com/vscode-autohotkey/ahkpp/issues/58))
 
 ## 2.7.1 - 2021-02-28
 
--   Fix indentation with parentheses ([#25](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/25))
+-   Fix indentation with parentheses ([#25](https://github.com/vscode-autohotkey/ahkpp/issues/25))
 
 ## 2.7.0 - 2021-02-21
 
--   Respect user choice to indent with either tabs or spaces ([#49](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/49))
+-   Respect user choice to indent with either tabs or spaces ([#49](https://github.com/vscode-autohotkey/ahkpp/issues/49))
 
 ## 2.6.3 - 2021-02-20
 
--   Fix IntelliSense ([#48](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/48))
+-   Fix IntelliSense ([#48](https://github.com/vscode-autohotkey/ahkpp/issues/48))
 -   Move `Run Selection` command to same category as all other commands (Thanks [@fade2gray](https://github.com/fade2gray)!)
 
 ## 2.6.2 - 2021-01-30
 
--   Fix formatting after ternary operator ([#18](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/18))
--   Fix formatting after multiple close braces on one line ([#26](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/26))
+-   Fix formatting after ternary operator ([#18](https://github.com/vscode-autohotkey/ahkpp/issues/18))
+-   Fix formatting after multiple close braces on one line ([#26](https://github.com/vscode-autohotkey/ahkpp/issues/26))
 
 ## 2.6.1 - 2021-01-23
 
--   Fix hover provider ([#16](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/16))
+-   Fix hover provider ([#16](https://github.com/vscode-autohotkey/ahkpp/issues/16))
 
 ## 2.6.0 - 2021-01-18
 
@@ -120,7 +141,7 @@ Fixes:
 ### Fixes
 
 -   Improve formatting for using `ExitApp` to end subroutines
--   Fix function coloring for functions whose names were also keywords ([#11](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/11))
+-   Fix function coloring for functions whose names were also keywords ([#11](https://github.com/vscode-autohotkey/ahkpp/issues/11))
 -   Fix function coloring for calls with a space before the parentheses (e.g. `foo ()`)
 -   Fix detection of labels indented with a tab
 -   Remove confusing deprecation warning from `StrSplit` function
