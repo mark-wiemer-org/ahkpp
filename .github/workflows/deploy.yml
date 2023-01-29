@@ -1,0 +1,26 @@
+# Whenever any tag is pushed to the repo
+on:
+  push:
+    tags:
+      - '*'
+
+name: Deploy Extension
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - uses: actions/setup-node@v3.6.0
+      - run: npm ci
+      - name: Publish to Open VSX Registry
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          # Generated via https://open-vsx.org/user-settings/tokens, valid forever?
+          pat: ${{ secrets.OPEN_VSX_TOKEN }}
+      - name: Publish to Visual Studio Marketplace
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          # https://dev.azure.com/markwiemer/_usersSettings/tokens, expires 2023-07-06
+          # Saved locally as "CI VS Code Marketplace Publish Token"
+          pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
+          registryUrl: https://marketplace.visualstudio.com
