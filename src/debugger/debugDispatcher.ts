@@ -10,7 +10,8 @@ import { StackHandler } from './handler/StackHandler';
 import { VariableHandler } from './handler/variableHandler';
 import { DbgpResponse } from './struct/dbgpResponse';
 import { VarScope } from './struct/scope';
-import * as portfinder from 'portfinder';
+
+import getPort = require('get-port');
 import { spawn } from 'child_process';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
@@ -19,10 +20,9 @@ import { Global, ConfigKey } from '../common/global';
 
 /**
  * An AHK runtime debugger.
- * reference: https://xdebug.org/docs/dbgp
+ * refrence: https://xdebug.org/docs/dbgp
  */
 export class DebugDispatcher extends EventEmitter {
-    private port: number;
     private debugServer: DebugServer;
     private breakPointHandler: BreakPointHandler;
     private commandHandler: CommandHandler;
@@ -30,56 +30,33 @@ export class DebugDispatcher extends EventEmitter {
     private variableHandler: VariableHandler;
     private startArgs: LaunchRequestArguments;
 
+    public constructor() {
+        super();
+    }
+
     /**
      * Start executing the given program.
      */
     public async start(args: LaunchRequestArguments) {
-        await this.initDebugger(args, args.dbgpSettings);
-
-        const runtime = args.runtime ?? Global.getConfig(ConfigKey.executePath);
-        if (!args.program) {
-            args.program = await RunnerService.getPathByActive();
-        }
-        if (!existsSync(runtime)) {
-            Out.log(`AutoHotkey execute bin not found: ${runtime}`);
-            this.end();
-            return;
-        }
-        const ahkArgs = [
-            '/ErrorStdOut',
-            `/debug=localhost:${this.port}`,
-            args.program,
-        ];
-        const ahkProcess = spawn(runtime, ahkArgs, {
-            cwd: `${resolve(args.program, '..')}`,
-        });
-        this.emit('output', `${runtime} ${ahkArgs.join(' ')}`);
-        ahkProcess.stderr.on('data', (err) => {
-            this.emit('output', err.toString('utf8'));
-            this.end();
-        });
-    }
-
-    private async initDebugger(
-        args: LaunchRequestArguments,
+        let { runtime, dbgpSettings = {} } = args;
         // names may used by AHK, let's not change them for now
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        dbgpSettings: { max_children?: number; max_data?: number } = {},
-    ) {
-        if (this.port) {
-            return;
+        const { max_children, max_data } = {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            max_children: 300,
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            max_data: 131072,
+            ...dbgpSettings,
+        };
+        if (!runtime) {
+            runtime = Global.getConfig(ConfigKey.executePath);
         }
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        const { max_children = 300, max_data = 131072 } = dbgpSettings;
+
         this.breakPointHandler = new BreakPointHandler();
         this.stackHandler = new StackHandler();
         this.variableHandler = new VariableHandler();
         this.startArgs = args;
-        const port = await portfinder.getPortPromise({
-            port: 9000,
-            stopPort: 9100,
-        });
-        Out.debug(`Creating debug server, port is ${port}`);
+        const port = await getPort({ port: getPort.makeRange(9000, 9100) });
         this.debugServer = new DebugServer(port);
         this.commandHandler = new CommandHandler(this.debugServer);
         this.debugServer
@@ -88,14 +65,14 @@ export class DebugDispatcher extends EventEmitter {
                 this.breakPointHandler.loopPoints((bp) => {
                     this.setBreakPonit(bp);
                 });
-                this.sendCommand(
+                this.sendComand(
                     `feature_set -n max_children -v ${max_children}`,
                 );
-                this.sendCommand(`feature_set -n max_data -v ${max_data}`);
-                this.sendCommand(`feature_set -n max_depth -v 2`); // Get properties recursively. Therefore fixed at 2
-                this.sendCommand('stdout -c 1');
-                this.sendCommand('stderr -c 1');
-                this.sendCommand('run');
+                this.sendComand(`feature_set -n max_data -v ${max_data}`);
+                this.sendComand(`feature_set -n max_depth -v 2`); // Get properties recursively. Therefore fixed at 2
+                this.sendComand('stdout -c 1');
+                this.sendComand('stderr -c 1');
+                this.sendComand('run');
             })
             .on('stream', (stream) => {
                 this.emit(
@@ -122,43 +99,57 @@ export class DebugDispatcher extends EventEmitter {
                     }
                 }
             });
-        this.port = port;
-        return port;
+        if (!args.program) {
+            args.program = await RunnerService.getPathByActive();
+        }
+
+        if (!existsSync(runtime)) {
+            Out.log(`AutoHotkey execute bin not found: ${runtime}`);
+            this.end();
+            return;
+        }
+
+        const ahkProcess = spawn(
+            runtime,
+            ['/ErrorStdOut', `/debug=localhost:${port}`, args.program],
+            { cwd: `${resolve(args.program, '..')}` },
+        );
+        ahkProcess.stderr.on('data', (err) => {
+            this.emit('output', err.toString('utf8'));
+            this.end();
+        });
+    }
+
+    public async restart() {
+        this.sendComand('stop');
+        this.end();
+        RunnerService.startDebugger(this.startArgs.program);
     }
 
     /**
      * send command to the ahk debug proxy.
      * @param command
      */
-    public sendCommand(command: string, data?: string): Promise<DbgpResponse> {
+    public sendComand(command: string, data?: string): Promise<DbgpResponse> {
         if (this.commandHandler) {
-            return this.commandHandler.sendCommand(command, data);
+            return this.commandHandler.sendComand(command, data);
         }
         return null;
-    }
-
-    public async restart() {
-        this.sendCommand('stop');
-        this.debugServer.prepareNewConnection();
-        this.start(this.startArgs);
     }
 
     /**
      * receive stop request from vscode, send command to notice the script stop.
      */
     public stop() {
-        this.sendCommand('stop');
+        this.sendComand('stop');
         this.debugServer.shutdown();
-        this.emit('output', `The debugger has stopped.`);
     }
 
     /**
      * receive end message from script, send event to stop the debug session.
      */
     public end() {
-        if (!this.debugServer.hasNew) {
-            this.emit('end');
-        }
+        this.emit('end');
         this.debugServer.shutdown();
     }
 
@@ -198,7 +189,7 @@ export class DebugDispatcher extends EventEmitter {
             return this.getVariable(frameId, scope, propertyName);
         }
 
-        const response = await this.sendCommand(
+        const response = await this.sendComand(
             `context_get -d ${frameId} -c ${scope}`,
         );
 
@@ -228,7 +219,7 @@ export class DebugDispatcher extends EventEmitter {
         scope: VarScope,
         variableName: string,
     ): Promise<Variable[]> {
-        const response = await this.sendCommand(
+        const response = await this.sendComand(
             `property_get -d ${frameId} -c ${scope} -n ${variableName}`,
         );
         return this.variableHandler.parsePropertyget(response, scope);
@@ -269,12 +260,12 @@ export class DebugDispatcher extends EventEmitter {
                         : `${parentFullName}.${fullname}`;
                 }
 
-                const response: DbgpResponse = await this.sendCommand(
+                const response: DbgpResponse = await this.sendComand(
                     `property_set -d ${frameId} -c ${scope} -n ${fullname} -t ${type}`,
                     value,
                 );
-                const success = !!parseInt(response.attr.success);
-                if (!success) {
+                const success: boolean = !!parseInt(response.attr.success);
+                if (success === false) {
                     throw new Error(
                         `"${fullname}" cannot be written. Probably read-only.`,
                     );
@@ -298,13 +289,13 @@ export class DebugDispatcher extends EventEmitter {
     public async stack(
         args: DebugProtocol.StackTraceArguments,
     ): Promise<StackFrame[]> {
-        const response = await this.sendCommand(`stack_get`);
+        const response = await this.sendComand(`stack_get`);
         return this.stackHandler.handle(args, response);
     }
 
     private async setBreakPonit(bp: DebugProtocol.Breakpoint) {
         if (this.debugServer && bp.verified) {
-            const res = await this.sendCommand(
+            const res = await this.sendComand(
                 `breakpoint_set -t line -f ${bp.source.path} -n ${bp.line}`,
             );
             bp.id = res.attr.id;
@@ -333,7 +324,7 @@ export class DebugDispatcher extends EventEmitter {
         let bps: DebugProtocol.Breakpoint[];
         if (this.debugServer && (bps = this.breakPointHandler.get(path))) {
             for (const bp of bps) {
-                this.sendCommand(`breakpoint_remove -d ${bp.id}`);
+                this.sendComand(`breakpoint_remove -d ${bp.id}`);
             }
         }
     }
