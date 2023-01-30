@@ -12,19 +12,7 @@ This document covers the development process, from writing code to publishing a 
 ## Testing
 
 -   Test all added commands
--   Perform the formatting tests
 -   If the README was modified, confirm README appears as intended
-
-### Automated tests
-
-1. Open the Debug console panel (`Ctrl + Shift + Y` or `F1` -> View: Toggle Debug Console)
-1. Run the tests (`debug test`)
-    1. Select `Test Extension` in the Debug side bar
-    1. Begin Debugging (`F5` or press the play button)
-
-The tests should run automatically, and you should see passing output in the Debug console within a few seconds.
-
-> Learn more about debugging at the [VS Code Debugging Guide](https://code.visualstudio.com/Docs/editor/debugging).
 
 ## Starting a release
 
