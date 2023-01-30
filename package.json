@@ -351,6 +351,7 @@
     "dependencies": {
         "@vscode/debugadapter": "^1.57.0",
         "date-format": "^4.0.14",
+        "get-port": "^5.1.1",
         "portfinder": "^1.0.32",
         "xml2js": "^0.4.23"
     },

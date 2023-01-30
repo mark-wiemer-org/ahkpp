@@ -12,19 +12,7 @@ This document covers the development process, from writing code to publishing a 
 ## Testing
 
 -   Test all added commands
--   Perform the formatting tests
 -   If the README was modified, confirm README appears as intended
-
-### Automated tests
-
-1. Open the Debug console panel (`Ctrl + Shift + Y` or `F1` -> View: Toggle Debug Console)
-1. Run the tests (`debug test`)
-    1. Select `Test Extension` in the Debug side bar
-    1. Begin Debugging (`F5` or press the play button)
-
-The tests should run automatically, and you should see passing output in the Debug console within a few seconds.
-
-> Learn more about debugging at the [VS Code Debugging Guide](https://code.visualstudio.com/Docs/editor/debugging).
 
 ## Starting a release
 
@@ -32,7 +20,8 @@ Unless otherwise specified, commit messages don't matter.
 
 1. Create a new branch with name e.g. `release-1.2.3` or similar. Don't use e.g. `v1.2.3`, that's used as a tag later.
 1. Update the changelog.
-1. Bump the version in `package.json`.
+1. Bump the version in `package.json`
+1. Run `npm i` to update `package-lock.json`
 1. Commit the changes.
 1. Open a PR. For style, the title of the PR should be e.g. `v1.2.3`. The PR description should contain the changelog entry, including the heading for this version.
 1. Fix any remaining issues with the PR.
@@ -51,7 +40,7 @@ Unless otherwise specified, commit messages don't matter.
     1. e.g. `git checkout main && git pull && git tag v1.2.3 && git push origin v1.2.3`
     1. [Create a new GitHub release for this tag](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tags)
         1. Release title: Same as in [Changelog.md](../Changelog.md)
-        1. Description: Changelog entry, including the heading for this version
+        1. Description: Changelog entry, excluding the heading for this version
         1. Attach binary
         1. Publish release
 
