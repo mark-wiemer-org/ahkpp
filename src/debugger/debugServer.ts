@@ -9,7 +9,6 @@ import { Out } from '../common/out';
 export class DebugServer extends EventEmitter {
     private proxyServer: Net.Server;
     private ahkConnection: Net.Socket;
-    public hasNew: boolean;
     public constructor(private port: number) {
         super();
     }
@@ -39,27 +38,12 @@ export class DebugServer extends EventEmitter {
         return this;
     }
 
-    public prepareNewConnection() {
-        this.closeAhkConnection();
-        this.hasNew = true;
-    }
-
-    public closeAhkConnection() {
+    public shutdown() {
         if (this.ahkConnection) {
             this.ahkConnection.end();
-            this.ahkConnection = null;
-        }
-    }
-
-    public shutdown() {
-        this.closeAhkConnection();
-        if (this.hasNew) {
-            this.hasNew = false;
-            return;
         }
         if (this.proxyServer) {
             this.proxyServer.close();
-            this.proxyServer = null;
         }
     }
 
