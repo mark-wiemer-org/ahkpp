@@ -48,7 +48,7 @@ export class DebugDispatcher extends EventEmitter {
         const ahkArgs = [
             '/ErrorStdOut',
             `/debug=localhost:${this.port}`,
-            args.program,
+            `${getFileNameOnly(args.program)}`,
         ];
         const ahkProcess = spawn(runtime, ahkArgs, {
             cwd: `${resolve(args.program, '..')}`,
@@ -350,3 +350,14 @@ export class DebugDispatcher extends EventEmitter {
         }
     }
 }
+
+/**
+ * Returns the user-friendly "name" of the file instead of its path
+ * @param path backslash-delimited path
+ * @returns last segment of the path
+ * @example ('c:\\Users\\mark\\myScript.ahk') => 'myScript.ahk'
+ */
+const getFileNameOnly = (path: string): string => {
+    const splitPath = path.split('\\');
+    return splitPath[splitPath.length - 1];
+};
