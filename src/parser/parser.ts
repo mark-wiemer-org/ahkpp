@@ -5,6 +5,13 @@ import { CodeUtil } from '../common/codeUtil';
 import { Out } from '../common/out';
 import { Script, Method, Ref, Label, Block, Variable } from './model';
 
+export interface BuildScriptOptions {
+    /** Defaults to false. If true, short-circuits when document is in cache. */
+    usingCache?: boolean;
+    /** Lines to parse. Defaults to extension setting. -1 for unlimited parsing. 0 for no parsing. */
+    maximumParseLength?: number;
+}
+
 export class Parser {
     private static documentCache = new Map<string, Script>();
 
@@ -43,11 +50,21 @@ export class Parser {
      */
     public static async buildScript(
         document: vscode.TextDocument,
-        usingCache = false,
+        options: BuildScriptOptions = {},
     ): Promise<Script> {
-        if (usingCache && this.documentCache.get(document.uri.path)) {
+        if (options.usingCache && this.documentCache.get(document.uri.path)) {
             return this.documentCache.get(document.uri.path);
         }
+
+        const maxParseLength =
+            options.maximumParseLength ??
+            Global.getConfig<number>(ConfigKey.maximumParseLength);
+        // limit parse length for performance
+        /** Count of lines to parse */
+        const linesToParse =
+            maxParseLength >= 0
+                ? Math.min(document.lineCount, maxParseLength)
+                : document.lineCount;
 
         const methods: Method[] = [];
         const refs: Ref[] = [];
@@ -56,16 +73,8 @@ export class Parser {
         const blocks: Block[] = [];
         let currentMethod: Method;
         let deep = 0;
-        const maxParseLength = Global.getConfig<number>(
-            ConfigKey.maximumParseLength,
-        );
-        // limit parse length for performance
-        const lineCount =
-            maxParseLength >= 0
-                ? Math.min(document.lineCount, maxParseLength)
-                : document.lineCount;
         let blockComment = false;
-        for (let line = 0; line < lineCount; line++) {
+        for (let line = 0; line < linesToParse; line++) {
             const lineText = document.lineAt(line).text;
             if (lineText.match(startBlockComment)) {
                 blockComment = true;

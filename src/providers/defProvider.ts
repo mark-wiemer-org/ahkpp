@@ -43,7 +43,7 @@ export class DefProvider implements vscode.DefinitionProvider {
             );
         }
 
-        const script = await Parser.buildScript(document, true);
+        const script = await Parser.buildScript(document, { usingCache: true });
 
         for (const method of script.methods) {
             if (
