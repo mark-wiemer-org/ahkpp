@@ -30,6 +30,11 @@
         "body": "#EscapeChar, ${1:NewChar}",
         "description": "Changes the script's escape character (e.g. accent vs. backslash).\n⚠Note: This directive is not recommended for use in new scripts because a) it does more harm than good and b) it is no longer available in AutoHotkey v2."
     },
+    "#HotIf": {
+        "prefix": "#HotIf",
+        "body": "#HotIf ${1:Expression}",
+        "description": "(⚠️ v2 only) Sets the expression which will be used by subsequently created hotkeys to determine whether they should activate. This expression is evaluated when the key, mouse button or combination is pressed, or at other times when the program needs to know whether the hotkey is active."
+    },
     "#HotkeyInterval": {
         "prefix": "#HotkeyInterval",
         "body": "#HotkeyInterval, ${1:Milliseconds}",
