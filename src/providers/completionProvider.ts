@@ -65,7 +65,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             }
         });
 
-        const script = await Parser.buildScript(document, true);
+        const script = await Parser.buildScript(document, { usingCache: true });
         script.variables.forEach((variable) => {
             const completionItem = new vscode.CompletionItem(
                 variable.name,

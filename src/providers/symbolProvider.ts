@@ -8,7 +8,7 @@ export class SymbolProvider implements vscode.DocumentSymbolProvider {
     ): Promise<vscode.DocumentSymbol[]> {
         const result = [];
 
-        const script = await Parser.buildScript(document, false);
+        const script = await Parser.buildScript(document);
 
         for (const method of script.methods) {
             result.push(
