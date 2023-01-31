@@ -126,6 +126,11 @@
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
                     "description": "Path to the AHK Help document."
                 },
+                "ahk++.file.maximumParseLength": {
+                    "type": "number",
+                    "default": 10000,
+                    "description": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts."
+                },
                 "ahk++.file.templateSnippetName": {
                     "type": "string",
                     "default": "AhkTemplate",

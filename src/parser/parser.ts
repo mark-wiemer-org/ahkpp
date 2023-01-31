@@ -1,3 +1,4 @@
+import { ConfigKey, Global } from '@/common/global';
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
@@ -55,14 +56,18 @@ export class Parser {
         const blocks: Block[] = [];
         let currentMethod: Method;
         let deep = 0;
-        const lineCount = Math.min(document.lineCount, 10000);
+        // limit parse length for performance
+        const lineCount = Math.min(
+            document.lineCount,
+            Global.getConfig(ConfigKey.maximumParseLength),
+        );
         let blockComment = false;
         for (let line = 0; line < lineCount; line++) {
             const lineText = document.lineAt(line).text;
-            if (lineText.match(/ *\/\*/)) {
+            if (lineText.match(startBlockComment)) {
                 blockComment = true;
             }
-            if (lineText.match(/ *\*\//)) {
+            if (lineText.match(endBlockComment)) {
                 blockComment = false;
             }
             if (blockComment) {
@@ -277,7 +282,7 @@ export class Parser {
         document: vscode.TextDocument,
         line: number,
         origin?: string,
-    ) {
+    ): Method | Ref | Ref[] {
         origin ??= document.lineAt(line).text;
         const text = CodeUtil.purify(origin);
         // [\u4e00-\u9fa5] Chinese unicode characters
@@ -374,3 +379,6 @@ export class Parser {
         }
     }
 }
+
+const startBlockComment = / *\/\*/;
+const endBlockComment = / *\*\//;

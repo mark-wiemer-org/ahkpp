@@ -35,6 +35,7 @@ export enum ConfigKey {
     helpPath = 'file.helpPath',
     indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',
     indentCodeAfterSharpDirective = 'formatter.indentCodeAfterSharpDirective',
+    maximumParseLength = 'file.maximumParseLength',
     preserveIndent = 'formatter.preserveIndent',
     templateSnippetName = 'file.templateSnippetName',
     trimExtraSpaces = 'formatter.trimExtraSpaces',
