@@ -96,6 +96,8 @@ export class DebugDispatcher extends EventEmitter {
             args.program = await RunnerService.getPathByActive();
         }
 
+        const programName = getFileNameOnly(args.program);
+
         if (!existsSync(runtime)) {
             Out.log(`AutoHotkey execute bin not found: ${runtime}`);
             this.end();
@@ -104,7 +106,7 @@ export class DebugDispatcher extends EventEmitter {
 
         const ahkProcess = spawn(
             runtime,
-            ['/ErrorStdOut', `/debug=localhost:${port}`, args.program],
+            ['/ErrorStdOut', `/debug=localhost:${port}`, programName],
             { cwd: `${resolve(args.program, '..')}` },
         );
         ahkProcess.stderr.on('data', (err) => {
@@ -333,3 +335,14 @@ export class DebugDispatcher extends EventEmitter {
         }
     }
 }
+
+/**
+ * Returns the user-friendly "name" of the file instead of its path
+ * @param path backslash-delimited path
+ * @returns last segment of the path
+ * @example ('c:\\Users\\mark\\myScript.ahk') => 'myScript.ahk'
+ */
+const getFileNameOnly = (path: string): string => {
+    const splitPath = path.split('\\');
+    return splitPath[splitPath.length - 1];
+};
