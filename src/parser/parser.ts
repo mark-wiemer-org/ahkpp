@@ -1,4 +1,4 @@
-import { ConfigKey, Global } from '@/common/global';
+import { ConfigKey, Global } from '../common/global';
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
@@ -56,11 +56,14 @@ export class Parser {
         const blocks: Block[] = [];
         let currentMethod: Method;
         let deep = 0;
-        // limit parse length for performance
-        const lineCount = Math.min(
-            document.lineCount,
-            Global.getConfig(ConfigKey.maximumParseLength),
+        const maxParseLength = Global.getConfig<number>(
+            ConfigKey.maximumParseLength,
         );
+        // limit parse length for performance
+        const lineCount =
+            maxParseLength >= 0
+                ? Math.min(document.lineCount, maxParseLength)
+                : document.lineCount;
         let blockComment = false;
         for (let line = 0; line < lineCount; line++) {
             const lineText = document.lineAt(line).text;
