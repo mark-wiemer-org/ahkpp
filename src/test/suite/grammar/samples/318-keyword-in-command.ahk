@@ -16,6 +16,7 @@ Gui, Color, White
 Gui, Flash, Off
 Gui, +AlwaysOnTop +Disabled -SysMenu +Owner
 Gui, New, -Caption +LastFound
+Gui, Add, Text, x+5 +Hidden
 If var between 1 and 5
 If var not between 1 and 5
 If var contains 1,3
@@ -38,6 +39,6 @@ WinSet, Transparent, 200, Untitled
 Break
 Continue
 
-LegacyString = is break continue id on off days grid
-GuiString = center hide disabled alwaysontop
-WinGetString = word, id
+LegacyString is break continue id on off days grid
+GuiString center, hide, disabled alwaysontop hidden
+WinGetString word, id

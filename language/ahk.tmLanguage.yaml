@@ -117,7 +117,7 @@ repository:
         name: keyword.keys.ahk
         example: LButton
       - match: >-
-          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|pic|ddl|iconsmall|tile|report|sortdesc|nosort|nosorthdr|grid|hdr|range|xm|ym|xs|ys|xp|yp|wp|hp|guiescape|guiclose|guisize|guicontextmenu|guidropfiles|tabstop|section|altsubmit|wrap|hscroll|vscroll|buttons|expand|first|imagelist|lines|wantctrla|wantf2|vis|visfirst|uppercase|lowercase|limit|password|multi|wantreturn|group|background|backgroundtrans|check3|checked|checkedgray|readonly|password|hidden|left|right|notab|section|move|focus|choose|choosestring|pos|enabled|visible|alttab|shiftalttab|alttabmenu|alttabandmenu|alttabmenudismiss|notimers|interrupt|blind|raw|on|all|base)(?!\[|\(|\.)\b
+          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|pic|ddl|iconsmall|tile|report|sortdesc|nosort|nosorthdr|grid|hdr|range|guiescape|guiclose|guisize|guicontextmenu|guidropfiles|buttons|expand|first|imagelist|lines|wantctrla|wantf2|vis|visfirst|uppercase|lowercase|limit|password|multi|wantreturn|group|check3|checked|checkedgray|readonly|password|notab|move|focus|choosestring|pos|enabled|visible|alttab|shiftalttab|alttabmenu|alttabandmenu|alttabmenudismiss|notimers|interrupt|blind|raw|on|all|base)(?!\[|\(|\.)\b
         name: keyword.other.ahk
         example: text
       # - match: (?i)\b(?<=\b1stField\b\s*,?\s*)()\b
@@ -125,9 +125,6 @@ repository:
       # - match: (?i)\b(?<=\b3rdField\b\s*,?[^,]+,\s*[^,]+,\s*)()\b
       # - match: (?i)\b(?<=\bCOMMAND\b\s*,?\s*WORD\s*,\s*)()\b
       # TODO
-      # Gui -Caption
-      # Gui Add, OPTIONS
-      # Controls: Common Styles and Other Options
       # GuiControl Progress SplashImage
       - match: (?i)\b(?<=\bCoordMode\b\s*,?\s*)(ToolTip|Pixel|Mouse|Caret|Menu)\b
         name: keyword.other.ahk
@@ -159,6 +156,12 @@ repository:
         # GUI Options and styles for a window
       - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?New\s*,)?[^,]*)(AlwaysOnTop|Border|Caption|Delimiter|Disabled|DPIScale|Hwnd|Label|LastFound|LastFoundExist|MaximizeBox|MinimizeBox|MinSize|MaxSize|OwnDialogs|Owner|Parent|Resize|SysMenu|Theme|ToolWindow)\b
         name: keyword.other.ahk
+        # GUI ADD - Positioning and Sizing of Controls
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(\w+|%\w+%)\s*,[^,]*)(wp|hp|x|y|xp|yp|xm|ym|xs|ys)\b
+        name: keyword.other.ahk
+        # GUI ADD - Controls' Common Styles and Other Options
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(\w+|%\w+%)\s*,[^,]*)(AltSubmit|Choose|Disabled|Hidden|Left|Right|Center|Section|Tabstop|Wrap|VScroll|HScroll|Controls|BackgroundTrans|Background|Border|HwndOutputVar|Theme)\b
+        name: keyword.other2.ahk
       # - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,\s*)()\b
       # - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,[^,]*)()\b
       # name: keyword.other.ahk
