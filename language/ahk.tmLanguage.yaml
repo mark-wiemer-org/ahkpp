@@ -142,7 +142,7 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\b(EnvAdd|EnvSub)\b\s*,?[^,]+,\s*[^,]+,\s*)(Seconds|Minutes|Hours|Days|S|M|H|D)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=(+|-)=)\s*[^,]+,\s*)(Seconds|Minutes|Hours|Days|S|M|H|D)\b
+      - match: (?i)\b(?<=(\+|-)=[^,]+,\s*)(Seconds|Minutes|Hours|Days|S|M|H|D)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bFormatTime\b\s*,?[^,]+,\s*[^,]*,\s*)(Time|ShortDate|LongDate|YearMonth|YDay|YDay0|WDay|YWeek)\b
         name: keyword.other.ahk
