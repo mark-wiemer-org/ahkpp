@@ -117,9 +117,18 @@ repository:
         name: keyword.keys.ahk
         example: LButton
       - match: >-
-          \b(?!MsgBox)(?<!\.)(?i:rgb|ltrim|rtrim|join|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|text|picture|pic|groupbox|button|checkbox|radio|dropdownlist|ddl|combobox|listbox|listview|datetime|monthcal|updown|slider|tab|tab2|statusbar|treeview|iconsmall|tile|report|sortdesc|nosort|nosorthdr|grid|hdr|autosize|range|xm|ym|xs|ys|xp|yp|wp|hp|font|resize|owner|submit|nohide|minimize|maximize|restore|noactivate|na|cancel|destroy|center|margin|maxsize|minsize|owndialogs|guiescape|guiclose|guisize|guicontextmenu|guidropfiles|tabstop|section|altsubmit|wrap|hscroll|vscroll|border|buttons|expand|first|imagelist|lines|wantctrla|wantf2|vis|visfirst|uppercase|lowercase|limit|password|multi|wantreturn|group|background|bold|italic|strike|underline|norm|backgroundtrans|theme|caption|delimiter|minimizebox|maximizebox|sysmenu|toolwindow|flash|check3|checked|checkedgray|readonly|password|hidden|left|right|center|notab|section|move|focus|hide|choose|choosestring|pos|enabled|disabled|visible|lastfound|lastfoundexist|alttab|shiftalttab|alttabmenu|alttabandmenu|alttabmenudismiss|notimers|interrupt|blind|raw|on|off|all|dpiscale|parent|base)(?!\[|\(|\.)\b
+          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|pic|ddl|iconsmall|tile|report|sortdesc|nosort|nosorthdr|grid|hdr|range|xm|ym|xs|ys|xp|yp|wp|hp|resize|owner|maxsize|minsize|owndialogs|guiescape|guiclose|guisize|guicontextmenu|guidropfiles|tabstop|section|altsubmit|wrap|hscroll|vscroll|border|buttons|expand|first|imagelist|lines|wantctrla|wantf2|vis|visfirst|uppercase|lowercase|limit|password|multi|wantreturn|group|background|backgroundtrans|theme|caption|delimiter|minimizebox|maximizebox|sysmenu|toolwindow|check3|checked|checkedgray|readonly|password|hidden|left|right|notab|section|move|focus|choose|choosestring|pos|enabled|disabled|visible|lastfound|lastfoundexist|alttab|shiftalttab|alttabmenu|alttabandmenu|alttabmenudismiss|notimers|interrupt|blind|raw|on|all|dpiscale|parent|base)(?!\[|\(|\.)\b
         name: keyword.other.ahk
         example: text
+      # - match: (?i)\b(?<=1stField\s*,?\s*)()\b
+      # - match: (?i)\b(?<=2ndField\s*,?[^,]+,\s*)()\b
+      # - match: (?i)\b(?<=3rdField\s*,?[^,]+,\s*[^,]+,\s*)()\b
+      # - match: (?i)\b(?<=COMMAND\s*,?\s*WORD\s*,\s*)()\b
+      # TODO
+      # Gui -Caption
+      # Gui Add, OPTIONS
+      # Controls: Common Styles and Other Options
+      # GuiControl Progress SplashImage
       - match: (?i)\b(?<=CoordMode\s*,?\s*)(ToolTip|Pixel|Mouse|Caret|Menu)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=CoordMode\s*,?[^,]+,\s*)(Screen|Relative|Window|Client)\b
@@ -132,6 +141,23 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=FormatTime\s*,?[^,]+,\s*[^,]*,\s*)(Time|ShortDate|LongDate|YearMonth|YDay|YDay0|WDay|YWeek)\b
         name: keyword.other.ahk
+      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?)(New|Add|Show|Submit|Cancel|Hide|Destroy|Font|Color|Margin|Menu|Minimize|Maximize|Restore|Flash|Default)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*)(Text|Edit|UpDown|Picture|Button|Checkbox|Radio|DropDownList|ComboBox|ListBox|ListView|TreeView|Link|Hotkey|DateTime|MonthCal|Slider|Progress|GroupBox|Tab|Tab2|Tab3|StatusBar|ActiveX|Custom)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Show\s*,[^,]*)(Center|xCenter|yCenter|AutoSize|Minimize|Maximize|Restore|NoActivate|NA|Hide)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Submit\s*,\s*)NoHide\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Font\s*,[^,]*)(Bold|Italic|Strike|Underline|Norm)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Color\s*,\s*)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Flash\s*,\s*)Off\b
+        name: keyword.other.ahk
+      # - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,\s*)()\b
+      # - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,[^,]*)()\b
+      # name: keyword.other.ahk
       - match: (?i)\b(?<=If\s+(\w+|%\w+%)\s+)(is\s+(not\s+)?(Integer|Float|Number|Digit|Xdigit|Alpha|Upper|Lower|Alnum|Space|Time|Date))\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=If\s+(\w+|%\w+%)\s+(not\s+)?)(between|contains|in)\b
