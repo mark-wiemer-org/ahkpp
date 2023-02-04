@@ -117,7 +117,7 @@ repository:
         name: keyword.keys.ahk
         example: LButton
       - match: >-
-          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|guiescape|guiclose|guisize|guicontextmenu|guidropfiles|buttons|expand|first|imagelist|lines|vis|visfirst|notab|move|focus|choosestring|pos|enabled|visible|alttab|shiftalttab|alttabmenu|alttabandmenu|alttabmenudismiss|notimers|interrupt|blind|raw|on|all|base)(?!\[|\(|\.)\b
+          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|GuiEscape|GuiClose|GuiSize|GuiContextMenu|GuiDropFiles|buttons|expand|first|imagelist|lines|vis|visfirst|notab|move|focus|pos|enabled|visible|notimers|interrupt|blind|raw|on|all|base)(?!\[|\(|\.)\b
         name: keyword.other.ahk
         example: text
       # - match: (?i)\b(?<=\b1stField\b\s*,?\s*)()\b
@@ -126,6 +126,10 @@ repository:
       # - match: (?i)\b(?<=\bCOMMAND\b\s*,?\s*WORD\s*,\s*)()\b
       # TODO
       # GuiControl Progress SplashImage
+      - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bControl\b\s*,?\s*)(Check|Uncheck|Enable|Disable|Show|Hide|Style|ExStyle|ShowDropDown|HideDropDown|TabLeft|TabRight|Add|Delete|Choose|ChooseString|EditPaste)\b
+        name: keyword.other.ahk
       - match: (?i)\b(?<=\bCoordMode\b\s*,?\s*)(ToolTip|Pixel|Mouse|Caret|Menu)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bCoordMode\b\s*,?[^,]+,\s*)(Screen|Relative|Window|Client)\b

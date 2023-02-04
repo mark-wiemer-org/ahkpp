@@ -1,4 +1,7 @@
 ; [Issue #318](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/318)
+RAlt & j::AltTab
+RAlt & k::ShiftAltTab
+Control, Show
 CoordMode, ToolTip, Screen ;BUG ToolTip keyword
 Drive, Unlock, C:
 DriveGet, OutputVar, List, FIXED
