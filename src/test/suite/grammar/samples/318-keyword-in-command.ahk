@@ -11,12 +11,28 @@ Gui, Add, Link, Options, Title
 Gui, GuiName:Add, Link, Options, Title
 Gui, %GuiName%:Add, Link, Options, Title
 Gui, Submit, NoHide
-Gui, Font, s10 Norm Italic
-Gui, Color, White
+Gui, Font, s10 Norm Italic cRed
+Gui, Color, Red
 Gui, Flash, Off
 Gui, +AlwaysOnTop +Disabled -SysMenu +Owner
 Gui, New, -Caption +LastFound
 Gui, Add, Text, x+5 +Hidden
+Gui, Add, Edit, Multi Limit ;BUG Edit keyword
+Gui, Add, UpDown, Horz 0x80
+Gui, Add, Picture, Icon2, Application.exe
+Gui, Add, Button, w80 Default, OK
+Gui, Add, Checkbox, Checked, Some text
+Gui, Add, Radio, Checked, Some text
+Gui, Add, DropDownList, Uppercase, Black|White
+Gui, Add, ComboBox, Simple, Red|Green
+Gui, Add, ListBox, ReadOnly, Red|Green
+Gui, Add, DateTime, ChooseNone, LongDate ;???
+Gui, Add, MonthCal, Multi 8
+Gui, Add, Slider, Invert, 50
+Gui, Add, Progress, w200 h20 cRed BackgroundGreen, 75 ;BUG Progress keyword
+Gui, Add, Tab3, Buttons, General|Settings
+Gui, Add, ListView, -LV0x10 AltSubmit cRed
+Gui, Add, TreeView, -ReadOnly cRed
 If var between 1 and 5
 If var not between 1 and 5
 If var contains 1,3

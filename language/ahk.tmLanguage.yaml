@@ -117,7 +117,7 @@ repository:
         name: keyword.keys.ahk
         example: LButton
       - match: >-
-          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|pic|ddl|iconsmall|tile|report|sortdesc|nosort|nosorthdr|grid|hdr|range|guiescape|guiclose|guisize|guicontextmenu|guidropfiles|buttons|expand|first|imagelist|lines|wantctrla|wantf2|vis|visfirst|uppercase|lowercase|limit|password|multi|wantreturn|group|check3|checked|checkedgray|readonly|password|notab|move|focus|choosestring|pos|enabled|visible|alttab|shiftalttab|alttabmenu|alttabandmenu|alttabmenudismiss|notimers|interrupt|blind|raw|on|all|base)(?!\[|\(|\.)\b
+          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|guiescape|guiclose|guisize|guicontextmenu|guidropfiles|buttons|expand|first|imagelist|lines|vis|visfirst|notab|move|focus|choosestring|pos|enabled|visible|alttab|shiftalttab|alttabmenu|alttabandmenu|alttabmenudismiss|notimers|interrupt|blind|raw|on|all|base)(?!\[|\(|\.)\b
         name: keyword.other.ahk
         example: text
       # - match: (?i)\b(?<=\b1stField\b\s*,?\s*)()\b
@@ -141,13 +141,13 @@ repository:
         # GUI
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?)(New|Add|Show|Submit|Cancel|Hide|Destroy|Font|Color|Margin|Menu|Minimize|Maximize|Restore|Flash|Default)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*)(Text|Edit|UpDown|Picture|Button|Checkbox|Radio|DropDownList|ComboBox|ListBox|ListView|TreeView|Link|Hotkey|DateTime|MonthCal|Slider|Progress|GroupBox|Tab|Tab2|Tab3|StatusBar|ActiveX|Custom)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*)(Text|Edit|UpDown|Picture|Pic|Button|Checkbox|Radio|DropDownList|DDL|ComboBox|ListBox|ListView|TreeView|Link|Hotkey|DateTime|MonthCal|Slider|Progress|GroupBox|Tab|Tab2|Tab3|StatusBar|ActiveX|Custom)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Show\s*,[^,]*)(Center|xCenter|yCenter|AutoSize|Minimize|Maximize|Restore|NoActivate|NA|Hide)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Submit\s*,\s*)NoHide\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Font\s*,[^,]*)(Bold|Italic|Strike|Underline|Norm)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Font\s*,[^,]*)(Bold|Italic|Strike|Underline|Norm|c(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Color\s*,\s*)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua)\b
         name: keyword.other.ahk
@@ -160,11 +160,43 @@ repository:
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(\w+|%\w+%)\s*,[^,]*)(wp|hp|x|y|xp|yp|xm|ym|xs|ys)\b
         name: keyword.other.ahk
         # GUI ADD - Controls' Common Styles and Other Options
-      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(\w+|%\w+%)\s*,[^,]*)(AltSubmit|Choose|Disabled|Hidden|Left|Right|Center|Section|Tabstop|Wrap|VScroll|HScroll|Controls|BackgroundTrans|Background|Border|HwndOutputVar|Theme)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(\w+|%\w+%)\s*,[^,]*)(AltSubmit|Choose|Disabled|Hidden|Left|Right|Center|Section|Tabstop|Wrap|VScroll|HScroll|Controls|BackgroundTrans|Background|Border|HwndOutputVar|Theme|c(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
+        name: keyword.other.ahk
+        # GUI ADD - Controls' Specific Options
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*Edit\s*,[^,]*)(Limit|Lowercase|Multi|Number|Password|ReadOnly|Uppercase|WantCtrlA|WantReturn|WantTab|Wrap)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*UpDown\s*,[^,]*)(Horz|Left|Range|Wrap|16|0x80)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(Picture|Pic)\s*,[^,]*)(Icon)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*Button\s*,[^,]*)Default\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*CheckBox\s*,[^,]*)(Check3|Checked|CheckedGray)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*Radio\s*,[^,]*)(Group|Checked)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(DropDownList|DDL)\s*,[^,]*)(Choose|Uppercase|Lowercase|Sort)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*ComboBox\s*,[^,]*)(Limit|Simple)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*ListBox\s*,[^,]*)(Choose|Multi|ReadOnly|Sort|0x100)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*DateTime\s*,[^,]*)(LongDate|Time|Choose|ChooseNone|Range|Right|)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*MonthCal\s*,[^,]*)(Multi|Range|Colors|4|8|16)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*Slider\s*,[^,]*)(Buddy1|Buddy2|Center|Invert|Left|Line|NoTicks|Page|Range|Thick|TickInterval|ToolTip|Vertical)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*Progress\s*,[^,]*)(Background|Range|Smooth|Vertical|c(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua)|Background(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(Tab|Tab2|Tab3)\s*,[^,]*)(Choose|Background|Buttons|Left|Right|Bottom|Wrap)\b
+        name: keyword.other.ahk
+        # GUI ADD LISTVIEW - Options
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*ListView\s*,[^,]*)(AltSubmit|Background|Checked|Count|Grid|Hdr|LV|LV0x10|LV0x20|Multi|NoSortHdr|NoSort|ReadOnly|Sort|SortDesc|WantF2|Icon|Tile|IconSmall|List|Report|c(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
         name: keyword.other2.ahk
-      # - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,\s*)()\b
-      # - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,[^,]*)()\b
-      # name: keyword.other.ahk
+        # GUI ADD TREEVIEW - Options
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*TreeView\s*,[^,]*)(AltSubmit|Background|Buttons|Checked|HScroll|ImageList|Lines|ReadOnly|WantF2|c(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
+        name: keyword.other.ahk
       - match: (?i)\b(?<=If\s+(\w+|%\w+%)\s+)(is\s+(not\s+)?(Integer|Float|Number|Digit|Xdigit|Alpha|Upper|Lower|Alnum|Space|Time|Date))\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=If\s+(\w+|%\w+%)\s+(not\s+)?)(between|contains|in)\b
