@@ -117,7 +117,7 @@ repository:
         name: keyword.keys.ahk
         example: LButton
       - match: >-
-          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|GuiEscape|GuiClose|GuiSize|GuiContextMenu|GuiDropFiles|buttons|expand|first|imagelist|lines|vis|visfirst|notab|move|focus|pos|enabled|visible|notimers|interrupt|blind|raw|on|all|base)(?!\[|\(|\.)\b
+          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|GuiEscape|GuiClose|GuiSize|GuiContextMenu|GuiDropFiles|buttons|expand|first|imagelist|lines|vis|visfirst|notab|move|focus|pos|enabled|visible|blind|raw|on|all|base)(?!\[|\(|\.)\b
         name: keyword.other.ahk
         example: text
       # - match: (?i)\b(?<=\b1stField\b\s*,?\s*)()\b
@@ -226,6 +226,8 @@ repository:
       - match: (?i)\b(?<=\bSetFormat\b\s*,?\s*)(Integer|Float|IntegerFast|FloatFast)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSetFormat\b\s*,?\s*(Integer|IntegerFast)\s*,\s*)(D|H|HEX)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bThread\b\s*,?\s*)(NoTimers|Priority|Interrupt)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bTransform\b\s*,?[^,]+,\s*)(Unicode|Deref|HTML|Asc|Chr|Mod|Exp|Sqrt|Log|Ln|Round|Ceil|Floor|Abs|Sin|Cos|Tan|ASin|ACos|ATan|Pow|BitNot|BitAnd|BitOr|BitXOr|BitShiftLeft|BitShiftRight)\b
         name: keyword.other.ahk

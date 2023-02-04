@@ -52,6 +52,8 @@ Menu, Tray, Add
 Process, Priority, notepad.exe, BelowNormal
 SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
+Thread, NoTimers
+Transform, OutputVar, Unicode
 WinGet, active_id, ID, A
 WinSet, Transparent, 200, Untitled
 
