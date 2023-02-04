@@ -14,6 +14,8 @@ Gui, Submit, NoHide
 Gui, Font, s10 Norm Italic
 Gui, Color, White
 Gui, Flash, Off
+Gui, +AlwaysOnTop +Disabled -SysMenu +Owner
+Gui, New, -Caption +LastFound
 If var between 1 and 5
 If var not between 1 and 5
 If var contains 1,3
@@ -36,4 +38,6 @@ WinSet, Transparent, 200, Untitled
 Break
 Continue
 
-legacyString = is break continue id center hide on off days grid
+LegacyString = is break continue id on off days grid
+GuiString = center hide disabled alwaysontop
+WinGetString = word, id

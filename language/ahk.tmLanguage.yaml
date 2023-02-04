@@ -117,46 +117,50 @@ repository:
         name: keyword.keys.ahk
         example: LButton
       - match: >-
-          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|pic|ddl|iconsmall|tile|report|sortdesc|nosort|nosorthdr|grid|hdr|range|xm|ym|xs|ys|xp|yp|wp|hp|resize|owner|maxsize|minsize|owndialogs|guiescape|guiclose|guisize|guicontextmenu|guidropfiles|tabstop|section|altsubmit|wrap|hscroll|vscroll|border|buttons|expand|first|imagelist|lines|wantctrla|wantf2|vis|visfirst|uppercase|lowercase|limit|password|multi|wantreturn|group|background|backgroundtrans|theme|caption|delimiter|minimizebox|maximizebox|sysmenu|toolwindow|check3|checked|checkedgray|readonly|password|hidden|left|right|notab|section|move|focus|choose|choosestring|pos|enabled|disabled|visible|lastfound|lastfoundexist|alttab|shiftalttab|alttabmenu|alttabandmenu|alttabmenudismiss|notimers|interrupt|blind|raw|on|all|dpiscale|parent|base)(?!\[|\(|\.)\b
+          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|pic|ddl|iconsmall|tile|report|sortdesc|nosort|nosorthdr|grid|hdr|range|xm|ym|xs|ys|xp|yp|wp|hp|guiescape|guiclose|guisize|guicontextmenu|guidropfiles|tabstop|section|altsubmit|wrap|hscroll|vscroll|buttons|expand|first|imagelist|lines|wantctrla|wantf2|vis|visfirst|uppercase|lowercase|limit|password|multi|wantreturn|group|background|backgroundtrans|check3|checked|checkedgray|readonly|password|hidden|left|right|notab|section|move|focus|choose|choosestring|pos|enabled|visible|alttab|shiftalttab|alttabmenu|alttabandmenu|alttabmenudismiss|notimers|interrupt|blind|raw|on|all|base)(?!\[|\(|\.)\b
         name: keyword.other.ahk
         example: text
-      # - match: (?i)\b(?<=1stField\s*,?\s*)()\b
-      # - match: (?i)\b(?<=2ndField\s*,?[^,]+,\s*)()\b
-      # - match: (?i)\b(?<=3rdField\s*,?[^,]+,\s*[^,]+,\s*)()\b
-      # - match: (?i)\b(?<=COMMAND\s*,?\s*WORD\s*,\s*)()\b
+      # - match: (?i)\b(?<=\b1stField\b\s*,?\s*)()\b
+      # - match: (?i)\b(?<=\b2ndField\b\s*,?[^,]+,\s*)()\b
+      # - match: (?i)\b(?<=\b3rdField\b\s*,?[^,]+,\s*[^,]+,\s*)()\b
+      # - match: (?i)\b(?<=\bCOMMAND\b\s*,?\s*WORD\s*,\s*)()\b
       # TODO
       # Gui -Caption
       # Gui Add, OPTIONS
       # Controls: Common Styles and Other Options
       # GuiControl Progress SplashImage
-      - match: (?i)\b(?<=CoordMode\s*,?\s*)(ToolTip|Pixel|Mouse|Caret|Menu)\b
+      - match: (?i)\b(?<=\bCoordMode\b\s*,?\s*)(ToolTip|Pixel|Mouse|Caret|Menu)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=CoordMode\s*,?[^,]+,\s*)(Screen|Relative|Window|Client)\b
+      - match: (?i)\b(?<=\bCoordMode\b\s*,?[^,]+,\s*)(Screen|Relative|Window|Client)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Drive\s*,?\s*)(Label|Lock|Unlock|Eject)\b
+      - match: (?i)\b(?<=\bDrive\b\s*,?\s*)(Label|Lock|Unlock|Eject)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=DriveGet\s*,?[^,]+,\s*)(List|Capacity|FS|FileSystem|Label|Serial|Type|Status|StatusCD)\b
+      - match: (?i)\b(?<=\bDriveGet\b\s*,?[^,]+,\s*)(List|Capacity|FS|FileSystem|Label|Serial|Type|Status|StatusCD)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=DriveGet\s*,?\s*List\s*,\s*)(CDROM|REMOVABLE|FIXED|NETWORK|RAMDISK|UNKNOWN)\b
+      - match: (?i)\b(?<=\bDriveGet\b\s*,?\s*List\s*,\s*)(CDROM|REMOVABLE|FIXED|NETWORK|RAMDISK|UNKNOWN)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=FormatTime\s*,?[^,]+,\s*[^,]*,\s*)(Time|ShortDate|LongDate|YearMonth|YDay|YDay0|WDay|YWeek)\b
+      - match: (?i)\b(?<=\bFormatTime\b\s*,?[^,]+,\s*[^,]*,\s*)(Time|ShortDate|LongDate|YearMonth|YDay|YDay0|WDay|YWeek)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?)(New|Add|Show|Submit|Cancel|Hide|Destroy|Font|Color|Margin|Menu|Minimize|Maximize|Restore|Flash|Default)\b
+        # GUI
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?)(New|Add|Show|Submit|Cancel|Hide|Destroy|Font|Color|Margin|Menu|Minimize|Maximize|Restore|Flash|Default)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*)(Text|Edit|UpDown|Picture|Button|Checkbox|Radio|DropDownList|ComboBox|ListBox|ListView|TreeView|Link|Hotkey|DateTime|MonthCal|Slider|Progress|GroupBox|Tab|Tab2|Tab3|StatusBar|ActiveX|Custom)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*)(Text|Edit|UpDown|Picture|Button|Checkbox|Radio|DropDownList|ComboBox|ListBox|ListView|TreeView|Link|Hotkey|DateTime|MonthCal|Slider|Progress|GroupBox|Tab|Tab2|Tab3|StatusBar|ActiveX|Custom)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Show\s*,[^,]*)(Center|xCenter|yCenter|AutoSize|Minimize|Maximize|Restore|NoActivate|NA|Hide)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Show\s*,[^,]*)(Center|xCenter|yCenter|AutoSize|Minimize|Maximize|Restore|NoActivate|NA|Hide)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Submit\s*,\s*)NoHide\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Submit\s*,\s*)NoHide\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Font\s*,[^,]*)(Bold|Italic|Strike|Underline|Norm)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Font\s*,[^,]*)(Bold|Italic|Strike|Underline|Norm)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Color\s*,\s*)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Color\s*,\s*)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?Flash\s*,\s*)Off\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Flash\s*,\s*)Off\b
         name: keyword.other.ahk
-      # - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,\s*)()\b
-      # - match: (?i)\b(?<=Gui\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,[^,]*)()\b
+        # GUI Options and styles for a window
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?New\s*,)?[^,]*)(AlwaysOnTop|Border|Caption|Delimiter|Disabled|DPIScale|Hwnd|Label|LastFound|LastFoundExist|MaximizeBox|MinimizeBox|MinSize|MaxSize|OwnDialogs|Owner|Parent|Resize|SysMenu|Theme|ToolWindow)\b
+        name: keyword.other.ahk
+      # - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,\s*)()\b
+      # - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?WORD\s*,[^,]*)()\b
       # name: keyword.other.ahk
       - match: (?i)\b(?<=If\s+(\w+|%\w+%)\s+)(is\s+(not\s+)?(Integer|Float|Number|Digit|Xdigit|Alpha|Upper|Lower|Alnum|Space|Time|Date))\b
         name: keyword.other.ahk
@@ -164,31 +168,31 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=IfMsgBox\s*,?\s*)(Yes|No|OK|Cancel|Abort|Ignore|Retry|Continue|TryAgain|Timeout)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Loop\s*,?\s*)(Files|Parse|Read|Reg)\b
+      - match: (?i)\b(?<=\bLoop\b\s*,?\s*)(Files|Parse|Read|Reg)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Loop\s*,?\s*Reg\s*,\s*)(HKEY_LOCAL_MACHINE|HKEY_USERS|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_CURRENT_CONFIG|HKLM|HKU|HKCU|HKCR|HKCC)\b
+      - match: (?i)\b(?<=\bLoop\b\s*,?\s*Reg\s*,\s*)(HKEY_LOCAL_MACHINE|HKEY_USERS|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_CURRENT_CONFIG|HKLM|HKU|HKCU|HKCR|HKCC)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Loop\s*,?\s*Reg\s*,\s*[^,]+,\s*)(KV?R?|KR?V?|VK?R?|VR?K?|RK?V?|RV?K?)\b
+      - match: (?i)\b(?<=\bLoop\b\s*,?\s*Reg\s*,\s*[^,]+,\s*)(KV?R?|KR?V?|VK?R?|VR?K?|RK?V?|RV?K?)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Menu\s*,?\s*)Tray\b
+      - match: (?i)\b(?<=\bMenu\b\s*,?\s*)Tray\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Menu\s*,?[^,]+,\s*)(Add|Insert|Delete|DeleteAll|Rename|Check|Uncheck|ToggleCheck|Enable|Disable|ToggleEnable|Default|NoDefault|Standard|NoStandard|Icon|NoIcon|Tip|Show|Color|Click|MainWindow|NoMainWindow|UseErrorLevel)\b
+      - match: (?i)\b(?<=\bMenu\b\b\s*,?[^,]+,\s*)(Add|Insert|Delete|DeleteAll|Rename|Check|Uncheck|ToggleCheck|Enable|Disable|ToggleEnable|Default|NoDefault|Standard|NoStandard|Icon|NoIcon|Tip|Show|Color|Click|MainWindow|NoMainWindow|UseErrorLevel)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Process\s*,?\s*)(Exist|Close|List|Priority|Wait|WaitClose)\b
+      - match: (?i)\b(?<=\bProcess\b\s*,?\s*)(Exist|Close|List|Priority|Wait|WaitClose)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Process\s*,?\s*Priority\s*,\s*[^,]+,\s*)(L|Low|B|BelowNormal|N|Normal|A|AboveNormal|H|High|R|Realtime)\b
+      - match: (?i)\b(?<=\bProcess\b\s*,?\s*Priority\s*,\s*[^,]+,\s*)(L|Low|B|BelowNormal|N|Normal|A|AboveNormal|H|High|R|Realtime)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=(SetCapsLockState|SetNumLockState|SetScrollLockState)\s*,?\s*)(On|Off|AlwaysOn|AlwaysOff)\b
+      - match: (?i)\b(?<=\b(SetCapsLockState|SetNumLockState|SetScrollLockState)\b\s*,?\s*)(On|Off|AlwaysOn|AlwaysOff)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=SetFormat\s*,?\s*)(Integer|Float|IntegerFast|FloatFast)\b
+      - match: (?i)\b(?<=\bSetFormat\b\s*,?\s*)(Integer|Float|IntegerFast|FloatFast)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=SetFormat\s*,?\s*(Integer|IntegerFast)\s*,\s*)(D|H|HEX)\b
+      - match: (?i)\b(?<=\bSetFormat\b\s*,?\s*(Integer|IntegerFast)\s*,\s*)(D|H|HEX)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=Transform\s*,?[^,]+,\s*)(Unicode|Deref|HTML|Asc|Chr|Mod|Exp|Sqrt|Log|Ln|Round|Ceil|Floor|Abs|Sin|Cos|Tan|ASin|ACos|ATan|Pow|BitNot|BitAnd|BitOr|BitXOr|BitShiftLeft|BitShiftRight)\b
+      - match: (?i)\b(?<=\bTransform\b\s*,?[^,]+,\s*)(Unicode|Deref|HTML|Asc|Chr|Mod|Exp|Sqrt|Log|Ln|Round|Ceil|Floor|Abs|Sin|Cos|Tan|ASin|ACos|ATan|Pow|BitNot|BitAnd|BitOr|BitXOr|BitShiftLeft|BitShiftRight)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=WinGet\s*,?[^,]+,\s*)(ID|IDLast|PID|ProcessName|ProcessPath|Count|List|MinMax|ControlList|ControlListHwnd|Transparent|TransColor|Style|ExStyle)\b
+      - match: (?i)\b(?<=\bWinGet\b\s*,?[^,]+,\s*)(ID|IDLast|PID|ProcessName|ProcessPath|Count|List|MinMax|ControlList|ControlListHwnd|Transparent|TransColor|Style|ExStyle)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=WinSet\s*,?\s*)(AlwaysOnTop|Bottom|Top|Disable|Enable|Redraw|Style|ExStyle|Region|Transparent|TransColor)\b
+      - match: (?i)\b(?<=\bWinSet\b\s*,?\s*)(AlwaysOnTop|Bottom|Top|Disable|Enable|Redraw|Style|ExStyle|Region|Transparent|TransColor)\b
         name: keyword.other.ahk
       - match: >-
           \b(?!MsgBox)(?<!\.)(?i:if|else|switch|case|return|loop|break|for|while|class|extends|catch|finally|throw|try|until|continue|critical|exit|exitapp)\b
