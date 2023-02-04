@@ -117,7 +117,7 @@ repository:
         name: keyword.keys.ahk
         example: LButton
       - match: >-
-          \b(?!MsgBox)(?<!\.)(?i:rgb|ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|topmost|setlabel|static|global|local|byref|seconds|minutes|hours|days|logoff|error|single|GuiEscape|GuiClose|GuiSize|GuiContextMenu|GuiDropFiles|buttons|expand|first|imagelist|lines|vis|visfirst|notab|move|focus|pos|enabled|visible|blind|raw|on|all|base)(?!\[|\(|\.)\b
+          \b(?!MsgBox)(?<!\.)(?i:ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|static|global|local|byref|error|single|GuiEscape|GuiClose|GuiSize|GuiContextMenu|GuiDropFiles|buttons|lines|blind|raw|all|base)(?!\[|\(|\.)\b
         name: keyword.other.ahk
         example: text
       # - match: (?i)\b(?<=\b1stField\b\s*,?\s*)()\b
@@ -125,7 +125,7 @@ repository:
       # - match: (?i)\b(?<=\b3rdField\b\s*,?[^,]+,\s*[^,]+,\s*)()\b
       # - match: (?i)\b(?<=\bCOMMAND\b\s*,?\s*WORD\s*,\s*)()\b
       # TODO
-      # GuiControl Progress SplashImage
+      # GuiControl GuiControlGet ImageSearch PixelGetColor PixelSearch ListLines
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bControl\b\s*,?\s*)(Check|Uncheck|Enable|Disable|Show|Hide|Style|ExStyle|ShowDropDown|HideDropDown|TabLeft|TabRight|Add|Delete|Choose|ChooseString|EditPaste)\b
@@ -139,6 +139,10 @@ repository:
       - match: (?i)\b(?<=\bDriveGet\b\s*,?[^,]+,\s*)(List|Capacity|FS|FileSystem|Label|Serial|Type|Status|StatusCD)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bDriveGet\b\s*,?\s*List\s*,\s*)(CDROM|REMOVABLE|FIXED|NETWORK|RAMDISK|UNKNOWN)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\b(EnvAdd|EnvSub)\b\s*,?[^,]+,\s*[^,]+,\s*)(Seconds|Minutes|Hours|Days|S|M|H|D)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=(+|-)=)\s*[^,]+,\s*)(Seconds|Minutes|Hours|Days|S|M|H|D)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bFormatTime\b\s*,?[^,]+,\s*[^,]*,\s*)(Time|ShortDate|LongDate|YearMonth|YDay|YDay0|WDay|YWeek)\b
         name: keyword.other.ahk
@@ -221,11 +225,19 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bProcess\b\s*,?\s*Priority\s*,\s*[^,]+,\s*)(L|Low|B|BelowNormal|N|Normal|A|AboveNormal|H|High|R|Realtime)\b
         name: keyword.other.ahk
+      - match: (?i)\b(?<=\b(Progress|SplashImage)\b\s*,?\s*)(Off|Show)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bProgress\b\s*,?[^,]*)(A|(B|M)(1|2)?|T|Hide|(CB|CT|CW)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bSplashImage\b\s*,?[^,]+,[^,]*)(A|(B|M)(1|2)?|T|Hide|(CB|CT|CW)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
+        name: keyword.other.ahk
       - match: (?i)\b(?<=\b(SetCapsLockState|SetNumLockState|SetScrollLockState)\b\s*,?\s*)(On|Off|AlwaysOn|AlwaysOff)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSetFormat\b\s*,?\s*)(Integer|Float|IntegerFast|FloatFast)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSetFormat\b\s*,?\s*(Integer|IntegerFast)\s*,\s*)(D|H|HEX)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bSetTimer\b\s*,?[^,]*,\s*)(On|Off|Delete)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bThread\b\s*,?\s*)(NoTimers|Priority|Interrupt)\b
         name: keyword.other.ahk

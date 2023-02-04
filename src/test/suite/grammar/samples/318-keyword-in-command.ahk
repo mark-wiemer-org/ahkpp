@@ -5,6 +5,8 @@ Control, Show
 CoordMode, ToolTip, Screen ;BUG ToolTip keyword
 Drive, Unlock, C:
 DriveGet, OutputVar, List, FIXED
+EnvAdd, Var, 5, Days
+Var += 5, Days
 FormatTime, TimeString, T12, Time
 FormatTime, TimeString,, LongDate
 Gui, Show, Center NoActivate, Title
@@ -50,8 +52,13 @@ Loop, Reg, HKEY_CURRENT_USER\Software, KVR
 Menu, MyMenu, Add
 Menu, Tray, Add
 Process, Priority, notepad.exe, BelowNormal
+Progress, Show
+SplashImage, Show
+Progress, CWRed CTRed
+SplashImage, Image.png, CWRed CTRed
 SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
+SetTimer, Label, Delete
 Thread, NoTimers
 Transform, OutputVar, Unicode
 WinGet, active_id, ID, A
