@@ -41,9 +41,13 @@ Gui, Add, Tab3, Buttons, General|Settings
 Gui, Add, ListView, -LV0x10 AltSubmit cRed
 Gui, Add, TreeView, -ReadOnly cRed
 GuiControl, +AltSubmit -g, MyListBox
+GuiControl, GuiName: +AltSubmit -g, MyListBox
+GuiControl, %GuiName%: +AltSubmit -g, MyListBox
 GuiControl, Font, MyEdit
 GuiControl, GuiName:Font, MyEdit
 GuiControl, %GuiName%:Font, MyEdit
+GuiControlGet, MyEdit, GuiName:Pos
+GuiControlGet, MyEdit, %GuiName%:Pos
 If var between 1 and 5
 If var not between 1 and 5
 If var contains 1,3

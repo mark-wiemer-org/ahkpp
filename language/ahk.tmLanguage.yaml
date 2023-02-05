@@ -120,12 +120,19 @@ repository:
           \b(?!MsgBox)(?<!\.)(?i:ahk_id|ahk_exe|ahk_pid|ahk_class|ahk_group|not|or|and|static|global|local|byref|error|single|GuiEscape|GuiClose|GuiSize|GuiContextMenu|GuiDropFiles|buttons|lines|blind|raw|all|base)(?!\[|\(|\.)\b
         name: keyword.other.ahk
         example: text
-      # - match: (?i)\b(?<=\b1stField\b\s*,?\s*)()\b
-      # - match: (?i)\b(?<=\b2ndField\b\s*,?[^,]+,\s*)()\b
-      # - match: (?i)\b(?<=\b3rdField\b\s*,?[^,]+,\s*[^,]+,\s*)()\b
-      # - match: (?i)\b(?<=\bCOMMAND\b\s*,?\s*WORD\s*,\s*)()\b
-      # TODO
-      # GuiControlGet ImageSearch PixelGetColor PixelSearch
+        # TEMPLATE
+        # General Command
+        # - match: (?i)\b(?<=\bCOMMAND\b\s*,?\s*)(1stPARAM)\b
+        # - match: (?i)\b(?<=\bCOMMAND\b\s*,?[^,]+,\s*)(2ndPARAM)\b
+        # - match: (?i)\b(?<=\bCOMMAND\b\s*,?[^,]+,\s*[^,]+,\s*)(3rdPARAM)\b
+        # Command with specific first parameter 1stPARAM
+        # - match: (?i)\b(?<=\bCOMMAND\b\s*,?\s*1stPARAM\s*,\s*)(2ndPARAM)\b
+        # GUI-like commands with window name "GuiName:" or "%GuiName%:"
+        # - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?)(1stPARAM)\b
+        # GUI-like commands with multiply options in single parameter
+        # - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?SUB_COMMAND\s*,)?[^,]*)(MULTIPLE_OPTIONS_IN_SECOND_PARAM)\b
+        # TODO
+      # ImageSearch PixelGetColor PixelSearch
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bControl\b\s*,?\s*)(Check|Uncheck|Enable|Disable|Show|Hide|Style|ExStyle|ShowDropDown|HideDropDown|TabLeft|TabRight|Add|Delete|Choose|ChooseString|EditPaste)\b
@@ -214,6 +221,8 @@ repository:
         name: keyword.other.ahk
         # GuiControl - Controls' Specific Options
       - match: (?i)\b(?<=\bGuiControl\b\s*,?\s*[^,]*(\+|-))(Limit|Lowercase|Multi|Number|Password|ReadOnly|Uppercase|WantCtrlA|WantReturn|WantTab|Wrap|Horz|Left|Range|Wrap|16|0x80|Icon|Default|Check3|Checked|CheckedGray|Group|Checked|Choose|Uppercase|Lowercase|Sort|Limit|Simple|Choose|Multi|ReadOnly|Sort|0x100|LongDate|Time|Choose|ChooseNone|Range|Right|Multi|Range|Colors|4|8|16|Buddy1|Buddy2|Center|Invert|Left|Line|NoTicks|Page|Range|Thick|TickInterval|ToolTip|Vertical|Background|Range|Smooth|Vertical|Choose|Background|Buttons|Left|Right|Bottom|Wrap|AltSubmit|Background|Checked|Count|Grid|Hdr|LV|LV0x10|LV0x20|Multi|NoSortHdr|NoSort|ReadOnly|Sort|SortDesc|WantF2|Icon|Tile|IconSmall|List|Report|AltSubmit|Background|Buttons|Checked|HScroll|ImageList|Lines|ReadOnly|WantF2)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGuiControlGet\b\s*,?[^,]+,\s*((\w+|%\w+%):\s*)?)(Pos|Focus|FocusV|Enabled|Visible|Hwnd|Name)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bIf\s+(\w+|%\w+%)\s+)(is\s+(not\s+)?(Integer|Float|Number|Digit|Xdigit|Alpha|Upper|Lower|Alnum|Space|Time|Date))\b
         name: keyword.other.ahk
