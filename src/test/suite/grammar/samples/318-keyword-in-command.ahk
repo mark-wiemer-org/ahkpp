@@ -7,6 +7,8 @@ Drive, Unlock, C:
 DriveGet, OutputVar, List, FIXED
 EnvAdd, Var, 5, Days
 Var += 5, Days
+For Key in Expression
+For Key, Value in Expression
 FormatTime, TimeString, T12, Time
 FormatTime, TimeString,, LongDate
 Gui, Show, Center NoActivate, Title
@@ -47,6 +49,7 @@ If var not in exe,bat
 If var is Time
 If var is not Time
 IfMsgBox, Timeout
+ListLines, On
 Loop, Files, *.jpg
 Loop, Reg, HKEY_CURRENT_USER\Software, KVR
 Menu, MyMenu, Add
@@ -55,9 +58,13 @@ Process, Priority, notepad.exe, BelowNormal
 Progress, Show
 SplashImage, Show
 Progress, CWRed CTRed
+RegDelete, HKEY_LOCAL_MACHINE\Software\SomeApplication, AHK_DEFAULT
+RegRead, OutputVar, HKEY_LOCAL_MACHINE\Software\SomeApplication, TestValue
+RegWrite, REG_SZ, HKEY_LOCAL_MACHINE\SOFTWARE\TestKey, MyValueName, TestValue
 SplashImage, Image.png, CWRed CTRed
 SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
+SetRegView, 32
 SetTimer, Label, Delete
 Thread, NoTimers
 Transform, OutputVar, Unicode
