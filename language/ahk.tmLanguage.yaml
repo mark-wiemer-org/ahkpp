@@ -179,7 +179,7 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(Picture|Pic)\s*,[^,]*)(Icon)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*Button\s*,[^,]*)Default\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*Button\s*,[^,]*)(Default)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*CheckBox\s*,[^,]*)(Check3|Checked|CheckedGray)\b
         name: keyword.other.ahk
@@ -191,7 +191,7 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*ListBox\s*,[^,]*)(Choose|Multi|ReadOnly|Sort|0x100)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*DateTime\s*,[^,]*)(LongDate|Time|Choose|ChooseNone|Range|Right|)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*DateTime\s*,[^,]*)(LongDate|Time|Choose|ChooseNone|Range|Right)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*MonthCal\s*,[^,]*)(Multi|Range|Colors|4|8|16)\b
         name: keyword.other.ahk
