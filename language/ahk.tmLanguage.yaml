@@ -174,7 +174,7 @@ repository:
       - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?New\s*,)?[^,]*)(AlwaysOnTop|Border|Caption|Delimiter|Disabled|DPIScale|Hwnd|Label|LastFound|LastFoundExist|MaximizeBox|MinimizeBox|MinSize|MaxSize|OwnDialogs|Owner|Parent|Resize|SysMenu|Theme|ToolWindow)\b
         name: keyword.other.ahk
         # GUI ADD - Positioning and Sizing of Controls
-      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(\w+|%\w+%)\s*,[^,]*)(wp|hp|x|y|xp|yp|xm|ym|xs|ys)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(\w+|%\w+%)\s*,[^,]*)(wp|hp|xp|yp|xm|ym|xs|ys)\b
         name: keyword.other.ahk
         # GUI ADD - Controls' Common Styles and Other Options
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(\w+|%\w+%)\s*,[^,]*)(AltSubmit|Choose|Disabled|Hidden|Left|Right|Center|Section|Tabstop|Wrap|VScroll|HScroll|Controls|BackgroundTrans|Background|Border|HwndOutputVar|Theme|c(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
