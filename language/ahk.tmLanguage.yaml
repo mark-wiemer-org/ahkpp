@@ -125,7 +125,7 @@ repository:
       # - match: (?i)\b(?<=\b3rdField\b\s*,?[^,]+,\s*[^,]+,\s*)()\b
       # - match: (?i)\b(?<=\bCOMMAND\b\s*,?\s*WORD\s*,\s*)()\b
       # TODO
-      # GuiControl GuiControlGet ImageSearch PixelGetColor PixelSearch
+      # GuiControlGet ImageSearch PixelGetColor PixelSearch
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bControl\b\s*,?\s*)(Check|Uncheck|Enable|Disable|Show|Hide|Style|ExStyle|ShowDropDown|HideDropDown|TabLeft|TabRight|Add|Delete|Choose|ChooseString|EditPaste)\b
@@ -206,6 +206,14 @@ repository:
         name: keyword.other.ahk
         # GUI ADD TREEVIEW - Options
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*TreeView\s*,[^,]*)(AltSubmit|Background|Buttons|Checked|HScroll|ImageList|Lines|ReadOnly|WantF2|c(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGuiControl\b\s*,?\s*((\w+|%\w+%):\s*)?)(Text|Move|MoveDraw|Focus|Disable|Enable|Hide|Show|Delete|Choose|ChooseString|Font|Options)\b
+        name: keyword.other.ahk
+        # GuiControl - Common Options
+      - match: (?i)\b(?<=\bGuiControl\b\s*,?\s*[^,]*(\+|-))(g|Redraw|AltSubmit|Choose|Disabled|Hidden|Left|Right|Center|Section|Tabstop|Wrap|VScroll|HScroll|Controls|BackgroundTrans|Background|Border|HwndOutputVar|Theme)\b
+        name: keyword.other.ahk
+        # GuiControl - Controls' Specific Options
+      - match: (?i)\b(?<=\bGuiControl\b\s*,?\s*[^,]*(\+|-))(Limit|Lowercase|Multi|Number|Password|ReadOnly|Uppercase|WantCtrlA|WantReturn|WantTab|Wrap|Horz|Left|Range|Wrap|16|0x80|Icon|Default|Check3|Checked|CheckedGray|Group|Checked|Choose|Uppercase|Lowercase|Sort|Limit|Simple|Choose|Multi|ReadOnly|Sort|0x100|LongDate|Time|Choose|ChooseNone|Range|Right|Multi|Range|Colors|4|8|16|Buddy1|Buddy2|Center|Invert|Left|Line|NoTicks|Page|Range|Thick|TickInterval|ToolTip|Vertical|Background|Range|Smooth|Vertical|Choose|Background|Buttons|Left|Right|Bottom|Wrap|AltSubmit|Background|Checked|Count|Grid|Hdr|LV|LV0x10|LV0x20|Multi|NoSortHdr|NoSort|ReadOnly|Sort|SortDesc|WantF2|Icon|Tile|IconSmall|List|Report|AltSubmit|Background|Buttons|Checked|HScroll|ImageList|Lines|ReadOnly|WantF2)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bIf\s+(\w+|%\w+%)\s+)(is\s+(not\s+)?(Integer|Float|Number|Digit|Xdigit|Alpha|Upper|Lower|Alnum|Space|Time|Date))\b
         name: keyword.other.ahk
