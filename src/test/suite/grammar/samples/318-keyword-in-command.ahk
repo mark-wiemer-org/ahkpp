@@ -40,6 +40,7 @@ Gui, Add, Progress, w200 h20 cRed BackgroundGreen, 75 ;BUG Progress keyword
 Gui, Add, Tab3, Buttons, General|Settings
 Gui, Add, ListView, -LV0x10 AltSubmit cRed
 Gui, Add, TreeView, -ReadOnly cRed
+Gui, ListView, ListViewName
 GuiControl, +AltSubmit -g, MyListBox
 GuiControl, GuiName: +AltSubmit -g, MyListBox
 GuiControl, %GuiName%: +AltSubmit -g, MyListBox
