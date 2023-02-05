@@ -132,8 +132,11 @@ repository:
         # GUI-like commands with multiply options in single parameter
         # - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?SUB_COMMAND\s*,)?[^,]*)(MULTIPLE_OPTIONS_IN_SECOND_PARAM)\b
         # TODO
-      # ImageSearch PixelGetColor PixelSearch
+      # ImageSearch PixelGetColor PixelSearch Run/RunWait
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
+        name: keyword.other.ahk
+        # ON/OFF Parameters
+      - match: (?i)\b(?<=\b(DetectHiddenText|DetectHiddenWindows|ListLines)\b\s*,?\s*)(On|Off)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bControl\b\s*,?\s*)(Check|Uncheck|Enable|Disable|Show|Hide|Style|ExStyle|ShowDropDown|HideDropDown|TabLeft|TabRight|Add|Delete|Choose|ChooseString|EditPaste)\b
         name: keyword.other.ahk
@@ -155,9 +158,10 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bFormatTime\b\s*,?[^,]+,\s*[^,]*,\s*)(Time|ShortDate|LongDate|YearMonth|YDay|YDay0|WDay|YWeek)\b
         name: keyword.other.ahk
-        # GUI
+        # GUI Sub-Commands
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?)(New|Add|Show|Submit|Cancel|Hide|Destroy|Font|Color|Margin|Menu|Minimize|Maximize|Restore|Flash|Default|ListView)\b
         name: keyword.other.ahk
+        # GUI Specific Sub-Commands Options
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*)(Text|Edit|UpDown|Picture|Pic|Button|Checkbox|Radio|DropDownList|DDL|ComboBox|ListBox|ListView|TreeView|Link|Hotkey|DateTime|MonthCal|Slider|Progress|GroupBox|Tab|Tab2|Tab3|StatusBar|ActiveX|Custom)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Show\s*,[^,]*)(Center|xCenter|yCenter|AutoSize|Minimize|Maximize|Restore|NoActivate|NA|Hide)\b
@@ -230,8 +234,6 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bIfMsgBox\s*,?\s*)(Yes|No|OK|Cancel|Abort|Ignore|Retry|Continue|TryAgain|Timeout)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bListLines\b\s*,?\s*)(On|Off)\b
-        name: keyword.other.ahk
       - match: (?i)\b(?<=\bLoop\b\s*,?\s*)(Files|Parse|Read|Reg)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bLoop\b\s*,?\s*Reg\s*,\s*)(HKEY_LOCAL_MACHINE|HKEY_USERS|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_CURRENT_CONFIG|HKLM|HKU|HKCU|HKCR|HKCC)\b
@@ -259,6 +261,8 @@ repository:
       - match: (?i)\b(?<=\bRegWrite\b\s*,?\s*)(REG_SZ|REG_EXPAND_SZ|REG_MULTI_SZ|REG_DWORD|REG_BINARY)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bRegWrite\b\s*,?[^,]+,\s*)(HKEY_LOCAL_MACHINE|HKEY_USERS|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_CURRENT_CONFIG|HKLM|HKU|HKCU|HKCR|HKCC)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\b(Run|RunWait)\b\s*,?[^,]+,\s*[^,]*,\s*)(Max|Min|Hide|UseErrorLevel)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSplashImage\b\s*,?[^,]+,[^,]*)(A|(B|M)(1|2)?|T|Hide|(CB|CT|CW)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
         name: keyword.other.ahk

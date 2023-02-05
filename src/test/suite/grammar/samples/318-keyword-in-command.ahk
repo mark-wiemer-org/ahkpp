@@ -1,6 +1,7 @@
 ; [Issue #318](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/318)
 RAlt & j::AltTab
 RAlt & k::ShiftAltTab
+DetectHiddenWindows, On
 Control, Show
 CoordMode, ToolTip, Screen ;BUG ToolTip keyword
 Drive, Unlock, C:
@@ -58,7 +59,6 @@ If var not in exe,bat
 If var is Time
 If var is not Time
 IfMsgBox, Timeout
-ListLines, On
 Loop, Files, *.jpg
 Loop, Reg, HKEY_CURRENT_USER\Software, KVR
 Menu, MyMenu, Add
@@ -70,6 +70,7 @@ Progress, CWRed CTRed
 RegDelete, HKEY_LOCAL_MACHINE\Software\SomeApplication, AHK_DEFAULT
 RegRead, OutputVar, HKEY_LOCAL_MACHINE\Software\SomeApplication, TestValue
 RegWrite, REG_SZ, HKEY_LOCAL_MACHINE\SOFTWARE\TestKey, MyValueName, TestValue
+RunWait, Target,, Min
 SplashImage, Image.png, CWRed CTRed
 SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
