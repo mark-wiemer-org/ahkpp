@@ -133,6 +133,9 @@ export class Parser {
             }
         }
         for (const filePath of this.documentCache.keys()) {
+            if (filePath === document.uri.path) {
+                continue;
+            }
             for (const method of this.documentCache.get(filePath).methods) {
                 if (method.name.toLowerCase() === name) {
                     return method;
@@ -162,6 +165,9 @@ export class Parser {
             }
         }
         for (const filePath of this.documentCache.keys()) {
+            if (filePath === document.uri.path) {
+                continue;
+            }
             for (const label of this.documentCache.get(filePath).labels) {
                 if (label.name.toLowerCase() === name) {
                     return label;
@@ -186,6 +192,9 @@ export class Parser {
             }
         }
         for (const filePath of this.documentCache.keys()) {
+            if (filePath === document.uri.path) {
+                continue;
+            }
             for (const variable of this.documentCache.get(filePath).variables) {
                 if (variable.name.toLowerCase() === name) {
                     return variable;
