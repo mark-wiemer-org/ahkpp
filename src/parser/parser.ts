@@ -170,6 +170,10 @@ export class Parser {
         }
     }
 
+    /**
+     * Returns the first variable whose name matches one in the global document cache.
+     * Searches the provided document before searching all other documents in no particular order.
+     */
     public static async getVariableByName(
         document: vscode.TextDocument,
         name: string,
