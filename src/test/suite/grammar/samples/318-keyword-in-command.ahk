@@ -1,6 +1,9 @@
 ; [Issue #318](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/318)
 RAlt & j::AltTab
 RAlt & k::ShiftAltTab
+AutoTrim, On
+BlockInput, MouseMove
+BlockInput, MouseMoveOff
 DetectHiddenWindows, On
 Control, Show
 CoordMode, ToolTip, Screen ;BUG ToolTip keyword
