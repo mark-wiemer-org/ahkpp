@@ -132,7 +132,6 @@ repository:
         # GUI-like commands with multiply options in single parameter
         # - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?SUB_COMMAND\s*,)?[^,]*)(MULTIPLE_OPTIONS_IN_SECOND_PARAM)\b
         # TODO D:\SERGEY\Install\Others\Keyboard HotKey\AutoHotkey\Tools\CallTipsForAll\ has list of commands with parameters!!! look at them
-      # ImageSearch PixelGetColor PixelSearch Run/RunWait
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
         # ON/OFF Parameters
@@ -243,6 +242,10 @@ repository:
       - match: (?i)\b(?<=\bMenu\b\s*,?\s*)Tray\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bMenu\b\b\s*,?[^,]+,\s*)(Add|Insert|Delete|DeleteAll|Rename|Check|Uncheck|ToggleCheck|Enable|Disable|ToggleEnable|Default|NoDefault|Standard|NoStandard|Icon|NoIcon|Tip|Show|Color|Click|MainWindow|NoMainWindow|UseErrorLevel)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bPixelGetColor\b\s*,?[^,]+,\s*[^,]+,\s*[^,]+,\s*[^,]*)(Alt|Slow|RGB)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bPixelSearch\b\s*,?[^,]+,\s*[^,]+,\s*[^,]+,\s*[^,]+,\s*[^,]+,\s*[^,]+,\s*[^,]+,\s*[^,]+,\s*[^,]*)(Fast|RGB)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bProcess\b\s*,?\s*)(Exist|Close|List|Priority|Wait|WaitClose)\b
         name: keyword.other.ahk
