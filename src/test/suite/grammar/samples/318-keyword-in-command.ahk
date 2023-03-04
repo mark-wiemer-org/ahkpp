@@ -83,6 +83,8 @@ SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
 SetRegView, 32
 SetTimer, Label, Delete
+SoundSet, +20, Master, Bass
+SoundSet, +1,, Mute
 StringCaseSense, Locale
 SysGet, OutputVar, Monitor
 Thread, NoTimers
