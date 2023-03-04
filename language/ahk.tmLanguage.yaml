@@ -153,7 +153,7 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bDriveGet\b\s*,?[^,]+,\s*)(List|Capacity|FS|FileSystem|Label|Serial|Type|Status|StatusCD)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bDriveGet\b\s*,?\s*List\s*,\s*)(CDROM|REMOVABLE|FIXED|NETWORK|RAMDISK|UNKNOWN)\b
+      - match: (?i)\b(?<=\bDriveGet\b\s*,?[^,]+,\s*List\s*,\s*)(CDROM|REMOVABLE|FIXED|NETWORK|RAMDISK|UNKNOWN)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\b(EnvAdd|EnvSub)\b\s*,?[^,]+,[^,]+,\s*)(Seconds|Minutes|Hours|Days|S|M|H|D)\b
         name: keyword.other.ahk
@@ -195,7 +195,7 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*UpDown\s*,[^,]*)(Horz|Left|Range|Wrap|16|0x80)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(Picture|Pic)\s*,[^,]*)(Icon)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*(Picture|Pic)\s*,[^,]*)(Icon\d+)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*Button\s*,[^,]*)(Default)\b
         name: keyword.other.ahk
@@ -209,7 +209,7 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*ListBox\s*,[^,]*)(Choose|Multi|ReadOnly|Sort|0x100)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*DateTime\s*,[^,]*)(LongDate|Time|Choose|ChooseNone|Range|Right)\b
+      - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*DateTime\s*,[^,]*,[^,]*)(LongDate|Time|Choose|ChooseNone|Range|Right)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?Add\s*,\s*MonthCal\s*,[^,]*)(Multi|Range|Colors|4|8|16)\b
         name: keyword.other.ahk

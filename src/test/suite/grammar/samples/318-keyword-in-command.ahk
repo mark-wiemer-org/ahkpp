@@ -2,7 +2,7 @@
 RAlt & j::AltTab
 RAlt & k::ShiftAltTab
 AutoTrim, On
-BlockInput, MouseMove
+BlockInput, MouseMove ;BUG MouseMove keyword
 BlockInput, MouseMoveOff
 DetectHiddenWindows, On
 Control, Show
@@ -40,7 +40,7 @@ Gui, Add, Radio, Checked, Some text
 Gui, Add, DropDownList, Uppercase, Black|White
 Gui, Add, ComboBox, Simple, Red|Green
 Gui, Add, ListBox, ReadOnly, Red|Green
-Gui, Add, DateTime, ChooseNone, LongDate ;???
+Gui, Add, DateTime,, ChooseNone
 Gui, Add, MonthCal, Multi 8
 Gui, Add, Slider, Invert, 50
 Gui, Add, Progress, w200 h20 cRed BackgroundGreen, 75 ;BUG Progress keyword
@@ -62,8 +62,8 @@ If var contains 1,3
 If var not contains 1,3
 If var in exe,bat
 If var not in exe,bat
-If var is Time
-If var is not Time
+If var is Float
+If var is not Float
 IfMsgBox, Timeout
 Loop, Files, *.jpg
 Loop, Reg, HKEY_CURRENT_USER\Software, KVR
@@ -79,7 +79,7 @@ RegDelete, HKEY_LOCAL_MACHINE\Software\SomeApplication, AHK_DEFAULT
 RegRead, OutputVar, HKEY_LOCAL_MACHINE\Software\SomeApplication, TestValue
 RegWrite, REG_SZ, HKEY_LOCAL_MACHINE\SOFTWARE\TestKey, MyValueName, TestValue
 RunWait, Target,, Min
-SendMode, Input
+SendMode, Input ;BUG Input keyword
 SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
 SetMouseDelay, 0, Play
