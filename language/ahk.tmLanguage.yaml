@@ -286,7 +286,9 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSetTimer\b\s*,?[^,]*,\s*)(On|Off|Delete)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bSoundSet\b\s*,?[^,]+,\s*(MASTER|SPEAKERS|DIGITAL|LINE|MICROPHONE|SYNTH|CD|TELEPHONE|PCSPEAKER|WAVE|AUX|ANALOG|HEADPHONES|N/A)?,\s*)(VOLUME|VOL|ONOFF|MUTE|MONO|LOUDNESS|STEREOENH|BASSBOOST|PAN|QSOUNDPAN|BASS|TREBLE|EQUALIZER)\b
+      - match: (?i)\b(?<=\bSoundSet\b\s*,?[^,]+,\s*)(MASTER|SPEAKERS|DIGITAL|LINE|MICROPHONE|SYNTH|CD|TELEPHONE|PCSPEAKER|WAVE|AUX|ANALOG|HEADPHONES|N/A)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bSoundSet\b\s*,?[^,]+,\s*[^,]*,\s*)(VOLUME|VOL|ONOFF|MUTE|MONO|LOUDNESS|STEREOENH|BASSBOOST|PAN|QSOUNDPAN|BASS|TREBLE|EQUALIZER)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSplashImage\b\s*,?[^,]+,[^,]*)(A|(B|M)(1|2)?|T|Hide|(CB|CT|CW)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
         name: keyword.other.ahk
