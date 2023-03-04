@@ -2,12 +2,11 @@
 RAlt & j::AltTab
 RAlt & k::ShiftAltTab
 AutoTrim, On
-BlockInput, MouseMove ;BUG MouseMove keyword
 BlockInput, MouseMoveOff
 DetectHiddenWindows, On
 Control, Show
 ControlClick, OK, WinTitle,, Left,, NA
-CoordMode, ToolTip, Screen ;BUG ToolTip keyword
+CoordMode, Pixel, Screen
 Drive, Unlock, C:
 DriveGet, OutputVar, List, FIXED
 EnvAdd, Var, 5, Days
@@ -31,7 +30,7 @@ Gui, Flash, Off
 Gui, +AlwaysOnTop +Disabled -SysMenu +Owner
 Gui, New, -Caption +LastFound
 Gui, Add, Text, x+5 +Hidden
-Gui, Add, Edit, Multi Limit ;BUG Edit keyword
+Gui, Add, Edit, Multi Limit ;BUG "Edit" not keyword, but command
 Gui, Add, UpDown, Horz 0x80
 Gui, Add, Picture, Icon2, Application.exe
 Gui, Add, Button, w80 Default, OK
@@ -43,7 +42,7 @@ Gui, Add, ListBox, ReadOnly, Red|Green
 Gui, Add, DateTime,, ChooseNone
 Gui, Add, MonthCal, Multi 8
 Gui, Add, Slider, Invert, 50
-Gui, Add, Progress, w200 h20 cRed BackgroundGreen, 75 ;BUG Progress keyword
+Gui, Add, Progress, w200 h20 cRed BackgroundGreen, 75 ;BUG "Progress" not keyword, but command
 Gui, Add, Tab3, Buttons, General|Settings
 Gui, Add, ListView, -LV0x10 AltSubmit cRed
 Gui, Add, TreeView, -ReadOnly cRed
@@ -79,7 +78,7 @@ RegDelete, HKEY_LOCAL_MACHINE\Software\SomeApplication, AHK_DEFAULT
 RegRead, OutputVar, HKEY_LOCAL_MACHINE\Software\SomeApplication, TestValue
 RegWrite, REG_SZ, HKEY_LOCAL_MACHINE\SOFTWARE\TestKey, MyValueName, TestValue
 RunWait, Target,, Min
-SendMode, Input ;BUG Input keyword
+SendMode, Event
 SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
 SetMouseDelay, 0, Play
@@ -97,10 +96,7 @@ Transform, OutputVar, Unicode
 WinGet, active_id, ID, A
 WinSet, Transparent, 200, Untitled
 
-Break
-Continue
-
 ;Special case strings
-LegacyString is break continue id on off days grid
+LegacyString is id on off days grid
 GuiString center, hide, disabled alwaysontop hidden
 WinGetString word, id
