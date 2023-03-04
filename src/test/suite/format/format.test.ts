@@ -1,3 +1,4 @@
+import { getDocument } from '../../utils';
 import * as assert from 'assert';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -92,6 +93,7 @@ const formatTests: FormatTest[] = [
         options: { insertSpaces: false },
     },
     { filenameRoot: 'legacy-text-sharp-directive' },
+    { filenameRoot: 'label-colon' },
     { filenameRoot: 'label-combination' },
     { filenameRoot: 'label-fall-through' },
     { filenameRoot: 'label-specific-name' },
@@ -147,6 +149,7 @@ suite('Internal formatter', () => {
 suite('External formatter', () => {
     // test external formatter a few times to make sure the connection is working
     // advanced tests are for internal formatter only
+    // TODO note these tests only support editor settings, not extension settings
     const externalFormatTests: FormatTest[] = [
         { filenameRoot: '25-multiline-string' },
         {
@@ -167,10 +170,9 @@ suite('External formatter', () => {
             const outFileString = fs
                 .readFileSync(path.join(filesParentPath, outFilename))
                 .toString();
-            const unformattedSampleFile =
-                await vscode.workspace.openTextDocument(
-                    path.join(filesParentPath, inFilename),
-                );
+            const unformattedSampleFile = await getDocument(
+                path.join(filesParentPath, inFilename),
+            );
             const originalText = unformattedSampleFile.getText();
             const textEditor = await vscode.window.showTextDocument(
                 unformattedSampleFile,

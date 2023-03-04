@@ -1,7 +1,7 @@
 {
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
     "categories": [
         "Programming Languages",
@@ -126,6 +126,11 @@
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
                     "description": "Path to the AHK Help document."
                 },
+                "ahk++.file.maximumParseLength": {
+                    "type": "number",
+                    "default": 10000,
+                    "description": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n-1: Unlimited parsing.\n0: No parsing."
+                },
                 "ahk++.file.templateSnippetName": {
                     "type": "string",
                     "default": "AhkTemplate",
@@ -135,7 +140,7 @@
                     "type": "integer",
                     "default": 1,
                     "minimum": -1,
-                    "description": "Allowed number of empty lines.\n-1: ignore empty lines.\n0: no empty lines."
+                    "description": "Allowed number of empty lines.\n-1: Ignore empty lines.\n0: No empty lines."
                 },
                 "ahk++.formatter.indentCodeAfterLabel": {
                     "type": "boolean",
@@ -351,6 +356,7 @@
     "dependencies": {
         "@vscode/debugadapter": "^1.57.0",
         "date-format": "^4.0.14",
+        "get-port": "^5.1.1",
         "portfinder": "^1.0.32",
         "xml2js": "^0.4.23"
     },

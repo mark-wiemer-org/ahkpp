@@ -4,23 +4,23 @@ import { SnippetString } from 'vscode';
 
 export class CompletionProvider implements vscode.CompletionItemProvider {
     private keywordList: string[] = [];
-    private keywordComplectionItems: vscode.CompletionItem[] = [];
+    private keywordCompletionItems: vscode.CompletionItem[] = [];
     constructor() {
-        this.initKeywordComplectionItem();
+        this.initKeywordCompletionItem();
     }
 
     public async provideCompletionItems(
         document: vscode.TextDocument,
         position: vscode.Position,
     ): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
-        const prePostion =
+        const prePosition =
             position.character === 0
                 ? position
                 : new vscode.Position(position.line, position.character - 1);
         const preChart =
             position.character === 0
                 ? null
-                : document.getText(new vscode.Range(prePostion, position));
+                : document.getText(new vscode.Range(prePosition, position));
         if (preChart === '.') {
             return [];
         }
@@ -65,7 +65,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             }
         });
 
-        const script = await Parser.buildScript(document, true);
+        const script = await Parser.buildScript(document, { usingCache: true });
         script.variables.forEach((variable) => {
             const completionItem = new vscode.CompletionItem(
                 variable.name,
@@ -74,7 +74,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             result.push(completionItem);
         });
 
-        return this.keywordComplectionItems.concat(result);
+        return this.keywordCompletionItems.concat(result);
     }
 
     public resolveCompletionItem?(
@@ -83,13 +83,13 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
         return item;
     }
 
-    private initKeywordComplectionItem() {
+    private initKeywordCompletionItem() {
         this.keywordList.forEach((keyword) => {
-            const keywordComplectionItem = new vscode.CompletionItem(
+            const keywordCompletionItem = new vscode.CompletionItem(
                 keyword + ' ',
             );
-            keywordComplectionItem.kind = vscode.CompletionItemKind.Property;
-            this.keywordComplectionItems.push(keywordComplectionItem);
+            keywordCompletionItem.kind = vscode.CompletionItemKind.Property;
+            this.keywordCompletionItems.push(keywordCompletionItem);
         });
     }
 }

@@ -24334,8 +24334,12 @@
 #^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 # ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >#if winactive(thisUniqueWintitle)
-#^^^ source.ahk keyword.control.directives.ahk
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk keyword.control.directives.ahk string.parameter.directives.ahk
+#^^^ source.ahk keyword.control.if.ahk
+#   ^ source.ahk keyword.control.if.ahk
+#    ^^^^^^^^^ source.ahk keyword.control.if.ahk support.function.ahk
+#             ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
+#              ^^^^^^^^^^^^^^^^^^ source.ahk keyword.control.if.ahk variable.def.ahk
+#                                ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
 >^e::
 #^^ source.ahk hotkeyline.ahk entity.name.function.label.ahk
 #  ^^ source.ahk hotkeyline.ahk punctuation.definition.equals.colon
@@ -27808,8 +27812,14 @@
 #^^^^^^ source.ahk keyword.control.ahk
 >
 >#if winactive("renamingWinTitle ahk_class AutoHotkeyGUI")
-#^^^ source.ahk keyword.control.directives.ahk
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk keyword.control.directives.ahk string.parameter.directives.ahk
+#^^^ source.ahk keyword.control.if.ahk
+#   ^ source.ahk keyword.control.if.ahk
+#    ^^^^^^^^^ source.ahk keyword.control.if.ahk support.function.ahk
+#             ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
+#              ^ source.ahk keyword.control.if.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk keyword.control.if.ahk string.quoted.double.ahk
+#                                                       ^ source.ahk keyword.control.if.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
+#                                                        ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
 >
 >$esc::
 #^^^^ source.ahk hotkeyline.ahk entity.name.function.label.ahk
@@ -27896,8 +27906,14 @@
 #^^^^^^ source.ahk keyword.control.ahk
 >
 >#if winactive("create_folder ahk_class AutoHotkeyGUI")
-#^^^ source.ahk keyword.control.directives.ahk
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk keyword.control.directives.ahk string.parameter.directives.ahk
+#^^^ source.ahk keyword.control.if.ahk
+#   ^ source.ahk keyword.control.if.ahk
+#    ^^^^^^^^^ source.ahk keyword.control.if.ahk support.function.ahk
+#             ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
+#              ^ source.ahk keyword.control.if.ahk string.quoted.double.ahk punctuation.definition.string.begin.ahk
+#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk keyword.control.if.ahk string.quoted.double.ahk
+#                                                    ^ source.ahk keyword.control.if.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
+#                                                     ^ source.ahk keyword.control.if.ahk punctuation.bracket.ahk
 >
 >$enter::
 #^^^^^^ source.ahk hotkeyline.ahk entity.name.function.label.ahk
