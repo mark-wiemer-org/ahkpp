@@ -11,6 +11,8 @@ Drive, Unlock, C:
 DriveGet, OutputVar, List, FIXED
 EnvAdd, Var, 5, Days
 Var += 5, Days
+FileEncoding, CP65001
+FileEncoding, UTF-16
 For Key in Expression
 For Key, Value in Expression
 FormatTime, TimeString, T12, Time

@@ -155,6 +155,8 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=(\+|-)=[^,]+,\s*)(Seconds|Minutes|Hours|Days|S|M|H|D)\b
         name: keyword.other.ahk
+      - match: (?i)\b(?<=\bFileEncoding\b\s*,?\s*)(UTF-8|UTF-8-RAW|UTF-16|UTF-16-RAW|CP\d{3,5})\b
+        name: keyword.other.ahk
       - match: (?i)\b(?<=\bFor\s+(\w+|%\w+%)\s*(,\s*(\w+|%\w+%))?\s+)(in)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bFormatTime\b\s*,?[^,]+,\s*[^,]*,\s*)(Time|ShortDate|LongDate|YearMonth|YDay|YDay0|WDay|YWeek)\b
