@@ -132,8 +132,7 @@ repository:
         # GUI-like commands with multiply options in single parameter
         # - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?SUB_COMMAND\s*,)?[^,]*)(MULTIPLE_OPTIONS_IN_SECOND_PARAM)\b
         # TODO D:\SERGEY\Install\Others\Keyboard HotKey\AutoHotkey\Tools\CallTipsForAll\ has list of commands with parameters!!! look at them
-        # ControlClick Menu MouseClick MouseClickDrag MouseMove Progress SplashImage SendMode SetKeyDelay SetMouseDelay SetStoreCapsLockMode
-        # Sort
+        # ControlClick Menu MouseClick MouseClickDrag MouseMove SetKeyDelay SetMouseDelay SetStoreCapsLockMode
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
         # ON/OFF Parameters
@@ -273,7 +272,7 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\b(Run|RunWait)\b\s*,?[^,]+,\s*[^,]*,\s*)(Max|Min|Hide|UseErrorLevel)\b
         name: keyword.other.ahk
-      - match: (?i)\b(?<=\bSplashImage\b\s*,?[^,]+,[^,]*)(A|(B|M)(1|2)?|T|Hide|(CB|CT|CW)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
+      - match: (?i)\b(?<=\bSendMode\b\s*,?\s*)(Event|Input|InputThenPlay|Play)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\b(SetCapsLockState|SetNumLockState|SetScrollLockState)\b\s*,?\s*)(On|Off|AlwaysOn|AlwaysOff)\b
         name: keyword.other.ahk
@@ -286,6 +285,8 @@ repository:
       - match: (?i)\b(?<=\bSetTimer\b\s*,?[^,]*,\s*)(On|Off|Delete)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSoundSet\b\s*,?[^,]+,\s*(MASTER|SPEAKERS|DIGITAL|LINE|MICROPHONE|SYNTH|CD|TELEPHONE|PCSPEAKER|WAVE|AUX|ANALOG|HEADPHONES|N/A)?,\s*)(VOLUME|VOL|ONOFF|MUTE|MONO|LOUDNESS|STEREOENH|BASSBOOST|PAN|QSOUNDPAN|BASS|TREBLE|EQUALIZER)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bSplashImage\b\s*,?[^,]+,[^,]*)(A|(B|M)(1|2)?|T|Hide|(CB|CT|CW)(Default|Black|Silver|Gray|White|Maroon|Red|Purple|Fuchsia|Green|Lime|Olive|Yellow|Navy|Blue|Teal|Aqua))\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bStringCaseSense\b\s*,?\s*)(On|Off|Locale)\b
         name: keyword.other.ahk

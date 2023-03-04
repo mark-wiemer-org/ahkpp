@@ -77,14 +77,15 @@ RegDelete, HKEY_LOCAL_MACHINE\Software\SomeApplication, AHK_DEFAULT
 RegRead, OutputVar, HKEY_LOCAL_MACHINE\Software\SomeApplication, TestValue
 RegWrite, REG_SZ, HKEY_LOCAL_MACHINE\SOFTWARE\TestKey, MyValueName, TestValue
 RunWait, Target,, Min
-SplashImage, Image.png, CWRed CTRed
-SplashImage, Show
+SendMode, Input
 SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
 SetRegView, 32
 SetTimer, Label, Delete
 SoundSet, +20, Master, Bass
 SoundSet, +1,, Mute
+SplashImage, Image.png, CWRed CTRed
+SplashImage, Show
 StringCaseSense, Locale
 SysGet, OutputVar, Monitor
 Thread, NoTimers
