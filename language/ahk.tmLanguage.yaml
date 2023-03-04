@@ -132,7 +132,6 @@ repository:
         # GUI-like commands with multiply options in single parameter
         # - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?SUB_COMMAND\s*,)?[^,]*)(MULTIPLE_OPTIONS_IN_SECOND_PARAM)\b
         # TODO D:\SERGEY\Install\Others\Keyboard HotKey\AutoHotkey\Tools\CallTipsForAll\ has list of commands with parameters!!! look at them
-        # ControlClick SetStoreCapsLockMode
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
         # ON/OFF Parameters
@@ -141,6 +140,10 @@ repository:
       - match: (?i)\b(?<=\bBlockInput\b\s*,?\s*)(On|Off|Send|Mouse|SendAndMouse|Default|MouseMove|MouseMoveOff)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bControl\b\s*,?\s*)(Check|Uncheck|Enable|Disable|Show|Hide|Style|ExStyle|ShowDropDown|HideDropDown|TabLeft|TabRight|Add|Delete|Choose|ChooseString|EditPaste)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bControlClick\b\s*,?[^,]*,\s*[^,]+,\s*[^,]*,\s*)(L|Left|R|Right|M|Middle|X1|XButton1|X2|XButton2|WheelUp|WU|WheelDown|WD|WheelLeft|WL|WheelRight|WR)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bControlClick\b\s*,?[^,]*,\s*[^,]+,\s*[^,]*,\s*[^,]*,\s*[^,]*,[^,]*)(NA|D|U|Pos)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bCoordMode\b\s*,?\s*)(ToolTip|Pixel|Mouse|Caret|Menu)\b
         name: keyword.other.ahk

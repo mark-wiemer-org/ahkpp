@@ -6,6 +6,7 @@ BlockInput, MouseMove
 BlockInput, MouseMoveOff
 DetectHiddenWindows, On
 Control, Show
+ControlClick, OK, WinTitle,, Left,, NA
 CoordMode, ToolTip, Screen ;BUG ToolTip keyword
 Drive, Unlock, C:
 DriveGet, OutputVar, List, FIXED
