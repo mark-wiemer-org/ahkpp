@@ -132,6 +132,8 @@ repository:
         # GUI-like commands with multiply options in single parameter
         # - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?SUB_COMMAND\s*,)?[^,]*)(MULTIPLE_OPTIONS_IN_SECOND_PARAM)\b
         # TODO D:\SERGEY\Install\Others\Keyboard HotKey\AutoHotkey\Tools\CallTipsForAll\ has list of commands with parameters!!! look at them
+        # ControlClick Menu MouseClick MouseClickDrag MouseMove Progress SplashImage SendMode SetKeyDelay SetMouseDelay SetStoreCapsLockMode
+        # Sort SoundSet StringCaseSense SysGet
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
         # ON/OFF Parameters
@@ -282,6 +284,8 @@ repository:
       - match: (?i)\b(?<=\bSetRegView\b\s*,?\s*)(32|64|Default)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSetTimer\b\s*,?[^,]*,\s*)(On|Off|Delete)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bSysGet\b\s*,?[^,]+,\s*)(MonitorCount|MonitorPrimary|Monitor|MonitorWorkArea|MonitorName)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bThread\b\s*,?\s*)(NoTimers|Priority|Interrupt)\b
         name: keyword.other.ahk

@@ -83,6 +83,7 @@ SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
 SetRegView, 32
 SetTimer, Label, Delete
+SysGet, OutputVar, Monitor
 Thread, NoTimers
 Transform, OutputVar, Unicode
 WinGet, active_id, ID, A
