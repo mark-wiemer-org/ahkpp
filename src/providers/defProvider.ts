@@ -43,7 +43,7 @@ export class DefProvider implements vscode.DefinitionProvider {
             );
         }
 
-        // "get hotkey" must be below "get label"!
+        // "get hotkey" must be called after "get label"!
         // If label and hotkey has same names, label can be placed only above
         // hotkey (below hotkey will generate error). AutoHotkey's
         // "Goto duplicateLabelName" command will jump to label!

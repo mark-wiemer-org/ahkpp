@@ -177,17 +177,6 @@ export class Parser {
                 return hotkey;
             }
         }
-        // DO NOT SEARCH IN ALL FILES, SCRIPTS CAN HAVE DUPLICATE HOTKEYS!
-        // for (const filePath of this.documentCache.keys()) {
-        //     for (const hotkey of this.documentCache.get(filePath).hotkeys) {
-        //         const hotkeyName = hotkey.name
-        //             .toLowerCase()
-        //             .replace(/^:.*?:/, '');
-        //         if (hotkeyName === name) {
-        //             return hotkey;
-        //         }
-        //     }
-        // }
     }
 
     public static async getLabelByName(
