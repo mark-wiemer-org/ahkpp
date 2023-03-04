@@ -136,7 +136,7 @@ repository:
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
         # ON/OFF Parameters
-      - match: (?i)\b(?<=\b(AutoTrim|DetectHiddenText|DetectHiddenWindows|ListLines)\b\s*,?\s*)(On|Off)\b
+      - match: (?i)\b(?<=\b(AutoTrim|DetectHiddenText|DetectHiddenWindows|ListLines|SetStoreCapsLockMode)\b\s*,?\s*)(On|Off)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bBlockInput\b\s*,?\s*)(On|Off|Send|Mouse|SendAndMouse|Default|MouseMove|MouseMoveOff)\b
         name: keyword.other.ahk
