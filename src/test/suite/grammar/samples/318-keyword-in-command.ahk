@@ -83,6 +83,7 @@ SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
 SetRegView, 32
 SetTimer, Label, Delete
+StringCaseSense, Locale
 SysGet, OutputVar, Monitor
 Thread, NoTimers
 Transform, OutputVar, Unicode
