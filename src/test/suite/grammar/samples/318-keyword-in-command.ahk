@@ -68,6 +68,7 @@ Loop, Files, *.jpg
 Loop, Reg, HKEY_CURRENT_USER\Software, KVR
 Menu, MyMenu, Add
 Menu, Tray, Add
+MouseClickDrag, Middle
 PixelGetColor, OutputVar, X, Y, Alt RGB
 PixelSearch, Px, Py, 200, 200, 300, 300, 0x9d6346, 3, Fast RGB
 Process, Priority, notepad.exe, BelowNormal
@@ -96,6 +97,7 @@ WinSet, Transparent, 200, Untitled
 Break
 Continue
 
+;Special case strings
 LegacyString is break continue id on off days grid
 GuiString center, hide, disabled alwaysontop hidden
 WinGetString word, id
