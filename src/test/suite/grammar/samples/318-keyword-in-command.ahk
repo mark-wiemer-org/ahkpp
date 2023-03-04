@@ -81,6 +81,8 @@ RunWait, Target,, Min
 SendMode, Input
 SetCapsLockState, AlwaysOff
 SetFormat, IntegerFast, Hex
+SetMouseDelay, 0, Play
+SetKeyDelay, 0, 0, Play
 SetRegView, 32
 SetTimer, Label, Delete
 SoundSet, +20, Master, Bass

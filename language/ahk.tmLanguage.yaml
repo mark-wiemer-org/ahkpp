@@ -132,7 +132,7 @@ repository:
         # GUI-like commands with multiply options in single parameter
         # - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?SUB_COMMAND\s*,)?[^,]*)(MULTIPLE_OPTIONS_IN_SECOND_PARAM)\b
         # TODO D:\SERGEY\Install\Others\Keyboard HotKey\AutoHotkey\Tools\CallTipsForAll\ has list of commands with parameters!!! look at them
-        # ControlClick SetKeyDelay SetMouseDelay SetStoreCapsLockMode
+        # ControlClick SetStoreCapsLockMode
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
         # ON/OFF Parameters
@@ -281,6 +281,10 @@ repository:
       - match: (?i)\b(?<=\bSetFormat\b\s*,?\s*)(Integer|Float|IntegerFast|FloatFast)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSetFormat\b\s*,?\s*(Integer|IntegerFast)\s*,\s*)(D|H|HEX)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bSetMouseDelay\b\s*,?[^,]+,\s*)(Play)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bSetKeyDelay\b\s*,?[^,]+,\s*[^,]+,\s*)(Play)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSetRegView\b\s*,?\s*)(32|64|Default)\b
         name: keyword.other.ahk
