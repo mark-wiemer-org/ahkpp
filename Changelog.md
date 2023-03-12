@@ -9,6 +9,7 @@
 
 Fixes:
 
+-   Fix several syntax highlighting issues([#85](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/85), [#318](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/318))
 -   Fix minor debugger issues introduced in 3.1.0 ([#279](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/279))
 -   Fix debugging a file with a space in its name ([#134](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/134))
 -   Fix formatting for some bad labels (two colons) ([PR #325](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/325))
