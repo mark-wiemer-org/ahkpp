@@ -101,7 +101,7 @@ repository:
           '2':
             name: comment.line.semicolon.directive.ahk
         match: >-
-          #\b(?i:allowsamelinecomments|clipboardtimeout|commentflag|errorstdout|escapechar|hotif|hotkeyinterval|hotkeymodifiertimeout|hotstring|iftimeout|ifwinactive|ifwinexist|ifwinnotactive|ifwinnotexist|inputlevel|installkeybdhook|installmousehook|keyhistory|ltrim|maxhotkeysperinterval|maxmem|maxthreads|maxthreadsbuffer|maxthreadsperhotkey|menumaskkey|noenv|notrayicon|persistent|requires|singleinstance|usehook|warn|winactivateforce)\b(.*?)(\s+;.*)?$
+          #\b(?i:allowsamelinecomments|clipboardtimeout|commentflag|errorstdout|escapechar|hotkeyinterval|hotkeymodifiertimeout|hotstring|iftimeout|ifwinactive|ifwinexist|ifwinnotactive|ifwinnotexist|inputlevel|installkeybdhook|installmousehook|keyhistory|ltrim|maxhotkeysperinterval|maxmem|maxthreads|maxthreadsbuffer|maxthreadsperhotkey|menumaskkey|noenv|notrayicon|persistent|requires|singleinstance|usehook|warn|winactivateforce)\b(.*?)(\s+;.*)?$
         name: keyword.control.directives.ahk
         example: '#persistent'
       - match: >-
