@@ -129,7 +129,7 @@
                 "ahk++.file.maximumParseLength": {
                     "type": "number",
                     "default": 10000,
-                    "description": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n-1: Unlimited parsing.\n0: No parsing."
+                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nRequires restart to take effect."
                 },
                 "ahk++.file.templateSnippetName": {
                     "type": "string",
@@ -140,7 +140,7 @@
                     "type": "integer",
                     "default": 1,
                     "minimum": -1,
-                    "description": "Allowed number of empty lines.\n-1: Ignore empty lines.\n0: No empty lines."
+                    "markdownDescription": "Allowed number of empty lines.\n- -1: Ignore empty lines.\n- 0: No empty lines."
                 },
                 "ahk++.formatter.indentCodeAfterLabel": {
                     "type": "boolean",
