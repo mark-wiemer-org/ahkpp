@@ -1,3 +1,21 @@
+import * as vscode from 'vscode';
+
+/**
+ * Returns VS Code's active editor's selected text.
+ * Empty string if editor is active but nothing is selected.
+ * `undefined` if no editor is active.
+ */
+export const getSelectedText = (
+    editor:
+        | {
+              document: { getText: (selection: vscode.Selection) => string };
+              selection: vscode.Selection;
+          }
+        | undefined,
+): string | undefined => {
+    return editor?.document.getText(editor.selection);
+};
+
 export class CodeUtil {
     /**
      * Trim non-formatted chars out of original line of code

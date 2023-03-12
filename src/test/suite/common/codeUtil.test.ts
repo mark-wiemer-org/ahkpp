@@ -1,5 +1,6 @@
 import * as assert from 'assert';
-import { CodeUtil } from '../../../common/codeUtil';
+import { CodeUtil, getSelectedText } from '../../../common/codeUtil';
+import * as vscode from 'vscode';
 
 suite('Code utils', () => {
     suite('purify', () => {
@@ -64,5 +65,48 @@ suite('Code utils', () => {
                 );
             });
         });
+    });
+
+    suite('getSelectedText', () => {
+        const tests: [
+            name: string,
+            args: Parameters<typeof getSelectedText>,
+            expected: ReturnType<typeof getSelectedText>,
+        ][] = [
+            [
+                'has selection',
+                [
+                    {
+                        document: {
+                            getText(selection) {
+                                return 'hello world';
+                            },
+                        },
+                        selection: new vscode.Selection(1, 2, 3, 4),
+                    },
+                ],
+                'hello world',
+            ],
+            [
+                'empty selection',
+                [
+                    {
+                        document: {
+                            getText(selection) {
+                                return '';
+                            },
+                        },
+                        selection: new vscode.Selection(1, 2, 3, 4),
+                    },
+                ],
+                '',
+            ],
+            ['no editor', [undefined], undefined],
+        ];
+        tests.forEach(([name, args, expected]) =>
+            test(name, () =>
+                assert.strictEqual(getSelectedText(...args), expected),
+            ),
+        );
     });
 });
