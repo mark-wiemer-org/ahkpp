@@ -3,6 +3,17 @@
 <!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
 <!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
 
+## 3.3.0 - 2023-03-11 🪴
+
+-   Add `ahk++.file.maximumParseLength` setting to support unlimited file size ([Issue #117](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/117))
+
+Fixes:
+
+-   Fix several syntax highlighting issues([#85](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/85), [#318](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/318))
+-   Fix minor debugger issues introduced in 3.1.0 ([#279](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/279))
+-   Fix debugging a file with a space in its name ([#134](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/134))
+-   Fix formatting for some bad labels (two colons) ([PR #325](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/325))
+
 ## 3.2.0 - 2023-01-29 ❄️
 
 -   Debug keyboard shortcut is now `Ctrl + Alt + F9` (was `F9`) to avoid conflicts with VS Code default shortcuts.
