@@ -11,6 +11,7 @@ on:
   schedule:
     - cron: '42 9 * * 3' # 09:42 UTC Wednesdays
   workflow_dispatch:
+  merge_group:
 
 jobs:
   analyze:
