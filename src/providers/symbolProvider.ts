@@ -52,6 +52,7 @@ export class SymbolProvider implements vscode.DocumentSymbolProvider {
             );
         }
 
-        return result;
+        // TODO meet the contract, stop casting
+        return result as unknown as vscode.DocumentSymbol[];
     }
 }

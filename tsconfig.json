@@ -9,7 +9,24 @@
         "paths": {
             "@/*": ["./src/*"]
         },
-        "rootDir": "src"
+        "rootDir": "src",
+
+        // Type checking
+        "alwaysStrict": true,
+        // "exactOptionalPropertyTypes": true, // TODO
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
+        // "strict": true // TODO
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true,
+        // "strictNullChecks": true // TODO
+        // "strictPropertyInitialization": true // TODO
+        "useUnknownInCatchVariables": true
     },
     "exclude": ["node_modules"]
 }

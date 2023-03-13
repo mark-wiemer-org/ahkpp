@@ -24,8 +24,10 @@ export interface DbgpResponse {
 }
 
 export interface DbgpProperty {
+    [key: string]: any;
     attr?: {
         name?: string;
+        /** Full path to the property */
         fullname?: string;
         type?: string;
         facet?: string;
