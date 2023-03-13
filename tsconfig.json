@@ -16,8 +16,8 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitOverride": true,
         "noImplicitReturns": true,
-        "noPropertyAccessFromIndexSignature": true
-        // "noUncheckedIndexedAccess": true
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true
         // "strict": true
     },
     "exclude": ["node_modules"]
