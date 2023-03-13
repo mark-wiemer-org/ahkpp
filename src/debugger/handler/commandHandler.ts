@@ -3,7 +3,10 @@ import { DebugServer } from '../debugServer';
 
 export class CommandHandler {
     private transId = 1;
-    private commandCallback = {};
+    private commandCallback: Record<
+        string,
+        ((response: DbgpResponse) => unknown) | null
+    > = {};
 
     public constructor(private readonly debugServer: DebugServer) {}
 

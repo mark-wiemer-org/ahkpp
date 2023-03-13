@@ -152,15 +152,18 @@ export class VariableHandler {
             }
             return `"${primitive}"`;
         } else if (attr.type === 'object') {
-            const childs = Util.toArray(property.property);
+            const children = Util.toArray(property.property);
             if (this.likeArray(property) && attr.classname === 'Object') {
-                return childs.map((p) => {
+                return children.map((p) => {
                     return Util.atob(p.content);
                 });
             } else {
-                return childs.reduce((value, child) => {
-                    value[child.attr.fullname] = Util.atob(child.content);
-                    return value;
+                // TODO refactor to avoid indexing `DbgpProperty`
+                return children.reduce((previous, current) => {
+                    previous[current.attr.fullname] = Util.atob(
+                        current.content,
+                    );
+                    return previous;
                 }, {});
             }
         }

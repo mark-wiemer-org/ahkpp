@@ -15,6 +15,7 @@
         "alwaysStrict": true,
         // "exactOptionalPropertyTypes": true, // TODO
         "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
         "noImplicitOverride": true,
         "noImplicitReturns": true,
         "noPropertyAccessFromIndexSignature": true,
@@ -23,6 +24,7 @@
         "strictBindCallApply": true,
         "strictFunctionTypes": true
         // "strictNullChecks": true // TODO
+        // "strictPropertyInitialization": true // TODO
     },
     "exclude": ["node_modules"]
 }
