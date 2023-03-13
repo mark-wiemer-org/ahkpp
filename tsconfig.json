@@ -18,8 +18,10 @@
         "noImplicitOverride": true,
         "noImplicitReturns": true,
         "noPropertyAccessFromIndexSignature": true,
-        "noUncheckedIndexedAccess": true
+        "noUncheckedIndexedAccess": true,
         // "strict": true // TODO
+        "strictBindCallApply": true
+        // "strictNullChecks": true // TODO
     },
     "exclude": ["node_modules"]
 }
