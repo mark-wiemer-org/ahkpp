@@ -137,6 +137,7 @@ export class VariableHandler {
                 };
             } catch (err) {
                 console.log(err);
+                return undefined;
             }
         });
     }

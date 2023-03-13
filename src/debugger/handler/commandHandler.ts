@@ -13,7 +13,7 @@ export class CommandHandler {
      */
     public sendCommand(command: string, data?: string): Promise<DbgpResponse> {
         if (!this.debugServer) {
-            return;
+            return undefined;
         }
         this.transId++;
         command += ` -i ${this.transId}`;
