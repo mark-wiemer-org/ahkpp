@@ -1,12 +1,4 @@
-import format from 'date-format';
 import * as vscode from 'vscode';
-
-function formatDate(date: Date) {
-    if (!date) {
-        return '';
-    }
-    return format('yyyy-MM-dd hh:mm:ss', date);
-}
 
 /** Logs messages to VS output channel */
 export class Out {
@@ -17,6 +9,11 @@ export class Out {
         this.log(value, false);
     }
 
+    /**
+     * Logs the given value. Traces errors to console before logging.
+     * Prepends all logs with `new Date().toISOString()`.
+     * @param value The value to log
+     */
     public static log(value: any, focus = true) {
         if (value instanceof Error) {
             console.trace(value);
@@ -25,7 +22,6 @@ export class Out {
         if (focus) {
             this.outputChannel.show(focus);
         }
-        const begin = formatDate(new Date());
-        this.outputChannel.appendLine(`${begin} ${value}`);
+        this.outputChannel.appendLine(`${new Date().toISOString()} ${value}`);
     }
 }

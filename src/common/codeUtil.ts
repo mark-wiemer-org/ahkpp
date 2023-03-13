@@ -59,7 +59,7 @@ export class CodeUtil {
         }
 
         const regs = [];
-        let temp: RegExpExecArray;
+        let temp: RegExpExecArray | null;
         while (!!(temp = regex.exec(text))) {
             regs.push(temp);
         }
