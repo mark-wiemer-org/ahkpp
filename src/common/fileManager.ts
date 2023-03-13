@@ -44,7 +44,7 @@ export class FileManager {
         fileName: string,
         content: string,
         model?: FileModel,
-    ): Promise<string> {
+    ): Promise<string> | undefined {
         if (!this.storagePath) {
             vscode.window.showErrorMessage('FileManager is not init!');
         }
