@@ -1,5 +1,6 @@
 import * as assert from 'assert';
-import { CodeUtil } from '../../../common/codeUtil';
+import { CodeUtil, getSelectedText } from '../../../common/codeUtil';
+import * as vscode from 'vscode';
 
 suite('Code utils', () => {
     suite('purify', () => {
