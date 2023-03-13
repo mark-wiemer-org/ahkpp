@@ -9,15 +9,15 @@
         "paths": {
             "@/*": ["./src/*"]
         },
-        "rootDir": "src"
+        "rootDir": "src",
 
         // Type checking
         // "exactOptionalPropertyTypes": true,
-        // "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true
         // "noImplicitOverride": true,
         // "noImplicitReturns": true,
         // "noPropertyAccessFromIndexSignature": true,
-        // "noUncheckedIndexedAccess": true,
+        // "noUncheckedIndexedAccess": true
         // "strict": true
     },
     "exclude": ["node_modules"]
