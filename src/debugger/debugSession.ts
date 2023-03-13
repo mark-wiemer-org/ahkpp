@@ -67,7 +67,7 @@ export class DebugSession extends LoggingDebugSession {
             });
     }
 
-    protected initializeRequest(
+    protected override initializeRequest(
         response: DebugProtocol.InitializeResponse,
         args: DebugProtocol.InitializeRequestArguments,
     ): void {
@@ -89,7 +89,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendEvent(new InitializedEvent());
     }
 
-    protected restartRequest(
+    protected override restartRequest(
         response: DebugProtocol.RestartResponse,
         args: DebugProtocol.RestartArguments,
         request?: DebugProtocol.Request,
@@ -98,7 +98,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected async launchRequest(
+    protected override async launchRequest(
         response: DebugProtocol.LaunchResponse,
         args: LaunchRequestArguments,
     ) {
@@ -106,7 +106,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected disconnectRequest(
+    protected override disconnectRequest(
         response: DebugProtocol.DisconnectResponse,
         args: DebugProtocol.DisconnectArguments,
         request?: DebugProtocol.Request,
@@ -115,7 +115,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected async setBreakPointsRequest(
+    protected override async setBreakPointsRequest(
         response: DebugProtocol.SetBreakpointsResponse,
         args: DebugProtocol.SetBreakpointsArguments,
     ): Promise<void> {
@@ -128,7 +128,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected async stackTraceRequest(
+    protected override async stackTraceRequest(
         response: DebugProtocol.StackTraceResponse,
         args: DebugProtocol.StackTraceArguments,
     ): Promise<void> {
@@ -136,7 +136,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected scopesRequest(
+    protected override scopesRequest(
         response: DebugProtocol.ScopesResponse,
         args: DebugProtocol.ScopesArguments,
     ): void {
@@ -144,7 +144,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected async variablesRequest(
+    protected override async variablesRequest(
         response: DebugProtocol.VariablesResponse,
         args: DebugProtocol.VariablesArguments,
         request?: DebugProtocol.Request,
@@ -155,7 +155,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected async setVariableRequest(
+    protected override async setVariableRequest(
         response: DebugProtocol.SetVariableResponse,
         args: DebugProtocol.SetVariableArguments,
         request?: DebugProtocol.Request,
@@ -171,7 +171,7 @@ export class DebugSession extends LoggingDebugSession {
         }
     }
 
-    protected pauseRequest(
+    protected override pauseRequest(
         response: DebugProtocol.PauseResponse,
         args: DebugProtocol.PauseArguments,
         request?: DebugProtocol.Request,
@@ -180,7 +180,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected continueRequest(
+    protected override continueRequest(
         response: DebugProtocol.ContinueResponse,
         args: DebugProtocol.ContinueArguments,
     ): void {
@@ -188,7 +188,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected nextRequest(
+    protected override nextRequest(
         response: DebugProtocol.NextResponse,
         args: DebugProtocol.NextArguments,
     ): void {
@@ -196,7 +196,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected stepInRequest(
+    protected override stepInRequest(
         response: DebugProtocol.StepInResponse,
         args: DebugProtocol.StepInArguments,
         request?: DebugProtocol.Request,
@@ -205,7 +205,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected stepOutRequest(
+    protected override stepOutRequest(
         response: DebugProtocol.StepOutResponse,
         args: DebugProtocol.StepOutArguments,
         request?: DebugProtocol.Request,
@@ -214,14 +214,16 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected threadsRequest(response: DebugProtocol.ThreadsResponse): void {
+    protected override threadsRequest(
+        response: DebugProtocol.ThreadsResponse,
+    ): void {
         response.body = {
             threads: [new Thread(DebugSession.threadId, 'main thread')],
         };
         this.sendResponse(response);
     }
 
-    protected async completionsRequest(
+    protected override async completionsRequest(
         response: DebugProtocol.CompletionsResponse,
         args: DebugProtocol.CompletionsArguments,
     ): Promise<void> {
@@ -244,7 +246,7 @@ export class DebugSession extends LoggingDebugSession {
         this.sendResponse(response);
     }
 
-    protected async evaluateRequest(
+    protected override async evaluateRequest(
         response: DebugProtocol.EvaluateResponse,
         args: DebugProtocol.EvaluateArguments,
     ): Promise<void> {

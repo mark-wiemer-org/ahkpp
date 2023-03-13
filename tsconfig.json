@@ -13,8 +13,8 @@
 
         // Type checking
         // "exactOptionalPropertyTypes": true,
-        "noFallthroughCasesInSwitch": true
-        // "noImplicitOverride": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true
         // "noImplicitReturns": true,
         // "noPropertyAccessFromIndexSignature": true,
         // "noUncheckedIndexedAccess": true
