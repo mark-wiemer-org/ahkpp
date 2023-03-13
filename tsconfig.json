@@ -20,7 +20,8 @@
         "noPropertyAccessFromIndexSignature": true,
         "noUncheckedIndexedAccess": true,
         // "strict": true // TODO
-        "strictBindCallApply": true
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true
         // "strictNullChecks": true // TODO
     },
     "exclude": ["node_modules"]
