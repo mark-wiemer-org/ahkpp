@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
 
 /**
- * Returns VS Code's active editor's selected text.
- * Empty string if editor is active but nothing is selected.
- * `undefined` if no editor is active.
+ * Returns the editor's selected text.
+ * Empty string if nothing is selected.
+ * `undefined` if no editor is provided.
  */
 export const getSelectedText = (
     editor:
@@ -12,9 +12,7 @@ export const getSelectedText = (
               selection: vscode.Selection;
           }
         | undefined,
-): string | undefined => {
-    return editor?.document.getText(editor.selection);
-};
+): string | undefined => editor?.document.getText(editor.selection);
 
 export class CodeUtil {
     /**
