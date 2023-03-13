@@ -1,5 +1,5 @@
 import { ConfigKey, Global } from '../common/global';
-import { Process } from '../common/processWrapper';
+import { exec } from '../common/processWrapper';
 import { getSelectedText } from '../common/codeUtil';
 import * as vscode from 'vscode';
 
@@ -26,5 +26,5 @@ export const openHelp = (): void => {
     const helpPath = Global.getConfig<string>(ConfigKey.helpPath);
     const text = getSelectedText(vscode.window.activeTextEditor);
     const command = getCommand(helpPath, text);
-    Process.exec(command);
+    exec(command);
 };

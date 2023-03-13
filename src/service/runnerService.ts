@@ -2,7 +2,7 @@ import { resolve as res } from 'path';
 import * as vscode from 'vscode';
 import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
-import { Process } from '../common/processWrapper';
+import { exec } from '../common/processWrapper';
 import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
 import { getSelectedText } from '../common/codeUtil';
 
@@ -66,7 +66,7 @@ export class RunnerService {
         if (!path) {
             path = await this.getPathByActive();
         }
-        Process.exec(`\"${executePath}\" \"${path}\"`, {
+        exec(`\"${executePath}\" \"${path}\"`, {
             cwd: `${res(path, '..')}`,
         });
     }
@@ -108,7 +108,7 @@ export class RunnerService {
         }
 
         if (
-            (await Process.exec(compileCommand, {
+            (await exec(compileCommand, {
                 cwd: `${res(currentPath, '..')}`,
             })) &&
             !showGui
