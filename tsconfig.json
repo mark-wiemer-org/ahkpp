@@ -23,9 +23,10 @@
         "noUncheckedIndexedAccess": true,
         // "strict": true // TODO
         "strictBindCallApply": true,
-        "strictFunctionTypes": true
+        "strictFunctionTypes": true,
         // "strictNullChecks": true // TODO
         // "strictPropertyInitialization": true // TODO
+        "useUnknownInCatchVariables": true
     },
     "exclude": ["node_modules"]
 }

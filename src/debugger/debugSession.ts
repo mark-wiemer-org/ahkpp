@@ -166,7 +166,7 @@ export class DebugSession extends LoggingDebugSession {
         } catch (error) {
             this.sendErrorResponse(response, {
                 id: args.variablesReference,
-                format: error.message,
+                format: (error as { message: string }).message,
             });
         }
     }
