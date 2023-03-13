@@ -10,6 +10,14 @@
             "@/*": ["./src/*"]
         },
         "rootDir": "src"
+
+        // Type checking
+        // "exactOptionalPropertyTypes": true,
+        // "noFallthroughCasesInSwitch": true,
+        // "noImplicitOverride": true,
+        // "noImplicitReturns": true,
+        // "noPropertyAccessFromIndexSignature": true,
+        // "noUncheckedIndexedAccess": true,
         // "strict": true
     },
     "exclude": ["node_modules"]
