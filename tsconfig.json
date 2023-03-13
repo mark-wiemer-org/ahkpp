@@ -12,13 +12,14 @@
         "rootDir": "src",
 
         // Type checking
-        // "exactOptionalPropertyTypes": true,
+        "alwaysStrict": true,
+        // "exactOptionalPropertyTypes": true, // TODO
         "noFallthroughCasesInSwitch": true,
         "noImplicitOverride": true,
         "noImplicitReturns": true,
         "noPropertyAccessFromIndexSignature": true,
         "noUncheckedIndexedAccess": true
-        // "strict": true
+        // "strict": true // TODO
     },
     "exclude": ["node_modules"]
 }
