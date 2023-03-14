@@ -4,12 +4,12 @@ import { getSelectedText } from '../common/codeUtil';
 import * as vscode from 'vscode';
 
 /**
- * @example `getHelpUrl('tutorial') === 'Tutorial.htm'`
+ * @example `getHelpUrl('tutorial') === 'Tutorial'`
  * Returns empty string if no specific URL matches `text`
  */
 export const getHelpUrl = (text: string): string => {
     if (text === 'tutorial') {
-        return 'Tutorial.htm';
+        return 'Tutorial';
     }
     return '';
 };
@@ -23,7 +23,7 @@ export const getCommand = (
     }
     const helpUrl = getHelpUrl(text);
     return `C:/Windows/hh.exe ${helpPath}${
-        helpUrl ? `::/docs/${helpUrl}` : ''
+        helpUrl ? `::/docs/${helpUrl}.htm` : ''
     }`;
 };
 
