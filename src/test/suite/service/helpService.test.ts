@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { getCommand } from '../../../service/helpService';
+import { getCommand, getHelpUrl } from '../../../service/helpService';
 
 suite('helpService', () => {
     suite('getCommand', () => {
@@ -33,6 +33,19 @@ suite('helpService', () => {
         ];
         tests.forEach(([name, args, expected]) =>
             test(name, () => assert.strictEqual(getCommand(...args), expected)),
+        );
+    });
+
+    suite('getHelpUrl', () => {
+        const tests: [
+            name: string,
+            args: Parameters<typeof getHelpUrl>,
+            expected: ReturnType<typeof getHelpUrl>,
+        ][] = [
+            ['existing directive', ['#ErrorStdOut'], 'commands/_ErrorStdOut'],
+        ];
+        tests.forEach(([name, args, expected]) =>
+            test(name, () => assert.strictEqual(getHelpUrl(...args), expected)),
         );
     });
 });

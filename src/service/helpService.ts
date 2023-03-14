@@ -5,9 +5,17 @@ import * as vscode from 'vscode';
 
 /**
  * @example `getHelpUrl('tutorial') === 'Tutorial'`
+ * @example `getHelpUrl('#ErrorStdOut') === 'commands/_ErrorStdOut'`
  * Returns empty string if no specific URL matches `text`
  */
-export const getHelpUrl = (text: string): string => {
+export const getHelpUrl = (text: string | undefined): string => {
+    // If the selection appears to start with a directive, open that directive
+    const directive = text?.match(/^#(\w+)/);
+    if (directive?.length) {
+        // directive[0] is the whole text, directive[1] is the matched group
+        // TODO if directive isn't real this opens error page in help
+        return `commands/_${directive[1]}`;
+    }
     if (text === 'tutorial') {
         return 'Tutorial';
     }
