@@ -3,6 +3,12 @@
 <!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
 <!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
 
+## 4.0.0 - Unreleased
+
+Add context-sensitive help ([#78](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/78)). Opening the help file with any text selected will now attempt to open the relevant page in the AutoHotkey docs based on the selected text. For example, selecting "tutorial" and opening the help file will open the tutorial page.
+
+You can help improve matching by [opening an issue](https://github.com/vscode-autohotkey/ahkpp/issues/new/choose)!
+
 ## 3.3.0 - 2023-03-11 🪴
 
 -   Add `ahk++.file.maximumParseLength` setting to support unlimited file size ([Issue #117](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/117))
