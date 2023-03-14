@@ -22,9 +22,19 @@ export const getCommand = (
     return `C:/Windows/hh.exe ${helpPath}${helpUrl ? `::${helpUrl}` : ''}`;
 };
 
+/**
+ * Opens help file according to the global help path.
+ * Opens context-sensitive help according to global setting.
+ * Behind the scenes, runs `hh.exe` on the `chm` file.
+ */
 export const openHelp = (): void => {
     const helpPath = Global.getConfig<string>(ConfigKey.helpPath);
-    const text = getSelectedText(vscode.window.activeTextEditor);
+    const enableContextSensitiveHelp = Global.getConfig<boolean>(
+        ConfigKey.enableContextSensitiveHelp,
+    );
+    const text = enableContextSensitiveHelp
+        ? getSelectedText(vscode.window.activeTextEditor)
+        : '';
     const command = getCommand(helpPath, text);
     exec(command);
 };

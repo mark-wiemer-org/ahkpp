@@ -116,6 +116,11 @@
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "AHK compiler path."
                 },
+                "ahk++.file.enableContextSensitiveHelp": {
+                    "type": "boolean",
+                    "default": "true",
+                    "markdownDescription": "When opening the AHK Help, open the page specific to the selected text. [Learn more about context-sensitive help](https://github.com/vscode-autohotkey/ahkpp/issues/78)."
+                },
                 "ahk++.file.executePath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",

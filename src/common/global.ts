@@ -30,6 +30,7 @@ export enum ConfigKey {
     compileIcon = 'compile.compileIcon',
     useMpress = 'compile.useMpress',
     compilePath = 'file.compilePath',
+    enableContextSensitiveHelp = 'file.enableContextSensitiveHelp',
     enableIntellisense = 'language.enableIntellisense',
     executePath = 'file.executePath',
     helpPath = 'file.helpPath',
