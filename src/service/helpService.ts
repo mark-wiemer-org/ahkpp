@@ -3,12 +3,15 @@ import { exec } from '../common/processWrapper';
 import { getSelectedText } from '../common/codeUtil';
 import * as vscode from 'vscode';
 
-/** @example `getHelpUrl('tutorial') === '/docs/Tutorial.htm'` */
-export const getHelpUrl = (text: string): string | undefined => {
+/**
+ * @example `getHelpUrl('tutorial') === 'Tutorial.htm'`
+ * Returns empty string if no specific URL matches `text`
+ */
+export const getHelpUrl = (text: string): string => {
     if (text === 'tutorial') {
-        return '/docs/Tutorial.htm';
+        return 'Tutorial.htm';
     }
-    return undefined;
+    return '';
 };
 
 export const getCommand = (
@@ -19,7 +22,9 @@ export const getCommand = (
         return undefined;
     }
     const helpUrl = getHelpUrl(text);
-    return `C:/Windows/hh.exe ${helpPath}${helpUrl ? `::${helpUrl}` : ''}`;
+    return `C:/Windows/hh.exe ${helpPath}${
+        helpUrl ? `::/docs/${helpUrl}` : ''
+    }`;
 };
 
 /**
