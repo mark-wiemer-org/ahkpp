@@ -173,6 +173,8 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bFormatTime\b\s*,?[^,]+,[^,]*,\s*)(Time|ShortDate|LongDate|YearMonth|YDay|YDay0|WDay|YWeek)\b
         name: keyword.other.ahk
+      - match: (?i)\b(?<=\bGetKeyState\b\s*,?[^,]+,[^,]+,\s*)(P|T)\b
+        name: keyword.other.ahk
         # GUI Sub-Commands
       - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?)(New|Add|Show|Submit|Cancel|Hide|Destroy|Font|Color|Margin|Menu|Minimize|Maximize|Restore|Flash|Default|ListView)\b
         name: keyword.other.ahk
@@ -249,7 +251,13 @@ repository:
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bIfMsgBox\s*,?\s*)(Yes|No|OK|Cancel|Abort|Ignore|Retry|Continue|TryAgain|Timeout)\b
         name: keyword.other.ahk
+      - match: (?i)\b(?<=\bInputBox\b\s*,?[^,]+,[^,]+,[^,]+,\s*)(HIDE)\b
+        name: keyword.other.ahk
       - match: (?i)\b(?<=\bLoop\b\s*,?\s*)(Files|Parse|Read|Reg)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bLoop\b\s*,?\s*Files\s*,[^,]+,\s*)(DF?R?|DR?F?|FD?R?|FR?D?|RD?F?|RF?D?)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bLoop\b\s*,?\s*Parse\s*,[^,]+,\s*)(CSV)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bLoop\b\s*,?\s*Reg\s*,\s*)(HKEY_LOCAL_MACHINE|HKEY_USERS|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_CURRENT_CONFIG|HKLM|HKU|HKCU|HKCR|HKCC)\b
         name: keyword.other.ahk
@@ -300,6 +308,8 @@ repository:
       - match: (?i)\b(?<=\bSetRegView\b\s*,?\s*)(32|64|Default)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSetTimer\b\s*,?[^,]*,\s*)(On|Off|Delete)\b
+        name: keyword.other.ahk
+      - match: (?i)\b(?<=\bSetTitleMatchMode\b\s*,?\s*)(RegEx|Fast|Slow)\b
         name: keyword.other.ahk
       - match: (?i)\b(?<=\bSoundSet\b\s*,?[^,]+,\s*)(MASTER|SPEAKERS|DIGITAL|LINE|MICROPHONE|SYNTH|CD|TELEPHONE|PCSPEAKER|WAVE|AUX|ANALOG|HEADPHONES|N/A)\b
         name: keyword.other.ahk

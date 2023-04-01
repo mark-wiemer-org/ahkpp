@@ -143,6 +143,17 @@
 #                       ^ source.ahk punctuation.ahk
 #                        ^ source.ahk
 #                         ^^^^^^^^ source.ahk keyword.other.ahk
+>GetKeyState, OutputVar, WhichKey, P
+#^^^^^^^^^^^ source.ahk support.function.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^^^^^^^^^ source.ahk variable.def.ahk
+#                      ^ source.ahk punctuation.ahk
+#                       ^ source.ahk
+#                        ^^^^^^^^ source.ahk variable.def.ahk
+#                                ^ source.ahk punctuation.ahk
+#                                 ^ source.ahk
+#                                  ^ source.ahk keyword.other.ahk
 >Gui, Show, Center NoActivate, Title
 #^^^ source.ahk support.function.ahk
 #   ^ source.ahk punctuation.ahk
@@ -753,7 +764,21 @@
 #        ^ source.ahk punctuation.ahk
 #         ^ source.ahk
 #          ^^^^^^^ source.ahk keyword.other.ahk
->Loop, Files, *.jpg
+>InputBox, OutputVar, Title, Prompt, HIDE
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^^ source.ahk variable.def.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^^^^^ source.ahk variable.def.ahk
+#                          ^ source.ahk punctuation.ahk
+#                           ^ source.ahk
+#                            ^^^^^^ source.ahk variable.def.ahk
+#                                  ^ source.ahk punctuation.ahk
+#                                   ^ source.ahk
+#                                    ^^^^ source.ahk keyword.other.ahk
+>Loop, Files, *.jpg, DFR
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
 #     ^ source.ahk
@@ -763,6 +788,20 @@
 #             ^ source.ahk keyword.operator.arithmetic.ahk
 #              ^ source.ahk
 #               ^^^ source.ahk variable.def.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^^^ source.ahk keyword.other.ahk
+>Loop, Parse, InputVar, CSV
+#^^^^ source.ahk keyword.control.ahk
+#    ^ source.ahk punctuation.ahk
+#     ^ source.ahk
+#      ^^^^^ source.ahk keyword.other.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^^^^^^^^ source.ahk variable.def.ahk
+#                     ^ source.ahk punctuation.ahk
+#                      ^ source.ahk
+#                       ^^^ source.ahk keyword.other.ahk
 >Loop, Reg, HKEY_CURRENT_USER\Software, KVR
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
@@ -973,6 +1012,11 @@
 #               ^ source.ahk punctuation.ahk
 #                ^ source.ahk
 #                 ^^^^^^ source.ahk keyword.keys.ahk
+>SetTitleMatchMode, Fast
+#^^^^^^^^^^^^^^^^^ source.ahk support.function.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^^^ source.ahk keyword.other.ahk
 >SoundSet, +20, Master, Bass
 #^^^^^^^^ source.ahk support.function.ahk
 #        ^ source.ahk punctuation.ahk
