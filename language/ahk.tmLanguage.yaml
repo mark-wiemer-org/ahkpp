@@ -17,7 +17,7 @@ repository:
       - captures:
           '2':
             name: punctuation.definition.comment.ahk
-        match: (^\s*|\s)(;).*
+        match: (^\s*|\s+)(;).*
         name: comment.line.semicolon.ahk
         example: ;comment
       - begin: ^\s*/\*
