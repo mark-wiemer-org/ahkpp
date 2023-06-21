@@ -20820,7 +20820,7 @@
 #                                         ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                          ^ source.ahk punctuation.ahk
 #                                           ^ source.ahk
-#                                            ^^ source.ahk keyword.other.ahk
+#                                            ^^ source.ahk variable.def.ahk
 >{
 #^ source.ahk punctuation.bracket.ahk
 >stuffByName%whichSide%[A_LoopFileName]:={date:A_LoopFileTimeModified,attri:A_LoopFileAttrib,size:A_LoopFileSize}
@@ -21127,7 +21127,7 @@
 #                                        ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                         ^ source.ahk punctuation.ahk
 #                                          ^ source.ahk
-#                                           ^ source.ahk keyword.other.ahk
+#                                           ^ source.ahk variable.def.ahk
 >{
 #^ source.ahk punctuation.bracket.ahk
 >if (A_LoopFileLongPath!=EcurrentDir%whichSide%) {
@@ -21331,7 +21331,7 @@
 #                                        ^ source.ahk string.quoted.double.ahk punctuation.definition.string.end.ahk
 #                                         ^ source.ahk punctuation.ahk
 #                                          ^ source.ahk
-#                                           ^ source.ahk keyword.other.ahk
+#                                           ^ source.ahk variable.def.ahk
 >{
 #^ source.ahk punctuation.bracket.ahk
 >if (A_LoopFileLongPath!=parent1Dir%whichSide%) {

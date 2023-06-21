@@ -17,7 +17,6 @@ For Key in Expression
 For Key, Value in Expression
 FormatTime, TimeString, T12, Time
 FormatTime, TimeString,, LongDate
-GetKeyState, OutputVar, WhichKey, P
 Gui, Show, Center NoActivate, Title
 Gui, GuiName:Show, Options, Title
 Gui, %GuiName%:Show, Options, Title
@@ -65,9 +64,7 @@ If var not in exe,bat
 If var is Float
 If var is not Float
 IfMsgBox, Timeout
-InputBox, OutputVar, Title, Prompt, HIDE
-Loop, Files, *.jpg, DFR
-Loop, Parse, InputVar, CSV
+Loop, Files, *.jpg
 Loop, Reg, HKEY_CURRENT_USER\Software, KVR
 Menu, MyMenu, Add
 Menu, Tray, Add
@@ -88,7 +85,6 @@ SetMouseDelay, 0, Play
 SetKeyDelay, 0, 0, Play
 SetRegView, 32
 SetTimer, Label, Delete
-SetTitleMatchMode, Fast
 SoundSet, +20, Master, Bass
 SoundSet, +1,, Mute
 SplashImage, Image.png, CWRed CTRed
