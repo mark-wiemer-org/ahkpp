@@ -57,21 +57,20 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
         document: vscode.TextDocument,
         position: vscode.Position,
     ): Promise<vscode.CompletionItem[]> {
-        const prePosition =
-            position.character === 0
-                ? position
-                : new vscode.Position(position.line, position.character - 1);
-        const preChart =
-            position.character === 0
-                ? null
-                : document.getText(new vscode.Range(prePosition, position));
-        if (preChart === '.') {
+        const result: vscode.CompletionItem[] = [];
+
+        // If the cursor is just after a dot, don't suggest anything.
+        // Default suggestions will still apply.
+        const preChar = document.getText(
+            new vscode.Range(position.translate(0, -1), position),
+        );
+        if (preChar === '.') {
             return [];
         }
 
-        const result: vscode.CompletionItem[] = [];
-
-        (await Parser.getAllMethod()).forEach((method) =>
+        // Suggest all methods and the local vars of the current method, if any
+        const methods = await Parser.getAllMethod();
+        methods.forEach((method) =>
             result.push(
                 ...completionItemsForMethod(
                     method,
@@ -81,6 +80,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             ),
         );
 
+        // Suggest all variables in this file
         const script = await Parser.buildScript(document, { usingCache: true });
         script.variables.forEach((variable) =>
             result.push(
