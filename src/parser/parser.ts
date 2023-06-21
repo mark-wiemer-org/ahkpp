@@ -324,7 +324,7 @@ export class Parser {
             return new Method(
                 methodFullName,
                 methodName,
-                document,
+                document.uri.toString(),
                 line,
                 character,
                 true,
@@ -340,7 +340,7 @@ export class Parser {
                 return new Method(
                     methodFullName,
                     methodName,
-                    document,
+                    document.uri.toString(),
                     line,
                     character,
                     false,

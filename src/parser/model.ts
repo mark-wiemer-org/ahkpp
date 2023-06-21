@@ -52,10 +52,11 @@ export class Method {
     constructor(
         public origin: string,
         public name: string,
-        public document: vscode.TextDocument,
+        public uriString: string,
         public line: number,
         public character: number,
         public withQuote: boolean,
+        /** Method header comment */
         public comment: string,
     ) {
         this.buildParams();

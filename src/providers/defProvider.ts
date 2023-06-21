@@ -25,9 +25,8 @@ export class DefProvider implements vscode.DefinitionProvider {
         ) {
             const method = await Parser.getMethodByName(document, word);
             if (method) {
-                const methodDoc = method.document;
                 return new vscode.Location(
-                    methodDoc.uri,
+                    vscode.Uri.parse(method.uriString),
                     new vscode.Position(method.line, method.character),
                 );
             }

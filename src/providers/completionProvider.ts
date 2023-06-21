@@ -6,7 +6,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
     public async provideCompletionItems(
         document: vscode.TextDocument,
         position: vscode.Position,
-    ): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
+    ): Promise<vscode.CompletionItem[]> {
         const prePosition =
             position.character === 0
                 ? position
@@ -20,27 +20,26 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
         }
 
         const result: vscode.CompletionItem[] = [];
+        const uriString = document.uri.toString();
+        const lineNumber = position.line;
 
         (await Parser.getAllMethod()).forEach((method) => {
+            // Always suggest the method itself
             const completionItem = new vscode.CompletionItem(
                 method.params.length === 0 ? method.name : method.full,
                 vscode.CompletionItemKind.Method,
             );
-            if (method.params.length === 0) {
-                completionItem.insertText = method.name + '()';
-            } else {
-                completionItem.insertText = new SnippetString(
-                    method.name + '($1)',
-                );
-            }
+            completionItem.insertText = method.params.length
+                ? new SnippetString(`${method.name} ($1)`)
+                : `${method.name}()`;
             completionItem.detail = method.comment;
             result.push(completionItem);
 
-            // If we're within the method, provide completions for params and variables
+            // If the cursor is in the method, suggest params and variables
             if (
-                method.document === document &&
-                position.line >= method.line &&
-                position.line <= method.endLine
+                method.uriString === uriString &&
+                method.line <= lineNumber &&
+                lineNumber <= method.endLine
             ) {
                 for (const param of method.params) {
                     result.push(
@@ -62,13 +61,14 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
         });
 
         const script = await Parser.buildScript(document, { usingCache: true });
-        script.variables.forEach((variable) => {
-            const completionItem = new vscode.CompletionItem(
-                variable.name,
-                vscode.CompletionItemKind.Variable,
-            );
-            result.push(completionItem);
-        });
+        script.variables.forEach((variable) =>
+            result.push(
+                new vscode.CompletionItem(
+                    variable.name,
+                    vscode.CompletionItemKind.Variable,
+                ),
+            ),
+        );
 
         return result;
     }
