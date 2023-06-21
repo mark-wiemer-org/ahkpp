@@ -1,4 +1,4 @@
-import { ConfigKey, Global } from '../common/global';
+import { ConfigKey, Global } from '@/common/global';
 import * as vscode from 'vscode';
 
 /** Adds template whenever empty AHK files are opened */
