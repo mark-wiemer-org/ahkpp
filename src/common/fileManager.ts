@@ -23,7 +23,7 @@ export class FileManager {
             vscode.window.showErrorMessage('FileManager is not init!');
         }
         if (!fileName) {
-            return undefined;
+            return;
         }
         const recordPath = `${this.storagePath}/${fileName}`;
         this.check(this.storagePath);
@@ -44,12 +44,12 @@ export class FileManager {
         fileName: string,
         content: string,
         model?: FileModel,
-    ): Promise<string> | undefined {
+    ): Promise<string> {
         if (!this.storagePath) {
             vscode.window.showErrorMessage('FileManager is not init!');
         }
         if (!fileName) {
-            return undefined;
+            return;
         }
         return new Promise((resolve, reject) => {
             const recordPath = `${this.storagePath}/${fileName}`;

@@ -47,12 +47,7 @@ suite('Code utils', () => {
 
     // Test against length for now
     suite('matchAll', () => {
-        const tests: {
-            name: string;
-            regex: RegExp;
-            text: string;
-            expected: ReturnType<typeof CodeUtil.matchAll>;
-        }[] = [
+        const tests = [
             {
                 name: 'no match',
                 regex: /hi/g,
@@ -61,13 +56,13 @@ suite('Code utils', () => {
             },
         ];
 
-        tests.forEach(({ name, regex, text, expected }) =>
-            test(name, () =>
+        tests.forEach((myTest) => {
+            test(myTest.name, () => {
                 assert.strictEqual(
-                    CodeUtil.matchAll(regex, text).length,
-                    expected.length,
-                ),
-            ),
-        );
+                    CodeUtil.matchAll(myTest.regex, myTest.text).length,
+                    myTest.expected.length,
+                );
+            });
+        });
     });
 });
