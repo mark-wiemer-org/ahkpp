@@ -33,7 +33,8 @@ export class DebugDispatcher extends EventEmitter {
 
     /** Start executing the given program. */
     public async start(args: LaunchRequestArguments) {
-        let { runtime, dbgpSettings = {} } = args;
+        const runtime = args.runtime ?? Global.getConfig(ConfigKey.executePath);
+        const dbgpSettings = args.dbgpSettings ?? {};
         // names may used by AHK, let's not change them for now
         const { maxChildren, maxData }: LaunchRequestArguments['dbgpSettings'] =
             {
@@ -41,9 +42,6 @@ export class DebugDispatcher extends EventEmitter {
                 maxData: 131072,
                 ...dbgpSettings,
             };
-        if (!runtime) {
-            runtime = Global.getConfig(ConfigKey.executePath);
-        }
 
         this.breakPointHandler = new BreakPointHandler();
         this.stackHandler = new StackHandler();
