@@ -1,14 +1,15 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
 import { SnippetString } from 'vscode';
-import { Method } from '../parser/model';
+import { Method, Variable } from '../parser/model';
 
 /**
  * A completion item for the method itself.
  * Also one for each of its local variables if the line number is within the method.
  */
+// TODO add tests
 export const completionItemsForMethod = (
-    method: Method,
+    method: Method, // TODO simplify type
     uriString: string,
     lineNumber: number,
 ): vscode.CompletionItem[] => {
@@ -25,24 +26,20 @@ export const completionItemsForMethod = (
     completionItem.detail = method.comment;
     result.push(completionItem);
 
-    // If the cursor is in the method, suggest params and variables
+    // If the cursor is in the method, suggest local variables
     if (
         method.uriString === uriString &&
         method.line <= lineNumber &&
         lineNumber <= method.endLine
     ) {
-        for (const param of method.params) {
+        // Local variables are all params and variables declared in the method
+        const localVarNames = method.params.concat(
+            method.variables.map((v) => v.name),
+        );
+        for (const localVar of localVarNames) {
             result.push(
                 new vscode.CompletionItem(
-                    param,
-                    vscode.CompletionItemKind.Variable,
-                ),
-            );
-        }
-        for (const variable of method.variables) {
-            result.push(
-                new vscode.CompletionItem(
-                    variable.name,
+                    localVar,
                     vscode.CompletionItemKind.Variable,
                 ),
             );
@@ -52,13 +49,46 @@ export const completionItemsForMethod = (
     return result;
 };
 
+/**
+ * Suggests all methods and the local vars of the current method, if any.
+ * Suggests all variables in the current file.
+ * @param methods The methods to suggest
+ * @param uriString The URI of the current file
+ * @param lineNumber The line number of the cursor
+ * @param variables The variables to suggest
+ * @returns The completion items
+ */
+// TODO add tests
+export const provideCompletionItemsInner = async (
+    methods: Method[],
+    uriString: string,
+    lineNumber: number,
+    variables: Variable[],
+): Promise<vscode.CompletionItem[]> => {
+    const result: vscode.CompletionItem[] = [];
+
+    methods.forEach((method) =>
+        result.push(...completionItemsForMethod(method, uriString, lineNumber)),
+    );
+
+    variables.forEach((variable) =>
+        result.push(
+            new vscode.CompletionItem(
+                variable.name,
+                vscode.CompletionItemKind.Variable,
+            ),
+        ),
+    );
+
+    return result;
+};
+
 export class CompletionProvider implements vscode.CompletionItemProvider {
+    // TODO add tests
     public async provideCompletionItems(
         document: vscode.TextDocument,
         position: vscode.Position,
     ): Promise<vscode.CompletionItem[]> {
-        const result: vscode.CompletionItem[] = [];
-
         // If the cursor is just after a dot, don't suggest anything.
         // Default suggestions will still apply.
         const preChar = document.getText(
@@ -69,28 +99,14 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
         }
 
         // Suggest all methods and the local vars of the current method, if any
+        // Suggest all variables in the current file
         const methods = await Parser.getAllMethod();
-        methods.forEach((method) =>
-            result.push(
-                ...completionItemsForMethod(
-                    method,
-                    document.uri.toString(),
-                    position.line,
-                ),
-            ),
-        );
-
-        // Suggest all variables in this file
         const script = await Parser.buildScript(document, { usingCache: true });
-        script.variables.forEach((variable) =>
-            result.push(
-                new vscode.CompletionItem(
-                    variable.name,
-                    vscode.CompletionItemKind.Variable,
-                ),
-            ),
+        return provideCompletionItemsInner(
+            methods,
+            document.uri.toString(),
+            position.line,
+            script.variables,
         );
-
-        return result;
     }
 }
