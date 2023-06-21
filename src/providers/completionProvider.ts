@@ -3,13 +3,35 @@ import { Parser } from '../parser/parser';
 import { SnippetString } from 'vscode';
 import { Method, Variable } from '../parser/model';
 
+// https://stackoverflow.com/a/74393523
+type Head<T extends string> = T extends `${infer First}.${string}` ? First : T;
+type Tail<T extends string> = T extends `${string}.${infer Rest}`
+    ? Rest
+    : never;
+type DeepPick<T, K extends string> = T extends object
+    ? {
+          [P in Head<K> & keyof T]: T[P] extends readonly unknown[]
+              ? DeepPick<T[P][number], Tail<Extract<K, `${P}.${string}`>>>[]
+              : DeepPick<T[P], Tail<Extract<K, `${P}.${string}`>>>;
+      }
+    : T;
+
 /**
  * A completion item for the method itself.
  * Also one for each of its local variables if the line number is within the method.
  */
 // TODO add tests
 export const completionItemsForMethod = (
-    method: Method, // TODO simplify type
+    method: Omit<
+        Method,
+        | 'origin'
+        | 'character'
+        | 'withQuote'
+        | 'variables'
+        | 'buildParams'
+        | 'pushVariable'
+    > &
+        DeepPick<Method, 'variables.name'>,
     uriString: string,
     lineNumber: number,
 ): vscode.CompletionItem[] => {
