@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 
+/** Symbols and structures parsed from a file */
 export interface Script {
     methods: Method[];
     refs: Ref[];

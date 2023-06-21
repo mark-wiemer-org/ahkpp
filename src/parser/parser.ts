@@ -45,7 +45,7 @@ export class Parser {
     }
 
     /**
-     * detect method list by document
+     * Parse the document into a Script and add it to the cache
      * @param document
      */
     public static async buildScript(
