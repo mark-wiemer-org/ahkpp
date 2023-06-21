@@ -5,7 +5,7 @@
 
 ## 3.3.2 - 2023-06-21 🪲
 
--   Revert changes in 3.3.1. This release is the same as 3.3.0.
+-   Revert changes in 3.3.1. This release is the same as 3.3.0. Ref [Issue #369](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/369)
 
 ## 3.3.1 (yanked) - 2023-06-20 🌞
 
