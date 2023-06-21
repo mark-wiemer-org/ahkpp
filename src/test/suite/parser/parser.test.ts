@@ -7,7 +7,7 @@ import { Parser } from '../../../parser/parser';
 suite('Parser', () => {
     suite('detectVariableByLine', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: // input test string
             //     rs: // expected result - number of detected variables inside line with command
@@ -40,7 +40,7 @@ suite('Parser', () => {
 
     suite('getRemarkByLine', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: // input test string
             //     rs: // expected result
