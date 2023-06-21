@@ -2,7 +2,7 @@ import { getDocument } from '../../utils';
 import * as assert from 'assert';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { Parser } from '../../../parser/Parser';
+import { Parser } from '../../../parser/parser';
 
 suite('Parser', () => {
     suite('detectVariableByLine', () => {
