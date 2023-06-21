@@ -129,7 +129,7 @@
                 "ahk++.file.maximumParseLength": {
                     "type": "number",
                     "default": 10000,
-                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nRequires restart to take effect."
+                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nChanges take effect on reload."
                 },
                 "ahk++.file.templateSnippetName": {
                     "type": "string",
@@ -165,7 +165,7 @@
                 "ahk++.language.enableIntellisense": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Enable IntelliSense (Preview). Changes take effect after reload."
+                    "description": "Add suggestions for relevant variables in the current file and methods in the workspace. Changes take effect on reload."
                 },
                 "ahk++.menu.showDebugButton": {
                     "type": "boolean",
