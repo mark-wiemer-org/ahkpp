@@ -140,6 +140,7 @@ repository:
         # - match: (?i)\b(?<=\bGui\b\s*,?\s*((\w+|%\w+%):\s*)?)(1stPARAM)\b
         # GUI-like commands with multiply options in single parameter
         # - match: (?i)\b(?<=\bGui\b\s*,?\s*(((\w+|%\w+%):\s*)?SUB_COMMAND\s*,)?[^,]*)(MULTIPLE_OPTIONS_IN_SECOND_PARAM)\b
+        # TODO D:\SERGEY\Install\Others\Keyboard HotKey\AutoHotkey\Tools\CallTipsForAll\ has list of commands with parameters!!! look at them
       - match: (?i)\b(?<=::\s*)(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)\b
         name: keyword.other.ahk
         # ON/OFF Parameters
