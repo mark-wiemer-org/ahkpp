@@ -337,7 +337,7 @@
 #                ^^^^^ source.ahk keyword.other.ahk
 #                     ^ source.ahk
 #                      ^^^^^ source.ahk keyword.other.ahk
-#                           ^ source.ahk comment.line.semicolon.ahk
+#                           ^ source.ahk
 #                            ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Gui, Add, UpDown, Horz 0x80
@@ -524,7 +524,7 @@
 #                                                 ^ source.ahk punctuation.ahk
 #                                                  ^ source.ahk
 #                                                   ^^ source.ahk constant.numeric.ahk
-#                                                     ^ source.ahk comment.line.semicolon.ahk
+#                                                     ^ source.ahk
 #                                                      ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Gui, Add, Tab3, Buttons, General|Settings
