@@ -3,12 +3,6 @@ import { Parser } from '../parser/parser';
 import { SnippetString } from 'vscode';
 
 export class CompletionProvider implements vscode.CompletionItemProvider {
-    private keywordList: string[] = [];
-    private keywordCompletionItems: vscode.CompletionItem[] = [];
-    constructor() {
-        this.initKeywordCompletionItem();
-    }
-
     public async provideCompletionItems(
         document: vscode.TextDocument,
         position: vscode.Position,
@@ -41,6 +35,8 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             }
             completionItem.detail = method.comment;
             result.push(completionItem);
+
+            // If we're within the method, provide completions for params and variables
             if (
                 method.document === document &&
                 position.line >= method.line &&
@@ -74,22 +70,6 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             result.push(completionItem);
         });
 
-        return this.keywordCompletionItems.concat(result);
-    }
-
-    public resolveCompletionItem?(
-        item: vscode.CompletionItem,
-    ): vscode.ProviderResult<vscode.CompletionItem> {
-        return item;
-    }
-
-    private initKeywordCompletionItem() {
-        this.keywordList.forEach((keyword) => {
-            const keywordCompletionItem = new vscode.CompletionItem(
-                keyword + ' ',
-            );
-            keywordCompletionItem.kind = vscode.CompletionItemKind.Property;
-            this.keywordCompletionItems.push(keywordCompletionItem);
-        });
+        return result;
     }
 }
