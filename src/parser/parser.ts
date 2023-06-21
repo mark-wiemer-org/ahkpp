@@ -156,7 +156,6 @@ export class Parser {
                 }
             }
         }
-        return undefined;
     }
 
     public static async getAllMethod(): Promise<Method[]> {
@@ -186,7 +185,6 @@ export class Parser {
                 }
             }
         }
-        return undefined;
     }
 
     public static getAllRefByName(name: string): Ref[] {
@@ -217,7 +215,6 @@ export class Parser {
                 character: text.indexOf(blockMatch[1]),
             };
         }
-        return undefined;
     }
 
     private static getLabelByLine(document: vscode.TextDocument, line: number) {
@@ -232,11 +229,10 @@ export class Parser {
                 labelName.toLowerCase() === 'case' ||
                 labelName.toLowerCase() === 'default'
             ) {
-                return undefined;
+                return;
             }
             return new Label(label[1], document, line, text.indexOf(labelName));
         }
-        return undefined;
     }
 
     private static varDefPattern =
@@ -285,6 +281,8 @@ export class Parser {
             }
             return vars;
         }
+
+        return null;
     }
 
     /**
@@ -304,7 +302,7 @@ export class Parser {
             /\s*(([\u4e00-\u9fa5_a-zA-Z0-9]+)(?<!if|while)\(.*?\))\s*(\{)?\s*/i;
         const methodMatch = text.match(refPattern);
         if (!methodMatch) {
-            return undefined;
+            return;
         }
         const methodName = methodMatch[2];
         const character = origin.indexOf(methodName);
@@ -350,7 +348,6 @@ export class Parser {
                 return new Ref(methodName, document, line, character);
             }
         }
-        return undefined;
     }
 
     /**

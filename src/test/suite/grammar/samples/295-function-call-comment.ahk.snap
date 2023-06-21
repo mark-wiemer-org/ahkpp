@@ -11,7 +11,7 @@
 #^^^ source.ahk entity.name.function.ahk
 #   ^ source.ahk punctuation.bracket.ahk
 #    ^ source.ahk punctuation.bracket.ahk
-#     ^ source.ahk comment.line.semicolon.ahk
+#     ^ source.ahk
 #      ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #       ^^^^^^^ source.ahk comment.line.semicolon.ahk
 >

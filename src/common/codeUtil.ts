@@ -1,19 +1,3 @@
-import * as vscode from 'vscode';
-
-/**
- * Returns the editor's selected text.
- * Empty string if nothing is selected.
- * `undefined` if no editor is provided.
- */
-export const getSelectedText = (
-    editor:
-        | {
-              document: { getText: (selection: vscode.Selection) => string };
-              selection: vscode.Selection;
-          }
-        | undefined,
-): string | undefined => editor?.document.getText(editor.selection);
-
 export class CodeUtil {
     /**
      * Trim non-formatted chars out of original line of code
@@ -57,7 +41,7 @@ export class CodeUtil {
         }
 
         const regs = [];
-        let temp: RegExpExecArray | null;
+        let temp: RegExpExecArray;
         while (!!(temp = regex.exec(text))) {
             regs.push(temp);
         }

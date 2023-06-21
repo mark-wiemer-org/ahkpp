@@ -65,17 +65,16 @@ export class AhkHoverProvider implements HoverProvider {
             snippetKey += '()';
         }
         const snippet = this.snippetCache.get(snippetKey);
-        if (!snippet) {
-            return undefined;
+        if (snippet) {
+            const content = new MarkdownString('', true).appendCodeblock(
+                snippet.body,
+                'ahk',
+            );
+            if (snippet.description) {
+                content.appendText(snippet.description);
+            }
+            return new Hover(content);
         }
-        const content = new MarkdownString('', true).appendCodeblock(
-            snippet.body,
-            'ahk',
-        );
-        if (snippet.description) {
-            content.appendText(snippet.description);
-        }
-        return new Hover(content);
     }
 
     private buildContext(document: TextDocument, position: Position): Context {

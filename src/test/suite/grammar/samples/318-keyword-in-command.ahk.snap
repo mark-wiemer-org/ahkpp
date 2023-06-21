@@ -143,17 +143,6 @@
 #                       ^ source.ahk punctuation.ahk
 #                        ^ source.ahk
 #                         ^^^^^^^^ source.ahk keyword.other.ahk
->GetKeyState, OutputVar, WhichKey, P
-#^^^^^^^^^^^ source.ahk support.function.ahk
-#           ^ source.ahk punctuation.ahk
-#            ^ source.ahk
-#             ^^^^^^^^^ source.ahk variable.def.ahk
-#                      ^ source.ahk punctuation.ahk
-#                       ^ source.ahk
-#                        ^^^^^^^^ source.ahk variable.def.ahk
-#                                ^ source.ahk punctuation.ahk
-#                                 ^ source.ahk
-#                                  ^ source.ahk keyword.other.ahk
 >Gui, Show, Center NoActivate, Title
 #^^^ source.ahk support.function.ahk
 #   ^ source.ahk punctuation.ahk
@@ -337,7 +326,7 @@
 #                ^^^^^ source.ahk keyword.other.ahk
 #                     ^ source.ahk
 #                      ^^^^^ source.ahk keyword.other.ahk
-#                           ^ source.ahk comment.line.semicolon.ahk
+#                           ^ source.ahk
 #                            ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Gui, Add, UpDown, Horz 0x80
@@ -524,7 +513,7 @@
 #                                                 ^ source.ahk punctuation.ahk
 #                                                  ^ source.ahk
 #                                                   ^^ source.ahk constant.numeric.ahk
-#                                                     ^ source.ahk comment.line.semicolon.ahk
+#                                                     ^ source.ahk
 #                                                      ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 #                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >Gui, Add, Tab3, Buttons, General|Settings
@@ -764,21 +753,7 @@
 #        ^ source.ahk punctuation.ahk
 #         ^ source.ahk
 #          ^^^^^^^ source.ahk keyword.other.ahk
->InputBox, OutputVar, Title, Prompt, HIDE
-#^^^^^^^^ source.ahk support.function.ahk
-#        ^ source.ahk punctuation.ahk
-#         ^ source.ahk
-#          ^^^^^^^^^ source.ahk variable.def.ahk
-#                   ^ source.ahk punctuation.ahk
-#                    ^ source.ahk
-#                     ^^^^^ source.ahk variable.def.ahk
-#                          ^ source.ahk punctuation.ahk
-#                           ^ source.ahk
-#                            ^^^^^^ source.ahk variable.def.ahk
-#                                  ^ source.ahk punctuation.ahk
-#                                   ^ source.ahk
-#                                    ^^^^ source.ahk keyword.other.ahk
->Loop, Files, *.jpg, DFR
+>Loop, Files, *.jpg
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
 #     ^ source.ahk
@@ -788,20 +763,6 @@
 #             ^ source.ahk keyword.operator.arithmetic.ahk
 #              ^ source.ahk
 #               ^^^ source.ahk variable.def.ahk
-#                  ^ source.ahk punctuation.ahk
-#                   ^ source.ahk
-#                    ^^^ source.ahk keyword.other.ahk
->Loop, Parse, InputVar, CSV
-#^^^^ source.ahk keyword.control.ahk
-#    ^ source.ahk punctuation.ahk
-#     ^ source.ahk
-#      ^^^^^ source.ahk keyword.other.ahk
-#           ^ source.ahk punctuation.ahk
-#            ^ source.ahk
-#             ^^^^^^^^ source.ahk variable.def.ahk
-#                     ^ source.ahk punctuation.ahk
-#                      ^ source.ahk
-#                       ^^^ source.ahk keyword.other.ahk
 >Loop, Reg, HKEY_CURRENT_USER\Software, KVR
 #^^^^ source.ahk keyword.control.ahk
 #    ^ source.ahk punctuation.ahk
@@ -1012,11 +973,6 @@
 #               ^ source.ahk punctuation.ahk
 #                ^ source.ahk
 #                 ^^^^^^ source.ahk keyword.keys.ahk
->SetTitleMatchMode, Fast
-#^^^^^^^^^^^^^^^^^ source.ahk support.function.ahk
-#                 ^ source.ahk punctuation.ahk
-#                  ^ source.ahk
-#                   ^^^^ source.ahk keyword.other.ahk
 >SoundSet, +20, Master, Bass
 #^^^^^^^^ source.ahk support.function.ahk
 #        ^ source.ahk punctuation.ahk

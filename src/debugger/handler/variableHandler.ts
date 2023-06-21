@@ -137,7 +137,6 @@ export class VariableHandler {
                 };
             } catch (err) {
                 console.log(err);
-                return undefined;
             }
         });
     }
@@ -152,18 +151,15 @@ export class VariableHandler {
             }
             return `"${primitive}"`;
         } else if (attr.type === 'object') {
-            const children = Util.toArray(property.property);
+            const childs = Util.toArray(property.property);
             if (this.likeArray(property) && attr.classname === 'Object') {
-                return children.map((p) => {
+                return childs.map((p) => {
                     return Util.atob(p.content);
                 });
             } else {
-                // TODO refactor to avoid indexing `DbgpProperty`
-                return children.reduce((previous, current) => {
-                    previous[current.attr.fullname] = Util.atob(
-                        current.content,
-                    );
-                    return previous;
+                return childs.reduce((value, child) => {
+                    value[child.attr.fullname] = Util.atob(child.content);
+                    return value;
                 }, {});
             }
         }

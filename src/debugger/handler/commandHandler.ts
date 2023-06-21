@@ -3,10 +3,7 @@ import { DebugServer } from '../debugServer';
 
 export class CommandHandler {
     private transId = 1;
-    private commandCallback: Record<
-        string,
-        ((response: DbgpResponse) => unknown) | null
-    > = {};
+    private commandCallback = {};
 
     public constructor(private readonly debugServer: DebugServer) {}
 
@@ -16,7 +13,7 @@ export class CommandHandler {
      */
     public sendCommand(command: string, data?: string): Promise<DbgpResponse> {
         if (!this.debugServer) {
-            return undefined;
+            return;
         }
         this.transId++;
         command += ` -i ${this.transId}`;

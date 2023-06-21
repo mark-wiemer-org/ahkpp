@@ -19,5 +19,5 @@ jobs:
         with:
           # https://github.com/settings/tokens
           # https://github.com/vscode-autohotkey/ahkpp/settings/secrets/actions
-          project-url: https://github.com/orgs/mark-wiemer-org/projects/1
+          project-url: https://github.com/orgs/vscode-autohotkey/projects/1
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
