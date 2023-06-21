@@ -51,7 +51,7 @@ export const completionItemsForMethod = (
 
 /**
  * Suggests all methods and the local vars of the current method, if any.
- * Suggests all variables in the current file.
+ * Suggests all variables provided.
  * @param methods The methods to suggest
  * @param uriString The URI of the current file
  * @param lineNumber The line number of the cursor
