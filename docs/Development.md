@@ -44,6 +44,8 @@ Unless otherwise specified, commit messages don't matter.
         1. Attach binary
         1. Publish release
 
+When the tag is pushed, changes will automatically be published.
+
 ### Validating deployment
 
 1. [Deploy workflow](https://github.com/mark-wiemer/ahkpp/actions/workflows/deploy.yml)

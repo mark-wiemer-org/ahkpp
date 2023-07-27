@@ -1,7 +1,7 @@
 {
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
-    "version": "3.3.2",
+    "version": "3.3.1",
     "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
     "categories": [
         "Programming Languages",
@@ -43,7 +43,7 @@
         "prepare": "husky install",
         "rebuild": "npm run clean && node build.js",
         "pretest": "npm run compile",
-        "test": "npm run test_unit && npm run test_grammar_inner",
+        "test": "npm run test_grammar_inner && npm run test_unit",
         "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",
         "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
         "test_unit": "node ./out/test/runTest.js",
@@ -355,10 +355,9 @@
     },
     "dependencies": {
         "@vscode/debugadapter": "^1.57.0",
-        "date-format": "^4.0.14",
         "get-port": "^5.1.1",
         "portfinder": "^1.0.32",
-        "xml2js": "^0.4.23"
+        "xml2js": "^0.6.2"
     },
     "devDependencies": {
         "@types/fs-extra": "^9.0.7",
@@ -366,10 +365,11 @@
         "@types/mocha": "^9.1.1",
         "@types/node": "^17.0.23",
         "@types/vscode": "^1.50.0",
+        "@types/xml2js": "^0.4.11",
         "@typescript-eslint/eslint-plugin": "^5.37.0",
         "@typescript-eslint/parser": "^5.37.0",
         "@vscode/test-electron": "^1.6.1",
-        "@vscode/vsce": "^2.18.0",
+        "@vscode/vsce": "^2.19.0",
         "esbuild": "^0.15.7",
         "esbuild-plugin-eslint": "^0.1.1",
         "eslint": "^8.23.1",

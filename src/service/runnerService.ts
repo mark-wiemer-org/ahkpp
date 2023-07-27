@@ -2,8 +2,9 @@ import { resolve as res } from 'path';
 import * as vscode from 'vscode';
 import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
-import { Process } from '../common/processWrapper';
+import { exec } from '../common/processWrapper';
 import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
+import { getSelectedText } from '../common/codeUtil';
 
 export const makeCompileCommand = (
     compilePath: string,
@@ -31,14 +32,12 @@ export const makeCompileCommand = (
 export class RunnerService {
     /** Runs the editor selection as a standalone script. */
     public static async runSelection(): Promise<void> {
-        const editor = vscode.window.activeTextEditor;
-        if (!editor) {
+        const text = getSelectedText(vscode.window.activeTextEditor);
+        if (text === undefined) {
             vscode.window.showErrorMessage('No active editor found!');
             return;
         }
 
-        const selection = editor.selection;
-        const text = editor.document.getText(selection);
         this.run(await this.createTemplate(text));
     }
 
@@ -67,7 +66,7 @@ export class RunnerService {
         if (!path) {
             path = await this.getPathByActive();
         }
-        Process.exec(`\"${executePath}\" \"${path}\"`, {
+        exec(`\"${executePath}\" \"${path}\"`, {
             cwd: `${res(path, '..')}`,
         });
     }
@@ -109,7 +108,7 @@ export class RunnerService {
         }
 
         if (
-            (await Process.exec(compileCommand, {
+            (await exec(compileCommand, {
                 cwd: `${res(currentPath, '..')}`,
             })) &&
             !showGui

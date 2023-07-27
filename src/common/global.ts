@@ -5,7 +5,7 @@ export class Global {
     private static statusBarItem: vscode.StatusBarItem;
 
     /** Get configuration from VS Code setting. */
-    public static getConfig<T>(key: ConfigKey): T {
+    public static getConfig<T>(key: ConfigKey): T | undefined {
         return vscode.workspace.getConfiguration(this.configPrefix).get<T>(key);
     }
 
