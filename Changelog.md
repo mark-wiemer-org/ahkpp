@@ -3,17 +3,10 @@
 <!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
 <!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
 
-## 3.3.2 - 2023-06-21 🪲
-
--   Revert changes in 3.3.1. This release is the same as 3.3.0. Ref [Issue #369](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/369)
-
-## 3.3.1 (yanked) - 2023-06-20 🌞
-
-> This release has been yanked, meaning it's not supported. Use v3.3.2 instead.
+## 3.3.1 - 2023-06-20 🌞
 
 -   Various syntax highlighting improvements ([PR #354](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/354), [PR #358](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/358))
 -   Running `Open help` while `tutorial` text is selected now opens the Tutorial page ([PR #348](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/348))
--   Unexpected change: Break debugger.
 
 ## 3.3.0 - 2023-03-11 🪴
 
@@ -105,7 +98,7 @@ Fixes:
 
 -   Revert to v2.8.2 due to unexpected breaking change in v2.8.3
 
-## 2.8.3 (yanked) - 2022-07-04 🦅
+## 2.8.3 (YANKED) - 2022-07-04 🦅
 
 > This release has been yanked, meaning it's not supported. Use v2.8.2 instead.
 

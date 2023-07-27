@@ -14,7 +14,7 @@ import { Global, ConfigKey } from './common/global';
 import { AhkRenameProvider } from './providers/ahkRenameProvider';
 import { SignatureProvider } from './providers/signatureProvider';
 import { CompletionProvider } from './providers/completionProvider';
-import { HelpService } from './service/helpService';
+import { openHelp } from './service/helpService';
 
 export function activate(context: vscode.ExtensionContext) {
     (async () => {
@@ -68,9 +68,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('ahk++.debug', () =>
             RunnerService.startDebugger(),
         ),
-        vscode.commands.registerCommand('ahk++.openHelp', () =>
-            HelpService.open(),
-        ),
+        vscode.commands.registerCommand('ahk++.openHelp', openHelp),
         vscode.commands.registerCommand('ahk++.run', () => RunnerService.run()),
         vscode.commands.registerCommand('ahk++.runSelection', () =>
             RunnerService.runSelection(),
