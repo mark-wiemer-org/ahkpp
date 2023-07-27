@@ -43,7 +43,7 @@
         "prepare": "husky install",
         "rebuild": "npm run clean && node build.js",
         "pretest": "npm run compile",
-        "test": "npm run test_unit && npm run test_grammar_inner",
+        "test": "npm run test_grammar_inner && npm run test_unit",
         "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",
         "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
         "test_unit": "node ./out/test/runTest.js",
