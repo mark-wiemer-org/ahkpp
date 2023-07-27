@@ -3,7 +3,7 @@ import { Parser } from '../parser/parser';
 import { SnippetString } from 'vscode';
 import { Method, Variable } from '../parser/model';
 
-// https://stackoverflow.com/a/74393523
+// DeepPick provided by https://stackoverflow.com/a/74393523
 type Head<T extends string> = T extends `${infer First}.${string}` ? First : T;
 type Tail<T extends string> = T extends `${string}.${infer Rest}`
     ? Rest
@@ -22,14 +22,15 @@ type DeepPick<T, K extends string> = T extends object
  */
 // TODO add tests
 export const completionItemsForMethod = (
-    method: Omit<
+    method: Pick<
         Method,
-        | 'origin'
-        | 'character'
-        | 'withQuote'
-        | 'variables'
-        | 'buildParams'
-        | 'pushVariable'
+        | 'params'
+        | 'name'
+        | 'full'
+        | 'comment'
+        | 'uriString'
+        | 'line'
+        | 'endLine'
     > &
         DeepPick<Method, 'variables.name'>,
     uriString: string,
