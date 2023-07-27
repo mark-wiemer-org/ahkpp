@@ -3,10 +3,21 @@
 <!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
 <!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
 
-## 3.3.1 - 2023-06-20 🌞
+## 3.3.3 - 2023-07-27 🏖️
+
+-   Restore changes from 3.3.1. This release is the same as 3.3.1, except the debugger works.
+
+## 3.3.2 - 2023-06-21 🪲
+
+-   Revert changes in 3.3.1. This release is the same as 3.3.0. Ref [Issue #369](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/369)
+
+## 3.3.1 (yanked) - 2023-06-20 🌞
+
+> This release has been yanked, meaning it's not supported. Use v3.3.3 instead.
 
 -   Various syntax highlighting improvements ([PR #354](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/354), [PR #358](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/358))
 -   Running `Open help` while `tutorial` text is selected now opens the Tutorial page ([PR #348](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/348))
+-   Unexpected change: Break debugger.
 
 ## 3.3.0 - 2023-03-11 🪴
 
@@ -98,13 +109,13 @@ Fixes:
 
 -   Revert to v2.8.2 due to unexpected breaking change in v2.8.3
 
-## 2.8.3 (YANKED) - 2022-07-04 🦅
+## 2.8.3 (yanked) - 2022-07-04 🦅
 
-> This release has been yanked, meaning it's not supported. Use v2.8.2 instead.
+> This release has been yanked, meaning it's not supported. Use v2.8.4 instead.
 
 -   Change to use default debug icon ([#100](https://github.com/vscode-autohotkey/ahkpp/issues/100))
 
--   Unexpected change: Break "step into" function of debugger. :(
+-   Unexpected change: Break "step into" function of debugger.
 
 ## 2.8.2 - 2022-06-11 🎂
 
@@ -183,29 +194,29 @@ Fixes:
 -   Update README
 -   Increase icon resolution
 
-## 2.5.6 - 2020/10/6
+## 2.5.6 - 2020-10-06
 
 -   Fix syntax error.
 -   Fix variable detect error.
 
-## 2.5.5 - 2020/9/29
+## 2.5.5 - 2020-09-29
 
 -   Fix rename bug.
 -   Bind key to context menu command.
 
-## 2.5.4 - 2020/9/27
+## 2.5.4 - 2020-09-27
 
 -   Enable IntelliSense as default.
 -   Fix switch format error.
 -   fix variable detech fail.
 
-## 2.5.3 - 2020/9/22
+## 2.5.3 - 2020-09-22
 
 -   Fix rename fail when unsave.
 -   Simple support variable detect.
 -   Simple implement intellisence.
 
-## 2.5.0 - 2020/9/21
+## 2.5.0 - 2020-09-21
 
 -   Adaptation zeroplus debuger extension.
 -   Support rename method name.
@@ -214,75 +225,75 @@ Fixes:
 
 -   Just fix bugs.
 
-## 2.4.4 - 2020/6/27
+## 2.4.4 - 2020-06-27
 
 -   Support find method references.
 -   Fix syntax bug.
 
-## 2.4.3 - 2020/6/25
+## 2.4.3 - 2020-06-25
 
 -   Add command|method hover feature.
 -   Add labels to outline.
 -   More syntax support.
 
-## 2.4.2 - 2020/6/24
+## 2.4.2 - 2020-06-24
 
 -   Support restart current programe.
 -   Support go to label.
 -   Fix bugs.
 
-## 2.4.1 - 2020/5/31
+## 2.4.1 - 2020-05-31
 
 -   Support config compiler path.
 -   Show variable detail in debug evalute
 
-## 2.4.0 - 2020/5/30
+## 2.4.0 - 2020-05-30
 
 -   Support get and modify variable in debug evalute
 -   Support pause and continue run script.
 -   Support OutputDebug command.
 -   Support run unsave ahk script.
 
-## 2.3.4 - 2020/4/15
+## 2.3.4 - 2020-04-15
 
 -   Suport change variable value when debug, contribute by @zero-plusplus.
 
-## 2.3.1 - 2020/4/12
+## 2.3.1 - 2020-04-12
 
 -   Support view variable when change call stack.
 
-## 2.3.0 - 2020/4/11
+## 2.3.0 - 2020-04-11
 
 -   Variable view support complex variable value, contribute by @zero-plusplus.
 -   Enhance method detecher.
 
-## 2.2.2 - 2020/3/27
+## 2.2.2 - 2020-03-27
 
 -   Fix path with space error.
 
-## 2.2.0 - 2020/3/25
+## 2.2.0 - 2020-03-25
 
 -   Support change defualt ahk execute path.
 -   Support simple debug.
 
-## 2.1.6 - 2020/3/23
+## 2.1.6 - 2020-03-23
 
 -   Find definition in whole workspace.
 -   Try go to include script in workspce.
 
-## 2.1.2 - 2020/3/22
+## 2.1.2 - 2020-03-22
 
 -   Update snippets.
 
-## 2.1.0 - 2020/3/19
+## 2.1.0 - 2020-03-19
 
 -   Support Run Script.
 
-## 2.0.3 - 2020/3/10
+## 2.0.3 - 2020-03-10
 
 -   Fix detecher if and while block as methods.
 -   Support go to method definition in same file.
 
-## 2.0.2 - 2019/11/27
+## 2.0.2 - 2019-11-27
 
 -   Enhance method symbol detection.

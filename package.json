@@ -1,7 +1,7 @@
 {
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
-    "version": "3.3.1",
+    "version": "3.3.3",
     "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
     "categories": [
         "Programming Languages",
@@ -43,7 +43,7 @@
         "prepare": "husky install",
         "rebuild": "npm run clean && node build.js",
         "pretest": "npm run compile",
-        "test": "npm run test_unit && npm run test_grammar_inner",
+        "test": "npm run test_grammar_inner && npm run test_unit",
         "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",
         "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
         "test_unit": "node ./out/test/runTest.js",
@@ -357,7 +357,7 @@
         "@vscode/debugadapter": "^1.57.0",
         "get-port": "^5.1.1",
         "portfinder": "^1.0.32",
-        "xml2js": "^0.5.0"
+        "xml2js": "^0.6.2"
     },
     "devDependencies": {
         "@types/fs-extra": "^9.0.7",
