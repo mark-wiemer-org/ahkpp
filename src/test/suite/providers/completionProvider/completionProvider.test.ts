@@ -14,6 +14,8 @@ suite('completionProvider', () => {
             args: Parameters<typeof provideCompletionItemsInner>,
             expected: ReturnType<typeof provideCompletionItemsInner>,
         ][] = [
+            ['no methods or variables', [[], 'mockUri', 1, []], []],
+            // just method
             [
                 'diff file, outside method, no locals',
                 [
@@ -98,11 +100,159 @@ suite('completionProvider', () => {
                     },
                 ],
             ],
+            [
+                'same file, outside method, no locals',
+                [
+                    [
+                        {
+                            comment: 'mockComment',
+                            endLine: 0,
+                            full: 'mockName()',
+                            line: 0,
+                            name: 'mockName',
+                            params: [],
+                            uriString: 'mockUri1',
+                            variables: [],
+                        },
+                    ],
+                    'mockUri1',
+                    1,
+                    [],
+                ],
+                [
+                    {
+                        detail: 'mockComment',
+                        insertText: 'mockName()',
+                        kind: vscode.CompletionItemKind.Method,
+                        label: 'mockName',
+                    },
+                ],
+            ],
+            [
+                'same file, outside method, ignore local variables',
+                [
+                    [
+                        {
+                            comment: 'mockComment',
+                            endLine: 0,
+                            full: 'mockName(mockParam1, mockParam2)',
+                            line: 0,
+                            name: 'mockName',
+                            params: ['mockParam1', 'mockParam2'],
+                            uriString: 'mockUri1',
+                            variables: ['mockVariable1'],
+                        },
+                    ],
+                    'mockUri1',
+                    1,
+                    [],
+                ],
+                [
+                    {
+                        detail: 'mockComment',
+                        insertText: new vscode.SnippetString('mockName($1)'),
+                        kind: vscode.CompletionItemKind.Method,
+                        label: 'mockName(mockParam1, mockParam2)',
+                    },
+                ],
+            ],
+            [
+                'same file, inside method, include locals (params first)',
+                [
+                    [
+                        {
+                            comment: 'mockComment',
+                            endLine: 2,
+                            full: 'mockName(mockParam1, mockParam2)',
+                            line: 0,
+                            name: 'mockName',
+                            params: ['mockParam1', 'mockParam2'],
+                            uriString: 'mockUri1',
+                            variables: ['mockVariable1'],
+                        },
+                    ],
+                    'mockUri1',
+                    1,
+                    [],
+                ],
+                [
+                    {
+                        detail: 'mockComment',
+                        insertText: new vscode.SnippetString('mockName($1)'),
+                        kind: vscode.CompletionItemKind.Method,
+                        label: 'mockName(mockParam1, mockParam2)',
+                    },
+                    {
+                        kind: vscode.CompletionItemKind.Variable,
+                        label: 'mockParam1',
+                    },
+                    {
+                        kind: vscode.CompletionItemKind.Variable,
+                        label: 'mockParam2',
+                    },
+                    {
+                        kind: vscode.CompletionItemKind.Variable,
+                        label: 'mockVariable1',
+                    },
+                ],
+            ],
+            [
+                'same file, inside one of two methods, include locals of only the current method',
+                [
+                    [
+                        {
+                            comment: 'mockComment1',
+                            endLine: 2,
+                            full: 'mockName1(mockParam1_1, mockParam1_2)',
+                            line: 0,
+                            name: 'mockName1',
+                            params: ['mockParam1_1', 'mockParam1_2'],
+                            uriString: 'mockUri',
+                            variables: ['mockVariable1_1'],
+                        },
+                        {
+                            comment: 'mockComment2',
+                            endLine: 4,
+                            full: 'mockName2(mockParam2_1, mockParam2_2)',
+                            line: 3,
+                            name: 'mockName2',
+                            params: ['mockParam2_1', 'mockParam2_2'],
+                            uriString: 'mockUri',
+                            variables: ['mockVariable2_1'],
+                        },
+                    ],
+                    'mockUri',
+                    1,
+                    [],
+                ],
+                [
+                    {
+                        detail: 'mockComment1',
+                        insertText: new vscode.SnippetString('mockName1($1)'),
+                        kind: vscode.CompletionItemKind.Method,
+                        label: 'mockName1(mockParam1_1, mockParam1_2)',
+                    },
+                    {
+                        kind: vscode.CompletionItemKind.Variable,
+                        label: 'mockParam1_1',
+                    },
+                    {
+                        kind: vscode.CompletionItemKind.Variable,
+                        label: 'mockParam1_2',
+                    },
+                    {
+                        kind: vscode.CompletionItemKind.Variable,
+                        label: 'mockVariable1_1',
+                    },
+                    {
+                        detail: 'mockComment2',
+                        insertText: new vscode.SnippetString('mockName2($1)'),
+                        kind: vscode.CompletionItemKind.Method,
+                        label: 'mockName2(mockParam2_1, mockParam2_2)',
+                    },
+                ],
+            ],
         ];
-        // same vs different file
-        // inside vs outside method
-        // with or without params
-        // with or without variables
         tests.forEach(([name, args, expected]) =>
             test(name, () =>
                 assert.deepEqual(
