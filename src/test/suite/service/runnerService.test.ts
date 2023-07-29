@@ -20,7 +20,7 @@ suite('runnerService', () => {
             useMpress: false,
         };
 
-        let tests: {
+        const tests: {
             name: string;
             compilePath: string;
             scriptPath: string;

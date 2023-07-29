@@ -2,12 +2,12 @@ import { getDocument } from '../../utils';
 import * as assert from 'assert';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { Parser } from '../../../parser/Parser';
+import { Parser } from '../../../parser/parser';
 
 suite('Parser', () => {
     suite('detectVariableByLine', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: // input test string
             //     rs: // expected result - number of detected variables inside line with command
@@ -40,7 +40,7 @@ suite('Parser', () => {
 
     suite('getRemarkByLine', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: // input test string
             //     rs: // expected result

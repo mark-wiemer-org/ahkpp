@@ -303,7 +303,7 @@ export function purify(original: string): string {
     // OUT: ControlSend(params)
     for (const command of commandList) {
         /** String with regular expression pattern */
-        let pattern =
+        const pattern =
             '(' + // begin 1st capture group
             '^\\s*' + // \b will do this: foo(Gui) { => foo(Gui
             command +
@@ -311,7 +311,7 @@ export function purify(original: string): string {
             '(?!\\()' + // after command must not be open brace '(', otherwise it's function
             ')' + // end 1st capture group
             '.*'; // this will be removed from string
-        let regExp = new RegExp(pattern, 'i');
+        const regExp = new RegExp(pattern, 'i');
         if (original.search(regExp) !== -1) {
             cmdTrim = original.replace(regExp, '$1');
             break;
@@ -423,8 +423,8 @@ export type BraceChar = '{' | '}';
  * @return Number of not matched braces
  */
 export function braceNumber(line: string, braceChar: BraceChar): number {
-    let braceRegEx = new RegExp(braceChar, 'g');
-    let braceNum =
+    const braceRegEx = new RegExp(braceChar, 'g');
+    const braceNum =
         replaceAll(line, /{[^{}]*}/g, '').match(braceRegEx)?.length ?? 0;
     return braceNum;
 }
@@ -486,7 +486,7 @@ export function alignLineAssignOperator(
     /** The line comment. Empty string if no line comment exists */
     const comment = /;.+/.exec(original)?.[0] ?? ''; // Save comment
     original = normalizeLineAssignOperator(original);
-    let position = original.indexOf('='); // = operator position
+    const position = original.indexOf('='); // = operator position
     return original
         .replace(/\s(?=:?=)/, ' '.repeat(targetPosition - position + 1)) // Align assignment
         .concat(comment) // Restore comment
@@ -514,7 +514,7 @@ export function replaceAll(
     replace: string,
 ): string {
     while (true) {
-        let len = text.length;
+        const len = text.length;
         text = text.replace(search, replace);
         if (len === text.length) {
             // Nothing was replaced, break loop.
@@ -584,7 +584,7 @@ export class FlowOfControlNestDepth {
     }
 
     pop() {
-        let result = this.depth.pop();
+        const result = this.depth.pop();
         this.restoreEmptyDepth();
         return result;
     }
@@ -604,8 +604,8 @@ export class FlowOfControlNestDepth {
      */
     restoreDepth() {
         /** Index of element right after last `-1` element. */
-        let index = this.depth.lastIndexOf(-1) + 1;
-        let element = this.depth[index];
+        const index = this.depth.lastIndexOf(-1) + 1;
+        const element = this.depth[index];
         this.depth.splice(index);
         return element;
     }

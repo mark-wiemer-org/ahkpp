@@ -17,7 +17,7 @@ export class SymbolProvider implements vscode.DocumentSymbolProvider {
                     vscode.SymbolKind.Method,
                     method.comment,
                     new vscode.Location(
-                        method.document.uri,
+                        vscode.Uri.parse(method.uriString),
                         new vscode.Position(method.line, method.character),
                     ),
                 ),

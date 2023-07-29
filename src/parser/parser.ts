@@ -45,7 +45,7 @@ export class Parser {
     }
 
     /**
-     * detect method list by document
+     * Parse the document into a Script and add it to the cache
      * @param document
      */
     public static async buildScript(
@@ -324,7 +324,7 @@ export class Parser {
             return new Method(
                 methodFullName,
                 methodName,
-                document,
+                document.uri.toString(),
                 line,
                 character,
                 true,
@@ -340,7 +340,7 @@ export class Parser {
                 return new Method(
                     methodFullName,
                     methodName,
-                    document,
+                    document.uri.toString(),
                     line,
                     character,
                     false,

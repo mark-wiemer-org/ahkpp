@@ -39,7 +39,7 @@ suite('FormattingProvider utils', () => {
             bn: number;
         }
         // List of test data
-        let dataList: TestBraceData[] = [
+        const dataList: TestBraceData[] = [
             // {
             //     in: , // input test string
             //     bc: , // brace character
@@ -83,7 +83,7 @@ suite('FormattingProvider utils', () => {
 
     suite('buildIndentationChars', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     dp: , // depth of indentation
             //     rs: , // expected result
@@ -140,7 +140,7 @@ suite('FormattingProvider utils', () => {
 
     suite('buildIndentedLine', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     dp: , // depth of indentation
             //     fl: , // formatted line
@@ -223,7 +223,7 @@ suite('FormattingProvider utils', () => {
 
     suite('hasMoreCloseParens', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result
@@ -258,7 +258,7 @@ suite('FormattingProvider utils', () => {
 
     suite('hasMoreOpenParens', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result
@@ -293,7 +293,7 @@ suite('FormattingProvider utils', () => {
 
     suite('purify', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result
@@ -376,7 +376,7 @@ suite('FormattingProvider utils', () => {
 
     suite('removeEmptyLines', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     ln: , // allowed empty lines
@@ -500,7 +500,7 @@ suite('FormattingProvider utils', () => {
 
     suite('trimExtraSpaces', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result
@@ -543,7 +543,7 @@ suite('FormattingProvider utils', () => {
 
     suite('normalizeLineAssignOperator', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result
@@ -623,7 +623,7 @@ suite('FormattingProvider utils', () => {
             abc       := a + b
             ; beautiful operator :=
         */
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     tp: , // target position
@@ -692,7 +692,7 @@ suite('FormattingProvider utils', () => {
 
     suite('FlowOfControlNestDepth.enterBlockOfCode', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input array
             //     bn: , // brace number
@@ -721,7 +721,7 @@ suite('FormattingProvider utils', () => {
 
     suite('FlowOfControlNestDepth.exitBlockOfCode', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input array
             //     bn: , // brace number
@@ -750,7 +750,7 @@ suite('FormattingProvider utils', () => {
 
     suite('FlowOfControlNestDepth.pop', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input array
             //     rs: , // expected result
@@ -770,7 +770,7 @@ suite('FormattingProvider utils', () => {
 
     suite('FlowOfControlNestDepth.restoreEmptyDepth', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input array
             //     rs: , // expected result
@@ -790,7 +790,7 @@ suite('FormattingProvider utils', () => {
 
     suite('FlowOfControlNestDepth.restoreDepth', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input array
             //     rs: , // expected result
@@ -820,7 +820,7 @@ suite('FormattingProvider utils', () => {
 
     suite('alignSingleLineComments', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result
@@ -897,7 +897,7 @@ suite('FormattingProvider utils', () => {
 
     suite('calculateDepth', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result
@@ -939,7 +939,7 @@ suite('FormattingProvider utils', () => {
 
     suite('nextLineIsOneCommandCode', () => {
         // List of test data
-        let dataList = [
+        const dataList = [
             // {
             //     in: , // input test string
             //     rs: , // expected result

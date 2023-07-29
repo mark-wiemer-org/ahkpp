@@ -80,7 +80,6 @@ export function activate(context: vscode.ExtensionContext) {
             vscode.languages.registerCompletionItemProvider(
                 language,
                 new CompletionProvider(),
-                ' ',
                 '.',
             ),
         );

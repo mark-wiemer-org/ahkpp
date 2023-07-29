@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 
+/** Symbols and structures parsed from a file */
 export interface Script {
     methods: Method[];
     refs: Ref[];
@@ -50,12 +51,14 @@ export class Method {
     public full: string;
     public endLine: number;
     constructor(
+        // TODO very similar to `this.full`, maybe merge them?
         public origin: string,
         public name: string,
-        public document: vscode.TextDocument,
+        public uriString: string,
         public line: number,
         public character: number,
         public withQuote: boolean,
+        /** Method header comment */
         public comment: string,
     ) {
         this.buildParams();
@@ -63,20 +66,22 @@ export class Method {
     }
 
     private buildParams() {
-        const refPattern = /\s*\((.+?)\)\s*$/;
+        /** Captures the parameters in a method header */
+        const paramRegex = /\s*\((.+?)\)\s*$/;
         if (this.origin !== this.name) {
-            const paramsMatch = this.origin.match(refPattern);
+            const paramsMatch = this.origin.match(paramRegex);
             if (paramsMatch) {
                 this.params = paramsMatch[1]
                     .split(',')
                     .filter((param) => param.trim())
                     .map((param) => {
-                        const paramMatch = param.match(/[^:=* \t]+/);
+                        const alphanumericRegex = /[^:=* \t]+/;
+                        const paramMatch = param.match(alphanumericRegex);
                         return paramMatch?.[0] ?? param;
                     });
                 this.full = this.origin.replace(
                     paramsMatch[1],
-                    this.params.join(','),
+                    this.params.join(', '),
                 );
             } else {
                 this.params = [];
