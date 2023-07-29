@@ -3,39 +3,25 @@ import { Parser } from '../parser/parser';
 import { SnippetString } from 'vscode';
 import { Method, Variable } from '../parser/model';
 
-// DeepPick provided by https://stackoverflow.com/a/74393523
-type Head<T extends string> = T extends `${infer First}.${string}` ? First : T;
-type Tail<T extends string> = T extends `${string}.${infer Rest}`
-    ? Rest
-    : never;
-type DeepPick<T, K extends string> = T extends object
-    ? {
-          [P in Head<K> & keyof T]: T[P] extends readonly unknown[]
-              ? DeepPick<T[P][number], Tail<Extract<K, `${P}.${string}`>>>[]
-              : DeepPick<T[P], Tail<Extract<K, `${P}.${string}`>>>;
-      }
-    : T;
-
-type PartialMethod = Pick<
+type SimpleMethod = Pick<
     Method,
     'params' | 'name' | 'full' | 'comment' | 'uriString' | 'line' | 'endLine'
-> &
-    DeepPick<Method, 'variables.name'>;
+> & { variables: string[] };
 
 /** A completion item for the method itself. */
 const completionItemForMethod = (
     method: Pick<
-        PartialMethod,
+        SimpleMethod,
         'params' | 'name' | 'full' | 'comment' | 'variables'
     >,
 ): vscode.CompletionItem => {
-    // Always suggest the method itself
+    // foo() -> foo, foo(bar) -> foo(bar)
     const completionItem = new vscode.CompletionItem(
         method.params.length === 0 ? method.name : method.full,
         vscode.CompletionItemKind.Method,
     );
     completionItem.insertText = method.params.length
-        ? new SnippetString(`${method.name} ($1)`)
+        ? new SnippetString(`${method.name}($1)`)
         : `${method.name}()`;
     completionItem.detail = method.comment;
     return completionItem;
@@ -46,7 +32,7 @@ const completionItemForMethod = (
  * and the method is in the same file.
  */
 const shouldSuggestMethodLocals = (
-    method: Pick<PartialMethod, 'uriString' | 'line' | 'endLine' | 'variables'>,
+    method: Pick<SimpleMethod, 'uriString' | 'line' | 'endLine' | 'variables'>,
     uriString: string,
     lineNumber: number,
 ): boolean =>
@@ -56,10 +42,10 @@ const shouldSuggestMethodLocals = (
 
 /** A completion item for each of the method's local variables and parameters. */
 const completionItemsForMethodLocals = (
-    method: Pick<PartialMethod, 'params' | 'variables'>,
+    method: Pick<SimpleMethod, 'params' | 'variables'>,
 ): vscode.CompletionItem[] =>
     method.params
-        .concat(method.variables.map((v) => v.name))
+        .concat(method.variables)
         .map(
             (local) =>
                 new vscode.CompletionItem(
@@ -73,7 +59,7 @@ const completionItemsForMethodLocals = (
  * Also one for each of its locals if the line number is within the method.
  */
 const completionItemsForMethod = (
-    method: PartialMethod,
+    method: SimpleMethod,
     uriString: string,
     lineNumber: number,
 ): vscode.CompletionItem[] => {
@@ -98,7 +84,7 @@ const completionItemsForMethod = (
  */
 // TODO add tests
 export const provideCompletionItemsInner = (
-    methods: PartialMethod[],
+    methods: SimpleMethod[],
     uriString: string,
     lineNumber: number,
     variables: Variable[],
@@ -141,7 +127,10 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
         const methods = await Parser.getAllMethod();
         const script = await Parser.buildScript(document, { usingCache: true });
         return provideCompletionItemsInner(
-            methods,
+            methods.map((m) => ({
+                ...m,
+                variables: m.variables.map((v) => v.name),
+            })),
             document.uri.toString(),
             position.line,
             script.variables,
