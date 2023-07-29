@@ -946,7 +946,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
     public provideDocumentFormattingEdits(
         document: vscode.TextDocument,
         options: vscode.FormattingOptions,
-        token: vscode.CancellationToken,
+        _: vscode.CancellationToken,
     ): vscode.TextEdit[] {
         const stringToFormat = documentToString(document);
 
