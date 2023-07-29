@@ -1,4 +1,5 @@
 #Requires AutoHotkey 1.1.33+
+#SingleInstance force
 
 ; Basic debugger test
 ; Ensure you've run `npm i` before running this test

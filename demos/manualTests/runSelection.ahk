@@ -1,3 +1,6 @@
+#Requires AutoHotkey 1.1.33+
+#SingleInstance force
+
 ; Select the following line and hit `Ctrl + F8` to run selection
 f1:: MsgBox, You hit F1
 
