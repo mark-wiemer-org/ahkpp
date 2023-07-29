@@ -16,28 +16,17 @@ type DeepPick<T, K extends string> = T extends object
       }
     : T;
 
-/**
- * A completion item for the method itself.
- * Also one for each of its local variables if the line number is within the method.
- */
-// TODO add tests
-export const completionItemsForMethod = (
-    method: Pick<
-        Method,
-        | 'params'
-        | 'name'
-        | 'full'
-        | 'comment'
-        | 'uriString'
-        | 'line'
-        | 'endLine'
-    > &
-        DeepPick<Method, 'variables.name'>,
-    uriString: string,
-    lineNumber: number,
-): vscode.CompletionItem[] => {
-    const result: vscode.CompletionItem[] = [];
+type PartialMethod = Pick<
+    Method,
+    'params' | 'name' | 'full' | 'comment' | 'uriString' | 'line' | 'endLine'
+> &
+    DeepPick<Method, 'variables.name'>;
 
+/** A completion item for the method itself. */
+const completionItemForMethod = (
+    method: Pick<Method, 'params' | 'name' | 'full' | 'comment'> &
+        DeepPick<Method, 'variables.name'>,
+): vscode.CompletionItem => {
     // Always suggest the method itself
     const completionItem = new vscode.CompletionItem(
         method.params.length === 0 ? method.name : method.full,
@@ -47,28 +36,53 @@ export const completionItemsForMethod = (
         ? new SnippetString(`${method.name} ($1)`)
         : `${method.name}()`;
     completionItem.detail = method.comment;
-    result.push(completionItem);
+    return completionItem;
+};
 
-    // If the cursor is in the method, suggest local variables
-    if (
-        method.uriString === uriString &&
-        method.line <= lineNumber &&
-        lineNumber <= method.endLine
-    ) {
-        // Local variables are all params and variables declared in the method
-        const localVarNames = method.params.concat(
-            method.variables.map((v) => v.name),
-        );
-        for (const localVar of localVarNames) {
-            result.push(
+/**
+ * True if the line number is within the method
+ * and the method is in the same file.
+ */
+const shouldSuggestMethodLocals = (
+    method: Pick<Method, 'uriString' | 'line' | 'endLine'> &
+        DeepPick<Method, 'variables.name'>,
+    uriString: string,
+    lineNumber: number,
+): boolean =>
+    method.uriString === uriString &&
+    method.line <= lineNumber &&
+    lineNumber <= method.endLine;
+
+/** A completion item for each of the method's local variables and parameters. */
+const completionItemsForMethodLocals = (
+    method: Pick<Method, 'params'> & DeepPick<Method, 'variables.name'>,
+): vscode.CompletionItem[] =>
+    method.params
+        .concat(method.variables.map((v) => v.name))
+        .map(
+            (local) =>
                 new vscode.CompletionItem(
-                    localVar,
+                    local,
                     vscode.CompletionItemKind.Variable,
                 ),
-            );
-        }
+        );
+
+/**
+ * A completion item for the method itself.
+ * Also one for each of its local variables if the line number is within the method.
+ */
+const completionItemsForMethod = (
+    method: PartialMethod,
+    uriString: string,
+    lineNumber: number,
+): vscode.CompletionItem[] => {
+    const result: vscode.CompletionItem[] = [completionItemForMethod(method)];
+
+    if (shouldSuggestMethodLocals(method, uriString, lineNumber)) {
+        result.push(...completionItemsForMethodLocals(method));
     }
 
+    console.log('items:', method, uriString, lineNumber, result);
     return result;
 };
 
@@ -82,17 +96,17 @@ export const completionItemsForMethod = (
  * @returns The completion items
  */
 // TODO add tests
-export const provideCompletionItemsInner = async (
-    methods: Method[],
+export const provideCompletionItemsInner = (
+    methods: PartialMethod[],
     uriString: string,
     lineNumber: number,
     variables: Variable[],
-): Promise<vscode.CompletionItem[]> => {
-    const result: vscode.CompletionItem[] = [];
+): vscode.CompletionItem[] => {
+    let result: vscode.CompletionItem[] = [];
 
-    methods.forEach((method) =>
-        result.push(...completionItemsForMethod(method, uriString, lineNumber)),
-    );
+    result = methods
+        .map((m) => completionItemsForMethod(m, uriString, lineNumber))
+        .reduce((a, b) => a.concat(b), []);
 
     variables.forEach((variable) =>
         result.push(
