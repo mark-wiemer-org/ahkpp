@@ -1,37 +1,44 @@
 import * as vscode from 'vscode';
-import * as assert from 'assert';
+import { assert } from 'chai';
 import { completionItemsForMethod } from '../../../../providers/completionProvider';
 
 // tests for completionItemsForMethod
 suite('completionProvider', () => {
-    suite('completionItemsForMethod', () => {
+    suite.only('completionItemsForMethod', () => {
         const tests: [
             name: string,
             args: Parameters<typeof completionItemsForMethod>,
             expected: ReturnType<typeof completionItemsForMethod>,
         ][] = [
             [
-                'empty',
+                'minimal: different file, outside of methood',
                 [
                     {
-                        comment: '',
+                        comment: 'mockComment',
                         endLine: 0,
                         full: '',
                         line: 0,
-                        name: '',
+                        name: 'mockName',
                         params: [],
-                        uriString: '',
+                        uriString: 'mockUri1',
                         variables: [{ name: '' }],
                     },
-                    '',
-                    0,
+                    'mockUri2',
+                    1,
                 ],
-                [],
+                [
+                    {
+                        detail: 'mockComment',
+                        insertText: 'mockName()',
+                        kind: vscode.CompletionItemKind.Method,
+                        label: 'mockName',
+                    },
+                ],
             ],
         ];
         tests.forEach(([name, args, expected]) =>
             test(name, () =>
-                assert.strictEqual(completionItemsForMethod(...args), expected),
+                assert.deepEqual(completionItemsForMethod(...args), expected),
             ),
         );
     });
