@@ -70,27 +70,30 @@ Collapse me!
 
 ; FUNCTIONS
 
-; Method header comment accessible to IntelliSense
-LAlt() {
-    ; do a thing
-}
-
 ; Function calls (with a space before parens)
-foo()
-bar ()
-baz ()
+function()
+function ()
 
 ; Functions with keyword names
-LAlt()
-Pause()
-AppsKey()
-CapsLock()
+LAlt() {
+}
+Pause() {
+}
+AppsKey() {
+}
+CapsLock() {
+}
+
+; Method header comments appear on hover
+hoverToSeeComment() {
+}
+
 
 ; SUBROUTINES
 
 ; ExitApp indentation for subroutines
 MySub:
-    foo()
+    function()
 ExitApp
 
 ; RUN SELECTION
@@ -103,4 +106,115 @@ f2:: MsgBox, You hit F2
 
 ; Formatting line below ternary with third operand a string value
 true ? 1 : "string"
-foo()
+function()
+
+;;;;;;;;;;
+; v3.2.0 ;
+;;;;;;;;;;
+
+;;;
+; Move lines of code down with correct indentation
+;;;
+
+var
+foo() {
+    if expression
+        code
+    code
+    if (expression)
+        code
+    if (expression) {
+        code
+    }
+
+}
+
+;;;
+; Check out these correctly-colored lines of code!
+;;;
+
+; https://github.com/vscode-autohotkey/ahkpp/pull/278
+Hotstring("::ykhis", "you know how it is")
+Hotstring(":C:OOS", "out-of::-spec")
+
+; https://github.com/vscode-autohotkey/ahkpp/issues/69
+#If WinActive("ahk_class Notepad") or WinActive(MyWindowTitle)
+#If
+
+; https://github.com/vscode-autohotkey/ahkpp/issues/86
+#Include Chrome.ahk ; and a nice green comment
+#IncludeAgain Chrome.ahk ; and another green comment
+
+; https://github.com/vscode-autohotkey/ahkpp/issues/295
+foo(); this is not actually a comment, it doesn't have a preceding space
+
+;;;
+; And these well-formatted snippets:
+;;;
+
+; https://github.com/vscode-autohotkey/ahkpp/issues/291
+if (expression)
+    ;
+    code
+
+; https://github.com/vscode-autohotkey/ahkpp/issues/290
+MsgBox, 4, , Would you like to continue?, 5  ; 5-second timeout.
+IfMsgBox, No
+    Return  ; User pressed the "No" button.
+IfMsgBox, Timeout
+    Return ; i.e. Assume "No" if it timed out.
+; Otherwise, continue:
+; ...
+
+F1 & F2 Up::
+    code
+return
+
+; https://github.com/vscode-autohotkey/ahkpp/issues/303
+F1 & F2 Up::
+    code
+return
+
+::btw::
+    code
+return
+
+; https://github.com/vscode-autohotkey/ahkpp/issues/316
+if (expression)
+    obj := { 0:""
+        , a: 1
+        , b: 2 }
+else
+    obj := { 0:""
+        , a: 2
+        , b: 1 }
+code
+
+; https://github.com/vscode-autohotkey/ahkpp/pull/287
+{
+    foo() {
+        if
+            if
+                if
+                    return
+    }
+
+    foo() {
+        for
+            for
+                if
+                    return
+    }
+}
+
+;;;
+; Hover messages are now trimmed
+;;;
+
+;        <-- those spaces will be gone!
+hoverOverMe() {
+
+}
+
+#HotIf
+#HotkeyInterval
