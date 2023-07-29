@@ -81,7 +81,7 @@ export class Method {
                     });
                 this.full = this.origin.replace(
                     paramsMatch[1],
-                    this.params.join(','),
+                    this.params.join(', '),
                 );
             } else {
                 this.params = [];
