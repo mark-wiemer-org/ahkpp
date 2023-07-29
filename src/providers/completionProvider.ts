@@ -73,6 +73,9 @@ const completionItemsForMethod = (
     return result;
 };
 
+const completionItemForVariable = (variable: string): vscode.CompletionItem =>
+    new vscode.CompletionItem(variable, vscode.CompletionItemKind.Variable);
+
 /**
  * Suggests all methods and the locals of the current method, if any.
  * Suggests all variables provided.
@@ -82,30 +85,16 @@ const completionItemsForMethod = (
  * @param variables The variables to suggest
  * @returns The completion items
  */
-// TODO add tests
 export const provideCompletionItemsInner = (
     methods: SimpleMethod[],
     uriString: string,
     lineNumber: number,
-    variables: Variable[],
-): vscode.CompletionItem[] => {
-    let result: vscode.CompletionItem[] = [];
-
-    result = methods
+    variables: string[],
+): vscode.CompletionItem[] =>
+    methods
         .map((m) => completionItemsForMethod(m, uriString, lineNumber))
-        .reduce((a, b) => a.concat(b), []);
-
-    variables.forEach((variable) =>
-        result.push(
-            new vscode.CompletionItem(
-                variable.name,
-                vscode.CompletionItemKind.Variable,
-            ),
-        ),
-    );
-
-    return result;
-};
+        .reduce((a, b) => a.concat(b), [])
+        .concat(variables.map(completionItemForVariable));
 
 export class CompletionProvider implements vscode.CompletionItemProvider {
     // TODO add tests
@@ -133,7 +122,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             })),
             document.uri.toString(),
             position.line,
-            script.variables,
+            script.variables.map((v) => v.name),
         );
     }
 }
