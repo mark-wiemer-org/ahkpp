@@ -1,3 +1,4 @@
+// TODO move to providers/formatting/formattingProvider.test.ts
 import { getDocument } from '../../utils';
 import * as assert from 'assert';
 import * as fs from 'fs-extra';
