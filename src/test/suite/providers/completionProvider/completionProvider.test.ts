@@ -4,6 +4,10 @@ import { provideCompletionItemsInner } from '../../../../providers/completionPro
 
 // tests for completionItemsForMethod
 suite('completionProvider', () => {
+    // TODO outer
+    // parsing vs no parsing
+    // intellisense enabled vs disabled
+
     suite.only('provideCompletionItemsInner', () => {
         const tests: [
             name: string,
