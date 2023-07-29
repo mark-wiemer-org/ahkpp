@@ -70,7 +70,7 @@ const completionItemsForMethodLocals = (
 
 /**
  * A completion item for the method itself.
- * Also one for each of its local variables if the line number is within the method.
+ * Also one for each of its locals if the line number is within the method.
  */
 const completionItemsForMethod = (
     method: PartialMethod,
@@ -88,7 +88,7 @@ const completionItemsForMethod = (
 };
 
 /**
- * Suggests all methods and the local vars of the current method, if any.
+ * Suggests all methods and the locals of the current method, if any.
  * Suggests all variables provided.
  * @param methods The methods to suggest
  * @param uriString The URI of the current file
@@ -136,7 +136,7 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
             return [];
         }
 
-        // Suggest all methods and the local vars of the current method, if any
+        // Suggest all methods and the locals of the current method, if any
         // Suggest all variables in the current file
         const methods = await Parser.getAllMethod();
         const script = await Parser.buildScript(document, { usingCache: true });
