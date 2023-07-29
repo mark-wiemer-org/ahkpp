@@ -8,7 +8,7 @@ suite('completionProvider', () => {
     // parsing vs no parsing
     // intellisense enabled vs disabled
 
-    suite.only('provideCompletionItemsInner', () => {
+    suite('provideCompletionItemsInner', () => {
         const tests: [
             name: string,
             args: Parameters<typeof provideCompletionItemsInner>,
