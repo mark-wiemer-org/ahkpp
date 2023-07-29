@@ -5,7 +5,7 @@ export type FormatOptions = Pick<
     'tabSize' | 'insertSpaces'
 > & {
     indentCodeAfterLabel: boolean;
-    indentCodeAfterSharpDirective: boolean;
+    indentCodeAfterIfDirective: boolean;
     preserveIndent: boolean;
     trimExtraSpaces: boolean;
     allowedNumberOfEmptyLines: number;

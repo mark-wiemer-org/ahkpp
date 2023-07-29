@@ -261,7 +261,7 @@ export const internalFormat = (
 
     // SETTINGS' ALIASES
     const indentCodeAfterLabel = options.indentCodeAfterLabel;
-    const indentCodeAfterSharpDirective = options.indentCodeAfterSharpDirective;
+    const indentCodeAfterIfDirective = options.indentCodeAfterIfDirective;
     const trimSpaces = options.trimExtraSpaces;
 
     // REGULAR EXPRESSION
@@ -841,7 +841,7 @@ export const internalFormat = (
         //     F1:: MsgBox Help
         if (
             purifiedLine.match('^' + sharpDirective + '\\b.+') &&
-            indentCodeAfterSharpDirective
+            indentCodeAfterIfDirective
         ) {
             depth++;
         }
@@ -958,8 +958,8 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ConfigKey.indentCodeAfterLabel,
         );
 
-        const indentCodeAfterSharpDirective = Global.getConfig<boolean>(
-            ConfigKey.indentCodeAfterSharpDirective,
+        const indentCodeAfterIfDirective = Global.getConfig<boolean>(
+            ConfigKey.indentCodeAfterIfDirective,
         );
 
         const preserveIndent = Global.getConfig<boolean>(
@@ -974,7 +974,7 @@ export class FormatProvider implements vscode.DocumentFormattingEditProvider {
             ...options,
             allowedNumberOfEmptyLines,
             indentCodeAfterLabel,
-            indentCodeAfterSharpDirective,
+            indentCodeAfterIfDirective,
             preserveIndent,
             trimExtraSpaces,
         });

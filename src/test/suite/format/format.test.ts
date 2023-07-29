@@ -24,7 +24,7 @@ const defaultOptions = {
     insertSpaces: true,
     allowedNumberOfEmptyLines: 1,
     indentCodeAfterLabel: true,
-    indentCodeAfterSharpDirective: true,
+    indentCodeAfterIfDirective: true,
     preserveIndent: false,
     trimExtraSpaces: true,
 };
@@ -32,7 +32,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '25-multiline-string' },
     { filenameRoot: '28-switch-case' },
     { filenameRoot: '40-command-inside-text' },
-    { filenameRoot: '55-sharp-directive' },
+    { filenameRoot: '55-if-directive' },
     { filenameRoot: '56-return-command-after-label' },
     { filenameRoot: '58-parentheses-indentation' },
     { filenameRoot: '59-one-command-indentation' },
@@ -74,6 +74,14 @@ const formatTests: FormatTest[] = [
     { filenameRoot: 'align-assignment' },
     { filenameRoot: 'demo' },
     {
+        filenameRoot: 'indent-code-after-if-directive-false',
+        options: { indentCodeAfterIfDirective: false },
+    },
+    {
+        filenameRoot: 'indent-code-after-if-directive-true',
+        options: { indentCodeAfterIfDirective: true },
+    },
+    {
         filenameRoot: 'indent-code-after-label-false',
         options: { indentCodeAfterLabel: false },
     },
@@ -82,18 +90,10 @@ const formatTests: FormatTest[] = [
         options: { indentCodeAfterLabel: true },
     },
     {
-        filenameRoot: 'indent-code-after-sharp-directive-false',
-        options: { indentCodeAfterSharpDirective: false },
-    },
-    {
-        filenameRoot: 'indent-code-after-sharp-directive-true',
-        options: { indentCodeAfterSharpDirective: true },
-    },
-    {
         filenameRoot: 'insert-spaces-false',
         options: { insertSpaces: false },
     },
-    { filenameRoot: 'legacy-text-sharp-directive' },
+    { filenameRoot: 'legacy-text-if-directive' },
     { filenameRoot: 'label-colon' },
     { filenameRoot: 'label-combination' },
     { filenameRoot: 'label-fall-through' },
