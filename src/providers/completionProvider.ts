@@ -69,7 +69,6 @@ const completionItemsForMethod = (
         result.push(...completionItemsForMethodLocals(method));
     }
 
-    console.log('items:', method, uriString, lineNumber, result);
     return result;
 };
 
