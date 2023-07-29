@@ -16,6 +16,7 @@ Breaking changes:
 
 Other changes:
 
+-   IntelliSense no longer suggests words when a user presses space ([Issue #110](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/110))
 -   IntelliSense now suggests `foo(p1, p2)` instead of `foo (p1,p2)`
 -   Improved descriptions of settings
 
