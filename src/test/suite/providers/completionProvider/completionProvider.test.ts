@@ -76,9 +76,9 @@ suite('completionProvider', () => {
         // with or without params
         // with or without variables
         tests.forEach(([name, args, expected]) =>
-            test(name, async () =>
+            test(name, () =>
                 assert.deepEqual(
-                    await provideCompletionItemsInner(...args),
+                    provideCompletionItemsInner(...args),
                     expected,
                 ),
             ),
