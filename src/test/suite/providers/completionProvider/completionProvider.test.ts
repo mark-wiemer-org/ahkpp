@@ -11,7 +11,7 @@ suite('completionProvider', () => {
             expected: ReturnType<typeof provideCompletionItemsInner>,
         ][] = [
             [
-                'minimal: different file, outside of method',
+                'diff file, outside method, no locals',
                 [
                     [
                         {
@@ -22,7 +22,7 @@ suite('completionProvider', () => {
                             name: 'mockName',
                             params: [],
                             uriString: 'mockUri1',
-                            variables: [{ name: '' }],
+                            variables: [],
                         },
                     ],
                     'mockUri2',
