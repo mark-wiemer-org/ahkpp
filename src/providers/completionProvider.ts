@@ -24,8 +24,10 @@ type PartialMethod = Pick<
 
 /** A completion item for the method itself. */
 const completionItemForMethod = (
-    method: Pick<Method, 'params' | 'name' | 'full' | 'comment'> &
-        DeepPick<Method, 'variables.name'>,
+    method: Pick<
+        PartialMethod,
+        'params' | 'name' | 'full' | 'comment' | 'variables'
+    >,
 ): vscode.CompletionItem => {
     // Always suggest the method itself
     const completionItem = new vscode.CompletionItem(
@@ -44,8 +46,7 @@ const completionItemForMethod = (
  * and the method is in the same file.
  */
 const shouldSuggestMethodLocals = (
-    method: Pick<Method, 'uriString' | 'line' | 'endLine'> &
-        DeepPick<Method, 'variables.name'>,
+    method: Pick<PartialMethod, 'uriString' | 'line' | 'endLine' | 'variables'>,
     uriString: string,
     lineNumber: number,
 ): boolean =>
@@ -55,7 +56,7 @@ const shouldSuggestMethodLocals = (
 
 /** A completion item for each of the method's local variables and parameters. */
 const completionItemsForMethodLocals = (
-    method: Pick<Method, 'params'> & DeepPick<Method, 'variables.name'>,
+    method: Pick<PartialMethod, 'params' | 'variables'>,
 ): vscode.CompletionItem[] =>
     method.params
         .concat(method.variables.map((v) => v.name))
