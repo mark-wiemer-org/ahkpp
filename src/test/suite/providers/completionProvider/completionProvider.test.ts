@@ -4,7 +4,7 @@ import { provideCompletionItemsInner } from '../../../../providers/completionPro
 
 // tests for completionItemsForMethod
 suite('completionProvider', () => {
-    suite('provideCompletionItemsInner', () => {
+    suite.only('provideCompletionItemsInner', () => {
         const tests: [
             name: string,
             args: Parameters<typeof provideCompletionItemsInner>,
@@ -33,6 +33,34 @@ suite('completionProvider', () => {
                     {
                         detail: 'mockComment',
                         insertText: 'mockName()',
+                        kind: vscode.CompletionItemKind.Method,
+                        label: 'mockName',
+                    },
+                ],
+            ],
+            [
+                'diff file, outside method, only params',
+                [
+                    [
+                        {
+                            comment: 'mockComment',
+                            endLine: 0,
+                            full: '',
+                            line: 0,
+                            name: 'mockName',
+                            params: ['mockParam1', 'mockParam2'],
+                            uriString: 'mockUri1',
+                            variables: [],
+                        },
+                    ],
+                    'mockUri2',
+                    1,
+                    [],
+                ],
+                [
+                    {
+                        detail: 'mockComment',
+                        insertText: 'mockName(mockParam1, mockParam2)',
                         kind: vscode.CompletionItemKind.Method,
                         label: 'mockName',
                     },
