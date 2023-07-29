@@ -3,6 +3,23 @@
 <!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
 <!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
 
+## 4.0.0 - 2023-07-29 🍀
+
+Minimal changes here, just following [semantic versioning](https://semver.org) since there are breaking changes.
+
+Breaking changes:
+
+-   Rename some settings. Users will have to manually adjust these new settings from the defaults to match their old settings:
+    -   `ahk++.formatter.indentCodeAfterSharpDirective` is now `ahk++.formatter.indentCodeAfterIfDirective`
+    -   `ahk++.language.enableIntellisense` is now `ahk++.intellisense.enableIntellisense`
+    -   `ahk++.file.maximumParseLength` is now `ahk++.intellisense.maximumParseLength`
+
+Other changes:
+
+-   IntelliSense no longer suggests words when a user presses space ([Issue #110](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/110))
+-   IntelliSense now suggests `foo(p1, p2)` instead of `foo (p1,p2)`
+-   Improved descriptions of settings
+
 ## 3.3.3 - 2023-07-27 🏖️
 
 -   Restore changes from 3.3.1. This release is the same as 3.3.1, except the debugger works.
