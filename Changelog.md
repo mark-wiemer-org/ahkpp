@@ -3,6 +3,34 @@
 <!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
 <!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
 
+## 5.0.0 - Unreleased ✌️
+
+-   Preview: AutoHotkey v2 support (more details pending release!)
+
+<!-- Ensure text below is commented before commiting :) -->
+
+<!--
+
+AutoHotkey v2 support now in preview! Please test it out and report any issues, you'll help the large community of 120,000+ users of this extension!
+
+-   New blue icon for v2 scripts (configure file association in bottom right of VS Code, in the status bar: "Change Language Mode" command)
+-   `.ahk1` and `.ah1` now available for v1 scripts, `.ahk2` and `.ah2` for v2 scripts. `.ahk` and `.ext` can be used for either version.
+
+### Known issues
+
+-   Existing commands use the same settings for both v1 and v2, causing issues when working with both versions in the same project.
+-   No snippets for v2 yet
+-   No syntax highlighting for v2 yet
+
+### TODO
+
+-   Research other extensions:
+    -   [AutoHotkey v2 Language Support by thqby](https://github.com/thqby/vscode-autohotkey2-lsp) (LGPL: free to use)
+-   New "v2 bugs" template
+-   Integrate [AutoHotkey Auto-Select](https://github.com/Lexikos/vscode-auto-select) by Lexikos
+
+<!-- -->
+
 ## 4.1.0 - 2023-08-03 🙋
 
 -   Add quick help, adapted from thqby's AutoHotkey v2 Language Support

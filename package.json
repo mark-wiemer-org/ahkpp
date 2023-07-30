@@ -260,45 +260,68 @@
             {
                 "command": "ahk++.compile",
                 "key": "ctrl+shift+f9",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
                 "command": "ahk++.debug",
                 "key": "ctrl+alt+f9",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
                 "command": "ahk++.openHelp",
                 "key": "ctrl+f1",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
                 "command": "ahk++.run",
                 "key": "ctrl+f9",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
                 "command": "ahk++.runSelection",
                 "key": "ctrl+f8",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             }
         ],
         "languages": [
             {
                 "id": "ahk",
                 "aliases": [
+                    "AutoHotkey v1",
                     "AutoHotkey",
                     "autohotkey",
                     "ahk"
                 ],
                 "extensions": [
                     ".ahk",
-                    ".ext"
+                    ".ext",
+                    ".ah1",
+                    ".ahk1"
                 ],
                 "configuration": "./language/ahk.configuration.json",
                 "icon": {
                     "dark": "./language/autohotkey.svg",
                     "light": "./language/autohotkey.svg"
+                }
+            },
+            {
+                "id": "ahk2",
+                "aliases": [
+                    "AutoHotkey v2",
+                    "AutoHotkey",
+                    "autohotkey",
+                    "ahk"
+                ],
+                "extensions": [
+                    ".ahk",
+                    ".ext",
+                    ".ah2",
+                    ".ahk2"
+                ],
+                "configuration": "./language/ahk.configuration.json",
+                "icon": {
+                    "dark": "./language/autohotkey2.svg",
+                    "light": "./language/autohotkey2.svg"
                 }
             }
         ],
@@ -306,29 +329,29 @@
             "editor/context": [
                 {
                     "command": "ahk++.compile",
-                    "when": "editorLangId == ahk",
+                    "when": "editorLangId == ahk || editorLangId == ahk2",
                     "group": "navigation@1"
                 },
                 {
                     "command": "ahk++.compilerGui",
-                    "when": "editorLangId == ahk",
+                    "when": "editorLangId == ahk || editorLangId == ahk2",
                     "group": "navigation@1"
                 },
                 {
                     "command": "ahk++.run",
-                    "when": "editorLangId == ahk",
+                    "when": "editorLangId == ahk || editorLangId == ahk2",
                     "group": "navigation@0"
                 },
                 {
                     "command": "ahk++.runSelection",
-                    "when": "editorLangId == ahk && editorHasSelection",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && editorHasSelection",
                     "group": "navigation@-1"
                 }
             ],
             "editor/title": [
                 {
                     "command": "ahk++.debug",
-                    "when": "editorLangId == ahk && config.ahk++.menu.showDebugButton",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.ahk++.menu.showDebugButton",
                     "group": "navigation@1"
                 }
             ]
@@ -341,8 +364,6 @@
         ]
     },
     "activationEvents": [
-        "onLanguage:ahk",
-        "onCommand:ahk++.run",
         "onDebug"
     ],
     "lint-staged": {

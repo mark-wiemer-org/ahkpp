@@ -3,6 +3,7 @@
 
 ; Basic debugger test
 ; Ensure you've run `npm i` before running this test
+; 0. Debug button should appear in title bar
 ; 1. Stop on breakpoint
 ; 2. Step forward works -- Global variables updates
 ; 3. No errors in Debug Console
