@@ -22,6 +22,10 @@ AutoHotkey v2 support now in preview! Please test it out and report any issues, 
 -   No snippets for v2 yet
 -   No syntax highlighting for v2 yet
 
+### Other changes
+
+-   Software now licensed under [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/#). Previous versions of the software remain licensed under [MIT License](https://choosealicense.com/licenses/mit/).
+
 ### TODO
 
 -   Research other extensions:
