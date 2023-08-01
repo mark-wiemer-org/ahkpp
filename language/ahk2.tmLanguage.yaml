@@ -1,3 +1,4 @@
+# Licensed under GNU GPLv3. For details, see LICENSE file.
 # Adapted from https://github.com/thqby/vscode-autohotkey2-lsp/blob/7b0ec9eccd57d05c8f75edf204928fe084e65552/syntaxes/ahk2.tmLanguage.json
 ---
 name: AutoHotkey v2
