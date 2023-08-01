@@ -27,7 +27,7 @@
         "build": "npm run rebuild -- --mode=production",
         "clean": "rimraf out && npm run compile_grammar",
         "compile": "npm run clean && npm run compile_ts",
-        "compile_grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json",
+        "compile_grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json && js-yaml language/ahk2.tmLanguage.yaml > language/ahk2.tmLanguage.json",
         "compile_ts": "tsc -p ./",
         "dev": "npm run rebuild",
         "eslint": "npm run eslint_inner -- src && echo No ESLint problems",
@@ -45,7 +45,7 @@
         "pretest": "npm run compile",
         "test": "npm run test_grammar_inner && npm run test_unit",
         "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",
-        "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
+        "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.{ahk1,ahk2}",
         "test_unit": "node ./out/test/runTest.js",
         "tsc": "tsc --noEmit --skipLibCheck && echo No TSC problems",
         "validate": "npm run lint && npm run test",
@@ -254,6 +254,11 @@
                 "language": "ahk",
                 "scopeName": "source.ahk",
                 "path": "./language/ahk.tmLanguage.json"
+            },
+            {
+                "language": "ahk2",
+                "scopeName": "source.ahk2",
+                "path": "./language/ahk2.tmLanguage.json"
             }
         ],
         "keybindings": [
