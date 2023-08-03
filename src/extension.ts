@@ -14,7 +14,7 @@ import { Global, ConfigKey } from './common/global';
 import { AhkRenameProvider } from './providers/ahkRenameProvider';
 import { SignatureProvider } from './providers/signatureProvider';
 import { CompletionProvider } from './providers/completionProvider';
-import { openHelp } from './service/helpService';
+import { openHelp } from './service/help/helpService';
 
 export function activate(context: vscode.ExtensionContext) {
     (async () => {
