@@ -25,6 +25,7 @@ export async function openHelp() {
     const searchText = getSearchText(editor.document, editor.selection);
     const executePath = Global.getConfig<string>(ConfigKey.executePath);
     if (executePath && existsSync(executePath)) {
+        // Using this as its own file is difficult with esbuild
         const script = `
 #NoTrayIcon
 #DllLoad oleacc.dll
