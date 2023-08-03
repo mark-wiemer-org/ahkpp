@@ -3,6 +3,13 @@
 <!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
 <!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
 
+## 4.1.0 - Unreleased 🙋
+
+-   Add quick help, adapted from thqby's AutoHotkey v2 Language Support
+    -   Selected text (or text at cursor) is now searched within the help documentation
+    -   Known limitation: This always opens a new help window instead of reusing any existing one.
+-   Update file icon to match [official AHK repository](https://github.com/AutoHotkey/AutoHotkey/blob/446829bc730aa002635d3d36bfd17e892b6981c0/source/resources/icons.svg)
+
 ## 4.0.0 - 2023-07-29 🍀
 
 Minimal changes here, just following [semantic versioning](https://semver.org) since there are breaking changes.
