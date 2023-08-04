@@ -3,7 +3,7 @@
 <!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
 <!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
 
-## 4.1.0 - Unreleased 🙋
+## 4.1.0 - 2023-08-03 🙋
 
 -   Add quick help, adapted from thqby's AutoHotkey v2 Language Support
     -   Selected text (or word at cursor) is now searched within the help documentation
