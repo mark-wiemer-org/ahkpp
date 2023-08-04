@@ -6,8 +6,8 @@
 ## 4.1.0 - Unreleased 🙋
 
 -   Add quick help, adapted from thqby's AutoHotkey v2 Language Support
-    -   Selected text (or text at cursor) is now searched within the help documentation
-    -   Known limitation: This always opens a new help window instead of reusing any existing one.
+    -   Selected text (or word at cursor) is now searched within the help documentation
+    -   Known limitation: if selected text would cause a syntax error when injected into a script, help is activated but no search is made. Ref [issue #376](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/376)
 -   Update file icon to match [official AHK repository](https://github.com/AutoHotkey/AutoHotkey/blob/446829bc730aa002635d3d36bfd17e892b6981c0/source/resources/icons.svg)
 
 ## 4.0.0 - 2023-07-29 🍀

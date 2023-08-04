@@ -7,14 +7,28 @@ import * as child_process from 'child_process';
 
 /**
  * Returns the text to use as a search.
- * If no text selected, returns the word at selection position.
+ * If there is selected text that's not all whitespace, it's trimmed and returned.
+ * If the selected text is empty or whitespace, the word at the cursor is returned.
+ * If there is no word immediately before or after the cursor, empty string is returned.
  */
 const getSearchText = (
-    document: Pick<vscode.TextDocument, 'getText' | 'getWordRangeAtPosition'>,
+    document: vscode.TextDocument,
     selection: vscode.Selection,
-) =>
-    document.getText(selection) ||
-    document.getText(document.getWordRangeAtPosition(selection.active));
+): string => {
+    const selectedText = document.getText(selection).trim();
+    if (selectedText) {
+        return selectedText;
+    }
+    // vscode.Document.getWordRangeAtPosition() returns the whole file if there is no word at the cursor
+    const wordAtCursor = document.getText(
+        document.getWordRangeAtPosition(selection.active),
+    );
+    if (!wordAtCursor.includes('\n')) {
+        return wordAtCursor;
+    }
+
+    return '';
+};
 
 export async function openHelp() {
     const editor = vscode.window.activeTextEditor;
@@ -26,54 +40,34 @@ export async function openHelp() {
     const executePath = Global.getConfig<string>(ConfigKey.executePath);
     if (executePath && existsSync(executePath)) {
         // Using this as its own file is difficult with esbuild
-        const script = `
-#NoTrayIcon
-#DllLoad oleacc.dll
-; Find existing help window if it exists and set it on top
-chm_hwnd := 0, chm_path := '${helpPath}', DetectHiddenWindows(true), !(WinGetExStyle(top := WinExist('A')) & 8) && (top := 0)
-for hwnd in WinGetList('AutoHotkey ahk_class HH Parent')
-    for item in ComObjGet('winmgmts:').ExecQuery('SELECT CommandLine FROM Win32_Process WHERE ProcessID=' WinGetPID(hwnd))
-        if InStr(item.CommandLine, chm_path) {
-            chm_hwnd := WinExist(hwnd)
-            break 2
+        const buildScript = (searchText: string, helpPath: string) => `
+SetWinDelay 10
+SetKeyDelay 0
+searchText := "${searchText}"
+IfWinNotExist, AutoHotkey Help
+{
+    Run ${helpPath}
+    WinWait AutoHotkey Help
+}
+WinActivate
+WinWaitActive
+StringReplace, searchText, searchText, #, {#}
+Send, !s
+Sleep 200
+Send {home}
+Sleep 10
+Send +{end}%searchText%{enter}
+return
+        `;
+        try {
+            child_process.execSync(`"${executePath}" /ErrorStdOut *`, {
+                input: buildScript(searchText, helpPath),
+            });
+        } catch {
+            // If user selects value starting with `"`, we get here
+            child_process.execSync(`"${executePath}" /ErrorStdOut *`, {
+                input: buildScript('', helpPath),
+            });
         }
-if top && top != chm_hwnd
-    WinSetAlwaysOnTop(0, top)
-
-; Create new help window if necessary
-if !chm_hwnd
-    Run(chm_path, , , &pid), chm_hwnd := WinWait('AutoHotkey ahk_class HH Parent ahk_pid' pid)
-
-; Show the window and wait for control
-WinShow(), WinActivate(), WinWaitActive(), ctl := 0, endt := A_TickCount + 3000
-while (!ctl && A_TickCount < endt)
-    try ctl := ControlGetHwnd('Internet Explorer_Server1')
-
-; Assign magic value to a pointer
-NumPut('int64', 0x11CF3C3D618736E0, 'int64', 0x719B3800AA000C81, IID_IAccessible := Buffer(16))
-
-; Send the search if user has selected something
-if ${!!searchText} && !DllCall('oleacc\\AccessibleObjectFromWindow', 'ptr', ctl, 'uint', 0, 'ptr', IID_IAccessible, 'ptr*', IAccessible := ComValue(13, 0)) {
-    ; Get the HTML window of the opened help file
-    IServiceProvider := ComObjQuery(IAccessible, IID_IServiceProvider := '{6D5140C1-7436-11CE-8034-00AA006009FA}')
-    NumPut('int64', 0x11D026CB332C4427, 'int64', 0x1901D94FC00083B4, IID_IHTMLWindow2 := Buffer(16))
-    ComCall(3, IServiceProvider, 'ptr', IID_IHTMLWindow2, 'ptr', IID_IHTMLWindow2, 'ptr*', IHTMLWindow2 := ComValue(9, 0))
-
-    ; Execute the search
-    IHTMLWindow2.execScript('
-    (
-        document.querySelector('#head > div > div.h-tabs > ul > li:nth-child(3) > button').click()
-        searchinput = document.querySelector('#left > div.search > div.input > input[type=search]')
-        keyevent = document.createEvent('KeyboardEvent')
-        keyevent.initKeyboardEvent('keyup', false, true, document.defaultView, 13, null, false, false, false, false)
-        searchinput.value = '${searchText}'
-        searchinput.dispatchEvent(keyevent)
-        Object.defineProperties(keyevent, { type: { get: function() { return 'keydown' } }, which: { get: function() { return 13 } } })
-        searchinput.dispatchEvent(keyevent)
-    )')
-}`;
-        child_process.execSync(`"${executePath}" /ErrorStdOut *`, {
-            input: script,
-        });
     }
 }
