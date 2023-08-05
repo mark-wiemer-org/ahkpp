@@ -65,3 +65,7 @@ export class CodeUtil {
         return regs;
     }
 }
+
+/** Whether the current active text editor is for an AHK v1 file */
+export const isV1 = (): boolean =>
+    vscode.window.activeTextEditor?.document.languageId === 'ahk';

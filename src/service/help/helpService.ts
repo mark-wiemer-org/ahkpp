@@ -37,8 +37,10 @@ export async function openHelp() {
     }
     const helpPath = Global.getConfig<string>(ConfigKey.helpPath);
     const searchText = getSearchText(editor.document, editor.selection);
-    const interpreterPath = Global.getConfig<string>(ConfigKey.interpreterPath);
-    if (interpreterPath && existsSync(interpreterPath)) {
+    const interpreterPathV1 = Global.getConfig<string>(
+        ConfigKey.interpreterPathV1,
+    );
+    if (interpreterPathV1 && existsSync(interpreterPathV1)) {
         // Using this as its own file is difficult with esbuild
         const buildScript = (searchText: string, helpPath: string) => `
 SetWinDelay 10
@@ -60,12 +62,12 @@ Send +{end}%searchText%{enter}
 return
         `;
         try {
-            child_process.execSync(`"${interpreterPath}" /ErrorStdOut *`, {
+            child_process.execSync(`"${interpreterPathV1}" /ErrorStdOut *`, {
                 input: buildScript(searchText, helpPath),
             });
         } catch {
             // If user selects value starting with `"`, we get here
-            child_process.execSync(`"${interpreterPath}" /ErrorStdOut *`, {
+            child_process.execSync(`"${interpreterPathV1}" /ErrorStdOut *`, {
                 input: buildScript('', helpPath),
             });
         }

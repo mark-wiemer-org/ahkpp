@@ -96,7 +96,7 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk++.compiler.compileBaseFile": {
+                "ahk++.compiler.compileBaseFileV1": {
                     "type": "string",
                     "default": "",
                     "description": "Base file path for compiling v1 scripts (optional)."
@@ -121,10 +121,15 @@
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "Path to the AHK compiler."
                 },
-                "ahk++.file.interpreterPath": {
+                "ahk++.file.interpreterPathV1": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "Path to the AHK runner."
+                    "description": "Path to the AHK v1 interpreter."
+                },
+                "ahk++.file.interpreterPathV2": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "description": "Path to the AHK v2 interpreter."
                 },
                 "ahk++.file.helpPath": {
                     "type": "string",

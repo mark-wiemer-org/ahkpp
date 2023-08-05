@@ -26,13 +26,14 @@ export class Global {
 
 export enum ConfigKey {
     allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
-    compileBaseFile = 'compiler.compileBaseFile',
+    compileBaseFileV1 = 'compiler.compileBaseFileV1',
     compileBaseFileV2 = 'compiler.compileBaseFileV2',
     compileIcon = 'compiler.compileIcon',
     useMpress = 'compiler.useMpress',
     compilerPath = 'file.compilerPath',
     enableIntellisense = 'intellisense.enableIntellisense',
-    interpreterPath = 'file.interpreterPath',
+    interpreterPathV1 = 'file.interpreterPathV1',
+    interpreterPathV2 = 'file.interpreterPathV2',
     helpPath = 'file.helpPath',
     indentCodeAfterIfDirective = 'formatter.indentCodeAfterIfDirective',
     indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',

@@ -11,7 +11,7 @@ Breaking changes:
 
 -   Rename some settings. Users will have to manually adjust these new settings from the defaults to match their old settings:
     -   `ahk++.file.compilePath` is now `ahk++.file.compilerPath`
-    -   `ahk++.file.executePath` is now `ahk++.file.interpreterPath`
+    -   `ahk++.file.executePath` is now `ahk++.file.interpreterPathV1`
 
 AutoHotkey v2 support now in preview! Please test it out and report any issues, you'll help the community of 120,000+ users of this extension!
 

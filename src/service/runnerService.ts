@@ -4,7 +4,7 @@ import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global, LanguageId } from '../common/global';
 import { exec } from '../common/processWrapper';
 import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
-import { getSelectedText } from '../common/codeUtil';
+import { getSelectedText, isV1 } from '../common/codeUtil';
 
 export const makeCompileCommand = (
     compilerPath: string,
@@ -54,19 +54,19 @@ export class RunnerService {
             type: debugPlusExists ? 'autohotkey' : 'ahk',
             request: 'launch',
             name: 'AutoHotkey Debugger',
-            runtime: Global.getConfig<string>(ConfigKey.interpreterPath),
+            runtime: Global.getConfig<string>(ConfigKey.interpreterPathV1),
             program: script,
         });
     }
 
     /** Runs the script at the specified path */
     public static async run(path?: string): Promise<void> {
-        const interpreterPath = Global.getConfig(ConfigKey.interpreterPath);
+        const interpreterPathV1 = Global.getConfig(ConfigKey.interpreterPathV1);
         this.checkAndSaveActive();
         if (!path) {
             path = await this.getPathByActive();
         }
-        exec(`\"${interpreterPath}\" \"${path}\"`, {
+        exec(`\"${interpreterPathV1}\" \"${path}\"`, {
             cwd: `${res(path, '..')}`,
         });
     }
@@ -76,7 +76,6 @@ export class RunnerService {
      */
     public static async compile(showGui: boolean) {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
-        const languageId = vscode.window.activeTextEditor.document.languageId;
         if (!fs.existsSync(currentPath)) {
             vscode.window.showErrorMessage('Cannot compile new files.');
             return;
@@ -86,9 +85,7 @@ export class RunnerService {
         const compilerPath = Global.getConfig<string>(ConfigKey.compilerPath);
         const compileIcon = Global.getConfig<string>(ConfigKey.compileIcon);
         const compileBaseFile = Global.getConfig<string>(
-            languageId === LanguageId.ahk1
-                ? ConfigKey.compileBaseFile
-                : ConfigKey.compileBaseFileV2,
+            isV1() ? ConfigKey.compileBaseFileV1 : ConfigKey.compileBaseFileV2,
         );
         const useMpress = Global.getConfig<boolean>(ConfigKey.useMpress);
 
