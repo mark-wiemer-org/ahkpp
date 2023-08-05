@@ -111,20 +111,20 @@
                     "default": false,
                     "markdownDescription": "Use [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm) (if available) to compress the resulting executable."
                 },
-                "ahk++.file.compilePath": {
+                "ahk++.file.compilerPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "AHK compiler path."
+                    "description": "Path to the AHK compiler."
                 },
-                "ahk++.file.executePath": {
+                "ahk++.file.runnerPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "AHK runner path."
+                    "description": "Path to the AHK runner."
                 },
                 "ahk++.file.helpPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-                    "description": "Path to the AHK Help document."
+                    "description": "Path to the AHK help document."
                 },
                 "ahk++.file.templateSnippetName": {
                     "type": "string",

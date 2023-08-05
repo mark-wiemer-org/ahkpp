@@ -7,14 +7,14 @@ import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
 import { getSelectedText } from '../common/codeUtil';
 
 export const makeCompileCommand = (
-    compilePath: string,
+    compilerPath: string,
     scriptPath: string,
     showGui: boolean,
     compileIcon: string,
     compileBaseFile: string,
     useMpress: boolean,
 ): string => {
-    if (!compilePath || !scriptPath) {
+    if (!compilerPath || !scriptPath) {
         return '';
     }
     const pos = scriptPath.lastIndexOf('.');
@@ -26,7 +26,7 @@ export const makeCompileCommand = (
         ? `/bin "${compileBaseFile}"`
         : '';
     const compileMpressCommand = useMpress ? '/mpress 1' : '';
-    return `"${compilePath}" ${guiCommand} /in "${scriptPath}" /out "${exePath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
+    return `"${compilerPath}" ${guiCommand} /in "${scriptPath}" /out "${exePath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
 };
 
 export class RunnerService {
@@ -54,19 +54,19 @@ export class RunnerService {
             type: debugPlusExists ? 'autohotkey' : 'ahk',
             request: 'launch',
             name: 'AutoHotkey Debugger',
-            runtime: Global.getConfig<string>(ConfigKey.executePath),
+            runtime: Global.getConfig<string>(ConfigKey.runnerPath),
             program: script,
         });
     }
 
     /** Runs the script at the specified path */
     public static async run(path?: string): Promise<void> {
-        const executePath = Global.getConfig(ConfigKey.executePath);
+        const runnerPath = Global.getConfig(ConfigKey.runnerPath);
         this.checkAndSaveActive();
         if (!path) {
             path = await this.getPathByActive();
         }
-        exec(`\"${executePath}\" \"${path}\"`, {
+        exec(`\"${runnerPath}\" \"${path}\"`, {
             cwd: `${res(path, '..')}`,
         });
     }
@@ -82,7 +82,7 @@ export class RunnerService {
         }
         this.checkAndSaveActive();
 
-        const compilePath = Global.getConfig<string>(ConfigKey.compilePath);
+        const compilerPath = Global.getConfig<string>(ConfigKey.compilerPath);
         const compileIcon = Global.getConfig<string>(ConfigKey.compileIcon);
         const compileBaseFile = Global.getConfig<string>(
             ConfigKey.compileBaseFile,
@@ -90,7 +90,7 @@ export class RunnerService {
         const useMpress = Global.getConfig<boolean>(ConfigKey.useMpress);
 
         const compileCommand = makeCompileCommand(
-            compilePath,
+            compilerPath,
             currentPath,
             showGui,
             compileIcon,

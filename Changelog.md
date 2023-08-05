@@ -7,11 +7,13 @@
 
 -   Preview: AutoHotkey v2 support (more details pending release!)
 
-<!-- Ensure text below is commented before commiting :) -->
+Breaking changes:
 
-<!--
+-   Rename some settings. Users will have to manually adjust these new settings from the defaults to match their old settings:
+    -   `ahk++.file.compilePath` is now `ahk++.file.compilerPath`
+    -   `ahk++.file.executePath` is now `ahk++.file.runnerPath`
 
-AutoHotkey v2 support now in preview! Please test it out and report any issues, you'll help the large community of 120,000+ users of this extension!
+AutoHotkey v2 support now in preview! Please test it out and report any issues, you'll help the community of 120,000+ users of this extension!
 
 -   New blue icon for v2 scripts (configure file association in bottom right of VS Code, in the status bar: "Change Language Mode" command)
 -   `.ahk1` and `.ah1` extensions now available for v1 scripts, `.ahk2` and `.ah2` for v2 scripts. `.ahk` and `.ext` can be used for either version.
