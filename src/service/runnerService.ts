@@ -81,12 +81,8 @@ export class RunnerService {
             return;
         }
         this.checkAndSaveActive();
-        const pos = currentPath.lastIndexOf('.');
 
         const compilePath = Global.getConfig<string>(ConfigKey.compilePath);
-        const compileDestPath =
-            currentPath.substring(0, pos < 0 ? currentPath.length : pos) +
-            '.exe';
         const compileIcon = Global.getConfig<string>(ConfigKey.compileIcon);
         const compileBaseFile = Global.getConfig<string>(
             ConfigKey.compileBaseFile,
