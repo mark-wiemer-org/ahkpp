@@ -11,3 +11,4 @@ out
 .vscode/settings.json
 *.vsix
 language/*.json
+*.exe

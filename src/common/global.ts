@@ -26,9 +26,9 @@ export class Global {
 
 export enum ConfigKey {
     allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
-    compileBaseFile = 'compile.compileBaseFile',
-    compileIcon = 'compile.compileIcon',
-    useMpress = 'compile.useMpress',
+    compileBaseFile = 'compiler.compileBaseFile',
+    compileIcon = 'compiler.compileIcon',
+    useMpress = 'compiler.useMpress',
     compilerPath = 'file.compilerPath',
     enableIntellisense = 'intellisense.enableIntellisense',
     runnerPath = 'file.runnerPath',
