@@ -145,32 +145,32 @@
                 "ahk++.formatter.indentCodeAfterLabel": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Indent code after label."
+                    "description": "Indent code after label. Only applies to AHK v1."
                 },
                 "ahk++.formatter.indentCodeAfterIfDirective": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist)."
+                    "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist). Only applies to AHK v1."
                 },
                 "ahk++.formatter.preserveIndent": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Preserve indentation on empty line."
+                    "description": "Preserve indentation on empty line. Only applies to AHK v1."
                 },
                 "ahk++.formatter.trimExtraSpaces": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Trim extra spaces between words."
+                    "description": "Trim extra spaces between words. Only applies to AHK v1."
                 },
                 "ahk++.intellisense.enableIntellisense": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Add suggestions for relevant variables and methods in the workspace. Requires parsing. Changes take effect after reload."
+                    "description": "Add suggestions for relevant variables and methods in the workspace. Requires parsing. Changes take effect after reload. Only applies to AHK v1."
                 },
                 "ahk++.intellisense.maximumParseLength": {
                     "type": "number",
                     "default": 10000,
-                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nChanges take effect after reload."
+                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nChanges take effect after reload. Only applies to AHK v1."
                 },
                 "ahk++.menu.showDebugButton": {
                     "type": "boolean",
