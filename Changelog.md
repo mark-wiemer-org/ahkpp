@@ -15,8 +15,9 @@ Breaking changes:
 
 AutoHotkey v2 support now in preview! Please test it out and report any issues, you'll help the community of 120,000+ users of this extension!
 
--   New blue icon for v1 scripts (configure file association in bottom right of VS Code, in the status bar: "Change Language Mode" command)
+-   Updated icons
     -   v2 scripts will have official green icons, while v1 scripts have modified blue icons
+    -   Icons are smaller and more aligned with existing VS Code icons
 -   `.ahk1` and `.ah1` extensions now available for v1 scripts, `.ahk2` and `.ah2` for v2 scripts. `.ahk` and `.ext` can be used for either version.
 -   Grammar for v2 provided by [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
 
