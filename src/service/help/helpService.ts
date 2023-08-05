@@ -4,6 +4,7 @@ import { ConfigKey, Global } from '../../common/global';
 import { existsSync } from 'fs';
 import * as vscode from 'vscode';
 import * as child_process from 'child_process';
+import { isV1 } from '../../common/codeUtil';
 
 /**
  * Returns the text to use as a search.
@@ -30,19 +31,7 @@ const getSearchText = (
     return '';
 };
 
-export async function openHelp() {
-    const editor = vscode.window.activeTextEditor;
-    if (!editor) {
-        return;
-    }
-    const helpPath = Global.getConfig<string>(ConfigKey.helpPath);
-    const searchText = getSearchText(editor.document, editor.selection);
-    const interpreterPathV1 = Global.getConfig<string>(
-        ConfigKey.interpreterPathV1,
-    );
-    if (interpreterPathV1 && existsSync(interpreterPathV1)) {
-        // Using this as its own file is difficult with esbuild
-        const buildScript = (searchText: string, helpPath: string) => `
+const buildScriptV1 = (searchText: string, helpPath: string) => `
 SetWinDelay 10
 SetKeyDelay 0
 searchText := "${searchText}"
@@ -59,17 +48,63 @@ Sleep 200
 Send {home}
 Sleep 10
 Send +{end}%searchText%{enter}
-return
-        `;
-        try {
-            child_process.execSync(`"${interpreterPathV1}" /ErrorStdOut *`, {
-                input: buildScript(searchText, helpPath),
-            });
-        } catch {
-            // If user selects value starting with `"`, we get here
-            child_process.execSync(`"${interpreterPathV1}" /ErrorStdOut *`, {
-                input: buildScript('', helpPath),
-            });
-        }
+ExitApp
+`;
+
+const buildScriptV2 = (searchText: string, helpPath: string) => `
+SetWinDelay(10)
+SetKeyDelay(0)
+searchText := "${searchText}"
+if (not WinExist("AutoHotkey v2 Help", ""))
+{
+    Run "${helpPath}"
+    WinWait "AutoHotkey v2 Help"
+}
+WinActivate
+WinWaitActive
+StrReplace(searchText, "#", "{#}")
+Send "!s"
+Sleep 200
+Send "{home}"
+Sleep 10
+Send "+{end}" searchText "{enter}"
+ExitApp()
+`;
+
+export async function openHelp() {
+    const editor = vscode.window.activeTextEditor;
+    if (!editor) {
+        return;
+    }
+    const searchText = getSearchText(editor.document, editor.selection);
+    const helpPath = isV1()
+        ? Global.getConfig<string>(ConfigKey.helpPathV1)
+        : Global.getConfig<string>(ConfigKey.helpPathV2);
+    const interpreterPath = Global.getConfig<string>(
+        isV1() ? ConfigKey.interpreterPathV1 : ConfigKey.interpreterPathV2,
+    );
+    const buildFunc = isV1() ? buildScriptV1 : buildScriptV2;
+    if (!existsSync(helpPath)) {
+        vscode.window.showErrorMessage(
+            `Help path "${helpPath}" does not exist`,
+        );
+        return;
+    }
+    if (!existsSync(interpreterPath)) {
+        vscode.window.showErrorMessage(
+            `Interpreter path "${interpreterPath}" does not exist`,
+        );
+        return;
+    }
+    try {
+        // Using this as its own file is difficult with esbuild
+        child_process.execSync(`"${interpreterPath}" /ErrorStdOut *`, {
+            input: buildFunc(searchText, helpPath),
+        });
+    } catch {
+        // If user selects value starting with `"`, we get here
+        child_process.execSync(`"${interpreterPath}" /ErrorStdOut *`, {
+            input: buildFunc('', helpPath),
+        });
     }
 }

@@ -119,7 +119,7 @@
                 "ahk++.file.compilerPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "Path to the AHK compiler."
+                    "description": "Path to the AHK compiler. (This is the same for both v1 and v2.)"
                 },
                 "ahk++.file.interpreterPathV1": {
                     "type": "string",
@@ -131,10 +131,15 @@
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
                     "description": "Path to the AHK v2 interpreter."
                 },
-                "ahk++.file.helpPath": {
+                "ahk++.file.helpPathV1": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-                    "description": "Path to the AHK help document."
+                    "description": "Path to the AHK v1 help document."
+                },
+                "ahk++.file.helpPathV2": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
+                    "description": "Path to the AHK v2 help document."
                 },
                 "ahk++.file.templateSnippetName": {
                     "type": "string",
