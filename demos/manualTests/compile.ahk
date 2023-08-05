@@ -1,7 +1,8 @@
 #Requires AutoHotkey 1.1.33+
 #SingleInstance force
 
-F1::MsgBox % "Hello world!"
+MsgBox % "Hello world!"
+ExitApp
 
 ; Default extension settings: no base path.
 ; Open Ahk2Exe.exe and set base file to a v1 interpreter. Save as default.

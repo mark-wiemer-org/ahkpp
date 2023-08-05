@@ -2,6 +2,7 @@
 #SingleInstance force
 
 F1::MsgBox("Hello world v2!")
+ExitApp
 
 ; No base file v2.
 ; Open Ahk2Exe.exe and set base file to a v2 interpreter. Save as default.
