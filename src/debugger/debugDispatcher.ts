@@ -33,7 +33,8 @@ export class DebugDispatcher extends EventEmitter {
 
     /** Start executing the given program. */
     public async start(args: LaunchRequestArguments) {
-        const runtime = args.runtime ?? Global.getConfig(ConfigKey.runnerPath);
+        const runtime =
+            args.runtime ?? Global.getConfig(ConfigKey.interpreterPath);
         const dbgpSettings = args.dbgpSettings ?? {};
         // names may used by AHK, let's not change them for now
         const { maxChildren, maxData }: LaunchRequestArguments['dbgpSettings'] =

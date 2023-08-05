@@ -32,7 +32,7 @@ export enum ConfigKey {
     useMpress = 'compiler.useMpress',
     compilerPath = 'file.compilerPath',
     enableIntellisense = 'intellisense.enableIntellisense',
-    runnerPath = 'file.runnerPath',
+    interpreterPath = 'file.interpreterPath',
     helpPath = 'file.helpPath',
     indentCodeAfterIfDirective = 'formatter.indentCodeAfterIfDirective',
     indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',

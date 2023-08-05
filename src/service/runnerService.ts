@@ -54,19 +54,19 @@ export class RunnerService {
             type: debugPlusExists ? 'autohotkey' : 'ahk',
             request: 'launch',
             name: 'AutoHotkey Debugger',
-            runtime: Global.getConfig<string>(ConfigKey.runnerPath),
+            runtime: Global.getConfig<string>(ConfigKey.interpreterPath),
             program: script,
         });
     }
 
     /** Runs the script at the specified path */
     public static async run(path?: string): Promise<void> {
-        const runnerPath = Global.getConfig(ConfigKey.runnerPath);
+        const interpreterPath = Global.getConfig(ConfigKey.interpreterPath);
         this.checkAndSaveActive();
         if (!path) {
             path = await this.getPathByActive();
         }
-        exec(`\"${runnerPath}\" \"${path}\"`, {
+        exec(`\"${interpreterPath}\" \"${path}\"`, {
             cwd: `${res(path, '..')}`,
         });
     }

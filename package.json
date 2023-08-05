@@ -121,7 +121,7 @@
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "Path to the AHK compiler."
                 },
-                "ahk++.file.runnerPath": {
+                "ahk++.file.interpreterPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
                     "description": "Path to the AHK runner."
