@@ -77,7 +77,7 @@ export class RunnerService {
     public static async compile(showGui: boolean) {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
         if (!fs.existsSync(currentPath)) {
-            vscode.window.showErrorMessage('Cannot compile never-saved files.');
+            vscode.window.showErrorMessage('Cannot compile new files.');
             return;
         }
         this.checkAndSaveActive();
