@@ -1,7 +1,7 @@
 import { resolve as res } from 'path';
 import * as vscode from 'vscode';
 import { FileManager, FileModel } from '../common/fileManager';
-import { ConfigKey, Global } from '../common/global';
+import { ConfigKey, Global, LanguageId } from '../common/global';
 import { exec } from '../common/processWrapper';
 import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
 import { getSelectedText } from '../common/codeUtil';
@@ -76,6 +76,7 @@ export class RunnerService {
      */
     public static async compile(showGui: boolean) {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
+        const languageId = vscode.window.activeTextEditor.document.languageId;
         if (!fs.existsSync(currentPath)) {
             vscode.window.showErrorMessage('Cannot compile new files.');
             return;
@@ -85,7 +86,9 @@ export class RunnerService {
         const compilerPath = Global.getConfig<string>(ConfigKey.compilerPath);
         const compileIcon = Global.getConfig<string>(ConfigKey.compileIcon);
         const compileBaseFile = Global.getConfig<string>(
-            ConfigKey.compileBaseFile,
+            languageId === LanguageId.ahk1
+                ? ConfigKey.compileBaseFile
+                : ConfigKey.compileBaseFileV2,
         );
         const useMpress = Global.getConfig<boolean>(ConfigKey.useMpress);
 

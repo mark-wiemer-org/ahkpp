@@ -99,7 +99,12 @@
                 "ahk++.compiler.compileBaseFile": {
                     "type": "string",
                     "default": "",
-                    "description": "Base file (.bin) path for compiling (optional)."
+                    "description": "Base file path for compiling v1 scripts (optional)."
+                },
+                "ahk++.compiler.compileBaseFileV2": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Base file path for compiling v2 scripts (optional)."
                 },
                 "ahk++.compiler.compileIcon": {
                     "type": "string",

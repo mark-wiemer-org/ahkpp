@@ -27,6 +27,7 @@ export class Global {
 export enum ConfigKey {
     allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
     compileBaseFile = 'compiler.compileBaseFile',
+    compileBaseFileV2 = 'compiler.compileBaseFileV2',
     compileIcon = 'compiler.compileIcon',
     useMpress = 'compiler.useMpress',
     compilerPath = 'file.compilerPath',
@@ -39,4 +40,9 @@ export enum ConfigKey {
     preserveIndent = 'formatter.preserveIndent',
     templateSnippetName = 'file.templateSnippetName',
     trimExtraSpaces = 'formatter.trimExtraSpaces',
+}
+
+export enum LanguageId {
+    ahk1 = 'ahk',
+    ahk2 = 'ahk2',
 }
