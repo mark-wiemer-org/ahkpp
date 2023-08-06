@@ -50,18 +50,23 @@ export class RunnerService {
         const debugPlusExists = !!vscode.extensions.getExtension(
             'zero-plusplus.vscode-autohotkey-debug',
         );
+        const interpreterPathKey = isV1()
+            ? ConfigKey.interpreterPathV1
+            : ConfigKey.interpreterPathV2;
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {
             type: debugPlusExists ? 'autohotkey' : 'ahk',
             request: 'launch',
             name: 'AutoHotkey Debugger',
-            runtime: Global.getConfig<string>(ConfigKey.interpreterPathV1),
+            runtime: Global.getConfig<string>(interpreterPathKey),
             program: script,
         });
     }
 
     /** Runs the script at the specified path */
     public static async run(path?: string): Promise<void> {
-        const interpreterPathV1 = Global.getConfig(ConfigKey.interpreterPathV1);
+        const interpreterPathV1 = Global.getConfig(
+            isV1() ? ConfigKey.interpreterPathV1 : ConfigKey.interpreterPathV2,
+        );
         this.checkAndSaveActive();
         if (!path) {
             path = await this.getPathByActive();
