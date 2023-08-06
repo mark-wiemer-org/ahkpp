@@ -36,7 +36,6 @@ export class DebugDispatcher extends EventEmitter {
         const runtime =
             args.runtime ?? Global.getConfig(ConfigKey.interpreterPathV1);
         const dbgpSettings = args.dbgpSettings ?? {};
-        // names may used by AHK, let's not change them for now
         const { maxChildren, maxData }: LaunchRequestArguments['dbgpSettings'] =
             {
                 maxChildren: 300,
