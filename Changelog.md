@@ -23,10 +23,10 @@ AutoHotkey v2 support now in preview! Please test it out and report any issues, 
 
 ### Known issues
 
--   Compiling without explicitly setting a base file can cause issues.
-    -   If the target script and base file are different versions, compilation fails with an informative error.
--   Existing commands use the same settings for both v1 and v2, causing issues when working with both versions in the same project.
--   No snippets for v2 yet
+-   Missing features for AHK v2:
+    -   Snippets
+    -   Formatting
+    -   Debugging
 
 ### TODO
 
