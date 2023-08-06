@@ -29,7 +29,6 @@ export enum ConfigKey {
     compileBaseFileV1 = 'compiler.compileBaseFileV1',
     compileBaseFileV2 = 'compiler.compileBaseFileV2',
     compileIcon = 'compiler.compileIcon',
-    useMpress = 'compiler.useMpress',
     compilerPath = 'file.compilerPath',
     enableIntellisense = 'intellisense.enableIntellisense',
     interpreterPathV1 = 'file.interpreterPathV1',
@@ -42,6 +41,7 @@ export enum ConfigKey {
     preserveIndent = 'formatter.preserveIndent',
     templateSnippetName = 'file.templateSnippetName',
     trimExtraSpaces = 'formatter.trimExtraSpaces',
+    useMpress = 'compiler.useMpress',
 }
 
 export enum LanguageId {
