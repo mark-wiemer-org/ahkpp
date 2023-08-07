@@ -32,4 +32,24 @@ To test, just create a new file! If you have any issues, please [open a discussi
 
 ## Troubleshooting
 
-The name of the snippet must be unique, not used by any other extension. This extension uses the name `AhkTemplate`, and other extensions may use similar names.
+The name of the snippet must be unique, not used by any other extension. This extension uses the names `AhkTemplateV1` and `AhkTemplateV2`. Other extensions may use similar names.
+
+## Reference
+
+The default templates are as follows:
+
+v1:
+
+```ahk
+#NoEnv
+#SingleInstance, Force
+SendMode, Input
+SetBatchLines, -1
+SetWorkingDir, %A_ScriptDir%
+```
+
+v2:
+
+```ahk
+#Requires AutoHotkey v2.0
+```

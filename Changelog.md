@@ -26,13 +26,9 @@ AutoHotkey v2 support now in preview! Please test it out and report any issues, 
 -   Missing features for AHK v2:
     -   Snippets
     -   Formatting
-    -   Debugging
 
 ### TODO
 
--   Research other extensions:
-    -   [AutoHotkey v2 Language Support by thqby](https://github.com/thqby/vscode-autohotkey2-lsp)
--   New "v2 bugs" template
 -   Integrate [AutoHotkey Auto-Select](https://github.com/Lexikos/vscode-auto-select) by Lexikos
 
 <!-- -->

@@ -1,5 +1,5 @@
 {
-    "AhkTemplate": {
+    "AhkTemplateV1": {
         "prefix": "#TEMPLATE",
         "body": [
             "#NoEnv",

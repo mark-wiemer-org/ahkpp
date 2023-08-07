@@ -1,17 +1,21 @@
-import { ConfigKey, Global } from '../common/global';
+import { isV1 } from '../common/codeUtil';
+import { ConfigKey, Global, LanguageId } from '../common/global';
 import * as vscode from 'vscode';
 
-/** Adds template whenever empty AHK files are opened */
+/** Adds template whenever empty AHK files (v1 or v2) are opened */
 export const createEditorListener = (): vscode.Disposable =>
     vscode.window.onDidChangeActiveTextEditor((e) => {
         if (
             e &&
-            e.document.languageId === 'ahk' &&
+            (e.document.languageId === LanguageId.ahk1 ||
+                e.document.languageId === LanguageId.ahk2) &&
             e.document.getText() === ''
         ) {
-            // Call getConfig within if -- for performance
+            const templateSnippetNameKey = isV1()
+                ? ConfigKey.templateSnippetNameV1
+                : ConfigKey.templateSnippetNameV2;
             const templateSnippetName = Global.getConfig<string>(
-                ConfigKey.templateSnippetName,
+                templateSnippetNameKey,
             );
             if (templateSnippetName === '') {
                 return;

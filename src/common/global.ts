@@ -39,7 +39,8 @@ export enum ConfigKey {
     indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',
     maximumParseLength = 'intellisense.maximumParseLength',
     preserveIndent = 'formatter.preserveIndent',
-    templateSnippetName = 'file.templateSnippetName',
+    templateSnippetNameV1 = 'file.templateSnippetNameV1',
+    templateSnippetNameV2 = 'file.templateSnippetNameV2',
     trimExtraSpaces = 'formatter.trimExtraSpaces',
     useMpress = 'compiler.useMpress',
 }

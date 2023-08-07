@@ -145,9 +145,14 @@
                     "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
                     "description": "Path to the AHK v2 help document."
                 },
-                "ahk++.file.templateSnippetName": {
+                "ahk++.file.templateSnippetNameV1": {
                     "type": "string",
-                    "default": "AhkTemplate",
+                    "default": "AhkTemplateV1",
+                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/vscode-autohotkey/ahkpp/tree/main/docs/TemplateSnippet.md)."
+                },
+                "ahk++.file.templateSnippetNameV2": {
+                    "type": "string",
+                    "default": "AhkTemplateV2",
                     "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/vscode-autohotkey/ahkpp/tree/main/docs/TemplateSnippet.md)."
                 },
                 "ahk++.formatter.allowedNumberOfEmptyLines": {
@@ -383,7 +388,11 @@
         "snippets": [
             {
                 "language": "ahk",
-                "path": "./language/snippets.json"
+                "path": "./language/snippetsV1.json"
+            },
+            {
+                "language": "ahk2",
+                "path": "./language/snippetsV2.json"
             }
         ]
     },

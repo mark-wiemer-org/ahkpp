@@ -10,5 +10,5 @@ out
 # Files
 .vscode/settings.json
 *.vsix
-language/*.json
+language/*.tmLanguage.json
 *.exe
