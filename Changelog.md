@@ -5,15 +5,15 @@
 
 ## 5.0.0 - Unreleased ✌️
 
--   Preview: AutoHotkey v2 support (more details pending release!)
+AutoHotkey v2 support now in preview! Please test it out and [report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new?assignees=mark-wiemer&labels=AHK+v2&projects=&template=v2.md&title=%5Bv2%5D+), you'll help the community of 120,000+ users of this extension!
 
-Breaking changes:
+### Breaking changes
 
 -   Rename some settings. Users will have to manually adjust these new settings from the defaults to match their old settings:
     -   `ahk++.file.compilePath` is now `ahk++.file.compilerPath`
     -   `ahk++.file.executePath` is now `ahk++.file.interpreterPathV1`
 
-AutoHotkey v2 support now in preview! Please test it out and report any issues, you'll help the community of 120,000+ users of this extension!
+### Other changes
 
 -   Updated icons
     -   v2 scripts will have official green icons, while v1 scripts have modified blue icons
@@ -23,9 +23,11 @@ AutoHotkey v2 support now in preview! Please test it out and report any issues, 
 
 ### Known issues
 
+Some features are not added to this initial preview release, but will be coming soon!
+
 -   Missing features for AHK v2:
-    -   Snippets
-    -   Formatting
+    -   Formatting ([Issue #381](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/381))
+    -   Snippets ([Issue #382](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/382))
 
 ### TODO
 
