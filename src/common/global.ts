@@ -26,17 +26,26 @@ export class Global {
 
 export enum ConfigKey {
     allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
-    compileBaseFile = 'compile.compileBaseFile',
-    compileIcon = 'compile.compileIcon',
-    useMpress = 'compile.useMpress',
-    compilePath = 'file.compilePath',
+    compileBaseFileV1 = 'compiler.compileBaseFileV1',
+    compileBaseFileV2 = 'compiler.compileBaseFileV2',
+    compileIcon = 'compiler.compileIcon',
+    compilerPath = 'file.compilerPath',
     enableIntellisense = 'intellisense.enableIntellisense',
-    executePath = 'file.executePath',
-    helpPath = 'file.helpPath',
+    interpreterPathV1 = 'file.interpreterPathV1',
+    interpreterPathV2 = 'file.interpreterPathV2',
+    helpPathV1 = 'file.helpPathV1',
+    helpPathV2 = 'file.helpPathV2',
     indentCodeAfterIfDirective = 'formatter.indentCodeAfterIfDirective',
     indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',
     maximumParseLength = 'intellisense.maximumParseLength',
     preserveIndent = 'formatter.preserveIndent',
-    templateSnippetName = 'file.templateSnippetName',
+    templateSnippetNameV1 = 'file.templateSnippetNameV1',
+    templateSnippetNameV2 = 'file.templateSnippetNameV2',
     trimExtraSpaces = 'formatter.trimExtraSpaces',
+    useMpress = 'compiler.useMpress',
+}
+
+export enum LanguageId {
+    ahk1 = 'ahk',
+    ahk2 = 'ahk2',
 }

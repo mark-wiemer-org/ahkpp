@@ -1,5 +1,5 @@
-#Requires AutoHotkey 1.1.33+
-#SingleInstance force
+#Requires AutoHotkey 2+
+#SingleInstance
 
 ; Select a word and use Ctrl+F1 to open help
 ; Click on a word (but don't select it), open help should still search that word

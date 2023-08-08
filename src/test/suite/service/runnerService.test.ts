@@ -5,14 +5,14 @@ suite('runnerService', () => {
     suite('makeCompileCommand', () => {
         // Declare exact type for exact VS Code hover hints
         const defaultArgs: {
-            compilePath: 'mockCompilePath';
+            compilerPath: 'mockCompilerPath';
             scriptPath: 'mockScriptPath';
             showGui: false;
             compileIcon: '';
             compileBaseFile: '';
             useMpress: false;
         } = {
-            compilePath: 'mockCompilePath',
+            compilerPath: 'mockCompilerPath',
             scriptPath: 'mockScriptPath',
             showGui: false,
             compileIcon: '',
@@ -22,7 +22,7 @@ suite('runnerService', () => {
 
         const tests: {
             name: string;
-            compilePath: string;
+            compilerPath: string;
             scriptPath: string;
             showGui: boolean;
             compileIcon: string;
@@ -33,44 +33,44 @@ suite('runnerService', () => {
             {
                 name: 'Default args',
                 ...defaultArgs,
-                expected: `"mockCompilePath"  /in "mockScriptPath" /out "mockScriptPath.exe"   `,
+                expected: `"mockCompilerPath"  /in "mockScriptPath" /out "mockScriptPath.exe"   `,
             },
             {
                 name: 'Usual current path',
                 ...defaultArgs,
                 scriptPath: 'mock/current/path/myFile.ahk',
-                expected: `"mockCompilePath"  /in "mock/current/path/myFile.ahk" /out "mock/current/path/myFile.exe"   `,
+                expected: `"mockCompilerPath"  /in "mock/current/path/myFile.ahk" /out "mock/current/path/myFile.exe"   `,
             },
             {
                 name: 'Base file',
                 ...defaultArgs,
                 compileBaseFile: 'mockCompileBaseFile',
-                expected: `"mockCompilePath"  /in "mockScriptPath" /out "mockScriptPath.exe"  /bin "mockCompileBaseFile" `,
+                expected: `"mockCompilerPath"  /in "mockScriptPath" /out "mockScriptPath.exe"  /bin "mockCompileBaseFile" `,
             },
             {
                 name: 'Compile icon',
                 ...defaultArgs,
                 compileIcon: 'mockCompileIcon',
-                expected: `"mockCompilePath"  /in "mockScriptPath" /out "mockScriptPath.exe" /icon "mockCompileIcon"  `,
+                expected: `"mockCompilerPath"  /in "mockScriptPath" /out "mockScriptPath.exe" /icon "mockCompileIcon"  `,
             },
             {
                 name: 'Compile icon and base file',
                 ...defaultArgs,
                 compileIcon: 'mockCompileIcon',
                 compileBaseFile: 'mockCompileBaseFile',
-                expected: `"mockCompilePath"  /in "mockScriptPath" /out "mockScriptPath.exe" /icon "mockCompileIcon" /bin "mockCompileBaseFile" `,
+                expected: `"mockCompilerPath"  /in "mockScriptPath" /out "mockScriptPath.exe" /icon "mockCompileIcon" /bin "mockCompileBaseFile" `,
             },
             {
                 name: 'Use MPRESS',
                 ...defaultArgs,
                 useMpress: true,
-                expected: `"mockCompilePath"  /in "mockScriptPath" /out "mockScriptPath.exe"   /mpress 1`,
+                expected: `"mockCompilerPath"  /in "mockScriptPath" /out "mockScriptPath.exe"   /mpress 1`,
             },
             {
                 name: 'Show GUI',
                 ...defaultArgs,
                 showGui: true,
-                expected: `"mockCompilePath" /gui /in "mockScriptPath" /out "mockScriptPath.exe"   `,
+                expected: `"mockCompilerPath" /gui /in "mockScriptPath" /out "mockScriptPath.exe"   `,
             },
             {
                 name: 'Everthing populated',
@@ -79,12 +79,12 @@ suite('runnerService', () => {
                 compileIcon: 'mockCompileIcon',
                 showGui: true,
                 useMpress: true,
-                expected: `"mockCompilePath" /gui /in "mockScriptPath" /out "mockScriptPath.exe" /icon "mockCompileIcon" /bin "mockCompileBaseFile" /mpress 1`,
+                expected: `"mockCompilerPath" /gui /in "mockScriptPath" /out "mockScriptPath.exe" /icon "mockCompileIcon" /bin "mockCompileBaseFile" /mpress 1`,
             },
             {
                 name: 'Empty compile path',
                 ...defaultArgs,
-                compilePath: '',
+                compilerPath: '',
                 expected: ``,
             },
             {
@@ -98,7 +98,7 @@ suite('runnerService', () => {
             test(myTest.name, () => {
                 assert.strictEqual(
                     makeCompileCommand(
-                        myTest.compilePath,
+                        myTest.compilerPath,
                         myTest.scriptPath,
                         myTest.showGui,
                         myTest.compileIcon,

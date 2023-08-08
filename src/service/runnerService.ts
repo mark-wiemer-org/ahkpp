@@ -1,20 +1,20 @@
 import { resolve as res } from 'path';
 import * as vscode from 'vscode';
 import { FileManager, FileModel } from '../common/fileManager';
-import { ConfigKey, Global } from '../common/global';
+import { ConfigKey, Global, LanguageId } from '../common/global';
 import { exec } from '../common/processWrapper';
 import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
-import { getSelectedText } from '../common/codeUtil';
+import { getSelectedText, isV1 } from '../common/codeUtil';
 
 export const makeCompileCommand = (
-    compilePath: string,
+    compilerPath: string,
     scriptPath: string,
     showGui: boolean,
     compileIcon: string,
     compileBaseFile: string,
     useMpress: boolean,
 ): string => {
-    if (!compilePath || !scriptPath) {
+    if (!compilerPath || !scriptPath) {
         return '';
     }
     const pos = scriptPath.lastIndexOf('.');
@@ -26,7 +26,7 @@ export const makeCompileCommand = (
         ? `/bin "${compileBaseFile}"`
         : '';
     const compileMpressCommand = useMpress ? '/mpress 1' : '';
-    return `"${compilePath}" ${guiCommand} /in "${scriptPath}" /out "${exePath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
+    return `"${compilerPath}" ${guiCommand} /in "${scriptPath}" /out "${exePath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
 };
 
 export class RunnerService {
@@ -50,23 +50,28 @@ export class RunnerService {
         const debugPlusExists = !!vscode.extensions.getExtension(
             'zero-plusplus.vscode-autohotkey-debug',
         );
+        const interpreterPathKey = isV1()
+            ? ConfigKey.interpreterPathV1
+            : ConfigKey.interpreterPathV2;
         vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {
             type: debugPlusExists ? 'autohotkey' : 'ahk',
             request: 'launch',
             name: 'AutoHotkey Debugger',
-            runtime: Global.getConfig<string>(ConfigKey.executePath),
+            runtime: Global.getConfig<string>(interpreterPathKey),
             program: script,
         });
     }
 
     /** Runs the script at the specified path */
     public static async run(path?: string): Promise<void> {
-        const executePath = Global.getConfig(ConfigKey.executePath);
+        const interpreterPathV1 = Global.getConfig(
+            isV1() ? ConfigKey.interpreterPathV1 : ConfigKey.interpreterPathV2,
+        );
         this.checkAndSaveActive();
         if (!path) {
             path = await this.getPathByActive();
         }
-        exec(`\"${executePath}\" \"${path}\"`, {
+        exec(`\"${interpreterPathV1}\" \"${path}\"`, {
             cwd: `${res(path, '..')}`,
         });
     }
@@ -77,24 +82,20 @@ export class RunnerService {
     public static async compile(showGui: boolean) {
         const currentPath = vscode.window.activeTextEditor.document.uri.fsPath;
         if (!fs.existsSync(currentPath)) {
-            vscode.window.showErrorMessage('Cannot compile never-saved files.');
+            vscode.window.showErrorMessage('Cannot compile new files.');
             return;
         }
         this.checkAndSaveActive();
-        const pos = currentPath.lastIndexOf('.');
 
-        const compilePath = Global.getConfig<string>(ConfigKey.compilePath);
-        const compileDestPath =
-            currentPath.substring(0, pos < 0 ? currentPath.length : pos) +
-            '.exe';
+        const compilerPath = Global.getConfig<string>(ConfigKey.compilerPath);
         const compileIcon = Global.getConfig<string>(ConfigKey.compileIcon);
         const compileBaseFile = Global.getConfig<string>(
-            ConfigKey.compileBaseFile,
+            isV1() ? ConfigKey.compileBaseFileV1 : ConfigKey.compileBaseFileV2,
         );
         const useMpress = Global.getConfig<boolean>(ConfigKey.useMpress);
 
         const compileCommand = makeCompileCommand(
-            compilePath,
+            compilerPath,
             currentPath,
             showGui,
             compileIcon,

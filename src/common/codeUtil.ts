@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { LanguageId } from './global';
 
 /**
  * Returns the editor's selected text.
@@ -65,3 +66,10 @@ export class CodeUtil {
         return regs;
     }
 }
+
+/** Whether the current active text editor is for an AHK v1 file */
+export const isV1 = (): boolean =>
+    vscode.window.activeTextEditor?.document.languageId === LanguageId.ahk1;
+
+export const isAHK = (languageId: string): boolean =>
+    languageId === LanguageId.ahk1 || languageId === LanguageId.ahk2;

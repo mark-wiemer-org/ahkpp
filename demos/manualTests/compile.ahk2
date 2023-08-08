@@ -1,0 +1,14 @@
+#Requires AutoHotkey 2+
+#SingleInstance force
+
+MsgBox("Hello world v2!")
+ExitApp()
+
+; Settings: No base file v2.
+; Open Ahk2Exe.exe and set base file to a v2 interpreter. Save as default.
+; Ctrl+Shift+F9 to compile this script
+
+; Settings: Base file v2 set to v2 interpreter:
+; C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe
+; Open Ahk2Exe.exe and set base file to a v1 interpreter. Save as default.
+; Ctrl+Shift+F9 to compile this script

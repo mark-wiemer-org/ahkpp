@@ -3,6 +3,46 @@
 <!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
 <!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
 
+## 5.0.0 - Unreleased ✌️
+
+AutoHotkey v2 support now in preview! Please test it out and [report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new?assignees=mark-wiemer&labels=AHK+v2&projects=&template=v2.md&title=%5Bv2%5D+), you'll help the community of 120,000+ users of this extension!
+
+Be sure to go to the settings and update the new `V2` settings in case the defaults aren't correct 😊
+
+### Breaking changes
+
+-   Rename some settings. Users will have to manually adjust these new settings from the defaults to match their old settings:
+    -   `ahk++.compiler.compileBaseFile` is now `ahk++.compiler.compileBaseFileV1`
+    -   `ahk++.file.compilePath` is now `ahk++.file.compilerPath`
+    -   `ahk++.file.executePath` is now `ahk++.file.interpreterPathV1`
+    -   `ahk++.file.helpPath` is now `ahk++.file.helpPathV1`
+    -   `ahk++.file.templateSnippetName` is now `ahk++.file.templateSnippetNameV1` with default value `AhkTemplateV1`
+
+### Other changes
+
+-   Allow `.ahk1` and `.ah1` extensions for v1 scripts, `.ahk2` and `.ah2` for v2 scripts. `.ahk` and `.ext` can be used for either version and still default to v1.
+-   Automatically change AHK version to match the `#Requires` directive near the top of any script the first time that script is opened
+-   Allow running and debugging v1 or v2 scripts without changing settings
+-   "Open help" (Ctrl + F1) now opens version-specific help
+-   Add full syntax highlighting for v2 scripts thanks to [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)
+-   Update icons (found next to a script's name in the explorer)
+    -   v2 scripts will have official green icons, while v1 scripts now have modified blue icons
+    -   Icons are a bit smaller to align with existing VS Code icons
+
+### Known issues
+
+Some features are not added to this initial preview release, but will be coming soon!
+
+-   Missing features for AHK v2:
+    -   Formatting ([Issue #381](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/381))
+    -   Snippets ([Issue #382](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/382))
+
+### Thank you!
+
+This update relies heavily on open-source code from [thqby](https://github.com/thqby) and [Steve Gray (Lexikos)](https://github.com/Lexikos). Thank you for your awesome work!
+
+<!-- -->
+
 ## 4.1.0 - 2023-08-03 🙋
 
 -   Add quick help, adapted from thqby's AutoHotkey v2 Language Support

@@ -1,0 +1,8 @@
+#Requires AutoHotkey 2+
+#SingleInstance
+
+MsgBox("1")
+
+; Select the following two lines and hit `Ctrl + F8` to run selection
+MsgBox("2")
+ExitApp()

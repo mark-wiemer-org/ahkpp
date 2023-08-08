@@ -112,7 +112,7 @@ export class AhkHoverProvider implements HoverProvider {
     private initSnippetCache(context: ExtensionContext) {
         const ahk = JSON.parse(
             readFileSync(
-                join(context.extensionPath, 'language', 'snippets.json'),
+                join(context.extensionPath, 'language', 'snippetsV1.json'),
                 'utf8',
             ),
         );

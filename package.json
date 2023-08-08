@@ -2,15 +2,19 @@
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
     "version": "4.1.0",
-    "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
+    "description": "AutoHotkey v1 and v2 language support for Visual Studio Code: IntelliSense, debugging, formatting, and more",
     "categories": [
         "Programming Languages",
-        "Snippets"
+        "Snippets",
+        "Formatters"
     ],
     "keywords": [
         "vscode",
         "autohotkey",
-        "ahk"
+        "ahk",
+        "ahk2",
+        "ahk v2",
+        "ahk v1"
     ],
     "homepage": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/README.md",
     "bugs": {
@@ -27,7 +31,7 @@
         "build": "npm run rebuild -- --mode=production",
         "clean": "rimraf out && npm run compile_grammar",
         "compile": "npm run clean && npm run compile_ts",
-        "compile_grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json",
+        "compile_grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json && js-yaml language/ahk2.tmLanguage.yaml > language/ahk2.tmLanguage.json",
         "compile_ts": "tsc -p ./",
         "dev": "npm run rebuild",
         "eslint": "npm run eslint_inner -- src && echo No ESLint problems",
@@ -45,7 +49,7 @@
         "pretest": "npm run compile",
         "test": "npm run test_grammar_inner && npm run test_unit",
         "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",
-        "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
+        "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.{ahk1,ahk2}",
         "test_unit": "node ./out/test/runTest.js",
         "tsc": "tsc --noEmit --skipLibCheck && echo No TSC problems",
         "validate": "npm run lint && npm run test",
@@ -96,10 +100,15 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk++.compiler.compileBaseFile": {
+                "ahk++.compiler.compileBaseFileV1": {
                     "type": "string",
                     "default": "",
-                    "description": "Base file (.bin) path for compiling (optional)."
+                    "description": "Base file path for compiling v1 scripts (optional)."
+                },
+                "ahk++.compiler.compileBaseFileV2": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Base file path for compiling v2 scripts (optional)."
                 },
                 "ahk++.compiler.compileIcon": {
                     "type": "string",
@@ -111,24 +120,39 @@
                     "default": false,
                     "markdownDescription": "Use [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm) (if available) to compress the resulting executable."
                 },
-                "ahk++.file.compilePath": {
+                "ahk++.file.compilerPath": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "AHK compiler path."
+                    "description": "Path to the AHK compiler. (This is the same for both v1 and v2.)"
                 },
-                "ahk++.file.executePath": {
+                "ahk++.file.interpreterPathV1": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "AHK runner path."
+                    "description": "Path to the AHK v1 interpreter."
                 },
-                "ahk++.file.helpPath": {
+                "ahk++.file.interpreterPathV2": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "description": "Path to the AHK v2 interpreter."
+                },
+                "ahk++.file.helpPathV1": {
                     "type": "string",
                     "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-                    "description": "Path to the AHK Help document."
+                    "description": "Path to the AHK v1 help document."
                 },
-                "ahk++.file.templateSnippetName": {
+                "ahk++.file.helpPathV2": {
                     "type": "string",
-                    "default": "AhkTemplate",
+                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
+                    "description": "Path to the AHK v2 help document."
+                },
+                "ahk++.file.templateSnippetNameV1": {
+                    "type": "string",
+                    "default": "AhkTemplateV1",
+                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/vscode-autohotkey/ahkpp/tree/main/docs/TemplateSnippet.md)."
+                },
+                "ahk++.file.templateSnippetNameV2": {
+                    "type": "string",
+                    "default": "AhkTemplateV2",
                     "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/vscode-autohotkey/ahkpp/tree/main/docs/TemplateSnippet.md)."
                 },
                 "ahk++.formatter.allowedNumberOfEmptyLines": {
@@ -140,32 +164,32 @@
                 "ahk++.formatter.indentCodeAfterLabel": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Indent code after label."
+                    "description": "Indent code after label. Only applies to AHK v1."
                 },
                 "ahk++.formatter.indentCodeAfterIfDirective": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist)."
+                    "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist). Only applies to AHK v1."
                 },
                 "ahk++.formatter.preserveIndent": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Preserve indentation on empty line."
+                    "description": "Preserve indentation on empty line. Only applies to AHK v1."
                 },
                 "ahk++.formatter.trimExtraSpaces": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Trim extra spaces between words."
+                    "description": "Trim extra spaces between words. Only applies to AHK v1."
                 },
                 "ahk++.intellisense.enableIntellisense": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Add suggestions for relevant variables and methods in the workspace. Requires parsing. Changes take effect after reload."
+                    "description": "Add suggestions for relevant variables and methods in the workspace. Requires parsing. Changes take effect after reload. Only applies to AHK v1."
                 },
                 "ahk++.intellisense.maximumParseLength": {
                     "type": "number",
                     "default": 10000,
-                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nChanges take effect after reload."
+                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nChanges take effect after reload. Only applies to AHK v1."
                 },
                 "ahk++.menu.showDebugButton": {
                     "type": "boolean",
@@ -254,51 +278,79 @@
                 "language": "ahk",
                 "scopeName": "source.ahk",
                 "path": "./language/ahk.tmLanguage.json"
+            },
+            {
+                "language": "ahk2",
+                "scopeName": "source.ahk2",
+                "path": "./language/ahk2.tmLanguage.json"
             }
         ],
         "keybindings": [
             {
                 "command": "ahk++.compile",
                 "key": "ctrl+shift+f9",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
                 "command": "ahk++.debug",
                 "key": "ctrl+alt+f9",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
                 "command": "ahk++.openHelp",
                 "key": "ctrl+f1",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
                 "command": "ahk++.run",
                 "key": "ctrl+f9",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
                 "command": "ahk++.runSelection",
                 "key": "ctrl+f8",
-                "when": "editorLangId == ahk"
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             }
         ],
         "languages": [
             {
                 "id": "ahk",
                 "aliases": [
+                    "AutoHotkey v1",
                     "AutoHotkey",
                     "autohotkey",
                     "ahk"
                 ],
                 "extensions": [
                     ".ahk",
-                    ".ext"
+                    ".ext",
+                    ".ah1",
+                    ".ahk1"
                 ],
                 "configuration": "./language/ahk.configuration.json",
                 "icon": {
                     "dark": "./language/autohotkey.svg",
                     "light": "./language/autohotkey.svg"
+                }
+            },
+            {
+                "id": "ahk2",
+                "aliases": [
+                    "AutoHotkey v2",
+                    "AutoHotkey",
+                    "autohotkey",
+                    "ahk"
+                ],
+                "extensions": [
+                    ".ahk",
+                    ".ext",
+                    ".ah2",
+                    ".ahk2"
+                ],
+                "configuration": "./language/ahk.configuration.json",
+                "icon": {
+                    "dark": "./language/autohotkey2.svg",
+                    "light": "./language/autohotkey2.svg"
                 }
             }
         ],
@@ -306,29 +358,29 @@
             "editor/context": [
                 {
                     "command": "ahk++.compile",
-                    "when": "editorLangId == ahk",
+                    "when": "editorLangId == ahk || editorLangId == ahk2",
                     "group": "navigation@1"
                 },
                 {
                     "command": "ahk++.compilerGui",
-                    "when": "editorLangId == ahk",
+                    "when": "editorLangId == ahk || editorLangId == ahk2",
                     "group": "navigation@1"
                 },
                 {
                     "command": "ahk++.run",
-                    "when": "editorLangId == ahk",
+                    "when": "editorLangId == ahk || editorLangId == ahk2",
                     "group": "navigation@0"
                 },
                 {
                     "command": "ahk++.runSelection",
-                    "when": "editorLangId == ahk && editorHasSelection",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && editorHasSelection",
                     "group": "navigation@-1"
                 }
             ],
             "editor/title": [
                 {
                     "command": "ahk++.debug",
-                    "when": "editorLangId == ahk && config.ahk++.menu.showDebugButton",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.ahk++.menu.showDebugButton",
                     "group": "navigation@1"
                 }
             ]
@@ -336,13 +388,15 @@
         "snippets": [
             {
                 "language": "ahk",
-                "path": "./language/snippets.json"
+                "path": "./language/snippetsV1.json"
+            },
+            {
+                "language": "ahk2",
+                "path": "./language/snippetsV2.json"
             }
         ]
     },
     "activationEvents": [
-        "onLanguage:ahk",
-        "onCommand:ahk++.run",
         "onDebug"
     ],
     "lint-staged": {
