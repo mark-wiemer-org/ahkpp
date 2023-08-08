@@ -8,6 +8,20 @@ AutoHotkey Plus Plus (AHK++) provides AutoHotkey v1 and v2 language support for 
 -   code formatting
 -   ...and more!
 
+## 5.0.0 - AutoHotkey v2 support now in preview!
+
+AutoHotkey v2 support has been a [long-requested feature](https://github.com/mark-wiemer-org/ahkpp/issues/96), and this release now supports nearly all functionality!
+Supported features include:
+
+-   Running and debugging v1 and v2 scripts without changing settings
+-   "Open help" (Ctrl + F1) opens language-specific help (and includes your text selection!)
+-   Full syntax highlighting for v2 scripts
+-   Unique icons for v1 (blue) and v2 (green)
+
+See the full changes at the [changelog](https://github.com/mark-wiemer-org/ahkpp/blob/main/Changelog.md).
+
+As always, please [report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose)!
+
 ## Contents
 
 -   [Why AutoHotkey Plus Plus?](#why-autohotkey-plus-plus)
@@ -25,12 +39,13 @@ AutoHotkey Plus Plus (AHK++) provides AutoHotkey v1 and v2 language support for 
     -   [Code format](#code-format)
         -   [Formatter directives](#formatter-directives)
 -   [Credits](#credits)
+-   [Links](#links)
 
 ## Why AutoHotkey Plus Plus?
 
 AutoHotkey Plus Plus is one of many extensions that offer VS Code language support. So why should you use this one?
 
--   **Supports both v1 and v2**: AHK++ now has support for AutoHotkey v2, making it the only extension to support both major versions of AutoHotkey!
+-   **Supports both v1 and v2**: AHK++ now has support for AutoHotkey v2 (in preview), making it the only extension to support both major versions of AutoHotkey!
 -   **Actively maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues).
 -   **IntelliSense**: Smart code completion, syntax highlighting, code navigation, and more.
 -   **Debug support**: Run and debug AHK scripts from VS Code.
@@ -156,12 +171,15 @@ Formatter directives instruct the formatter to behave a certain way on sections 
 
 ## Credits
 
-Previous extensions:
+This extension relies heavily on open-source code. A huge thank you to all these open-source participants who made the extension what it is today!
 
 -   [AutoHotkey Plus by cweijan](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-autohotkey-plus): AHK++ is a fork of AutoHotkey Plus by cweijan (Weijan Chen)
--   [AutoHotkey by stef-levesque](https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-autohotkey): AutoHotkey Plus is a fork of stef-levesque's original AutoHotkey extension.
+-   [Contributions to AHK++ by kyklish](https://github.com/mark-wiemer-org/ahkpp/commits/main?author=kyklish): Greatly improved formatting and snippets by both fixing bugs and adding features
+-   [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp): The source of the v2 grammar and other great contributions
+-   [Lexikos/vscode-auto-select](https://github.com/Lexikos/vscode-auto-select): The core code for automatically switching AHK versions
+-   [AutoHotkey by stef-levesque](https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-autohotkey): AutoHotkey Plus is a fork of stef-levesque's original AutoHotkey extension, which provided the original grammar and snippets for AHK
 
 ## Links
 
 -   [GitHub](https://github.com/mark-wiemer-org/ahkpp): View code, file bugs, and join discussions
--   [Reviews](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus&ssr=false#review-details): Help others discover AHK++ by leaving a quick review!
+-   [Reviews](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus&ssr=false#review-details): Help others discover AHK++ by leaving a review

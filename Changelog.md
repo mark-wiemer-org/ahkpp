@@ -15,11 +15,14 @@ AutoHotkey v2 support now in preview! Please test it out and [report any issues]
 
 ### Other changes
 
--   Updated icons
-    -   v2 scripts will have official green icons, while v1 scripts have modified blue icons
-    -   Icons are smaller and more aligned with existing VS Code icons
--   `.ahk1` and `.ah1` extensions now available for v1 scripts, `.ahk2` and `.ah2` for v2 scripts. `.ahk` and `.ext` can be used for either version.
--   Grammar for v2 provided by [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
+-   `.ahk1` and `.ah1` extensions now available for v1 scripts, `.ahk2` and `.ah2` for v2 scripts. `.ahk` and `.ext` can be used for either version and still default to v1.
+-   AHK version now automatically changes to match the `#Requires` directive near the top of any script the first time that script is opened
+-   Allow running and debugging v1 or v2 scripts without changing settings
+-   "Open help" (Ctrl + F1) now opens language-specific help
+-   Full syntax highlighting for v2 scripts thanks to [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)
+-   Updated icons (found next to the file's name in the explorer)
+    -   v2 scripts will have official green icons, while v1 scripts now have modified blue icons
+    -   Icons are a bit smaller to align with existing VS Code icons
 
 ### Known issues
 
@@ -29,9 +32,9 @@ Some features are not added to this initial preview release, but will be coming 
     -   Formatting ([Issue #381](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/381))
     -   Snippets ([Issue #382](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/382))
 
-### TODO
+### Thank you!
 
--   Integrate [AutoHotkey Auto-Select](https://github.com/Lexikos/vscode-auto-select) by Lexikos
+This update relies heavily on open-source code from [thqby](https://github.com/thqby) and [Steve Gray (Lexikos)](https://github.com/Lexikos). Thank you for your awesome work!
 
 <!-- -->
 
