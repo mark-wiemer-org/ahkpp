@@ -11,6 +11,7 @@ AutoHotkey Plus Plus (AHK++) provides AutoHotkey v1 and v2 language support for 
 ## 5.0.0 - AutoHotkey v2 support now in preview!
 
 AutoHotkey v2 support has been a [long-requested feature](https://github.com/mark-wiemer-org/ahkpp/issues/96), and this release now supports nearly all functionality!
+
 Supported features include:
 
 -   Running and debugging v1 and v2 scripts without changing settings
