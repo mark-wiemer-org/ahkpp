@@ -3,7 +3,7 @@
 
 import * as vscode from 'vscode';
 import { LanguageId } from '../common/global';
-import { isV1 } from '../common/codeUtil';
+import { isAHK, isV1 } from '../common/codeUtil';
 
 /**
  * Return the major version number (1 or 2) associated with
@@ -27,10 +27,7 @@ const makeOnSwitchFile =
         // If not an AHK file, or already seen, do nothing.
         if (
             !editor ||
-            !(
-                editor.document.languageId === LanguageId.ahk1 ||
-                editor.document.languageId === LanguageId.ahk2
-            ) ||
+            !isAHK(editor.document.languageId) ||
             seen.has(editor.document.uri)
         ) {
             return;
