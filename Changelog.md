@@ -41,8 +41,6 @@ Some features are not added to this initial preview release, but will be coming 
 
 This update relies heavily on open-source code from [thqby](https://github.com/thqby) and [Steve Gray (Lexikos)](https://github.com/Lexikos). Thank you for your awesome work!
 
-<!-- -->
-
 ## 4.1.0 - 2023-08-03 🙋
 
 -   Add quick help, adapted from thqby's AutoHotkey v2 Language Support
