@@ -1,10 +1,10 @@
 // openHelp adapted from thqby/vscode-autohotkey2-lsp, used under GNU LGPLv3, licensed here under GNU GPLv3
 // https://github.com/thqby/vscode-autohotkey2-lsp/blob/fa0782e8a221e54e5755358eb594ae9cc872ca1a/client/src/extension.ts#L348
-import { ConfigKey, Global } from '../../common/global';
+import { ConfigKey, Global } from '../common/global';
 import { existsSync } from 'fs';
 import * as vscode from 'vscode';
 import * as child_process from 'child_process';
-import { isV1 } from '../../common/codeUtil';
+import { isV1 } from '../common/codeUtil';
 
 /**
  * Returns the text to use as a search.
