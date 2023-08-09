@@ -7,6 +7,7 @@
 
 -   `ahk++.file.interpreterPathV2` now defaults to `C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe` ([Issue #387](https://github.com/mark-wiemer-org/ahkpp/issues/387))
 -   Add breakpoint support for AHK v2 files ([Issue #384](https://github.com/mark-wiemer-org/ahkpp/issues/384))
+-   Add AHK v2 debug config template ([#385](https://github.com/mark-wiemer-org/ahkpp/issues/385))
 
 ## 5.0.0 - 2023-08-07 ✌️
 
