@@ -60,6 +60,9 @@
         "breakpoints": [
             {
                 "language": "ahk"
+            },
+            {
+                "language": "ahk2"
             }
         ],
         "commands": [
@@ -132,7 +135,7 @@
                 },
                 "ahk++.file.interpreterPathV2": {
                     "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe",
                     "description": "Path to the AHK v2 interpreter."
                 },
                 "ahk++.file.helpPathV1": {
@@ -201,7 +204,10 @@
         "debuggers": [
             {
                 "type": "ahk",
-                "label": "AutoHotkey",
+                "label": "AutoHotkey v1",
+                "languages": [
+                    "ahk"
+                ],
                 "program": "./out/debugger/DebugAdapter.js",
                 "runtime": "\"C:\\Program Files\\AutoHotkey\\AutoHotkeyU64.exe\"",
                 "configurationAttributes": {
@@ -212,12 +218,12 @@
                         "properties": {
                             "program": {
                                 "type": "string",
-                                "description": "Absolute path to a text file.",
+                                "description": "Absolute path to the AHK v1 script to debug.",
                                 "default": "${file}"
                             },
                             "runtime": {
                                 "type": "string",
-                                "description": "Absolute path to a AutoHotkey.exe file.",
+                                "description": "Absolute path to an AutoHotkey v1 interpreter.",
                                 "default": "C:\\Program Files\\AutoHotkey\\AutoHotkeyU64.exe"
                             },
                             "stopOnEntry": {
@@ -235,16 +241,16 @@
                                 "properties": {
                                     "max_children": {
                                         "type": "integer",
-                                        "description": "max number of array or object children to initially retrieve",
+                                        "description": "Max number of array or object children to initially retrieve.",
                                         "default": 300
                                     },
                                     "max_data": {
                                         "type": "integer",
-                                        "description": "max amount of variable data to initially retrieve.",
+                                        "description": "Max amount of variable data to initially retrieve.",
                                         "default": 131072
                                     }
                                 },
-                                "description": "Dbgp settings. See https://xdebug.org/docs-dbgp.php#feature-names",
+                                "description": "DBGP settings. See https://xdebug.org/docs-dbgp.php#feature-names",
                                 "default": {}
                             }
                         }
@@ -254,18 +260,94 @@
                     {
                         "type": "ahk",
                         "request": "launch",
-                        "name": "AutoHotkey Debugger",
+                        "name": "AutoHotkey v1 Debugger",
                         "program": "${file}",
                         "stopOnEntry": true
                     }
                 ],
                 "configurationSnippets": [
                     {
-                        "label": "AutoHotkey Debug: Launch",
+                        "label": "AutoHotkey v1 Debug: Launch",
                         "body": {
                             "type": "ahk",
                             "request": "launch",
-                            "name": "AutoHotkey Debugger",
+                            "name": "AutoHotkey v1 Debugger",
+                            "program": "${file}",
+                            "stopOnEntry": true
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "ahk2",
+                "label": "AutoHotkey v2",
+                "languages": [
+                    "ahk2"
+                ],
+                "program": "./out/debugger/DebugAdapter.js",
+                "runtime": "\"C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey64.exe\"",
+                "configurationAttributes": {
+                    "launch": {
+                        "required": [
+                            "program"
+                        ],
+                        "properties": {
+                            "program": {
+                                "type": "string",
+                                "description": "Absolute path to the AHK v2 script to debug.",
+                                "default": "${file}"
+                            },
+                            "runtime": {
+                                "type": "string",
+                                "description": "Absolute path to an AutoHotkey v2 interpreter.",
+                                "default": "C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey64.exe"
+                            },
+                            "stopOnEntry": {
+                                "type": "boolean",
+                                "description": "Automatically stop after launch.",
+                                "default": true
+                            },
+                            "trace": {
+                                "type": "boolean",
+                                "description": "Enable logging of the Debug Adapter Protocol.",
+                                "default": true
+                            },
+                            "dbgpSettings": {
+                                "type": "object",
+                                "properties": {
+                                    "max_children": {
+                                        "type": "integer",
+                                        "description": "Max number of array or object children to initially retrieve.",
+                                        "default": 300
+                                    },
+                                    "max_data": {
+                                        "type": "integer",
+                                        "description": "Max amount of variable data to initially retrieve.",
+                                        "default": 131072
+                                    }
+                                },
+                                "description": "DBGP settings. See https://xdebug.org/docs-dbgp.php#feature-names",
+                                "default": {}
+                            }
+                        }
+                    }
+                },
+                "initialConfigurations": [
+                    {
+                        "type": "ahk2",
+                        "request": "launch",
+                        "name": "AutoHotkey v2 Debugger",
+                        "program": "${file}",
+                        "stopOnEntry": true
+                    }
+                ],
+                "configurationSnippets": [
+                    {
+                        "label": "AutoHotkey v2 Debug: Launch",
+                        "body": {
+                            "type": "ahk2",
+                            "request": "launch",
+                            "name": "AutoHotkey v2 Debugger",
                             "program": "${file}",
                             "stopOnEntry": true
                         }
@@ -424,7 +506,7 @@
         "@typescript-eslint/eslint-plugin": "^5.37.0",
         "@typescript-eslint/parser": "^5.37.0",
         "@vscode/test-electron": "^1.6.1",
-        "@vscode/vsce": "^2.19.0",
+        "@vscode/vsce": "^2.20.1",
         "chai": "^4.3.7",
         "esbuild": "^0.15.7",
         "esbuild-plugin-eslint": "^0.1.1",

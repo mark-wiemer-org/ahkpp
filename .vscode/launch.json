@@ -21,30 +21,6 @@
             ],
             "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
             "preLaunchTask": "npm: compile"
-        },
-        // TODO untested
-        {
-            "type": "ahk",
-            "request": "launch",
-            "name": "Autohotkey v1 Debugger",
-            "program": "${workspaceFolder}/demos/v1Demo.ahk",
-            "runtime": "C:\\Program Files\\Autohotkey\\AutoHotkeyU64.exe",
-            "stopOnEntry": false,
-            "dbgpSettings": {
-                "max_children": 149
-            }
-        },
-        // TODO untested
-        {
-            "type": "ahk2",
-            "request": "launch",
-            "name": "Autohotkey v2 Debugger",
-            "program": "${workspaceFolder}/demos/v2Demo.ahk",
-            "runtime": "C:\\Program Files\\AutoHotkey\\v2-alpha\\x64\\AutoHotkey.exe", // Default value of Scite for ahk v2
-            "stopOnEntry": false,
-            "dbgpSettings": {
-                "max_children": 149
-            }
         }
     ]
 }
