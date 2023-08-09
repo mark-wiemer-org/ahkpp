@@ -132,7 +132,7 @@
                 },
                 "ahk++.file.interpreterPathV2": {
                     "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe",
                     "description": "Path to the AHK v2 interpreter."
                 },
                 "ahk++.file.helpPathV1": {
