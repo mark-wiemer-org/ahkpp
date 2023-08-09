@@ -60,6 +60,9 @@
         "breakpoints": [
             {
                 "language": "ahk"
+            },
+            {
+                "language": "ahk2"
             }
         ],
         "commands": [
