@@ -1,8 +1,5 @@
 # Changelog
 
-<!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
-<!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
-
 ## 5.0.1 - 2023-08-08 😶‍🌫️
 
 -   `ahk++.file.interpreterPathV2` now defaults to `C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe` ([Issue #387](https://github.com/mark-wiemer-org/ahkpp/issues/387))
