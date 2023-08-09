@@ -1,13 +1,10 @@
 # Changelog
 
-<!-- PRs -- Find: `#([0-9]+)`, Replace `[PR #$1](https://github.com/vscode-autohotkey/ahkpp/pull/$1)` -->
-<!-- Issues -- Find: `#([0-9]+)`, Replace `[#$1](https://github.com/vscode-autohotkey/ahkpp/issues/$1)` -->
-
 ## 5.0.1 - 2023-08-08 😶‍🌫️
 
 -   `ahk++.file.interpreterPathV2` now defaults to `C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe` ([Issue #387](https://github.com/mark-wiemer-org/ahkpp/issues/387))
 -   Add breakpoint support for AHK v2 files ([Issue #384](https://github.com/mark-wiemer-org/ahkpp/issues/384))
--   Add AHK v2 debug config template ([#385](https://github.com/mark-wiemer-org/ahkpp/issues/385))
+-   Add AHK v2 debug config template ([Issue #385](https://github.com/mark-wiemer-org/ahkpp/issues/385))
 
 ## 5.0.0 - 2023-08-07 ✌️
 
@@ -51,7 +48,7 @@ This update relies heavily on open-source code from [thqby](https://github.com/t
 
 -   Add quick help, adapted from thqby's AutoHotkey v2 Language Support
     -   Selected text (or word at cursor) is now searched within the help documentation
-    -   Known limitation: if selected text would cause a syntax error when injected into a script, help is activated but no search is made. Ref [issue #376](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/376)
+    -   Known limitation: if selected text would cause a syntax error when injected into a script, help is activated but no search is made. [Issue #376](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/376)
 -   Update file icon to match [official AHK repository](https://github.com/AutoHotkey/AutoHotkey/blob/446829bc730aa002635d3d36bfd17e892b6981c0/source/resources/icons.svg)
 
 ## 4.0.0 - 2023-07-29 🍀
