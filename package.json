@@ -25,9 +25,8 @@
     "main": "./out/extension",
     "scripts": {
         "build": "npm run rebuild -- --mode=production",
-        "clean": "rimraf out && npm run compile_grammar",
+        "clean": "rimraf out",
         "compile": "npm run clean && npm run compile_ts",
-        "compile_grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json",
         "compile_ts": "tsc -p ./",
         "dev": "npm run rebuild",
         "eslint": "npm run eslint_inner -- src && echo No ESLint problems",
@@ -43,9 +42,7 @@
         "prepare": "husky install",
         "rebuild": "npm run clean && node build.js",
         "pretest": "npm run compile",
-        "test": "npm run test_grammar_inner && npm run test_unit",
-        "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",
-        "test_grammar_inner": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.ahk",
+        "test": "npm run test_unit",
         "test_unit": "node ./out/test/runTest.js",
         "tsc": "tsc --noEmit --skipLibCheck && echo No TSC problems",
         "validate": "npm run lint && npm run test",
@@ -53,38 +50,32 @@
         "watch": "tsc -watch -p ./"
     },
     "contributes": {
-        "breakpoints": [
-            {
-                "language": "ahk"
-            }
-        ],
-        "commands": [],
         "configuration": {
             "type": "object",
-            "title": "AutoHotkey Plus Plus",
+            "title": "AutoHotkey v1 Formatter",
             "properties": {
-                "ahk++.formatter.allowedNumberOfEmptyLines": {
+                "ahkV1Formatter.allowedNumberOfEmptyLines": {
                     "type": "integer",
                     "default": 1,
                     "minimum": -1,
                     "markdownDescription": "Allowed number of empty lines.\n- -1: Ignore empty lines.\n- 0: No empty lines."
                 },
-                "ahk++.formatter.indentCodeAfterLabel": {
+                "ahkV1Formatter.indentCodeAfterLabel": {
                     "type": "boolean",
                     "default": true,
                     "description": "Indent code after label."
                 },
-                "ahk++.formatter.indentCodeAfterIfDirective": {
+                "ahkV1Formatter.indentCodeAfterIfDirective": {
                     "type": "boolean",
                     "default": true,
                     "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist)."
                 },
-                "ahk++.formatter.preserveIndent": {
+                "ahkV1Formatter.preserveIndent": {
                     "type": "boolean",
                     "default": false,
                     "description": "Preserve indentation on empty line."
                 },
-                "ahk++.formatter.trimExtraSpaces": {
+                "ahkV1Formatter.trimExtraSpaces": {
                     "type": "boolean",
                     "default": true,
                     "description": "Trim extra spaces between words."
@@ -147,8 +138,7 @@
         "rimraf": "^3.0.2",
         "sort-package-json": "^1.57.0",
         "source-map-support": "^0.5.19",
-        "typescript": "~4.7.4",
-        "vscode-tmgrammar-test": "^0.1.1"
+        "typescript": "~4.7.4"
     },
     "engines": {
         "vscode": "^1.50.0"
