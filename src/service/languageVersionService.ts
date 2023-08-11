@@ -23,21 +23,17 @@ const tryGetRequiresVersion = (doc: vscode.TextDocument): 1 | 2 | undefined => {
  * Makes a function that switches to the correct version of AHK.
  */
 const makeOnSwitchFile =
-    (seen: Set<vscode.Uri>) => (editor: vscode.TextEditor | undefined) => {
+    (seen: Set<vscode.Uri>) => (doc: vscode.TextDocument | undefined) => {
         // If not an AHK file, or already seen, do nothing.
-        if (
-            !editor ||
-            !isAHK(editor.document.languageId) ||
-            seen.has(editor.document.uri)
-        ) {
+        if (!doc || !isAHK(doc.languageId) || seen.has(doc.uri)) {
             return;
         }
-        seen.add(editor.document.uri);
-        const versionNumber = tryGetRequiresVersion(editor.document);
+        seen.add(doc.uri);
+        const versionNumber = tryGetRequiresVersion(doc);
         const newLang = [LanguageId.ahk1, LanguageId.ahk2][versionNumber - 1];
-        const currentLang = editor.document.languageId;
+        const currentLang = doc.languageId;
         if (newLang && newLang !== currentLang) {
-            switchLang(editor.document, newLang);
+            switchLang(doc, newLang);
         }
     };
 
@@ -68,9 +64,19 @@ export const initializeLanguageVersionService = (
 ) => {
     const onSwitchFile = makeOnSwitchFile(new Set<vscode.Uri>());
     vscode.window.onDidChangeActiveTextEditor(
-        onSwitchFile,
+        (newActiveEditor) => onSwitchFile(newActiveEditor.document),
         null,
         context.subscriptions,
     );
-    onSwitchFile(vscode.window.activeTextEditor);
+    // Update language version of all open text editors
+    vscode.window.tabGroups.all.forEach((tabGroup) =>
+        tabGroup.tabs
+            .filter((t) => t.input instanceof vscode.TabInputText)
+            .forEach(async (t) => {
+                const doc = await vscode.workspace.openTextDocument(
+                    (t.input as vscode.TabInputText).uri,
+                );
+                onSwitchFile(doc);
+            }),
+    );
 };
