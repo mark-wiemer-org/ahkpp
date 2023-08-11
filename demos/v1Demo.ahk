@@ -1,4 +1,6 @@
-﻿globalVar := "Global"
+﻿#Requires AutoHotkey v1
+
+globalVar := "Global"
 global SuperGlobalVar := "SuperGlobal"
 function()
 return
