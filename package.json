@@ -1,11 +1,11 @@
 {
-    "name": "vscode-autohotkey-plus-plus",
-    "displayName": "AutoHotkey Plus Plus",
+    "name": "ahk-v1-formatter",
+    "displayName": "AutoHotkey v1 Formatter",
     "version": "4.1.0",
-    "description": "AutoHotkey IntelliSense, debug, and language support for VS Code, forked from AutoHotkey Plus by cweijan",
+    "description": "AutoHotkey v1 formatting, meant for use with AutoHotkey Plus Plus",
     "categories": [
         "Programming Languages",
-        "Snippets"
+        "Formatters"
     ],
     "keywords": [
         "vscode",
@@ -58,79 +58,11 @@
                 "language": "ahk"
             }
         ],
-        "commands": [
-            {
-                "command": "ahk++.compile",
-                "title": "Compile AHK Script",
-                "category": "AHK++",
-                "icon": "./image/build.svg"
-            },
-            {
-                "command": "ahk++.compilerGui",
-                "title": "Compile AHK Script (GUI)",
-                "category": "AHK++"
-            },
-            {
-                "command": "ahk++.debug",
-                "title": "Debug AHK Script",
-                "category": "AHK++",
-                "icon": "$(debug-alt)"
-            },
-            {
-                "command": "ahk++.openHelp",
-                "title": "Open AutoHotkey Help",
-                "category": "AHK++"
-            },
-            {
-                "command": "ahk++.run",
-                "title": "Run AHK Script",
-                "category": "AHK++"
-            },
-            {
-                "command": "ahk++.runSelection",
-                "title": "Run Selection",
-                "category": "AHK++"
-            }
-        ],
+        "commands": [],
         "configuration": {
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk++.compiler.compileBaseFile": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Base file (.bin) path for compiling (optional)."
-                },
-                "ahk++.compiler.compileIcon": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Icon path for the compiled AHK file (optional)."
-                },
-                "ahk++.compiler.useMpress": {
-                    "type": "boolean",
-                    "default": false,
-                    "markdownDescription": "Use [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm) (if available) to compress the resulting executable."
-                },
-                "ahk++.file.compilePath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "AHK compiler path."
-                },
-                "ahk++.file.executePath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "AHK runner path."
-                },
-                "ahk++.file.helpPath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-                    "description": "Path to the AHK Help document."
-                },
-                "ahk++.file.templateSnippetName": {
-                    "type": "string",
-                    "default": "AhkTemplate",
-                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/vscode-autohotkey/ahkpp/tree/main/docs/TemplateSnippet.md)."
-                },
                 "ahk++.formatter.allowedNumberOfEmptyLines": {
                     "type": "integer",
                     "default": 1,
@@ -156,133 +88,9 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Trim extra spaces between words."
-                },
-                "ahk++.intellisense.enableIntellisense": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Add suggestions for relevant variables and methods in the workspace. Requires parsing. Changes take effect after reload."
-                },
-                "ahk++.intellisense.maximumParseLength": {
-                    "type": "number",
-                    "default": 10000,
-                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nChanges take effect after reload."
-                },
-                "ahk++.menu.showDebugButton": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Show the Debug button in the editor title menu."
                 }
             }
         },
-        "debuggers": [
-            {
-                "type": "ahk",
-                "label": "AutoHotkey",
-                "program": "./out/debugger/DebugAdapter.js",
-                "runtime": "\"C:\\Program Files\\AutoHotkey\\AutoHotkeyU64.exe\"",
-                "configurationAttributes": {
-                    "launch": {
-                        "required": [
-                            "program"
-                        ],
-                        "properties": {
-                            "program": {
-                                "type": "string",
-                                "description": "Absolute path to a text file.",
-                                "default": "${file}"
-                            },
-                            "runtime": {
-                                "type": "string",
-                                "description": "Absolute path to a AutoHotkey.exe file.",
-                                "default": "C:\\Program Files\\AutoHotkey\\AutoHotkeyU64.exe"
-                            },
-                            "stopOnEntry": {
-                                "type": "boolean",
-                                "description": "Automatically stop after launch.",
-                                "default": true
-                            },
-                            "trace": {
-                                "type": "boolean",
-                                "description": "Enable logging of the Debug Adapter Protocol.",
-                                "default": true
-                            },
-                            "dbgpSettings": {
-                                "type": "object",
-                                "properties": {
-                                    "max_children": {
-                                        "type": "integer",
-                                        "description": "max number of array or object children to initially retrieve",
-                                        "default": 300
-                                    },
-                                    "max_data": {
-                                        "type": "integer",
-                                        "description": "max amount of variable data to initially retrieve.",
-                                        "default": 131072
-                                    }
-                                },
-                                "description": "Dbgp settings. See https://xdebug.org/docs-dbgp.php#feature-names",
-                                "default": {}
-                            }
-                        }
-                    }
-                },
-                "initialConfigurations": [
-                    {
-                        "type": "ahk",
-                        "request": "launch",
-                        "name": "AutoHotkey Debugger",
-                        "program": "${file}",
-                        "stopOnEntry": true
-                    }
-                ],
-                "configurationSnippets": [
-                    {
-                        "label": "AutoHotkey Debug: Launch",
-                        "body": {
-                            "type": "ahk",
-                            "request": "launch",
-                            "name": "AutoHotkey Debugger",
-                            "program": "${file}",
-                            "stopOnEntry": true
-                        }
-                    }
-                ]
-            }
-        ],
-        "grammars": [
-            {
-                "language": "ahk",
-                "scopeName": "source.ahk",
-                "path": "./language/ahk.tmLanguage.json"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "ahk++.compile",
-                "key": "ctrl+shift+f9",
-                "when": "editorLangId == ahk"
-            },
-            {
-                "command": "ahk++.debug",
-                "key": "ctrl+alt+f9",
-                "when": "editorLangId == ahk"
-            },
-            {
-                "command": "ahk++.openHelp",
-                "key": "ctrl+f1",
-                "when": "editorLangId == ahk"
-            },
-            {
-                "command": "ahk++.run",
-                "key": "ctrl+f9",
-                "when": "editorLangId == ahk"
-            },
-            {
-                "command": "ahk++.runSelection",
-                "key": "ctrl+f8",
-                "when": "editorLangId == ahk"
-            }
-        ],
         "languages": [
             {
                 "id": "ahk",
@@ -295,56 +103,10 @@
                     ".ahk",
                     ".ext"
                 ],
-                "configuration": "./language/ahk.configuration.json",
-                "icon": {
-                    "dark": "./language/autohotkey.svg",
-                    "light": "./language/autohotkey.svg"
-                }
-            }
-        ],
-        "menus": {
-            "editor/context": [
-                {
-                    "command": "ahk++.compile",
-                    "when": "editorLangId == ahk",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "ahk++.compilerGui",
-                    "when": "editorLangId == ahk",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "ahk++.run",
-                    "when": "editorLangId == ahk",
-                    "group": "navigation@0"
-                },
-                {
-                    "command": "ahk++.runSelection",
-                    "when": "editorLangId == ahk && editorHasSelection",
-                    "group": "navigation@-1"
-                }
-            ],
-            "editor/title": [
-                {
-                    "command": "ahk++.debug",
-                    "when": "editorLangId == ahk && config.ahk++.menu.showDebugButton",
-                    "group": "navigation@1"
-                }
-            ]
-        },
-        "snippets": [
-            {
-                "language": "ahk",
-                "path": "./language/snippets.json"
+                "configuration": "./language/ahk.configuration.json"
             }
         ]
     },
-    "activationEvents": [
-        "onLanguage:ahk",
-        "onCommand:ahk++.run",
-        "onDebug"
-    ],
     "lint-staged": {
         "*": "prettier --check",
         "src/**/*.ts": [
