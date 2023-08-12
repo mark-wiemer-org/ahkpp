@@ -2,6 +2,10 @@
 ; Copyright 2021 FuPeiJiang, used with permission
 ; https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/32#issuecomment-770233225
 
+
+; Ctrl+F `^ +`, replace all with empty string, format. Should be no Git change.
+
+
 #NoEnv ; Recommended for performance and compatibility with future AutoHotkey releases.
 #SingleInstance, force
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability.
