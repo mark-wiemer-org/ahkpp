@@ -10,9 +10,9 @@ export class Global {
 }
 
 export enum ConfigKey {
-    allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
-    indentCodeAfterIfDirective = 'formatter.indentCodeAfterIfDirective',
-    indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',
-    preserveIndent = 'formatter.preserveIndent',
-    trimExtraSpaces = 'formatter.trimExtraSpaces',
+    allowedNumberOfEmptyLines = 'allowedNumberOfEmptyLines',
+    indentCodeAfterIfDirective = 'indentCodeAfterIfDirective',
+    indentCodeAfterLabel = 'indentCodeAfterLabel',
+    preserveIndent = 'preserveIndent',
+    trimExtraSpaces = 'trimExtraSpaces',
 }

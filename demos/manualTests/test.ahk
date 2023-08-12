@@ -2,9 +2,7 @@
 ; Copyright 2021 FuPeiJiang, used with permission
 ; https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/32#issuecomment-770233225
 
-
 ; Ctrl+F `^ +`, replace all with empty string, format. Should be no Git change.
-
 
 #NoEnv ; Recommended for performance and compatibility with future AutoHotkey releases.
 #SingleInstance, force
@@ -2819,21 +2817,21 @@ ShellContextMenu(folderPath, files, win_hwnd = 0 )
     ; Formatter ignores block comments for now, nbd
     /*
     typedef struct _CMINVOKECOMMANDINFOEX {
-        DWORD   cbSize;          0
-        DWORD   fMask;           4
-        HWND    hwnd;            8
-        LPCSTR  lpVerb;          8+A_PtrSize
-        LPCSTR  lpParameters;    8+2*A_PtrSize
-        LPCSTR  lpDirectory;     8+3*A_PtrSize
-        int     nShow;           8+4*A_PtrSize
-        DWORD   dwHotKey;        12+4*A_PtrSize
-        HANDLE  hIcon;           16+4*A_PtrSize
-        LPCSTR  lpTitle;         16+5*A_PtrSize
-        LPCWSTR lpVerbW;         16+6*A_PtrSize
-        LPCWSTR lpParametersW;   16+7*A_PtrSize
-        LPCWSTR lpDirectoryW;    16+8*A_PtrSize
-        LPCWSTR lpTitleW;        16+9*A_PtrSize
-        POINT   ptInvoke;        16+10*A_PtrSize
+    DWORD   cbSize;          0
+    DWORD   fMask;           4
+    HWND    hwnd;            8
+    LPCSTR  lpVerb;          8+A_PtrSize
+    LPCSTR  lpParameters;    8+2*A_PtrSize
+    LPCSTR  lpDirectory;     8+3*A_PtrSize
+    int     nShow;           8+4*A_PtrSize
+    DWORD   dwHotKey;        12+4*A_PtrSize
+    HANDLE  hIcon;           16+4*A_PtrSize
+    LPCSTR  lpTitle;         16+5*A_PtrSize
+    LPCWSTR lpVerbW;         16+6*A_PtrSize
+    LPCWSTR lpParametersW;   16+7*A_PtrSize
+    LPCWSTR lpDirectoryW;    16+8*A_PtrSize
+    LPCWSTR lpTitleW;        16+9*A_PtrSize
+    POINT   ptInvoke;        16+10*A_PtrSize
     } CMINVOKECOMMANDINFOEX, *LPCMINVOKECOMMANDINFOEX;
     http://msdn.microsoft.com/en-us/library/bb773217%28v=VS.85%29.aspx
     */
