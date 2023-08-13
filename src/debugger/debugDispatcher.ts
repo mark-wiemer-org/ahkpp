@@ -154,11 +154,7 @@ export class DebugDispatcher extends EventEmitter {
         return this.variableHandler.scopes(frameId);
     }
 
-    /**
-     * List all variable or get refrence variable property detail.
-     * @param scopeId 0(Local) and 1(Global)
-     * @param args
-     */
+    /** List all variable or get reference variable property detail. */
     public async listVariables(
         args: DebugProtocol.VariablesArguments,
     ): Promise<Variable[]> {
