@@ -42,24 +42,27 @@ export class RunnerService {
     }
 
     /** Start debug session */
-    public static async startDebugger(script?: string) {
-        const cwd = script
-            ? vscode.Uri.file(script)
+    public static async startDebugger(scriptPath?: string) {
+        const scriptUri = scriptPath
+            ? vscode.Uri.file(scriptPath)
             : vscode.window.activeTextEditor.document.uri;
-        script = script ? script : await this.getPathByActive();
+        scriptPath ||= await this.getPathByActive();
         const debugPlusExists = !!vscode.extensions.getExtension(
             'zero-plusplus.vscode-autohotkey-debug',
         );
         const interpreterPathKey = isV1()
             ? ConfigKey.interpreterPathV1
             : ConfigKey.interpreterPathV2;
-        vscode.debug.startDebugging(vscode.workspace.getWorkspaceFolder(cwd), {
-            type: debugPlusExists ? 'autohotkey' : 'ahk',
-            request: 'launch',
-            name: 'AutoHotkey Debugger',
-            runtime: Global.getConfig<string>(interpreterPathKey),
-            program: script,
-        });
+        vscode.debug.startDebugging(
+            vscode.workspace.getWorkspaceFolder(scriptUri),
+            {
+                type: debugPlusExists ? 'autohotkey' : 'ahk',
+                request: 'launch',
+                name: 'AutoHotkey Debugger',
+                runtime: Global.getConfig<string>(interpreterPathKey),
+                program: scriptPath,
+            },
+        );
     }
 
     /** Runs the script at the specified path */
@@ -68,9 +71,7 @@ export class RunnerService {
             isV1() ? ConfigKey.interpreterPathV1 : ConfigKey.interpreterPathV2,
         );
         this.checkAndSaveActive();
-        if (!path) {
-            path = await this.getPathByActive();
-        }
+        path ||= await this.getPathByActive();
         exec(`\"${interpreterPathV1}\" \"${path}\"`, {
             cwd: `${res(path, '..')}`,
         });
