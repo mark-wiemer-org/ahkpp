@@ -25,7 +25,7 @@ export class CommandHandler {
         }
         command += '\x00';
 
-        this.debugServer.write(`${command}`);
+        this.debugServer.write(command);
         return new Promise((resolve) => {
             this.commandCallback['' + this.transId] = (
                 response: DbgpResponse,
