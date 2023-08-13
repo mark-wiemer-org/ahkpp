@@ -1,0 +1,13 @@
+>; [Issue #295](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/295)
+#^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>ToolTip ;Comment
+#^^^^^^^ source.ahk support.function.ahk
+#       ^ source.ahk comment.line.semicolon.ahk
+#        ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+#         ^^^^^^^ source.ahk comment.line.semicolon.ahk
+>ToolTip;NotComment
+#^^^^^^^ source.ahk support.function.ahk
+#       ^ source.ahk
+#        ^^^^^^^^^^ source.ahk variable.def.ahk
+>

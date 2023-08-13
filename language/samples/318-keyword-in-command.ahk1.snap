@@ -1,0 +1,1146 @@
+>; [Issue #318](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/318)
+#^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>RAlt & j::AltTab
+#^^^^^^^^ source.ahk hotkeyline.ahk entity.name.function.label.ahk
+#        ^^ source.ahk hotkeyline.ahk punctuation.definition.equals.colon
+#          ^^^^^^ source.ahk keyword.other.ahk
+>RAlt & k::ShiftAltTab
+#^^^^^^^^ source.ahk hotkeyline.ahk entity.name.function.label.ahk
+#        ^^ source.ahk hotkeyline.ahk punctuation.definition.equals.colon
+#          ^^^^^^^^^^^ source.ahk keyword.other.ahk
+>AutoTrim, On
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^ source.ahk keyword.other.ahk
+>BlockInput, MouseMoveOff
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^^^^^^^^^^^ source.ahk keyword.other.ahk
+>DetectHiddenWindows, On
+#^^^^^^^^^^^^^^^^^^^ source.ahk support.function.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^^ source.ahk keyword.other.ahk
+>Control, Show
+#^^^^^^^ source.ahk support.function.ahk
+#       ^ source.ahk punctuation.ahk
+#        ^ source.ahk
+#         ^^^^ source.ahk keyword.other.ahk
+>ControlClick, OK, WinTitle,, Left,, NA
+#^^^^^^^^^^^^ source.ahk support.function.ahk
+#            ^ source.ahk punctuation.ahk
+#             ^ source.ahk
+#              ^^ source.ahk variable.def.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^^^^^ source.ahk variable.def.ahk
+#                          ^ source.ahk punctuation.ahk
+#                           ^ source.ahk punctuation.ahk
+#                            ^ source.ahk
+#                             ^^^^ source.ahk keyword.keys.ahk
+#                                 ^ source.ahk punctuation.ahk
+#                                  ^ source.ahk punctuation.ahk
+#                                   ^ source.ahk
+#                                    ^^ source.ahk keyword.other.ahk
+>CoordMode, Pixel, Screen
+#^^^^^^^^^ source.ahk support.function.ahk
+#         ^ source.ahk punctuation.ahk
+#          ^ source.ahk
+#           ^^^^^ source.ahk keyword.other.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^^^ source.ahk keyword.other.ahk
+>Drive, Unlock, C:
+#^^^^^ source.ahk support.function.ahk
+#     ^ source.ahk punctuation.ahk
+#      ^ source.ahk
+#       ^^^^^^ source.ahk keyword.other.ahk
+#             ^ source.ahk punctuation.ahk
+#              ^ source.ahk
+#               ^ source.ahk variable.def.ahk
+#                ^ source.ahk punctuation.ahk
+>DriveGet, OutputVar, List, FIXED
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^^ source.ahk variable.def.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^^^^ source.ahk keyword.other.ahk
+#                         ^ source.ahk punctuation.ahk
+#                          ^ source.ahk
+#                           ^^^^^ source.ahk keyword.other.ahk
+>EnvAdd, Var, 5, Days
+#^^^^^^ source.ahk support.function.ahk
+#      ^ source.ahk punctuation.ahk
+#       ^ source.ahk
+#        ^^^ source.ahk variable.def.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^ source.ahk constant.numeric.ahk
+#              ^ source.ahk punctuation.ahk
+#               ^ source.ahk
+#                ^^^^ source.ahk keyword.other.ahk
+>Var += 5, Days
+#^^^ source.ahk variable.def.ahk
+#   ^ source.ahk
+#    ^ source.ahk keyword.operator.arithmetic.ahk
+#     ^ source.ahk keyword.operator.assignment.ahk
+#      ^ source.ahk
+#       ^ source.ahk constant.numeric.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^ source.ahk keyword.other.ahk
+>FileEncoding, CP65001
+#^^^^^^^^^^^^ source.ahk support.function.ahk
+#            ^ source.ahk punctuation.ahk
+#             ^ source.ahk
+#              ^^^^^^^ source.ahk keyword.other.ahk
+>FileEncoding, UTF-16
+#^^^^^^^^^^^^ source.ahk support.function.ahk
+#            ^ source.ahk punctuation.ahk
+#             ^ source.ahk
+#              ^^^^^^ source.ahk keyword.other.ahk
+>For Key in Expression
+#^^^ source.ahk keyword.control.ahk
+#   ^ source.ahk
+#    ^^^ source.ahk variable.def.ahk
+#       ^ source.ahk
+#        ^^ source.ahk keyword.other.ahk
+#          ^ source.ahk
+#           ^^^^^^^^^^ source.ahk variable.def.ahk
+>For Key, Value in Expression
+#^^^ source.ahk keyword.control.ahk
+#   ^ source.ahk
+#    ^^^ source.ahk variable.def.ahk
+#       ^ source.ahk punctuation.ahk
+#        ^ source.ahk
+#         ^^^^^ source.ahk variable.def.ahk
+#              ^ source.ahk
+#               ^^ source.ahk keyword.other.ahk
+#                 ^ source.ahk
+#                  ^^^^^^^^^^ source.ahk variable.def.ahk
+>FormatTime, TimeString, T12, Time
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^^^^^^^^^ source.ahk variable.def.ahk
+#                      ^ source.ahk punctuation.ahk
+#                       ^ source.ahk
+#                        ^^^ source.ahk variable.def.ahk
+#                           ^ source.ahk punctuation.ahk
+#                            ^ source.ahk
+#                             ^^^^ source.ahk keyword.other.ahk
+>FormatTime, TimeString,, LongDate
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^^^^^^^^^ source.ahk variable.def.ahk
+#                      ^ source.ahk punctuation.ahk
+#                       ^ source.ahk punctuation.ahk
+#                        ^ source.ahk
+#                         ^^^^^^^^ source.ahk keyword.other.ahk
+>GetKeyState, OutputVar, WhichKey, P
+#^^^^^^^^^^^ source.ahk support.function.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^^^^^^^^^ source.ahk variable.def.ahk
+#                      ^ source.ahk punctuation.ahk
+#                       ^ source.ahk
+#                        ^^^^^^^^ source.ahk variable.def.ahk
+#                                ^ source.ahk punctuation.ahk
+#                                 ^ source.ahk
+#                                  ^ source.ahk keyword.other.ahk
+>Gui, Show, Center NoActivate, Title
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^^ source.ahk keyword.other.ahk
+#         ^ source.ahk punctuation.ahk
+#          ^ source.ahk
+#           ^^^^^^ source.ahk keyword.other.ahk
+#                 ^ source.ahk
+#                  ^^^^^^^^^^ source.ahk keyword.other.ahk
+#                            ^ source.ahk punctuation.ahk
+#                             ^ source.ahk
+#                              ^^^^^ source.ahk variable.def.ahk
+>Gui, GuiName:Show, Options, Title
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^^^^^ source.ahk variable.def.ahk
+#            ^ source.ahk punctuation.ahk
+#             ^^^^ source.ahk keyword.other.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^^^^^^ source.ahk variable.def.ahk
+#                          ^ source.ahk punctuation.ahk
+#                           ^ source.ahk
+#                            ^^^^^ source.ahk variable.def.ahk
+>Gui, %GuiName%:Show, Options, Title
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^ source.ahk punctuation.definition.variable.percent.ahk
+#      ^^^^^^^ source.ahk variable.def.ahk
+#             ^ source.ahk punctuation.definition.variable.percent.ahk
+#              ^ source.ahk punctuation.ahk
+#               ^^^^ source.ahk keyword.other.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^^^^^^^ source.ahk variable.def.ahk
+#                            ^ source.ahk punctuation.ahk
+#                             ^ source.ahk
+#                              ^^^^^ source.ahk variable.def.ahk
+>Gui, Add, Link, Options, Title
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^ source.ahk keyword.other.ahk
+#              ^ source.ahk punctuation.ahk
+#               ^ source.ahk
+#                ^^^^^^^ source.ahk variable.def.ahk
+#                       ^ source.ahk punctuation.ahk
+#                        ^ source.ahk
+#                         ^^^^^ source.ahk variable.def.ahk
+>Gui, GuiName:Add, Link, Options, Title
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^^^^^ source.ahk variable.def.ahk
+#            ^ source.ahk punctuation.ahk
+#             ^^^ source.ahk keyword.other.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^ source.ahk keyword.other.ahk
+#                      ^ source.ahk punctuation.ahk
+#                       ^ source.ahk
+#                        ^^^^^^^ source.ahk variable.def.ahk
+#                               ^ source.ahk punctuation.ahk
+#                                ^ source.ahk
+#                                 ^^^^^ source.ahk variable.def.ahk
+>Gui, %GuiName%:Add, Link, Options, Title
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^ source.ahk punctuation.definition.variable.percent.ahk
+#      ^^^^^^^ source.ahk variable.def.ahk
+#             ^ source.ahk punctuation.definition.variable.percent.ahk
+#              ^ source.ahk punctuation.ahk
+#               ^^^ source.ahk keyword.other.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^^^^ source.ahk keyword.other.ahk
+#                        ^ source.ahk punctuation.ahk
+#                         ^ source.ahk
+#                          ^^^^^^^ source.ahk variable.def.ahk
+#                                 ^ source.ahk punctuation.ahk
+#                                  ^ source.ahk
+#                                   ^^^^^ source.ahk variable.def.ahk
+>Gui, Submit, NoHide
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^^^^ source.ahk keyword.other.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^^^^^^ source.ahk keyword.other.ahk
+>Gui, Font, s10 Norm Italic cRed
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^^ source.ahk keyword.other.ahk
+#         ^ source.ahk punctuation.ahk
+#          ^ source.ahk
+#           ^^^ source.ahk variable.def.ahk
+#              ^ source.ahk
+#               ^^^^ source.ahk keyword.other.ahk
+#                   ^ source.ahk
+#                    ^^^^^^ source.ahk keyword.other.ahk
+#                          ^ source.ahk
+#                           ^^^^ source.ahk keyword.other.ahk
+>Gui, Color, Red
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^^^ source.ahk keyword.other.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^^ source.ahk keyword.other.ahk
+>Gui, Flash, Off
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^^^ source.ahk keyword.other.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^^ source.ahk keyword.other.ahk
+>Gui, +AlwaysOnTop +Disabled -SysMenu +Owner
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^ source.ahk keyword.operator.arithmetic.ahk
+#      ^^^^^^^^^^^ source.ahk keyword.other.ahk
+#                 ^ source.ahk
+#                  ^ source.ahk keyword.operator.arithmetic.ahk
+#                   ^^^^^^^^ source.ahk keyword.other.ahk
+#                           ^ source.ahk
+#                            ^ source.ahk keyword.operator.arithmetic.ahk
+#                             ^^^^^^^ source.ahk keyword.other.ahk
+#                                    ^ source.ahk
+#                                     ^ source.ahk keyword.operator.arithmetic.ahk
+#                                      ^^^^^ source.ahk keyword.other.ahk
+>Gui, New, -Caption +LastFound
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.keys.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^ source.ahk keyword.operator.arithmetic.ahk
+#           ^^^^^^^ source.ahk keyword.other.ahk
+#                  ^ source.ahk
+#                   ^ source.ahk keyword.operator.arithmetic.ahk
+#                    ^^^^^^^^^ source.ahk keyword.other.ahk
+>Gui, Add, Text, x+5 +Hidden
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^ source.ahk keyword.other.ahk
+#              ^ source.ahk punctuation.ahk
+#               ^ source.ahk
+#                ^ source.ahk variable.def.ahk
+#                 ^ source.ahk keyword.operator.arithmetic.ahk
+#                  ^ source.ahk constant.numeric.ahk
+#                   ^ source.ahk
+#                    ^ source.ahk keyword.operator.arithmetic.ahk
+#                     ^^^^^^ source.ahk keyword.other.ahk
+>Gui, Add, Edit, Multi Limit ;BUG "Edit" not keyword, but command
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^ source.ahk support.function.ahk
+#              ^ source.ahk punctuation.ahk
+#               ^ source.ahk
+#                ^^^^^ source.ahk keyword.other.ahk
+#                     ^ source.ahk
+#                      ^^^^^ source.ahk keyword.other.ahk
+#                           ^ source.ahk comment.line.semicolon.ahk
+#                            ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+#                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>Gui, Add, UpDown, Horz 0x80
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^ source.ahk keyword.other.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^ source.ahk keyword.other.ahk
+#                      ^ source.ahk
+#                       ^^^^ source.ahk keyword.other.ahk
+>Gui, Add, Picture, Icon2, Application.exe
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^ source.ahk keyword.other.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^^^^ source.ahk keyword.other.ahk
+#                        ^ source.ahk punctuation.ahk
+#                         ^ source.ahk
+#                          ^^^^^^^^^^^ source.ahk variable.def.ahk
+#                                     ^ source.ahk
+#                                      ^^^ source.ahk variable.def.ahk
+>Gui, Add, Button, w80 Default, OK
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^ source.ahk keyword.other.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^ source.ahk variable.def.ahk
+#                     ^ source.ahk
+#                      ^^^^^^^ source.ahk keyword.other.ahk
+#                             ^ source.ahk punctuation.ahk
+#                              ^ source.ahk
+#                               ^^ source.ahk variable.def.ahk
+>Gui, Add, Checkbox, Checked, Some text
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^ source.ahk keyword.other.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^^^^^^^ source.ahk keyword.other.ahk
+#                           ^ source.ahk punctuation.ahk
+#                            ^ source.ahk
+#                             ^^^^ source.ahk variable.def.ahk
+#                                 ^ source.ahk
+#                                  ^^^^ source.ahk variable.def.ahk
+>Gui, Add, Radio, Checked, Some text
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^ source.ahk keyword.other.ahk
+#               ^ source.ahk punctuation.ahk
+#                ^ source.ahk
+#                 ^^^^^^^ source.ahk keyword.other.ahk
+#                        ^ source.ahk punctuation.ahk
+#                         ^ source.ahk
+#                          ^^^^ source.ahk variable.def.ahk
+#                              ^ source.ahk
+#                               ^^^^ source.ahk variable.def.ahk
+>Gui, Add, DropDownList, Uppercase, Black|White
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^^^^^ source.ahk keyword.other.ahk
+#                      ^ source.ahk punctuation.ahk
+#                       ^ source.ahk
+#                        ^^^^^^^^^ source.ahk keyword.other.ahk
+#                                 ^ source.ahk punctuation.ahk
+#                                  ^ source.ahk
+#                                   ^^^^^ source.ahk variable.def.ahk
+#                                        ^ source.ahk keyword.operator.arithmetic.ahk
+#                                         ^^^^^ source.ahk variable.def.ahk
+>Gui, Add, ComboBox, Simple, Red|Green
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^ source.ahk keyword.other.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^^^^^^ source.ahk keyword.other.ahk
+#                          ^ source.ahk punctuation.ahk
+#                           ^ source.ahk
+#                            ^^^ source.ahk variable.def.ahk
+#                               ^ source.ahk keyword.operator.arithmetic.ahk
+#                                ^^^^^ source.ahk variable.def.ahk
+>Gui, Add, ListBox, ReadOnly, Red|Green
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^ source.ahk keyword.other.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^^^^^^^ source.ahk keyword.other.ahk
+#                           ^ source.ahk punctuation.ahk
+#                            ^ source.ahk
+#                             ^^^ source.ahk variable.def.ahk
+#                                ^ source.ahk keyword.operator.arithmetic.ahk
+#                                 ^^^^^ source.ahk variable.def.ahk
+>Gui, Add, DateTime,, ChooseNone
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^ source.ahk keyword.other.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^^^^^^^^^^ source.ahk keyword.other.ahk
+>Gui, Add, MonthCal, Multi 8
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^ source.ahk keyword.other.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^^^^^ source.ahk keyword.other.ahk
+#                         ^ source.ahk
+#                          ^ source.ahk keyword.other.ahk
+>Gui, Add, Slider, Invert, 50
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^ source.ahk keyword.other.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^^^ source.ahk keyword.other.ahk
+#                        ^ source.ahk punctuation.ahk
+#                         ^ source.ahk
+#                          ^^ source.ahk constant.numeric.ahk
+>Gui, Add, Progress, w200 h20 cRed BackgroundGreen, 75 ;BUG "Progress" not keyword, but command
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^ source.ahk support.function.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^^^^ source.ahk variable.def.ahk
+#                        ^ source.ahk
+#                         ^^^ source.ahk variable.def.ahk
+#                            ^ source.ahk
+#                             ^^^^ source.ahk keyword.other.ahk
+#                                 ^ source.ahk
+#                                  ^^^^^^^^^^^^^^^ source.ahk keyword.other.ahk
+#                                                 ^ source.ahk punctuation.ahk
+#                                                  ^ source.ahk
+#                                                   ^^ source.ahk constant.numeric.ahk
+#                                                     ^ source.ahk comment.line.semicolon.ahk
+#                                                      ^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+#                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>Gui, Add, Tab3, Buttons, General|Settings
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^ source.ahk keyword.other.ahk
+#              ^ source.ahk punctuation.ahk
+#               ^ source.ahk
+#                ^^^^^^^ source.ahk keyword.other.ahk
+#                       ^ source.ahk punctuation.ahk
+#                        ^ source.ahk
+#                         ^^^^^^^ source.ahk variable.def.ahk
+#                                ^ source.ahk keyword.operator.arithmetic.ahk
+#                                 ^^^^^^^^ source.ahk variable.def.ahk
+>Gui, Add, ListView, -LV0x10 AltSubmit cRed
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^ source.ahk keyword.other.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^ source.ahk keyword.operator.arithmetic.ahk
+#                     ^^^^^^ source.ahk keyword.other.ahk
+#                           ^ source.ahk
+#                            ^^^^^^^^^ source.ahk keyword.other.ahk
+#                                     ^ source.ahk
+#                                      ^^^^ source.ahk keyword.other.ahk
+>Gui, Add, TreeView, -ReadOnly cRed
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^ source.ahk keyword.other.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^ source.ahk keyword.other.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^ source.ahk keyword.operator.arithmetic.ahk
+#                     ^^^^^^^^ source.ahk keyword.other.ahk
+#                             ^ source.ahk
+#                              ^^^^ source.ahk keyword.other.ahk
+>Gui, ListView, ListViewName
+#^^^ source.ahk support.function.ahk
+#   ^ source.ahk punctuation.ahk
+#    ^ source.ahk
+#     ^^^^^^^^ source.ahk keyword.other.ahk
+#             ^ source.ahk punctuation.ahk
+#              ^ source.ahk
+#               ^^^^^^^^^^^^ source.ahk variable.def.ahk
+>GuiControl, +AltSubmit -g, MyListBox
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^ source.ahk keyword.operator.arithmetic.ahk
+#             ^^^^^^^^^ source.ahk keyword.other.ahk
+#                      ^ source.ahk
+#                       ^ source.ahk keyword.operator.arithmetic.ahk
+#                        ^ source.ahk keyword.other.ahk
+#                         ^ source.ahk punctuation.ahk
+#                          ^ source.ahk
+#                           ^^^^^^^^^ source.ahk variable.def.ahk
+>GuiControl, GuiName: +AltSubmit -g, MyListBox
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^^^^^^ source.ahk variable.def.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^ source.ahk keyword.operator.arithmetic.ahk
+#                      ^^^^^^^^^ source.ahk keyword.other.ahk
+#                               ^ source.ahk
+#                                ^ source.ahk keyword.operator.arithmetic.ahk
+#                                 ^ source.ahk keyword.other.ahk
+#                                  ^ source.ahk punctuation.ahk
+#                                   ^ source.ahk
+#                                    ^^^^^^^^^ source.ahk variable.def.ahk
+>GuiControl, %GuiName%: +AltSubmit -g, MyListBox
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^ source.ahk punctuation.definition.variable.percent.ahk
+#             ^^^^^^^ source.ahk variable.def.ahk
+#                    ^ source.ahk punctuation.definition.variable.percent.ahk
+#                     ^ source.ahk punctuation.ahk
+#                      ^ source.ahk
+#                       ^ source.ahk keyword.operator.arithmetic.ahk
+#                        ^^^^^^^^^ source.ahk keyword.other.ahk
+#                                 ^ source.ahk
+#                                  ^ source.ahk keyword.operator.arithmetic.ahk
+#                                   ^ source.ahk keyword.other.ahk
+#                                    ^ source.ahk punctuation.ahk
+#                                     ^ source.ahk
+#                                      ^^^^^^^^^ source.ahk variable.def.ahk
+>GuiControl, Font, MyEdit
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^^^ source.ahk keyword.other.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^^^ source.ahk variable.def.ahk
+>GuiControl, GuiName:Font, MyEdit
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^^^^^^ source.ahk variable.def.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^^^^ source.ahk keyword.other.ahk
+#                        ^ source.ahk punctuation.ahk
+#                         ^ source.ahk
+#                          ^^^^^^ source.ahk variable.def.ahk
+>GuiControl, %GuiName%:Font, MyEdit
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^ source.ahk punctuation.definition.variable.percent.ahk
+#             ^^^^^^^ source.ahk variable.def.ahk
+#                    ^ source.ahk punctuation.definition.variable.percent.ahk
+#                     ^ source.ahk punctuation.ahk
+#                      ^^^^ source.ahk keyword.other.ahk
+#                          ^ source.ahk punctuation.ahk
+#                           ^ source.ahk
+#                            ^^^^^^ source.ahk variable.def.ahk
+>GuiControlGet, MyEdit, GuiName:Pos
+#^^^^^^^^^^^^^ source.ahk support.function.ahk
+#             ^ source.ahk punctuation.ahk
+#              ^ source.ahk
+#               ^^^^^^ source.ahk variable.def.ahk
+#                     ^ source.ahk punctuation.ahk
+#                      ^ source.ahk
+#                       ^^^^^^^ source.ahk variable.def.ahk
+#                              ^ source.ahk punctuation.ahk
+#                               ^^^ source.ahk keyword.other.ahk
+>GuiControlGet, MyEdit, %GuiName%:Pos
+#^^^^^^^^^^^^^ source.ahk support.function.ahk
+#             ^ source.ahk punctuation.ahk
+#              ^ source.ahk
+#               ^^^^^^ source.ahk variable.def.ahk
+#                     ^ source.ahk punctuation.ahk
+#                      ^ source.ahk
+#                       ^ source.ahk punctuation.definition.variable.percent.ahk
+#                        ^^^^^^^ source.ahk variable.def.ahk
+#                               ^ source.ahk punctuation.definition.variable.percent.ahk
+#                                ^ source.ahk punctuation.ahk
+#                                 ^^^ source.ahk keyword.other.ahk
+>If var between 1 and 5
+#^^ source.ahk keyword.control.ahk
+#  ^ source.ahk
+#   ^^^ source.ahk variable.def.ahk
+#      ^ source.ahk
+#       ^^^^^^^ source.ahk keyword.other.ahk
+#              ^ source.ahk
+#               ^ source.ahk constant.numeric.ahk
+#                ^ source.ahk
+#                 ^^^ source.ahk keyword.other.ahk
+#                    ^ source.ahk
+#                     ^ source.ahk constant.numeric.ahk
+>If var not between 1 and 5
+#^^ source.ahk keyword.control.ahk
+#  ^ source.ahk
+#   ^^^ source.ahk variable.def.ahk
+#      ^ source.ahk
+#       ^^^ source.ahk keyword.other.ahk
+#          ^ source.ahk
+#           ^^^^^^^ source.ahk keyword.other.ahk
+#                  ^ source.ahk
+#                   ^ source.ahk constant.numeric.ahk
+#                    ^ source.ahk
+#                     ^^^ source.ahk keyword.other.ahk
+#                        ^ source.ahk
+#                         ^ source.ahk constant.numeric.ahk
+>If var contains 1,3
+#^^ source.ahk keyword.control.ahk
+#  ^ source.ahk
+#   ^^^ source.ahk variable.def.ahk
+#      ^ source.ahk
+#       ^^^^^^^^ source.ahk keyword.other.ahk
+#               ^ source.ahk
+#                ^ source.ahk constant.numeric.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk constant.numeric.ahk
+>If var not contains 1,3
+#^^ source.ahk keyword.control.ahk
+#  ^ source.ahk
+#   ^^^ source.ahk variable.def.ahk
+#      ^ source.ahk
+#       ^^^ source.ahk keyword.other.ahk
+#          ^ source.ahk
+#           ^^^^^^^^ source.ahk keyword.other.ahk
+#                   ^ source.ahk
+#                    ^ source.ahk constant.numeric.ahk
+#                     ^ source.ahk punctuation.ahk
+#                      ^ source.ahk constant.numeric.ahk
+>If var in exe,bat
+#^^ source.ahk keyword.control.ahk
+#  ^ source.ahk
+#   ^^^ source.ahk variable.def.ahk
+#      ^ source.ahk
+#       ^^ source.ahk keyword.other.ahk
+#         ^ source.ahk
+#          ^^^ source.ahk variable.def.ahk
+#             ^ source.ahk punctuation.ahk
+#              ^^^ source.ahk variable.def.ahk
+>If var not in exe,bat
+#^^ source.ahk keyword.control.ahk
+#  ^ source.ahk
+#   ^^^ source.ahk variable.def.ahk
+#      ^ source.ahk
+#       ^^^ source.ahk keyword.other.ahk
+#          ^ source.ahk
+#           ^^ source.ahk keyword.other.ahk
+#             ^ source.ahk
+#              ^^^ source.ahk variable.def.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^^^ source.ahk variable.def.ahk
+>If var is Float
+#^^ source.ahk keyword.control.ahk
+#  ^ source.ahk
+#   ^^^ source.ahk variable.def.ahk
+#      ^ source.ahk
+#       ^^^^^^^^ source.ahk keyword.other.ahk
+>If var is not Float
+#^^ source.ahk keyword.control.ahk
+#  ^ source.ahk
+#   ^^^ source.ahk variable.def.ahk
+#      ^ source.ahk
+#       ^^^^^^^^^^^^ source.ahk keyword.other.ahk
+>IfMsgBox, Timeout
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^ source.ahk keyword.other.ahk
+>InputBox, OutputVar, Title, Prompt, HIDE
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^^^^ source.ahk variable.def.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^^^^^ source.ahk variable.def.ahk
+#                          ^ source.ahk punctuation.ahk
+#                           ^ source.ahk
+#                            ^^^^^^ source.ahk variable.def.ahk
+#                                  ^ source.ahk punctuation.ahk
+#                                   ^ source.ahk
+#                                    ^^^^ source.ahk keyword.other.ahk
+>Loop, Files, *.jpg, DFR
+#^^^^ source.ahk keyword.control.ahk
+#    ^ source.ahk punctuation.ahk
+#     ^ source.ahk
+#      ^^^^^ source.ahk keyword.other.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^ source.ahk keyword.operator.arithmetic.ahk
+#              ^ source.ahk
+#               ^^^ source.ahk variable.def.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^^^ source.ahk keyword.other.ahk
+>Loop, Parse, InputVar, CSV
+#^^^^ source.ahk keyword.control.ahk
+#    ^ source.ahk punctuation.ahk
+#     ^ source.ahk
+#      ^^^^^ source.ahk keyword.other.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^^^^^^^^ source.ahk variable.def.ahk
+#                     ^ source.ahk punctuation.ahk
+#                      ^ source.ahk
+#                       ^^^ source.ahk keyword.other.ahk
+>Loop, Reg, HKEY_CURRENT_USER\Software, KVR
+#^^^^ source.ahk keyword.control.ahk
+#    ^ source.ahk punctuation.ahk
+#     ^ source.ahk
+#      ^^^ source.ahk keyword.other.ahk
+#         ^ source.ahk punctuation.ahk
+#          ^ source.ahk
+#           ^^^^^^^^^^^^^^^^^ source.ahk keyword.other.ahk
+#                            ^ source.ahk
+#                             ^^^^^^^^ source.ahk variable.def.ahk
+#                                     ^ source.ahk punctuation.ahk
+#                                      ^ source.ahk
+#                                       ^^^ source.ahk keyword.other.ahk
+>Menu, MyMenu, Add
+#^^^^ source.ahk support.function.ahk
+#    ^ source.ahk punctuation.ahk
+#     ^ source.ahk
+#      ^^^^^^ source.ahk variable.def.ahk
+#            ^ source.ahk punctuation.ahk
+#             ^ source.ahk
+#              ^^^ source.ahk keyword.other.ahk
+>Menu, Tray, Add
+#^^^^ source.ahk support.function.ahk
+#    ^ source.ahk punctuation.ahk
+#     ^ source.ahk
+#      ^^^^ source.ahk keyword.other.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^^ source.ahk keyword.other.ahk
+>MouseClickDrag, Middle
+#^^^^^^^^^^^^^^ source.ahk support.function.ahk
+#              ^ source.ahk punctuation.ahk
+#               ^ source.ahk
+#                ^^^^^^ source.ahk keyword.other.ahk
+>PixelGetColor, OutputVar, X, Y, Alt RGB
+#^^^^^^^^^^^^^ source.ahk support.function.ahk
+#             ^ source.ahk punctuation.ahk
+#              ^ source.ahk
+#               ^^^^^^^^^ source.ahk variable.def.ahk
+#                        ^ source.ahk punctuation.ahk
+#                         ^ source.ahk
+#                          ^ source.ahk variable.def.ahk
+#                           ^ source.ahk punctuation.ahk
+#                            ^ source.ahk
+#                             ^ source.ahk variable.def.ahk
+#                              ^ source.ahk punctuation.ahk
+#                               ^ source.ahk
+#                                ^^^ source.ahk keyword.keys.ahk
+#                                   ^ source.ahk
+#                                    ^^^ source.ahk keyword.other.ahk
+>PixelSearch, Px, Py, 200, 200, 300, 300, 0x9d6346, 3, Fast RGB
+#^^^^^^^^^^^ source.ahk support.function.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^^ source.ahk variable.def.ahk
+#               ^ source.ahk punctuation.ahk
+#                ^ source.ahk
+#                 ^^ source.ahk variable.def.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^^^ source.ahk constant.numeric.ahk
+#                        ^ source.ahk punctuation.ahk
+#                         ^ source.ahk
+#                          ^^^ source.ahk constant.numeric.ahk
+#                             ^ source.ahk punctuation.ahk
+#                              ^ source.ahk
+#                               ^^^ source.ahk constant.numeric.ahk
+#                                  ^ source.ahk punctuation.ahk
+#                                   ^ source.ahk
+#                                    ^^^ source.ahk constant.numeric.ahk
+#                                       ^ source.ahk punctuation.ahk
+#                                        ^ source.ahk
+#                                         ^^^^^^^^ source.ahk constant.numeric.ahk
+#                                                 ^ source.ahk punctuation.ahk
+#                                                  ^ source.ahk
+#                                                   ^ source.ahk constant.numeric.ahk
+#                                                    ^ source.ahk punctuation.ahk
+#                                                     ^ source.ahk
+#                                                      ^^^^ source.ahk keyword.other.ahk
+#                                                          ^ source.ahk
+#                                                           ^^^ source.ahk keyword.other.ahk
+>Process, Priority, notepad.exe, BelowNormal
+#^^^^^^^ source.ahk support.function.ahk
+#       ^ source.ahk punctuation.ahk
+#        ^ source.ahk
+#         ^^^^^^^^ source.ahk keyword.other.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^^^^^^ source.ahk variable.def.ahk
+#                          ^ source.ahk
+#                           ^^^ source.ahk variable.def.ahk
+#                              ^ source.ahk punctuation.ahk
+#                               ^ source.ahk
+#                                ^^^^^^^^^^^ source.ahk keyword.other.ahk
+>Progress, Show
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^ source.ahk keyword.other.ahk
+>Progress, CWRed CTRed
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^ source.ahk keyword.other.ahk
+#               ^ source.ahk
+#                ^^^^^ source.ahk keyword.other.ahk
+>RegDelete, HKEY_LOCAL_MACHINE\Software\SomeApplication, AHK_DEFAULT
+#^^^^^^^^^ source.ahk support.function.ahk
+#         ^ source.ahk punctuation.ahk
+#          ^ source.ahk
+#           ^^^^^^^^^^^^^^^^^^ source.ahk keyword.other.ahk
+#                             ^ source.ahk
+#                              ^^^^^^^^ source.ahk variable.def.ahk
+#                                      ^ source.ahk
+#                                       ^^^^^^^^^^^^^^^ source.ahk variable.def.ahk
+#                                                      ^ source.ahk punctuation.ahk
+#                                                       ^ source.ahk
+#                                                        ^^^^^^^^^^^ source.ahk keyword.other.ahk
+>RegRead, OutputVar, HKEY_LOCAL_MACHINE\Software\SomeApplication, TestValue
+#^^^^^^^ source.ahk support.function.ahk
+#       ^ source.ahk punctuation.ahk
+#        ^ source.ahk
+#         ^^^^^^^^^ source.ahk variable.def.ahk
+#                  ^ source.ahk punctuation.ahk
+#                   ^ source.ahk
+#                    ^^^^^^^^^^^^^^^^^^ source.ahk keyword.other.ahk
+#                                      ^ source.ahk
+#                                       ^^^^^^^^ source.ahk variable.def.ahk
+#                                               ^ source.ahk
+#                                                ^^^^^^^^^^^^^^^ source.ahk variable.def.ahk
+#                                                               ^ source.ahk punctuation.ahk
+#                                                                ^ source.ahk
+#                                                                 ^^^^^^^^^ source.ahk variable.def.ahk
+>RegWrite, REG_SZ, HKEY_LOCAL_MACHINE\SOFTWARE\TestKey, MyValueName, TestValue
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^^ source.ahk keyword.other.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^^^^^^^^^^^^^^^ source.ahk keyword.other.ahk
+#                                    ^ source.ahk
+#                                     ^^^^^^^^ source.ahk variable.def.ahk
+#                                             ^ source.ahk
+#                                              ^^^^^^^ source.ahk variable.def.ahk
+#                                                     ^ source.ahk punctuation.ahk
+#                                                      ^ source.ahk
+#                                                       ^^^^^^^^^^^ source.ahk variable.def.ahk
+#                                                                  ^ source.ahk punctuation.ahk
+#                                                                   ^ source.ahk
+#                                                                    ^^^^^^^^^ source.ahk variable.def.ahk
+>RunWait, Target,, Min
+#^^^^^^^ source.ahk support.function.ahk
+#       ^ source.ahk punctuation.ahk
+#        ^ source.ahk
+#         ^^^^^^ source.ahk variable.def.ahk
+#               ^ source.ahk punctuation.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^ source.ahk keyword.other.ahk
+>SendMode, Event
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^ source.ahk keyword.other.ahk
+>SetCapsLockState, AlwaysOff
+#^^^^^^^^^^^^^^^^ source.ahk support.function.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^^^^^^ source.ahk keyword.other.ahk
+>SetFormat, IntegerFast, Hex
+#^^^^^^^^^ source.ahk support.function.ahk
+#         ^ source.ahk punctuation.ahk
+#          ^ source.ahk
+#           ^^^^^^^^^^^ source.ahk keyword.other.ahk
+#                      ^ source.ahk punctuation.ahk
+#                       ^ source.ahk
+#                        ^^^ source.ahk keyword.other.ahk
+>SetMouseDelay, 0, Play
+#^^^^^^^^^^^^^ source.ahk support.function.ahk
+#             ^ source.ahk punctuation.ahk
+#              ^ source.ahk
+#               ^ source.ahk constant.numeric.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^ source.ahk keyword.other.ahk
+>SetKeyDelay, 0, 0, Play
+#^^^^^^^^^^^ source.ahk support.function.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^ source.ahk constant.numeric.ahk
+#              ^ source.ahk punctuation.ahk
+#               ^ source.ahk
+#                ^ source.ahk constant.numeric.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^^^ source.ahk keyword.other.ahk
+>SetRegView, 32
+#^^^^^^^^^^ source.ahk support.function.ahk
+#          ^ source.ahk punctuation.ahk
+#           ^ source.ahk
+#            ^^ source.ahk keyword.other.ahk
+>SetTimer, Label, Delete
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^^^^^ source.ahk variable.def.ahk
+#               ^ source.ahk punctuation.ahk
+#                ^ source.ahk
+#                 ^^^^^^ source.ahk keyword.keys.ahk
+>SetTitleMatchMode, Fast
+#^^^^^^^^^^^^^^^^^ source.ahk support.function.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^^^ source.ahk keyword.other.ahk
+>SoundSet, +20, Master, Bass
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^ source.ahk keyword.operator.arithmetic.ahk
+#           ^^ source.ahk constant.numeric.ahk
+#             ^ source.ahk punctuation.ahk
+#              ^ source.ahk
+#               ^^^^^^ source.ahk keyword.other.ahk
+#                     ^ source.ahk punctuation.ahk
+#                      ^ source.ahk
+#                       ^^^^ source.ahk keyword.other.ahk
+>SoundSet, +1,, Mute
+#^^^^^^^^ source.ahk support.function.ahk
+#        ^ source.ahk punctuation.ahk
+#         ^ source.ahk
+#          ^ source.ahk keyword.operator.arithmetic.ahk
+#           ^ source.ahk constant.numeric.ahk
+#            ^ source.ahk punctuation.ahk
+#             ^ source.ahk punctuation.ahk
+#              ^ source.ahk
+#               ^^^^ source.ahk keyword.other.ahk
+>SplashImage, Image.png, CWRed CTRed
+#^^^^^^^^^^^ source.ahk support.function.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^^^^^ source.ahk variable.def.ahk
+#                  ^ source.ahk
+#                   ^^^ source.ahk variable.def.ahk
+#                      ^ source.ahk punctuation.ahk
+#                       ^ source.ahk
+#                        ^^^^^ source.ahk keyword.other.ahk
+#                             ^ source.ahk
+#                              ^^^^^ source.ahk keyword.other.ahk
+>SplashImage, Show
+#^^^^^^^^^^^ source.ahk support.function.ahk
+#           ^ source.ahk punctuation.ahk
+#            ^ source.ahk
+#             ^^^^ source.ahk keyword.other.ahk
+>StringCaseSense, Locale
+#^^^^^^^^^^^^^^^ source.ahk support.function.ahk
+#               ^ source.ahk punctuation.ahk
+#                ^ source.ahk
+#                 ^^^^^^ source.ahk keyword.other.ahk
+>SysGet, OutputVar, Monitor
+#^^^^^^ source.ahk support.function.ahk
+#      ^ source.ahk punctuation.ahk
+#       ^ source.ahk
+#        ^^^^^^^^^ source.ahk variable.def.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^^^^^^ source.ahk keyword.other.ahk
+>Thread, NoTimers
+#^^^^^^ source.ahk support.function.ahk
+#      ^ source.ahk punctuation.ahk
+#       ^ source.ahk
+#        ^^^^^^^^ source.ahk keyword.other.ahk
+>Transform, OutputVar, Unicode
+#^^^^^^^^^ source.ahk support.function.ahk
+#         ^ source.ahk punctuation.ahk
+#          ^ source.ahk
+#           ^^^^^^^^^ source.ahk variable.def.ahk
+#                    ^ source.ahk punctuation.ahk
+#                     ^ source.ahk
+#                      ^^^^^^^ source.ahk keyword.other.ahk
+>WinGet, active_id, ID, A
+#^^^^^^ source.ahk support.function.ahk
+#      ^ source.ahk punctuation.ahk
+#       ^ source.ahk
+#        ^^^^^^^^^ source.ahk variable.def.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^ source.ahk keyword.other.ahk
+#                     ^ source.ahk punctuation.ahk
+#                      ^ source.ahk
+#                       ^ source.ahk variable.def.ahk
+>WinSet, Transparent, 200, Untitled
+#^^^^^^ source.ahk support.function.ahk
+#      ^ source.ahk punctuation.ahk
+#       ^ source.ahk
+#        ^^^^^^^^^^^ source.ahk keyword.other.ahk
+#                   ^ source.ahk punctuation.ahk
+#                    ^ source.ahk
+#                     ^^^ source.ahk constant.numeric.ahk
+#                        ^ source.ahk punctuation.ahk
+#                         ^ source.ahk
+#                          ^^^^^^^^ source.ahk variable.def.ahk
+>
+>;Special case strings
+#^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
+# ^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
+>LegacyString is id on off days grid
+#^^^^^^^^^^^^ source.ahk variable.def.ahk
+#            ^ source.ahk
+#             ^^ source.ahk variable.def.ahk
+#               ^ source.ahk
+#                ^^ source.ahk variable.def.ahk
+#                  ^ source.ahk
+#                   ^^ source.ahk variable.def.ahk
+#                     ^ source.ahk
+#                      ^^^ source.ahk variable.def.ahk
+#                         ^ source.ahk
+#                          ^^^^ source.ahk variable.def.ahk
+#                              ^ source.ahk
+#                               ^^^^ source.ahk variable.def.ahk
+>GuiString center, hide, disabled alwaysontop hidden
+#^^^^^^^^^ source.ahk variable.def.ahk
+#         ^ source.ahk
+#          ^^^^^^ source.ahk variable.def.ahk
+#                ^ source.ahk punctuation.ahk
+#                 ^ source.ahk
+#                  ^^^^ source.ahk variable.def.ahk
+#                      ^ source.ahk punctuation.ahk
+#                       ^ source.ahk
+#                        ^^^^^^^^ source.ahk variable.def.ahk
+#                                ^ source.ahk
+#                                 ^^^^^^^^^^^ source.ahk variable.def.ahk
+#                                            ^ source.ahk
+#                                             ^^^^^^ source.ahk variable.def.ahk
+>WinGetString word, id
+#^^^^^^^^^^^^ source.ahk variable.def.ahk
+#            ^ source.ahk
+#             ^^^^ source.ahk variable.def.ahk
+#                 ^ source.ahk punctuation.ahk
+#                  ^ source.ahk
+#                   ^^ source.ahk variable.def.ahk
+>
