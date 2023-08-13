@@ -11,3 +11,4 @@
 x := 1
 y := 2 ; Breakpoint here
 z := 3
+MsgBox % "Hello world!"
