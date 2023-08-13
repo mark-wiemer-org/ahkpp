@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { makeCompileCommand } from '../../../service/runnerService';
+import { makeCompileCommand } from './runnerService';
 
 suite('runnerService', () => {
     suite('makeCompileCommand', () => {

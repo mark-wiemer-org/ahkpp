@@ -1,8 +1,8 @@
-import { getDocument } from '../../utils';
+import { getDocument } from '../test/utils';
 import * as assert from 'assert';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { Parser } from '../../../parser/parser';
+import { Parser } from '../parser/parser';
 
 suite('Parser', () => {
     suite('detectVariableByLine', () => {
@@ -81,11 +81,7 @@ suite('Parser', () => {
             __dirname,
             '..',
             '..',
-            '..',
-            '..',
             'src',
-            'test',
-            'suite',
             'parser',
             'samples',
         );

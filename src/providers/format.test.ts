@@ -1,5 +1,4 @@
-// TODO move to providers/formatting/formattingProvider.test.ts
-import { getDocument } from '../../utils';
+import { getDocument } from '../test/utils';
 import * as assert from 'assert';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -7,8 +6,8 @@ import * as vscode from 'vscode';
 import {
     FormatProvider,
     internalFormat,
-} from '../../../providers/formattingProvider';
-import { FormatOptions } from '../../../providers/formattingProvider.types';
+} from '../providers/formattingProvider';
+import { FormatOptions } from '../providers/formattingProvider.types';
 
 const inFilenameSuffix = '.in.ahk';
 const outFilenameSuffix = '.out.ahk';
@@ -111,12 +110,8 @@ const filesParentPath = path.join(
     __dirname,
     '..',
     '..',
-    '..',
-    '..',
     'src',
-    'test',
-    'suite',
-    'format',
+    'providers',
     'samples',
 );
 

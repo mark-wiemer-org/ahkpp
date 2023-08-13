@@ -18,7 +18,7 @@ import {
     purify,
     removeEmptyLines,
     trimExtraSpaces,
-} from '../../../../providers/formattingProvider.utils';
+} from './formattingProvider.utils';
 
 suite('FormattingProvider utils', () => {
     // Default formatting options
@@ -1063,14 +1063,8 @@ suite('FormattingProvider utils', () => {
             __dirname,
             '..',
             '..',
-            '..',
-            '..',
-            '..',
             'src',
-            'test',
-            'suite',
             'providers',
-            'formatting',
             'samples',
         );
 
