@@ -60,6 +60,7 @@ export class DebugSession extends LoggingDebugSession {
             })
             .on('output', (text) => {
                 this.sendEvent(new OutputEvent(`${text}\n`));
+                // Focus on Debug Console View
                 commands.executeCommand('workbench.debug.action.focusRepl');
             })
             .on('end', () => {
