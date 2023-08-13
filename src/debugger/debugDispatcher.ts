@@ -58,7 +58,7 @@ export class DebugDispatcher extends EventEmitter {
             .start()
             .on('init', () => {
                 this.breakPointHandler.loopPoints((bp) => {
-                    this.setBreakPonit(bp);
+                    this.setBreakPoint(bp);
                 });
                 this.sendCommand(
                     `feature_set -n max_children -v ${maxChildren}`,
@@ -285,7 +285,7 @@ export class DebugDispatcher extends EventEmitter {
         return this.stackHandler.handle(args, response);
     }
 
-    private async setBreakPonit(bp: DebugProtocol.Breakpoint) {
+    private async setBreakPoint(bp: DebugProtocol.Breakpoint) {
         if (this.debugServer && bp.verified) {
             const res = await this.sendCommand(
                 `breakpoint_set -t line -f ${bp.source.path} -n ${bp.line}`,
@@ -303,7 +303,7 @@ export class DebugDispatcher extends EventEmitter {
             path,
             sourceBreakpoints,
             (bp) => {
-                this.setBreakPonit(bp);
+                this.setBreakPoint(bp);
             },
         );
     }
