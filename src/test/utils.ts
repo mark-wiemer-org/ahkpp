@@ -8,3 +8,5 @@ export const getDocument = async (
     fileName: string,
 ): Promise<vscode.TextDocument> =>
     await vscode.workspace.openTextDocument(fileName);
+
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
