@@ -27,7 +27,15 @@ Be sure to go to the settings and update the new `V2` settings in case the defau
 
 ### Other changes
 
--   Allow `.ahk1` and `.ah1` extensions for v1 scripts, `.ahk2` and `.ah2` for v2 scripts. `.ahk` and `.ext` can be used for either version and still default to v1.
+-   Allow `.ahk1` and `.ah1` extensions for v1 scripts, `.ahk2` and `.ah2` for v2 scripts. `.ahk` and `.ext` can be used for either version, but default to AHK v2 ([Issue #396](https://github.com/mark-wiemer-org/ahkpp/issues/396))
+    -   The original changelog entry mentioned that the shared file extensions defaulted to AHK v1--this was incorrect
+    -   You can add a `#Requires AutoHotkey v1` directive to the top of an of `.ahk` file to have it automatically load in AHK v1 independent of VS Code settings ([Issue #392](https://github.com/mark-wiemer-org/ahkpp/issues/392))
+    -   The same can be done with `#Requires AutoHotkey v2`
+    -   Alternatively, you can follow the below steps to associate all `.ahk` files with AHK v1:
+    1. Open a `.ahk` file
+    1. `F1` -> "Change language mode"
+    1. "Configure file association for `.ahk` files"
+    1. "AutoHotkey v1"
 -   Automatically change AHK version to match the `#Requires` directive near the top of any script the first time that script is opened
 -   Allow running and debugging v1 or v2 scripts without changing settings
 -   "Open help" (Ctrl + F1) now opens version-specific help
