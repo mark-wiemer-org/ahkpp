@@ -64,7 +64,7 @@ export const initializeLanguageVersionService = (
 ) => {
     const onSwitchFile = makeOnSwitchFile(new Set<vscode.Uri>());
     vscode.window.onDidChangeActiveTextEditor(
-        (newActiveEditor) => onSwitchFile(newActiveEditor.document),
+        (newActiveEditor) => onSwitchFile(newActiveEditor?.document),
         null,
         context.subscriptions,
     );
