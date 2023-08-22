@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.3 - 2023-08-21 🏄
+
+-   Fix extension crash when switching to a nullish editor ([Issue #398](https://github.com/mark-wiemer-org/ahkpp/issues/398))
+
 ## 5.0.2 - 2023-08-10 🐈
 
 -   Fix language mode resetting when VS Code restarts ([Issue #392](https://github.com/mark-wiemer-org/ahkpp/issues/392))
