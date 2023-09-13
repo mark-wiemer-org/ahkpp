@@ -14,6 +14,8 @@ You can customize the template snippet to fit your needs:
 
 1. In VS Code, open the command palette (F1) and go to "Snippets: Configure User Snippets".
 
+1. Choose a global snippets file or create a new one.
+
 1. Create a new snippet with a unique name, for example:
 
     ```json
