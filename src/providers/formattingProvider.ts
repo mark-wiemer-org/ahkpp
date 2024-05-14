@@ -38,8 +38,8 @@ export const internalFormat = (
     /** Level of indentation on previous line */
     let prevLineDepth = 0;
     /**
-     * It's marker for `Return`, `ExitApp`, `#Directive` commands, which
-     * allow/disallow for them to be un-indented.
+     * It's marker for `Return`, `ExitApp`, `#Directive` commands and `Labels`,
+     * which allow/disallow for them to be un-indented.
      *
      * -------------------------------------------------------------------------
      * `tagDepth === 0`:
@@ -59,15 +59,15 @@ export const internalFormat = (
      *    Current indentation level is in sync with `Label` indentation level
      *    (no additional indent added by block `{}`, `oneCommandCode`, etc...).
      *
-     *    `Return` or `ExitApp` commands allowed to be un-indented, so they will
-     *    be placed on same indentation level as `Label`.
+     *    `Return`, `ExitApp`, `Fall-Through Label` allowed to be un-indented,
+     *     so they will be placed on same indentation level as `Label`.
      *
      *    `Label` allowed to be un-indented for fall-through scenario.
      *
      * -------------------------------------------------------------------------
      * `tagDepth !== depth`:
      *
-     *    `Return` or `ExitApp` commands disallowed to be un-indented, so they
+     *    `Return`, `ExitApp`, `Label` disallowed to be un-indented, so they
      *    will obey indentation rules as code above them (`Return` inside
      *    function, block `{}`, `oneCommandCode`, etc... stay on same
      *    indentation level as code above them).
@@ -83,8 +83,8 @@ export const internalFormat = (
      *
      *    Only `Label` makes syncing `tagDepth` with `depth`.
      *
-     *    `Case:` and `Default:` must not make syncing to disallow `Return` and
-     *    `ExitApp` un-indent inside `Switch-Case` block.
+     *    `Case:` and `Default:` must not make syncing to disallow `Return`,
+     *    `ExitApp` and `Label` to un-indent inside `Switch-Case` block.
      */
     let tagDepth = 0;
 
@@ -293,11 +293,17 @@ export const internalFormat = (
      */
     const label = /^[^\s\t,`]+(?<!:):$/;
     /**
-     * Hotkey and hotstring without code after it.
+     * Hotkey or hotstring without code after it.
      *
      * Example: `F1 & F2 Up::` (hotkey), `::btw::` (hotstring)
      */
     const hotkey = /^.+::$/;
+    /**
+     * Hotkey or hotstring with code on same line.
+     *
+     * Example: `#n::Run Notepad` (hotkey), `::btw::by the way` (hotstring)
+     */
+    const hotkeySingleLine = /^.+::/;
     /**
      * `#Directive`, that will create context-sensitive hotkeys and hotstrings.
      * Example of `#Directives`:
@@ -716,7 +722,11 @@ export const internalFormat = (
         if (purifiedLine.match(switchCaseDefault)) {
             // Case: or Default:
             depth--;
-        } else if (purifiedLine.match(label) || purifiedLine.match(hotkey)) {
+        } else if (
+            purifiedLine.match(label) ||
+            purifiedLine.match(hotkey) ||
+            purifiedLine.match(hotkeySingleLine)
+        ) {
             if (indentCodeAfterLabel) {
                 // Label: or Hotkey::
                 // De-indent label or hotkey, if they not end with 'return'
@@ -727,8 +737,11 @@ export const internalFormat = (
                 // Label2: <-- de-indent
                 //     code
                 // return
-                // No need to make 'tagDepth' in sync with 'depth', 'Label'
-                // check for next line will do it.
+                // De-indent single-line hotkey, after label.
+                // This is fall-through scenario. Example:
+                // F1::
+                // F2:: <-- de-indent
+                // F3:: foo() <-- de-indent
                 if (tagDepth === depth) {
                     depth--;
                 }
