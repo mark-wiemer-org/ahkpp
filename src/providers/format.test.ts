@@ -69,6 +69,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '290-ifmsgbox' },
     { filenameRoot: '291-single-line-comment' },
     { filenameRoot: '316-if-object-continuation-section' },
+    { filenameRoot: '432-label-inside-code-block' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'align-assignment' },
     { filenameRoot: 'demo' },
