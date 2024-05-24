@@ -72,6 +72,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '429-single-line-hotkey' },
     { filenameRoot: '432-label-inside-code-block' },
     { filenameRoot: '440-fall-through-single-line-hotkey-with-if-directive' },
+    { filenameRoot: '442-fall-through-single-line-hotkey-with-function' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'align-assignment' },
     { filenameRoot: 'demo' },

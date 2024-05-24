@@ -87,8 +87,8 @@ export const internalFormat = (
      * -------------------------------------------------------------------------
      * `tagDepth = 0`:
      *
-     *    `Return`, `ExitApp`, `#If Directive` resets `tagDepth` value, when
-     *    they un-indented.
+     *    `Return`, `ExitApp`, `#If Directive`, `HotkeySingleLine` resets
+     *    `tagDepth` value, when they un-indented.
      */
     let tagDepth = 0;
 
@@ -881,6 +881,8 @@ export const internalFormat = (
                     tagDepth = depth;
                 }
             }
+        } else if (purifiedLine.match(hotkeySingleLine)) {
+            tagDepth = 0;
         }
 
         // CONTINUATION SECTION: Expression, Object
