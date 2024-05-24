@@ -70,6 +70,7 @@ const formatTests: FormatTest[] = [
     { filenameRoot: '291-single-line-comment' },
     { filenameRoot: '316-if-object-continuation-section' },
     { filenameRoot: '429-single-line-hotkey' },
+    { filenameRoot: '432-label-inside-code-block' },
     { filenameRoot: 'ahk-explorer' },
     { filenameRoot: 'align-assignment' },
     { filenameRoot: 'demo' },

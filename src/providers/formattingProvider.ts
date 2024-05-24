@@ -870,8 +870,11 @@ export const internalFormat = (
             if (indentCodeAfterLabel) {
                 // Label: or Hotkey:: <-- indent next line
                 //     code
-                depth++;
-                tagDepth = depth;
+                // Do this only if the LABEL is not inside a nested code
+                if (focDepth.depth.length === 1) {
+                    depth++;
+                    tagDepth = depth;
+                }
             }
         }
 
