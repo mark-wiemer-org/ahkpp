@@ -12,7 +12,7 @@ This document covers the development process, from writing code to publishing a 
 ## Testing
 
 -   Test all added commands
--   If the README was modified, confirm README appears as intended
+-   If the readme was modified, confirm it appears as intended
 
 ## Starting a release
 
