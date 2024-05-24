@@ -176,7 +176,7 @@ Breaking changes:
 
 Features:
 
--   Add [formatter directive](./README.md#formatter-directives) for "Format Block Comment" ([PR #164](https://github.com/vscode-autohotkey/ahkpp/pull/164))
+-   Add [formatter directive](./readme.md#formatter-directives) for "Format Block Comment" ([PR #164](https://github.com/vscode-autohotkey/ahkpp/pull/164))
 -   Add "allowed number of empty lines" setting to preserve any number of lines. Defaults to `1`, `-1` means "preserve all empty lines" ([PR #194](https://github.com/vscode-autohotkey/ahkpp/pull/194))
 -   Add "preserve indent" setting to preserve spaces before a comment. Defaults to `false`. ([PR #192](https://github.com/vscode-autohotkey/ahkpp/pull/192))
 -   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. ([PR #191](https://github.com/vscode-autohotkey/ahkpp/pull/191))
@@ -277,7 +277,7 @@ Fixes:
 
 -   Change ownership (from `cweijan` to `mark-wiemer`)
 -   Change configuration title to 'AutoHotkey Plus Plus'
--   Update README
+-   Update readme
 -   Increase icon resolution
 
 ## 2.5.6 - 2020-10-06
