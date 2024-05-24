@@ -83,6 +83,12 @@ export const internalFormat = (
      *
      *    `Case:` and `Default:` must not make syncing to disallow `Return`,
      *    `ExitApp` and `Label` to un-indent inside `Switch-Case` block.
+     *
+     * -------------------------------------------------------------------------
+     * `tagDepth = 0`:
+     *
+     *    `Return`, `ExitApp`, `#If Directive` resets `tagDepth` value, when
+     *    they un-indented.
      */
     let tagDepth = 0;
 
