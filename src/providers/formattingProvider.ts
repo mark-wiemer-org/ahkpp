@@ -857,6 +857,7 @@ export const internalFormat = (
             indentCodeAfterIfDirective
         ) {
             depth++;
+            tagDepth = 0;
         }
 
         // SWITCH-CASE-DEFAULT or LABEL: or HOTKEY::
