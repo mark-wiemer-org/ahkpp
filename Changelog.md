@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.4 - 2024-05-23 😎
+
+-   Add "PixelSearch" to V1 snippets ([PR #427](https://github.com/mark-wiemer-org/ahkpp/pull/427))
+-   Fix two minor formatting issues ([Issue #432](https://github.com/mark-wiemer-org/ahkpp/issues/432), [#429](https://github.com/mark-wiemer-org/ahkpp/issues/429))
+-   Update internal dependencies for security ([PR #435](https://github.com/mark-wiemer-org/ahkpp/pull/435))
+
 ## 5.0.3 - 2023-08-21 🏄
 
 -   Fix extension crash when switching to a nullish editor ([Issue #398](https://github.com/mark-wiemer-org/ahkpp/issues/398))
