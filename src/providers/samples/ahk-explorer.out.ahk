@@ -2848,11 +2848,11 @@ ShellContextMenu(folderPath, files, win_hwnd = 0 )
     DllCall("GlobalFree", "Ptr", DllCall("SetWindowLongPtr", "Ptr", win_hwnd, "int", -4, "Ptr", WPOld,"UPtr"))
     DllCall("DestroyMenu", "Ptr", hMenu)
     StopContextMenu:
-        ObjRelease(pIContextMenu3)
-        ObjRelease(pIContextMenu2)
-        ObjRelease(pIContextMenu)
-        pIContextMenu2:=pIContextMenu3:=WPOld:=0
-        Gui,SHELL_CONTEXT:Destroy
+    ObjRelease(pIContextMenu3)
+    ObjRelease(pIContextMenu2)
+    ObjRelease(pIContextMenu)
+    pIContextMenu2:=pIContextMenu3:=WPOld:=0
+    Gui,SHELL_CONTEXT:Destroy
     return idn
 }
 WindowProc(hWnd, nMsg, wParam, lParam)
