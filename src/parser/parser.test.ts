@@ -38,6 +38,39 @@ suite('Parser', () => {
         });
     });
 
+    suite('getLabelByLine', () => {
+        // List of test data
+        const dataList = [
+            // {
+            //     in: // input test string
+            //     rs: // expected result - label name or undefined
+            // },
+            {
+                in: 'ValidLabel:',
+                rs: 'ValidLabel',
+            },
+            {
+                in: 'NotValidLabel :',
+                rs: undefined,
+            },
+        ];
+        dataList.forEach((data) => {
+            test("'" + data.in + "' => '" + data.rs + "'", async () => {
+                const document = await vscode.workspace.openTextDocument({
+                    language: 'ahk',
+                    content: data.in,
+                });
+                // Use array access for the private members
+                const label = Parser['getLabelByLine'](document, 0);
+                if (label === undefined) {
+                    assert.equal(label, data.rs);
+                } else {
+                    assert.strictEqual(label.name, data.rs);
+                }
+            });
+        });
+    });
+
     suite('getRemarkByLine', () => {
         // List of test data
         const dataList = [
