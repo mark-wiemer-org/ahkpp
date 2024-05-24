@@ -792,7 +792,7 @@
     },
     "PixelSearch": {
         "prefix": "PixelSearch",
-        "body": "PixelSearch, ${1:OutputVarX}, ${2:OutputVarY}, ${3:X1}, ${4:Y1}, ${5:X2}, ${6:Y2}, ${7:ColorID [}, ${8:Variation}",
+        "body": "PixelSearch, ${1:OutputVarX}, ${2:OutputVarY}, ${3:X1}, ${4:Y1}, ${5:X2}, ${6:Y2}, ${7:ColorID [}, ${8:Variation}, ${9:Fast|RGB]}",
         "description": "Searches a region of the screen for a pixel of the specified color."
     },
     "PostMessage": {
