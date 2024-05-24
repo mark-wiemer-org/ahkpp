@@ -506,7 +506,7 @@
         "@types/xml2js": "^0.4.11",
         "@typescript-eslint/eslint-plugin": "^5.37.0",
         "@typescript-eslint/parser": "^5.37.0",
-        "@vscode/test-electron": "^1.6.1",
+        "@vscode/test-electron": "^2.3.10",
         "@vscode/vsce": "^2.20.1",
         "chai": "^4.3.7",
         "esbuild": "^0.15.7",
