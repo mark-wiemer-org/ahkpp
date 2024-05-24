@@ -168,7 +168,7 @@
                 "ahk++.formatter.indentCodeAfterLabel": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Indent code after hotkey and label in not nested code block. Only applies to AHK v1."
+                    "description": "Indent code after hotkeys and labels in top-level code blocks. Only applies to AHK v1."
                 },
                 "ahk++.formatter.indentCodeAfterIfDirective": {
                     "type": "boolean",
