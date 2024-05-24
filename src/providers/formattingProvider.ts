@@ -38,20 +38,18 @@ export const internalFormat = (
     /** Level of indentation on previous line */
     let prevLineDepth = 0;
     /**
-     * It's marker for `Return`, `ExitApp`, `#Directive` commands and `Labels`,
+     * It's marker for `Return`, `ExitApp`, `Hotkeys` and `Labels`,
      * which allow/disallow for them to be un-indented.
      *
      * -------------------------------------------------------------------------
      * `tagDepth === 0`:
      *
-     *    Indentation level was decreased by `Return` or `ExitApp` command,
+     *    Indentation level was decreased by `Return`, `ExitApp`, `#If Directive`,
      *    so they placed on same indentation level as `Label`.
      *
      *    Decrement of indentation level by `Label` is disallowed (previous
      *    `Label` finished with `Return` or `ExitApp` command and un-indent for
      *    fall-through scenario not needed).
-     *
-     *    Decrement indentation by one level for `#Directive` is allowed.
      *
      * -------------------------------------------------------------------------
      * `tagDepth === depth`:
@@ -75,7 +73,7 @@ export const internalFormat = (
      * -------------------------------------------------------------------------
      * `tagDepth > 0` :
      *
-     *    `#Directive` allowed to be un-indented by `tagDepth` value (jump
+     *    `#If Directive` allowed to be un-indented by `tagDepth` value (jump
      *    several indentation levels).
      *
      * -------------------------------------------------------------------------
@@ -85,6 +83,12 @@ export const internalFormat = (
      *
      *    `Case:` and `Default:` must not make syncing to disallow `Return`,
      *    `ExitApp` and `Label` to un-indent inside `Switch-Case` block.
+     *
+     * -------------------------------------------------------------------------
+     * `tagDepth = 0`:
+     *
+     *    `Return`, `ExitApp`, `#If Directive`, `HotkeySingleLine` resets
+     *    `tagDepth` value, when they un-indented.
      */
     let tagDepth = 0;
 
@@ -305,8 +309,8 @@ export const internalFormat = (
      */
     const hotkeySingleLine = /^.+::/;
     /**
-     * `#Directive`, that will create context-sensitive hotkeys and hotstrings.
-     * Example of `#Directives`:
+     * `#IF Directive`, that will create context-sensitive hotkeys and hotstrings.
+     * Example of `#If Directives`:
      * ```ahk
      * #IfWinActive WinTitle
      * #IfWinNotActive WinTitle
@@ -692,12 +696,12 @@ export const internalFormat = (
             }
         }
 
-        // #DIRECTIVE
+        // #IF DIRECTIVE
         // #IfWinActive WinTitle1
         //     Hotkey::
-        // #IfWinActive WinTitle2 <-- fall-through scenario for #Directive with
-        //     Hotkey::                                               parameters
-        // #If                    <-- de-indent #Directive without parameters
+        // #IfWinActive WinTitle2 <-- fall-through scenario for #IF DIRECTIVE
+        //     Hotkey::                                          with parameters
+        // #If                    <-- de-indent #IF DIRECTIVE without parameters
         if (purifiedLine.match('^' + sharpDirective + '\\b')) {
             if (tagDepth > 0) {
                 depth -= tagDepth;
@@ -849,14 +853,15 @@ export const internalFormat = (
             openBraceIndent = false;
         }
 
-        // #DIRECTIVE with parameters
-        // #If Expression <-- indent next line after '#Directive'
+        // #IF DIRECTIVE with parameters
+        // #If Expression <-- indent next line after '#IF DIRECTIVE'
         //     F1:: MsgBox Help
         if (
             purifiedLine.match('^' + sharpDirective + '\\b.+') &&
             indentCodeAfterIfDirective
         ) {
             depth++;
+            tagDepth = 0;
         }
 
         // SWITCH-CASE-DEFAULT or LABEL: or HOTKEY::
@@ -876,6 +881,8 @@ export const internalFormat = (
                     tagDepth = depth;
                 }
             }
+        } else if (purifiedLine.match(hotkeySingleLine)) {
+            tagDepth = 0;
         }
 
         // CONTINUATION SECTION: Expression, Object
