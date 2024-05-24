@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.4 - 2024-05-23 😎
+
+-   Add "PixelSearch" to V1 snippets ([PR #427](https://github.com/mark-wiemer-org/ahkpp/pull/427))
+-   Fix two minor formatting issues ([Issue #432](https://github.com/mark-wiemer-org/ahkpp/issues/432), [#429](https://github.com/mark-wiemer-org/ahkpp/issues/429))
+-   Update internal dependencies for security ([PR #435](https://github.com/mark-wiemer-org/ahkpp/pull/435))
+
 ## 5.0.3 - 2023-08-21 🏄
 
 -   Fix extension crash when switching to a nullish editor ([Issue #398](https://github.com/mark-wiemer-org/ahkpp/issues/398))
@@ -170,7 +176,7 @@ Breaking changes:
 
 Features:
 
--   Add [formatter directive](./README.md#formatter-directives) for "Format Block Comment" ([PR #164](https://github.com/vscode-autohotkey/ahkpp/pull/164))
+-   Add [formatter directive](./readme.md#formatter-directives) for "Format Block Comment" ([PR #164](https://github.com/vscode-autohotkey/ahkpp/pull/164))
 -   Add "allowed number of empty lines" setting to preserve any number of lines. Defaults to `1`, `-1` means "preserve all empty lines" ([PR #194](https://github.com/vscode-autohotkey/ahkpp/pull/194))
 -   Add "preserve indent" setting to preserve spaces before a comment. Defaults to `false`. ([PR #192](https://github.com/vscode-autohotkey/ahkpp/pull/192))
 -   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. ([PR #191](https://github.com/vscode-autohotkey/ahkpp/pull/191))
@@ -271,7 +277,7 @@ Fixes:
 
 -   Change ownership (from `cweijan` to `mark-wiemer`)
 -   Change configuration title to 'AutoHotkey Plus Plus'
--   Update README
+-   Update readme
 -   Increase icon resolution
 
 ## 2.5.6 - 2020-10-06
