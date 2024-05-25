@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.0.5 - 2024-05-24 🏝️
+
+-   Fix formatter in single line hotkey fall-through scenario ([#440](https://github.com/mark-wiemer-org/ahkpp/issues/440), [#442](https://github.com/mark-wiemer-org/ahkpp/issues/442))
+-   Fix outline showing invalid labels ([#438](https://github.com/mark-wiemer-org/ahkpp/issues/438))
+
 ## 5.0.4 - 2024-05-23 😎
 
 -   Add "PixelSearch" to V1 snippets ([PR #427](https://github.com/mark-wiemer-org/ahkpp/pull/427))
