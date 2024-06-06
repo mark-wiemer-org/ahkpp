@@ -25,37 +25,40 @@ export function activate(context: vscode.ExtensionContext) {
         Global.hide();
     })();
 
-    const language = { language: 'ahk' };
+    const languages = [{ language: 'ahk' }, { language: 'ahk2' }];
     FileManager.init(context);
     initializeLanguageVersionService(context);
     context.subscriptions.push(
         vscode.languages.registerHoverProvider(
-            language,
+            languages,
             new AhkHoverProvider(context),
         ),
         vscode.languages.registerDefinitionProvider(
-            language,
+            languages,
             new DefProvider(),
         ),
         vscode.languages.registerRenameProvider(
-            language,
+            languages,
             new AhkRenameProvider(),
         ),
         vscode.languages.registerSignatureHelpProvider(
-            language,
+            languages,
             new SignatureProvider(),
             '(',
             ',',
         ),
         vscode.languages.registerDocumentSymbolProvider(
-            language,
+            languages,
             new SymbolProvider(),
         ),
         vscode.languages.registerDocumentFormattingEditProvider(
-            language,
+            languages,
             new FormatProvider(),
         ),
-        vscode.languages.registerReferenceProvider(language, new RefProvider()),
+        vscode.languages.registerReferenceProvider(
+            languages,
+            new RefProvider(),
+        ),
         vscode.debug.registerDebugAdapterDescriptorFactory(
             'ahk',
             new InlineDebugAdapterFactory(),
@@ -80,7 +83,7 @@ export function activate(context: vscode.ExtensionContext) {
     if (Global.getConfig<boolean>(ConfigKey.enableIntellisense)) {
         context.subscriptions.push(
             vscode.languages.registerCompletionItemProvider(
-                language,
+                languages,
                 new CompletionProvider(),
                 '.',
             ),
