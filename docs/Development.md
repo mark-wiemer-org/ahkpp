@@ -25,7 +25,7 @@ Unless otherwise specified, commit messages don't matter.
 1. Commit the changes.
 1. Open a PR. For style, the title of the PR should be e.g. `v1.2.3`. The PR description should contain the changelog entry, including the heading for this version.
 1. Fix any remaining issues with the PR.
-1. Merge the PR. Commit message should be e.g. `v1.2.3 (#456)`, no additional details.
+1. Merge the PR. Commit message should be the changelog heading, e.g. `v1.2.3 - 2020-12-31 ❄️ (#456)`
 1. `git checkout main && git pull && npm run package`
 1. Install the new version:
     1. Select the newly-created `.vsix` file.
