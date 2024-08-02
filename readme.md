@@ -21,7 +21,7 @@ Supported features include:
 
 See the full changes at the [changelog](https://github.com/mark-wiemer-org/ahkpp/blob/main/Changelog.md).
 
-As always, please [report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose)!
+For issues with the extension recognizing v1 files as v2, or vice-versa, refer to (issue 396)[https://github.com/mark-wiemer-org/ahkpp/issues/396]. Please [report any other issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose) as well!
 
 ## Contents
 
