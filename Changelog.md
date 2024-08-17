@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.0.6 - 2024-08-17 📝
+
+Changes to the marketplace page require a new version. This version has no user-facing changes, just documentation updates:
+
+-   Update package description to clarify v2 support is in preview
+-   Update readme to clarify v2 support is in preview
+
+Full v2 support (IntelliSense, debugging, formatting) is coming later this month! ([Issue #453](https://github.com/mark-wiemer-org/ahkpp/issues/453))
+
 ## 5.0.5 - 2024-05-24 🏝️
 
 -   Fix formatter in single line hotkey fall-through scenario ([#440](https://github.com/mark-wiemer-org/ahkpp/issues/440), [#442](https://github.com/mark-wiemer-org/ahkpp/issues/442))
