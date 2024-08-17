@@ -1,16 +1,17 @@
 # AutoHotkey Plus Plus (AHK++)
 
-AutoHotkey Plus Plus (AHK++) provides AutoHotkey v1 and v2 language support for VS Code. This includes:
+AutoHotkey Plus Plus (AHK++) provides AutoHotkey language support for VS Code. For AHK v1, this includes:
 
 -   IntelliSense
--   code highlighting
+-   syntax highlighting
 -   debug support
--   code formatting
+-   formatting
+-   quick help
 -   ...and more!
 
-## 5.0.0 - AutoHotkey v2 support now in preview!
+## AHK v2 full support coming August 2024!
 
-AutoHotkey v2 support has been a [long-requested feature](https://github.com/mark-wiemer-org/ahkpp/issues/96), and this release now supports nearly all functionality!
+AutoHotkey v2 support has been a [long-requested feature](https://github.com/mark-wiemer-org/ahkpp/issues/96), and v5.0.0 supports many key features. An August 2024 update will add IntelliSense, formatting, and debugger support to AHK++!
 
 Supported features include:
 
@@ -19,9 +20,13 @@ Supported features include:
 -   Full syntax highlighting for v2 scripts
 -   Unique icons for v1 (blue) and v2 (green)
 
-See the full changes at the [changelog](https://github.com/mark-wiemer-org/ahkpp/blob/main/Changelog.md).
+[Known limitations (issue #385)](https://github.com/mark-wiemer-org/ahkpp/issues/385):
 
-For issues with the extension recognizing v1 files as v2, or vice-versa, refer to (issue 396)[https://github.com/mark-wiemer-org/ahkpp/issues/396]. Please [report any other issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose) as well!
+-   No formatting support
+-   Minimal IntelliSense/snippets support
+-   No debugger support
+
+Please [report any other issues](https://github.com/mark-wiemer-org/ahkpp/issues/new?assignees=mark-wiemer&labels=AHK+v2&projects=&template=v2.md&title=%5Bv2%5D+) 🐛
 
 ## Contents
 

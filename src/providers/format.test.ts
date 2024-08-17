@@ -3,11 +3,8 @@ import * as assert from 'assert';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import {
-    FormatProvider,
-    internalFormat,
-} from '../providers/formattingProvider';
-import { FormatOptions } from '../providers/formattingProvider.types';
+import { FormatProvider, internalFormat } from './formattingProvider';
+import { FormatOptions } from './formattingProvider.types';
 
 const inFilenameSuffix = '.in.ahk';
 const outFilenameSuffix = '.out.ahk';
