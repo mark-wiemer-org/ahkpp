@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.7 - 2024-08-17 😬
+
+-   Fix readme: v2 debugger works via commands, just not via "run and debug" viewlet
+
 ## 5.0.6 - 2024-08-17 📝
 
 Changes to the marketplace page require a new version. This version has no user-facing changes, just documentation updates:
