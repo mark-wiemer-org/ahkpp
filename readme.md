@@ -16,15 +16,15 @@ AutoHotkey v2 support has been a [long-requested feature](https://github.com/mar
 Supported features include:
 
 -   Running and debugging v1 and v2 scripts without changing settings
--   "Open help" (Ctrl + F1) opens language-specific help (and includes your text selection!)
 -   Full syntax highlighting for v2 scripts
+-   "Open help" (Ctrl + F1) opens language-specific help (and includes your text selection!)
 -   Unique icons for v1 (blue) and v2 (green)
 
 [Known limitations (issue #385)](https://github.com/mark-wiemer-org/ahkpp/issues/385):
 
--   No formatting support
--   Minimal IntelliSense/snippets support
--   No debugger support
+-   No v2 formatting support
+-   No v2 snippets support
+-   "Run and debug" viewlet doesn't support v2 debugger
 
 Please [report any other issues](https://github.com/mark-wiemer-org/ahkpp/issues/new?assignees=mark-wiemer&labels=AHK+v2&projects=&template=v2.md&title=%5Bv2%5D+) 🐛
 
