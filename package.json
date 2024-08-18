@@ -41,7 +41,6 @@
         "license.txt"
     ],
     "scripts": {
-        "prebuild": "npm run clean:dist",
         "build": "node build.mjs --mode=production",
         "clean:all": "npm run clean:dist && npm run clean:language && npm run clean:out",
         "clean:dist": "del-cli dist",
