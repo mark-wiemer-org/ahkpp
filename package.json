@@ -47,7 +47,7 @@
         "clean:language": "del-cli language/*.tmLanguage.json",
         "clean:out": "del-cli out",
         "compile-grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json && js-yaml language/ahk2.tmLanguage.yaml > language/ahk2.tmLanguage.json",
-        "compile-ts": "tsc -p ./",
+        "compile-ts": "tsc -b",
         "eslint": "npm run eslint:files -- src && echo No ESLint problems",
         "eslint:files": "eslint --max-warnings=0",
         "eslint:fix": "npm run eslint:files -- src --fix",
