@@ -3,9 +3,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "dev",
+            "label": "build",
             "type": "npm",
-            "script": "dev",
+            "script": "build:dev",
             "group": "build",
             "isBackground": true,
             "problemMatcher": [
@@ -21,10 +21,10 @@
                     "background": {
                         "activeOnStart": true,
                         "beginsPattern": {
-                            "regexp": "build start"
+                            "regexp": "Build start"
                         },
                         "endsPattern": {
-                            "regexp": "build success"
+                            "regexp": "Build success"
                         }
                     }
                 }

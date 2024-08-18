@@ -9,9 +9,7 @@ build({
     external: ['vscode'],
     format: 'cjs',
     platform: 'node',
-    // logLevel: 'error',
     metafile: true,
-    // sourceRoot: __dirname+"/src",
     minify: isProd,
     sourcemap: !isProd,
     plugins: [
@@ -19,9 +17,11 @@ build({
             name: 'build notice',
             setup(build) {
                 build.onStart(() => {
+                    // used in `tasks.json`
                     console.log('Build start');
                 });
                 build.onEnd(() => {
+                    // used in `tasks.json`
                     console.log('Build success');
                 });
             },

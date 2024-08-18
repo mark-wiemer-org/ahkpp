@@ -16,13 +16,12 @@ import { SignatureProvider } from './providers/signatureProvider';
 import { CompletionProvider } from './providers/completionProvider';
 import { openHelp } from './service/helpService';
 import { initializeLanguageVersionService } from './service/languageVersionService';
+import { activate as activateV2 } from '../ahk2/client/src/extension';
 
 export function activate(context: vscode.ExtensionContext) {
     (async () => {
         Global.updateStatusBarItems('Indexing AutoHotkey workspace...');
-        await Parser.buildByPath(
-            vscode.workspace.workspaceFolders[0].uri.toString(),
-        );
+        await Parser.buildByPath(vscode.workspace.rootPath);
         Global.updateStatusBarItems('Indexed AutoHotkey workspace :)');
         Global.hide();
     })();
@@ -88,6 +87,8 @@ export function activate(context: vscode.ExtensionContext) {
             ),
         );
     }
+
+    activateV2(context);
 }
 
 class InlineDebugAdapterFactory

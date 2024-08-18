@@ -25,8 +25,8 @@
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-            // "outFiles": ["${workspaceRoot}/out/**/*.js"],
-            "preLaunchTask": "dev"
+            "outFiles": ["${workspaceRoot}/out/**/*.js"],
+            "preLaunchTask": "build"
         },
         {
             "name": "Test Extension",
