@@ -73,16 +73,16 @@ All checks are found in [📄 `package.json#scripts`](https://github.com/mark-wi
             -   Grammar: [js-yaml](https://www.npmjs.com/package/js-yaml) converts [language syntax](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide#:~:text=USING%20YAML%20TO%20WRITE%20A%20GRAMMAR) from YAML to JSON
         -   Automated tests: [Mocha](https://mochajs.org/) checks functionality
 
-## Syntax / code color contributions
+## Syntax highlighting
 
-The syntax in [📄 `language/ahk.tmLanguage.yaml`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/language/ahk.tmLanguage.yaml) determines how the code is colorized.
+The syntax in [📄 `language/ahk.tmLanguage.yaml`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/language/ahk.tmLanguage.yaml) determines how syntax highlighting is applied.
 
 ```
-; No colorization for me 😞
+; No syntax highlighting here 😞
 ```
 
 ```ahk
-; 🌈 I'm colorized! 🌈
+; This comment is colored green thanks to syntax highlighting 🌈
 ```
 
 Some resources:
@@ -93,7 +93,7 @@ Some resources:
 
 To update the syntax, we recommend following this flow:
 
-1. 🤔 Take some time to reproduce a colorizing issue with as little AHK code as possible
+1. 🤔 Take some time to reproduce a syntax highlighting issue with as little AHK code as possible
 1. ➕ Add a new file in [📁 `src/test/suite/grammar/samples`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tree/main/src/test/suite/grammar/samples) that demonstrates the issue
 1. 🏃 Run `npm run test_grammar` to generate a `.snap` snapshot for the file you added
 1. ✏️ Edit the YAML grammar
