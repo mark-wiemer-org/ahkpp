@@ -19,9 +19,11 @@ import { initializeLanguageVersionService } from './service/languageVersionServi
 
 export function activate(context: vscode.ExtensionContext) {
     (async () => {
-        Global.updateStatusBarItems('Indexing AutoHotkey Workspace...');
-        await Parser.buildByPath(vscode.workspace.rootPath);
-        Global.updateStatusBarItems('Index Workspace Success!');
+        Global.updateStatusBarItems('Indexing AutoHotkey workspace...');
+        await Parser.buildByPath(
+            vscode.workspace.workspaceFolders[0].uri.toString(),
+        );
+        Global.updateStatusBarItems('Indexed AutoHotkey workspace :)');
         Global.hide();
     })();
 
