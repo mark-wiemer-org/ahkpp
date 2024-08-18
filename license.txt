@@ -5,7 +5,8 @@ Portions copyright 2019-2022 [Weijan Chen](https://github.com/cweijan),
 
 Unless otherwise indicated, all content is licensed under MIT.
 Portions licensed under GNU GPLv3.
-Files licensed under GNU GPLv3 are marked as such at the top of the file.
+Files under src/ahk2 are licensed under GNU GPLv3.
+Other files licensed under GNU GPLv3 are marked as such at the top of the file.
 
 MIT License
 
