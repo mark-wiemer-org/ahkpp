@@ -50,20 +50,12 @@ This way, we'll alway have a test to ensure we don't [re-introduce a bug](https:
 
 ### Writing Code FAQ
 
-#### Tests aren't working properly
-
-Question: Sometimes, when running tests via VS Code's Debug viewlet, I see results for tests that don't match the TypeScript tests.
-
-Answer: Try running `npm run pretest` before running tests.
-
-Explanation: The tests are written in TypeScript, but must be transpiled to JavaScript before executing. When switching branches, the TS may change while the JS stays the same. This can result in running stale tests via VS Code. Running `npm run test` in the console will always run fresh tests.
-
 ### Validate the build
 
 Please validate the build before opening a PR. Automated checks will have to pass before the PR can be merged.
 
 1. `npm run validate` for automated checks
-1. Go to `Run and Debug` viewlet (`Ctrl+Shift+D`) and click "Run Extension" for manual checks
+1. Go to `Run and Debug` viewlet (`Ctrl+Shift+D`) and click "Run Extension" for [manual checks](demos/manualTests)
 
 ### Automated checks
 
@@ -81,16 +73,16 @@ All checks are found in [📄 `package.json#scripts`](https://github.com/mark-wi
             -   Grammar: [js-yaml](https://www.npmjs.com/package/js-yaml) converts [language syntax](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide#:~:text=USING%20YAML%20TO%20WRITE%20A%20GRAMMAR) from YAML to JSON
         -   Automated tests: [Mocha](https://mochajs.org/) checks functionality
 
-## Syntax / code color contributions
+## Syntax highlighting
 
-The syntax in [📄 `language/ahk.tmLanguage.yaml`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/language/ahk.tmLanguage.yaml) determines how the code is colorized.
+The syntax in [📄 `language/ahk.tmLanguage.yaml`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/language/ahk.tmLanguage.yaml) determines how syntax highlighting is applied.
 
 ```
-; No colorization for me 😞
+; No syntax highlighting here 😞
 ```
 
 ```ahk
-; 🌈 I'm colorized! 🌈
+; This comment is colored green thanks to syntax highlighting 🌈
 ```
 
 Some resources:
@@ -101,7 +93,7 @@ Some resources:
 
 To update the syntax, we recommend following this flow:
 
-1. 🤔 Take some time to reproduce a colorizing issue with as little AHK code as possible
+1. 🤔 Take some time to reproduce a syntax highlighting issue with as little AHK code as possible
 1. ➕ Add a new file in [📁 `src/test/suite/grammar/samples`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tree/main/src/test/suite/grammar/samples) that demonstrates the issue
 1. 🏃 Run `npm run test_grammar` to generate a `.snap` snapshot for the file you added
 1. ✏️ Edit the YAML grammar
