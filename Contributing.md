@@ -9,7 +9,7 @@ I welcome any issues or PRs :)
 1. Clone the repo
 1. Install the relevant dependencies
     - VS Code Insiders (needed to run the tests from CLI, see [using Insiders version for extension development](https://code.visualstudio.com/api/working-with-extensions/testing-extension#using-insiders-version-for-extension-development))
-    - [Node 16](https://nodejs.org/en/), which comes automatically bundled with npm 8, another dependency.
+    - [Node 20](https://nodejs.org/en/), which comes automatically bundled with npm 8, another dependency.
 1. `npm i`
 1. Use `bash` to run the npm scripts. They use commands that are not compatible with PowerShell. Use this setting: `"terminal.integrated.defaultProfile.windows": "Git Bash"`
     > If you use Command Prompt or PowerShell, you may see errors like
