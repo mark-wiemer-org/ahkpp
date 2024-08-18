@@ -502,6 +502,23 @@
         ],
         "package.json": "npm run packagejson"
     },
+    "prettier": {
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "all",
+        "overrides": [
+            {
+                "files": [
+                    "*.yml",
+                    "*.yaml",
+                    ".prettierrc"
+                ],
+                "options": {
+                    "tabWidth": 2
+                }
+            }
+        ]
+    },
     "dependencies": {
         "@vscode/debugadapter": "^1.57.0",
         "get-port": "^5.1.1",
