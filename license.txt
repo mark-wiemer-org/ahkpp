@@ -1,6 +1,6 @@
 Copyright 2020-2024 [Mark Wiemer](https://github.com/mark-wiemer).
 Portions copyright 2019-2022 [Weijan Chen](https://github.com/cweijan),
-2020-2023 [thqby](https://github.com/thqby),
+2020-2024 [thqby](https://github.com/thqby),
 2022-2023 [Lexikos](https://github.com/Lexikos).
 
 Unless otherwise indicated, all content is licensed under MIT.
