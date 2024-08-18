@@ -50,20 +50,12 @@ This way, we'll alway have a test to ensure we don't [re-introduce a bug](https:
 
 ### Writing Code FAQ
 
-#### Tests aren't working properly
-
-Question: Sometimes, when running tests via VS Code's Debug viewlet, I see results for tests that don't match the TypeScript tests.
-
-Answer: Try running `npm run pretest` before running tests.
-
-Explanation: The tests are written in TypeScript, but must be transpiled to JavaScript before executing. When switching branches, the TS may change while the JS stays the same. This can result in running stale tests via VS Code. Running `npm run test` in the console will always run fresh tests.
-
 ### Validate the build
 
 Please validate the build before opening a PR. Automated checks will have to pass before the PR can be merged.
 
 1. `npm run validate` for automated checks
-1. Go to `Run and Debug` viewlet (`Ctrl+Shift+D`) and click "Run Extension" for manual checks
+1. Go to `Run and Debug` viewlet (`Ctrl+Shift+D`) and click "Run Extension" for [manual checks](demos/manualTests)
 
 ### Automated checks
 
