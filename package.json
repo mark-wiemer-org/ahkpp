@@ -28,6 +28,18 @@
     "license": "See license.txt",
     "publisher": "mark-wiemer",
     "main": "./out/extension",
+    "files": [
+        "language/ahk.configuration.json",
+        "language/ahk.tmLanguage.json",
+        "language/ahk2.tmLanguage.json",
+        "language/autohotkey.svg",
+        "language/autohotkey2.svg",
+        "language/snippetsV1.json",
+        "language/snippetsV2.json",
+        "out/extension.js",
+        "icon.png",
+        "license.txt"
+    ],
     "scripts": {
         "build": "npm run rebuild -- --mode=production",
         "clean": "rimraf out && npm run compile_grammar",
