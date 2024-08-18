@@ -1,3 +1,3 @@
 [submodule "ahk2"]
 	path = ahk2
-	url = https://github.com/mark-wiemer-org/vscode-autohotkey2-lsp.git
+	url = https://github.com/mark-wiemer-org/vscode-autohotkey2-lsp
