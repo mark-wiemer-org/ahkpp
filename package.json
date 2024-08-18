@@ -27,7 +27,7 @@
     },
     "license": "See license.txt",
     "publisher": "mark-wiemer",
-    "main": "./out/extension",
+    "main": "./out/src/extension",
     "files": [
         "language/ahk.configuration.json",
         "language/ahk.tmLanguage.json",
@@ -36,7 +36,7 @@
         "language/autohotkey2.svg",
         "language/snippetsV1.json",
         "language/snippetsV2.json",
-        "out/extension.js",
+        "out/src/extension.js",
         "icon.png",
         "license.txt"
     ],
@@ -53,17 +53,16 @@
         "eslint:fix": "npm run eslint:files -- src --fix",
         "format": "prettier --check .",
         "format:fix": "prettier --write .",
-        "lint": "npm run tsc && npm run eslint && npm run format && npm run sort-package-json",
+        "lint": "npm run eslint && npm run format && npm run sort-package-json",
         "package": "vsce package",
-        "prepare": "husky install",
+        "prepare": "husky install && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
         "sort-package-json:fix": "sort-package-json",
         "test": "npm run test-grammar && npm run test-unit",
         "pretest-grammar": "npm run compile-grammar",
         "test-grammar": "vscode-tmgrammar-snap language/samples/*.{ahk1,ahk2}",
         "pretest-unit": "npm run clean:out && npm run compile-ts",
-        "test-unit": "node ./out/test/runTest.js",
-        "tsc": "tsc --noEmit --skipLibCheck && echo No TSC problems",
+        "test-unit": "node ./out/src/test/runTest.js",
         "validate": "npm run lint && npm run test && npm run package",
         "vscode:prepublish": "npm run build && echo Packaging..."
     },
@@ -495,8 +494,7 @@
     "lint-staged": {
         "*": "prettier --check",
         "src/**/*.ts": [
-            "npm run eslint:files",
-            "npm run tsc"
+            "npm run eslint:files"
         ],
         "package.json": "npm run sort-package-json"
     },
@@ -553,7 +551,7 @@
         "vscode-tmgrammar-test": "^0.1.1"
     },
     "engines": {
-        "vscode": "^1.50.0"
+        "vscode": "^1.90.0"
     },
     "icon": "icon.png",
     "galleryBanner": {
