@@ -27,7 +27,7 @@
     },
     "license": "See license.txt",
     "publisher": "mark-wiemer",
-    "main": "./out/src/extension",
+    "main": "./dist/extension",
     "files": [
         "language/ahk.configuration.json",
         "language/ahk.tmLanguage.json",
@@ -36,7 +36,7 @@
         "language/autohotkey2.svg",
         "language/snippetsV1.json",
         "language/snippetsV2.json",
-        "out/src/extension.js",
+        "dist/extension.js",
         "icon.png",
         "license.txt"
     ],
