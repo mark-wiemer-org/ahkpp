@@ -19,8 +19,9 @@ async function main() {
             extensionDevelopmentPath,
             extensionTestsPath,
         });
-    } catch (err) {
+    } catch (e) {
         console.error('Failed to run tests');
+        console.error(e);
         process.exit(1);
     }
 }

@@ -4,7 +4,6 @@ import { Parser } from '../parser/parser';
 export class SymbolProvider implements vscode.DocumentSymbolProvider {
     public async provideDocumentSymbols(
         document: vscode.TextDocument,
-        token: vscode.CancellationToken,
     ): Promise<vscode.DocumentSymbol[]> {
         const result = [];
 

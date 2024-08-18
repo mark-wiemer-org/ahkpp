@@ -1,13 +1,11 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
-import { Out } from '../common/out';
 
 export class AhkRenameProvider implements vscode.RenameProvider {
     async provideRenameEdits(
         document: vscode.TextDocument,
         position: vscode.Position,
         newName: string,
-        token: vscode.CancellationToken,
     ): Promise<vscode.WorkspaceEdit> {
         for (const doc of vscode.workspace.textDocuments) {
             Parser.buildScript(doc);
@@ -46,7 +44,6 @@ export class AhkRenameProvider implements vscode.RenameProvider {
     async prepareRename?(
         document: vscode.TextDocument,
         position: vscode.Position,
-        token: vscode.CancellationToken,
     ): Promise<vscode.Range> {
         const wordRange = document.getWordRangeAtPosition(position);
         const word = document.getText(wordRange);

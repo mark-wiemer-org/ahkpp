@@ -1,7 +1,6 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import {
-    CancellationToken,
     ExtensionContext,
     Hover,
     HoverProvider,
@@ -30,11 +29,7 @@ export class AhkHoverProvider implements HoverProvider {
         this.initSnippetCache(context);
     }
 
-    public async provideHover(
-        document: TextDocument,
-        position: Position,
-        token: CancellationToken,
-    ) {
+    public async provideHover(document: TextDocument, position: Position) {
         const context = this.buildContext(document, position);
         if (!context) {
             return null;

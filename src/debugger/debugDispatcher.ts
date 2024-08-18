@@ -11,7 +11,7 @@ import { VariableHandler } from './handler/variableHandler';
 import { DbgpResponse } from './struct/dbgpResponse';
 import { VarScope } from './struct/scope';
 
-import getPort = require('get-port');
+import * as getPort from 'get-port';
 import { spawn } from 'child_process';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
@@ -224,7 +224,12 @@ export class DebugDispatcher extends EventEmitter {
 
     public async setVariable(
         args: DebugProtocol.SetVariableArguments,
-    ): Promise<any> {
+    ): Promise<{
+        name: string;
+        value: string;
+        type: string;
+        variablesReference: number;
+    }> {
         return this.variableHandler
             .obtainValue(args.value)
             .then(async ({ type, value, isVariable }) => {

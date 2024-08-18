@@ -6,9 +6,9 @@ export function run(): Promise<void> {
     // Create the mocha test
     const mocha = new Mocha({
         ui: 'tdd',
+        color: true,
+        timeout: 0,
     });
-    (mocha as any).color();
-    mocha.timeout(0);
 
     const testsRoot = path.resolve(__dirname, '../..');
 

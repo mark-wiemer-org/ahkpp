@@ -1,7 +1,7 @@
 import { resolve as res } from 'path';
 import * as vscode from 'vscode';
 import { FileManager, FileModel } from '../common/fileManager';
-import { ConfigKey, Global, LanguageId } from '../common/global';
+import { ConfigKey, Global } from '../common/global';
 import { exec } from '../common/processWrapper';
 import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
 import { getSelectedText, isV1 } from '../common/codeUtil';
@@ -71,7 +71,7 @@ export class RunnerService {
         if (!path) {
             path = await this.getPathByActive();
         }
-        exec(`\"${interpreterPathV1}\" \"${path}\"`, {
+        exec(`"${interpreterPathV1}" "${path}"`, {
             cwd: `${res(path, '..')}`,
         });
     }
@@ -165,11 +165,10 @@ export class RunnerService {
         );
     }
 
-    private static pad(n: any, width: number, z?: any): number {
-        z = z || '0';
-        n = n + '';
-        return n.length >= width
+    private static pad(n: number, width: number): number | string {
+        const nString = n + '';
+        return nString.length >= width
             ? n
-            : new Array(width - n.length + 1).join(z) + n;
+            : new Array(width - nString.length + 1).join('0') + n;
     }
 }

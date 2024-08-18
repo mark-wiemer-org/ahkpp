@@ -91,9 +91,7 @@ export function activate(context: vscode.ExtensionContext) {
 class InlineDebugAdapterFactory
     implements vscode.DebugAdapterDescriptorFactory
 {
-    public createDebugAdapterDescriptor(
-        _session: vscode.DebugSession,
-    ): ProviderResult<vscode.DebugAdapterDescriptor> {
+    public createDebugAdapterDescriptor(): ProviderResult<vscode.DebugAdapterDescriptor> {
         return new vscode.DebugAdapterInlineImplementation(new DebugSession());
     }
 }

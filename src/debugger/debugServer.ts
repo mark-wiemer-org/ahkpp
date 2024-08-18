@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import Net = require('net');
-import xml2js = require('xml2js');
+import * as Net from 'net';
+import * as xml2js from 'xml2js';
 import { Out } from '../common/out';
 
 /**
@@ -62,7 +62,7 @@ export class DebugServer extends EventEmitter {
         explicitArray: false,
     });
     public process(data: string) {
-        data = data.substr(data.indexOf('<?xml'));
+        data = data.substring(data.indexOf('<?xml'));
         if (data.indexOf(this.header) === -1) {
             data = this.header + data;
         }
@@ -73,9 +73,10 @@ export class DebugServer extends EventEmitter {
             const xmlString = this.header + part;
             this.parser
                 .parseStringPromise(xmlString)
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 .then((res: any) => {
                     for (const key in res) {
-                        if (res.hasOwnProperty(key)) {
+                        if (Object.prototype.hasOwnProperty.call(res, key)) {
                             this.emit(key, res[key]);
                         }
                     }

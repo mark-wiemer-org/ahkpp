@@ -1,4 +1,5 @@
- 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export interface DbgpResponse {
     attr: {
         /** only one stack */

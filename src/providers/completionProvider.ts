@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
 import { SnippetString } from 'vscode';
-import { Method, Variable } from '../parser/model';
+import { Method } from '../parser/model';
 
 type SimpleMethod = Pick<
     Method,

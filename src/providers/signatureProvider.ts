@@ -5,8 +5,6 @@ export class SignatureProvider implements vscode.SignatureHelpProvider {
     public async provideSignatureHelp(
         document: vscode.TextDocument,
         position: vscode.Position,
-        _: vscode.CancellationToken,
-        __: vscode.SignatureHelpContext,
     ): Promise<vscode.SignatureHelp> {
         let methodPosition: vscode.Position;
         const lineText = document.lineAt(position.line).text;

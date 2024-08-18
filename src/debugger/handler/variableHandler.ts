@@ -14,7 +14,7 @@ interface AhkVariable {
     name: string;
     frameId: number;
     scope: VarScope;
-    value: any;
+    value: string[];
 }
 
 export class VariableHandler {
@@ -42,7 +42,7 @@ export class VariableHandler {
         let type: string;
         let isVariable = false;
         const match = value.match(
-            /^(?:()|\"(.*)\"|(true|false)|([+-]?\d+)|([+-]?\d+\.[+-]?\d+)|([\w\d]+))$/is,
+            /^(?:()|"(.*)"|(true|false)|([+-]?\d+)|([+-]?\d+\.[+-]?\d+)|([\w\d]+))$/is,
         );
         if (!match) {
             return Promise.reject(new Error(`"${value}" is invalid value.`));
@@ -81,11 +81,9 @@ export class VariableHandler {
             return [];
         }
 
-        return (ahkVar.value as any[])
-            .slice(start, start + count)
-            .map((value, index) => {
-                return new Variable(`[${start + index + 1}]`, value);
-            });
+        return ahkVar.value.slice(start, start + count).map((value, index) => {
+            return new Variable(`[${start + index + 1}]`, value);
+        });
     }
 
     public scopes(frameId: number): Scope[] {
@@ -142,6 +140,7 @@ export class VariableHandler {
         });
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private buildVariableValue(property: DbgpProperty): any {
         const { attr, content = '' } = property;
 
