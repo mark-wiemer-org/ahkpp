@@ -48,8 +48,9 @@
         "clean:out": "del-cli out",
         "compile-grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json && js-yaml language/ahk2.tmLanguage.yaml > language/ahk2.tmLanguage.json",
         "compile-ts": "tsc -p ./",
-        "eslint": "eslint src --max-warnings=0 && echo No ESLint problems",
-        "eslint:fix": "eslint src --max-warnings=0 --fix",
+        "eslint": "npm run eslint:files -- src && echo No ESLint problems",
+        "eslint:files": "eslint --max-warnings=0",
+        "eslint:fix": "npm run eslint:files -- src --fix",
         "format": "prettier --check .",
         "format:fix": "prettier --write .",
         "lint": "npm run tsc && npm run eslint && npm run format && npm run sort-package-json",
@@ -494,7 +495,7 @@
     "lint-staged": {
         "*": "prettier --check",
         "src/**/*.ts": [
-            "npm run eslint:inner",
+            "npm run eslint:files",
             "npm run tsc"
         ],
         "package.json": "npm run sort-package-json"
