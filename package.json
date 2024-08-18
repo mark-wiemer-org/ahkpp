@@ -42,6 +42,7 @@
     ],
     "scripts": {
         "build": "node build.mjs --mode=production",
+        "build:dev": "node build.mjs",
         "clean:all": "npm run clean:dist && npm run clean:language && npm run clean:out",
         "clean:dist": "del-cli dist",
         "clean:language": "del-cli language/*.tmLanguage.json",

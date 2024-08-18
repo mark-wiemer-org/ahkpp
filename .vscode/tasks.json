@@ -3,9 +3,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "dev",
+            "label": "build:dev",
             "type": "npm",
-            "script": "dev",
+            "script": "build:dev",
             "group": "build",
             "isBackground": true,
             "problemMatcher": [
