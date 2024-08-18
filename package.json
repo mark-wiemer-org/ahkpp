@@ -28,6 +28,18 @@
     "license": "See license.txt",
     "publisher": "mark-wiemer",
     "main": "./out/extension",
+    "files": [
+        "language/ahk.configuration.json",
+        "language/ahk.tmLanguage.json",
+        "language/ahk2.tmLanguage.json",
+        "language/autohotkey.svg",
+        "language/autohotkey2.svg",
+        "language/snippetsV1.json",
+        "language/snippetsV2.json",
+        "out/extension.js",
+        "icon.png",
+        "license.txt"
+    ],
     "scripts": {
         "build": "npm run rebuild -- --mode=production",
         "clean": "rimraf out && npm run compile_grammar",
@@ -193,7 +205,7 @@
                 "ahk++.intellisense.maximumParseLength": {
                     "type": "number",
                     "default": 10000,
-                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nChanges take effect after reload. Only applies to AHK v1."
+                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nOnly applies to AHK v1."
                 },
                 "ahk++.menu.showDebugButton": {
                     "type": "boolean",

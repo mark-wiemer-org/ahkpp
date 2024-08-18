@@ -9,6 +9,6 @@ ExitApp
 ; Ctrl+Shift+F9 to compile this script
 
 ; Settings: Compile base file v1 set to v1 interpreter.
-; C:/Program Files/AutoHotkey/v1.1.37.01/AutoHotkeyU64.exe
+; C:/Program Files/AutoHotkey/v1.1.37.02/AutoHotkeyU64.exe
 ; Open Ahk2Exe.exe and set base file to a v2 interpreter. Save as default.
 ; Ctrl+Shift+F9 to compile this script

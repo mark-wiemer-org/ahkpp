@@ -9,6 +9,8 @@ out
 
 # Files
 .vscode/settings.json
-*.vsix
 language/*.tmLanguage.json
 *.exe
+*.log
+*.txt
+*.vsix
