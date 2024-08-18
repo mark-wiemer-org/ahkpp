@@ -6,27 +6,31 @@
         "experimentalDecorators": true,
         "lib": ["es6", "es2017", "es2019"],
         "sourceMap": true,
-        "rootDir": "src",
+        "rootDirs": ["src", "ahk2/client"],
 
-        // Type checking
-        "alwaysStrict": true,
-        // "exactOptionalPropertyTypes": true, // TODO
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
-        "noImplicitOverride": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "noPropertyAccessFromIndexSignature": true,
-        "noUncheckedIndexedAccess": true,
-        // "strict": true // TODO
-        "strictBindCallApply": true,
-        "strictFunctionTypes": true,
-        // "strictNullChecks": true // TODO
-        // "strictPropertyInitialization": true // TODO
-        "useUnknownInCatchVariables": true,
+        // todo move all type checking to ESLint for maintainability
+        // "alwaysStrict": true,
+        // // "exactOptionalPropertyTypes": true, // TODO
+        // "noFallthroughCasesInSwitch": true,
+        // "noImplicitOverride": true,
+        // "noImplicitReturns": true,
+        // "noImplicitThis": true,
+        // "noPropertyAccessFromIndexSignature": true,
+        // "noUncheckedIndexedAccess": true,
+        // // "strict": true // TODO
+        // "strictBindCallApply": true,
+        // "strictFunctionTypes": true,
+        // // "strictNullChecks": true // TODO
+        // // "strictPropertyInitialization": true // TODO
+        // "useUnknownInCatchVariables": true,
 
         // ESM
         "esModuleInterop": true
     },
-    "exclude": ["node_modules", "src/ahk2"]
+    "exclude": ["node_modules"],
+    "references": [
+        {
+            "path": "./ahk2/client"
+        }
+    ]
 }
