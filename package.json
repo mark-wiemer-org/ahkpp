@@ -55,7 +55,7 @@
         "format:fix": "prettier --write .",
         "lint": "npm run eslint && npm run format && npm run sort-package-json",
         "package": "vsce package",
-        "prepare": "husky install && cd ahk2 && npm install",
+        "prepare": "husky install && git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
         "sort-package-json:fix": "sort-package-json",
         "test": "npm run test-grammar && npm run test-unit",
