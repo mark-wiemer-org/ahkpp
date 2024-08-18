@@ -73,7 +73,7 @@ suite('runnerService', () => {
                 expected: `"mockCompilerPath" /gui /in "mockScriptPath" /out "mockScriptPath.exe"   `,
             },
             {
-                name: 'Everthing populated',
+                name: 'Everything populated',
                 ...defaultArgs,
                 compileBaseFile: 'mockCompileBaseFile',
                 compileIcon: 'mockCompileIcon',
