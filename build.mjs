@@ -5,7 +5,7 @@ const isProd = process.argv.indexOf('--mode=production') >= 0;
 build({
     entryPoints: ['./src/extension.ts'],
     bundle: true,
-    outfile: 'out/extension.js',
+    outfile: 'dist/extension.js',
     external: ['vscode'],
     format: 'cjs',
     platform: 'node',
@@ -19,10 +19,10 @@ build({
             name: 'build notice',
             setup(build) {
                 build.onStart(() => {
-                    console.log('build start');
+                    console.log('Build start');
                 });
                 build.onEnd(() => {
-                    console.log('build success');
+                    console.log('Build success');
                 });
             },
         },

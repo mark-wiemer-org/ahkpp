@@ -4,6 +4,7 @@
 .idea/
 .@vscode/test-electron/
 .vscode-test/
+dist
 node_modules
 out
 
