@@ -1060,12 +1060,13 @@ suite('FormattingProvider utils', () => {
     suite(externalDocumentToString, () => {
         // Currently in `out` folder, need to get back to main `src` folder
         const filesParentPath = path.join(
-            __dirname,
-            '..',
-            '..',
-            'src',
-            'providers',
-            'samples',
+            __dirname, // ./out/src/providers
+            '..', // ./out/src
+            '..', // ./out
+            '..', // .
+            'src', // ./src
+            'providers', // ./src/providers
+            'samples', // ./src/providers/samples
         );
 
         const myTests = [

@@ -18,7 +18,7 @@ jobs:
         # AHK is built for Windows only, so we only build on Windows
         # As always, if community asks, community shall receive ;)
         os: [windows-latest]
-        node-version: [22.x]
+        node-version: [20.x]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
