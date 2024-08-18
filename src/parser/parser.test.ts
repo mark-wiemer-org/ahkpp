@@ -111,12 +111,13 @@ suite('Parser', () => {
     suite('buildScript', () => {
         // Currently in `out` folder, need to get back to main `src` folder
         const filesParentPath = path.join(
-            __dirname,
-            '..',
-            '..',
-            'src',
-            'parser',
-            'samples',
+            __dirname, // ./out/src/parser
+            '..', // ./out/src
+            '..', // ./out
+            '..', // .
+            'src', // ./src
+            'parser', // ./src/parser
+            'samples', // ./src/parser/samples
         );
 
         const myTests: {

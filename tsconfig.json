@@ -1,32 +1,18 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2019",
+        "target": "ES2022",
+        "lib": ["ES2022", "WebWorker"],
         "outDir": "out",
         "experimentalDecorators": true,
-        "lib": ["es6", "es2017", "es2019"],
         "sourceMap": true,
-        "rootDir": "src",
-
-        // Type checking
-        "alwaysStrict": true,
-        // "exactOptionalPropertyTypes": true, // TODO
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
-        "noImplicitOverride": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "noPropertyAccessFromIndexSignature": true,
-        "noUncheckedIndexedAccess": true,
-        // "strict": true // TODO
-        "strictBindCallApply": true,
-        "strictFunctionTypes": true,
-        // "strictNullChecks": true // TODO
-        // "strictPropertyInitialization": true // TODO
-        "useUnknownInCatchVariables": true,
-
-        // ESM
+        "rootDirs": ["src", "ahk2/client"],
         "esModuleInterop": true
     },
-    "exclude": ["node_modules", "src/ahk2"]
+    "exclude": ["node_modules", "./ahk2/node_modules"],
+    "references": [
+        {
+            "path": "./ahk2/client"
+        }
+    ]
 }
