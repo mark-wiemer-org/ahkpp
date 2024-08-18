@@ -5,8 +5,6 @@ export class RefProvider implements vscode.ReferenceProvider {
     public provideReferences(
         document: vscode.TextDocument,
         position: vscode.Position,
-        context: vscode.ReferenceContext,
-        token: vscode.CancellationToken,
     ): vscode.ProviderResult<vscode.Location[]> {
         const word = document.getText(
             document.getWordRangeAtPosition(position),

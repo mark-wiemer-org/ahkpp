@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as assert from 'assert';
-import path = require('path');
+import * as path from 'path';
 import {
     alignLineAssignOperator,
     alignSingleLineComments,
@@ -983,7 +983,7 @@ suite('FormattingProvider utils', () => {
                 name: '0 lines (empty string)',
                 in: {
                     lineCount: 0,
-                    lineAt(i: number): { text: string } {
+                    lineAt(): { text: string } {
                         throw new Error('Argument out of bounds');
                     },
                 },
@@ -993,7 +993,7 @@ suite('FormattingProvider utils', () => {
                 name: '1 non-empty line',
                 in: {
                     lineCount: 1,
-                    lineAt(i: number): { text: string } {
+                    lineAt(): { text: string } {
                         return { text: 'hi' };
                     },
                 },
@@ -1030,7 +1030,7 @@ suite('FormattingProvider utils', () => {
                 name: '1 empty line, nothing else',
                 in: {
                     lineCount: 1,
-                    lineAt(i: 0): { text: string } {
+                    lineAt(): { text: string } {
                         return { text: '' };
                     },
                 },
@@ -1040,7 +1040,7 @@ suite('FormattingProvider utils', () => {
                 name: '2 empty lines, nothing else',
                 in: {
                     lineCount: 2,
-                    lineAt(i: number): { text: string } {
+                    lineAt(): { text: string } {
                         return { text: '' };
                     },
                 },
@@ -1087,7 +1087,7 @@ suite('FormattingProvider utils', () => {
             { filename: '7-single-line-no-newline.txt', expected: 'hello' },
         ];
 
-        myTests.forEach((myTest, i) =>
+        myTests.forEach((myTest) =>
             test(myTest.filename, async () => {
                 const vscodeDocument = await vscode.workspace.openTextDocument(
                     path.join(filesParentPath, myTest.filename),

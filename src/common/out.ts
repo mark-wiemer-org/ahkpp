@@ -5,7 +5,7 @@ export class Out {
     private static outputChannel: vscode.OutputChannel =
         vscode.window.createOutputChannel('AHK');
 
-    public static debug(value: any) {
+    public static debug(value: unknown) {
         this.log(value, false);
     }
 
@@ -14,7 +14,7 @@ export class Out {
      * Prepends all logs with `new Date().toISOString()`.
      * @param value The value to log
      */
-    public static log(value: any, focus = true) {
+    public static log(value: unknown, focus = true) {
         if (value instanceof Error) {
             console.trace(value);
             value = value.message;

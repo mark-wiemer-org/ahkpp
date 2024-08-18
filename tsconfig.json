@@ -23,7 +23,10 @@
         "strictFunctionTypes": true,
         // "strictNullChecks": true // TODO
         // "strictPropertyInitialization": true // TODO
-        "useUnknownInCatchVariables": true
+        "useUnknownInCatchVariables": true,
+
+        // ESM
+        "esModuleInterop": true
     },
     "exclude": ["node_modules", "src/ahk2"]
 }

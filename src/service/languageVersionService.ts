@@ -40,7 +40,7 @@ const makeOnSwitchFile =
 /** Switch the language of a document. */
 const switchLang = (doc: vscode.TextDocument, languageId: string) => {
     vscode.languages.setTextDocumentLanguage(doc, languageId).then(
-        (_) => {
+        () => {
             const versionName = isV1() ? 'v1' : 'v2';
             vscode.window.showInformationMessage(
                 `Found '#Requires ${versionName}'. Switched to AutoHotkey ${versionName}.`,

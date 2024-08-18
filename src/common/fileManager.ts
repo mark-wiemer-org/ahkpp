@@ -51,7 +51,7 @@ export class FileManager {
         if (!fileName) {
             return undefined;
         }
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             const recordPath = `${this.storagePath}/${fileName}`;
             this.check(this.storagePath);
             this.check(path.resolve(recordPath, '..'));

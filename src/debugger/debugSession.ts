@@ -69,7 +69,6 @@ export class DebugSession extends LoggingDebugSession {
 
     protected override initializeRequest(
         response: DebugProtocol.InitializeResponse,
-        args: DebugProtocol.InitializeRequestArguments,
     ): void {
         response.body = {
             ...response.body,
@@ -91,8 +90,6 @@ export class DebugSession extends LoggingDebugSession {
 
     protected override restartRequest(
         response: DebugProtocol.RestartResponse,
-        args: DebugProtocol.RestartArguments,
-        request?: DebugProtocol.Request,
     ): void {
         this.dispatcher.restart();
         this.sendResponse(response);
@@ -108,8 +105,6 @@ export class DebugSession extends LoggingDebugSession {
 
     protected override disconnectRequest(
         response: DebugProtocol.DisconnectResponse,
-        args: DebugProtocol.DisconnectArguments,
-        request?: DebugProtocol.Request,
     ): void {
         this.dispatcher.stop();
         this.sendResponse(response);
@@ -147,7 +142,6 @@ export class DebugSession extends LoggingDebugSession {
     protected override async variablesRequest(
         response: DebugProtocol.VariablesResponse,
         args: DebugProtocol.VariablesArguments,
-        request?: DebugProtocol.Request,
     ) {
         response.body = {
             variables: await this.dispatcher.listVariables(args),
@@ -158,7 +152,6 @@ export class DebugSession extends LoggingDebugSession {
     protected override async setVariableRequest(
         response: DebugProtocol.SetVariableResponse,
         args: DebugProtocol.SetVariableArguments,
-        request?: DebugProtocol.Request,
     ): Promise<void> {
         try {
             response.body = await this.dispatcher.setVariable(args);
@@ -173,8 +166,6 @@ export class DebugSession extends LoggingDebugSession {
 
     protected override pauseRequest(
         response: DebugProtocol.PauseResponse,
-        args: DebugProtocol.PauseArguments,
-        request?: DebugProtocol.Request,
     ): void {
         this.dispatcher.sendCommand(Continue.break);
         this.sendResponse(response);
@@ -182,24 +173,18 @@ export class DebugSession extends LoggingDebugSession {
 
     protected override continueRequest(
         response: DebugProtocol.ContinueResponse,
-        args: DebugProtocol.ContinueArguments,
     ): void {
         this.dispatcher.sendCommand(Continue.run);
         this.sendResponse(response);
     }
 
-    protected override nextRequest(
-        response: DebugProtocol.NextResponse,
-        args: DebugProtocol.NextArguments,
-    ): void {
+    protected override nextRequest(response: DebugProtocol.NextResponse): void {
         this.dispatcher.sendCommand(Continue.stepOver);
         this.sendResponse(response);
     }
 
     protected override stepInRequest(
         response: DebugProtocol.StepInResponse,
-        args: DebugProtocol.StepInArguments,
-        request?: DebugProtocol.Request,
     ): void {
         this.dispatcher.sendCommand(Continue.stepInto);
         this.sendResponse(response);
@@ -207,8 +192,6 @@ export class DebugSession extends LoggingDebugSession {
 
     protected override stepOutRequest(
         response: DebugProtocol.StepOutResponse,
-        args: DebugProtocol.StepOutArguments,
-        request?: DebugProtocol.Request,
     ): void {
         this.dispatcher.sendCommand(Continue.stepOut);
         this.sendResponse(response);
@@ -225,7 +208,6 @@ export class DebugSession extends LoggingDebugSession {
 
     protected override async completionsRequest(
         response: DebugProtocol.CompletionsResponse,
-        args: DebugProtocol.CompletionsArguments,
     ): Promise<void> {
         response.body = {
             targets: [

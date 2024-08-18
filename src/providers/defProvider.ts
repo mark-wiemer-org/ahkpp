@@ -6,7 +6,6 @@ export class DefProvider implements vscode.DefinitionProvider {
     public async provideDefinition(
         document: vscode.TextDocument,
         position: vscode.Position,
-        token: vscode.CancellationToken,
     ): Promise<vscode.Location | vscode.Location[] | vscode.LocationLink[]> {
         const fileLink = await this.tryGetFileLink(document, position);
         if (fileLink) {

@@ -1,11 +1,11 @@
-const { build } = require('esbuild');
-const eslint = require('esbuild-plugin-eslint');
+/* eslint-disable no-undef */
+import { build } from 'esbuild';
 const isProd = process.argv.indexOf('--mode=production') >= 0;
 
 build({
     entryPoints: ['./src/extension.ts'],
     bundle: true,
-    outfile: 'out/extension.js',
+    outfile: 'dist/extension.js',
     external: ['vscode'],
     format: 'cjs',
     platform: 'node',
@@ -13,18 +13,16 @@ build({
     metafile: true,
     // sourceRoot: __dirname+"/src",
     minify: isProd,
-    watch: !isProd,
     sourcemap: !isProd,
     plugins: [
-        eslint(),
         {
             name: 'build notice',
             setup(build) {
                 build.onStart(() => {
-                    console.log('build start');
+                    console.log('Build start');
                 });
                 build.onEnd(() => {
-                    console.log('build success');
+                    console.log('Build success');
                 });
             },
         },
