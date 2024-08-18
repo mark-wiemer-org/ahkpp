@@ -183,7 +183,6 @@ suite('External formatter', () => {
                     ...defaultOptions,
                     ...formatTest.options,
                 },
-                null,
             );
             // editing the file also saves the file, so we'll need to teardown
             await textEditor.edit((editBuilder) => {

@@ -58,7 +58,7 @@
         "packagejson": "sort-package-json --check",
         "packagejson_fix": "sort-package-json",
         "prepare": "husky install",
-        "rebuild": "npm run clean && node build.js",
+        "rebuild": "npm run clean && node build.mjs",
         "pretest": "npm run compile",
         "test": "npm run test_grammar_inner && npm run test_unit",
         "test_grammar": "npm run compile_grammar && npm run test_grammar_inner",

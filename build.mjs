@@ -1,4 +1,5 @@
-const { build } = require('esbuild');
+/* eslint-disable no-undef */
+import { build } from 'esbuild';
 const isProd = process.argv.indexOf('--mode=production') >= 0;
 
 build({
@@ -12,7 +13,6 @@ build({
     metafile: true,
     // sourceRoot: __dirname+"/src",
     minify: isProd,
-    watch: !isProd,
     sourcemap: !isProd,
     plugins: [
         {
