@@ -68,6 +68,7 @@ export class CodeUtil {
 }
 
 /** Whether the current active text editor is for an AHK v1 file */
+// todo use LSP for all v2 functionality
 export const isV1 = (): boolean =>
     vscode.window.activeTextEditor?.document.languageId === LanguageId.ahk1;
 

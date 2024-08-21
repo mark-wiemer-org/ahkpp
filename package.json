@@ -29,6 +29,8 @@
     "publisher": "mark-wiemer",
     "main": "./dist/extension",
     "files": [
+        "ahk2/server/dist/*",
+        "ahk2/syntaxes/ahk2_common.json",
         "language/ahk.configuration.json",
         "language/ahk.tmLanguage.json",
         "language/ahk2.tmLanguage.json",
@@ -41,13 +43,14 @@
         "license.txt"
     ],
     "scripts": {
-        "build": "node build.mjs --mode=production",
-        "build:dev": "node build.mjs",
+        "build": "node build.mjs --mode=production && cd ahk2 && npm run build",
+        "build:dev": "node build.mjs && cd ahk2 && npm run build:dev",
         "clean:all": "npm run clean:dist && npm run clean:language && npm run clean:out",
         "clean:dist": "del-cli dist",
         "clean:language": "del-cli language/*.tmLanguage.json",
         "clean:out": "del-cli out",
         "compile-grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json && js-yaml language/ahk2.tmLanguage.yaml > language/ahk2.tmLanguage.json",
+        "precompile-ts": "npm run clean:out",
         "compile-ts": "tsc -b",
         "eslint": "npm run eslint:files -- src && echo No ESLint problems",
         "eslint:files": "eslint --max-warnings=0",
@@ -62,7 +65,7 @@
         "test": "npm run test-grammar && npm run test-unit",
         "pretest-grammar": "npm run compile-grammar",
         "test-grammar": "vscode-tmgrammar-snap language/samples/*.{ahk1,ahk2}",
-        "pretest-unit": "npm run clean:out && npm run compile-ts",
+        "pretest-unit": "npm run compile-ts",
         "test-unit": "node ./out/src/test/runTest.js",
         "validate": "npm run lint && npm run test && npm run package",
         "vscode:prepublish": "npm run build && echo Packaging..."

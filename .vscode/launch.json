@@ -1,32 +1,17 @@
 // Use IntelliSense to learn about possible attributes.
 // Hover to view descriptions of existing attributes.
 // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+// See `code --help` for launch args
 {
     "version": "0.2.0",
     "configurations": [
-        {
-            "type": "ahk2",
-            "request": "launch",
-            "name": "AutoHotkey v2 Debugger",
-            "program": "${file}",
-            "stopOnEntry": true,
-            "runtime": "C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey64.exe"
-        },
-        {
-            "type": "ahk",
-            "request": "launch",
-            "name": "AutoHotkey v1 Debugger",
-            "program": "${file}",
-            "stopOnEntry": true,
-            "runtime": "C:\\Program Files\\AutoHotkey\\v1.1.37.01\\AutoHotkeyU64.exe"
-        },
         {
             "name": "Launch Extension",
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-            // "outFiles": ["${workspaceRoot}/out/**/*.js"],
-            "preLaunchTask": "build:dev"
+            "outFiles": ["${workspaceRoot}/out/**/*.js"],
+            "preLaunchTask": "npm: build:dev"
         },
         {
             "name": "Test Extension",
@@ -36,10 +21,10 @@
             "args": [
                 "--disable-extensions",
                 "--extensionDevelopmentPath=${workspaceFolder}",
-                "--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
+                "--extensionTestsPath=${workspaceFolder}/out/src/test/suite/index"
             ],
             "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
-            "preLaunchTask": "npm: compile"
+            "preLaunchTask": "npm: compile-ts"
         }
     ]
 }

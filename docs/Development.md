@@ -12,7 +12,11 @@ This document covers the development process, from writing code to publishing a 
 ## Testing
 
 -   Test all added commands
--   If the readme was modified, confirm it appears as intended
+-   If the readme was modified, confirm it appears as intended in a non-GitHub viewer (Ctrl+Shift+V in VS Code is sufficient)
+
+### Launch Extension troubleshooting
+
+In the Run and Debug viewlet, the "Launch Extension" config is best for manual testing. [\_readme.md](../demos/manualTests/_readme.md) covers how those tests work.
 
 ## Starting a release
 

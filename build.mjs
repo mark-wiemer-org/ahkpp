@@ -9,22 +9,7 @@ build({
     external: ['vscode'],
     format: 'cjs',
     platform: 'node',
-    // logLevel: 'error',
     metafile: true,
-    // sourceRoot: __dirname+"/src",
     minify: isProd,
     sourcemap: !isProd,
-    plugins: [
-        {
-            name: 'build notice',
-            setup(build) {
-                build.onStart(() => {
-                    console.log('Build start');
-                });
-                build.onEnd(() => {
-                    console.log('Build success');
-                });
-            },
-        },
-    ],
 });
