@@ -9,7 +9,10 @@
             "name": "Launch Extension",
             "type": "extensionHost",
             "request": "launch",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}", "-n"],
+            "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
+            "env": {
+                "VSCODE_AHK_SERVER_PATH": "ahk2/out"
+            },
             "outFiles": ["${workspaceRoot}/out/**/*.js"],
             "preLaunchTask": "build"
         },
