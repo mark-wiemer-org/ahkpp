@@ -19,7 +19,7 @@ import { initializeLanguageVersionService } from './service/languageVersionServi
 import { activate as activateV2 } from '../ahk2/client/src/extension';
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('ahk++ activate');
+    console.log('ahk++ activated');
     (async () => {
         Global.updateStatusBarItems('Indexing AutoHotkey workspace...');
         await Parser.buildByPath(vscode.workspace.rootPath);
