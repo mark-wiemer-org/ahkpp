@@ -5,22 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "ahk2",
-            "request": "launch",
-            "name": "AutoHotkey v2 Debugger",
-            "program": "${file}",
-            "stopOnEntry": true,
-            "runtime": "C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey64.exe"
-        },
-        {
-            "type": "ahk",
-            "request": "launch",
-            "name": "AutoHotkey v1 Debugger",
-            "program": "${file}",
-            "stopOnEntry": true,
-            "runtime": "C:\\Program Files\\AutoHotkey\\v1.1.37.01\\AutoHotkeyU64.exe"
-        },
-        {
             "name": "Launch Extension",
             "type": "extensionHost",
             "request": "launch",
