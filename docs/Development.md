@@ -14,6 +14,12 @@ This document covers the development process, from writing code to publishing a 
 -   Test all added commands
 -   If the readme was modified, confirm it appears as intended
 
+### Launch Extension troubleshooting
+
+-   In the Run and Debug viewlet, the "Launch Extension" config is best for manual testing
+-   If the launch fails without clear error messages, it may be trying to launch against the current folder. To resolve this, launch from a different folder, open a totally different folder in the new debug window, then try again. Feel free to open a discussion on the repo about this :)
+-   `console.log` statements will be found in the `Debug console` view (`F1` -> Debug Console: Focus on Debug Console View)
+
 ## Starting a release
 
 Unless otherwise specified, commit messages don't matter.
