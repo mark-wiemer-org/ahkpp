@@ -6,13 +6,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            // Build before launching (npm run build:dev)
-            // Automatic connection is very buggy!
             "name": "Launch Extension",
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-            "outFiles": ["${workspaceRoot}/out/**/*.js"]
+            "outFiles": ["${workspaceRoot}/out/**/*.js"],
+            "preLaunchTask": "npm: build:dev"
         },
         {
             "name": "Test Extension",
@@ -26,32 +25,6 @@
             ],
             "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
             "preLaunchTask": "npm: compile-ts"
-        },
-        {
-            "type": "extensionHost",
-            "request": "launch",
-            "name": "Launch v2 Client",
-            "runtimeExecutable": "${execPath}",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}/ahk2"],
-            "outFiles": ["${workspaceRoot}/ahk2/client/dist/**/*.js"],
-            "preLaunchTask": "build:dev"
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach to v2 Server",
-            "port": 6009,
-            "restart": true,
-            "outFiles": [
-                "${workspaceRoot}/ahk2/server/out/**/*.js",
-                "${workspaceRoot}/ahk2/server/dist/**/*.js"
-            ]
-        }
-    ],
-    "compounds": [
-        {
-            "name": "[v2] Client + Server",
-            "configurations": ["Launch v2 Client", "Attach to v2 Server"]
         }
     ]
 }
