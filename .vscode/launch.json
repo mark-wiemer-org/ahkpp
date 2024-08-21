@@ -25,7 +25,6 @@
             "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
             "preLaunchTask": "npm: compile-ts"
         },
-        // Needs more testing
         {
             "type": "extensionHost",
             "request": "launch",
@@ -37,7 +36,6 @@
             },
             "outFiles": ["${workspaceRoot}/ahk2/client/dist/**/*.js"]
         },
-        // Needs more testing
         {
             "type": "node",
             "request": "attach",
@@ -51,7 +49,6 @@
         }
     ],
     "compounds": [
-        // Needs more testing
         {
             "name": "[v2] Client + Server",
             "configurations": ["Launch v2 Client", "Attach to v2 Server"]
