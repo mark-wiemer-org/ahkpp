@@ -24,6 +24,37 @@
             ],
             "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
             "preLaunchTask": "npm: compile-ts"
+        },
+        // Needs more testing
+        {
+            "type": "extensionHost",
+            "request": "launch",
+            "name": "Launch v2 Client",
+            "runtimeExecutable": "${execPath}",
+            "args": ["--extensionDevelopmentPath=${workspaceRoot}/ahk2"],
+            "env": {
+                "VSCODE_AHK_SERVER_PATH": "ahk2/out"
+            },
+            "outFiles": ["${workspaceRoot}/ahk2/client/dist/**/*.js"]
+        },
+        // Needs more testing
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to v2 Server",
+            "port": 6009,
+            "restart": true,
+            "outFiles": [
+                "${workspaceRoot}/ahk2/server/out/**/*.js",
+                "${workspaceRoot}/ahk2/server/dist/**/*.js"
+            ]
+        }
+    ],
+    "compounds": [
+        // Needs more testing
+        {
+            "name": "[v2] Client + Server",
+            "configurations": ["Launch v2 Client", "Attach to v2 Server"]
         }
     ]
 }
