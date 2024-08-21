@@ -14,7 +14,7 @@
                 "VSCODE_AHK_SERVER_PATH": "ahk2/out"
             },
             "outFiles": ["${workspaceRoot}/out/**/*.js"],
-            "preLaunchTask": "build"
+            "preLaunchTask": "build:dev"
         },
         {
             "name": "Test Extension",
@@ -38,7 +38,8 @@
             "env": {
                 "VSCODE_AHK_SERVER_PATH": "ahk2/out"
             },
-            "outFiles": ["${workspaceRoot}/ahk2/client/dist/**/*.js"]
+            "outFiles": ["${workspaceRoot}/ahk2/client/dist/**/*.js"],
+            "preLaunchTask": "build:dev"
         },
         {
             "type": "node",

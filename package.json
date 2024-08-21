@@ -41,8 +41,10 @@
         "license.txt"
     ],
     "scripts": {
-        "build": "node build.mjs --mode=production",
-        "build:dev": "node build.mjs",
+        "build": "node build.mjs --mode=production && cd ahk2 && npm run build",
+        "prebuild:dev": "echo Building...",
+        "build:dev": "node build.mjs && cd ahk2 && npm run build:dev",
+        "postbuild:dev": "echo Build success",
         "clean:all": "npm run clean:dist && npm run clean:language && npm run clean:out",
         "clean:dist": "del-cli dist",
         "clean:language": "del-cli language/*.tmLanguage.json",

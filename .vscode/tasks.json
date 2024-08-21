@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build:dev",
             "type": "npm",
             "script": "build:dev",
             "group": "build",
@@ -21,7 +21,7 @@
                     "background": {
                         "activeOnStart": true,
                         "beginsPattern": {
-                            "regexp": "Build start"
+                            "regexp": "Building..."
                         },
                         "endsPattern": {
                             "regexp": "Build success"
