@@ -12,23 +12,11 @@ This document covers the development process, from writing code to publishing a 
 ## Testing
 
 -   Test all added commands
--   If the readme was modified, confirm it appears as intended
+-   If the readme was modified, confirm it appears as intended in a non-GitHub viewer (Ctrl+Shift+V in VS Code is sufficient)
 
 ### Launch Extension troubleshooting
 
-In the Run and Debug viewlet, the "Launch Extension" config is best for manual testing. However, VS Code 1.92.2 doesn't work well with several launch configurations, and bugs are common but hard to reproduce. I recommend using VS Code Insiders for manual testing. As of the following version, things are working pretty smoothly:
-
-```
-Version: 1.93.0-insider (user setup)
-Commit: e2b54301a5745870f6b95d81c91fb3e9557d4f08
-Date: 2024-08-20T08:04:15.567Z
-Electron: 30.3.1
-ElectronBuildId: 9960165
-Chromium: 124.0.6367.243
-Node.js: 20.15.1
-V8: 12.4.254.20-electron.0
-OS: Windows_NT x64 10.0.22631
-```
+In the Run and Debug viewlet, the "Launch Extension" config is best for manual testing. [\_readme.md](../demos/manualTests/_readme.md) covers how those tests work.
 
 ## Starting a release
 
