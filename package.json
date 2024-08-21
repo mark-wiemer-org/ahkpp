@@ -29,6 +29,8 @@
     "publisher": "mark-wiemer",
     "main": "./dist/extension",
     "files": [
+        "ahk2/server/dist/*",
+        "ahk2/syntaxes/ahk2_common.json",
         "language/ahk.configuration.json",
         "language/ahk.tmLanguage.json",
         "language/ahk2.tmLanguage.json",
