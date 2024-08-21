@@ -14,12 +14,12 @@ import { Global, ConfigKey } from './common/global';
 import { AhkRenameProvider } from './providers/ahkRenameProvider';
 import { SignatureProvider } from './providers/signatureProvider';
 import { CompletionProvider } from './providers/completionProvider';
-import { openHelp } from './service/helpService';
+// import { openHelp } from './service/helpService';
 import { initializeLanguageVersionService } from './service/languageVersionService';
 import { activate as activateV2 } from '../ahk2/client/src/extension';
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('Congratulations, your extension "ahk++" is now active!');
+    console.log('ahk++ activate');
     (async () => {
         Global.updateStatusBarItems('Indexing AutoHotkey workspace...');
         await Parser.buildByPath(vscode.workspace.rootPath);
@@ -72,7 +72,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('ahk++.debug', () =>
             RunnerService.startDebugger(),
         ),
-        vscode.commands.registerCommand('ahk++.openHelp', openHelp),
+        // vscode.commands.registerCommand('ahk++.openHelp', openHelp), // leave this to the v2 extension for now
         vscode.commands.registerCommand('ahk++.run', () => RunnerService.run()),
         vscode.commands.registerCommand('ahk++.runSelection', () =>
             RunnerService.runSelection(),
