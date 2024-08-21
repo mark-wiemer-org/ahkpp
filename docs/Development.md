@@ -16,9 +16,19 @@ This document covers the development process, from writing code to publishing a 
 
 ### Launch Extension troubleshooting
 
--   In the Run and Debug viewlet, the "Launch Extension" config is best for manual testing
--   If the launch fails without clear error messages, it may be trying to launch against the current folder. To resolve this, launch from a different folder, open a totally different folder in the new debug window, then try again. Feel free to open a discussion on the repo about this :)
--   `console.log` statements will be found in the `Debug console` view (`F1` -> Debug Console: Focus on Debug Console View)
+In the Run and Debug viewlet, the "Launch Extension" config is best for manual testing. However, VS Code 1.92.2 doesn't work well with several launch configurations, and bugs are common but hard to reproduce. I recommend using VS Code Insiders for manual testing. As of the following version, things are working pretty smoothly:
+
+```
+Version: 1.93.0-insider (user setup)
+Commit: e2b54301a5745870f6b95d81c91fb3e9557d4f08
+Date: 2024-08-20T08:04:15.567Z
+Electron: 30.3.1
+ElectronBuildId: 9960165
+Chromium: 124.0.6367.243
+Node.js: 20.15.1
+V8: 12.4.254.20-electron.0
+OS: Windows_NT x64 10.0.22631
+```
 
 ## Starting a release
 
