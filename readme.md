@@ -15,7 +15,7 @@ Install from VS Code or install from VS Code Marketplace: [Install AutoHotkey Pl
 
 ## AHK v2 full support in pre-release!
 
-AutoHotkey v2 support has been a [long-requested feature](https://github.com/mark-wiemer-org/ahkpp/issues/96), and v5.0.0 supports many key features. The latest pre-release version, v5.1.0, improves IntelliSense, adds formatting, and improves debugger support for AHK++!
+AutoHotkey v2 support has been a [long-requested feature](https://github.com/mark-wiemer-org/ahkpp/issues/96), and v5.0.0 supports many key features. The latest [🧪 pre-release version](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions), v5.1.0, adds full v2 support!
 
 Supported features include:
 
@@ -26,13 +26,13 @@ Supported features include:
 -   Rich IntelliSense support with snippets and hover text (🧪 pre-release only)
 -   Formatting files (🧪 pre-release only)
 
-Please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose)
+Please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose), it helps bring full v2 support to the release version faster 🧑‍💻
 
 ## Why AutoHotkey Plus Plus?
 
 AutoHotkey Plus Plus is one of many extensions that offer VS Code language support. So why should you use this one?
 
--   **Supports both v1 and v2**: AHK++ now has support for AutoHotkey v2 (in preview), making it the only extension to support both major versions of AutoHotkey!
+-   **Supports both v1 and v2**: AHK++ supports both AHK v1 and v2, making it the only extension to support both major versions of AutoHotkey!
 -   **Actively maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues).
 -   **IntelliSense**: Smart code completion, syntax highlighting, code navigation, and more.
 -   **Debug support**: Run and debug AHK scripts from VS Code.
