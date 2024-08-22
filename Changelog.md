@@ -1,6 +1,6 @@
 # Changelog
 
-## 5.1.0 - 2024-08-21 🧪
+## 5.1.0 - 2024-08-22 🧪
 
 > 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
 
