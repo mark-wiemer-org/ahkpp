@@ -1,6 +1,6 @@
 ---
-name: Issues with AHK v2 support
-about: Issues specific to AutoHotkey v2.
+name: Issues with a pre-release
+about: Issues specific to a pre-release.
 title: '[Pre-release] '
 labels: pre-release
 assignees: mark-wiemer
