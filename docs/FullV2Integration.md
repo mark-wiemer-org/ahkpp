@@ -20,7 +20,6 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   ahk2.selection.run (dupe of ahk++.runSelection)
 -   ahk2.stop
 -   ahk2.compile (dupe of ahk++.compile)
--   ahk2.help (dupe of ahk++.openHelp)
 -   ahk2.generate.comment
 -   ahk2.updateversioninfo
 -   ahk2.switch
