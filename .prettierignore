@@ -5,7 +5,6 @@
 dist
 node_modules
 out
-ahk2
 
 # Files
 .vscode/settings.json
