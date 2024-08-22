@@ -1,5 +1,22 @@
 # Changelog
 
+## 6.0.0-rc-1 - 2024-08-21 ⚠️
+
+(For [technical reasons](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#prerelease-extensions), this is tagged with `5.1.0`, but it is a breaking change and the full release will be tagged `6.0.0`)
+
+This is a very early pre-release, expect significant issues. Commands may not work as expected and features may be missing. Please [report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose) you find 🤓
+
+### Breaking changes
+
+-   I haven't found any yet 😉
+
+### Other changes
+
+-   Add full v2 support via [thqby's AutoHotkey v2 Language Support](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)
+    -   No need to install that extension, all features are bundled into this extension
+    -   Future work will de-dupe commands like "debug", "run selection", and "open help"
+    -   Known issues and all new features are documented at [full v2 integration](docs/FullV2Integration.md)
+
 ## 5.0.7 - 2024-08-17 😬
 
 -   Fix readme: v2 debugger works via commands, just not via "run and debug" viewlet

@@ -129,8 +129,9 @@ New, added:
 
 These issues will be resolved before a full release
 
+-   Several [commands](#commands) are duplicated. The plan is to retain the current visual style.
 -   `common.ts#loadahk2` needs work
--   Needs more tests!!
+-   Needs more tests!! Many features have not been tested at all, hence the pre-release!
 
 ### Low priority
 
