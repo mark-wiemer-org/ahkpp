@@ -72,6 +72,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('ahk++.debug', () =>
             RunnerService.startDebugger(),
         ),
+        // todo fixup openHelp duplicate registration
         // vscode.commands.registerCommand('ahk++.openHelp', openHelp), // leave this to the v2 extension for now
         vscode.commands.registerCommand('ahk++.run', () => RunnerService.run()),
         vscode.commands.registerCommand('ahk++.runSelection', () =>
