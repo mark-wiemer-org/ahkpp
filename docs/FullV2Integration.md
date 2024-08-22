@@ -140,3 +140,4 @@ These issues will be backlogged and resolved after a full release
 
 -   App is bloated, including source map files that can be removed. See [ahk2/webpack.config.js](../ahk2/webpack.config.js)
 -   No newline at end of file when formatting (inconsistent with v1 and industry standards)
+-   Format check is [failing in the pipeline](https://github.com/mark-wiemer-org/ahkpp/actions/runs/10503320004/job/29096451649?pr=467)

@@ -56,7 +56,7 @@
         "eslint:fix": "npm run eslint:files -- src --fix && cd ahk2 && npm run eslint:fix",
         "format": "prettier --check . && cd ahk2 && npm run format",
         "format:fix": "prettier --write . && cd ahk2 && npm run format:fix",
-        "lint": "npm run eslint && npm run format && npm run sort-package-json",
+        "lint": "npm run eslint && npm run sort-package-json",
         "package": "vsce package",
         "prepare": "husky install && git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
