@@ -139,3 +139,4 @@ These issues will be resolved before a full release
 These issues will be backlogged and resolved after a full release
 
 -   App is bloated, including source map files that can be removed. See [ahk2/webpack.config.js](../ahk2/webpack.config.js)
+-   No newline at end of file when formatting (inconsistent with v1 and industry standards)
