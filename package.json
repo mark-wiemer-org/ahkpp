@@ -859,6 +859,9 @@
                     "dark": "./language/autohotkey2.svg",
                     "light": "./language/autohotkey2.svg"
                 }
+            },
+            {
+                "id": "~ahk2-output"
             }
         ],
         "menus": {
