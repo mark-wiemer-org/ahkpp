@@ -30,8 +30,8 @@ See [language-specific editor settings](https://code.visualstudio.com/docs/getst
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "terminal.integrated.defaultProfile.windows": "Git Bash",
     "[ahk]": {
-        "editor.defaultFormatter": "mark-wiemer.vscode-autohotkey-plus-plus"
-    }
+        "editor.defaultFormatter": "mark-wiemer.vscode-autohotkey-plus-plus",
+    },
 }
 ```
 
