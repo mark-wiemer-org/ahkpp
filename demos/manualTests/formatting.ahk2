@@ -1,0 +1,4 @@
+#Requires AutoHotkey v2
+
+; Shift+Alt+F to format
+ ExitApp()
