@@ -391,7 +391,7 @@
                 "AutoHotkey2.ActionWhenV1IsDetected": {
                     "scope": "window",
                     "type": "string",
-                    "default": "Warn",
+                    "default": "SwitchToV1",
                     "enum": [
                         "Continue",
                         "Warn",

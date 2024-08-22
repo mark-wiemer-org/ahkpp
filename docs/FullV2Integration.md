@@ -1,6 +1,6 @@
 # Full v2 integration
 
-This doc covers all the new features as a result of integrating with thqby's AHK v2 Language Support extension.
+This doc covers all the new features as a result of integrating with thqby's AHK v2 Language Support extension. See [known issues](#known-issues) at the bottom of this file
 
 ## package.json contributions
 
@@ -34,7 +34,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   AutoHotkey2.Warn.VarUnset
 -   AutoHotkey2.Warn.LocalSameAsGlobal
 -   AutoHotkey2.Warn.CallWithoutParentheses
--   AutoHotkey2.ActionWhenV1IsDetected
+-   AutoHotkey2.ActionWhenV1IsDetected (now defaults to "Switch to v1" instead of "Warn")
 -   AutoHotkey2.CompletionCommitCharacters
 -   AutoHotkey2.Files.Exclude
 -   AutoHotkey2.Files.ScanMaxDepth
@@ -117,3 +117,8 @@ New, added:
     }
 ]
 ```
+
+## Known issues
+
+-   [mark-wiemer.vscode-autohotkey-plus-plus]: Unknown language in `contributes.grammars.language`. Provided value: ~ahk2-output
+-   `common.ts#loadahk2` needs work
