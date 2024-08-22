@@ -34,6 +34,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   AutoHotkey2.Warn.VarUnset
 -   AutoHotkey2.Warn.LocalSameAsGlobal
 -   AutoHotkey2.Warn.CallWithoutParentheses
+-   AutoHotkey2.ActionWhenV1IsDetected
 -   AutoHotkey2.CompletionCommitCharacters
 -   AutoHotkey2.Files.Exclude
 -   AutoHotkey2.Files.ScanMaxDepth
