@@ -2,6 +2,11 @@
 
 This doc covers all the new features as a result of integrating with thqby's AHK v2 Language Support extension. See [known issues](#known-issues) at the bottom of this file
 
+## The big changes
+
+-   Formatting support
+-   Better v2 IntelliSense support: rename, hover, and more
+
 ## package.json contributions
 
 ### Commands
@@ -120,5 +125,15 @@ New, added:
 
 ## Known issues
 
--   [mark-wiemer.vscode-autohotkey-plus-plus]: Unknown language in `contributes.grammars.language`. Provided value: ~ahk2-output
+### Blocking
+
+These issues will be resolved before a full release
+
 -   `common.ts#loadahk2` needs work
+-   Needs more tests!!
+
+### Low priority
+
+These issues will be backlogged and resolved after a full release
+
+-   App is a bit bloated, including source map files that can be removed. See [ahk2/webpack.config.js](../ahk2/webpack.config.js)
