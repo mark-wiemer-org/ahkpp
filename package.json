@@ -861,7 +861,10 @@
                 }
             },
             {
-                "id": "~ahk2-output"
+                "id": "~ahk2-output",
+                "extensions": [
+                    ".ahk2-output"
+                ]
             }
         ],
         "menus": {
