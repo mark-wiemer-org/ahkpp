@@ -2,13 +2,13 @@
 
 ## 5.1.0 - 2024-08-21 🛞🧪
 
-> 🧪 means this is a pre-release!
-
-(For [technical reasons](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#prerelease-extensions), this is tagged with `5.1.0`, but it is a breaking change and the full release will be tagged `6.0.0`)
+> 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
 
 This is a very early pre-release, expect significant issues. Commands may not work as expected and features may be missing.
 
 ### Breaking changes
+
+For [technical reasons](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#prerelease-extensions), this is tagged with `5.1.0`, but it is a breaking release and the full release will be tagged `6.0.0`
 
 -   I haven't found any yet! Please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose) you find 🤓
 
