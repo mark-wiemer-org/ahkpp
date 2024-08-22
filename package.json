@@ -67,7 +67,7 @@
         "pretest-unit": "npm run compile-ts",
         "test-unit": "node ./out/src/test/runTest.js",
         "validate": "npm run lint && npm run test && npm run package",
-        "vscode:prepublish": "npm run build && echo Packaging..."
+        "vscode:prepublish": "npm run compile-grammar && npm run build && echo Packaging..."
     },
     "contributes": {
         "breakpoints": [
