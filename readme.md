@@ -11,7 +11,7 @@ AutoHotkey Plus Plus (AHK++) provides AutoHotkey language support for VS Code. F
 
 ## Install
 
-Install from VS Code or install from VS Code Marketplace: [Install AutoHotkey Plus Plus](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus).
+Install from VS Code or install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus).
 
 ## AHK v2 full support in pre-release!
 
@@ -27,6 +27,8 @@ Supported features include:
 -   Formatting files (🧪 pre-release only)
 
 Please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose), it helps bring full v2 support to the release version faster 🧑‍💻
+
+💚 Special thanks to [thqby](https://github.com/thqby), as this would not have been possible without thqby's open-source [AutoHotkey v2 Language Support](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
 
 ## Why AutoHotkey Plus Plus?
 
