@@ -1,0 +1,119 @@
+{
+    "comments": {
+        "lineComment": ";",
+        "blockComment": ["/*", "*/"]
+    },
+    "brackets": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"]
+    ],
+    "autoClosingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["%", "%"],
+        {
+            "open": "\"",
+            "close": "\"",
+            "notIn": ["string"]
+        },
+        {
+            "open": "'",
+            "close": "'",
+            "notIn": ["string"]
+        },
+        {
+            "open": "/**",
+            "close": " */",
+            "notIn": ["string"]
+        }
+    ],
+    "autoCloseBefore": ":.,}])>'\" \n\t",
+    "surroundingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""],
+        ["'", "'"],
+        ["%", "%"]
+    ],
+    "indentationRules": {
+        "increaseIndentPattern": "^((?!;).)*(\\{[^}\"'`]*|\\([^)\"'`]*|\\[[^\\]\"'`]*)$",
+        "decreaseIndentPattern": "^((?!.*?/\\*).*\\*/)?\\s*[\\])}].*$",
+        "indentNextLinePattern": "^\\s*(((\\}\\s*)?([Ee]lse|[Ff]inally)\\b|[Tt]ry\\b)(?=\\s*([;{].*)?$)|(((\\}\\s*)?([Ee]lse|[Ff]inally)|[Tt]ry)\\s+)?([Ii]f|[Ff]or|[Ww]hile|[Ll]oop)\\b|(\\}\\s*)?[Cc]atch\\b)",
+        // e.g.  * ...| or */| or *-----*/|
+        "unIndentedLinePattern": {
+            "pattern": "^(\\t|[ ])*[ ]\\*[^/]*\\*/\\s*$|^(\\t|[ ])*[ ]\\*/\\s*$|^(\\t|[ ])*[ ]\\*([ ]([^\\*]|\\*(?!/))*)?$"
+        }
+    },
+    "onEnterRules": [
+        {
+            // e.g. /** | */
+            "beforeText": {
+                "pattern": "^\\s*/\\*\\*(?!/)([^\\*]|\\*(?!/))*$"
+            },
+            "afterText": {
+                "pattern": "^\\s*\\*/$"
+            },
+            "action": {
+                "indent": "indentOutdent",
+                "appendText": " * "
+            }
+        },
+        {
+            // e.g. /** ...|
+            "beforeText": {
+                "pattern": "^\\s*/\\*\\*(?!/)([^\\*]|\\*(?!/))*$"
+            },
+            "action": {
+                "indent": "none",
+                "appendText": " * "
+            }
+        },
+        {
+            // e.g.  * ...|
+            "beforeText": {
+                "pattern": "^(\\t|[ ])*[ ]\\*([ ]([^\\*]|\\*(?!/))*)?$"
+            },
+            "previousLineText": {
+                "pattern": "(?=^(\\s*(/\\*\\*|\\*)).*)(?=(?!(\\s*\\*/)))"
+            },
+            "action": {
+                "indent": "none",
+                "appendText": "* "
+            }
+        },
+        {
+            // e.g.  */|
+            "beforeText": {
+                "pattern": "^(\\t|[ ])*[ ]\\*/\\s*$"
+            },
+            "action": {
+                "indent": "none",
+                "removeText": 1
+            }
+        },
+        {
+            // e.g.  *-----*/|
+            "beforeText": {
+                "pattern": "^(\\t|[ ])*[ ]\\*[^/]*\\*/\\s*$"
+            },
+            "action": {
+                "indent": "none",
+                "removeText": 1
+            }
+        },
+        {
+            "beforeText": {
+                "pattern": "^\\s*(\\b[cC]ase\\s.+:|\\b[dD]efault:)$"
+            },
+            "afterText": {
+                "pattern": "^(?!\\s*(\\b[cC]ase\\b|\\b[dD]efault\\b))"
+            },
+            "action": {
+                "indent": "indent"
+            }
+        }
+    ]
+}
