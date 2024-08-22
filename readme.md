@@ -26,6 +26,8 @@ Supported features include:
 -   Rich IntelliSense support with snippets and hover text (🧪 pre-release only)
 -   Formatting files (🧪 pre-release only)
 
+For known issues, see [the changelog](./Changelog.md)
+
 Please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose), it helps bring full v2 support to the release version faster 🧑‍💻
 
 💚 Special thanks to [thqby](https://github.com/thqby), as this would not have been possible without thqby's open-source [AutoHotkey v2 Language Support](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
