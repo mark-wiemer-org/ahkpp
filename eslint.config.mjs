@@ -4,7 +4,5 @@ import tseslint from 'typescript-eslint';
 export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.recommended,
-    {
-        ignores: ['out', 'dist', '**/*.d.ts', 'src/ahk2'],
-    },
+    { ignores: ['out', 'dist', '**/*.d.ts', 'ahk2'] },
 );

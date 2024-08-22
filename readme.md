@@ -9,9 +9,13 @@ AutoHotkey Plus Plus (AHK++) provides AutoHotkey language support for VS Code. F
 -   quick help
 -   ...and more!
 
-## AHK v2 full support coming August 2024!
+## Install
 
-AutoHotkey v2 support has been a [long-requested feature](https://github.com/mark-wiemer-org/ahkpp/issues/96), and v5.0.0 supports many key features. An August 2024 update will add IntelliSense, formatting, and debugger support to AHK++!
+Install from VS Code or install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus).
+
+## AHK v2 full support in pre-release!
+
+AutoHotkey v2 support has been a [long-requested feature](https://github.com/mark-wiemer-org/ahkpp/issues/96), and v5.0.0 supports many key features. The latest [🧪 pre-release version](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions), v5.1.0, adds full v2 support!
 
 Supported features include:
 
@@ -19,47 +23,24 @@ Supported features include:
 -   Full syntax highlighting for v2 scripts
 -   "Open help" (Ctrl + F1) opens language-specific help (and includes your text selection!)
 -   Unique icons for v1 (blue) and v2 (green)
+-   Rich IntelliSense support with snippets and hover text (🧪 pre-release only)
+-   Formatting files (🧪 pre-release only)
 
-[Known limitations (issue #385)](https://github.com/mark-wiemer-org/ahkpp/issues/385):
+For known issues, see [the changelog](./Changelog.md)
 
--   No v2 formatting support
--   No v2 snippets support
--   "Run and debug" viewlet doesn't support v2 debugger
+Please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose), it helps bring full v2 support to the release version faster 🧑‍💻
 
-Please [report any other issues](https://github.com/mark-wiemer-org/ahkpp/issues/new?assignees=mark-wiemer&labels=AHK+v2&projects=&template=v2.md&title=%5Bv2%5D+) 🐛
-
-## Contents
-
--   [Why AutoHotkey Plus Plus?](#why-autohotkey-plus-plus)
--   [Install](#install)
--   [Commands](#commands)
--   [Debug](#debug)
--   [Language features](#language-features)
-    -   [IntelliSense](#intellisense)
-    -   [Function symbol](#function-symbol)
-    -   [Go to definition](#go-to-definition)
-    -   [Find references](#find-symbol-references)
-    -   [Hover tip](#hover-tip)
-    -   [Outline](#outline)
-    -   [Folding](#folding)
-    -   [Code format](#code-format)
-        -   [Formatter directives](#formatter-directives)
--   [Credits](#credits)
--   [Links](#links)
+💚 Special thanks to [thqby](https://github.com/thqby), as this would not have been possible without thqby's open-source [AutoHotkey v2 Language Support](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
 
 ## Why AutoHotkey Plus Plus?
 
 AutoHotkey Plus Plus is one of many extensions that offer VS Code language support. So why should you use this one?
 
--   **Supports both v1 and v2**: AHK++ now has support for AutoHotkey v2 (in preview), making it the only extension to support both major versions of AutoHotkey!
+-   **Supports both v1 and v2**: AHK++ supports both AHK v1 and v2, making it the only extension to support both major versions of AutoHotkey!
 -   **Actively maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues).
 -   **IntelliSense**: Smart code completion, syntax highlighting, code navigation, and more.
 -   **Debug support**: Run and debug AHK scripts from VS Code.
 -   **New features**: Another benefit to active maintenance is that AHK++ can add new features as users request them. For example, quick help, formatter directives, and custom new file templates were all added based on user feedback!
-
-## Install
-
-Install from VS Code or install from VS Code Marketplace: [Install AutoHotkey Plus Plus](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus).
 
 ## Commands
 
