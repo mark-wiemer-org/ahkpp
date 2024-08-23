@@ -31,6 +31,11 @@
     "files": [
         "ahk2/server/dist/*",
         "ahk2/syntaxes/ahk2_common.json",
+        "ahk2/syntaxes/ahk2_h.d.ahk",
+        "ahk2/syntaxes/ahk2_h.json",
+        "ahk2/syntaxes/ahk2.d.ahk",
+        "ahk2/syntaxes/ahk2.json",
+        "ahk2/syntaxes/winapi.d.ahk",
         "language/ahk.configuration.json",
         "language/*.tmLanguage.json",
         "language/autohotkey.svg",
@@ -43,6 +48,7 @@
     ],
     "scripts": {
         "build": "node build.mjs --mode=production && cd ahk2 && npm run build",
+        "build:ahk1": "node build.mjs --mode=production",
         "build:dev": "node build.mjs && cd ahk2 && npm run build:dev",
         "clean:all": "npm run clean:dist && npm run clean:language && npm run clean:out",
         "clean:dist": "del-cli dist",
