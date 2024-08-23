@@ -58,7 +58,7 @@
         "format:fix": "prettier --write .",
         "lint": "npm run eslint && npm run sort-package-json",
         "package": "vsce package",
-        "prepare": "husky install && git submodule update --init --recursive && cd ahk2 && npm install",
+        "prepare": "git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
         "sort-package-json:fix": "sort-package-json",
         "test": "npm run test-grammar && npm run test-unit",
@@ -971,13 +971,6 @@
     "activationEvents": [
         "onDebug"
     ],
-    "lint-staged": {
-        "*": "prettier --check",
-        "src/**/*.ts": [
-            "npm run eslint:files"
-        ],
-        "package.json": "npm run sort-package-json"
-    },
     "prettier": {
         "singleQuote": true,
         "tabWidth": 4,
@@ -1019,9 +1012,7 @@
         "eslint": "^9.9.0",
         "fs-extra": "^9.1.0",
         "glob": "^7.1.6",
-        "husky": "^8.0.3",
         "js-yaml": "^4.1.0",
-        "lint-staged": "^14.0.1",
         "mocha": "^10.0.0",
         "prettier": "3.3.3",
         "sort-package-json": "^1.57.0",
