@@ -16,7 +16,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   ahk2.diagnostic.full
 -   ahk2.export.symbols
 -   ahk2.run (dupe of ahk++.run, except it can be stopped with ahk2.stop)
--   ahk2.selection.run (dupe of ahk++.runSelection)
+-   ahk2.selection.run (dupe of ahk++.runSelection, except it can be stopped with ahk2.stop)
 -   ahk2.stop
 -   ahk2.compile (dupe of ahk++.compile)
 -   ahk2.generate.comment
