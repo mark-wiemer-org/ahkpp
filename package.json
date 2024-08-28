@@ -71,7 +71,7 @@
         "pretest-grammar": "npm run compile-grammar",
         "test-grammar": "vscode-tmgrammar-snap language/samples/*.{ahk1,ahk2}",
         "pretest-unit": "npm run compile-ts",
-        "test-unit": "node ./out/src/test/runTest.js",
+        "test-unit": "vscode-test",
         "validate": "npm run lint && npm run test && npm run package",
         "vscode:prepublish": "npm run compile-grammar && npm run build && echo Packaging..."
     },
@@ -998,6 +998,10 @@
         "@vscode/debugadapter": "^1.57.0",
         "get-port": "^5.1.1",
         "portfinder": "^1.0.32",
+        "vscode-languageclient": "^9.0.1",
+        "vscode-languageserver": "^9.0.1",
+        "vscode-languageserver-textdocument": "^1.0.11",
+        "vscode-uri": "^3.0.8",
         "xml2js": "^0.6.2"
     },
     "devDependencies": {
@@ -1010,6 +1014,7 @@
         "@types/node": "^20.16.0",
         "@types/vscode": "1.90.0",
         "@types/xml2js": "^0.4.11",
+        "@vscode/test-cli": "^0.0.10",
         "@vscode/test-electron": "^2.3.10",
         "@vscode/vsce": "^3.0.0",
         "chai": "^4.3.7",
@@ -1021,6 +1026,7 @@
         "js-yaml": "^4.1.0",
         "mocha": "^10.0.0",
         "prettier": "3.3.3",
+        "sinon": "^18.0.0",
         "sort-package-json": "^1.57.0",
         "source-map-support": "^0.5.19",
         "typescript": "~4.7.4",

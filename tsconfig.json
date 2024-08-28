@@ -6,13 +6,8 @@
         "outDir": "out",
         "experimentalDecorators": true,
         "sourceMap": true,
-        "rootDirs": ["src", "ahk2/client"],
+        "rootDirs": ["src"],
         "esModuleInterop": true
     },
-    "exclude": ["node_modules", "./ahk2/node_modules"],
-    "references": [
-        {
-            "path": "./ahk2/client"
-        }
-    ]
+    "exclude": ["node_modules", "./ahk2/node_modules"]
 }
