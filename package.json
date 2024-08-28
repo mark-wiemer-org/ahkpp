@@ -63,7 +63,7 @@
         "eslint:fix": "npm run eslint:files -- src --fix",
         "format": "prettier --check .",
         "format:fix": "prettier --write .",
-        "lint": "npm run eslint && npm run sort-package-json",
+        "lint": "npm run format && npm run eslint && npm run sort-package-json",
         "package": "vsce package",
         "prepare": "git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
