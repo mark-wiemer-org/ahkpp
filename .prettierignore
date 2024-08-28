@@ -1,30 +1,5 @@
 # ahk2
-ahk2/client/src/browserClientMain.ts
-ahk2/client/src/extension.ts
-ahk2/client/src/test/extension.test.ts
-ahk2/client/src/test/formattingProvider.test.ts
-ahk2/client/src/test/utils.ts
-ahk2/server/src/ahkProvider.ts
-ahk2/server/src/browserServerMain.ts
-ahk2/server/src/codeActionProvider.ts
-ahk2/server/src/colorProvider.ts
-ahk2/server/src/commandProvider.ts
-ahk2/server/src/common.ts
-ahk2/server/src/completionProvider.ts
-ahk2/server/src/constants.ts
-ahk2/server/src/definitionProvider.ts
-ahk2/server/src/formattingProvider.ts
-ahk2/server/src/hoverProvider.ts
-ahk2/server/src/Lexer.ts
-ahk2/server/src/localize.ts
-ahk2/server/src/PEFile.ts
-ahk2/server/src/referencesProvider.ts
-ahk2/server/src/renameProvider.ts
-ahk2/server/src/scriptrunner.ts
-ahk2/server/src/semanticTokensProvider.ts
-ahk2/server/src/server.ts
-ahk2/server/src/signatureProvider.ts
-ahk2/server/src/symbolProvider.ts
+ahk2
 
 # Folders
 .idea/
