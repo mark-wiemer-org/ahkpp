@@ -72,7 +72,6 @@ See [commands](#commands) for duplicates
 
 -   ahk2.run
 -   ahk2.selection.run
--   ahk2.debug
 -   ahk2.debug.params
 -   ahk2.help
 -   ahk2.stop
@@ -87,7 +86,6 @@ See [commands](#commands) for duplicates
 
 editor/context:
 
--   ahk2.debug
 -   ahk2.debug.attach
 -   ahk2.debug.params
 -   ahk2.selection.run
@@ -101,7 +99,6 @@ editor/title:
 
 -   ahk2.run
 -   ahk2.stop
--   ahk2.debug
 
 ### Semantic token scopes
 
