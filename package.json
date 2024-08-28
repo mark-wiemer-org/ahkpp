@@ -45,7 +45,8 @@
         "language/snippetsV2.json",
         "dist/extension.js",
         "icon.png",
-        "license.txt"
+        "license.txt",
+        "package.nls.*"
     ],
     "scripts": {
         "build": "node build.mjs --mode=production && cd ahk2 && npm run build",
