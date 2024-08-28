@@ -129,10 +129,9 @@ New, added:
 These issues will be resolved before a full release
 
 -   Several [commands](#commands) are duplicated. The plan is to retain the current visual style.
--   Globals like `MsgBox` and `ExitApp` are not recognized in any file, e.g. [compile.ahk2](../demos/manualTests/compile.ahk2)
--   `common.ts#loadahk2` needs work
 -   Needs more tests!! Many features have not been tested at all, hence the pre-release!
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
+-   Settings description name placeholders are not replaced
 
 ### Low priority
 
@@ -140,4 +139,3 @@ These issues will be backlogged and resolved after a full release
 
 -   App is bloated, including source map files that can be removed. See [ahk2/webpack.config.js](../ahk2/webpack.config.js)
 -   No newline at end of file when formatting (inconsistent with v1 and industry standards)
--   Format check is [failing in the pipeline](https://github.com/mark-wiemer-org/ahkpp/actions/runs/10503320004/job/29096451649?pr=467)
