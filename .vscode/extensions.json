@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "aaron-bond.better-comments",
+        "dbaeumer.vscode-eslint",
+        "github.copilot",
+        "github.copilot-chat",
+        "github.vscode-pull-request-github",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "simonsiefke.svg-preview",
+        "meganrogge.template-string-converter"
+    ]
+}

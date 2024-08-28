@@ -35,10 +35,4 @@
         ],
         "description": "Generate tests for Mocha.",
     },
-    "Issue link (ahkpp)": {
-        "scope": "markdown",
-        "prefix": "[#",
-        "body": ["[#$1](https://github.com/mark-wiemer-org/ahkpp/issues/$1)"],
-        "description": "Link an ahkpp issue",
-    },
 }
