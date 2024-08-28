@@ -11,7 +11,6 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### Commands
 
--   ahk2.debug (dupe of ahk++.debug)
 -   ahk2.debug.attach
 -   ahk2.debug.params
 -   ahk2.diagnostic.full
