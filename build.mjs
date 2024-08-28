@@ -1,7 +1,9 @@
-/* eslint-disable no-undef */
 import { build } from 'esbuild';
+
+/* eslint-disable-next-line no-undef */
 const isProd = process.argv.indexOf('--mode=production') >= 0;
 
+// https://esbuild.github.io/api
 build({
     entryPoints: ['./src/extension.ts'],
     bundle: true,
@@ -9,7 +11,6 @@ build({
     external: ['vscode'],
     format: 'cjs',
     platform: 'node',
-    metafile: true,
     minify: isProd,
     sourcemap: !isProd,
 });
