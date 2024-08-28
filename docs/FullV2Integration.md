@@ -123,7 +123,6 @@ These issues will be resolved before a full release
 
 -   Needs more tests!! Many features have not been tested at all, hence the pre-release!
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
--   Settings description name placeholders are not replaced
 
 ### Low priority
 
