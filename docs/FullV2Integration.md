@@ -15,7 +15,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   ahk2.debug.params
 -   ahk2.diagnostic.full
 -   ahk2.export.symbols
--   ahk2.run (dupe of ahk++.run)
+-   ahk2.run (dupe of ahk++.run, except it can be stopped with ahk2.stop)
 -   ahk2.selection.run (dupe of ahk++.runSelection)
 -   ahk2.stop
 -   ahk2.compile (dupe of ahk++.compile)
@@ -128,6 +128,7 @@ New, added:
 These issues will be resolved before a full release
 
 -   Several [commands](#commands) are duplicated. The plan is to retain the current visual style.
+    -   ahk2.run is the same as ahk++.run, except ahk2.stop only works on scripts started with ahk2.run
 -   Needs more tests!! Many features have not been tested at all, hence the pre-release!
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 -   Settings description name placeholders are not replaced
