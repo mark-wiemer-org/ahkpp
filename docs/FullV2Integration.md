@@ -11,15 +11,13 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### Commands
 
--   ahk2.debug (dupe of ahk++.debug)
 -   ahk2.debug.attach
 -   ahk2.debug.params
 -   ahk2.diagnostic.full
 -   ahk2.export.symbols
--   ahk2.run (dupe of ahk++.run)
--   ahk2.selection.run (dupe of ahk++.runSelection)
+-   ahk2.run (replaces ahk++.run)
+-   ahk2.selection.run (replaces ahk++.runSelection)
 -   ahk2.stop
--   ahk2.compile (dupe of ahk++.compile)
 -   ahk2.generate.comment
 -   ahk2.updateversioninfo
 -   ahk2.switch
@@ -74,8 +72,6 @@ See [commands](#commands) for duplicates
 
 -   ahk2.run
 -   ahk2.selection.run
--   ahk2.compile
--   ahk2.debug
 -   ahk2.debug.params
 -   ahk2.help
 -   ahk2.stop
@@ -90,12 +86,10 @@ See [commands](#commands) for duplicates
 
 editor/context:
 
--   ahk2.debug
 -   ahk2.debug.attach
 -   ahk2.debug.params
 -   ahk2.selection.run
 -   ahk2.run
--   ahk2.compile
 -   ahk2.help
 -   ahk2.stop
 -   ahk2.generate.comment
@@ -105,7 +99,6 @@ editor/title:
 
 -   ahk2.run
 -   ahk2.stop
--   ahk2.debug
 
 ### Semantic token scopes
 
@@ -128,10 +121,8 @@ New, added:
 
 These issues will be resolved before a full release
 
--   Several [commands](#commands) are duplicated. The plan is to retain the current visual style.
 -   Needs more tests!! Many features have not been tested at all, hence the pre-release!
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
--   Settings description name placeholders are not replaced
 
 ### Low priority
 

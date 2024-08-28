@@ -45,7 +45,8 @@
         "language/snippetsV2.json",
         "dist/extension.js",
         "icon.png",
-        "license.txt"
+        "license.txt",
+        "package.nls.*"
     ],
     "scripts": {
         "build": "node build.mjs --mode=production && cd ahk2 && npm run build",
@@ -109,23 +110,6 @@
                 "category": "AHK++"
             },
             {
-                "command": "ahk++.run",
-                "title": "Run AHK Script",
-                "category": "AHK++"
-            },
-            {
-                "command": "ahk++.runSelection",
-                "title": "Run Selection",
-                "category": "AHK++"
-            },
-            {
-                "enablement": "editorLangId == ahk2 && shellExecutionSupported",
-                "command": "ahk2.debug",
-                "title": "%ahk2.debug%",
-                "icon": "$(debug)",
-                "category": "ahk2"
-            },
-            {
                 "enablement": "!isWeb",
                 "command": "ahk2.debug.attach",
                 "title": "%ahk2.debug.attach%",
@@ -167,12 +151,6 @@
                 "command": "ahk2.stop",
                 "title": "%ahk2.stop%",
                 "icon": "$(stop)",
-                "category": "ahk2"
-            },
-            {
-                "enablement": "editorLangId == ahk2 && shellExecutionSupported",
-                "command": "ahk2.compile",
-                "title": "%ahk2.compile%",
                 "category": "ahk2"
             },
             {
@@ -775,16 +753,6 @@
                 "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
-                "command": "ahk++.run",
-                "key": "ctrl+f9",
-                "when": "editorLangId == ahk || editorLangId == ahk2"
-            },
-            {
-                "command": "ahk++.runSelection",
-                "key": "ctrl+f8",
-                "when": "editorLangId == ahk || editorLangId == ahk2"
-            },
-            {
                 "command": "ahk2.run",
                 "key": "ctrl+f5",
                 "when": "editorLangId == ahk2 && !isWeb && !editorHasSelection"
@@ -793,16 +761,6 @@
                 "command": "ahk2.selection.run",
                 "key": "ctrl+f5",
                 "when": "editorLangId == ahk2 && !isWeb && editorHasSelection"
-            },
-            {
-                "command": "ahk2.compile",
-                "key": "ctrl+shift+f5",
-                "when": "editorLangId == ahk2 && !isWeb"
-            },
-            {
-                "command": "ahk2.debug",
-                "key": "f5",
-                "when": "editorLangId == ahk2 && !isWeb && !inDebugMode"
             },
             {
                 "command": "ahk2.debug.params",
@@ -876,21 +834,6 @@
                     "group": "navigation@1"
                 },
                 {
-                    "command": "ahk++.run",
-                    "when": "editorLangId == ahk || editorLangId == ahk2",
-                    "group": "navigation@0"
-                },
-                {
-                    "command": "ahk++.runSelection",
-                    "when": "(editorLangId == ahk || editorLangId == ahk2) && editorHasSelection",
-                    "group": "navigation@-1"
-                },
-                {
-                    "when": "editorLangId == ahk2 && !isWeb",
-                    "command": "ahk2.debug",
-                    "group": "navigation@1"
-                },
-                {
                     "when": "editorLangId == ahk2 && !isWeb",
                     "command": "ahk2.debug.attach",
                     "group": "navigation@2"
@@ -909,11 +852,6 @@
                     "when": "editorLangId == ahk2 && !isWeb && !editorHasSelection",
                     "command": "ahk2.run",
                     "group": "navigation@0"
-                },
-                {
-                    "when": "editorLangId == ahk2 && !isWeb",
-                    "command": "ahk2.compile",
-                    "group": "navigation@2"
                 },
                 {
                     "when": "editorLangId == ahk2 && !isWeb && ahk2:isRunning",
@@ -946,11 +884,6 @@
                     "command": "ahk2.stop",
                     "group": "navigation@0",
                     "when": "resourceLangId == ahk2 && ahk2:isRunning && shellExecutionSupported"
-                },
-                {
-                    "command": "ahk2.debug",
-                    "group": "navigation@1",
-                    "when": "resourceLangId == ahk2 && shellExecutionSupported"
                 }
             ]
         },
