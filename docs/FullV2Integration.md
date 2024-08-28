@@ -18,7 +18,6 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   ahk2.run (dupe of ahk++.run, except it can be stopped with ahk2.stop)
 -   ahk2.selection.run (dupe of ahk++.runSelection, except it can be stopped with ahk2.stop)
 -   ahk2.stop
--   ahk2.compile (dupe of ahk++.compile)
 -   ahk2.generate.comment
 -   ahk2.updateversioninfo
 -   ahk2.switch
@@ -73,7 +72,6 @@ See [commands](#commands) for duplicates
 
 -   ahk2.run
 -   ahk2.selection.run
--   ahk2.compile
 -   ahk2.debug
 -   ahk2.debug.params
 -   ahk2.help
@@ -94,7 +92,6 @@ editor/context:
 -   ahk2.debug.params
 -   ahk2.selection.run
 -   ahk2.run
--   ahk2.compile
 -   ahk2.help
 -   ahk2.stop
 -   ahk2.generate.comment

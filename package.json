@@ -163,12 +163,6 @@
                 "category": "ahk2"
             },
             {
-                "enablement": "editorLangId == ahk2 && shellExecutionSupported",
-                "command": "ahk2.compile",
-                "title": "%ahk2.compile%",
-                "category": "ahk2"
-            },
-            {
                 "enablement": "editorLangId == ahk2",
                 "command": "ahk2.generate.comment",
                 "title": "%ahk2.generatecomment%",
@@ -788,11 +782,6 @@
                 "when": "editorLangId == ahk2 && !isWeb && editorHasSelection"
             },
             {
-                "command": "ahk2.compile",
-                "key": "ctrl+shift+f5",
-                "when": "editorLangId == ahk2 && !isWeb"
-            },
-            {
                 "command": "ahk2.debug.params",
                 "key": "shift+f5",
                 "when": "editorLangId == ahk2 && !isWeb"
@@ -892,11 +881,6 @@
                     "when": "editorLangId == ahk2 && !isWeb && !editorHasSelection",
                     "command": "ahk2.run",
                     "group": "navigation@0"
-                },
-                {
-                    "when": "editorLangId == ahk2 && !isWeb",
-                    "command": "ahk2.compile",
-                    "group": "navigation@2"
                 },
                 {
                     "when": "editorLangId == ahk2 && !isWeb && ahk2:isRunning",
