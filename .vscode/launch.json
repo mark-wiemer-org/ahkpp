@@ -14,7 +14,7 @@
             // "preLaunchTask": "npm: build:dev",
             "env": {
                 "VSCODE_AHK_SERVER_PATH": "", // default path works for debug as well
-                "SYNTAXES_PATH": "syntaxes" // default path works for debug only
+                "SYNTAXES_PATH": "" // default path works for debug as well
             }
         },
         {
