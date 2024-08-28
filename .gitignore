@@ -8,10 +8,13 @@ dist
 node_modules
 out
 
-# Files
+# Common files
 .vscode/settings.json
 language/*.tmLanguage.json
 *.exe
+*.vsix
+
+# Misc
 *.log
 *.txt
-*.vsix
+*.zip
