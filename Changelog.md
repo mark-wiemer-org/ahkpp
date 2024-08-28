@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.1.1 - 2024-08-27 🧪
+
+> 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
+
+-   Fix global function recognition ([#472](https://github.com/mark-wiemer-org/ahkpp/issues/472))
+
 ## 5.1.0 - 2024-08-22 🧪
 
 > 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
