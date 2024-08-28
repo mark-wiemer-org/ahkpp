@@ -73,10 +73,6 @@ export function activate(context: vscode.ExtensionContext) {
             RunnerService.startDebugger(),
         ),
         vscode.commands.registerCommand('ahk++.openHelp', openHelp),
-        vscode.commands.registerCommand('ahk++.run', () => RunnerService.run()),
-        vscode.commands.registerCommand('ahk++.runSelection', () =>
-            RunnerService.runSelection(),
-        ),
     );
 
     if (Global.getConfig<boolean>(ConfigKey.enableIntellisense)) {

@@ -4,7 +4,7 @@ import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
 import { exec } from '../common/processWrapper';
 import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
-import { getSelectedText, isV1 } from '../common/codeUtil';
+import { isV1 } from '../common/codeUtil';
 
 export const makeCompileCommand = (
     compilerPath: string,
@@ -30,17 +30,6 @@ export const makeCompileCommand = (
 };
 
 export class RunnerService {
-    /** Runs the editor selection as a standalone script. */
-    public static async runSelection(): Promise<void> {
-        const text = getSelectedText(vscode.window.activeTextEditor);
-        if (text === undefined) {
-            vscode.window.showErrorMessage('No active editor found!');
-            return;
-        }
-
-        this.run(await this.createTemplate(text));
-    }
-
     /** Start debug session */
     public static async startDebugger(script?: string) {
         const cwd = script
@@ -59,20 +48,6 @@ export class RunnerService {
             name: 'AutoHotkey Debugger',
             runtime: Global.getConfig<string>(interpreterPathKey),
             program: script,
-        });
-    }
-
-    /** Runs the script at the specified path */
-    public static async run(path?: string): Promise<void> {
-        const interpreterPathV1 = Global.getConfig(
-            isV1() ? ConfigKey.interpreterPathV1 : ConfigKey.interpreterPathV2,
-        );
-        this.checkAndSaveActive();
-        if (!path) {
-            path = await this.getPathByActive();
-        }
-        exec(`"${interpreterPathV1}" "${path}"`, {
-            cwd: `${res(path, '..')}`,
         });
     }
 
