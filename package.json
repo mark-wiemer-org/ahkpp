@@ -135,8 +135,8 @@
             },
             {
                 "enablement": "editorLangId == ahk2 && shellExecutionSupported",
-                "command": "ahk2.run",
-                "title": "%ahk2.run%",
+                "command": "ahk++.run",
+                "title": "%ahk++.run%",
                 "icon": "$(play)",
                 "category": "ahk2"
             },
@@ -753,9 +753,9 @@
                 "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
-                "command": "ahk2.run",
-                "key": "ctrl+f5",
-                "when": "editorLangId == ahk2 && !isWeb && !editorHasSelection"
+                "command": "ahk++.run",
+                "key": "ctrl+f9",
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
                 "command": "ahk++.runSelection",
@@ -844,14 +844,14 @@
                     "group": "navigation@2"
                 },
                 {
+                    "command": "ahk++.run",
+                    "key": "ctrl+f9",
+                    "when": "editorLangId == ahk || editorLangId == ahk2"
+                },
+                {
                     "command": "ahk++.runSelection",
                     "when": "(editorLangId == ahk || editorLangId == ahk2) && editorHasSelection",
                     "group": "navigation@-1"
-                },
-                {
-                    "when": "editorLangId == ahk2 && !isWeb && !editorHasSelection",
-                    "command": "ahk2.run",
-                    "group": "navigation@0"
                 },
                 {
                     "when": "editorLangId == ahk2 && !isWeb && ahk2:isRunning",
@@ -876,7 +876,7 @@
                     "group": "navigation@1"
                 },
                 {
-                    "command": "ahk2.run",
+                    "command": "ahk++.run",
                     "group": "navigation@0",
                     "when": "resourceLangId == ahk2 && shellExecutionSupported"
                 },

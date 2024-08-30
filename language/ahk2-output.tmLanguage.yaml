@@ -8,7 +8,7 @@ patterns:
       '2':
         name: string
     match: "^(\\[Running\\])(.*)$"
-    name: ahk2.running
+    name: ahk++.running
   - captures:
       '1':
         name: token.info-token
