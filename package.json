@@ -117,8 +117,8 @@
             },
             {
                 "enablement": "editorLangId == ahk2 && shellExecutionSupported",
-                "command": "ahk2.debug.params",
-                "title": "%ahk2.debug.params%",
+                "command": "ahk++.debug.params",
+                "title": "%ahk++.debug.params%",
                 "category": "ahk2"
             },
             {
@@ -763,7 +763,7 @@
                 "when": "editorLangId == ahk2 && !isWeb && editorHasSelection"
             },
             {
-                "command": "ahk2.debug.params",
+                "command": "ahk++.debug.params",
                 "key": "shift+f5",
                 "when": "editorLangId == ahk2 && !isWeb"
             },
@@ -840,7 +840,7 @@
                 },
                 {
                     "when": "editorLangId == ahk2 && !isWeb",
-                    "command": "ahk2.debug.params",
+                    "command": "ahk++.debug.params",
                     "group": "navigation@2"
                 },
                 {

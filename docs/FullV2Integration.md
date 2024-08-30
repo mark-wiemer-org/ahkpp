@@ -12,7 +12,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 ### Updated commands
 
 -   ahk++.debug.attach
--   ahk2.debug.params
+-   ahk++.debug.params
 -   ahk2.diagnostic.full
 -   ahk2.export.symbols
 -   ahk2.run (replaces ahk++.run)
@@ -72,7 +72,7 @@ See [commands](#commands) for duplicates
 
 -   ahk2.run
 -   ahk2.selection.run
--   ahk2.debug.params
+-   ahk++.debug.params
 -   ahk2.help
 -   ahk2.stop
 
@@ -87,7 +87,7 @@ See [commands](#commands) for duplicates
 editor/context:
 
 -   ahk++.debug.attach
--   ahk2.debug.params
+-   ahk++.debug.params
 -   ahk2.selection.run
 -   ahk2.run
 -   ahk2.help
