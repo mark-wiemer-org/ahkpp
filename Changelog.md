@@ -85,7 +85,7 @@ AutoHotkey v2 support now in preview! Please test it out and [report any issues]
 
 Be sure to go to the settings and update the new `V2` settings in case the defaults aren't correct 😊
 
-### Breaking changes
+### ⛓️‍💥 Breaking changes
 
 -   Rename some settings. Users will have to manually adjust these new settings from the defaults to match their old settings:
     -   `ahk++.compiler.compileBaseFile` is now `ahk++.compiler.compileBaseFileV1`
@@ -134,16 +134,14 @@ This update relies heavily on open-source code from [thqby](https://github.com/t
 
 ## 4.0.0 - 2023-07-29 🍀
 
-Minimal changes here, just following [semantic versioning](https://semver.org) since there are breaking changes.
-
-Breaking changes:
+### ⛓️‍💥 Breaking changes
 
 -   Rename some settings. Users will have to manually adjust these new settings from the defaults to match their old settings:
     -   `ahk++.formatter.indentCodeAfterSharpDirective` is now `ahk++.formatter.indentCodeAfterIfDirective`
     -   `ahk++.language.enableIntellisense` is now `ahk++.intellisense.enableIntellisense`
     -   `ahk++.file.maximumParseLength` is now `ahk++.intellisense.maximumParseLength`
 
-Other changes:
+### Other changes
 
 -   IntelliSense no longer suggests words when a user presses space ([Issue #110](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/110))
 -   IntelliSense now suggests `foo(p1, p2)` instead of `foo (p1,p2)`
@@ -159,7 +157,7 @@ Other changes:
 
 ## 3.3.1 (yanked) - 2023-06-20 🌞
 
-> This release has been yanked, meaning it's not supported. Use v3.3.3 instead.
+> This release has been yanked, meaning it's not supported. Use 3.3.3 instead.
 
 -   Various syntax highlighting improvements ([PR #354](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/354), [PR #358](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/358))
 -   Running `Open help` while `tutorial` text is selected now opens the Tutorial page ([PR #348](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/348))
@@ -228,13 +226,13 @@ Fixes:
 
 This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you!
 
-Breaking changes:
+### ⛓️‍💥 Breaking changes
 
 -   Update file template: Add `#NoEnv` and `SetBatchLines, -1` ([PR #202](https://github.com/vscode-autohotkey/ahkpp/pull/202))
 
 > Formatter bugfixes may be considered breaking if you wanted the old behaviors. If you want the old behavior, please [open an issue](https://github.com/vscode-autohotkey/ahkpp/issues/new?assignees=mark-wiemer&labels=bug%2C+formatter&template=formatting-bug.md&title=).
 
-Features:
+### Features
 
 -   Add [formatter directive](./readme.md#formatter-directives) for "Format Block Comment" ([PR #164](https://github.com/vscode-autohotkey/ahkpp/pull/164))
 -   Add "allowed number of empty lines" setting to preserve any number of lines. Defaults to `1`, `-1` means "preserve all empty lines" ([PR #194](https://github.com/vscode-autohotkey/ahkpp/pull/194))
@@ -242,7 +240,7 @@ Features:
 -   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. ([PR #191](https://github.com/vscode-autohotkey/ahkpp/pull/191))
 -   Trim end of line when formatting ([PR #190](https://github.com/vscode-autohotkey/ahkpp/pull/190))
 
-Fixes:
+### Fixes
 
 -   Fix some snippets ([PR #138](https://github.com/vscode-autohotkey/ahkpp/pull/138), [PR #201](https://github.com/vscode-autohotkey/ahkpp/pull/201), [PR #210](https://github.com/vscode-autohotkey/ahkpp/pull/210))
 -   Fix formatting bugs with semi-colon as part of a string ([PR #159](https://github.com/vscode-autohotkey/ahkpp/pull/159))
@@ -253,15 +251,15 @@ Fixes:
 
 ## 2.8.4 - 2022-07-07
 
--   Revert to v2.8.2 due to unexpected breaking change in v2.8.3
+-   Revert to 2.8.2 due to issues with 2.8.3
 
 ## 2.8.3 (yanked) - 2022-07-04 🦅
 
-> This release has been yanked, meaning it's not supported. Use v2.8.4 instead.
+> This release has been yanked, meaning it's not supported. Use 2.8.4 instead.
 
 -   Change to use default debug icon ([#100](https://github.com/vscode-autohotkey/ahkpp/issues/100))
 
--   Unexpected change: Break "step into" function of debugger.
+-   ⛓️‍💥 Unexpected breaking change: Break "step into" function of debugger.
 
 ## 2.8.2 - 2022-06-11 🎂
 
@@ -339,6 +337,10 @@ Fixes:
 -   Change configuration title to 'AutoHotkey Plus Plus'
 -   Update readme
 -   Increase icon resolution
+
+<details><summary>Older releases from AutoHotkey Plus</summary>
+
+> These releases are not versions of AHK++, but carried over from [AutoHotkey Plus by cweijan](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-autohotkey-plus)
 
 ## 2.5.6 - 2020-10-06
 
@@ -443,3 +445,5 @@ Fixes:
 ## 2.0.2 - 2019-11-27
 
 -   Enhance method symbol detection.
+
+</details>
