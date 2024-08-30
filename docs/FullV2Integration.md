@@ -5,7 +5,8 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 ## The big changes
 
 -   Formatting support
--   Better v2 IntelliSense support: rename, hover, and more
+-   Snippets support
+-   Better v2 IntelliSense support: rename, better hovers, and more
 
 ## package.json contributions
 
@@ -71,7 +72,6 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 See [commands](#commands) for duplicates
 
 -   ahk2.run
--   ahk2.selection.run
 -   ahk++.debug.params
 -   ahk2.help
 -   ahk2.stop
@@ -88,7 +88,6 @@ editor/context:
 
 -   ahk++.debug.attach
 -   ahk++.debug.params
--   ahk2.selection.run
 -   ahk2.run
 -   ahk2.help
 -   ahk2.stop
