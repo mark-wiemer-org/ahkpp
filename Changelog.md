@@ -1,5 +1,22 @@
 # Changelog
 
+## 5.1.2 - 2024-08-29 🧪
+
+> 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
+
+### ⛓️‍💥 Breaking changes
+
+-   Remove duplicate commands
+    -   ahk2.debug (use ahk++.debug)
+    -   ahk++.run (use ahk2.run)
+    -   ahk++.runSelection (use ahk2.selection.run)
+    -   ahk2.compile (use ahk++.compile)
+    -   Commands may be renamed in the future for consistency
+
+### Other changes
+
+-   Reduce extension size from 1.34 MB to 533 KB, compared to 534 KB for AHK++ 5.0.7
+
 ## 5.1.1 - 2024-08-27 🧪
 
 > 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
@@ -12,9 +29,9 @@
 
 This is a very early pre-release, expect significant issues. Commands may not work as expected and features may be missing.
 
-### Breaking changes
+### ⛓️‍💥 Breaking changes
 
-For [technical reasons](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#prerelease-extensions), this is tagged with `5.1.0`, but it is a breaking release and the full release will be tagged `6.0.0`
+For [technical reasons](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#prerelease-extensions), this is tagged with `5.1.0`, but it may be a breaking release and the full release will be tagged `6.0.0`
 
 -   I haven't found any yet! Please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose) you find 🤓
 
