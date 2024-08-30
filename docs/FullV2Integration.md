@@ -16,8 +16,6 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   ahk++.debug.params
 -   ahk2.diagnostic.full
 -   ahk2.export.symbols
--   ahk2.run (replaces ahk++.run)
--   ahk2.selection.run (replaces ahk++.runSelection)
 -   ahk2.stop
 -   ahk2.generate.comment
 -   ahk2.updateversioninfo
@@ -71,9 +69,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 See [commands](#commands) for duplicates
 
--   ahk2.run
 -   ahk++.debug.params
--   ahk2.help
 -   ahk2.stop
 
 ### Languages
@@ -88,15 +84,12 @@ editor/context:
 
 -   ahk++.debug.attach
 -   ahk++.debug.params
--   ahk2.run
--   ahk2.help
 -   ahk2.stop
 -   ahk2.generate.comment
 -   ahk2.updateversioninfo
 
 editor/title:
 
--   ahk2.run
 -   ahk2.stop
 
 ### Semantic token scopes
