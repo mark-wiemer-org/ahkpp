@@ -111,8 +111,8 @@
             },
             {
                 "enablement": "!isWeb",
-                "command": "ahk2.debug.attach",
-                "title": "%ahk2.debug.attach%",
+                "command": "ahk++.debug.attach",
+                "title": "%ahk++.debug.attach%",
                 "category": "ahk2"
             },
             {
@@ -835,7 +835,7 @@
                 },
                 {
                     "when": "editorLangId == ahk2 && !isWeb",
-                    "command": "ahk2.debug.attach",
+                    "command": "ahk++.debug.attach",
                     "group": "navigation@2"
                 },
                 {

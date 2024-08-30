@@ -9,9 +9,9 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ## package.json contributions
 
-### Commands
+### Updated commands
 
--   ahk2.debug.attach
+-   ahk++.debug.attach
 -   ahk2.debug.params
 -   ahk2.diagnostic.full
 -   ahk2.export.symbols
@@ -86,7 +86,7 @@ See [commands](#commands) for duplicates
 
 editor/context:
 
--   ahk2.debug.attach
+-   ahk++.debug.attach
 -   ahk2.debug.params
 -   ahk2.selection.run
 -   ahk2.run
