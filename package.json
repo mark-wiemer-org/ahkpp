@@ -49,9 +49,9 @@
         "package.nls.*"
     ],
     "scripts": {
-        "build": "node build.mjs --mode=production && cd ahk2 && npm run build",
-        "build:ahk1": "node build.mjs --mode=production",
-        "build:dev": "node build.mjs && cd ahk2 && npm run build:dev",
+        "build": "node src/build.mjs --mode=production && cd ahk2 && npm run build",
+        "build:ahk1": "node src/build.mjs --mode=production",
+        "build:dev": "node src/build.mjs && cd ahk2 && npm run build:dev",
         "clean:all": "npm run clean:dist && npm run clean:language && npm run clean:out",
         "clean:dist": "del-cli dist",
         "clean:language": "del-cli language/*.tmLanguage.json",
