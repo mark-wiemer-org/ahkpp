@@ -312,8 +312,8 @@
                 },
                 "ahk++.v2.file.interpreterPath": {
                     "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe",
-                    "description": "Path to the AHK v2 interpreter."
+                    "default": "C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey64.exe",
+                    "description": "%ahk++.config.v2.file.interpreterPath%"
                 },
                 "ahk++.v2.file.templateSnippetName": {
                     "type": "string",
@@ -525,12 +525,6 @@
                     "type": "integer",
                     "default": 2,
                     "description": "%ahk++.config.v2.files.maxScanDepth%"
-                },
-                "ahk++.InterpreterPath": {
-                    "scope": "window",
-                    "type": "string",
-                    "default": "C:\\Program Files\\Autohotkey\\v2\\AutoHotkey.exe",
-                    "markdownDescription": "%ahk++.config.v2.interpreterPath%"
                 },
                 "ahk++.SymbolFoldingFromOpenBrace": {
                     "scope": "window",
