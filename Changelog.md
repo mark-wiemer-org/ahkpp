@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.0.0 - 2024-08-31 🥂
+
+AHK++ 6 introduces full v2 support, including formatting, enhanced IntelliSense and debug support, and more!
+
+### ⛓️‍💥 Breaking changes
+
+-   Remove `intellisense.enableIntellisense` setting: IntelliSense is now always on
+
+### 💚 Thank you!
+
+Special thanks to [thqby](https://github.com/thqby), as this would not have been possible without thqby's open-source [AutoHotkey v2 Language Support](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
+
 ## 5.1.3 - 2024-08-30 🧪
 
 > 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!

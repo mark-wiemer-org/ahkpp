@@ -30,7 +30,6 @@ export enum ConfigKey {
     compileBaseFileV2 = 'compiler.compileBaseFileV2',
     compileIcon = 'compiler.compileIcon',
     compilerPath = 'file.compilerPath',
-    enableIntellisense = 'intellisense.enableIntellisense',
     interpreterPathV1 = 'file.interpreterPathV1',
     interpreterPathV2 = 'file.interpreterPathV2',
     helpPathV1 = 'file.helpPathV1',
