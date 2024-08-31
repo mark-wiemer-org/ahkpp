@@ -1,6 +1,6 @@
 ; From https://github.com/FuPeiJiang/ahk_explorer/blob/tests/ahk_explorer.ahk
 ; Copyright 2021 FuPeiJiang, used with permission
-; https://github.com/mark-wiemer-org/ahkpp/pull/32#issuecomment-770233225
+; https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/32#issuecomment-770233225
 
 #NoEnv ; Recommended for performance and compatibility with future AutoHotkey releases.
 #SingleInstance, force

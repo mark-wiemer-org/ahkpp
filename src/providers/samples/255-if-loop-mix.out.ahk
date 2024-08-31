@@ -1,4 +1,4 @@
-; [Issue #255](https://github.com/mark-wiemer-org/ahkpp/issues/255)
+; [Issue #255](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/255)
 {
     if
         if
@@ -10,8 +10,8 @@
     if
         loop
             code
-        else
-            code
+    else
+        code
     code
 
     loop
@@ -19,8 +19,8 @@
             loop
                 loop
                     code
-                else
-                    code
+        else
+            code
     code
 
     Loop

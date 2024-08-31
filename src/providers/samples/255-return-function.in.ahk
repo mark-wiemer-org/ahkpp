@@ -1,19 +1,19 @@
-; [Issue #255](https://github.com/mark-wiemer-org/ahkpp/issues/255)
+; [Issue #255](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/255)
 foo() {
-    Loop
-        code
-    Loop
-        if
-            code
-    return
+Loop
+code
+Loop
+if
+code
+return
 }
 
 foo() {
-    Loop
-        code
-    Loop
-        if {
-            code
-        }
-    return
+Loop
+code
+Loop
+if {
+code
+}
+return
 }

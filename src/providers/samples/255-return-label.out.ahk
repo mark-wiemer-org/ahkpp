@@ -1,10 +1,10 @@
-; [Issue #255](https://github.com/mark-wiemer-org/ahkpp/issues/255)
+; [Issue #255](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/255)
 label:
     if {
         code
     } else
         code
-    return
+return
 
 label:
     if {
@@ -12,7 +12,7 @@ label:
     }
 label:
     code
-    return
+return
 
 label:
     if {
@@ -21,4 +21,4 @@ label:
         code
 label:
     code
-    return
+return

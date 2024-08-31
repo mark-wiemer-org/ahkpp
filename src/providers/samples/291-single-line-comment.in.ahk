@@ -1,4 +1,4 @@
-; [Issue #291](https://github.com/mark-wiemer-org/ahkpp/issues/291)
+; [Issue #291](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/291)
 if (expression)
-    ;
-    code
+;
+code
