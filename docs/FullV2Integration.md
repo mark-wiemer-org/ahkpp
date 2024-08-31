@@ -32,6 +32,7 @@ All new settings are in the `V2` settings category
 -   Library Suggestions: Whether to suggest functions included in library files
 -   Comment Tag Regex: The regular expression for custom symbols to appear in the breadcrumb and elsewhere. Default matches any line that starts with `;;`
 -   Complete Function Calls: Whether to automatically add parenetheses when calling a function
+-   Completion Commit Characters: Characters which commit auto-completion
 -   Debug Configuration: The [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) to use when debugging
 -   Diagnostics
     -   Class Non Dynamic Member Check: Check whether non-dynamic members of a class exist when lexing
