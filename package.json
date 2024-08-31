@@ -111,14 +111,14 @@
             },
             {
                 "enablement": "!isWeb",
-                "command": "ahk++.debug.attach",
-                "title": "%ahk++.debug.attach%",
+                "command": "ahk++.debugAttach",
+                "title": "%ahk++.debugAttach%",
                 "category": "ahk2"
             },
             {
                 "enablement": "editorLangId == ahk2 && shellExecutionSupported",
-                "command": "ahk++.debug.params",
-                "title": "%ahk++.debug.params%",
+                "command": "ahk++.debugParams",
+                "title": "%ahk++.debugParams%",
                 "category": "ahk2"
             },
             {
@@ -129,8 +129,8 @@
             },
             {
                 "enablement": "editorLangId == ahk2",
-                "command": "ahk2.export.symbols",
-                "title": "%ahk2.export.symbols%",
+                "command": "ahk++.exportSymbols",
+                "title": "%ahk++.exportSymbols%",
                 "category": "ahk2"
             },
             {
@@ -763,7 +763,7 @@
                 "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
-                "command": "ahk++.debug.params",
+                "command": "ahk++.debugParams",
                 "key": "shift+f5",
                 "when": "editorLangId == ahk2 && !isWeb"
             },
@@ -835,12 +835,12 @@
                 },
                 {
                     "when": "editorLangId == ahk2 && !isWeb",
-                    "command": "ahk++.debug.attach",
+                    "command": "ahk++.debugAttach",
                     "group": "navigation@2"
                 },
                 {
                     "when": "editorLangId == ahk2 && !isWeb",
-                    "command": "ahk++.debug.params",
+                    "command": "ahk++.debugParams",
                     "group": "navigation@2"
                 },
                 {

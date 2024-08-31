@@ -12,10 +12,10 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### New commands
 
--   Debug AHK and Attach (`ahk++.debug.attach`): Like Debug AHK Script, except attach to the debug session for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
--   Debug AHK with Params (`ahk++.debug.params`): Like Debug AHK Script, except add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Debug AHK and Attach (`ahk++.debugAttach`): Like Debug AHK Script, except attach to the debug session for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Debug AHK with Params (`ahk++.debugParams`): Like Debug AHK Script, except add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
 -   Run AHK++ Diagnostic (`ahk++.diagnostic.full`): Effectively restart the AHK v2 features of the app. Future work may do a full reset of the entire AHK++ extension.
--   ahk2.export.symbols
+-   Export AHK Symbols (`ahk++.exportSymbols`): Exports application functions and classes to a new file.
 -   ahk2.stop
 -   ahk2.generate.comment
 -   ahk2.updateversioninfo
@@ -69,7 +69,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 See [commands](#commands) for duplicates
 
--   ahk++.debug.params
+-   ahk++.debugParams
 -   ahk2.stop
 
 ### Languages
@@ -82,8 +82,8 @@ See [commands](#commands) for duplicates
 
 editor/context:
 
--   ahk++.debug.attach
--   ahk++.debug.params
+-   ahk++.debugAttach
+-   ahk++.debugParams
 -   ahk2.stop
 -   ahk2.generate.comment
 -   ahk2.updateversioninfo
