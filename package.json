@@ -307,11 +307,11 @@
                     "default": "^;;\\s*(?<tag>.+)",
                     "markdownDescription": "%ahk++.commentTagRegex%"
                 },
-                "ahk++.CompleteFunctionParens": {
+                "ahk++.v2.completeFunctionCalls": {
                     "scope": "window",
                     "type": "boolean",
                     "default": false,
-                    "markdownDescription": "%ahk2.completefunctionparens%"
+                    "markdownDescription": "%ahk++.completeFunctionCalls%"
                 },
                 "ahk++.DebugConfiguration": {
                     "scope": "window",
