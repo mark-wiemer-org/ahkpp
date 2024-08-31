@@ -26,7 +26,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### Configuration
 
--   ahk++.librarySuggestions
+-   Library suggestions: Whether to suggest functions included in library files
 -   ahk++.CommentTags
 -   ahk++.CompilerCMD
 -   ahk++.CompleteFunctionParens

@@ -299,7 +299,7 @@
                         "All"
                     ],
                     "default": "Disabled",
-                    "description": "%ahk2.autolibinclude%"
+                    "description": "%ahk2.librarySuggestions%"
                 },
                 "ahk++.CommentTags": {
                     "scope": "window",

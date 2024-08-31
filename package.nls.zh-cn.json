@@ -3,7 +3,7 @@
     "action.stopparsing": "停止解析",
     "action.switchtov1": "切换到ahk v1",
     "ahk2.actionwhenv1isdetected": "检测到v1脚本时的行为",
-    "ahk2.autolibinclude": "对用户库和标准库, 本地库提供补全和自动include",
+    "ahk2.librarySuggestions": "对用户库和标准库, 本地库提供补全和自动include",
     "ahk2.commenttags": "用来从注释中提取命名标记的正则表达式, 并生成模块符号",
     "ahk2.compilercmd": "编译器命令行选项. 如果未指定ahk2exe.exe, 将使用默认路径. `${execPath}`等价于当前选择的AutoHotkey.exe",
     "ahk2.completefunctionparens": "当右侧不存在`(`或`[`时, 给函数补全添加括号; 否则向右移动光标",
