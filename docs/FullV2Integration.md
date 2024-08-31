@@ -22,6 +22,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   Switch AHK Version (`ahk++.switchAhkVersion`): Change between v1 and v2 for the current file
 -   Select AHK Syntaxes (`ahk++.selectSyntaxes`): Select custom syntax files for advanced use-cases. PRs are welcomed if the default syntaxes aren't sufficient!
 -   Set A_ScriptDir Here (`ahk++.setAScriptDir`): Set [`A_ScriptDir`](https://www.autohotkey.com/docs/v2/Variables.htm#ScriptDir) to the path of the current file. Only for AHK v2.
+-   Set AHK v2 Interpreter (`ahk++.setV2Interpreter`): Open a quick pick to change the AHK v2 intepreter for all scripts.
 
 ### Configuration
 
