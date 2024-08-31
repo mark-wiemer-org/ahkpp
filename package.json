@@ -305,7 +305,7 @@
                     "scope": "window",
                     "type": "string",
                     "default": "^;;\\s*(?<tag>.+)",
-                    "description": "%ahk2.commentTagRegex%"
+                    "markdownDescription": "%ahk++.commentTagRegex%"
                 },
                 "ahk++.CompilerCMD": {
                     "scope": "window",
