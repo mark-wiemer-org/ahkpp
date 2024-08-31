@@ -301,11 +301,11 @@
                     "default": "Disabled",
                     "description": "%ahk2.librarySuggestions%"
                 },
-                "ahk++.CommentTags": {
+                "ahk++.commentTagRegex": {
                     "scope": "window",
                     "type": "string",
                     "default": "^;;\\s*(?<tag>.+)",
-                    "description": "%ahk2.commenttags%"
+                    "description": "%ahk2.commentTagRegex%"
                 },
                 "ahk++.CompilerCMD": {
                     "scope": "window",
