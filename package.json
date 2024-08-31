@@ -193,16 +193,6 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk++.compiler.compileBaseFileV1": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Base file path for compiling v1 scripts (optional)."
-                },
-                "ahk++.compiler.compileBaseFileV2": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Base file path for compiling v2 scripts (optional)."
-                },
                 "ahk++.compiler.compileIcon": {
                     "type": "string",
                     "default": "",
@@ -218,36 +208,6 @@
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "Path to the AHK compiler. (This is the same for both v1 and v2.)"
                 },
-                "ahk++.file.interpreterPathV1": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "Path to the AHK v1 interpreter."
-                },
-                "ahk++.file.interpreterPathV2": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe",
-                    "description": "Path to the AHK v2 interpreter."
-                },
-                "ahk++.file.helpPathV1": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-                    "description": "Path to the AHK v1 help document."
-                },
-                "ahk++.file.helpPathV2": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
-                    "description": "Path to the AHK v2 help document."
-                },
-                "ahk++.file.templateSnippetNameV1": {
-                    "type": "string",
-                    "default": "AhkTemplateV1",
-                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
-                },
-                "ahk++.file.templateSnippetNameV2": {
-                    "type": "string",
-                    "default": "AhkTemplateV2",
-                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
-                },
                 "ahk++.intellisense.maximumParseLength": {
                     "type": "number",
                     "default": 10000,
@@ -257,6 +217,26 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Show the Debug button in the editor title menu."
+                },
+                "ahk++.v1.file.compileBaseFile": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Base file path for compiling v1 scripts (optional)."
+                },
+                "ahk++.v1.file.helpPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+                    "description": "Path to the AHK v1 help document."
+                },
+                "ahk++.v1.file.interpreterPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "description": "Path to the AHK v1 interpreter."
+                },
+                "ahk++.v1.file.templateSnippetName": {
+                    "type": "string",
+                    "default": "AhkTemplateV1",
+                    "markdownDescription": "The name of the snippet to populate new AHK v1 files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
                 },
                 "ahk++.v1.formatter.allowedNumberOfEmptyLines": {
                     "type": "integer",
@@ -319,6 +299,26 @@
                     "type": "boolean",
                     "default": true,
                     "description": "%ahk++.config.v2.diagnostics.paramsCheck%"
+                },
+                "ahk++.v2.file.compileBaseFile": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Base file path for compiling v2 scripts (optional)."
+                },
+                "ahk++.v2.file.helpPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
+                    "description": "Path to the AHK v2 help document."
+                },
+                "ahk++.v2.file.interpreterPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe",
+                    "description": "Path to the AHK v2 interpreter."
+                },
+                "ahk++.v2.file.templateSnippetName": {
+                    "type": "string",
+                    "default": "AhkTemplateV2",
+                    "markdownDescription": "The name of the snippet to populate new AHK v2 files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
                 },
                 "ahk++.v2.formatter": {
                     "scope": "window",
@@ -518,19 +518,19 @@
                         "type": "string"
                     },
                     "uniqueItems": true,
-                    "description": "%ahk2.files.exclude%"
+                    "description": "%ahk++.config.v2.files.exclude%"
                 },
                 "ahk++.Files.ScanMaxDepth": {
                     "scope": "window",
                     "type": "integer",
                     "default": 2,
-                    "description": "%ahk2.files.scanmaxdepth%"
+                    "description": "%ahk++.config.v2.files.maxScanDepth%"
                 },
                 "ahk++.InterpreterPath": {
                     "scope": "window",
                     "type": "string",
                     "default": "C:\\Program Files\\Autohotkey\\v2\\AutoHotkey.exe",
-                    "markdownDescription": "%ahk2.interpreterpath%"
+                    "markdownDescription": "%ahk++.config.v2.interpreterPath%"
                 },
                 "ahk++.SymbolFoldingFromOpenBrace": {
                     "scope": "window",
