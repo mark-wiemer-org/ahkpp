@@ -25,7 +25,7 @@ export class Global {
 }
 
 export enum ConfigKey {
-    allowedNumberOfEmptyLines = 'formatter.allowedNumberOfEmptyLines',
+    allowedNumberOfEmptyLines = 'v1.formatter.allowedNumberOfEmptyLines',
     compileBaseFileV1 = 'compiler.compileBaseFileV1',
     compileBaseFileV2 = 'compiler.compileBaseFileV2',
     compileIcon = 'compiler.compileIcon',
@@ -35,13 +35,13 @@ export enum ConfigKey {
     interpreterPathV2 = 'file.interpreterPathV2',
     helpPathV1 = 'file.helpPathV1',
     helpPathV2 = 'file.helpPathV2',
-    indentCodeAfterIfDirective = 'formatter.indentCodeAfterIfDirective',
-    indentCodeAfterLabel = 'formatter.indentCodeAfterLabel',
+    indentCodeAfterIfDirective = 'v1.formatter.indentCodeAfterIfDirective',
+    indentCodeAfterLabel = 'v1.formatter.indentCodeAfterLabel',
     maximumParseLength = 'intellisense.maximumParseLength',
-    preserveIndent = 'formatter.preserveIndent',
+    preserveIndent = 'v1.formatter.preserveIndent',
     templateSnippetNameV1 = 'file.templateSnippetNameV1',
     templateSnippetNameV2 = 'file.templateSnippetNameV2',
-    trimExtraSpaces = 'formatter.trimExtraSpaces',
+    trimExtraSpaces = 'v1.formatter.trimExtraSpaces',
     useMpress = 'compiler.useMpress',
 }
 

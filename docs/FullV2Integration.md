@@ -35,6 +35,7 @@ All new settings are in the `V2` settings category
 -   Diagnostics
     -   Class Non Dynamic Member Check: Check whether non-dynamic members of a class exist when lexing
     -   Params Check: Check that the function call has the correct number of arguments
+-   Formatter: Options for how to format a file. v1 and v2 formatters have their own settings.
 -   Warn
     -   Var Unset: Display a warning when referencing an unassigned variable. Changes take effect after restart.
     -   Local Same As Global: Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.
@@ -42,7 +43,6 @@ All new settings are in the `V2` settings category
 
 In progress:
 
--   ahk++.FormatOptions
 -   ahk++.ActionWhenV1IsDetected (now defaults to "Switch to v1" instead of "Warn")
 -   ahk++.CompletionCommitCharacters
 -   ahk++.Files.Exclude

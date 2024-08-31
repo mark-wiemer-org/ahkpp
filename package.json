@@ -248,32 +248,6 @@
                     "default": "AhkTemplateV2",
                     "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
                 },
-                "ahk++.formatter.allowedNumberOfEmptyLines": {
-                    "type": "integer",
-                    "default": 1,
-                    "minimum": -1,
-                    "markdownDescription": "Allowed number of empty lines.\n- -1: Ignore empty lines.\n- 0: No empty lines."
-                },
-                "ahk++.formatter.indentCodeAfterLabel": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Indent code after hotkeys and labels in top-level code blocks. Only applies to AHK v1."
-                },
-                "ahk++.formatter.indentCodeAfterIfDirective": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist). Only applies to AHK v1."
-                },
-                "ahk++.formatter.preserveIndent": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Preserve indentation on empty line. Only applies to AHK v1."
-                },
-                "ahk++.formatter.trimExtraSpaces": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Trim extra spaces between words. Only applies to AHK v1."
-                },
                 "ahk++.intellisense.enableIntellisense": {
                     "type": "boolean",
                     "default": true,
@@ -288,6 +262,32 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Show the Debug button in the editor title menu."
+                },
+                "ahk++.v1.formatter.allowedNumberOfEmptyLines": {
+                    "type": "integer",
+                    "default": 1,
+                    "minimum": -1,
+                    "markdownDescription": "Allowed number of empty lines.\n- -1: Ignore empty lines.\n- 0: No empty lines."
+                },
+                "ahk++.v1.formatter.indentCodeAfterLabel": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indent code after hotkeys and labels in top-level code blocks. Only applies to AHK v1."
+                },
+                "ahk++.v1.formatter.indentCodeAfterIfDirective": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist). Only applies to AHK v1."
+                },
+                "ahk++.v1.formatter.preserveIndent": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Preserve indentation on empty line. Only applies to AHK v1."
+                },
+                "ahk++.v1.formatter.trimExtraSpaces": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Trim extra spaces between words. Only applies to AHK v1."
                 },
                 "ahk++.v2.commentTagRegex": {
                     "scope": "window",
