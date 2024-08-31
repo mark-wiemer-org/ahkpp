@@ -1,4 +1,4 @@
-; [Issue #255](https://github.com/vscode-autohotkey/ahkpp/issues/290)
+; [Issue #255](https://github.com/mark-wiemer-org/ahkpp/issues/290)
 MsgBox, 4, , Would you like to continue?, 5 ; 5-second timeout.
 IfMsgBox, No
     Return ; User pressed the "No" button.
