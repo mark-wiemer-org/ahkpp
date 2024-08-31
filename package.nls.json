@@ -10,6 +10,7 @@
     "ahk++.command.setV2Interpreter": "Set AHK v2 Interpreter",
     "ahk++.command.stop": "Stop AHK Script",
     "ahk++.command.updateVersionInfo": "Update File Version Info",
+    "ahk++.config.v2.actionWhenV1Detected": "Action when v1 script is detected",
     "ahk++.config.v2.commentTagRegex": "The regular expression for custom symbols to appear in the breadcrumb and elsewhere. Default matches any line that starts with `;;`",
     "ahk++.config.v2.completeFunctionCalls": "Whether to automatically add parenetheses when calling a function",
     "ahk++.config.v2.debugConfiguration": "The [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) to use when debugging",
@@ -20,7 +21,6 @@
     "ahk++.config.v2.warn.localSameAsGlobal": "Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.",
     "ahk++.config.v2.warn.varUnset": "Display a warning when referencing an unassigned variable. Changes take effect after restart.",
 
-    "ahk2.actionwhenv1isdetected": "Action when v1 script is detected",
     "ahk2.completioncommitcharacters": "Characters which commit auto completion, such as `.(`",
     "ahk2.description": "Autohotkey2 Language Support using vscode-lsp",
     "ahk2.files.exclude": "Configure glob patterns for excluding files and folders when scanning ahk files.",

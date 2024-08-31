@@ -28,6 +28,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 All new settings are in the `V2` settings category
 
+-   Action When V1 Detected: Action when v1 script is detected
 -   Library Suggestions: Whether to suggest functions included in library files
 -   Comment Tag Regex: The regular expression for custom symbols to appear in the breadcrumb and elsewhere. Default matches any line that starts with `;;`
 -   Complete Function Calls: Whether to automatically add parenetheses when calling a function
@@ -43,7 +44,6 @@ All new settings are in the `V2` settings category
 
 In progress:
 
--   ahk++.ActionWhenV1IsDetected (now defaults to "Switch to v1" instead of "Warn")
 -   ahk++.CompletionCommitCharacters
 -   ahk++.Files.Exclude
 -   ahk++.Files.ScanMaxDepth
