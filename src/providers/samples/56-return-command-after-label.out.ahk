@@ -1,4 +1,4 @@
-; [Issue #56](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/56)
+; [Issue #56](https://github.com/mark-wiemer-org/ahkpp/issues/56)
 func1(x, y) {
     return x + y
 }
@@ -12,7 +12,7 @@ func2(x, y) {
 }
 
 ^SPACE::
-    SoundBeep
+SoundBeep
 return
 
 func3(x, y) {

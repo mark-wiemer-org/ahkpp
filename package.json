@@ -17,13 +17,13 @@
         "ahk v2",
         "ahk v1"
     ],
-    "homepage": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/readme.md",
+    "homepage": "https://github.com/mark-wiemer-org/ahkpp/blob/main/readme.md",
     "bugs": {
-        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues"
+        "url": "https://github.com/mark-wiemer-org/ahkpp/issues"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/mark-wiemer/vscode-autohotkey-plus-plus.git"
+        "url": "https://github.com/mark-wiemer-org/ahkpp.git"
     },
     "license": "See license.txt",
     "publisher": "mark-wiemer",
@@ -241,12 +241,12 @@
                 "ahk++.file.templateSnippetNameV1": {
                     "type": "string",
                     "default": "AhkTemplateV1",
-                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/vscode-autohotkey/ahkpp/tree/main/docs/TemplateSnippet.md)."
+                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
                 },
                 "ahk++.file.templateSnippetNameV2": {
                     "type": "string",
                     "default": "AhkTemplateV2",
-                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/vscode-autohotkey/ahkpp/tree/main/docs/TemplateSnippet.md)."
+                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
                 },
                 "ahk++.formatter.allowedNumberOfEmptyLines": {
                     "type": "integer",

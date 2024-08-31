@@ -42,7 +42,7 @@ Unless otherwise specified, commit messages don't matter.
 
 1. Tag the release
     1. e.g. `git checkout main && git pull && git tag v1.2.3 && git push origin v1.2.3`
-    1. [Create a new GitHub release for this tag](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tags)
+    1. [Create a new GitHub release for this tag](https://github.com/mark-wiemer-org/ahkpp/tags)
         1. Release title: Same as in [Changelog.md](../Changelog.md)
         1. Description: Changelog entry, excluding the heading for this version
         1. Attach binary
@@ -52,7 +52,7 @@ When the tag is pushed, changes will automatically be published.
 
 ### Validating deployment
 
-1. [Deploy workflow](https://github.com/mark-wiemer/ahkpp/actions/workflows/deploy.yml)
+1. [Deploy workflow](https://github.com/mark-wiemer-org/ahkpp/actions/workflows/deploy.yml)
 1. [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus)
     1. [Publisher view](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer): validation takes about 5 minutes
-1. [Open VSX Marketplace](https://open-vsx.org/extension/mark-wiemer/vscode-autohotkey-plus-plus)
+1. [Open VSX Marketplace](https://open-vsx.org/extension/mark-wiemer-org/ahkpp)

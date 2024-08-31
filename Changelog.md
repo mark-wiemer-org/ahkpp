@@ -118,8 +118,8 @@ Be sure to go to the settings and update the new `V2` settings in case the defau
 Some features are not added to this initial preview release, but will be coming soon!
 
 -   Missing features for AHK v2:
-    -   Formatting ([Issue #381](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/381))
-    -   Snippets ([Issue #382](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/382))
+    -   Formatting ([Issue #381](https://github.com/mark-wiemer-org/ahkpp/issues/381))
+    -   Snippets ([Issue #382](https://github.com/mark-wiemer-org/ahkpp/issues/382))
 
 ### Thank you!
 
@@ -129,7 +129,7 @@ This update relies heavily on open-source code from [thqby](https://github.com/t
 
 -   Add quick help, adapted from thqby's AutoHotkey v2 Language Support
     -   Selected text (or word at cursor) is now searched within the help documentation
-    -   Known limitation: if selected text would cause a syntax error when injected into a script, help is activated but no search is made. [Issue #376](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/376)
+    -   Known limitation: if selected text would cause a syntax error when injected into a script, help is activated but no search is made. [Issue #376](https://github.com/mark-wiemer-org/ahkpp/issues/376)
 -   Update file icon to match [official AHK repository](https://github.com/AutoHotkey/AutoHotkey/blob/446829bc730aa002635d3d36bfd17e892b6981c0/source/resources/icons.svg)
 
 ## 4.0.0 - 2023-07-29 🍀
@@ -143,7 +143,7 @@ This update relies heavily on open-source code from [thqby](https://github.com/t
 
 ### Other changes
 
--   IntelliSense no longer suggests words when a user presses space ([Issue #110](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/110))
+-   IntelliSense no longer suggests words when a user presses space ([Issue #110](https://github.com/mark-wiemer-org/ahkpp/issues/110))
 -   IntelliSense now suggests `foo(p1, p2)` instead of `foo (p1,p2)`
 -   Improved descriptions of settings
 
@@ -153,52 +153,52 @@ This update relies heavily on open-source code from [thqby](https://github.com/t
 
 ## 3.3.2 - 2023-06-21 🪲
 
--   Revert changes in 3.3.1. This release is the same as 3.3.0. Ref [Issue #369](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/369)
+-   Revert changes in 3.3.1. This release is the same as 3.3.0. Ref [Issue #369](https://github.com/mark-wiemer-org/ahkpp/issues/369)
 
 ## 3.3.1 (yanked) - 2023-06-20 🌞
 
 > This release has been yanked, meaning it's not supported. Use 3.3.3 instead.
 
--   Various syntax highlighting improvements ([PR #354](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/354), [PR #358](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/358))
--   Running `Open help` while `tutorial` text is selected now opens the Tutorial page ([PR #348](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/348))
+-   Various syntax highlighting improvements ([PR #354](https://github.com/mark-wiemer-org/ahkpp/pull/354), [PR #358](https://github.com/mark-wiemer-org/ahkpp/pull/358))
+-   Running `Open help` while `tutorial` text is selected now opens the Tutorial page ([PR #348](https://github.com/mark-wiemer-org/ahkpp/pull/348))
 -   Unexpected change: Break debugger.
 
 ## 3.3.0 - 2023-03-11 🪴
 
--   Add `ahk++.file.maximumParseLength` setting to support unlimited file size ([Issue #117](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/117))
+-   Add `ahk++.file.maximumParseLength` setting to support unlimited file size ([Issue #117](https://github.com/mark-wiemer-org/ahkpp/issues/117))
 
 Fixes:
 
--   Fix several syntax highlighting issues ([#85](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/85), [#318](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/318))
--   Fix minor debugger issues introduced in 3.1.0 ([#279](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/279))
--   Fix debugging a file with a space in its name ([#134](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/134))
--   Fix formatting for some bad labels (two colons) ([PR #325](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/325))
+-   Fix several syntax highlighting issues ([#85](https://github.com/mark-wiemer-org/ahkpp/issues/85), [#318](https://github.com/mark-wiemer-org/ahkpp/issues/318))
+-   Fix minor debugger issues introduced in 3.1.0 ([#279](https://github.com/mark-wiemer-org/ahkpp/issues/279))
+-   Fix debugging a file with a space in its name ([#134](https://github.com/mark-wiemer-org/ahkpp/issues/134))
+-   Fix formatting for some bad labels (two colons) ([PR #325](https://github.com/mark-wiemer-org/ahkpp/pull/325))
 
 ## 3.2.0 - 2023-01-29 ❄️
 
 -   Debug keyboard shortcut is now `Ctrl + Alt + F9` (was `F9`) to avoid conflicts with VS Code default shortcuts.
 -   New setting: Snippet template name. Create your own template for new AHK files, including no template at all.
--   [Moving lines of code via commands](https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing) now (almost) correctly indents ([PR #306](https://github.com/vscode-autohotkey/ahkpp/pull/306), issue [#319](https://github.com/vscode-autohotkey/ahkpp/issues/319))
--   Snippets and keywords updated to AutoHotkey v1.1.36.0 ([PR #288](https://github.com/vscode-autohotkey/ahkpp/pull/288), [PR #298](https://github.com/vscode-autohotkey/ahkpp/pull/298))
+-   [Moving lines of code via commands](https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing) now (almost) correctly indents ([PR #306](https://github.com/mark-wiemer-org/ahkpp/pull/306), issue [#319](https://github.com/mark-wiemer-org/ahkpp/issues/319))
+-   Snippets and keywords updated to AutoHotkey v1.1.36.0 ([PR #288](https://github.com/mark-wiemer-org/ahkpp/pull/288), [PR #298](https://github.com/mark-wiemer-org/ahkpp/pull/298))
 
 Fixes:
 
 -   Fix syntax highlighting for:
 
-    -   strings with double colons in them ([PR #278](https://github.com/vscode-autohotkey/ahkpp/pull/278))
-    -   conditional directives ([#69](https://github.com/vscode-autohotkey/ahkpp/issues/69))
-    -   #Include and #IncludeAgain ([#86](https://github.com/vscode-autohotkey/ahkpp/issues/86))
-    -   semi-colons without a preceding space (usually meant to be comments) ([#295](https://github.com/vscode-autohotkey/ahkpp/issues/295))
+    -   strings with double colons in them ([PR #278](https://github.com/mark-wiemer-org/ahkpp/pull/278))
+    -   conditional directives ([#69](https://github.com/mark-wiemer-org/ahkpp/issues/69))
+    -   #Include and #IncludeAgain ([#86](https://github.com/mark-wiemer-org/ahkpp/issues/86))
+    -   semi-colons without a preceding space (usually meant to be comments) ([#295](https://github.com/mark-wiemer-org/ahkpp/issues/295))
 
 -   Fix formatting for:
 
-    -   comments at the beginning of a code block ([#291](https://github.com/vscode-autohotkey/ahkpp/issues/291))
-    -   `IfMsgBox` ([#290](https://github.com/vscode-autohotkey/ahkpp/issues/290))
-    -   complex hotkeys ([#303](https://github.com/vscode-autohotkey/ahkpp/issues/303))
-    -   object assignment within unbraced code blocks ([#316](https://github.com/vscode-autohotkey/ahkpp/issues/316))
-    -   nested, unbraced code blocks ([PR #287](https://github.com/vscode-autohotkey/ahkpp/pull/287))
+    -   comments at the beginning of a code block ([#291](https://github.com/mark-wiemer-org/ahkpp/issues/291))
+    -   `IfMsgBox` ([#290](https://github.com/mark-wiemer-org/ahkpp/issues/290))
+    -   complex hotkeys ([#303](https://github.com/mark-wiemer-org/ahkpp/issues/303))
+    -   object assignment within unbraced code blocks ([#316](https://github.com/mark-wiemer-org/ahkpp/issues/316))
+    -   nested, unbraced code blocks ([PR #287](https://github.com/mark-wiemer-org/ahkpp/pull/287))
 
--   Fix hover message for doc comments to always be trimmed ([PR #308](https://github.com/vscode-autohotkey/ahkpp/pull/308))
+-   Fix hover message for doc comments to always be trimmed ([PR #308](https://github.com/mark-wiemer-org/ahkpp/pull/308))
 
 ## 3.1.0 - 2022-11-21 🦃
 
@@ -207,9 +207,9 @@ Fixes:
 -   New compiler options in settings: Choose base file, file icon, and "use [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm)"
 -   Add "Compiler GUI" command in context menu to use the AHK GUI when compiling
 
-**Snippets**: Update snippets for AHK 1.1.35.00 and fix broken `InStr()` snippet ([#263](https://github.com/vscode-autohotkey/ahkpp/issues/263))
+**Snippets**: Update snippets for AHK 1.1.35.00 and fix broken `InStr()` snippet ([#263](https://github.com/mark-wiemer-org/ahkpp/issues/263))
 
-**Grammar**: Fix `#Requires` not being recognized ([#268](https://github.com/vscode-autohotkey/ahkpp/issues/268))
+**Grammar**: Fix `#Requires` not being recognized ([#268](https://github.com/mark-wiemer-org/ahkpp/issues/268))
 
 **Editor**: New AHK file icon (green square with white H)
 
@@ -217,8 +217,8 @@ Fixes:
 
 **Formatter**: Close the following bugs:
 
--   Formatter incorrectly indents object literals ([#184](https://github.com/vscode-autohotkey/ahkpp/issues/184), [#222](https://github.com/vscode-autohotkey/ahkpp/issues/222))
--   Nested one command code flow control ([#255](https://github.com/vscode-autohotkey/ahkpp/issues/255))
+-   Formatter incorrectly indents object literals ([#184](https://github.com/mark-wiemer-org/ahkpp/issues/184), [#222](https://github.com/mark-wiemer-org/ahkpp/issues/222))
+-   Nested one command code flow control ([#255](https://github.com/mark-wiemer-org/ahkpp/issues/255))
 
 **Miscellaneous**: Extension should start up faster
 
@@ -228,26 +228,26 @@ This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you
 
 ### ⛓️‍💥 Breaking changes
 
--   Update file template: Add `#NoEnv` and `SetBatchLines, -1` ([PR #202](https://github.com/vscode-autohotkey/ahkpp/pull/202))
+-   Update file template: Add `#NoEnv` and `SetBatchLines, -1` ([PR #202](https://github.com/mark-wiemer-org/ahkpp/pull/202))
 
-> Formatter bugfixes may be considered breaking if you wanted the old behaviors. If you want the old behavior, please [open an issue](https://github.com/vscode-autohotkey/ahkpp/issues/new?assignees=mark-wiemer&labels=bug%2C+formatter&template=formatting-bug.md&title=).
+> Formatter bugfixes may be considered breaking if you wanted the old behaviors. If you want the old behavior, please [open an issue](https://github.com/mark-wiemer-org/ahkpp/issues/new?assignees=mark-wiemer&labels=bug%2C+formatter&template=formatting-bug.md&title=).
 
 ### Features
 
--   Add [formatter directive](./readme.md#formatter-directives) for "Format Block Comment" ([PR #164](https://github.com/vscode-autohotkey/ahkpp/pull/164))
--   Add "allowed number of empty lines" setting to preserve any number of lines. Defaults to `1`, `-1` means "preserve all empty lines" ([PR #194](https://github.com/vscode-autohotkey/ahkpp/pull/194))
--   Add "preserve indent" setting to preserve spaces before a comment. Defaults to `false`. ([PR #192](https://github.com/vscode-autohotkey/ahkpp/pull/192))
--   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. ([PR #191](https://github.com/vscode-autohotkey/ahkpp/pull/191))
--   Trim end of line when formatting ([PR #190](https://github.com/vscode-autohotkey/ahkpp/pull/190))
+-   Add [formatter directive](./readme.md#formatter-directives) for "Format Block Comment" ([PR #164](https://github.com/mark-wiemer-org/ahkpp/pull/164))
+-   Add "allowed number of empty lines" setting to preserve any number of lines. Defaults to `1`, `-1` means "preserve all empty lines" ([PR #194](https://github.com/mark-wiemer-org/ahkpp/pull/194))
+-   Add "preserve indent" setting to preserve spaces before a comment. Defaults to `false`. ([PR #192](https://github.com/mark-wiemer-org/ahkpp/pull/192))
+-   Add "trim extra spaces" to trim spaces between words. Defaults to `true`. ([PR #191](https://github.com/mark-wiemer-org/ahkpp/pull/191))
+-   Trim end of line when formatting ([PR #190](https://github.com/mark-wiemer-org/ahkpp/pull/190))
 
 ### Fixes
 
--   Fix some snippets ([PR #138](https://github.com/vscode-autohotkey/ahkpp/pull/138), [PR #201](https://github.com/vscode-autohotkey/ahkpp/pull/201), [PR #210](https://github.com/vscode-autohotkey/ahkpp/pull/210))
--   Fix formatting bugs with semi-colon as part of a string ([PR #159](https://github.com/vscode-autohotkey/ahkpp/pull/159))
--   Fix some formatting bugs with `if`, `else`, etc. without braces ([PR #181](https://github.com/vscode-autohotkey/ahkpp/pull/181))
--   Fix formatter issue with non-label colon at end of line ([PR #162](https://github.com/vscode-autohotkey/ahkpp/pull/162))
--   Even more formatter fixes ([PR #164](https://github.com/vscode-autohotkey/ahkpp/pull/164))
--   Use default debug icon (was yanked in 2.8.3, now it returns!) ([PR #149](https://github.com/vscode-autohotkey/ahkpp/pull/149))
+-   Fix some snippets ([PR #138](https://github.com/mark-wiemer-org/ahkpp/pull/138), [PR #201](https://github.com/mark-wiemer-org/ahkpp/pull/201), [PR #210](https://github.com/mark-wiemer-org/ahkpp/pull/210))
+-   Fix formatting bugs with semi-colon as part of a string ([PR #159](https://github.com/mark-wiemer-org/ahkpp/pull/159))
+-   Fix some formatting bugs with `if`, `else`, etc. without braces ([PR #181](https://github.com/mark-wiemer-org/ahkpp/pull/181))
+-   Fix formatter issue with non-label colon at end of line ([PR #162](https://github.com/mark-wiemer-org/ahkpp/pull/162))
+-   Even more formatter fixes ([PR #164](https://github.com/mark-wiemer-org/ahkpp/pull/164))
+-   Use default debug icon (was yanked in 2.8.3, now it returns!) ([PR #149](https://github.com/mark-wiemer-org/ahkpp/pull/149))
 
 ## 2.8.4 - 2022-07-07
 
@@ -257,7 +257,7 @@ This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you
 
 > This release has been yanked, meaning it's not supported. Use 2.8.4 instead.
 
--   Change to use default debug icon ([#100](https://github.com/vscode-autohotkey/ahkpp/issues/100))
+-   Change to use default debug icon ([#100](https://github.com/mark-wiemer-org/ahkpp/issues/100))
 
 -   ⛓️‍💥 Unexpected breaking change: Break "step into" function of debugger.
 
@@ -270,37 +270,37 @@ This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you
 
 ## 2.8.1 - 2021-05-09
 
--   Fix indentation with `(::` ([#72](https://github.com/vscode-autohotkey/ahkpp/issues/72))
+-   Fix indentation with `(::` ([#72](https://github.com/mark-wiemer-org/ahkpp/issues/72))
 
 ## 2.8.0 - 2021-03-14
 
--   Add setting to toggle debug button in editor title menu ([#10](https://github.com/vscode-autohotkey/ahkpp/issues/10))
+-   Add setting to toggle debug button in editor title menu ([#10](https://github.com/mark-wiemer-org/ahkpp/issues/10))
 
 ## 2.7.2 - 2021-03-02
 
--   Fix indentation with parentheses again (sorry!) ([#58](https://github.com/vscode-autohotkey/ahkpp/issues/58))
+-   Fix indentation with parentheses again (sorry!) ([#58](https://github.com/mark-wiemer-org/ahkpp/issues/58))
 
 ## 2.7.1 - 2021-02-28
 
--   Fix indentation with parentheses ([#25](https://github.com/vscode-autohotkey/ahkpp/issues/25))
+-   Fix indentation with parentheses ([#25](https://github.com/mark-wiemer-org/ahkpp/issues/25))
 
 ## 2.7.0 - 2021-02-21
 
--   Respect user choice to indent with either tabs or spaces ([#49](https://github.com/vscode-autohotkey/ahkpp/issues/49))
+-   Respect user choice to indent with either tabs or spaces ([#49](https://github.com/mark-wiemer-org/ahkpp/issues/49))
 
 ## 2.6.3 - 2021-02-20
 
--   Fix IntelliSense ([#48](https://github.com/vscode-autohotkey/ahkpp/issues/48))
+-   Fix IntelliSense ([#48](https://github.com/mark-wiemer-org/ahkpp/issues/48))
 -   Move `Run Selection` command to same category as all other commands (Thanks [@fade2gray](https://github.com/fade2gray)!)
 
 ## 2.6.2 - 2021-01-30
 
--   Fix formatting after ternary operator ([#18](https://github.com/vscode-autohotkey/ahkpp/issues/18))
--   Fix formatting after multiple close braces on one line ([#26](https://github.com/vscode-autohotkey/ahkpp/issues/26))
+-   Fix formatting after ternary operator ([#18](https://github.com/mark-wiemer-org/ahkpp/issues/18))
+-   Fix formatting after multiple close braces on one line ([#26](https://github.com/mark-wiemer-org/ahkpp/issues/26))
 
 ## 2.6.1 - 2021-01-23
 
--   Fix hover provider ([#16](https://github.com/vscode-autohotkey/ahkpp/issues/16))
+-   Fix hover provider ([#16](https://github.com/mark-wiemer-org/ahkpp/issues/16))
 
 ## 2.6.0 - 2021-01-18
 
@@ -313,7 +313,7 @@ This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you
 ### Fixes
 
 -   Improve formatting for using `ExitApp` to end subroutines
--   Fix function coloring for functions whose names were also keywords ([#11](https://github.com/vscode-autohotkey/ahkpp/issues/11))
+-   Fix function coloring for functions whose names were also keywords ([#11](https://github.com/mark-wiemer-org/ahkpp/issues/11))
 -   Fix function coloring for calls with a space before the parentheses (e.g. `foo ()`)
 -   Fix detection of labels indented with a tab
 -   Remove confusing deprecation warning from `StrSplit` function
