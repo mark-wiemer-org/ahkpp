@@ -301,7 +301,7 @@
                     "default": "Disabled",
                     "description": "%ahk2.librarySuggestions%"
                 },
-                "ahk++.commentTagRegex": {
+                "ahk++.v2.commentTagRegex": {
                     "scope": "window",
                     "type": "string",
                     "default": "^;;\\s*(?<tag>.+)",
