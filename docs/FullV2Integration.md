@@ -17,7 +17,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   Run AHK++ Diagnostic (`ahk++.diagnostic.full`): Effectively restart the AHK v2 features of the app. Future work may do a full reset of the entire AHK++ extension.
 -   Export AHK Symbols (`ahk++.exportSymbols`): Exports application functions and classes to a new file.
 -   Stop AHK Script (`ahk++.stop`): Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation.
--   ahk2.generate.comment
+-   Add Doc Comment (`ahk++.addDocComment`): Add a function header comment for the current function
 -   ahk2.updateversioninfo
 -   ahk2.switch
 -   ahk2.selectSyntaxes
@@ -85,7 +85,7 @@ editor/context:
 -   ahk++.debugAttach
 -   ahk++.debugParams
 -   ahk++.stop
--   ahk2.generate.comment
+-   ahk++.addDocComment
 -   ahk2.updateversioninfo
 
 editor/title:
