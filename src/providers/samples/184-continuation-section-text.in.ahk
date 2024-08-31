@@ -1,4 +1,4 @@
-; [Issue #184](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/184)
+; [Issue #184](https://github.com/mark-wiemer-org/ahkpp/issues/184)
 Var =
 (
 A line of text.

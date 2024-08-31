@@ -1,4 +1,4 @@
-; [Issue #119](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/119)
+; [Issue #119](https://github.com/mark-wiemer-org/ahkpp/issues/119)
 MsgBox, { ; comment with close brace }
 bar()
 {

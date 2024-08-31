@@ -1,4 +1,4 @@
-; [Issue #55](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/55)
+; [Issue #55](https://github.com/mark-wiemer-org/ahkpp/issues/55)
 #If WinActive(title)
     s::
         SoundBeep

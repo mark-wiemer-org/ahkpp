@@ -1,4 +1,4 @@
-; [Issue #429](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/429)
+; [Issue #429](https://github.com/mark-wiemer-org/ahkpp/issues/429)
 #IfWinActive, WinTitle
     F1::
     F2::
