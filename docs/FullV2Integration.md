@@ -34,7 +34,6 @@ This doc covers all the new features as a result of integrating with thqby's AHK
     -   Diagnostics
         -   Class Non Dynamic Member Check: Check whether non-dynamic members of a class exist when lexing
         -   Params Check: Check that the function call has the correct number of arguments
--   ahk++.v2.diagnostics.paramsCheck
 -   ahk++.Warn.VarUnset
 -   ahk++.Warn.LocalSameAsGlobal
 -   ahk++.Warn.CallWithoutParentheses
