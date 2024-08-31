@@ -2,7 +2,6 @@
 
 ; Tests for the settings added by incorporating thqby's extension
 
-
 ; Comment Tag Regex
 ; comments matching the regex show up in the command palette and breadcrumb
 ; Ctrl+Shift+O or F1 > "Go to Symbol in Editor
@@ -24,7 +23,7 @@
 ; I added "MyMsgBox" to my standard library
 ; and "MyLocalMsgBox" to the local library
 
-;; Warn 
+;; Warn
 ; VarUnset
 x := 1
 MsgBox(x)
