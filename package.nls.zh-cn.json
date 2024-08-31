@@ -23,7 +23,7 @@
     "action.stopparsing": "停止解析",
     "action.switchtov1": "切换到ahk v1",
     "ahk++.config.v2.actionWhenV1Detected": "检测到v1脚本时的行为",
-    "ahk2.completioncommitcharacters": "提交自动完成的字符, 例如`.(`",
+    "ahk++.config.v2.completionCommitCharacters": "提交自动完成的字符, 例如`.(`",
     "ahk2.description": "基于 vscode-lsp 协议的 Autohotkey2 语言支持",
     "ahk++.config.v2.warn.callWithoutParentheses": "为每个不带括号的函数或方法调用显示警告",
     "ahk2.files.exclude": "配置 glob 模式以在扫描ahk文件时排除文件和文件夹.",

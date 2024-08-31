@@ -1,5 +1,7 @@
 #Requires AutoHotkey v2.0
 
+; settings should be accessible via Settings GUI, not just settings.json
+
 ;; braceStyle
 ; Defaults to OTB
 ; if true {

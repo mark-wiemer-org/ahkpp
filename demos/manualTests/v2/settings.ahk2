@@ -11,12 +11,11 @@
 ; when typing a function name, the parens are automatically added
 ; cursor moved to the middle of the parens
 
+; todo Completion Commit Characters is untested for now
+
 ;; Diagnostics
 ; todo Class Non Dynamic Member Check is untested for now
 ; todo Params Check is untested for now
-
-;; Formatter
-; settings should be accessible via Settings GUI, not just settings.json
 
 ; Library suggestions
 ; https://www.autohotkey.com/docs/v2/Scripts.htm#lib

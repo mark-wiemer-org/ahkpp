@@ -498,7 +498,7 @@
                     ],
                     "description": "%ahk++.config.v2.actionWhenV1Detected%"
                 },
-                "ahk++.CompletionCommitCharacters": {
+                "ahk++.v2.completionCommitCharacters": {
                     "scope": "window",
                     "type": "object",
                     "properties": {
@@ -513,7 +513,7 @@
                         "Class": ".(",
                         "Function": "("
                     },
-                    "markdownDescription": "%ahk2.completioncommitcharacters%"
+                    "markdownDescription": "%ahk++.config.v2.completionCommitCharacters%"
                 },
                 "ahk++.Files.Exclude": {
                     "scope": "window",

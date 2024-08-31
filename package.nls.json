@@ -21,7 +21,7 @@
     "ahk++.config.v2.warn.localSameAsGlobal": "Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.",
     "ahk++.config.v2.warn.varUnset": "Display a warning when referencing an unassigned variable. Changes take effect after restart.",
 
-    "ahk2.completioncommitcharacters": "Characters which commit auto completion, such as `.(`",
+    "ahk++.config.v2.completionCommitCharacters": "Characters which commit auto-completion. Defaults to `.(`",
     "ahk2.description": "Autohotkey2 Language Support using vscode-lsp",
     "ahk2.files.exclude": "Configure glob patterns for excluding files and folders when scanning ahk files.",
     "ahk2.files.scanmaxdepth": "Controls the depth when scanning ahk files.",
