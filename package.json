@@ -289,7 +289,7 @@
                     "default": true,
                     "description": "Show the Debug button in the editor title menu."
                 },
-                "ahk++.librarySuggestions": {
+                "ahk++.v2.librarySuggestions": {
                     "scope": "window",
                     "type": "string",
                     "enum": [
