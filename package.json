@@ -289,18 +289,6 @@
                     "default": true,
                     "description": "Show the Debug button in the editor title menu."
                 },
-                "ahk++.v2.librarySuggestions": {
-                    "scope": "window",
-                    "type": "string",
-                    "enum": [
-                        "Disabled",
-                        "Local",
-                        "User and Standard",
-                        "All"
-                    ],
-                    "default": "Disabled",
-                    "description": "%ahk++.config.v2.librarySuggestions%"
-                },
                 "ahk++.v2.commentTagRegex": {
                     "scope": "window",
                     "type": "string",
@@ -336,75 +324,6 @@
                     "type": "boolean",
                     "default": true,
                     "description": "%ahk++.config.v2.diagnostics.paramsCheck%"
-                },
-                "ahk++.v2.warn.varUnset": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "description": "%ahk++.config.v2.warn.varUnset%"
-                },
-                "ahk++.v2.warn.localSameAsGlobal": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": false,
-                    "description": "%ahk++.config.v2.warn.localSameAsGlobal%"
-                },
-                "ahk++.v2.warn.callWithoutParentheses": {
-                    "scope": "window",
-                    "type": "string",
-                    "enum": [
-                        "Off",
-                        "Parentheses",
-                        "On"
-                    ],
-                    "default": "Off",
-                    "description": "%ahk++.config.v2.warn.callWithoutParentheses%"
-                },
-                "ahk++.ActionWhenV1IsDetected": {
-                    "scope": "window",
-                    "type": "string",
-                    "default": "SwitchToV1",
-                    "enum": [
-                        "Continue",
-                        "Warn",
-                        "StopParsing",
-                        "SwitchToV1",
-                        "SkipLine"
-                    ],
-                    "description": "%ahk2.actionwhenv1isdetected%"
-                },
-                "ahk++.CompletionCommitCharacters": {
-                    "scope": "window",
-                    "type": "object",
-                    "properties": {
-                        "Class": {
-                            "type": "string"
-                        },
-                        "Function": {
-                            "type": "string"
-                        }
-                    },
-                    "default": {
-                        "Class": ".(",
-                        "Function": "("
-                    },
-                    "markdownDescription": "%ahk2.completioncommitcharacters%"
-                },
-                "ahk++.Files.Exclude": {
-                    "scope": "window",
-                    "type": "array",
-                    "default": [],
-                    "items": {
-                        "type": "string"
-                    },
-                    "uniqueItems": true,
-                    "description": "%ahk2.files.exclude%"
-                },
-                "ahk++.Files.ScanMaxDepth": {
-                    "scope": "window",
-                    "type": "integer",
-                    "default": 2,
-                    "description": "%ahk2.files.scanmaxdepth%"
                 },
                 "ahk++.v2.formatter": {
                     "scope": "window",
@@ -505,7 +424,91 @@
                             "default": 0
                         }
                     },
+                    "additionalProperties": {
+                        "type": "string"
+                    },
                     "default": {}
+                },
+                "ahk++.v2.librarySuggestions": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "Disabled",
+                        "Local",
+                        "User and Standard",
+                        "All"
+                    ],
+                    "default": "Disabled",
+                    "description": "%ahk++.config.v2.librarySuggestions%"
+                },
+                "ahk++.v2.warn.callWithoutParentheses": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "Off",
+                        "Parentheses",
+                        "On"
+                    ],
+                    "default": "Off",
+                    "description": "%ahk++.config.v2.warn.callWithoutParentheses%"
+                },
+                "ahk++.v2.warn.localSameAsGlobal": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%ahk++.config.v2.warn.localSameAsGlobal%"
+                },
+                "ahk++.v2.warn.varUnset": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%ahk++.config.v2.warn.varUnset%"
+                },
+                "ahk++.ActionWhenV1IsDetected": {
+                    "scope": "window",
+                    "type": "string",
+                    "default": "SwitchToV1",
+                    "enum": [
+                        "Continue",
+                        "Warn",
+                        "StopParsing",
+                        "SwitchToV1",
+                        "SkipLine"
+                    ],
+                    "description": "%ahk2.actionwhenv1isdetected%"
+                },
+                "ahk++.CompletionCommitCharacters": {
+                    "scope": "window",
+                    "type": "object",
+                    "properties": {
+                        "Class": {
+                            "type": "string"
+                        },
+                        "Function": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "Class": ".(",
+                        "Function": "("
+                    },
+                    "markdownDescription": "%ahk2.completioncommitcharacters%"
+                },
+                "ahk++.Files.Exclude": {
+                    "scope": "window",
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "uniqueItems": true,
+                    "description": "%ahk2.files.exclude%"
+                },
+                "ahk++.Files.ScanMaxDepth": {
+                    "scope": "window",
+                    "type": "integer",
+                    "default": 2,
+                    "description": "%ahk2.files.scanmaxdepth%"
                 },
                 "ahk++.InterpreterPath": {
                     "scope": "window",
