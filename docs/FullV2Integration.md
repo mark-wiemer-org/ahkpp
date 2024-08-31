@@ -45,7 +45,6 @@ All new settings are in the `V2` settings category
 
 In progress:
 
--   ahk++.CompletionCommitCharacters
 -   ahk++.Files.Exclude
 -   ahk++.Files.ScanMaxDepth
 -   ahk++.InterpreterPath
