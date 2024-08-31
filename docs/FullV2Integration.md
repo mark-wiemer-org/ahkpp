@@ -28,7 +28,6 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 -   Library suggestions: Whether to suggest functions included in library files
 -   Comment tag regex: Regex for custom symbols to appear in the breadcrumb and elsewhere
--   ahk++.CompilerCMD
 -   ahk++.CompleteFunctionParens
 -   ahk++.DebugConfiguration
 -   ahk++.Diagnostics.ClassNonDynamicMemberCheck

@@ -307,12 +307,6 @@
                     "default": "^;;\\s*(?<tag>.+)",
                     "markdownDescription": "%ahk++.commentTagRegex%"
                 },
-                "ahk++.CompilerCMD": {
-                    "scope": "window",
-                    "type": "string",
-                    "default": "/compress 0 /base ${execPath}",
-                    "markdownDescription": "%ahk2.compilercmd%"
-                },
                 "ahk++.CompleteFunctionParens": {
                     "scope": "window",
                     "type": "boolean",

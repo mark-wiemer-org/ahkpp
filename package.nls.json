@@ -2,7 +2,6 @@
     "ahk2.actionwhenv1isdetected": "Action when v1 script is detected",
     "ahk++.librarySuggestions": "Which libraries to suggest functions from, if any. Changes take effect after restart.",
     "ahk++.commentTagRegex": "The regular expression for custom symbols to appear in the breadcrumb and elsewhere. Default regex matches any line that starts with `;;`",
-    "ahk2.compilercmd": "Compiler command line options. If ahk2exe.exe is not specified, the default path will be used. `${execPath}` is equal to the currently selected AutoHotkey.exe",
     "ahk2.completefunctionparens": "Parentheses are added to function completion when there is no `(` or `[` on the right; otherwise move the cursor to the right",
     "ahk2.completioncommitcharacters": "Characters which commit auto completion, such as `.(`",
     "ahk++.debugAttach": "Debug AHK and Attach",
