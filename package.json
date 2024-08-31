@@ -325,7 +325,7 @@
                     },
                     "markdownDescription": "%ahk++.config.v2.debugConfiguration%"
                 },
-                "ahk++.config.v2.diagnostics.classNonDynamicMemberCheck": {
+                "ahk++.v2.diagnostics.classNonDynamicMemberCheck": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
@@ -384,9 +384,6 @@
                             "type": "string"
                         }
                     },
-                    "additionalProperties": {
-                        "type": "string"
-                    },
                     "default": {
                         "Class": ".(",
                         "Function": "("
@@ -409,7 +406,7 @@
                     "default": 2,
                     "description": "%ahk2.files.scanmaxdepth%"
                 },
-                "ahk++.FormatOptions": {
+                "ahk++.v2.formatter": {
                     "scope": "window",
                     "type": "object",
                     "properties": {
@@ -507,9 +504,6 @@
                             "type": "number",
                             "default": 0
                         }
-                    },
-                    "additionalProperties": {
-                        "type": "string"
                     },
                     "default": {}
                 },
