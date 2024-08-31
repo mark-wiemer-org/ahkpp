@@ -337,11 +337,11 @@
                     "default": true,
                     "description": "%ahk++.diagnostics.paramsCheck%"
                 },
-                "ahk++.Warn.VarUnset": {
+                "ahk++.v2.warn.varUnset": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
-                    "description": "%ahk2.warn.varunset%"
+                    "description": "%ahk++.config.v2.warn.varUnset%"
                 },
                 "ahk++.Warn.LocalSameAsGlobal": {
                     "scope": "window",

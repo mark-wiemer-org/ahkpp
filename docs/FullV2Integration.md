@@ -26,7 +26,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### New settings
 
--   v2
+-   V2
     -   Library Suggestions: Whether to suggest functions included in library files
     -   Comment Tag Regex: Regex for custom symbols to appear in the breadcrumb and elsewhere
     -   Complete Function Calls: Whether to automatically add parenetheses when calling a function
@@ -34,7 +34,9 @@ This doc covers all the new features as a result of integrating with thqby's AHK
     -   Diagnostics
         -   Class Non Dynamic Member Check: Check whether non-dynamic members of a class exist when lexing
         -   Params Check: Check that the function call has the correct number of arguments
--   ahk++.Warn.VarUnset
+    -   Warn
+        -   Var Unset:
+-   ahk++.v2.warn.varUnset
 -   ahk++.Warn.LocalSameAsGlobal
 -   ahk++.Warn.CallWithoutParentheses
 -   ahk++.ActionWhenV1IsDetected (now defaults to "Switch to v1" instead of "Warn")
@@ -117,6 +119,8 @@ These issues will be resolved before a full release
 
 -   [#486](https://github.com/mark-wiemer-org/ahkpp/issues/486)
 -   Ensure commands work with both v1 and v2 as intended
+-   Cleanup and organize settings names and IDs
+-   Cleanup nls values (do they need to start with `ahk++`?)
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 
 ### Low priority

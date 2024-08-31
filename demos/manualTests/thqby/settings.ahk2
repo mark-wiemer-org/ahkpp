@@ -18,3 +18,6 @@
 
 ; todo Class Non Dynamic Member Check is untested for now
 ; todo Params Check is untested for now
+
+;; Warn 
+; VarUnset
