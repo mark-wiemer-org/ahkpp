@@ -4,6 +4,8 @@
 
 AHK++ 6 introduces full v2 support, including formatting, enhanced IntelliSense and debug support, and more!
 
+Changes listed here are compared to AHK++ 5.0.7.
+
 ### ⛓️‍💥 Breaking changes
 
 -   Remove `intellisense.enableIntellisense` setting: IntelliSense is now always on
@@ -13,6 +15,8 @@ AHK++ 6 introduces full v2 support, including formatting, enhanced IntelliSense 
 Special thanks to [thqby](https://github.com/thqby), as this would not have been possible without thqby's open-source [AutoHotkey v2 Language Support](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
 
 ## 5.1.3 - 2024-08-30 🧪
+
+<details><summary>5.1.3</summary>
 
 > 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
 
@@ -32,7 +36,11 @@ Fixup new command names and IDs:
 -   Set A_ScriptDir Here (`ahk++.setAScriptDir`): Set [`A_ScriptDir`](https://www.autohotkey.com/docs/v2/Variables.htm#ScriptDir) to the path of the current file. Only for AHK v2.
 -   Set AHK v2 Interpreter (`ahk++.setV2Interpreter`): Open a quick pick to change the AHK v2 intepreter for all scripts.
 
+</details>
+
 ## 5.1.2 - 2024-08-29 🧪
+
+<details><summary>5.1.2</summary>
 
 > 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
 
@@ -49,13 +57,21 @@ Fixup new command names and IDs:
 
 -   Reduce extension size from 1.34 MB to 533 KB, compared to 534 KB for AHK++ 5.0.7
 
+</details>
+
 ## 5.1.1 - 2024-08-27 🧪
+
+<details><summary>5.1.1</summary>
 
 > 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
 
 -   Fix global function recognition ([#472](https://github.com/mark-wiemer-org/ahkpp/issues/472))
 
+</details>
+
 ## 5.1.0 - 2024-08-22 🧪
+
+<details><summary>5.1.0</summary>
 
 > 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
 
@@ -73,6 +89,8 @@ For [technical reasons](https://code.visualstudio.com/api/working-with-extension
     -   No need to install that extension, all features are bundled into this extension
     -   Future work will de-dupe commands like "debug", "run selection", and "open help"
     -   Known issues and all new features are documented at [full v2 integration](docs/FullV2Integration.md)
+
+</details>
 
 ## 5.0.7 - 2024-08-17 😬
 
