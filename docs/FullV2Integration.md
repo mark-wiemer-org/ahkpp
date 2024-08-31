@@ -113,6 +113,7 @@ New, added:
 
 These issues will be resolved before a full release
 
+-   [#486](https://github.com/mark-wiemer-org/ahkpp/issues/486)
 -   Needs more tests!! Many features have not been tested at all, hence the pre-release!
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 
