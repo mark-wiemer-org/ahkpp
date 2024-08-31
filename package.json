@@ -277,7 +277,7 @@
                 "ahk++.intellisense.enableIntellisense": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Add suggestions for relevant variables and methods in the workspace. Requires parsing. Changes take effect after reload. Only applies to AHK v1."
+                    "description": "Add suggestions for relevant variables and methods in the workspace. Requires parsing. Changes take effect after restart. Only applies to AHK v1."
                 },
                 "ahk++.intellisense.maximumParseLength": {
                     "type": "number",
@@ -299,7 +299,7 @@
                         "All"
                     ],
                     "default": "Disabled",
-                    "description": "%ahk2.librarySuggestions%"
+                    "description": "%ahk++.librarySuggestions%"
                 },
                 "ahk++.v2.commentTagRegex": {
                     "scope": "window",
