@@ -276,6 +276,23 @@
                     "default": false,
                     "markdownDescription": "%ahk++.config.v2.completeFunctionCalls%"
                 },
+                "ahk++.v2.completionCommitCharacters": {
+                    "scope": "window",
+                    "type": "object",
+                    "properties": {
+                        "Class": {
+                            "type": "string"
+                        },
+                        "Function": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "Class": ".(",
+                        "Function": "("
+                    },
+                    "markdownDescription": "%ahk++.config.v2.completionCommitCharacters%"
+                },
                 "ahk++.v2.debugConfiguration": {
                     "scope": "window",
                     "type": "object",
@@ -479,36 +496,6 @@
                     "type": "boolean",
                     "default": true,
                     "description": "%ahk++.config.v2.warn.varUnset%"
-                },
-                "ahk++.v2.actionWhenV1Detected": {
-                    "scope": "window",
-                    "type": "string",
-                    "default": "SwitchToV1",
-                    "enum": [
-                        "Continue",
-                        "Warn",
-                        "StopParsing",
-                        "SwitchToV1",
-                        "SkipLine"
-                    ],
-                    "description": "%ahk++.config.v2.actionWhenV1Detected%"
-                },
-                "ahk++.v2.completionCommitCharacters": {
-                    "scope": "window",
-                    "type": "object",
-                    "properties": {
-                        "Class": {
-                            "type": "string"
-                        },
-                        "Function": {
-                            "type": "string"
-                        }
-                    },
-                    "default": {
-                        "Class": ".(",
-                        "Function": "("
-                    },
-                    "markdownDescription": "%ahk++.config.v2.completionCommitCharacters%"
                 },
                 "ahk++.Files.Exclude": {
                     "scope": "window",
