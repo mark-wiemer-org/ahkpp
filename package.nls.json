@@ -18,14 +18,13 @@
     "ahk++.config.v2.diagnostics.classNonDynamicMemberCheck": "Check whether non-dynamic members of a class exist",
     "ahk++.config.v2.diagnostics.paramsCheck": "Check that the function call has the correct number of arguments",
     "ahk++.config.v2.files.exclude": "Glob patterns for excluding files and folders when scanning AHK files.",
-    "ahk++.config.v2.files.maxScanDepth": "Controls the depth when scanning ahk files.",
-    "ahk++.config.v2.interpreterPath": "The path of the `AutoHotkey.exe` executable file. If `AutoHotkeyUX.exe` is selected, the script will be launched using UX Launcher.",
+    "ahk++.config.v2.files.maxScanDepth": "Controls the depth when scanning AHK files.",
+    "ahk++.config.v2.interpreterPath": "Path to the `AutoHotkey.exe` executable file for AHK v2.",
     "ahk++.config.v2.librarySuggestions": "Which libraries to suggest functions from, if any.",
+    "ahk++.config.v2.symbolFoldingFromOpenBrace": "Forced symbol folding starts at open brace",
+    "ahk++.config.v2.syntaxes": "Path to the `ahk2.json`, `*.snippet.json`, and `ahk2.d.ahk` files used by IntelliSense.",
     "ahk++.config.v2.warn.callWithoutParentheses": "Display warnings for each function or method call without parentheses. Changes take effect after restart.",
     "ahk++.config.v2.warn.localSameAsGlobal": "Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.",
     "ahk++.config.v2.warn.varUnset": "Display a warning when referencing an unassigned variable. Changes take effect after restart.",
-
-    "ahk2.symbolfoldingfromopenbrace": "Forced symbol folding starts at open brace",
-    "ahk2.syntaxes": "Specifies the folder path to the `ahk2.json`, `*.snippet.json` and `ahk2.d.ahk` files used for IntelliSense.",
-    "ahk2.workingdirs": "Sets the working directory for the script"
+    "ahk++.config.v2.workingDirectories": "Sets the working directory for the script"
 }

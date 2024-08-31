@@ -536,7 +536,7 @@
                     "scope": "window",
                     "type": "boolean",
                     "default": false,
-                    "description": "%ahk2.symbolfoldingfromopenbrace%"
+                    "description": "%ahk++.config.v2.symbolFoldingFromOpenBrace%"
                 },
                 "ahk++.WorkingDirs": {
                     "scope": "window",
@@ -546,12 +546,12 @@
                         "type": "string"
                     },
                     "uniqueItems": true,
-                    "description": "%ahk2.workingdirs%"
+                    "description": "%ahk++.config.v2.workingDirectories%"
                 },
                 "ahk++.Syntaxes": {
                     "scope": "window",
                     "type": "string",
-                    "markdownDescription": "%ahk2.syntaxes%"
+                    "markdownDescription": "%ahk++.config.v2.syntaxes%"
                 }
             }
         },
