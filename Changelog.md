@@ -1,5 +1,25 @@
 # Changelog
 
+## 5.1.3 - 2024-08-30 🧪
+
+> 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
+
+### ⛓️‍💥 Breaking changes
+
+Fixup new command names and IDs:
+
+-   Debug AHK and Attach (`ahk++.debugAttach`): Debug and attach to the debug session for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Debug AHK with Params (`ahk++.debugParams`): Debug and add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Run AHK++ Diagnostic (`ahk++.diagnostic.full`): Effectively restart the AHK v2 features of the app.
+-   Export AHK Symbols (`ahk++.exportSymbols`): Export application functions and classes to a new file.
+-   Stop AHK Script (`ahk++.stop`): Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation.
+-   Add Doc Comment (`ahk++.addDocComment`): Add a function header comment for the current function
+-   Update File Version Info (`ahk++.updateVersionInfo`): Add or update a file header comment
+-   Switch AHK Version (`ahk++.switchAhkVersion`): Change between v1 and v2 for the current file
+-   Select AHK Syntaxes (`ahk++.selectSyntaxes`): Select custom syntax files for advanced use-cases. PRs are welcomed if the default syntaxes aren't sufficient!
+-   Set A_ScriptDir Here (`ahk++.setAScriptDir`): Set [`A_ScriptDir`](https://www.autohotkey.com/docs/v2/Variables.htm#ScriptDir) to the path of the current file. Only for AHK v2.
+-   Set AHK v2 Interpreter (`ahk++.setV2Interpreter`): Open a quick pick to change the AHK v2 intepreter for all scripts.
+
 ## 5.1.2 - 2024-08-29 🧪
 
 > 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
