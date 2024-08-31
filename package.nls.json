@@ -12,7 +12,7 @@
     "ahk++.diagnostics.classNonDynamicMemberCheck": "Check whether non-dynamic members of a class exist",
     "ahk++.diagnostics.paramsCheck": "Check that the function call has the correct number of arguments",
     "ahk++.config.v2.warn.varUnset": "Display a warning when referencing an unassigned variable. Changes take effect after restart.",
-    "ahk2.warn.localsameasglobal": "Display warnings for each undeclared local variable which has the same name as a global variable",
+    "ahk++.config.v2.warn.localSameAsGlobal": "Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.",
     "ahk2.warn.callwithoutparentheses": "Display warnings for each function or method call without parentheses",
     "ahk++.exportSymbols": "Export AHK Symbols",
     "ahk2.files.exclude": "Configure glob patterns for excluding files and folders when scanning ahk files.",

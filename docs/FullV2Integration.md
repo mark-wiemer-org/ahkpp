@@ -35,7 +35,8 @@ This doc covers all the new features as a result of integrating with thqby's AHK
         -   Class Non Dynamic Member Check: Check whether non-dynamic members of a class exist when lexing
         -   Params Check: Check that the function call has the correct number of arguments
     -   Warn
-        -   Var Unset:
+        -   Var Unset: Display a warning when referencing an unassigned variable. Changes take effect after restart.
+        -   Local Same As Global: Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.
 -   ahk++.v2.warn.varUnset
 -   ahk++.Warn.LocalSameAsGlobal
 -   ahk++.Warn.CallWithoutParentheses

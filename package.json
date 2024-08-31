@@ -343,11 +343,11 @@
                     "default": true,
                     "description": "%ahk++.config.v2.warn.varUnset%"
                 },
-                "ahk++.Warn.LocalSameAsGlobal": {
+                "ahk++.v2.warn.localSameAsGlobal": {
                     "scope": "window",
                     "type": "boolean",
                     "default": false,
-                    "description": "%ahk2.warn.localsameasglobal%"
+                    "description": "%ahk++.config.v2.warn.localSameAsGlobal%"
                 },
                 "ahk++.Warn.CallWithoutParentheses": {
                     "scope": "window",

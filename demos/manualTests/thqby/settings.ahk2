@@ -21,3 +21,10 @@
 
 ;; Warn 
 ; VarUnset
+x := 1
+MsgBox(x)
+
+; Local Same As Global
+MyFunc() {
+    x := 2
+}

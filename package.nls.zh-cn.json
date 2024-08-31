@@ -15,7 +15,7 @@
     "ahk++.diagnostics.classNonDynamicMemberCheck": "检查类非动态成员是否存在",
     "ahk++.diagnostics.paramsCheck": "检查函数调用参数个数是否正确",
     "ahk++.config.v2.warn.varUnset": "为每个从未直接赋值或与引用操作符一起使用的变量的显示警告",
-    "ahk2.warn.localsameasglobal": "为每个与全局变量同名的未声明的局部变量显示警告",
+    "ahk++.config.v2.warn.localSameAsGlobal": "为每个与全局变量同名的未声明的局部变量显示警告",
     "ahk2.warn.callwithoutparentheses": "为每个不带括号的函数或方法调用显示警告",
     "ahk++.exportSymbols": "导出ahk类和函数",
     "ahk2.files.exclude": "配置 glob 模式以在扫描ahk文件时排除文件和文件夹.",
