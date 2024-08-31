@@ -2,6 +2,10 @@
 
 ; Tests for features provided by thqby's extension
 
+; todo Debug AHK and Attach is untested for now
+
+; todo Debug AHK with Params is untested for now
+
 ; Export AHK Symbols should give ~20 lines for this
 ; And open in an unsaved new editor group
 MyMsgBox(text) {
@@ -18,3 +22,16 @@ MyMsgBox("Hello again!")
 AddDocComment(arg1, arg2) {
     ; do nothing
 }
+
+; Update File Version Info should update the file version info ;)
+; create block comment, don't save, put cursor at end of first line
+; update version only via quick pick
+
+; Switch AHK Version should switch and ignore the `Requires` directive
+
+; todo Select AHK Syntaxes is untested for now
+
+; todo Set A_ScriptDir Here is untested for now
+
+; Set AHK v2 Interpreter should open quick pick with installed options
+; updates should reflect in workspace settings
