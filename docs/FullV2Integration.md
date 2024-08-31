@@ -123,6 +123,7 @@ These issues will be resolved before a full release
 -   [#486](https://github.com/mark-wiemer-org/ahkpp/issues/486)
 -   Ensure commands work with both v1 and v2 as intended
 -   Cleanup and organize settings names and IDs
+-   Dedupe configuration values
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 
 ### Low priority
@@ -132,3 +133,4 @@ These issues will be backlogged and resolved after a full release
 -   No newline at end of file when formatting (inconsistent with v1 and industry standards)
 -   No browser support (AHK++ did not have this before, we can add it later if users want it)
 -   Hardlink config files shared between ahk2 submodule and global package (e.g. `*.nls*.json`)
+-   Explain formatter options
