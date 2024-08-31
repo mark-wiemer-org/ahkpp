@@ -16,7 +16,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   Debug AHK with Params (`ahk++.debugParams`): Like Debug AHK Script, except add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
 -   Run AHK++ Diagnostic (`ahk++.diagnostic.full`): Effectively restart the AHK v2 features of the app. Future work may do a full reset of the entire AHK++ extension.
 -   Export AHK Symbols (`ahk++.exportSymbols`): Exports application functions and classes to a new file.
--   ahk2.stop
+-   Stop AHK Script (`ahk++.stop`): Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation.
 -   ahk2.generate.comment
 -   ahk2.updateversioninfo
 -   ahk2.switch
@@ -70,7 +70,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 See [commands](#commands) for duplicates
 
 -   ahk++.debugParams
--   ahk2.stop
+-   ahk++.stop
 
 ### Languages
 
@@ -84,13 +84,13 @@ editor/context:
 
 -   ahk++.debugAttach
 -   ahk++.debugParams
--   ahk2.stop
+-   ahk++.stop
 -   ahk2.generate.comment
 -   ahk2.updateversioninfo
 
 editor/title:
 
--   ahk2.stop
+-   ahk++.stop
 
 ### Semantic token scopes
 
