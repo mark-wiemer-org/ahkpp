@@ -37,7 +37,7 @@ Please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/
 AutoHotkey Plus Plus is one of many extensions that offer VS Code language support. So why should you use this one?
 
 -   **Supports both v1 and v2**: AHK++ supports both AHK v1 and v2, making it the only extension to support both major versions of AutoHotkey!
--   **Actively maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues).
+-   **Actively maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer-org/ahkpp/issues).
 -   **IntelliSense**: Smart code completion, syntax highlighting, code navigation, and more.
 -   **Debug support**: Run and debug AHK scripts from VS Code.
 -   **New features**: Another benefit to active maintenance is that AHK++ can add new features as users request them. For example, quick help, formatter directives, and custom new file templates were all added based on user feedback!
@@ -54,7 +54,7 @@ With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts
 
 ## Debug
 
-> There are some [known issues with the debugger](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues?q=is%3Aopen+is%3Aissue+label%3Adebugger). If you need an advanced setup, we recommend [zero-plusplus.vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
+> There are some [known issues with the debugger](https://github.com/mark-wiemer-org/ahkpp/issues?q=is%3Aopen+is%3Aissue+label%3Adebugger). If you need an advanced setup, we recommend [zero-plusplus.vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug) for now. Please [open an issue](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose) if the built-in debugger does not support your needs. As `zero-plusplus.vscode-autohotkey-debug` is [closed-source](https://github.com/zero-plusplus/vscode-autohotkey-debug/discussions/332), we will be working to introduce advanced debugger features to ensure an open-source, collaborative, complete extension is available to the AHK community 🙂
 
 1. Click the debug button in the editor title menu (at the top right of the editor) or press `Ctrl + Alt + F9`.
 2. The debugger supports breakpoints, stack tracing, and variable watching

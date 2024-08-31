@@ -5,24 +5,24 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 ## The big changes
 
 -   Formatting support
--   Better v2 IntelliSense support: rename, hover, and more
+-   Snippets support
+-   Better v2 IntelliSense support: rename, better hovers, and more
 
 ## package.json contributions
 
-### Commands
+### New commands
 
--   ahk2.debug.attach
--   ahk2.debug.params
--   ahk2.diagnostic.full
--   ahk2.export.symbols
--   ahk2.run (replaces ahk++.run)
--   ahk2.selection.run (replaces ahk++.runSelection)
--   ahk2.stop
--   ahk2.generate.comment
--   ahk2.updateversioninfo
--   ahk2.switch
--   ahk2.selectSyntaxes
--   ahk2.setscriptdir
+-   Debug AHK and Attach (`ahk++.debugAttach`): Debug and attach to the debug session for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Debug AHK with Params (`ahk++.debugParams`): Debug and add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Run AHK++ Diagnostic (`ahk++.diagnostic.full`): Effectively restart the AHK v2 features of the app.
+-   Export AHK Symbols (`ahk++.exportSymbols`): Export application functions and classes to a new file.
+-   Stop AHK Script (`ahk++.stop`): Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation.
+-   Add Doc Comment (`ahk++.addDocComment`): Add a function header comment for the current function
+-   Update File Version Info (`ahk++.updateVersionInfo`): Add or update a file header comment
+-   Switch AHK Version (`ahk++.switchAhkVersion`): Change between v1 and v2 for the current file
+-   Select AHK Syntaxes (`ahk++.selectSyntaxes`): Select custom syntax files for advanced use-cases. PRs are welcomed if the default syntaxes aren't sufficient!
+-   Set A_ScriptDir Here (`ahk++.setAScriptDir`): Set [`A_ScriptDir`](https://www.autohotkey.com/docs/v2/Variables.htm#ScriptDir) to the path of the current file. Only for AHK v2.
+-   Set AHK v2 Interpreter (`ahk++.setV2Interpreter`): Open a quick pick to change the AHK v2 intepreter for all scripts.
 
 ### Configuration
 
@@ -70,11 +70,8 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 See [commands](#commands) for duplicates
 
--   ahk2.run
--   ahk2.selection.run
--   ahk2.debug.params
--   ahk2.help
--   ahk2.stop
+-   ahk++.debugParams
+-   ahk++.stop
 
 ### Languages
 
@@ -86,19 +83,15 @@ See [commands](#commands) for duplicates
 
 editor/context:
 
--   ahk2.debug.attach
--   ahk2.debug.params
--   ahk2.selection.run
--   ahk2.run
--   ahk2.help
--   ahk2.stop
--   ahk2.generate.comment
--   ahk2.updateversioninfo
+-   ahk++.debugAttach
+-   ahk++.debugParams
+-   ahk++.stop
+-   ahk++.addDocComment
+-   ahk++.updateVersionInfo
 
 editor/title:
 
--   ahk2.run
--   ahk2.stop
+-   ahk++.stop
 
 ### Semantic token scopes
 

@@ -1,4 +1,4 @@
-// openHelp adapted from thqby/vscode-autohotkey2-lsp, used under GNU LGPLv3, licensed here under GNU GPLv3
+// openHelp adapted from thqby/vscode-autohotkey2-lsp, used under GNU LGPLv3
 // https://github.com/thqby/vscode-autohotkey2-lsp/blob/fa0782e8a221e54e5755358eb594ae9cc872ca1a/client/src/extension.ts#L348
 import { ConfigKey, Global } from '../common/global';
 import { existsSync } from 'fs';

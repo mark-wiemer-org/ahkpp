@@ -1,4 +1,4 @@
-; [Issue #56](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/56)
+; [Issue #56](https://github.com/mark-wiemer-org/ahkpp/issues/56)
 func1(x, y) {
     return x + y
 }

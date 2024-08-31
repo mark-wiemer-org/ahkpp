@@ -1,4 +1,4 @@
-; [Issue #117](https://github.com/vscode-autohotkey/ahkpp/issues/117)
+; [Issue #117](https://github.com/mark-wiemer-org/ahkpp/issues/117)
 ; Go to definition here should work, even though `bottom` is defined
 ; after line 10,000
 bottom()

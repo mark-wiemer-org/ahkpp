@@ -1,4 +1,4 @@
-; [Issue #28](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/28)
+; [Issue #28](https://github.com/mark-wiemer-org/ahkpp/issues/28)
 {
     Switch SwitchValue {
     Case CaseValue1:

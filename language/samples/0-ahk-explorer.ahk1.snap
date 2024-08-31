@@ -4,7 +4,7 @@
 >; Copyright 2021 FuPeiJiang, used with permission
 #^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
->; https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/pull/32#issuecomment-770233225
+>; https://github.com/mark-wiemer-org/ahkpp/pull/32#issuecomment-770233225
 #^ source.ahk comment.line.semicolon.ahk punctuation.definition.comment.ahk
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ahk comment.line.semicolon.ahk
 >

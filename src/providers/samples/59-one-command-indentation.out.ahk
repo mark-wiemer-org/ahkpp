@@ -1,4 +1,4 @@
-; [Issue #59](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/59)
+; [Issue #59](https://github.com/mark-wiemer-org/ahkpp/issues/59)
 if (true)
 
     ; comment

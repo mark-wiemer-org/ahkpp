@@ -1,4 +1,4 @@
-; [Issue #58](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/58)
+; [Issue #58](https://github.com/mark-wiemer-org/ahkpp/issues/58)
 foo(bar
 ,(baz) )
 x := 1

@@ -18,6 +18,6 @@ jobs:
       - uses: actions/add-to-project@v0.3.0
         with:
           # https://github.com/settings/tokens
-          # https://github.com/vscode-autohotkey/ahkpp/settings/secrets/actions
+          # https://github.com/mark-wiemer-org/ahkpp/settings/secrets/actions
           project-url: https://github.com/orgs/mark-wiemer-org/projects/1
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}

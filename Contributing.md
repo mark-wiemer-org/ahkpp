@@ -59,7 +59,7 @@ Please validate the build before opening a PR. Automated checks will have to pas
 
 ### Automated checks
 
-All checks are found in [📄 `package.json#scripts`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/package.json).
+All checks are found in [📄 `package.json#scripts`](https://github.com/mark-wiemer-org/ahkpp/blob/main/package.json).
 
 -   Validate: Make sure everything is working correctly
     -   Lint
@@ -75,7 +75,7 @@ All checks are found in [📄 `package.json#scripts`](https://github.com/mark-wi
 
 ## Syntax highlighting
 
-The syntax in [📄 `language/ahk.tmLanguage.yaml`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/blob/main/language/ahk.tmLanguage.yaml) determines how syntax highlighting is applied.
+The syntax in [📄 `language/ahk.tmLanguage.yaml`](https://github.com/mark-wiemer-org/ahkpp/blob/main/language/ahk.tmLanguage.yaml) determines how syntax highlighting is applied.
 
 ```
 ; No syntax highlighting here 😞
@@ -94,7 +94,7 @@ Some resources:
 To update the syntax, we recommend following this flow:
 
 1. 🤔 Take some time to reproduce a syntax highlighting issue with as little AHK code as possible
-1. ➕ Add a new file in [📁 `src/test/suite/grammar/samples`](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/tree/main/src/test/suite/grammar/samples) that demonstrates the issue
+1. ➕ Add a new file in [📁 `src/test/suite/grammar/samples`](https://github.com/mark-wiemer-org/ahkpp/tree/main/src/test/suite/grammar/samples) that demonstrates the issue
 1. 🏃 Run `npm run test_grammar` to generate a `.snap` snapshot for the file you added
 1. ✏️ Edit the YAML grammar
 1. 🧪 Repeat the last two steps until everything is working as you want

@@ -1,4 +1,4 @@
-; [Issue #185](https://github.com/mark-wiemer/vscode-autohotkey-plus-plus/issues/185)
+; [Issue #185](https://github.com/mark-wiemer-org/ahkpp/issues/185)
 foo () {
     ;@AHK++FormatBlockCommentOn
     /*
