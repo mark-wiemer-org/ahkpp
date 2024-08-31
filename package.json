@@ -111,63 +111,63 @@
             {
                 "enablement": "!isWeb",
                 "command": "ahk++.debugAttach",
-                "title": "%ahk++.debugAttach%",
+                "title": "%ahk++.command.debugAttach%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2 && shellExecutionSupported",
                 "command": "ahk++.debugParams",
-                "title": "%ahk++.debugParams%",
+                "title": "%ahk++.command.debugParams%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2",
                 "command": "ahk++.diagnostic.full",
-                "title": "%ahk++.diagnostic.full%",
+                "title": "%ahk++.command.diagnostic.full%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2",
                 "command": "ahk++.exportSymbols",
-                "title": "%ahk++.exportSymbols%",
+                "title": "%ahk++.command.exportSymbols%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2 && shellExecutionSupported",
                 "command": "ahk++.run",
-                "title": "%ahk++.run%",
+                "title": "%ahk++.command.run%",
                 "icon": "$(play)",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2 && !isWeb",
                 "command": "ahk++.runSelection",
-                "title": "%ahk++.runSelection%",
+                "title": "%ahk++.command.runSelection%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2 && !isWeb",
                 "command": "ahk++.stop",
-                "title": "%ahk++.stop%",
+                "title": "%ahk++.command.stop%",
                 "icon": "$(stop)",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2",
                 "command": "ahk++.addDocComment",
-                "title": "%ahk++.addDocComment%",
+                "title": "%ahk++.command.addDocComment%",
                 "category": "AHK++"
             },
             {
                 "enablement": "!isWeb",
                 "command": "ahk++.setV2Interpreter",
-                "title": "%ahk++.setV2Interpreter%",
+                "title": "%ahk++.command.setV2Interpreter%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2",
                 "command": "ahk++.updateVersionInfo",
-                "title": "%ahk++.updateVersionInfo%",
+                "title": "%ahk++.command.updateVersionInfo%",
                 "category": "AHK++"
             },
             {
@@ -185,7 +185,7 @@
             {
                 "enablement": "editorLangId == ahk2 && resourceScheme == file",
                 "command": "ahk++.setAScriptDir",
-                "title": "%ahk++.setAScriptDir%",
+                "title": "%ahk++.command.setAScriptDir%",
                 "category": "AHK++"
             }
         ],
@@ -299,19 +299,19 @@
                         "All"
                     ],
                     "default": "Disabled",
-                    "description": "%ahk++.librarySuggestions%"
+                    "description": "%ahk++.config.v2.librarySuggestions%"
                 },
                 "ahk++.v2.commentTagRegex": {
                     "scope": "window",
                     "type": "string",
                     "default": "^;;\\s*(?<tag>.+)",
-                    "markdownDescription": "%ahk++.commentTagRegex%"
+                    "markdownDescription": "%ahk++.config.v2.commentTagRegex%"
                 },
                 "ahk++.v2.completeFunctionCalls": {
                     "scope": "window",
                     "type": "boolean",
                     "default": false,
-                    "markdownDescription": "%ahk++.completeFunctionCalls%"
+                    "markdownDescription": "%ahk++.config.v2.completeFunctionCalls%"
                 },
                 "ahk++.v2.debugConfiguration": {
                     "scope": "window",
@@ -323,19 +323,19 @@
                         "useDebugDirective": true,
                         "usePerfTips": true
                     },
-                    "markdownDescription": "%ahk++.debugConfiguration%"
+                    "markdownDescription": "%ahk++.config.v2.debugConfiguration%"
                 },
-                "ahk++.diagnostics.classNonDynamicMemberCheck": {
+                "ahk++.config.v2.diagnostics.classNonDynamicMemberCheck": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
-                    "description": "%ahk++.diagnostics.classNonDynamicMemberCheck%"
+                    "description": "%ahk++.config.v2.diagnostics.classNonDynamicMemberCheck%"
                 },
                 "ahk++.v2.diagnostics.paramsCheck": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
-                    "description": "%ahk++.diagnostics.paramsCheck%"
+                    "description": "%ahk++.config.v2.diagnostics.paramsCheck%"
                 },
                 "ahk++.v2.warn.varUnset": {
                     "scope": "window",

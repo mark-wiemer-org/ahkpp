@@ -121,7 +121,6 @@ These issues will be resolved before a full release
 -   [#486](https://github.com/mark-wiemer-org/ahkpp/issues/486)
 -   Ensure commands work with both v1 and v2 as intended
 -   Cleanup and organize settings names and IDs
--   Cleanup nls values (do they need to start with `ahk++`?)
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 
 ### Low priority
