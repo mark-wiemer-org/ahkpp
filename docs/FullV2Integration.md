@@ -26,10 +26,10 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### Configuration
 
--   Library suggestions: Whether to suggest functions included in library files
--   Comment tag regex: Regex for custom symbols to appear in the breadcrumb and elsewhere
--   Complete function calls: Whether to automatically add parenetheses when calling a function
--   ahk++.DebugConfiguration
+-   Library Suggestions: Whether to suggest functions included in library files
+-   Comment Tag Regex: Regex for custom symbols to appear in the breadcrumb and elsewhere
+-   Complete Function Calls: Whether to automatically add parenetheses when calling a function
+-   Debug Configuration: The [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) to use when debugging
 -   ahk++.Diagnostics.ClassNonDynamicMemberCheck
 -   ahk++.Diagnostics.ParamsCheck
 -   ahk++.Warn.VarUnset

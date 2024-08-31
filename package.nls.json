@@ -6,7 +6,7 @@
     "ahk2.completioncommitcharacters": "Characters which commit auto completion, such as `.(`",
     "ahk++.debugAttach": "Debug AHK and Attach",
     "ahk++.debugParams": "Debug AHK with Params",
-    "ahk2.debugconfiguration": "Append debugging configuration to the currently started debugger, same as launch.json configuration",
+    "ahk++.debugConfiguration": "The [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) to use when debugging",
     "ahk2.description": "Autohotkey2 Language Support using vscode-lsp",
     "ahk++.diagnostic.full": "Run AHK++ Diagnostic",
     "ahk2.diagnostics.class-non-dynamic-member-check": "Check whether non-dynamic members of class exist",
