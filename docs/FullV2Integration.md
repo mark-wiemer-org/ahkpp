@@ -26,23 +26,27 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### New settings
 
--   V2
-    -   Library Suggestions: Whether to suggest functions included in library files
-    -   Comment Tag Regex: Regex for custom symbols to appear in the breadcrumb and elsewhere
-    -   Complete Function Calls: Whether to automatically add parenetheses when calling a function
-    -   Debug Configuration: The [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) to use when debugging
-    -   Diagnostics
-        -   Class Non Dynamic Member Check: Check whether non-dynamic members of a class exist when lexing
-        -   Params Check: Check that the function call has the correct number of arguments
-    -   Warn
-        -   Var Unset: Display a warning when referencing an unassigned variable. Changes take effect after restart.
-        -   Local Same As Global: Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.
--   ahk++.Warn.CallWithoutParentheses
+All new settings are in the `V2` settings category
+
+-   Library Suggestions: Whether to suggest functions included in library files
+-   Comment Tag Regex: The regular expression for custom symbols to appear in the breadcrumb and elsewhere. Default matches any line that starts with `;;`
+-   Complete Function Calls: Whether to automatically add parenetheses when calling a function
+-   Debug Configuration: The [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) to use when debugging
+-   Diagnostics
+    -   Class Non Dynamic Member Check: Check whether non-dynamic members of a class exist when lexing
+    -   Params Check: Check that the function call has the correct number of arguments
+-   Warn
+    -   Var Unset: Display a warning when referencing an unassigned variable. Changes take effect after restart.
+    -   Local Same As Global: Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.
+    -   Call Without Parentheses: Display warnings for each function or method call without parentheses. Changes take effect after restart.
+
+In progress:
+
+-   ahk++.FormatOptions
 -   ahk++.ActionWhenV1IsDetected (now defaults to "Switch to v1" instead of "Warn")
 -   ahk++.CompletionCommitCharacters
 -   ahk++.Files.Exclude
 -   ahk++.Files.ScanMaxDepth
--   ahk++.FormatOptions
 -   ahk++.InterpreterPath
 -   ahk++.SymbolFoldingFromOpenBrace
 -   ahk++.WorkingDirs
@@ -127,3 +131,4 @@ These issues will be backlogged and resolved after a full release
 
 -   No newline at end of file when formatting (inconsistent with v1 and industry standards)
 -   No browser support (AHK++ did not have this before, we can add it later if users want it)
+-   Hardlink config files shared between ahk2 submodule and global package (e.g. `*.nls*.json`)

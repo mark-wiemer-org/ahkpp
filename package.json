@@ -349,7 +349,7 @@
                     "default": false,
                     "description": "%ahk++.config.v2.warn.localSameAsGlobal%"
                 },
-                "ahk++.Warn.CallWithoutParentheses": {
+                "ahk++.v2.warn.callWithoutParentheses": {
                     "scope": "window",
                     "type": "string",
                     "enum": [
@@ -358,7 +358,7 @@
                         "On"
                     ],
                     "default": "Off",
-                    "description": "%ahk2.warn.callwithoutparentheses%"
+                    "description": "%ahk++.config.v2.warn.callWithoutParentheses%"
                 },
                 "ahk++.ActionWhenV1IsDetected": {
                     "scope": "window",

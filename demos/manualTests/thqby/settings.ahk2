@@ -28,3 +28,8 @@ MsgBox(x)
 MyFunc() {
     x := 2
 }
+
+; Call Without Parentheses
+MyFunc
+MsgBox "hi"
+MsgBox ("hi")
