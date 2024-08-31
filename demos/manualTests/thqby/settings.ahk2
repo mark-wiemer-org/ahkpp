@@ -1,0 +1,8 @@
+#Requires AutoHotkey v2.0
+
+; Tests for the settings added by incorporating thqby's extension
+
+; library suggestions
+; https://www.autohotkey.com/docs/v2/Scripts.htm#lib
+; I added "MyMsgBox" to my standard library
+; and "MyLocalMsgBox" to the local library

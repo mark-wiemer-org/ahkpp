@@ -26,7 +26,7 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### Configuration
 
--   ahk++.AutoLibInclude
+-   ahk++.librarySuggestions
 -   ahk++.CommentTags
 -   ahk++.CompilerCMD
 -   ahk++.CompleteFunctionParens
