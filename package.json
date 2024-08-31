@@ -289,7 +289,7 @@
                     "default": true,
                     "description": "Show the Debug button in the editor title menu."
                 },
-                "AutoHotkey2.AutoLibInclude": {
+                "ahk++.AutoLibInclude": {
                     "scope": "window",
                     "type": "string",
                     "enum": [
@@ -301,25 +301,25 @@
                     "default": "Disabled",
                     "description": "%ahk2.autolibinclude%"
                 },
-                "AutoHotkey2.CommentTags": {
+                "ahk++.CommentTags": {
                     "scope": "window",
                     "type": "string",
                     "default": "^;;\\s*(?<tag>.+)",
                     "description": "%ahk2.commenttags%"
                 },
-                "AutoHotkey2.CompilerCMD": {
+                "ahk++.CompilerCMD": {
                     "scope": "window",
                     "type": "string",
                     "default": "/compress 0 /base ${execPath}",
                     "markdownDescription": "%ahk2.compilercmd%"
                 },
-                "AutoHotkey2.CompleteFunctionParens": {
+                "ahk++.CompleteFunctionParens": {
                     "scope": "window",
                     "type": "boolean",
                     "default": false,
                     "markdownDescription": "%ahk2.completefunctionparens%"
                 },
-                "AutoHotkey2.DebugConfiguration": {
+                "ahk++.DebugConfiguration": {
                     "scope": "window",
                     "type": "object",
                     "default": {
@@ -331,31 +331,31 @@
                     },
                     "description": "%ahk2.debugconfiguration%"
                 },
-                "AutoHotkey2.Diagnostics.ClassNonDynamicMemberCheck": {
+                "ahk++.Diagnostics.ClassNonDynamicMemberCheck": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "description": "%ahk2.diagnostics.class-non-dynamic-member-check%"
                 },
-                "AutoHotkey2.Diagnostics.ParamsCheck": {
+                "ahk++.Diagnostics.ParamsCheck": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "description": "%ahk2.diagnostics.paramscheck%"
                 },
-                "AutoHotkey2.Warn.VarUnset": {
+                "ahk++.Warn.VarUnset": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "description": "%ahk2.warn.varunset%"
                 },
-                "AutoHotkey2.Warn.LocalSameAsGlobal": {
+                "ahk++.Warn.LocalSameAsGlobal": {
                     "scope": "window",
                     "type": "boolean",
                     "default": false,
                     "description": "%ahk2.warn.localsameasglobal%"
                 },
-                "AutoHotkey2.Warn.CallWithoutParentheses": {
+                "ahk++.Warn.CallWithoutParentheses": {
                     "scope": "window",
                     "type": "string",
                     "enum": [
@@ -366,7 +366,7 @@
                     "default": "Off",
                     "description": "%ahk2.warn.callwithoutparentheses%"
                 },
-                "AutoHotkey2.ActionWhenV1IsDetected": {
+                "ahk++.ActionWhenV1IsDetected": {
                     "scope": "window",
                     "type": "string",
                     "default": "SwitchToV1",
@@ -379,7 +379,7 @@
                     ],
                     "description": "%ahk2.actionwhenv1isdetected%"
                 },
-                "AutoHotkey2.CompletionCommitCharacters": {
+                "ahk++.CompletionCommitCharacters": {
                     "scope": "window",
                     "type": "object",
                     "properties": {
@@ -399,7 +399,7 @@
                     },
                     "markdownDescription": "%ahk2.completioncommitcharacters%"
                 },
-                "AutoHotkey2.Files.Exclude": {
+                "ahk++.Files.Exclude": {
                     "scope": "window",
                     "type": "array",
                     "default": [],
@@ -409,13 +409,13 @@
                     "uniqueItems": true,
                     "description": "%ahk2.files.exclude%"
                 },
-                "AutoHotkey2.Files.ScanMaxDepth": {
+                "ahk++.Files.ScanMaxDepth": {
                     "scope": "window",
                     "type": "integer",
                     "default": 2,
                     "description": "%ahk2.files.scanmaxdepth%"
                 },
-                "AutoHotkey2.FormatOptions": {
+                "ahk++.FormatOptions": {
                     "scope": "window",
                     "type": "object",
                     "properties": {
@@ -519,19 +519,19 @@
                     },
                     "default": {}
                 },
-                "AutoHotkey2.InterpreterPath": {
+                "ahk++.InterpreterPath": {
                     "scope": "window",
                     "type": "string",
                     "default": "C:\\Program Files\\Autohotkey\\v2\\AutoHotkey.exe",
                     "markdownDescription": "%ahk2.interpreterpath%"
                 },
-                "AutoHotkey2.SymbolFoldingFromOpenBrace": {
+                "ahk++.SymbolFoldingFromOpenBrace": {
                     "scope": "window",
                     "type": "boolean",
                     "default": false,
                     "description": "%ahk2.symbolfoldingfromopenbrace%"
                 },
-                "AutoHotkey2.WorkingDirs": {
+                "ahk++.WorkingDirs": {
                     "scope": "window",
                     "type": "array",
                     "default": [],
@@ -541,7 +541,7 @@
                     "uniqueItems": true,
                     "description": "%ahk2.workingdirs%"
                 },
-                "AutoHotkey2.Syntaxes": {
+                "ahk++.Syntaxes": {
                     "scope": "window",
                     "type": "string",
                     "markdownDescription": "%ahk2.syntaxes%"

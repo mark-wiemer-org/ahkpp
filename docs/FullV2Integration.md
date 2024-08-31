@@ -26,25 +26,25 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### Configuration
 
--   AutoHotkey2.AutoLibInclude
--   AutoHotkey2.CommentTags
--   AutoHotkey2.CompilerCMD
--   AutoHotkey2.CompleteFunctionParens
--   AutoHotkey2.DebugConfiguration
--   AutoHotkey2.Diagnostics.ClassNonDynamicMemberCheck
--   AutoHotkey2.Diagnostics.ParamsCheck
--   AutoHotkey2.Warn.VarUnset
--   AutoHotkey2.Warn.LocalSameAsGlobal
--   AutoHotkey2.Warn.CallWithoutParentheses
--   AutoHotkey2.ActionWhenV1IsDetected (now defaults to "Switch to v1" instead of "Warn")
--   AutoHotkey2.CompletionCommitCharacters
--   AutoHotkey2.Files.Exclude
--   AutoHotkey2.Files.ScanMaxDepth
--   AutoHotkey2.FormatOptions
--   AutoHotkey2.InterpreterPath
--   AutoHotkey2.SymbolFoldingFromOpenBrace
--   AutoHotkey2.WorkingDirs
--   AutoHotkey2.Syntaxes
+-   ahk++.AutoLibInclude
+-   ahk++.CommentTags
+-   ahk++.CompilerCMD
+-   ahk++.CompleteFunctionParens
+-   ahk++.DebugConfiguration
+-   ahk++.Diagnostics.ClassNonDynamicMemberCheck
+-   ahk++.Diagnostics.ParamsCheck
+-   ahk++.Warn.VarUnset
+-   ahk++.Warn.LocalSameAsGlobal
+-   ahk++.Warn.CallWithoutParentheses
+-   ahk++.ActionWhenV1IsDetected (now defaults to "Switch to v1" instead of "Warn")
+-   ahk++.CompletionCommitCharacters
+-   ahk++.Files.Exclude
+-   ahk++.Files.ScanMaxDepth
+-   ahk++.FormatOptions
+-   ahk++.InterpreterPath
+-   ahk++.SymbolFoldingFromOpenBrace
+-   ahk++.WorkingDirs
+-   ahk++.Syntaxes
 
 ### Configuration defaults
 
