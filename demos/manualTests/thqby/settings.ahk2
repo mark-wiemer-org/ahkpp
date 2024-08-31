@@ -15,3 +15,6 @@
 ; complete function parens
 ; when typing a function name, the parens are automatically added
 ; cursor moved to the middle of the parens
+
+; todo Class Non Dynamic Member Check is untested for now
+; todo Params Check is untested for now

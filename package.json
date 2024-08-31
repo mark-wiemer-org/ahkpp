@@ -325,17 +325,17 @@
                     },
                     "markdownDescription": "%ahk++.debugConfiguration%"
                 },
-                "ahk++.Diagnostics.ClassNonDynamicMemberCheck": {
+                "ahk++.diagnostics.classNonDynamicMemberCheck": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
-                    "description": "%ahk2.diagnostics.class-non-dynamic-member-check%"
+                    "description": "%ahk++.diagnostics.classNonDynamicMemberCheck%"
                 },
-                "ahk++.Diagnostics.ParamsCheck": {
+                "ahk++.v2.diagnostics.paramsCheck": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
-                    "description": "%ahk2.diagnostics.paramscheck%"
+                    "description": "%ahk++.diagnostics.paramsCheck%"
                 },
                 "ahk++.Warn.VarUnset": {
                     "scope": "window",

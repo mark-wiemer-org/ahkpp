@@ -4,8 +4,8 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ## The big changes
 
--   Formatting support
--   Snippets support
+-   AHK v2 formatting support
+-   AHK v2 snippets support
 -   Better v2 IntelliSense support: rename, better hovers, and more
 
 ## package.json contributions
@@ -24,14 +24,17 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 -   Set A_ScriptDir Here (`ahk++.setAScriptDir`): Set [`A_ScriptDir`](https://www.autohotkey.com/docs/v2/Variables.htm#ScriptDir) to the path of the current file. Only for AHK v2.
 -   Set AHK v2 Interpreter (`ahk++.setV2Interpreter`): Open a quick pick to change the AHK v2 intepreter for all scripts.
 
-### Configuration
+### New settings
 
--   Library Suggestions: Whether to suggest functions included in library files
--   Comment Tag Regex: Regex for custom symbols to appear in the breadcrumb and elsewhere
--   Complete Function Calls: Whether to automatically add parenetheses when calling a function
--   Debug Configuration: The [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) to use when debugging
--   ahk++.Diagnostics.ClassNonDynamicMemberCheck
--   ahk++.Diagnostics.ParamsCheck
+-   v2
+    -   Library Suggestions: Whether to suggest functions included in library files
+    -   Comment Tag Regex: Regex for custom symbols to appear in the breadcrumb and elsewhere
+    -   Complete Function Calls: Whether to automatically add parenetheses when calling a function
+    -   Debug Configuration: The [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) to use when debugging
+    -   Diagnostics
+        -   Class Non Dynamic Member Check: Check whether non-dynamic members of a class exist when lexing
+        -   Params Check: Check that the function call has the correct number of arguments
+-   ahk++.v2.diagnostics.paramsCheck
 -   ahk++.Warn.VarUnset
 -   ahk++.Warn.LocalSameAsGlobal
 -   ahk++.Warn.CallWithoutParentheses
@@ -114,7 +117,7 @@ New, added:
 These issues will be resolved before a full release
 
 -   [#486](https://github.com/mark-wiemer-org/ahkpp/issues/486)
--   Needs more tests!! Many features have not been tested at all, hence the pre-release!
+-   Ensure commands work with both v1 and v2 as intended
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 
 ### Low priority
