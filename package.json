@@ -329,7 +329,7 @@
                     "scope": "window",
                     "type": "object",
                     "properties": {
-                        "array_style": {
+                        "arrayStyle": {
                             "type": "string",
                             "enum": [
                                 "collapse",
@@ -338,7 +338,7 @@
                             ],
                             "default": "none"
                         },
-                        "brace_style": {
+                        "braceStyle": {
                             "type": "string",
                             "enum": [
                                 "One True Brace",
@@ -351,31 +351,31 @@
                                 "if 1 {\n}\nelse {\n}"
                             ]
                         },
-                        "break_chained_methods": {
+                        "breakChainedMethods": {
                             "type": "boolean",
                             "default": false
                         },
-                        "ignore_comment": {
+                        "ignoreComment": {
                             "type": "boolean",
                             "default": false
                         },
-                        "indent_string": {
+                        "indentString": {
                             "type": "string",
-                            "default": "\t"
+                            "default": "    "
                         },
-                        "indent_between_hotif_directive": {
+                        "indentBetweenHotIfDirectives": {
                             "type": "boolean",
                             "default": false
                         },
-                        "keyword_start_with_uppercase": {
+                        "keywordStartWithUppercase": {
                             "type": "boolean",
                             "default": false
                         },
-                        "max_preserve_newlines": {
+                        "maxPreserveNewlines": {
                             "type": "number",
                             "default": 2
                         },
-                        "object_style": {
+                        "objectStyle": {
                             "type": "string",
                             "enum": [
                                 "collapse",
@@ -384,50 +384,71 @@
                             ],
                             "default": "none"
                         },
-                        "preserve_newlines": {
+                        "preserveNewlines": {
                             "type": "boolean",
                             "default": true
                         },
-                        "space_before_conditional": {
+                        "spaceBeforeConditional": {
                             "type": "boolean",
                             "default": true
                         },
-                        "space_after_double_colon": {
+                        "spaceAfterDoubleColon": {
                             "type": "boolean",
                             "default": true
                         },
-                        "space_in_empty_paren": {
+                        "spaceInEmptyParen": {
                             "type": "boolean",
                             "default": false
                         },
-                        "space_in_other": {
+                        "spaceInOther": {
                             "type": "boolean",
                             "default": true
                         },
-                        "space_in_paren": {
+                        "spaceInParen": {
                             "type": "boolean",
                             "default": false
                         },
-                        "switch_case_alignment": {
+                        "switchCaseAlignment": {
                             "type": "boolean",
                             "default": false
                         },
-                        "symbol_with_same_case": {
+                        "symbolWithSameCase": {
                             "type": "boolean",
                             "default": false
                         },
-                        "white_space_before_inline_comment": {
+                        "whitespaceBeforeInlineComment": {
                             "type": "string"
                         },
-                        "wrap_line_length": {
+                        "wrapLineLength": {
                             "type": "number",
-                            "default": 0
+                            "default": 0,
+                            "description": "0 to disable wrapping"
                         }
                     },
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "default": {}
+                    "default": {
+                        "arrayStyle": "none",
+                        "braceStyle": "One True Brace",
+                        "breakChainedMethods": false,
+                        "ignoreComment": false,
+                        "indentString": "    ",
+                        "indentBetweenHotIfDirectives": false,
+                        "keywordStartWithUppercase": false,
+                        "maxPreserveNewlines": 2,
+                        "objectStyle": "none",
+                        "preserveNewlines": true,
+                        "spaceBeforeConditional": true,
+                        "spaceAfterDoubleColon": true,
+                        "spaceInEmptyParen": false,
+                        "spaceInOther": true,
+                        "spaceInParen": false,
+                        "switchCaseAlignment": false,
+                        "symbolWithSameCase": false,
+                        "whitespaceBeforeInlineComment": "",
+                        "wrapLineLength": 120
+                    }
                 },
                 "ahk++.v2.librarySuggestions": {
                     "scope": "window",
