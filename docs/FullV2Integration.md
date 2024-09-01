@@ -116,19 +116,17 @@ New, added:
 
 These issues will be resolved before a full release
 
--   Set interpreter path v2 not updating workspace or user settings but does update status bar item
--   Run and debug aren't working for v1
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 
 ### Low priority
 
 These issues will be backlogged and resolved after a full release
 
--   `ahk++.stop` should work with v1 scripts as well
 -   Exclude setting doesn't work, ref [issue #488](https://github.com/mark-wiemer-org/ahkpp/issues/488)
 -   No newline at end of file when formatting (inconsistent with v1 and industry standards)
 -   Issue with custom folding and comment blocks (see v2/settings.ahk2)
 -   Cleanup `indentString` to be "spaces" vs "tabs" with a `tabSize` option as well
+-   Error message: `Request textDocument/foldingRange failed.` on files that switch from AHK v2 to v1, see manualTests/languageVersion
 
 ### Cut
 
