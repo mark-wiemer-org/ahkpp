@@ -756,7 +756,7 @@
             },
             {
                 "command": "ahk++.debugParams",
-                "key": "shift+f5",
+                "key": "ctrl+f5",
                 "when": "editorLangId == ahk2"
             },
             {
