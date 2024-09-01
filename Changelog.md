@@ -1,6 +1,6 @@
 # Changelog
 
-## 6.0.0 - 2024-08-31 🥂
+## 6.0.0 - unreleased
 
 AHK++ 6 introduces full v2 support, including formatting, enhanced IntelliSense and debug support, and more!
 
