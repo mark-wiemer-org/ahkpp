@@ -1,46 +1,40 @@
-# AutoHotkey Plus Plus (AHK++)
-
-AutoHotkey Plus Plus (AHK++) provides AutoHotkey language support for VS Code. For AHK v1, this includes:
-
--   IntelliSense
--   syntax highlighting
--   debug support
--   formatting
--   quick help
--   ...and more!
+<div align="center">
+    <h1>AHK++</h1>
+    <h2>Full language support for AHK v1 and AHK v2</h2>
+    <div>IntelliSense</div>
+    <div>Syntax highlighting</div>
+    <div>Debug support</div>
+    <div>Formatting (customizable!)</div>
+    <div>Quick help</div>
+    <div>...and more</div>
+</div>
 
 ## Install
 
 Install from VS Code or install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus).
 
-## AHK v2 full support in pre-release!
+## AHK v2 full support is here! 🥂
 
-AutoHotkey v2 support has been a [long-requested feature](https://github.com/mark-wiemer-org/ahkpp/issues/96), and v5.0.0 supports many key features. The latest [🧪 pre-release version](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions), v5.1.0, adds full v2 support!
+AHK++ 6 now incorporates [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp), meaning full AHK v2 support:
 
-Supported features include:
-
--   Running and debugging v1 and v2 scripts without changing settings
+-   Running, debugging, and stopping v1 and v2 scripts without changing settings
 -   Full syntax highlighting for v2 scripts
--   "Open help" (Ctrl + F1) opens language-specific help (and includes your text selection!)
--   Unique icons for v1 (blue) and v2 (green)
--   Rich IntelliSense support with snippets and hover text (🧪 pre-release only)
--   Formatting files (🧪 pre-release only)
+-   "Open help" (`Ctrl + F1`) opens language-specific help (and includes your text selection)
+-   Unique icons for AHK v1 (blue) and v2 (green)
+-   Rich IntelliSense support with snippets, hover text, and suggestions
+-   Formatting files with many customized options
 
-For known issues, see [the changelog](./Changelog.md)
+For all changes, including breaking changes, see [the changelog](./Changelog.md)
 
-Please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose), it helps bring full v2 support to the release version faster 🧑‍💻
+As always, please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose)
 
-💚 Special thanks to [thqby](https://github.com/thqby), as this would not have been possible without thqby's open-source [AutoHotkey v2 Language Support](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
+💚 Special thanks again to [thqby](https://github.com/thqby), as this would not have been possible without thqby's open-source [AutoHotkey v2 Language Support](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
 
-## Why AutoHotkey Plus Plus?
+### ⛓️‍💥 Breaking changes
 
-AutoHotkey Plus Plus is one of many extensions that offer VS Code language support. So why should you use this one?
+When adding all the new settings, VS Code's setting UX became overwhelming. Settings are now organized into flat objects, which should improve UX and reduce the need for breaking changes in the future! See [the changelog](./Changelog.md) for details.
 
--   **Supports both v1 and v2**: AHK++ supports both AHK v1 and v2, making it the only extension to support both major versions of AutoHotkey!
--   **Actively maintained**: Any issues encountered while using this extension can be reported and fixed. With other extensions, anything that's broken will stay broken forever. You can report any issues with AHK++ (and view all issues) through the [issue tracker](https://github.com/mark-wiemer-org/ahkpp/issues).
--   **IntelliSense**: Smart code completion, syntax highlighting, code navigation, and more.
--   **Debug support**: Run and debug AHK scripts from VS Code.
--   **New features**: Another benefit to active maintenance is that AHK++ can add new features as users request them. For example, quick help, formatter directives, and custom new file templates were all added based on user feedback!
+---
 
 ## Commands
 
@@ -51,6 +45,7 @@ With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts
 -   Open help: `Ctrl + F1`
 -   Run: `Ctrl + F9`
 -   Run selection: `Ctrl + F8`
+-   Stop: `Ctrl + F6`
 
 ## Debug
 
