@@ -65,6 +65,7 @@
         "format": "prettier --check .",
         "format:fix": "prettier --write .",
         "lint": "npm run format && npm run eslint && npm run sort-package-json",
+        "lint:ci": "npm run eslint && npm run sort-package-json",
         "package": "vsce package",
         "prepare": "git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
@@ -75,6 +76,7 @@
         "pretest-unit": "npm run compile-ts",
         "test-unit": "vscode-test",
         "validate": "npm run lint && npm run test && npm run package",
+        "validate:ci": "npm run lint:ci && npm run test && npm run package",
         "vscode:prepublish": "npm run compile-grammar && npm run build && echo Packaging..."
     },
     "contributes": {
