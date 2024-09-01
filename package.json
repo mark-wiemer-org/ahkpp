@@ -336,6 +336,28 @@
                         "type": "string"
                     }
                 },
+                "AHK++.v2.completionCommitCharacters": {
+                    "markdownDescription": "%ahk++.config.v2.completionCommitCharacters%",
+                    "scope": "window",
+                    "type": "object",
+                    "properties": {
+                        "Class": {
+                            "type": "string",
+                            "default": ".("
+                        },
+                        "Function": {
+                            "type": "string",
+                            "default": "("
+                        }
+                    },
+                    "default": {
+                        "Class": ".(",
+                        "Function": "("
+                    },
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "AHK++.v2.debugConfiguration": {
                     "markdownDescription": "%ahk++.config.v2.debugConfiguration%",
                     "scope": "window",
@@ -631,28 +653,6 @@
                         "librarySuggestions": "Disabled",
                         "symbolFoldingFromOpenBrace": false,
                         "syntaxes": ""
-                    },
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "AHK++.v2.general.completionCommitCharacters": {
-                    "markdownDescription": "%ahk++.config.v2.completionCommitCharacters%",
-                    "scope": "window",
-                    "type": "object",
-                    "properties": {
-                        "Class": {
-                            "type": "string",
-                            "default": ".("
-                        },
-                        "Function": {
-                            "type": "string",
-                            "default": "("
-                        }
-                    },
-                    "default": {
-                        "Class": ".(",
-                        "Function": "("
                     },
                     "additionalProperties": {
                         "type": "string"
