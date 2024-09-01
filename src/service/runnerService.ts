@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import { FileManager, FileModel } from '../common/fileManager';
 import { ConfigKey, Global } from '../common/global';
 import { exec } from '../common/processWrapper';
-import * as fs from 'fs'; // In NodeJS: 'const fs = require('fs')'
+import * as fs from 'fs';
 import { isV1 } from '../common/codeUtil';
 
 export const makeCompileCommand = (
