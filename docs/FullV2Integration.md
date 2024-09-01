@@ -112,12 +112,6 @@ New, added:
 
 ## Known issues
 
-### Blocking
-
-These issues will be resolved before a full release
-
--   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
-
 ### Low priority
 
 These issues will be backlogged and resolved after a full release
