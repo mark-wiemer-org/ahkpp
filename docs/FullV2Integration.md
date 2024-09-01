@@ -116,6 +116,7 @@ New, added:
 
 These issues will be resolved before a full release
 
+-   Set interpreter path v2 not updating workspace or user settings but does update status bar item
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 
 ### Low priority
