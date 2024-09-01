@@ -2,6 +2,8 @@
 #SingleInstance force
 
 ; Ctrl+F9 to run
+; return focus to VS Code
+; Ctrl+F6 to stop
 
 MsgBox % "You did it!"
 

@@ -12,11 +12,11 @@ This doc covers all the new features as a result of integrating with thqby's AHK
 
 ### New commands
 
--   Debug AHK and Attach (`ahk++.debugAttach`): Debug and attach to the debug session for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
--   Debug AHK with Params (`ahk++.debugParams`): Debug and add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Debug AHK and Attach (`ahk++.debugAttach`): Debug and attach to the debug session for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug. Only for AHK v2.
+-   Debug AHK with Params (`ahk++.debugParams`): Debug and add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug. Only for AHK v2.
 -   Run AHK++ Diagnostic (`ahk++.diagnostic.full`): Effectively restart the AHK v2 features of the app.
 -   Export AHK Symbols (`ahk++.exportSymbols`): Export application functions and classes to a new file. Only for AHK v2.
--   Stop AHK Script (`ahk++.stop`): Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation.
+-   Stop AHK Script (`ahk++.stop`): Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation. Only for AHK v2.
 -   Add Doc Comment (`ahk++.addDocComment`): Add a function header comment for the current function
 -   Update File Version Info (`ahk++.updateVersionInfo`): Add or update a file header comment
 -   Switch AHK Version (`ahk++.switchAhkVersion`): Change between v1 and v2 for the current file
@@ -116,17 +116,18 @@ New, added:
 
 These issues will be resolved before a full release
 
--   [#486](https://github.com/mark-wiemer-org/ahkpp/issues/486)
--   Ensure commands work with both v1 and v2 as intended
--   Cleanup and organize settings names and IDs
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 
 ### Low priority
 
 These issues will be backlogged and resolved after a full release
 
+-   Exclude setting doesn't work, ref [issue #488](https://github.com/mark-wiemer-org/ahkpp/issues/488)
 -   No newline at end of file when formatting (inconsistent with v1 and industry standards)
--   No browser support (AHK++ did not have this before, we can add it later if users want it)
--   Hardlink config files shared between ahk2 submodule and global package (e.g. `*.nls*.json`)
--   Explain formatter options
 -   Issue with custom folding and comment blocks (see v2/settings.ahk2)
+-   Cleanup `indentString` to be "spaces" vs "tabs" with a `tabSize` option as well
+-   Error message: `Request textDocument/foldingRange failed.` on files that switch from AHK v2 to v1, see manualTests/languageVersion
+
+### Cut
+
+-   No browser support. AHK++ did not have this before, we can add it later if users want it

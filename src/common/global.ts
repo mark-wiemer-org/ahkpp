@@ -1,12 +1,14 @@
 import * as vscode from 'vscode';
 
 export class Global {
-    public static configPrefix = 'ahk++';
     private static statusBarItem: vscode.StatusBarItem;
 
-    /** Get configuration from VS Code setting. */
+    /** Gets config value from VS Code */
     public static getConfig<T>(key: ConfigKey): T | undefined {
-        return vscode.workspace.getConfiguration(this.configPrefix).get<T>(key);
+        return (
+            vscode.workspace.getConfiguration('ahk++').get<T>(key) ??
+            vscode.workspace.getConfiguration('AHK++').get<T>(key)
+        );
     }
 
     public static updateStatusBarItems(text: string) {
@@ -24,19 +26,22 @@ export class Global {
     }
 }
 
+/** Defined in package.json */
+// PascalCase formats value shown to user properly
+// Ref https://github.com/microsoft/vscode/issues/70589
 export enum ConfigKey {
     allowedNumberOfEmptyLines = 'v1.formatter.allowedNumberOfEmptyLines',
     compileBaseFileV1 = 'v1.file.compileBaseFile',
     compileBaseFileV2 = 'v2.file.compileBaseFile',
     compileIcon = 'compiler.compileIcon',
-    compilerPath = 'file.compilerPath',
+    compilerPath = 'compiler.compilerPath',
     interpreterPathV1 = 'v1.file.interpreterPath',
     interpreterPathV2 = 'v2.file.interpreterPath',
     helpPathV1 = 'v1.file.helpPath',
     helpPathV2 = 'v2.file.helpPath',
     indentCodeAfterIfDirective = 'v1.formatter.indentCodeAfterIfDirective',
     indentCodeAfterLabel = 'v1.formatter.indentCodeAfterLabel',
-    maximumParseLength = 'intellisense.maximumParseLength',
+    maximumParseLength = 'v1.intellisense.maximumParseLength',
     preserveIndent = 'v1.formatter.preserveIndent',
     templateSnippetNameV1 = 'v1.file.templateSnippetName',
     templateSnippetNameV2 = 'v2.file.templateSnippetName',
@@ -44,6 +49,7 @@ export enum ConfigKey {
     useMpress = 'compiler.useMpress',
 }
 
+/** Also in submodule */
 export enum LanguageId {
     ahk1 = 'ahk',
     ahk2 = 'ahk2',

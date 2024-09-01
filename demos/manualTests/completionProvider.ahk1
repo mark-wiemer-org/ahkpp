@@ -14,14 +14,8 @@ compTest(p1, p2) {
 ; Suggestions outside of method exclude locals
 p
 
-; Default settings (enabled IntelliSense, enabled parsing) shows suggestions
-c
-
-; Disabled IntelliSense with enabled parsing shows no suggestions
+; Default settings (enabled parsing) shows suggestions
 c
 
 ; Enabled IntelliSense with disabled parsing shows no suggestions
-c
-
-; Disabled IntelliSense with disabled parsing shows no suggestions
 c
