@@ -1,14 +1,146 @@
 # Changelog
 
-## 6.0.0 - unreleased
+## 6.0.0 - 2024-09-01 🥂
 
-AHK++ 6 introduces full v2 support, including formatting, enhanced IntelliSense and debug support, and more!
+### Full AHK v2 support is here!
 
-Changes listed here are compared to AHK++ 5.0.7.
+AHK++ 6 incorporates [AutoHotkey v2 Language Support 2.4.9 by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp) to deliver full v2 support, including formatting, enhanced IntelliSense and debug support, and more!
+
+All changes are compared to AHK++ 5.0.7.
+
+-   v2 formatting support
+-   v2 IntelliSense support
+-   Start and stop scripts via VS Code keybindings
+
+More changes are listed below the breaking changes...
 
 ### ⛓️‍💥 Breaking changes
 
--   Remove `intellisense.enableIntellisense` setting: IntelliSense is now always on
+Settings are now organized into flat objects for a better user experience. Unfortunately, this means settings will have to be replaced when upgrading to AHK++ 6. This is a one-time fixup. Below are sample settings matching the new schema and default values of AHK++. You can learn more about the settings via VS Code's settings UI (`Ctrl + ,`)
+
+<details open><summary>Default AHK++ settings</summary>
+
+```json
+// settings.json
+{
+    // ...other settings...
+    "AHK++.compiler": {
+        "compileIcon": "",
+        "compilerPath": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
+        "useMpress": false
+    },
+    "AHK++.menu": {
+        "showDebugButton": true
+    },
+    "AHK++.v1.file": {
+        "compileBaseFile": "",
+        "helpPath": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+        "interpreterPath": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+        "templateSnippetName": "AhkTemplateV1"
+    },
+    "AHK++.v1.formatter": {
+        "allowedNumberOfEmptyLines": 1,
+        "indentCodeAfterIfDirective": true,
+        "indentCodeAfterLabel": true,
+        "preserveIndent": false,
+        "trimExtraSpaces": true
+    },
+    "AHK++.v1.intellisense": {
+        "maximumParseLength": 10000
+    },
+    "AHK++.v2.completionCommitCharacters": {
+        "Class": ".(",
+        "Function": "("
+    },
+    "AHK++.v2.debugConfiguration": {
+        "port": "9002-9100",
+        "useAnnounce": "detail",
+        "useAutoJumpToError": true,
+        "useDebugDirective": true,
+        "usePerfTips": true
+    },
+    "AHK++.v2.diagnostics": {
+        "classNonDynamicMemberCheck": true,
+        "paramsCheck": true
+    },
+    // ⚠️ Not yet supported, ref [issue #488](https://github.com/mark-wiemer-org/ahkpp/issues/488)
+    "AHK++.v2.exclude": [],
+    "AHK++.v2.file": {
+        "compileBaseFile": "",
+        "helpPath": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
+        "interpreterPath": "C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey64.exe",
+        "maxScanDepth": 2,
+        "templateSnippetName": "AhkTemplateV2"
+    },
+    "AHK++.v2.formatter": {
+        "arrayStyle": "none",
+        "braceStyle": "One True Brace",
+        "breakChainedMethods": false,
+        "ignoreComment": false,
+        "indentString": "    ",
+        "indentBetweenHotIfDirectives": false,
+        "keywordStartWithUppercase": false,
+        "maxPreserveNewlines": 2,
+        "objectStyle": "none",
+        "preserveNewlines": true,
+        "spaceBeforeConditional": true,
+        "spaceAfterDoubleColon": true,
+        "spaceInEmptyParen": false,
+        "spaceInOther": true,
+        "spaceInParen": false,
+        "switchCaseAlignment": false,
+        "symbolWithSameCase": false,
+        "whitespaceBeforeInlineComment": "",
+        "wrapLineLength": 120
+    },
+    "AHK++.v2.general": {
+        "actionWhenV1Detected": "SwitchToV1",
+        "commentTagRegex": "^;;\\s*(?<tag>.+)",
+        "completeFunctionCalls": false,
+        "librarySuggestions": "Disabled",
+        "symbolFoldingFromOpenBrace": false,
+        "syntaxes": ""
+    },
+    "AHK++.v2.warn": {
+        "callWithoutParentheses": "Off",
+        "localSameAsGlobal": false,
+        "varUnset": true
+    },
+    "AHK++.v2.workingDirectories": []
+}
+```
+
+</details>
+
+### New commands
+
+-   Debug AHK and Attach: Debug and attach to the debug session for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Debug AHK with Params (`Ctrl + F5`): Debug and add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Run AHK++ Diagnostic: Effectively restart the AHK v2 features of the app.
+-   Export AHK Symbols: Export application functions and classes to a new file. Only for AHK v2.
+-   Stop AHK Script (`Ctrl + F6`): Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation.
+-   Add Doc Comment: Add a function header comment for the current function
+-   Update File Version Info: Add or update a file header comment
+-   Switch AHK Version: Change between AHK v1 and v2 for the current file
+-   Select AHK Syntaxes: Select custom AHK v2 syntax files for advanced use-cases. PRs are welcomed if the default syntaxes aren't sufficient!
+-   Set A_ScriptDir Here: Set [`A_ScriptDir`](https://www.autohotkey.com/docs/v2/Variables.htm#ScriptDir) to the path of the current file. Only for AHK v2.
+-   Set AHK v2 Interpreter: Open a quick pick to change the AHK v2 intepreter for all scripts.
+
+### Other changes
+
+-   Context menu commands are now organized near the top of the menu
+
+### Developer changes
+
+-   Use ESLint 9 and typescript-eslint 8 for better code hygiene checks
+-   Upgrade from Node 16 to Node 20
+-   Remove husky and lint-staged for simplicity
+-   Modernize unit tests with @vscode/test-cli
+-   Add recommended VS Code extensions for working in this codebase
+-   Simplify launch configurations
+-   Improve manual tests and add manual tests for new AHK v2 capabilities
+-   Add [full v2 integration docs](docs/FullV2Integration.md)
+-   Clarify [license](license.txt): even more open-source than before!
 
 ### 💚 Thank you!
 

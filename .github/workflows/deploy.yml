@@ -26,4 +26,4 @@ jobs:
           # Saved locally as "CI VS Code Marketplace Publish Token", expires 2024-06-22
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
-          preRelease: true
+          # preRelease: true
