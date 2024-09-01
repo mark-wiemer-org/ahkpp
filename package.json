@@ -1030,7 +1030,7 @@
             "editor/title": [
                 {
                     "command": "ahk++.debug",
-                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.AHK++.Menu.showDebugButton",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.AHK++.menu.showDebugButton",
                     "group": "navigation@1"
                 },
                 {

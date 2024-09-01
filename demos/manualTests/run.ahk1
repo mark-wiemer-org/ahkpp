@@ -2,6 +2,7 @@
 #SingleInstance force
 
 ; Ctrl+F9 to run
+; Ctrl+F6 to stop
 
 MsgBox % "You did it!"
 
