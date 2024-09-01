@@ -130,3 +130,4 @@ These issues will be backlogged and resolved after a full release
 -   Hardlink config files shared between ahk2 submodule and global package (e.g. `*.nls*.json`)
 -   Explain formatter options
 -   Issue with custom folding and comment blocks (see v2/settings.ahk2)
+-   `ahk++.stop` should work with v1 scripts as well

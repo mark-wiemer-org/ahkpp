@@ -91,39 +91,42 @@
         "commands": [
             {
                 "command": "ahk++.compile",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "title": "Compile AHK Script",
                 "category": "AHK++"
             },
             {
                 "command": "ahk++.compilerGui",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "title": "Compile AHK Script (GUI)",
                 "category": "AHK++"
             },
             {
                 "command": "ahk++.debug",
                 "title": "Debug AHK Script",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "category": "AHK++",
                 "icon": "$(debug-alt)"
             },
             {
                 "command": "ahk++.openHelp",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "title": "Open AutoHotkey Help",
                 "category": "AHK++"
             },
             {
-                "enablement": "!isWeb",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.debugAttach",
                 "title": "%ahk++.command.debugAttach%",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2 && shellExecutionSupported",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.debugParams",
                 "title": "%ahk++.command.debugParams%",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2",
                 "command": "ahk++.diagnostic.full",
                 "title": "%ahk++.command.diagnostic.full%",
                 "category": "AHK++"
@@ -135,53 +138,53 @@
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2 && shellExecutionSupported",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.run",
                 "title": "%ahk++.command.run%",
                 "icon": "$(play)",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2 && !isWeb",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.runSelection",
                 "title": "%ahk++.command.runSelection%",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2 && !isWeb",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.stop",
                 "title": "%ahk++.command.stop%",
                 "icon": "$(stop)",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2",
+                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "command": "ahk++.addDocComment",
                 "title": "%ahk++.command.addDocComment%",
                 "category": "AHK++"
             },
             {
-                "enablement": "!isWeb",
+                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "command": "ahk++.setV2Interpreter",
                 "title": "%ahk++.command.setV2Interpreter%",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2",
+                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "command": "ahk++.updateVersionInfo",
                 "title": "%ahk++.command.updateVersionInfo%",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2 || editorLangId == ahk",
+                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "command": "ahk++.switchAhkVersion",
                 "title": "Switch AHK Version",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2 && !isWeb",
+                "enablement": "editorLangId == ahk2",
                 "command": "ahk++.selectSyntaxes",
-                "title": "Select AHK Syntaxes",
+                "title": "Select AHK v2 Syntaxes",
                 "category": "AHK++"
             },
             {
@@ -813,6 +816,16 @@
         "menus": {
             "editor/context": [
                 {
+                    "command": "ahk++.runSelection",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && editorHasSelection",
+                    "group": "navigation@-1"
+                },
+                {
+                    "when": "editorLangId == ahk2 && !isWeb && ahk2:isRunning",
+                    "command": "ahk++.stop",
+                    "group": "navigation@0"
+                },
+                {
                     "command": "ahk++.compile",
                     "when": "editorLangId == ahk || editorLangId == ahk2",
                     "group": "navigation@1"
@@ -823,29 +836,20 @@
                     "group": "navigation@1"
                 },
                 {
-                    "when": "editorLangId == ahk2 && !isWeb",
                     "command": "ahk++.debugAttach",
-                    "group": "navigation@2"
+                    "when": "editorLangId == ahk || editorLangId == ahk2",
+                    "group": "navigation@1"
                 },
                 {
-                    "when": "editorLangId == ahk2 && !isWeb",
                     "command": "ahk++.debugParams",
-                    "group": "navigation@2"
+                    "when": "editorLangId == ahk || editorLangId == ahk2",
+                    "group": "navigation@1"
                 },
                 {
                     "command": "ahk++.run",
                     "key": "ctrl+f9",
-                    "when": "editorLangId == ahk || editorLangId == ahk2"
-                },
-                {
-                    "command": "ahk++.runSelection",
-                    "when": "(editorLangId == ahk || editorLangId == ahk2) && editorHasSelection",
-                    "group": "navigation@-1"
-                },
-                {
-                    "when": "editorLangId == ahk2 && !isWeb && ahk2:isRunning",
-                    "command": "ahk++.stop",
-                    "group": "navigation@0"
+                    "when": "editorLangId == ahk || editorLangId == ahk2",
+                    "group": "navigation@1"
                 },
                 {
                     "when": "editorLangId == ahk2",
@@ -867,12 +871,12 @@
                 {
                     "command": "ahk++.run",
                     "group": "navigation@0",
-                    "when": "resourceLangId == ahk2 && shellExecutionSupported"
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported"
                 },
                 {
                     "command": "ahk++.stop",
                     "group": "navigation@0",
-                    "when": "resourceLangId == ahk2 && ahk2:isRunning && shellExecutionSupported"
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && ahk2:isRunning && shellExecutionSupported"
                 }
             ]
         },
