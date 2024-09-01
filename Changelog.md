@@ -63,6 +63,7 @@ Settings are now organized into flat objects for a better user experience. Unfor
         "classNonDynamicMemberCheck": true,
         "paramsCheck": true
     },
+    // ⚠️ Not yet supported, ref [issue #488](https://github.com/mark-wiemer-org/ahkpp/issues/488)
     "AHK++.v2.exclude": [],
     "AHK++.v2.file": {
         "compileBaseFile": "",
@@ -114,10 +115,10 @@ Settings are now organized into flat objects for a better user experience. Unfor
 ### New commands
 
 -   Debug AHK and Attach: Debug and attach to the debug session for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
--   Debug AHK with Params: Debug and add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
+-   Debug AHK with Params (`Ctrl + F5`): Debug and add user-provided command-line arguments to the debugger for advanced use-cases. Requires zero-plusplus.vscode-autohotkey-debug.
 -   Run AHK++ Diagnostic: Effectively restart the AHK v2 features of the app.
 -   Export AHK Symbols: Export application functions and classes to a new file. Only for AHK v2.
--   Stop AHK Script: Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation.
+-   Stop AHK Script (`Ctrl + F6`): Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation.
 -   Add Doc Comment: Add a function header comment for the current function
 -   Update File Version Info: Add or update a file header comment
 -   Switch AHK Version: Change between AHK v1 and v2 for the current file
@@ -125,9 +126,13 @@ Settings are now organized into flat objects for a better user experience. Unfor
 -   Set A_ScriptDir Here: Set [`A_ScriptDir`](https://www.autohotkey.com/docs/v2/Variables.htm#ScriptDir) to the path of the current file. Only for AHK v2.
 -   Set AHK v2 Interpreter: Open a quick pick to change the AHK v2 intepreter for all scripts.
 
+### Other changes
+
+-   Context menu commands are now organized near the top of the menu
+
 ### Developer changes
 
--   Modernize ESLint and Prettier for better code hygiene checks
+-   Use ESLint 9 and typescript-eslint 8 for better code hygiene checks
 -   Upgrade from Node 16 to Node 20
 -   Remove husky and lint-staged for simplicity
 -   Modernize unit tests with @vscode/test-cli
