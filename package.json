@@ -198,76 +198,142 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk++.compiler.compileIcon": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Icon path for the compiled AHK file (optional)."
+                "AHK++.Compiler": {
+                    "type": "object",
+                    "properties": {
+                        "compileIcon": {
+                            "type": "string",
+                            "default": "",
+                            "description": "Icon path for the compiled AHK file (optional)."
+                        },
+                        "useMpress": {
+                            "type": "boolean",
+                            "default": false,
+                            "markdownDescription": "Use MPRESS (if available) to compress the resulting executable."
+                        },
+                        "compilerPath": {
+                            "type": "string",
+                            "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
+                            "description": "Path to the AHK compiler. This is the same for both v1 and v2."
+                        }
+                    },
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "default": {
+                        "compileIcon": "",
+                        "compilerPath": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
+                        "useMpress": false
+                    },
+                    "markdownDescription": "Learn more about [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm)"
                 },
-                "ahk++.compiler.useMpress": {
-                    "type": "boolean",
-                    "default": false,
-                    "markdownDescription": "Use [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm) (if available) to compress the resulting executable."
+                "AHK++.Menu": {
+                    "type": "object",
+                    "properties": {
+                        "showDebugButton": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Show the Debug button in the editor title menu."
+                        }
+                    },
+                    "default": {
+                        "showDebugButton": true
+                    },
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
-                "ahk++.file.compilerPath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
-                    "description": "Path to the AHK compiler. (This is the same for both v1 and v2.)"
+                "AHK++.v1.File": {
+                    "type": "object",
+                    "markdownDescription": "[Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)",
+                    "properties": {
+                        "compileBaseFile": {
+                            "type": "string",
+                            "default": "",
+                            "description": "Base file path for compiling v1 scripts (optional)."
+                        },
+                        "helpPath": {
+                            "type": "string",
+                            "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+                            "description": "Path to the AHK v1 help document."
+                        },
+                        "interpreterPath": {
+                            "type": "string",
+                            "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                            "description": "Path to the AHK v1 interpreter."
+                        },
+                        "templateSnippetName": {
+                            "type": "string",
+                            "default": "AhkTemplateV1",
+                            "description": "The name of the snippet to populate new AHK v1 files. If blank, no snippet will be applied. [Learn more about the template snippet]("
+                        }
+                    },
+                    "default": {
+                        "compileBaseFile": "",
+                        "helpPath": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+                        "interpreterPath": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                        "templateSnippetName": "AhkTemplateV1"
+                    },
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
-                "ahk++.intellisense.maximumParseLength": {
-                    "type": "number",
-                    "default": 10000,
-                    "markdownDescription": "Number of lines to parse for each AHK file. Larger numbers may impact performance. Parsing is used by IntelliSense only, not AHK itself. Changing this value will not affect the behavior of AHK scripts.\n- -1: Unlimited parsing.\n- 0: No parsing.\n\nOnly applies to AHK v1."
+                "AHK++.v1.Formatter": {
+                    "type": "object",
+                    "properties": {
+                        "allowedNumberOfEmptyLines": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": -1,
+                            "description": "Allowed number of empty lines.\n- -1: Ignore empty lines.\n- 0: No empty lines."
+                        },
+                        "indentCodeAfterIfDirective": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist)."
+                        },
+                        "indentCodeAfterLabel": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Indent code after hotkeys and labels in top-level code blocks."
+                        },
+                        "preserveIndent": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Preserve indentation on empty line."
+                        },
+                        "trimExtraSpaces": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Trim extra spaces between words."
+                        }
+                    },
+                    "default": {
+                        "allowedNumberOfEmptyLines": 1,
+                        "indentCodeAfterIfDirective": true,
+                        "indentCodeAfterLabel": true,
+                        "preserveIndent": false,
+                        "trimExtraSpaces": true
+                    },
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
-                "ahk++.menu.showDebugButton": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Show the Debug button in the editor title menu."
-                },
-                "ahk++.v1.file.compileBaseFile": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Base file path for compiling v1 scripts (optional)."
-                },
-                "ahk++.v1.file.helpPath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-                    "description": "Path to the AHK v1 help document."
-                },
-                "ahk++.v1.file.interpreterPath": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "Path to the AHK v1 interpreter."
-                },
-                "ahk++.v1.file.templateSnippetName": {
-                    "type": "string",
-                    "default": "AhkTemplateV1",
-                    "markdownDescription": "The name of the snippet to populate new AHK v1 files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
-                },
-                "ahk++.v1.formatter.allowedNumberOfEmptyLines": {
-                    "type": "integer",
-                    "default": 1,
-                    "minimum": -1,
-                    "markdownDescription": "Allowed number of empty lines.\n- -1: Ignore empty lines.\n- 0: No empty lines."
-                },
-                "ahk++.v1.formatter.indentCodeAfterLabel": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Indent code after hotkeys and labels in top-level code blocks. Only applies to AHK v1."
-                },
-                "ahk++.v1.formatter.indentCodeAfterIfDirective": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist). Only applies to AHK v1."
-                },
-                "ahk++.v1.formatter.preserveIndent": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Preserve indentation on empty line. Only applies to AHK v1."
-                },
-                "ahk++.v1.formatter.trimExtraSpaces": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Trim extra spaces between words. Only applies to AHK v1."
+                "AHK++.v1.IntelliSense": {
+                    "type": "object",
+                    "properties": {
+                        "maximumParseLength": {
+                            "type": "number",
+                            "default": 10000,
+                            "description": "Number of lines to parse each AHK file for IntelliSense.\n- -1: Unlimited parsing.\n- 0: No parsing."
+                        }
+                    },
+                    "default": {
+                        "maximumParseLength": 10000
+                    },
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "ahk++.v2.commentTagRegex": {
                     "scope": "window",
@@ -865,7 +931,7 @@
             "editor/title": [
                 {
                     "command": "ahk++.debug",
-                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.ahk++.menu.showDebugButton",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.AHK++.Menu.showDebugButton",
                     "group": "navigation@1"
                 },
                 {
