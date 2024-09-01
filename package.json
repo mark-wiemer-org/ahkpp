@@ -658,7 +658,7 @@
                         "type": "string"
                     }
                 },
-                "AHK++.v2.general.workingDirectories": {
+                "AHK++.v2.workingDirectories": {
                     "scope": "window",
                     "type": "array",
                     "default": [],
@@ -666,7 +666,7 @@
                         "type": "string"
                     },
                     "uniqueItems": true,
-                    "description": "%ahk++.config.v2.general.workingDirectories%"
+                    "description": "%ahk++.config.v2.workingDirectories%"
                 },
                 "AHK++.v2.warn": {
                     "type": "object",
