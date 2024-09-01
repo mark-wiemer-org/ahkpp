@@ -418,6 +418,16 @@
                         "type": "string"
                     }
                 },
+                "AHK++.v2.exclude": {
+                    "scope": "window",
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "uniqueItems": true,
+                    "markdownDescription": "%ahk++.config.v2.file.exclude%"
+                },
                 "AHK++.v2.file": {
                     "type": "object",
                     "properties": {
@@ -425,16 +435,6 @@
                             "type": "string",
                             "default": "",
                             "description": "Base file path for compiling v2 scripts (optional)."
-                        },
-                        "exclude": {
-                            "scope": "window",
-                            "type": "array",
-                            "default": [],
-                            "items": {
-                                "type": "string"
-                            },
-                            "uniqueItems": true,
-                            "description": "%ahk++.config.v2.files.exclude%"
                         },
                         "helpPath": {
                             "type": "string",
@@ -460,7 +460,6 @@
                     },
                     "default": {
                         "compileBaseFile": "",
-                        "exclude": [],
                         "helpPath": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
                         "interpreterPath": "C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey64.exe",
                         "maxScanDepth": 2,
