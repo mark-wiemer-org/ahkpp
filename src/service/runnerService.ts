@@ -29,6 +29,7 @@ export const makeCompileCommand = (
     return `"${compilerPath}" ${guiCommand} /in "${scriptPath}" /out "${exePath}" ${compileIconCommand} ${compileBaseFileCommand} ${compileMpressCommand}`;
 };
 
+/** Debugs and compiles AHK. Run is now located in ahk2 submodule. */
 export class RunnerService {
     /** Start debug session */
     public static async startDebugger(script?: string) {
