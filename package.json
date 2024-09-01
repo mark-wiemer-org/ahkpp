@@ -319,13 +319,14 @@
                         "type": "string"
                     }
                 },
-                "AHK++.v1.IntelliSense": {
+                "AHK++.v1.Intellisense": {
                     "type": "object",
                     "markdownDescription": "Number of lines to parse each AHK file for IntelliSense.\n- -1: Unlimited parsing.\n- 0: No parsing.",
                     "properties": {
                         "maximumParseLength": {
                             "type": "number",
-                            "default": 10000
+                            "default": 10000,
+                            "minimum": -1
                         }
                     },
                     "default": {
