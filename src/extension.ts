@@ -10,7 +10,7 @@ import { SymbolProvider } from './providers/symbolProvider';
 import { FileManager } from './common/fileManager';
 import { AhkHoverProvider } from './providers/ahkHoverProvider';
 import { RefProvider } from './providers/refProvider';
-import { Global, ConfigKey } from './common/global';
+import { Global } from './common/global';
 import { AhkRenameProvider } from './providers/ahkRenameProvider';
 import { SignatureProvider } from './providers/signatureProvider';
 import { CompletionProvider } from './providers/completionProvider';
@@ -75,15 +75,13 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('ahk++.openHelp', openHelp),
     );
 
-    if (Global.getConfig<boolean>(ConfigKey.enableIntellisense)) {
-        context.subscriptions.push(
-            vscode.languages.registerCompletionItemProvider(
-                language,
-                new CompletionProvider(),
-                '.',
-            ),
-        );
-    }
+    context.subscriptions.push(
+        vscode.languages.registerCompletionItemProvider(
+            language,
+            new CompletionProvider(),
+            '.',
+        ),
+    );
 
     activateV2(context);
 }

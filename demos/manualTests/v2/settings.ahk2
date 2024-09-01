@@ -1,0 +1,38 @@
+#Requires AutoHotkey v2.0
+
+; Tests for the settings added by incorporating thqby's extension
+
+; Comment Tag Regex
+; comments matching the regex show up in the command palette and breadcrumb
+; Ctrl+Shift+O or F1 > "Go to Symbol in Editor
+;; hello world
+
+; Complete Function Calls
+; when typing a function name, the parens are automatically added
+; cursor moved to the middle of the parens
+
+; todo Completion Commit Characters is untested for now
+
+;; Diagnostics
+; todo Class Non Dynamic Member Check is untested for now
+; todo Params Check is untested for now
+
+; Library suggestions
+; https://www.autohotkey.com/docs/v2/Scripts.htm#lib
+; I added "MyMsgBox" to my standard library
+; and "MyLocalMsgBox" to the local library
+
+;; Warn
+; VarUnset
+x := 1
+MsgBox(x)
+
+; Local Same As Global
+MyFunc() {
+    x := 2
+}
+
+; Call Without Parentheses
+MyFunc
+MsgBox "hi"
+MsgBox ("hi")

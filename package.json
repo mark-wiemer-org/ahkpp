@@ -1,7 +1,7 @@
 {
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AutoHotkey Plus Plus",
-    "version": "5.1.3",
+    "version": "5.1.4",
     "description": "AutoHotkey v1 and v2 language support for Visual Studio Code: IntelliSense, debugging, formatting, and more!",
     "categories": [
         "Debuggers",
@@ -65,6 +65,7 @@
         "format": "prettier --check .",
         "format:fix": "prettier --write .",
         "lint": "npm run format && npm run eslint && npm run sort-package-json",
+        "lint:ci": "npm run eslint && npm run sort-package-json",
         "package": "vsce package",
         "prepare": "git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
@@ -75,6 +76,7 @@
         "pretest-unit": "npm run compile-ts",
         "test-unit": "vscode-test",
         "validate": "npm run lint && npm run test && npm run package",
+        "validate:ci": "npm run lint:ci && npm run test && npm run package",
         "vscode:prepublish": "npm run compile-grammar && npm run build && echo Packaging..."
     },
     "contributes": {
@@ -111,63 +113,63 @@
             {
                 "enablement": "!isWeb",
                 "command": "ahk++.debugAttach",
-                "title": "%ahk++.debugAttach%",
+                "title": "%ahk++.command.debugAttach%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2 && shellExecutionSupported",
                 "command": "ahk++.debugParams",
-                "title": "%ahk++.debugParams%",
+                "title": "%ahk++.command.debugParams%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2",
                 "command": "ahk++.diagnostic.full",
-                "title": "%ahk++.diagnostic.full%",
+                "title": "%ahk++.command.diagnostic.full%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2",
                 "command": "ahk++.exportSymbols",
-                "title": "%ahk++.exportSymbols%",
+                "title": "%ahk++.command.exportSymbols%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2 && shellExecutionSupported",
                 "command": "ahk++.run",
-                "title": "%ahk++.run%",
+                "title": "%ahk++.command.run%",
                 "icon": "$(play)",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2 && !isWeb",
                 "command": "ahk++.runSelection",
-                "title": "%ahk++.runSelection%",
+                "title": "%ahk++.command.runSelection%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2 && !isWeb",
                 "command": "ahk++.stop",
-                "title": "%ahk++.stop%",
+                "title": "%ahk++.command.stop%",
                 "icon": "$(stop)",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2",
                 "command": "ahk++.addDocComment",
-                "title": "%ahk++.addDocComment%",
+                "title": "%ahk++.command.addDocComment%",
                 "category": "AHK++"
             },
             {
                 "enablement": "!isWeb",
                 "command": "ahk++.setV2Interpreter",
-                "title": "%ahk++.setV2Interpreter%",
+                "title": "%ahk++.command.setV2Interpreter%",
                 "category": "AHK++"
             },
             {
                 "enablement": "editorLangId == ahk2",
                 "command": "ahk++.updateVersionInfo",
-                "title": "%ahk++.updateVersionInfo%",
+                "title": "%ahk++.command.updateVersionInfo%",
                 "category": "AHK++"
             },
             {
@@ -185,7 +187,7 @@
             {
                 "enablement": "editorLangId == ahk2 && resourceScheme == file",
                 "command": "ahk++.setAScriptDir",
-                "title": "%ahk++.setAScriptDir%",
+                "title": "%ahk++.command.setAScriptDir%",
                 "category": "AHK++"
             }
         ],
@@ -193,16 +195,6 @@
             "type": "object",
             "title": "AutoHotkey Plus Plus",
             "properties": {
-                "ahk++.compiler.compileBaseFileV1": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Base file path for compiling v1 scripts (optional)."
-                },
-                "ahk++.compiler.compileBaseFileV2": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Base file path for compiling v2 scripts (optional)."
-                },
                 "ahk++.compiler.compileIcon": {
                     "type": "string",
                     "default": "",
@@ -218,67 +210,6 @@
                     "default": "C:/Program Files/AutoHotkey/Compiler/Ahk2Exe.exe",
                     "description": "Path to the AHK compiler. (This is the same for both v1 and v2.)"
                 },
-                "ahk++.file.interpreterPathV1": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
-                    "description": "Path to the AHK v1 interpreter."
-                },
-                "ahk++.file.interpreterPathV2": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe",
-                    "description": "Path to the AHK v2 interpreter."
-                },
-                "ahk++.file.helpPathV1": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
-                    "description": "Path to the AHK v1 help document."
-                },
-                "ahk++.file.helpPathV2": {
-                    "type": "string",
-                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
-                    "description": "Path to the AHK v2 help document."
-                },
-                "ahk++.file.templateSnippetNameV1": {
-                    "type": "string",
-                    "default": "AhkTemplateV1",
-                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
-                },
-                "ahk++.file.templateSnippetNameV2": {
-                    "type": "string",
-                    "default": "AhkTemplateV2",
-                    "markdownDescription": "The name of the snippet to populate new AHK files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
-                },
-                "ahk++.formatter.allowedNumberOfEmptyLines": {
-                    "type": "integer",
-                    "default": 1,
-                    "minimum": -1,
-                    "markdownDescription": "Allowed number of empty lines.\n- -1: Ignore empty lines.\n- 0: No empty lines."
-                },
-                "ahk++.formatter.indentCodeAfterLabel": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Indent code after hotkeys and labels in top-level code blocks. Only applies to AHK v1."
-                },
-                "ahk++.formatter.indentCodeAfterIfDirective": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist). Only applies to AHK v1."
-                },
-                "ahk++.formatter.preserveIndent": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Preserve indentation on empty line. Only applies to AHK v1."
-                },
-                "ahk++.formatter.trimExtraSpaces": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Trim extra spaces between words. Only applies to AHK v1."
-                },
-                "ahk++.intellisense.enableIntellisense": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Add suggestions for relevant variables and methods in the workspace. Requires parsing. Changes take effect after reload. Only applies to AHK v1."
-                },
                 "ahk++.intellisense.maximumParseLength": {
                     "type": "number",
                     "default": 10000,
@@ -289,97 +220,65 @@
                     "default": true,
                     "description": "Show the Debug button in the editor title menu."
                 },
-                "AutoHotkey2.AutoLibInclude": {
-                    "scope": "window",
+                "ahk++.v1.file.compileBaseFile": {
                     "type": "string",
-                    "enum": [
-                        "Disabled",
-                        "Local",
-                        "User and Standard",
-                        "All"
-                    ],
-                    "default": "Disabled",
-                    "description": "%ahk2.autolibinclude%"
+                    "default": "",
+                    "description": "Base file path for compiling v1 scripts (optional)."
                 },
-                "AutoHotkey2.CommentTags": {
+                "ahk++.v1.file.helpPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkey.chm",
+                    "description": "Path to the AHK v1 help document."
+                },
+                "ahk++.v1.file.interpreterPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/AutoHotkeyU64.exe",
+                    "description": "Path to the AHK v1 interpreter."
+                },
+                "ahk++.v1.file.templateSnippetName": {
+                    "type": "string",
+                    "default": "AhkTemplateV1",
+                    "markdownDescription": "The name of the snippet to populate new AHK v1 files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
+                },
+                "ahk++.v1.formatter.allowedNumberOfEmptyLines": {
+                    "type": "integer",
+                    "default": 1,
+                    "minimum": -1,
+                    "markdownDescription": "Allowed number of empty lines.\n- -1: Ignore empty lines.\n- 0: No empty lines."
+                },
+                "ahk++.v1.formatter.indentCodeAfterLabel": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indent code after hotkeys and labels in top-level code blocks. Only applies to AHK v1."
+                },
+                "ahk++.v1.formatter.indentCodeAfterIfDirective": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indent code after a directive that creates context-sensitive hotkeys or hotstrings (#If, #IfWinActive, #IfWinNotActive, #IfWinExist, #IfWinNotExist). Only applies to AHK v1."
+                },
+                "ahk++.v1.formatter.preserveIndent": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Preserve indentation on empty line. Only applies to AHK v1."
+                },
+                "ahk++.v1.formatter.trimExtraSpaces": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Trim extra spaces between words. Only applies to AHK v1."
+                },
+                "ahk++.v2.commentTagRegex": {
                     "scope": "window",
                     "type": "string",
                     "default": "^;;\\s*(?<tag>.+)",
-                    "description": "%ahk2.commenttags%"
+                    "markdownDescription": "%ahk++.config.v2.commentTagRegex%"
                 },
-                "AutoHotkey2.CompilerCMD": {
-                    "scope": "window",
-                    "type": "string",
-                    "default": "/compress 0 /base ${execPath}",
-                    "markdownDescription": "%ahk2.compilercmd%"
-                },
-                "AutoHotkey2.CompleteFunctionParens": {
+                "ahk++.v2.completeFunctionCalls": {
                     "scope": "window",
                     "type": "boolean",
                     "default": false,
-                    "markdownDescription": "%ahk2.completefunctionparens%"
+                    "markdownDescription": "%ahk++.config.v2.completeFunctionCalls%"
                 },
-                "AutoHotkey2.DebugConfiguration": {
-                    "scope": "window",
-                    "type": "object",
-                    "default": {
-                        "port": "9002-9100",
-                        "useAnnounce": "detail",
-                        "useAutoJumpToError": true,
-                        "useDebugDirective": true,
-                        "usePerfTips": true
-                    },
-                    "description": "%ahk2.debugconfiguration%"
-                },
-                "AutoHotkey2.Diagnostics.ClassNonDynamicMemberCheck": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "description": "%ahk2.diagnostics.class-non-dynamic-member-check%"
-                },
-                "AutoHotkey2.Diagnostics.ParamsCheck": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "description": "%ahk2.diagnostics.paramscheck%"
-                },
-                "AutoHotkey2.Warn.VarUnset": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "description": "%ahk2.warn.varunset%"
-                },
-                "AutoHotkey2.Warn.LocalSameAsGlobal": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": false,
-                    "description": "%ahk2.warn.localsameasglobal%"
-                },
-                "AutoHotkey2.Warn.CallWithoutParentheses": {
-                    "scope": "window",
-                    "type": "string",
-                    "enum": [
-                        "Off",
-                        "Parentheses",
-                        "On"
-                    ],
-                    "default": "Off",
-                    "description": "%ahk2.warn.callwithoutparentheses%"
-                },
-                "AutoHotkey2.ActionWhenV1IsDetected": {
-                    "scope": "window",
-                    "type": "string",
-                    "default": "SwitchToV1",
-                    "enum": [
-                        "Continue",
-                        "Warn",
-                        "StopParsing",
-                        "SwitchToV1",
-                        "SkipLine"
-                    ],
-                    "description": "%ahk2.actionwhenv1isdetected%"
-                },
-                "AutoHotkey2.CompletionCommitCharacters": {
+                "ahk++.v2.completionCommitCharacters": {
                     "scope": "window",
                     "type": "object",
                     "properties": {
@@ -390,16 +289,42 @@
                             "type": "string"
                         }
                     },
-                    "additionalProperties": {
-                        "type": "string"
-                    },
                     "default": {
                         "Class": ".(",
                         "Function": "("
                     },
-                    "markdownDescription": "%ahk2.completioncommitcharacters%"
+                    "markdownDescription": "%ahk++.config.v2.completionCommitCharacters%"
                 },
-                "AutoHotkey2.Files.Exclude": {
+                "ahk++.v2.debugConfiguration": {
+                    "scope": "window",
+                    "type": "object",
+                    "default": {
+                        "port": "9002-9100",
+                        "useAnnounce": "detail",
+                        "useAutoJumpToError": true,
+                        "useDebugDirective": true,
+                        "usePerfTips": true
+                    },
+                    "markdownDescription": "%ahk++.config.v2.debugConfiguration%"
+                },
+                "ahk++.v2.diagnostics.classNonDynamicMemberCheck": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%ahk++.config.v2.diagnostics.classNonDynamicMemberCheck%"
+                },
+                "ahk++.v2.diagnostics.paramsCheck": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%ahk++.config.v2.diagnostics.paramsCheck%"
+                },
+                "ahk++.v2.file.compileBaseFile": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Base file path for compiling v2 scripts (optional)."
+                },
+                "ahk++.v2.file.exclude": {
                     "scope": "window",
                     "type": "array",
                     "default": [],
@@ -407,19 +332,34 @@
                         "type": "string"
                     },
                     "uniqueItems": true,
-                    "description": "%ahk2.files.exclude%"
+                    "description": "%ahk++.config.v2.files.exclude%"
                 },
-                "AutoHotkey2.Files.ScanMaxDepth": {
+                "ahk++.v2.file.helpPath": {
+                    "type": "string",
+                    "default": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
+                    "description": "Path to the AHK v2 help document."
+                },
+                "ahk++.v2.file.interpreterPath": {
+                    "type": "string",
+                    "default": "C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey64.exe",
+                    "description": "%ahk++.config.v2.file.interpreterPath%"
+                },
+                "ahk++.v2.file.maxScanDepth": {
                     "scope": "window",
                     "type": "integer",
                     "default": 2,
-                    "description": "%ahk2.files.scanmaxdepth%"
+                    "description": "%ahk++.config.v2.files.maxScanDepth%"
                 },
-                "AutoHotkey2.FormatOptions": {
+                "ahk++.v2.file.templateSnippetName": {
+                    "type": "string",
+                    "default": "AhkTemplateV2",
+                    "markdownDescription": "The name of the snippet to populate new AHK v2 files. If blank, no snippet will be applied. [Learn more about the template snippet](https://github.com/mark-wiemer-org/ahkpp/tree/main/docs/TemplateSnippet.md)."
+                },
+                "ahk++.v2.formatter": {
                     "scope": "window",
                     "type": "object",
                     "properties": {
-                        "array_style": {
+                        "arrayStyle": {
                             "type": "string",
                             "enum": [
                                 "collapse",
@@ -428,7 +368,7 @@
                             ],
                             "default": "none"
                         },
-                        "brace_style": {
+                        "braceStyle": {
                             "type": "string",
                             "enum": [
                                 "One True Brace",
@@ -441,31 +381,31 @@
                                 "if 1 {\n}\nelse {\n}"
                             ]
                         },
-                        "break_chained_methods": {
+                        "breakChainedMethods": {
                             "type": "boolean",
                             "default": false
                         },
-                        "ignore_comment": {
+                        "ignoreComment": {
                             "type": "boolean",
                             "default": false
                         },
-                        "indent_string": {
+                        "indentString": {
                             "type": "string",
-                            "default": "\t"
+                            "default": "    "
                         },
-                        "indent_between_hotif_directive": {
+                        "indentBetweenHotIfDirectives": {
                             "type": "boolean",
                             "default": false
                         },
-                        "keyword_start_with_uppercase": {
+                        "keywordStartWithUppercase": {
                             "type": "boolean",
                             "default": false
                         },
-                        "max_preserve_newlines": {
+                        "maxPreserveNewlines": {
                             "type": "number",
                             "default": 2
                         },
-                        "object_style": {
+                        "objectStyle": {
                             "type": "string",
                             "enum": [
                                 "collapse",
@@ -474,64 +414,119 @@
                             ],
                             "default": "none"
                         },
-                        "preserve_newlines": {
+                        "preserveNewlines": {
                             "type": "boolean",
                             "default": true
                         },
-                        "space_before_conditional": {
+                        "spaceBeforeConditional": {
                             "type": "boolean",
                             "default": true
                         },
-                        "space_after_double_colon": {
+                        "spaceAfterDoubleColon": {
                             "type": "boolean",
                             "default": true
                         },
-                        "space_in_empty_paren": {
+                        "spaceInEmptyParen": {
                             "type": "boolean",
                             "default": false
                         },
-                        "space_in_other": {
+                        "spaceInOther": {
                             "type": "boolean",
                             "default": true
                         },
-                        "space_in_paren": {
+                        "spaceInParen": {
                             "type": "boolean",
                             "default": false
                         },
-                        "switch_case_alignment": {
+                        "switchCaseAlignment": {
                             "type": "boolean",
                             "default": false
                         },
-                        "symbol_with_same_case": {
+                        "symbolWithSameCase": {
                             "type": "boolean",
                             "default": false
                         },
-                        "white_space_before_inline_comment": {
+                        "whitespaceBeforeInlineComment": {
                             "type": "string"
                         },
-                        "wrap_line_length": {
+                        "wrapLineLength": {
                             "type": "number",
-                            "default": 0
+                            "default": 0,
+                            "description": "0 to disable wrapping"
                         }
                     },
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "default": {}
+                    "default": {
+                        "arrayStyle": "none",
+                        "braceStyle": "One True Brace",
+                        "breakChainedMethods": false,
+                        "ignoreComment": false,
+                        "indentString": "    ",
+                        "indentBetweenHotIfDirectives": false,
+                        "keywordStartWithUppercase": false,
+                        "maxPreserveNewlines": 2,
+                        "objectStyle": "none",
+                        "preserveNewlines": true,
+                        "spaceBeforeConditional": true,
+                        "spaceAfterDoubleColon": true,
+                        "spaceInEmptyParen": false,
+                        "spaceInOther": true,
+                        "spaceInParen": false,
+                        "switchCaseAlignment": false,
+                        "symbolWithSameCase": false,
+                        "whitespaceBeforeInlineComment": "",
+                        "wrapLineLength": 120
+                    }
                 },
-                "AutoHotkey2.InterpreterPath": {
+                "ahk++.v2.librarySuggestions": {
                     "scope": "window",
                     "type": "string",
-                    "default": "C:\\Program Files\\Autohotkey\\v2\\AutoHotkey.exe",
-                    "markdownDescription": "%ahk2.interpreterpath%"
+                    "enum": [
+                        "Disabled",
+                        "Local",
+                        "User and Standard",
+                        "All"
+                    ],
+                    "default": "Disabled",
+                    "description": "%ahk++.config.v2.librarySuggestions%"
                 },
-                "AutoHotkey2.SymbolFoldingFromOpenBrace": {
+                "ahk++.v2.warn.callWithoutParentheses": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "Off",
+                        "Parentheses",
+                        "On"
+                    ],
+                    "default": "Off",
+                    "description": "%ahk++.config.v2.warn.callWithoutParentheses%"
+                },
+                "ahk++.v2.warn.localSameAsGlobal": {
                     "scope": "window",
                     "type": "boolean",
                     "default": false,
-                    "description": "%ahk2.symbolfoldingfromopenbrace%"
+                    "description": "%ahk++.config.v2.warn.localSameAsGlobal%"
                 },
-                "AutoHotkey2.WorkingDirs": {
+                "ahk++.v2.warn.varUnset": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%ahk++.config.v2.warn.varUnset%"
+                },
+                "ahk++.v2.symbolFoldingFromOpenBrace": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%ahk++.config.v2.symbolFoldingFromOpenBrace%"
+                },
+                "ahk++.v2.syntaxes": {
+                    "scope": "window",
+                    "type": "string",
+                    "markdownDescription": "%ahk++.config.v2.syntaxes%"
+                },
+                "ahk++.v2.workingDirectories": {
                     "scope": "window",
                     "type": "array",
                     "default": [],
@@ -539,12 +534,7 @@
                         "type": "string"
                     },
                     "uniqueItems": true,
-                    "description": "%ahk2.workingdirs%"
-                },
-                "AutoHotkey2.Syntaxes": {
-                    "scope": "window",
-                    "type": "string",
-                    "markdownDescription": "%ahk2.syntaxes%"
+                    "description": "%ahk++.config.v2.workingDirectories%"
                 }
             }
         },

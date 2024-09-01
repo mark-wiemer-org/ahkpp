@@ -35,3 +35,4 @@ AddDocComment(arg1, arg2) {
 
 ; Set AHK v2 Interpreter should open quick pick with installed options
 ; updates should reflect in workspace settings
+; option should be present in status bar, bottom left
