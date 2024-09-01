@@ -30,23 +30,23 @@ export class Global {
 // PascalCase formats value shown to user properly
 // Ref https://github.com/microsoft/vscode/issues/70589
 export enum ConfigKey {
-    allowedNumberOfEmptyLines = 'v1.Formatter.allowedNumberOfEmptyLines',
-    compileBaseFileV1 = 'v1.File.compileBaseFile',
+    allowedNumberOfEmptyLines = 'v1.formatter.allowedNumberOfEmptyLines',
+    compileBaseFileV1 = 'v1.file.compileBaseFile',
     compileBaseFileV2 = 'v2.file.compileBaseFile',
-    compileIcon = 'Compiler.compileIcon',
-    compilerPath = 'Compiler.compilerPath',
-    interpreterPathV1 = 'v1.File.interpreterPath',
+    compileIcon = 'compiler.compileIcon',
+    compilerPath = 'compiler.compilerPath',
+    interpreterPathV1 = 'v1.file.interpreterPath',
     interpreterPathV2 = 'v2.file.interpreterPath',
-    helpPathV1 = 'v1.File.helpPath',
+    helpPathV1 = 'v1.file.helpPath',
     helpPathV2 = 'v2.file.helpPath',
-    indentCodeAfterIfDirective = 'v1.Formatter.indentCodeAfterIfDirective',
-    indentCodeAfterLabel = 'v1.Formatter.indentCodeAfterLabel',
-    maximumParseLength = 'v1.Intellisense.maximumParseLength',
-    preserveIndent = 'v1.Formatter.preserveIndent',
-    templateSnippetNameV1 = 'v1.File.templateSnippetName',
+    indentCodeAfterIfDirective = 'v1.formatter.indentCodeAfterIfDirective',
+    indentCodeAfterLabel = 'v1.formatter.indentCodeAfterLabel',
+    maximumParseLength = 'v1.intellisense.maximumParseLength',
+    preserveIndent = 'v1.formatter.preserveIndent',
+    templateSnippetNameV1 = 'v1.file.templateSnippetName',
     templateSnippetNameV2 = 'v2.file.templateSnippetName',
-    trimExtraSpaces = 'v1.Formatter.trimExtraSpaces',
-    useMpress = 'Compiler.useMpress',
+    trimExtraSpaces = 'v1.formatter.trimExtraSpaces',
+    useMpress = 'compiler.useMpress',
 }
 
 export enum LanguageId {
