@@ -55,4 +55,4 @@ When the tag is pushed, changes will automatically be published.
 1. [Deploy workflow](https://github.com/mark-wiemer-org/ahkpp/actions/workflows/deploy.yml)
 1. [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus)
     1. [Publisher view](https://marketplace.visualstudio.com/manage/publishers/mark-wiemer): validation takes about 5 minutes
-1. [Open VSX Marketplace](https://open-vsx.org/extension/mark-wiemer-org/ahkpp)
+1. [Open VSX Marketplace](https://open-vsx.org/extension/mark-wiemer/vscode-autohotkey-plus-plus)
