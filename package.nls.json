@@ -19,12 +19,12 @@
     "ahk++.config.v2.diagnostics.paramsCheck": "Check that the function call has the correct number of arguments",
     "ahk++.config.v2.file.interpreterPath": "Path to the `AutoHotkey.exe` executable file for AHK v2.",
     "ahk++.config.v2.files.exclude": "Glob patterns for excluding files and folders when scanning AHK files.",
-    "ahk++.config.v2.files.maxScanDepth": "Controls the depth when scanning AHK files.",
+    "ahk++.config.v2.files.maxScanDepth": "Depth of folders to scan for IntelliSense. Negative values mean infinite depth.",
     "ahk++.config.v2.librarySuggestions": "Which libraries to suggest functions from, if any.",
-    "ahk++.config.v2.symbolFoldingFromOpenBrace": "Forced symbol folding starts at open brace",
+    "ahk++.config.v2.symbolFoldingFromOpenBrace": "Fold parameter lists separately from definitions. Recommended false for consistency with other languages.",
     "ahk++.config.v2.syntaxes": "Path to the `ahk2.json`, `*.snippet.json`, and `ahk2.d.ahk` files used by IntelliSense.",
     "ahk++.config.v2.warn.callWithoutParentheses": "Display warnings for each function or method call without parentheses. Changes take effect after restart.",
     "ahk++.config.v2.warn.localSameAsGlobal": "Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.",
     "ahk++.config.v2.warn.varUnset": "Display a warning when referencing an unassigned variable. Changes take effect after restart.",
-    "ahk++.config.v2.workingDirectories": "Sets the working directory for the script"
+    "ahk++.config.v2.workingDirectories": "The directories containing referenced AHK files"
 }

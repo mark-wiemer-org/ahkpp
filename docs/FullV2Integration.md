@@ -38,19 +38,15 @@ All new settings are in the `V2` settings category
     -   Class Non Dynamic Member Check: Check whether non-dynamic members of a class exist when lexing
     -   Params Check: Check that the function call has the correct number of arguments
 -   Formatter: Options for how to format a file. v1 and v2 formatters have their own settings due to very different implementations.
+-   File
+    -   Exclude: Glob patterns for excluding files and folders when scanning AHK files.
+    -   Max Scan Depth: Depth of folders to scan for IntelliSense. Negative values mean infinite depth.
 -   Warn
     -   Var Unset: Display a warning when referencing an unassigned variable. Changes take effect after restart.
     -   Local Same As Global: Display warnings for each undeclared local variable that has the same name as a global variable. Changes take effect after restart.
     -   Call Without Parentheses: Display warnings for each function or method call without parentheses. Changes take effect after restart.
-
-In progress:
-
--   ahk++.Files.Exclude
--   ahk++.Files.ScanMaxDepth
--   ahk++.InterpreterPath
--   ahk++.SymbolFoldingFromOpenBrace
--   ahk++.WorkingDirs
--   ahk++.Syntaxes
+-   Symbol Folding From Open Brace: Fold parameter lists separately from definitions. Recommended false for consistency with other languages.
+-   Working Directories: The directories containing referenced AHK files
 
 ### Configuration defaults
 
@@ -123,7 +119,6 @@ These issues will be resolved before a full release
 -   [#486](https://github.com/mark-wiemer-org/ahkpp/issues/486)
 -   Ensure commands work with both v1 and v2 as intended
 -   Cleanup and organize settings names and IDs
--   Dedupe configuration values
 -   [Release pipeline](../.github/workflows/deploy.yml) has been changed to push pre-releases. Definitely fix this for the final release 😉
 
 ### Low priority
@@ -134,3 +129,4 @@ These issues will be backlogged and resolved after a full release
 -   No browser support (AHK++ did not have this before, we can add it later if users want it)
 -   Hardlink config files shared between ahk2 submodule and global package (e.g. `*.nls*.json`)
 -   Explain formatter options
+-   Issue with custom folding and comment blocks (see v2/settings.ahk2)
