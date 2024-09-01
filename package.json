@@ -321,7 +321,7 @@
                 },
                 "AHK++.v1.intellisense": {
                     "type": "object",
-                    "markdownDescription": "Number of lines to parse each AHK file for IntelliSense.\n- -1: Unlimited parsing.\n- 0: No parsing.",
+                    "markdownDescription": "Number of lines to parse each AHK file for IntelliSense.\n- -1: Unlimited parsing\n- 0: No parsing\n\nChanges take effect after restart.",
                     "properties": {
                         "maximumParseLength": {
                             "type": "number",
