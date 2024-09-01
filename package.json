@@ -757,12 +757,12 @@
             {
                 "command": "ahk++.debugParams",
                 "key": "shift+f5",
-                "when": "editorLangId == ahk2 && !isWeb"
+                "when": "editorLangId == ahk2"
             },
             {
                 "command": "ahk++.stop",
                 "key": "ctrl+f6",
-                "when": "editorLangId == ahk2 && !isWeb && ahk2:isRunning"
+                "when": "editorLangId == ahk2 && ahk2:isRunning"
             }
         ],
         "languages": [
@@ -821,7 +821,7 @@
                     "group": "navigation@-1"
                 },
                 {
-                    "when": "editorLangId == ahk2 && !isWeb && ahk2:isRunning",
+                    "when": "editorLangId == ahk2 && ahk2:isRunning",
                     "command": "ahk++.stop",
                     "group": "navigation@0"
                 },
