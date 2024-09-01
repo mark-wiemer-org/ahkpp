@@ -49,6 +49,7 @@ export enum ConfigKey {
     useMpress = 'compiler.useMpress',
 }
 
+/** Also in submodule */
 export enum LanguageId {
     ahk1 = 'ahk',
     ahk2 = 'ahk2',
