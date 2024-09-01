@@ -336,28 +336,6 @@
                         "type": "string"
                     }
                 },
-                "AHK++.v2.completionCommitCharacters": {
-                    "markdownDescription": "%ahk++.config.v2.completionCommitCharacters%",
-                    "scope": "window",
-                    "type": "object",
-                    "properties": {
-                        "Class": {
-                            "type": "string",
-                            "default": ".("
-                        },
-                        "Function": {
-                            "type": "string",
-                            "default": "("
-                        }
-                    },
-                    "default": {
-                        "Class": ".(",
-                        "Function": "("
-                    },
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
                 "AHK++.v2.debugConfiguration": {
                     "markdownDescription": "%ahk++.config.v2.debugConfiguration%",
                     "scope": "window",
@@ -644,16 +622,6 @@
                             "type": "string",
                             "default": "",
                             "description": "%ahk++.config.v2.syntaxes%"
-                        },
-                        "workingDirectories": {
-                            "scope": "window",
-                            "type": "array",
-                            "default": [],
-                            "items": {
-                                "type": "string"
-                            },
-                            "uniqueItems": true,
-                            "description": "%ahk++.config.v2.workingDirectories%"
                         }
                     },
                     "default": {
@@ -662,12 +630,43 @@
                         "completeFunctionCalls": false,
                         "librarySuggestions": "Disabled",
                         "symbolFoldingFromOpenBrace": false,
-                        "syntaxes": "",
-                        "workingDirectories": []
+                        "syntaxes": ""
                     },
                     "additionalProperties": {
                         "type": "string"
                     }
+                },
+                "AHK++.v2.general.completionCommitCharacters": {
+                    "markdownDescription": "%ahk++.config.v2.completionCommitCharacters%",
+                    "scope": "window",
+                    "type": "object",
+                    "properties": {
+                        "Class": {
+                            "type": "string",
+                            "default": ".("
+                        },
+                        "Function": {
+                            "type": "string",
+                            "default": "("
+                        }
+                    },
+                    "default": {
+                        "Class": ".(",
+                        "Function": "("
+                    },
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "AHK++.v2.general.workingDirectories": {
+                    "scope": "window",
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "uniqueItems": true,
+                    "description": "%ahk++.config.v2.general.workingDirectories%"
                 },
                 "AHK++.v2.warn": {
                     "type": "object",
