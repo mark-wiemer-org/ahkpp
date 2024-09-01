@@ -151,7 +151,6 @@
                 "category": "AHK++"
             },
             {
-                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.stop",
                 "title": "%ahk++.command.stop%",
                 "icon": "$(stop)",
@@ -927,7 +926,7 @@
             {
                 "command": "ahk++.stop",
                 "key": "ctrl+f6",
-                "when": "editorLangId == ahk2 && ahk2:isRunning"
+                "when": "ahk:isRunning"
             }
         ],
         "languages": [
@@ -986,8 +985,8 @@
                     "group": "navigation@-1"
                 },
                 {
-                    "when": "editorLangId == ahk2 && ahk2:isRunning",
                     "command": "ahk++.stop",
+                    "when": "ahk:isRunning",
                     "group": "navigation@0"
                 },
                 {
@@ -1041,7 +1040,7 @@
                 {
                     "command": "ahk++.stop",
                     "group": "navigation@0",
-                    "when": "(editorLangId == ahk || editorLangId == ahk2) && ahk2:isRunning && shellExecutionSupported"
+                    "when": "ahk:isRunning"
                 }
             ]
         },
