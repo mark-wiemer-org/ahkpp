@@ -27,8 +27,9 @@ export class Global {
 }
 
 /** Defined in package.json */
-// PascalCase formats value shown to user properly
-// Ref https://github.com/microsoft/vscode/issues/70589
+// Ref "Settings UI is overwhelming for extensions with lots of settings"
+// https://github.com/microsoft/vscode/issues/70589
+// todo de-dupe with ahk2/**/config.ts
 export enum ConfigKey {
     allowedNumberOfEmptyLines = 'v1.formatter.allowedNumberOfEmptyLines',
     compileBaseFileV1 = 'v1.file.compileBaseFile',

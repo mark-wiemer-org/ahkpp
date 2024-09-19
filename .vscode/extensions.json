@@ -8,6 +8,7 @@
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
         "simonsiefke.svg-preview",
-        "meganrogge.template-string-converter"
+        "meganrogge.template-string-converter",
+        "tyriar.sort-lines"
     ]
 }

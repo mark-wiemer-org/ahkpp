@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.1.0 - unreleased 🫙
+
+-   Add "General > showOutputView" setting to toggle automatically showing the output view when running or debugging a script
+
 ## 6.0.0 - 2024-09-01 🥂
 
 ### Full AHK v2 support is here!
