@@ -5,4 +5,10 @@
 ; showOutputView
 ; always: shows on start
 ; never: never shows
-MsgBox(x)
+; works for both running and debugging
+
+; always+run
+; always+debug
+; never+run
+; never+debug
+x := 1
