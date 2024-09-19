@@ -1,0 +1,8 @@
+#Requires AutoHotkey v2.0
+#SingleInstance
+
+;; General
+; showOutputView
+; always: shows on start
+; never: never shows
+MsgBox(x)

@@ -233,12 +233,10 @@
                             "type": "string",
                             "enum": [
                                 "always",
-                                "onError",
                                 "never"
                             ],
                             "enumDescriptions": [
                                 "%ahk++.config.general.showOutputView.always%",
-                                "%ahk++.config.general.showOutputView.onError%",
                                 "%ahk++.config.general.showOutputView.never%"
                             ],
                             "default": "always",
