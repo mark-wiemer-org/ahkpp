@@ -60,6 +60,7 @@ export class DebugSession extends LoggingDebugSession {
             })
             .on('output', (text) => {
                 this.sendEvent(new OutputEvent(`${text}\n`));
+                // todo only focus on debug console view according to new config
                 commands.executeCommand('workbench.debug.action.focusRepl');
             })
             .on('end', () => {
