@@ -226,6 +226,32 @@
                     },
                     "markdownDescription": "Learn more about [MPRESS](https://www.autohotkey.com/mpress/mpress_web.htm)"
                 },
+                "AHK++.general": {
+                    "type": "object",
+                    "properties": {
+                        "showOutputView": {
+                            "type": "string",
+                            "enum": [
+                                "always",
+                                "onError",
+                                "never"
+                            ],
+                            "enumDescriptions": [
+                                "%ahk++.config.general.showOutputView.always%",
+                                "%ahk++.config.general.showOutputView.onError%",
+                                "%ahk++.config.general.showOutputView.never%"
+                            ],
+                            "default": "always",
+                            "description": "%ahk++.config.general.showOutputView%"
+                        }
+                    },
+                    "default": {
+                        "showOutputView": "always"
+                    },
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "AHK++.menu": {
                     "type": "object",
                     "properties": {
