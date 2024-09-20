@@ -12,6 +12,7 @@ import { DebugProtocol } from '@vscode/debugprotocol';
 import { DebugDispatcher } from './debugDispatcher';
 import { Continue } from './struct/command';
 import { VscodeScope } from './struct/scope';
+import { ConfigKey, Global } from '../common/global';
 
 /**
  * This interface describes the mock-debug specific launch attributes
@@ -60,8 +61,10 @@ export class DebugSession extends LoggingDebugSession {
             })
             .on('output', (text) => {
                 this.sendEvent(new OutputEvent(`${text}\n`));
-                // todo only focus on debug console view according to new config
-                commands.executeCommand('workbench.debug.action.focusRepl');
+                if (Global.getConfig(ConfigKey.showOutputView)) {
+                    // focus on debug console view
+                    commands.executeCommand('workbench.debug.action.focusRepl');
+                }
             })
             .on('end', () => {
                 this.sendEvent(new TerminatedEvent());
