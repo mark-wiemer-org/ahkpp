@@ -34,7 +34,8 @@ const getSearchText = (
 const buildScriptV1 = (searchText: string, helpPath: string) => `
 SetWinDelay 10
 SetKeyDelay 0
-searchText := "${searchText}"
+searchText := "${searchText.replaceAll('"', '""')}" ; Escape double quotes 
+searchText := StrReplace(searchText, "#", "{#}")
 IfWinNotExist, AutoHotkey Help
 {
     Run ${helpPath}
@@ -42,7 +43,6 @@ IfWinNotExist, AutoHotkey Help
 }
 WinActivate
 WinWaitActive
-StringReplace, searchText, searchText, #, {#}
 Send, !s
 Sleep 200
 Send {home}
