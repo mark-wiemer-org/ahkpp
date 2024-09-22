@@ -4,6 +4,7 @@
 
 -   Add "General > showOutputView" setting to toggle automatically showing the output view when running a script ([#492](https://github.com/mark-wiemer-org/ahkpp/issues/492))
 -   Fix quick help when selecting quoted strings ([#376](https://github.com/mark-wiemer-org/ahkpp/issues/376))
+-   Fix description for V2 > General > `actionWhenV1Detected` config key
 
 ## 6.0.0 - 2024-09-01 🥂
 
