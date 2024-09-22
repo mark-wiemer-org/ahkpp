@@ -25,11 +25,11 @@ export const isOutputVisible = async (): Promise<boolean> => {
      * You can access the visible or active output channel as a {@link TextDocument text document} from {@link window.visibleTextEditors visible editors} or {@link window.activeTextEditor active editor}
      * and use the language id to contribute language features like syntax coloring, code lens etc.
      */
-    const outputVisible = vscode.window.visibleTextEditors.some(
+    const outputViewVisible = vscode.window.visibleTextEditors.some(
         (editor) => editor.document.uri.scheme === 'output',
     );
 
-    return outputVisible;
+    return outputViewVisible;
 };
 
 /** Close the panel if it's open. Do nothing if it's not open. */
