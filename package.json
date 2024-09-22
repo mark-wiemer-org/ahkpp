@@ -632,7 +632,7 @@
                                 "SwitchToV1",
                                 "SkipLine"
                             ],
-                            "description": "%ahk++.config.v2.actionWhenV1Detectedd%"
+                            "description": "%ahk++.config.v2.actionWhenV1Detected%"
                         },
                         "commentTagRegex": {
                             "type": "string",
