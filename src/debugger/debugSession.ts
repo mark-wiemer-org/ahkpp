@@ -1,4 +1,3 @@
-import { commands } from 'vscode';
 import {
     BreakpointEvent,
     InitializedEvent,
@@ -12,7 +11,6 @@ import { DebugProtocol } from '@vscode/debugprotocol';
 import { DebugDispatcher } from './debugDispatcher';
 import { Continue } from './struct/command';
 import { VscodeScope } from './struct/scope';
-import { ConfigKey, Global } from '../common/global';
 
 /**
  * This interface describes the mock-debug specific launch attributes
@@ -40,7 +38,7 @@ export class DebugSession extends LoggingDebugSession {
     private dispatcher: DebugDispatcher;
 
     public constructor() {
-        super('ahk-debug.txt');
+        super();
 
         // this debugger uses zero-based lines and columns
         this.setDebuggerLinesStartAt1(false);
@@ -61,10 +59,6 @@ export class DebugSession extends LoggingDebugSession {
             })
             .on('output', (text) => {
                 this.sendEvent(new OutputEvent(`${text}\n`));
-                if (Global.getConfig(ConfigKey.showOutputView)) {
-                    // focus on debug console view
-                    commands.executeCommand('workbench.debug.action.focusRepl');
-                }
             })
             .on('end', () => {
                 this.sendEvent(new TerminatedEvent());
