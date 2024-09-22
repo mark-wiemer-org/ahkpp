@@ -6,6 +6,9 @@
 ; always: shows on start
 ; never: never shows
 ; works for both running and debugging
+; running: output is in the Output view
+; debugging: output is in the Debug Console, only shown if panel is already open
+
 
 ; always+run
 ; always+debug
