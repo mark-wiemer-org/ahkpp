@@ -47,18 +47,5 @@ suite('ahk2', () => {
                 assert.equal(await isOutputVisible(), show === 'always');
             });
         });
-
-        const debugTests: [name: string, show: 'always' | 'never'][] = [
-            ['always + debug', 'always'],
-            ['never + debug', 'never'],
-        ];
-
-        debugTests.forEach(([name, show]) => {
-            test(name, async () => {
-                await before(show);
-
-                // todo
-            });
-        });
     });
 });
