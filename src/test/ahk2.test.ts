@@ -1,7 +1,13 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { getDocument, isOutputVisible } from './utils';
+import {
+    closePanel,
+    getDocument,
+    isOutputVisible,
+    showDocument,
+    updateConfig,
+} from './utils';
 
 // Currently in `out` folder, need to get back to main `src` folder
 const filesParentPath = path.join(
@@ -14,20 +20,35 @@ const filesParentPath = path.join(
     'samples', // ./src/test/samples
 );
 
-suite('ahk2', () => {
+suite.only('ahk2', () => {
     suite('general.showOutputView', () => {
-        test('always + run', async () => {
-            vscode.workspace
-                .getConfiguration('AHK++')
-                .update('general', { showOutputView: 'always' }, true);
+        const tests: [
+            name: string,
+            show: 'always' | 'never',
+            runOrDebug: 'run' | 'debug',
+        ][] = [
+            ['always + run', 'always', 'run'],
+            ['never + run', 'never', 'run'],
+            // ['always + debug', 'always', 'debug'],
+            // ['never + debug', 'never', 'debug'],
+        ];
 
-            const filePath = path.join(filesParentPath, 'ahk2.ahk2');
-            const doc = await getDocument(filePath);
+        tests.forEach(([name, show, runOrDebug]) => {
+            test(name, async () => {
+                await updateConfig('general', { showOutputView: show });
+                const filePath = path.join(filesParentPath, 'ahk2.ahk2');
+                const doc = await getDocument(filePath);
+                await showDocument(doc);
 
-            await vscode.window.showTextDocument(doc);
-            await vscode.commands.executeCommand('ahk++.run');
+                // run cmd opens panel
+                // debug cmd opens debug console only when panel already opened
+                if (runOrDebug === 'run') await closePanel();
+                // else await vscode.commands.executeCommand('terminal.focus'); // todo
 
-            assert.equal(await isOutputVisible(), true);
+                await vscode.commands.executeCommand(`ahk++.${runOrDebug}`);
+
+                assert.equal(await isOutputVisible(), show === 'always');
+            });
         });
     });
 });

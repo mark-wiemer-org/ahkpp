@@ -17,18 +17,30 @@ export async function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-/** Whether the output view is visible with AHK++ output */
-/* From VS Code API docs:
- * You can access the visible or active output channel as a {@link TextDocument text document} from {@link window.visibleTextEditors visible editors} or {@link window.activeTextEditor active editor}
- * and use the language id to contribute language features like syntax coloring, code lens etc.
- */
+/** Whether the output view is visible */
 export const isOutputVisible = async (): Promise<boolean> => {
-    await sleep(100); // wait for output to show
-    return vscode.window.visibleTextEditors.some((editor) =>
-        editor.document.uri
-            .toString()
-            .startsWith(
-                'output:extension-output-mark-wiemer.vscode-autohotkey-plus-plus',
-            ),
+    await sleep(150); // wait for panel visibility to update
+
+    /* From VS Code API docs:
+     * You can access the visible or active output channel as a {@link TextDocument text document} from {@link window.visibleTextEditors visible editors} or {@link window.activeTextEditor active editor}
+     * and use the language id to contribute language features like syntax coloring, code lens etc.
+     */
+    const outputVisible = vscode.window.visibleTextEditors.some(
+        (editor) => editor.document.uri.scheme === 'output',
     );
+
+    return outputVisible;
+};
+
+/** Close the panel if it's open. Do nothing if it's not open. */
+export const closePanel = async (): Promise<void> => {
+    await vscode.commands.executeCommand('workbench.action.closePanel');
+};
+
+/** Update the global AHK++ setting */
+export const updateConfig = async (section: string, value: unknown) => {
+    await vscode.workspace
+        .getConfiguration('AHK++')
+        .update(section, value, true);
+    await sleep(80);
 };
