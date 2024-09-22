@@ -5,7 +5,7 @@ Portions copyright 2019-2022 [Weijan Chen](https://github.com/cweijan/autohotkey
 
 Unless otherwise indicated, all content is licensed under MIT.
 AutoHotkey H icon licensed under GNU GENERAL PUBLIC LICENSE
-Files under in the ahk2 submodule are licensed under GNU LESSER GENERAL PUBLIC LICENSE.
+Files in the ahk2 submodule are licensed under GNU LESSER GENERAL PUBLIC LICENSE.
 Other files licensed outside of MIT are marked as such at the top of the file.
 
 MIT License
