@@ -73,7 +73,7 @@
         "test": "npm run test-grammar && npm run test-unit",
         "pretest-grammar": "npm run compile-grammar",
         "test-grammar": "vscode-tmgrammar-snap language/samples/*.{ahk1,ahk2}",
-        "pretest-unit": "npm run compile-ts",
+        "pretest-unit": "npm run compile-ts && npm run build",
         "test-unit": "vscode-test",
         "validate": "npm run lint && npm run test && npm run package",
         "validate:ci": "npm run lint:ci && npm run test && npm run package",
