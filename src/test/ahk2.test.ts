@@ -21,9 +21,9 @@ const filesParentPath = path.join(
 );
 
 suite.only('ahk2', () => {
-    suite('general.showOutputView', () => {
+    suite('general.showOutput', () => {
         const before = async (show: 'always' | 'never') => {
-            await updateConfig('general', { showOutputView: show });
+            await updateConfig('general', { showOutput: show });
             const filePath = path.join(filesParentPath, 'ahk2.ahk2');
             const doc = await getDocument(filePath);
             await showDocument(doc);
@@ -38,7 +38,7 @@ suite.only('ahk2', () => {
             test(name, async () => {
                 await before(show);
 
-                // run cmd opens panel when `showOutputView` is 'always'
+                // run cmd opens panel when `showOutput` is 'always'
                 await closePanel();
 
                 await vscode.commands.executeCommand(`ahk++.run`);

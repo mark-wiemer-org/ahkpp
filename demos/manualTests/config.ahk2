@@ -2,7 +2,7 @@
 #SingleInstance
 
 ;; General
-; showOutputView
+; showOutput
 ; always: shows on start
 ; never: never shows
 ; works only for running scripts

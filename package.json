@@ -229,22 +229,22 @@
                 "AHK++.general": {
                     "type": "object",
                     "properties": {
-                        "showOutputView": {
+                        "showOutput": {
                             "type": "string",
                             "enum": [
                                 "always",
                                 "never"
                             ],
                             "enumDescriptions": [
-                                "%ahk++.config.general.showOutputView.always%",
-                                "%ahk++.config.general.showOutputView.never%"
+                                "%ahk++.config.general.showOutput.always%",
+                                "%ahk++.config.general.showOutput.never%"
                             ],
                             "default": "always",
-                            "description": "%ahk++.config.general.showOutputView%"
+                            "description": "%ahk++.config.general.showOutput%"
                         }
                     },
                     "default": {
-                        "showOutputView": "always"
+                        "showOutput": "always"
                     },
                     "additionalProperties": {
                         "type": "string"
