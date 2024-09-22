@@ -14,7 +14,7 @@ const filesParentPath = path.join(
     'samples', // ./src/test/samples
 );
 
-suite.only('ahk2', () => {
+suite('ahk2', () => {
     suite('general.showOutputView', () => {
         test('always + run', async () => {
             vscode.workspace
