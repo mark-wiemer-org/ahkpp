@@ -1,6 +1,7 @@
+import * as assert from 'assert';
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { getDocument } from './utils';
+import { getDocument, isOutputVisible } from './utils';
 
 // Currently in `out` folder, need to get back to main `src` folder
 const filesParentPath = path.join(
@@ -25,6 +26,8 @@ suite.only('ahk2', () => {
 
             await vscode.window.showTextDocument(doc);
             await vscode.commands.executeCommand('ahk++.run');
+
+            assert.equal(await isOutputVisible(), true);
         });
     });
 });
