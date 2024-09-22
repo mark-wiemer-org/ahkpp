@@ -20,7 +20,7 @@ export async function sleep(ms: number) {
 /** Whether the output view is visible */
 export const isOutputVisible = async (): Promise<boolean> => {
     // todo incremental retry for performance
-    await sleep(10_000); // wait for panel visibility to update
+    await sleep(150); // wait for panel visibility to update
 
     /* From VS Code API docs:
      * You can access the visible or active output channel as a {@link TextDocument text document} from {@link window.visibleTextEditors visible editors} or {@link window.activeTextEditor active editor}

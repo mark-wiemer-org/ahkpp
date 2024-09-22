@@ -21,7 +21,8 @@ const filesParentPath = path.join(
 );
 
 suite('ahk2', () => {
-    suite('general.showOutput', () => {
+    // CI does not have AHK installed
+    suite('general.showOutput @ignoreCI', () => {
         const before = async (show: 'always' | 'never') => {
             await updateConfig('general', { showOutput: show });
             const filePath = path.join(filesParentPath, 'ahk2.ahk2');
