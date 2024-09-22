@@ -2,7 +2,7 @@
 
 ## 6.1.0 - unreleased 🫙
 
--   Add "General > showOutputView" setting to toggle automatically showing the output view when running or debugging a script
+-   Add "General > showOutputView" setting to toggle automatically showing the output view when running or debugging a script ([#70](https://github.com/mark-wiemer-org/ahkpp/issues/70), [#492](https://github.com/mark-wiemer-org/ahkpp/issues/492))
 -   Fix quick help when selecting quoted strings ([#376](https://github.com/mark-wiemer-org/ahkpp/issues/376))
 
 ## 6.0.0 - 2024-09-01 🥂
