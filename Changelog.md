@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.1.1 - 2024-09-22 😤
+
+-   No changes, just working around technical limitations with VS Marketplace as 6.1.0 failed without detailed errors.
+
 ## 6.1.0 - 2024-09-22 🫙
 
 -   Add `General > showOutput` setting to toggle automatically showing the output view when running a script ([#492](https://github.com/mark-wiemer-org/ahkpp/issues/492))
