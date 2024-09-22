@@ -5,13 +5,9 @@
 ; showOutputView
 ; always: shows on start
 ; never: never shows
-; works for both running and debugging
+; works only for running scripts
 ; running: output is in the Output view
-; debugging: output is in the Debug Console, only shown if panel is already open
 
-
-; always+run
-; always+debug
-; never+run
-; never+debug
+; always
+; never
 x := 1
