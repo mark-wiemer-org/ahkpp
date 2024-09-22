@@ -10,25 +10,11 @@
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-            "outFiles": ["${workspaceRoot}/out/**/*.js"],
-            "preLaunchTask": "npm: build",
+            "preLaunchTask": "npm: build:dev", // :dev for sourcemaps
             "env": {
                 "VSCODE_AHK_SERVER_PATH": "", // default path works for debug as well
                 "SYNTAXES_PATH": "" // default path works for debug as well
             }
-        },
-        {
-            "name": "Test Extension",
-            "type": "extensionHost",
-            "request": "launch",
-            "runtimeExecutable": "${execPath}",
-            "args": [
-                "--disable-extensions",
-                "--extensionDevelopmentPath=${workspaceFolder}",
-                "--extensionTestsPath=${workspaceFolder}/out/src/test/suite/index"
-            ],
-            "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
-            "preLaunchTask": "npm: compile-ts"
         }
     ]
 }

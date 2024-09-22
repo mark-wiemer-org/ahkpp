@@ -2,13 +2,12 @@
 #SingleInstance
 
 ;; General
-; showOutputView
+; showOutput
 ; always: shows on start
 ; never: never shows
-; works for both running and debugging
+; works only for running scripts
+; running: output is in the Output view
 
-; always+run
-; always+debug
-; never+run
-; never+debug
+; always
+; never
 x := 1

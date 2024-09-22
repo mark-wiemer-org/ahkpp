@@ -1,4 +1,4 @@
-import { getDocument } from '../test/utils';
+import { getDocument, showDocument } from '../test/utils';
 import * as assert from 'assert';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -163,23 +163,22 @@ suite('External formatter', () => {
     externalFormatTests.forEach((formatTest) => {
         test(`${formatTest.filenameRoot} external format`, async () => {
             // Arrange
-            const inFilename = formatTest.filenameRoot + inFilenameSuffix;
+            const inFilePath = path.join(
+                filesParentPath,
+                formatTest.filenameRoot + inFilenameSuffix,
+            );
             const outFilename = formatTest.filenameRoot + outFilenameSuffix;
             const outFileString = fs
                 .readFileSync(path.join(filesParentPath, outFilename))
                 .toString();
-            const unformattedSampleFile = await getDocument(
-                path.join(filesParentPath, inFilename),
-            );
-            const originalText = unformattedSampleFile.getText();
-            const textEditor = await vscode.window.showTextDocument(
-                unformattedSampleFile,
-            );
+            const unformattedSampleDoc = await getDocument(inFilePath);
+            const originalText = unformattedSampleDoc.getText();
+            const textEditor = await showDocument(unformattedSampleDoc);
             const formatter = new FormatProvider();
 
             // Act
             const edits = formatter.provideDocumentFormattingEdits(
-                unformattedSampleFile,
+                unformattedSampleDoc,
                 {
                     ...defaultOptions,
                     ...formatTest.options,
@@ -196,10 +195,10 @@ suite('External formatter', () => {
             assert.strictEqual(textEditor.document.getText(), outFileString);
 
             // Teardown - revert the file to its original state
-            const lastLineIndex = unformattedSampleFile.lineCount - 1;
+            const lastLineIndex = unformattedSampleDoc.lineCount - 1;
             const lastLineLength =
-                unformattedSampleFile.lineAt(lastLineIndex).text.length;
-            const fullDocumentRange = unformattedSampleFile.validateRange(
+                unformattedSampleDoc.lineAt(lastLineIndex).text.length;
+            const fullDocumentRange = unformattedSampleDoc.validateRange(
                 new vscode.Range(
                     new vscode.Position(0, 0),
                     new vscode.Position(lastLineIndex + 1, lastLineLength + 1), // + 1 to ensure full coverage
