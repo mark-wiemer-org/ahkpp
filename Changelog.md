@@ -1,8 +1,8 @@
 # Changelog
 
-## 6.1.0 - unreleased 🫙
+## 6.1.0 - 2024-09-22 🫙
 
--   Add "General > showOutputView" setting to toggle automatically showing the output view when running or debugging a script ([#70](https://github.com/mark-wiemer-org/ahkpp/issues/70), [#492](https://github.com/mark-wiemer-org/ahkpp/issues/492))
+-   Add "General > showOutputView" setting to toggle automatically showing the output view when running a script ([#492](https://github.com/mark-wiemer-org/ahkpp/issues/492))
 -   Fix quick help when selecting quoted strings ([#376](https://github.com/mark-wiemer-org/ahkpp/issues/376))
 
 ## 6.0.0 - 2024-09-01 🥂
@@ -206,7 +206,7 @@ Fixup new command names and IDs:
 
 </details>
 
-## 5.1.0 - 2024-08-22 🧪
+## 5.1.0 - 2024-08-22 🧪🎂
 
 <details><summary>5.1.0</summary>
 
