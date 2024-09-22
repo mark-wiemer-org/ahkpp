@@ -22,32 +22,41 @@ const filesParentPath = path.join(
 
 suite.only('ahk2', () => {
     suite('general.showOutputView', () => {
-        const tests: [
-            name: string,
-            show: 'always' | 'never',
-            runOrDebug: 'run' | 'debug',
-        ][] = [
-            ['always + run', 'always', 'run'],
-            ['never + run', 'never', 'run'],
-            // ['always + debug', 'always', 'debug'],
-            // ['never + debug', 'never', 'debug'],
+        const before = async (show: 'always' | 'never') => {
+            await updateConfig('general', { showOutputView: show });
+            const filePath = path.join(filesParentPath, 'ahk2.ahk2');
+            const doc = await getDocument(filePath);
+            await showDocument(doc);
+        };
+
+        const runTests: [name: string, show: 'always' | 'never'][] = [
+            ['always + run', 'always'],
+            ['never + run', 'never'],
         ];
 
-        tests.forEach(([name, show, runOrDebug]) => {
+        runTests.forEach(([name, show]) => {
             test(name, async () => {
-                await updateConfig('general', { showOutputView: show });
-                const filePath = path.join(filesParentPath, 'ahk2.ahk2');
-                const doc = await getDocument(filePath);
-                await showDocument(doc);
+                await before(show);
 
-                // run cmd opens panel
-                // debug cmd opens debug console only when panel already opened
-                if (runOrDebug === 'run') await closePanel();
-                // else await vscode.commands.executeCommand('terminal.focus'); // todo
+                // run cmd opens panel when `showOutputView` is 'always'
+                await closePanel();
 
-                await vscode.commands.executeCommand(`ahk++.${runOrDebug}`);
+                await vscode.commands.executeCommand(`ahk++.run`);
 
                 assert.equal(await isOutputVisible(), show === 'always');
+            });
+        });
+
+        const debugTests: [name: string, show: 'always' | 'never'][] = [
+            ['always + debug', 'always'],
+            ['never + debug', 'never'],
+        ];
+
+        debugTests.forEach(([name, show]) => {
+            test(name, async () => {
+                await before(show);
+
+                // todo
             });
         });
     });
