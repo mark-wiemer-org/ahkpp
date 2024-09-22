@@ -10,8 +10,7 @@
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-            "outFiles": ["${workspaceRoot}/out/**/*.js"],
-            "preLaunchTask": "npm: build",
+            "preLaunchTask": "npm: build:dev", // :dev for sourcemaps
             "env": {
                 "VSCODE_AHK_SERVER_PATH": "", // default path works for debug as well
                 "SYNTAXES_PATH": "" // default path works for debug as well
