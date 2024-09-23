@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.2.0 - unreleased 🫡
+
+Update thqby's extension from 2.4.9 to 2.5.2:
+
+-   todo add tests!
+
 ## 6.1.1 - 2024-09-22 😤
 
 -   No changes, just working around technical limitations with VS Marketplace as 6.1.0 failed without detailed errors.
