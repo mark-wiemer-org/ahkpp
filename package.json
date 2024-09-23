@@ -1091,12 +1091,6 @@
                 }
             ]
         },
-        "submenus": [
-            {
-                "id": "ahk++.context",
-                "label": "AHK++"
-            }
-        ],
         "semanticTokenScopes": [
             {
                 "language": "ahk2",
@@ -1115,6 +1109,12 @@
             {
                 "language": "ahk2",
                 "path": "./language/snippetsV2.json"
+            }
+        ],
+        "submenus": [
+            {
+                "id": "ahk++.context",
+                "label": "AHK++"
             }
         ]
     },
@@ -1154,7 +1154,7 @@
         "@types/eslint__js": "^8.42.3",
         "@types/fs-extra": "^9.0.7",
         "@types/glob": "^7.1.3",
-        "@types/mocha": "^9.1.1",
+        "@types/mocha": "^10.0.8",
         "@types/node": "^20.16.0",
         "@types/vscode": "1.90.0",
         "@types/xml2js": "^0.4.11",
