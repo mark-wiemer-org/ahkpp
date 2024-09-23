@@ -104,6 +104,12 @@
                 "category": "AHK++"
             },
             {
+                "command": "ahk++.openHelp",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
+                "title": "Open AutoHotkey Help",
+                "category": "AHK++"
+            },
+            {
                 "command": "ahk++.debug",
                 "title": "Debug AHK Script",
                 "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
@@ -111,21 +117,24 @@
                 "icon": "$(debug-alt)"
             },
             {
-                "command": "ahk++.openHelp",
+                "command": "ahk++.debugConfigs",
+                "title": "%ahk++.command.debugConfigs%",
                 "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
-                "title": "Open AutoHotkey Help",
+                "icon": "$(debug-all)",
                 "category": "AHK++"
             },
             {
-                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.debugAttach",
                 "title": "%ahk++.command.debugAttach%",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
+                "icon": "$(debug-alt)",
                 "category": "AHK++"
             },
             {
-                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.debugParams",
                 "title": "%ahk++.command.debugParams%",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
+                "icon": "$(debug-console)",
                 "category": "AHK++"
             },
             {
@@ -134,22 +143,22 @@
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2",
                 "command": "ahk++.exportSymbols",
                 "title": "%ahk++.command.exportSymbols%",
+                "enablement": "editorLangId == ahk2",
                 "category": "AHK++"
             },
             {
-                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.run",
                 "title": "%ahk++.command.run%",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "icon": "$(play)",
                 "category": "AHK++"
             },
             {
-                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "command": "ahk++.runSelection",
                 "title": "%ahk++.command.runSelection%",
+                "enablement": "(editorLangId == ahk || editorLangId == ahk2) && shellExecutionSupported",
                 "category": "AHK++"
             },
             {
@@ -159,39 +168,39 @@
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "command": "ahk++.addDocComment",
                 "title": "%ahk++.command.addDocComment%",
+                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "command": "ahk++.setV2Interpreter",
                 "title": "%ahk++.command.setV2Interpreter%",
+                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "command": "ahk++.updateVersionInfo",
                 "title": "%ahk++.command.updateVersionInfo%",
+                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "command": "ahk++.switchAhkVersion",
                 "title": "Switch AHK Version",
+                "enablement": "editorLangId == ahk || editorLangId == ahk2",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2",
                 "command": "ahk++.selectSyntaxes",
                 "title": "Select AHK v2 Syntaxes",
+                "enablement": "editorLangId == ahk2",
                 "category": "AHK++"
             },
             {
-                "enablement": "editorLangId == ahk2 && resourceScheme == file",
                 "command": "ahk++.setAScriptDir",
                 "title": "%ahk++.command.setAScriptDir%",
+                "enablement": "editorLangId == ahk2 && resourceScheme == file",
                 "category": "AHK++"
             }
         ],
@@ -258,7 +267,7 @@
                         "showDebugButton": {
                             "type": "boolean",
                             "default": true,
-                            "description": "Show the Debug button in the editor title menu."
+                            "description": "Show the debug buttons in the editor title menu."
                         }
                     },
                     "default": {
@@ -920,21 +929,6 @@
         ],
         "keybindings": [
             {
-                "command": "ahk++.compile",
-                "key": "ctrl+shift+f9",
-                "when": "editorLangId == ahk || editorLangId == ahk2"
-            },
-            {
-                "command": "ahk++.debug",
-                "key": "ctrl+alt+f9",
-                "when": "editorLangId == ahk || editorLangId == ahk2"
-            },
-            {
-                "command": "ahk++.openHelp",
-                "key": "ctrl+f1",
-                "when": "editorLangId == ahk || editorLangId == ahk2"
-            },
-            {
                 "command": "ahk++.run",
                 "key": "ctrl+f9",
                 "when": "editorLangId == ahk || editorLangId == ahk2"
@@ -942,6 +936,11 @@
             {
                 "command": "ahk++.runSelection",
                 "key": "ctrl+f8",
+                "when": "editorLangId == ahk || editorLangId == ahk2"
+            },
+            {
+                "command": "ahk++.debug",
+                "key": "ctrl+alt+f9",
                 "when": "editorLangId == ahk || editorLangId == ahk2"
             },
             {
@@ -953,6 +952,16 @@
                 "command": "ahk++.stop",
                 "key": "ctrl+f6",
                 "when": "ahk:isRunning"
+            },
+            {
+                "command": "ahk++.compile",
+                "key": "ctrl+shift+f9",
+                "when": "editorLangId == ahk || editorLangId == ahk2"
+            },
+            {
+                "command": "ahk++.openHelp",
+                "key": "ctrl+f1",
+                "when": "editorLangId == ahk || editorLangId == ahk2"
             }
         ],
         "languages": [
@@ -1006,58 +1015,54 @@
         "menus": {
             "editor/context": [
                 {
-                    "command": "ahk++.runSelection",
-                    "when": "(editorLangId == ahk || editorLangId == ahk2) && editorHasSelection",
-                    "group": "navigation@-1"
-                },
-                {
-                    "command": "ahk++.stop",
-                    "when": "ahk:isRunning",
+                    "submenu": "ahk++.context",
                     "group": "navigation@0"
-                },
+                }
+            ],
+            "ahk++.context": [
                 {
-                    "command": "ahk++.compile",
-                    "when": "editorLangId == ahk || editorLangId == ahk2",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "ahk++.compilerGui",
-                    "when": "editorLangId == ahk || editorLangId == ahk2",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "ahk++.debugAttach",
-                    "when": "editorLangId == ahk || editorLangId == ahk2",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "ahk++.debugParams",
-                    "when": "editorLangId == ahk || editorLangId == ahk2",
-                    "group": "navigation@1"
+                    "command": "ahk++.runSelection",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && editorHasSelection"
                 },
                 {
                     "command": "ahk++.run",
                     "key": "ctrl+f9",
-                    "when": "editorLangId == ahk || editorLangId == ahk2",
-                    "group": "navigation@1"
+                    "when": "editorLangId == ahk || editorLangId == ahk2"
+                },
+                {
+                    "command": "ahk++.stop",
+                    "when": "ahk:isRunning"
+                },
+                {
+                    "command": "ahk++.compile",
+                    "when": "editorLangId == ahk || editorLangId == ahk2"
+                },
+                {
+                    "command": "ahk++.compilerGui",
+                    "when": "editorLangId == ahk || editorLangId == ahk2"
+                },
+                {
+                    "command": "ahk++.debugAttach",
+                    "when": "editorLangId == ahk || editorLangId == ahk2"
+                },
+                {
+                    "command": "ahk++.debugConfigs",
+                    "when": "editorLangId == ahk || editorLangId == ahk2"
+                },
+                {
+                    "command": "ahk++.debugParams",
+                    "when": "editorLangId == ahk || editorLangId == ahk2"
                 },
                 {
                     "when": "editorLangId == ahk2",
-                    "command": "ahk++.addDocComment",
-                    "group": "navigation@2"
+                    "command": "ahk++.addDocComment"
                 },
                 {
                     "when": "editorLangId == ahk2",
-                    "command": "ahk++.updateVersionInfo",
-                    "group": "navigation@2"
+                    "command": "ahk++.updateVersionInfo"
                 }
             ],
-            "editor/title": [
-                {
-                    "command": "ahk++.debug",
-                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.AHK++.menu.showDebugButton",
-                    "group": "navigation@1"
-                },
+            "editor/title/run": [
                 {
                     "command": "ahk++.run",
                     "group": "navigation@0",
@@ -1067,6 +1072,22 @@
                     "command": "ahk++.stop",
                     "group": "navigation@0",
                     "when": "ahk:isRunning"
+                },
+                {
+                    "command": "ahk++.debug",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.AHK++.menu.showDebugButton"
+                },
+                {
+                    "command": "ahk++.debugConfigs",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.AHK++.menu.showDebugButton"
+                },
+                {
+                    "command": "ahk++.debugParams",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.AHK++.menu.showDebugButton"
+                },
+                {
+                    "command": "ahk++.debugAttach",
+                    "when": "(editorLangId == ahk || editorLangId == ahk2) && config.AHK++.menu.showDebugButton"
                 }
             ]
         },
@@ -1088,6 +1109,12 @@
             {
                 "language": "ahk2",
                 "path": "./language/snippetsV2.json"
+            }
+        ],
+        "submenus": [
+            {
+                "id": "ahk++.context",
+                "label": "AHK++"
             }
         ]
     },
@@ -1127,7 +1154,7 @@
         "@types/eslint__js": "^8.42.3",
         "@types/fs-extra": "^9.0.7",
         "@types/glob": "^7.1.3",
-        "@types/mocha": "^9.1.1",
+        "@types/mocha": "^10.0.8",
         "@types/node": "^20.16.0",
         "@types/vscode": "1.90.0",
         "@types/xml2js": "^0.4.11",

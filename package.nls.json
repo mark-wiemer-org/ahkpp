@@ -1,6 +1,7 @@
 {
     "ahk++.command.addDocComment": "Add Doc Comment",
     "ahk++.command.debugAttach": "Debug AHK and Attach",
+    "ahk++.command.debugConfigs": "Debug Configurations",
     "ahk++.command.debugParams": "Debug AHK with Params",
     "ahk++.command.diagnostic.full": "Run AHK++ Diagnostic",
     "ahk++.command.exportSymbols": "Export AHK Symbols",
