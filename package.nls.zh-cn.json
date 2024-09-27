@@ -4,7 +4,6 @@
     "action.switchtov1": "切换到ahk v1",
     "ahk++.command.addDocComment": "生成注释模板",
     "ahk++.command.debugAttach": "附加到运行中的脚本",
-    "ahk++.command.debugConfigs": "Debug Configurations",
     "ahk++.command.debugParams": "带参调试",
     "ahk++.command.diagnostic.full": "诊断全文",
     "ahk++.command.exportSymbols": "导出ahk类和函数",
