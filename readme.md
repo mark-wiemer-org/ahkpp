@@ -1,3 +1,11 @@
+# This version doesn't work!
+
+<!--
+    todo fix this version or wait for VS Code 1.94.0 and a migration guide of sorts
+    Automated tests pass but when packaged the server silently fails
+    Ref https://github.com/microsoft/vscode/issues/130367
+-->
+
 <div align="center">
     <h1>AHK++</h1>
     <h2>Full language support for AHK v1 and AHK v2</h2>
