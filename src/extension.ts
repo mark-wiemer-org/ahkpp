@@ -16,7 +16,7 @@ import { SignatureProvider } from './providers/signatureProvider.js';
 import { CompletionProvider } from './providers/completionProvider.js';
 import { openHelp } from './service/helpService.js';
 import { initializeLanguageVersionService } from './service/languageVersionService.js';
-import { activate as activateV2 } from '../ahk2/client/src/extension.js';
+import { activate as activateV2 } from '../ahk2/client/src/extension.cjs';
 
 export function activate(context: vscode.ExtensionContext) {
     // when debugging, this goes into the Debug Console (Ctrl + Shift + Y)
