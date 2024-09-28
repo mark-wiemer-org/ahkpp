@@ -11,7 +11,7 @@
 
 ## Install
 
-Install from VS Code or [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus).
+Install from [VS Code](https://code.visualstudio.com/), the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus), [Theia IDE](https://theia-ide.org/), or [Open VSX Registry](https://open-vsx.org/extension/mark-wiemer/vscode-autohotkey-plus-plus)
 
 ## AHK v2 full support is here! 🥂
 
