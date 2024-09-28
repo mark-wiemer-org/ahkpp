@@ -6,11 +6,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Extension",
+            "name": "(dev) Launch Extension",
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
             "preLaunchTask": "npm: build:dev", // :dev for sourcemaps
+            "env": {
+                "VSCODE_AHK_SERVER_PATH": "", // default path works for debug as well
+                "SYNTAXES_PATH": "" // default path works for debug as well
+            }
+        },
+        {
+            "name": "(prod) Launch Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
+            "preLaunchTask": "npm: build", // prod for closer to end-user experience
             "env": {
                 "VSCODE_AHK_SERVER_PATH": "", // default path works for debug as well
                 "SYNTAXES_PATH": "" // default path works for debug as well

@@ -22,6 +22,8 @@ const filesParentPath = path.join(
 
 suite('ahk2', () => {
     // CI does not have AHK installed
+    // tests are flaky now that server crashes locally when debugging :(
+    // `(prod) Launch Extension` works fine as of this writing
     suite('general.showOutput @ignoreCI', () => {
         const before = async (show: 'always' | 'never') => {
             await updateConfig('general', { showOutput: show });
