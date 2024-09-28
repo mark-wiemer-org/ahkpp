@@ -76,18 +76,15 @@
         "pretest-e2e": "npm run compile-ts",
         "test-e2e": "vscode-test",
         "test-e2e:ci": "npm run test-e2e -- -i --fgrep @ignoreCI",
-        "pretest-unit": "npm run compile-ts",
-        "test-unit": "mocha",
         "pretest-grammar": "npm run compile-grammar",
         "test-grammar": "vscode-tmgrammar-snap language/samples/*.{ahk1,ahk2}",
+        "pretest-unit": "npm run compile-ts",
+        "test-unit": "mocha",
         "test:ci": "npm run test-grammar && npm run test-e2e:ci",
         "validate": "npm run lint && npm run test && npm run package",
         "validate:ci": "npm run lint:ci && npm run test:ci && npm run package",
         "validate:fix": "npm run lint:fix && npm run test && npm run package",
         "vscode:prepublish": "npm run compile-grammar && npm run build && echo Packaging..."
-    },
-    "mocha": {
-        "spec": "out/**/*.test.js"
     },
     "contributes": {
         "breakpoints": [
@@ -1145,6 +1142,9 @@
                 }
             }
         ]
+    },
+    "mocha": {
+        "spec": "out/**/*.test.js"
     },
     "dependencies": {
         "@vscode/debugadapter": "^1.57.0",
