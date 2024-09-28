@@ -49,6 +49,7 @@
         "package.nls.*"
     ],
     "scripts": {
+        "prebuild": "npm run clean:dist",
         "build": "node src/build.mjs --mode=production && cd ahk2 && npm run build",
         "build:ahk1": "node src/build.mjs --mode=production",
         "build:dev": "node src/build.mjs && cd ahk2 && npm run build:dev",
