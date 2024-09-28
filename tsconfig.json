@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
         "target": "ES2022",
         "lib": ["ES2022", "WebWorker"],
         "outDir": "out",
         "experimentalDecorators": true,
         "sourceMap": true,
-        "esModuleInterop": true
     },
     "exclude": ["node_modules", "./ahk2/node_modules"]
 }

@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { CodeUtil } from './codeUtil';
+import { CodeUtil } from './codeUtil.js';
 
 suite('Code utils', () => {
     suite('purify', () => {

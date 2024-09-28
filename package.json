@@ -3,6 +3,7 @@
     "displayName": "AutoHotkey Plus Plus",
     "version": "6.1.2",
     "description": "AutoHotkey v1 and v2 language support for Visual Studio Code: IntelliSense, debugging, formatting, and more!",
+    "type": "module",
     "categories": [
         "Debuggers",
         "Formatters",
@@ -27,7 +28,7 @@
     },
     "license": "See license.txt",
     "publisher": "mark-wiemer",
-    "main": "./dist/extension",
+    "main": "./dist/extension.cjs",
     "files": [
         "ahk2/server/dist/ahkProvider.ahk",
         "ahk2/server/dist/server.js",
@@ -43,12 +44,13 @@
         "language/autohotkey2.svg",
         "language/snippetsV1.json",
         "language/snippetsV2.json",
-        "dist/extension.js",
+        "dist/extension.cjs",
         "icon.png",
         "license.txt",
         "package.nls.*"
     ],
     "scripts": {
+        "prebuild": "npm run clean:dist",
         "build": "node src/build.mjs --mode=production && cd ahk2 && npm run build",
         "build:ahk1": "node src/build.mjs --mode=production",
         "build:dev": "node src/build.mjs && cd ahk2 && npm run build:dev",

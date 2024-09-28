@@ -1,4 +1,4 @@
-import { DbgpResponse } from '../struct/dbgpResponse';
+import { DbgpResponse } from '../struct/dbgpResponse.js';
 import { DebugProtocol } from '@vscode/debugprotocol';
 import { StackFrame, Source } from '@vscode/debugadapter';
 import { basename } from 'path';

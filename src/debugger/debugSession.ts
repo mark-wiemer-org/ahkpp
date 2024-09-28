@@ -8,9 +8,9 @@ import {
     Thread,
 } from '@vscode/debugadapter';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { DebugDispatcher } from './debugDispatcher';
-import { Continue } from './struct/command';
-import { VscodeScope } from './struct/scope';
+import { DebugDispatcher } from './debugDispatcher.js';
+import { Continue } from './struct/command.js';
+import { VscodeScope } from './struct/scope.js';
 
 /**
  * This interface describes the mock-debug specific launch attributes

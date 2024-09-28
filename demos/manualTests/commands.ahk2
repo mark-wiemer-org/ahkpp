@@ -1,0 +1,3 @@
+#Requires AutoHotkey v2.0
+
+; commands requiring AHK v2 language server are failing now :(

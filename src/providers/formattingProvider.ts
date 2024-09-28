@@ -1,8 +1,8 @@
 import { isDeepStrictEqual } from 'util';
 import * as vscode from 'vscode';
-import { commentRegExp } from '../common/constants';
-import { ConfigKey, Global } from '../common/global';
-import { FormatOptions } from './formattingProvider.types';
+import { commentRegExp } from '../common/constants.js';
+import { ConfigKey, Global } from '../common/global.js';
+import { FormatOptions } from './formattingProvider.types.js';
 import {
     alignSingleLineComments,
     alignTextAssignOperator,
@@ -14,7 +14,7 @@ import {
     purify,
     removeEmptyLines,
     trimExtraSpaces,
-} from './formattingProvider.utils';
+} from './formattingProvider.utils.js';
 
 function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
     const lastLineId = document.lineCount - 1;

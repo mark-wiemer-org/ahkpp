@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { commentRegExp } from '../common/constants';
-import { FormatOptions } from './formattingProvider.types';
+import { commentRegExp } from '../common/constants.js';
+import { FormatOptions } from './formattingProvider.types.js';
 
 /** Stringify a document, using consistent `\n` line separators */
 export const documentToString = (document: {

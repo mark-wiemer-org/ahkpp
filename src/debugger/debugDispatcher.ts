@@ -1,23 +1,23 @@
 import { EventEmitter } from 'events';
 import { Scope, StackFrame, Variable } from '@vscode/debugadapter';
 import { DebugProtocol } from '@vscode/debugprotocol';
-import { RunnerService } from '../service/runnerService';
-import { DebugServer } from './debugServer';
-import { LaunchRequestArguments } from './debugSession';
-import { BreakPointHandler } from './handler/breakpointHandler';
-import { CommandHandler } from './handler/commandHandler';
-import { StackHandler } from './handler/StackHandler';
-import { VariableHandler } from './handler/variableHandler';
-import { DbgpResponse } from './struct/dbgpResponse';
-import { VarScope } from './struct/scope';
+import { RunnerService } from '../service/runnerService.js';
+import { DebugServer } from './debugServer.js';
+import { LaunchRequestArguments } from './debugSession.js';
+import { BreakPointHandler } from './handler/breakpointHandler.js';
+import { CommandHandler } from './handler/commandHandler.js';
+import { StackHandler } from './handler/StackHandler.js';
+import { VariableHandler } from './handler/variableHandler.js';
+import { DbgpResponse } from './struct/dbgpResponse.js';
+import { VarScope } from './struct/scope.js';
 
 import getPort from 'get-port';
 import { spawn } from 'child_process';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
-import { Out } from '../common/out';
-import { Global, ConfigKey } from '../common/global';
-import { isV1 } from '../common/codeUtil';
+import { Out } from '../common/out.js';
+import { Global, ConfigKey } from '../common/global.js';
+import { isV1 } from '../common/codeUtil.js';
 
 /** An AHK runtime debugger, ref https://xdebug.org/docs/dbgp */
 export class DebugDispatcher extends EventEmitter {

@@ -9,7 +9,7 @@ import {
     Range,
     TextDocument,
 } from 'vscode';
-import { Parser } from '../parser/parser';
+import { Parser } from '../parser/parser.js';
 
 interface Snippet {
     prefix: string;

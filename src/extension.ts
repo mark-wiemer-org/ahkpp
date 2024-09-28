@@ -1,22 +1,22 @@
 import * as vscode from 'vscode';
 import { ProviderResult } from 'vscode';
-import { Parser } from './parser/parser';
-import { RunnerService } from './service/runnerService';
-import { DebugSession } from './debugger/debugSession';
-import { DefProvider } from './providers/defProvider';
-import { createEditorListener } from './service/templateService';
-import { FormatProvider } from './providers/formattingProvider';
-import { SymbolProvider } from './providers/symbolProvider';
-import { FileManager } from './common/fileManager';
-import { AhkHoverProvider } from './providers/ahkHoverProvider';
-import { RefProvider } from './providers/refProvider';
-import { Global } from './common/global';
-import { AhkRenameProvider } from './providers/ahkRenameProvider';
-import { SignatureProvider } from './providers/signatureProvider';
-import { CompletionProvider } from './providers/completionProvider';
-import { openHelp } from './service/helpService';
-import { initializeLanguageVersionService } from './service/languageVersionService';
-import { activate as activateV2 } from '../ahk2/client/src/extension';
+import { Parser } from './parser/parser.js';
+import { RunnerService } from './service/runnerService.js';
+import { DebugSession } from './debugger/debugSession.js';
+import { DefProvider } from './providers/defProvider.js';
+import { createEditorListener } from './service/templateService.js';
+import { FormatProvider } from './providers/formattingProvider.js';
+import { SymbolProvider } from './providers/symbolProvider.js';
+import { FileManager } from './common/fileManager.js';
+import { AhkHoverProvider } from './providers/ahkHoverProvider.js';
+import { RefProvider } from './providers/refProvider.js';
+import { Global } from './common/global.js';
+import { AhkRenameProvider } from './providers/ahkRenameProvider.js';
+import { SignatureProvider } from './providers/signatureProvider.js';
+import { CompletionProvider } from './providers/completionProvider.js';
+import { openHelp } from './service/helpService.js';
+import { initializeLanguageVersionService } from './service/languageVersionService.js';
+import { activate as activateV2 } from '../ahk2/client/src/extension.js';
 
 export function activate(context: vscode.ExtensionContext) {
     (async () => {

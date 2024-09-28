@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { LanguageId } from './global';
+import { LanguageId } from './global.js';
 
 export class CodeUtil {
     /**

@@ -1,9 +1,9 @@
-import { ConfigKey, Global } from '../common/global';
+import { ConfigKey, Global } from '../common/global.js';
 import * as fs from 'fs';
 import * as vscode from 'vscode';
-import { CodeUtil } from '../common/codeUtil';
-import { Out } from '../common/out';
-import { Script, Method, Ref, Label, Block, Variable } from './model';
+import { CodeUtil } from '../common/codeUtil.js';
+import { Out } from '../common/out.js';
+import { Script, Method, Ref, Label, Block, Variable } from './model.js';
 
 export interface BuildScriptOptions {
     /** Defaults to false. If true, short-circuits when document is in cache. */

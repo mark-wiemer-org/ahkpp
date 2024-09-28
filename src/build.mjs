@@ -10,7 +10,7 @@ console.log('Building AHK++ in', isProd ? 'production' : 'development', 'mode');
 build({
     entryPoints: ['./src/extension.ts'],
     bundle: true,
-    outfile: 'dist/extension.js',
+    outfile: 'dist/extension.cjs',
     external: ['vscode'],
     format: 'cjs',
     platform: 'node',

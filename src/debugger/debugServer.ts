@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import * as Net from 'net';
 import * as xml2js from 'xml2js';
-import { Out } from '../common/out';
+import { Out } from '../common/out.js';
 
 /**
  * Exchange dbgp protocol with ahk debug proxy.

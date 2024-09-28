@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Parser } from '../parser/parser';
+import { Parser } from '../parser/parser.js';
 import { existsSync } from 'fs';
 
 export class DefProvider implements vscode.DefinitionProvider {

@@ -18,7 +18,7 @@ import {
     purify,
     removeEmptyLines,
     trimExtraSpaces,
-} from './formattingProvider.utils';
+} from './formattingProvider.utils.js';
 
 suite('FormattingProvider utils', () => {
     // Default formatting options

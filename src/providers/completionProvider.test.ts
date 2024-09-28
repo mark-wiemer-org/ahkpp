@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { assert } from 'chai';
-import { provideCompletionItemsInner } from './completionProvider';
+import { provideCompletionItemsInner } from './completionProvider.js';
 
 // tests for completionItemsForMethod
 suite('completionProvider', () => {

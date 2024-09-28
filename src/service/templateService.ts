@@ -1,5 +1,5 @@
-import { isAHK, isV1 } from '../common/codeUtil';
-import { ConfigKey, Global } from '../common/global';
+import { isAHK, isV1 } from '../common/codeUtil.js';
+import { ConfigKey, Global } from '../common/global.js';
 import * as vscode from 'vscode';
 
 /** Adds template whenever empty AHK files (v1 or v2) are opened */

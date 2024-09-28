@@ -1,5 +1,5 @@
 import * as child_process from 'child_process';
-import { Out } from './out';
+import { Out } from './out.js';
 
 /**
  * Wrapper for Node's `child_process.exec`, includes logging.

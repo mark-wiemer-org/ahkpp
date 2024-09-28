@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Parser } from '../parser/parser';
+import { Parser } from '../parser/parser.js';
 
 export class RefProvider implements vscode.ReferenceProvider {
     public provideReferences(

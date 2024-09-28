@@ -1,10 +1,10 @@
 import { resolve as res } from 'path';
 import * as vscode from 'vscode';
-import { FileManager, FileModel } from '../common/fileManager';
-import { ConfigKey, Global } from '../common/global';
-import { exec } from '../common/processWrapper';
+import { FileManager, FileModel } from '../common/fileManager.js';
+import { ConfigKey, Global } from '../common/global.js';
+import { exec } from '../common/processWrapper.js';
 import * as fs from 'fs';
-import { isV1 } from '../common/codeUtil';
+import { isV1 } from '../common/codeUtil.js';
 
 export const makeCompileCommand = (
     compilerPath: string,

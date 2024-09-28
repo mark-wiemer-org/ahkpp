@@ -1,7 +1,7 @@
 import { Handles, Scope, Variable } from '@vscode/debugadapter';
-import { DbgpProperty, DbgpResponse } from '../struct/dbgpResponse';
-import { VarScope } from '../struct/scope';
-import { Util } from '../util/util';
+import { DbgpProperty, DbgpResponse } from '../struct/dbgpResponse.js';
+import { VarScope } from '../struct/scope.js';
+import { Util } from '../util/util.js';
 
 export interface VariableRequest {
     scope: VarScope;

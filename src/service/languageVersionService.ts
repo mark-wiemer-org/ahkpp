@@ -2,8 +2,8 @@
 // Used under The Unlicense (public domain): https://github.com/Lexikos/vscode-auto-select/blob/main/UNLICENSE
 
 import * as vscode from 'vscode';
-import { LanguageId } from '../common/global';
-import { isAHK, isV1 } from '../common/codeUtil';
+import { LanguageId } from '../common/global.js';
+import { isAHK, isV1 } from '../common/codeUtil.js';
 
 /**
  * Return the major version number (1 or 2) associated with

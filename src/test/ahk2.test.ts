@@ -7,7 +7,7 @@ import {
     isOutputVisible,
     showDocument,
     updateConfig,
-} from './utils';
+} from './utils.js';
 
 // Currently in `out` folder, need to get back to main `src` folder
 const filesParentPath = path.join(

@@ -1,5 +1,5 @@
-import { DbgpResponse } from '../struct/dbgpResponse';
-import { DebugServer } from '../debugServer';
+import { DbgpResponse } from '../struct/dbgpResponse.js';
+import { DebugServer } from '../debugServer.js';
 
 export class CommandHandler {
     private transId = 1;

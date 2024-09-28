@@ -1,3 +1,3 @@
-import { DebugSession } from './debugSession';
+import { DebugSession } from './debugSession.js';
 
 DebugSession.run(DebugSession);

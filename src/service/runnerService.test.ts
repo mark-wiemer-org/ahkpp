@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { makeCompileCommand } from './runnerService';
+import { makeCompileCommand } from './runnerService.js';
 
 suite('runnerService', () => {
     suite('makeCompileCommand', () => {
