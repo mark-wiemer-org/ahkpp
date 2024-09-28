@@ -28,7 +28,7 @@
     },
     "license": "See license.txt",
     "publisher": "mark-wiemer",
-    "main": "./dist/extension.cjs",
+    "main": "./dist/extension.js",
     "files": [
         "ahk2/server/dist/ahkProvider.ahk",
         "ahk2/server/dist/server.js",
@@ -44,7 +44,7 @@
         "language/autohotkey2.svg",
         "language/snippetsV1.json",
         "language/snippetsV2.json",
-        "dist/extension.cjs",
+        "dist/extension.js",
         "icon.png",
         "license.txt",
         "package.nls.*"
