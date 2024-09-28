@@ -2,6 +2,7 @@
 ahk2/client/src/browserClientMain.ts
 ahk2/client/src/extension.ts
 ahk2/client/src/test/utils.ts
+ahk2/coverage
 ahk2/server/src/ahkProvider.ts
 ahk2/server/src/browserServerMain.ts
 ahk2/server/src/codeActionProvider.ts
