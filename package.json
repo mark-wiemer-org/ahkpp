@@ -72,10 +72,12 @@
         "prepare": "git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
         "sort-package-json:fix": "sort-package-json",
-        "test": "npm run test-grammar && npm run test-e2e",
-        "pretest-e2e": "npm run compile-ts && npm run build",
+        "test": "npm run test-grammar && npm run test-unit && npm run test-e2e",
+        "pretest-e2e": "npm run compile-ts",
         "test-e2e": "vscode-test",
         "test-e2e:ci": "npm run test-e2e -- -i --fgrep @ignoreCI",
+        "pretest-unit": "npm run compile-ts",
+        "test-unit": "mocha",
         "pretest-grammar": "npm run compile-grammar",
         "test-grammar": "vscode-tmgrammar-snap language/samples/*.{ahk1,ahk2}",
         "test:ci": "npm run test-grammar && npm run test-e2e:ci",
@@ -83,6 +85,9 @@
         "validate:ci": "npm run lint:ci && npm run test:ci && npm run package",
         "validate:fix": "npm run lint:fix && npm run test && npm run package",
         "vscode:prepublish": "npm run compile-grammar && npm run build && echo Packaging..."
+    },
+    "mocha": {
+        "spec": "out/**/*.test.js"
     },
     "contributes": {
         "breakpoints": [
