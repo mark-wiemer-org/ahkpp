@@ -1,6 +1,6 @@
 # ahk2
 ahk2/client/src/browserClientMain.ts
-ahk2/client/src/extension.ts
+ahk2/client/src/extension.cts
 ahk2/client/src/test/utils.ts
 ahk2/coverage
 ahk2/server/src/ahkProvider.ts

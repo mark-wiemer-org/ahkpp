@@ -1,4 +1,4 @@
-import { getDocument } from '../test/utils.js';
+import { getDocument } from '../test/utils.cjs';
 import * as assert from 'assert';
 import * as path from 'path';
 import * as vscode from 'vscode';

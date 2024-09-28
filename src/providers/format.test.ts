@@ -1,4 +1,4 @@
-import { getDocument, showDocument } from '../test/utils.js';
+import { getDocument, showDocument } from '../test/utils.cjs';
 import * as assert from 'assert';
 import * as fs from 'fs-extra';
 import * as path from 'path';

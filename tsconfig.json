@@ -6,7 +6,7 @@
         "lib": ["ES2022", "WebWorker"],
         "outDir": "out",
         "experimentalDecorators": true,
-        "sourceMap": true,
+        "sourceMap": true
     },
     "exclude": ["node_modules", "./ahk2/node_modules"]
 }

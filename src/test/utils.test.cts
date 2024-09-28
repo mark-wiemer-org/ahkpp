@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
-import { closePanel, isOutputVisible } from './utils.js';
+import { closePanel, isOutputVisible } from './utils.cjs';
 
 suite('utils', () => {
     suite('closeOutputView', () => {
