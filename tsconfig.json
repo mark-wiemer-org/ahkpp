@@ -6,7 +6,6 @@
         "outDir": "out",
         "experimentalDecorators": true,
         "sourceMap": true,
-        "rootDirs": ["src"],
         "esModuleInterop": true
     },
     "exclude": ["node_modules", "./ahk2/node_modules"]
