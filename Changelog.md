@@ -31,7 +31,7 @@
 
 ## 6.1.1 - 2024-09-22 😤
 
--   No changes, just working around technical limitations with VS Marketplace as 6.1.0 failed without detailed errors.
+-   No changes, just working around technical limitations with VS Marketplace as 6.1.0 failed to deploy without detailed errors.
 
 ## 6.1.0 - 2024-09-22 🫙
 
