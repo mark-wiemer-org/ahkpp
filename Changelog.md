@@ -2,9 +2,32 @@
 
 ## 6.2.0 - unreleased 🫡
 
-Update thqby's extension from 2.4.9 to 2.5.2:
+-   Update thqby's extension from 2.4.9 to 2.5.2, adding new features and bugfixes
 
--   todo add tests!
+### New features
+
+-   [thqby #564](https://github.com/thqby/vscode-autohotkey2-lsp/issues/564)
+-   [thqby #565](https://github.com/thqby/vscode-autohotkey2-lsp/issues/565)
+-   [thqby #570](https://github.com/thqby/vscode-autohotkey2-lsp/issues/570)
+
+### Fixes
+
+-   Fix [thqby #591](https://github.com/thqby/vscode-autohotkey2-lsp/issues/591)
+-   Fix [thqby #594](https://github.com/thqby/vscode-autohotkey2-lsp/issues/594)
+-   Fix [thqby #595](https://github.com/thqby/vscode-autohotkey2-lsp/issues/595)
+-   Fix [thqby #596](https://github.com/thqby/vscode-autohotkey2-lsp/issues/596)
+-   Fix [thqby #584](https://github.com/thqby/vscode-autohotkey2-lsp/issues/584)
+-   Fix [thqby #533](https://github.com/thqby/vscode-autohotkey2-lsp/issues/533)
+-   Fix [thqby #562](https://github.com/thqby/vscode-autohotkey2-lsp/issues/562)
+-   Fix [thqby #563](https://github.com/thqby/vscode-autohotkey2-lsp/issues/563)
+-   Fix [thqby #571](https://github.com/thqby/vscode-autohotkey2-lsp/issues/571)
+-   Fix [thqby #574](https://github.com/thqby/vscode-autohotkey2-lsp/issues/574)
+-   Fix [thqby #576](https://github.com/thqby/vscode-autohotkey2-lsp/issues/576)
+-   Fix other unreported bugs in AHK v2 support. These changes weren't fully documented, see the diff or open a discussion for details.
+
+### Developer changes
+
+-   Add true unit tests that don't require opening VS Code to run (`npm run test-unit`)
 
 ## 6.1.1 - 2024-09-22 😤
 
