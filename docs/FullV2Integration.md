@@ -1,6 +1,8 @@
 # Full v2 integration
 
-This doc covers all the new features as a result of integrating with thqby's AHK v2 Language Support extension. See [known issues](#known-issues) at the bottom of this file
+This page serves as a migration guide from AHK++ 5.0.7 to AHK++ 6.0.0. It may not be fully up-to-date with the latest version of AHK++, but breaking changes will only be present in AHK++ 7 and later.
+
+This doc covers all the new features as a result of integrating with thqby's AHK v2 Language Support extension in AHK++ 6. See [known issues](#known-issues) at the bottom of this file for more details.
 
 ## The big changes
 

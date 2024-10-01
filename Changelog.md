@@ -2,13 +2,36 @@
 
 ## 6.2.0 - unreleased 🫡
 
-Update thqby's extension from 2.4.9 to 2.5.2:
+-   Update thqby's extension from 2.4.9 to 2.5.2, adding new features and bugfixes
 
--   todo add tests!
+### New features
+
+-   Watch files for changes, improving `#Includes` support ([thqby #564](https://github.com/thqby/vscode-autohotkey2-lsp/issues/564))
+-   "Update File Version Info" now updates all `;@ahk2exe` directives as well ([thqby #565](https://github.com/thqby/vscode-autohotkey2-lsp/issues/565))
+-   Context menu items organized into AHK++ submenu ([thqby #570](https://github.com/thqby/vscode-autohotkey2-lsp/issues/570))
+
+### Fixes
+
+-   Fix TraySetIcon definition ([thqby #591](https://github.com/thqby/vscode-autohotkey2-lsp/issues/591))
+-   Fix ternary operator parsing ([thqby #594](https://github.com/thqby/vscode-autohotkey2-lsp/issues/594))
+-   Improve completion provider for DllCall.Bind ([thqby #595](https://github.com/thqby/vscode-autohotkey2-lsp/issues/595))
+-   Add Help and Sleep as key names ([thqby #596](https://github.com/thqby/vscode-autohotkey2-lsp/issues/596))
+-   Fix debug when `launch.json` is present ([thqby #584](https://github.com/thqby/vscode-autohotkey2-lsp/issues/584))
+-   Fix debug not using selected launch config ([thqby #533](https://github.com/thqby/vscode-autohotkey2-lsp/issues/533))
+-   Fix "Update File Version Info" when more than one space is present ([thqby #562](https://github.com/thqby/vscode-autohotkey2-lsp/issues/562))
+-   Fix "Update File Version Info" when placed after directive ([thqby #563](https://github.com/thqby/vscode-autohotkey2-lsp/issues/563))
+-   Fix hover provider for `this` in classes ([thqby #571](https://github.com/thqby/vscode-autohotkey2-lsp/issues/571))
+-   Fix formatting inside conditional function definition ([thqby #574](https://github.com/thqby/vscode-autohotkey2-lsp/issues/574))
+-   Disallow switching `.ahk2` files to AHK v1 and vice versa ([thqby #576](https://github.com/thqby/vscode-autohotkey2-lsp/issues/576))
+-   Fix other unreported bugs in AHK v2 support. These changes weren't fully documented, see the diff or open a discussion for details.
+
+### Developer changes
+
+-   Add true unit tests that don't require opening VS Code to run (`npm run test-unit`)
 
 ## 6.1.1 - 2024-09-22 😤
 
--   No changes, just working around technical limitations with VS Marketplace as 6.1.0 failed without detailed errors.
+-   No changes, just working around technical limitations with VS Marketplace as 6.1.0 failed to deploy without detailed errors.
 
 ## 6.1.0 - 2024-09-22 🫙
 
