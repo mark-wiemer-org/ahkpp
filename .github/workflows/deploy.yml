@@ -15,7 +15,8 @@ jobs:
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
         with:
-          # Generated via https://open-vsx.org/user-settings/tokens, valid forever?
+          # Generated via https://open-vsx.org/user-settings/tokens
+          # Saved locally as "CI VS Code Open VSX publish token"
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
           # preRelease: true
       - name: Publish to Visual Studio Marketplace
@@ -23,7 +24,7 @@ jobs:
         with:
           # https://github.com/mark-wiemer-org/ahkpp/settings/secrets/actions
           # https://dev.azure.com/markwiemer/_usersSettings/tokens
-          # Saved locally as "CI VS Code Marketplace Publish Token", expires 2024-06-22
+          # Saved locally as "CI VS Code Marketplace Publish Token"
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
           # preRelease: true
