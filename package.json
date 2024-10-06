@@ -66,7 +66,6 @@
         "format": "prettier --check .",
         "format:fix": "prettier --write .",
         "lint": "npm run format && npm run eslint && npm run sort-package-json",
-        "lint:ci": "npm run eslint && npm run sort-package-json",
         "lint:fix": "npm run format:fix && npm run eslint:fix && npm run sort-package-json:fix",
         "package": "vsce package",
         "prepare": "git submodule update --init --recursive && cd ahk2 && npm install",
@@ -82,7 +81,7 @@
         "test-unit": "mocha",
         "test:ci": "npm run test-grammar && npm run test-e2e:ci",
         "validate": "npm run lint && npm run test && npm run package",
-        "validate:ci": "npm run lint:ci && npm run test:ci && npm run package",
+        "validate:ci": "npm run lint && npm run test:ci && npm run package",
         "validate:fix": "npm run lint:fix && npm run test && npm run package",
         "vscode:prepublish": "npm run compile-grammar && npm run build && echo Packaging..."
     },
