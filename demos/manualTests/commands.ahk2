@@ -6,7 +6,7 @@
 
 ; todo Debug AHK with Params is untested for now
 
-;* Export AHK Symbols should give ~20 lines for this
+;* Export AHK Symbols should give ~45 lines for this
 ; And open in an unsaved new editor group
 MyMsgBox(text) {
     MsgBox(text)
