@@ -946,11 +946,15 @@ export const internalFormat = (
                 // in array stays, because formatter waits code after close
                 // brace, but instead reaches EOF. If not equal, syntax is
                 // incorrect of there is bug in formatter logic.
-                console.error('Internal formatter data:');
-                console.log(' ifDepth:');
-                console.log(ifDepth.depth);
-                console.log('occDepth:');
-                console.log(focDepth.depth);
+                console.error(
+                    [
+                        'Internal formatter data:',
+                        'ifDepth:',
+                        ifDepth.depth,
+                        'focDepth:',
+                        focDepth.depth,
+                    ].join('\n'),
+                );
             }
         }
     });

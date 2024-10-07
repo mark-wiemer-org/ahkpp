@@ -37,12 +37,8 @@
         "ahk2/syntaxes/ahk2.d.ahk",
         "ahk2/syntaxes/ahk2.json",
         "ahk2/syntaxes/winapi.d.ahk",
-        "language/ahk.configuration.json",
-        "language/*.tmLanguage.json",
-        "language/autohotkey.svg",
-        "language/autohotkey2.svg",
-        "language/snippetsV1.json",
-        "language/snippetsV2.json",
+        "language/*.json",
+        "language/*.svg",
         "dist/extension.js",
         "icon.png",
         "license.txt",
@@ -52,14 +48,14 @@
         "prebuild": "npm run clean:dist",
         "build": "node src/build.mjs --mode=production && cd ahk2 && npm run build",
         "build:ahk1": "node src/build.mjs --mode=production",
-        "build:dev": "node src/build.mjs && cd ahk2 && npm run build:dev",
+        "build:dev": "node src/build.mjs && cd ahk2 && npm run build",
         "clean:all": "npm run clean:dist && npm run clean:language && npm run clean:out",
         "clean:dist": "del-cli dist",
         "clean:language": "del-cli language/*.tmLanguage.json",
         "clean:out": "del-cli out",
-        "compile-grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json && js-yaml language/ahk2.tmLanguage.yaml > language/ahk2.tmLanguage.json && js-yaml language/ahk2-output.tmLanguage.yaml > language/ahk2-output.tmLanguage.json",
-        "precompile-ts": "npm run clean:out",
-        "compile-ts": "tsc -b",
+        "compile:grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json && js-yaml language/ahk2.tmLanguage.yaml > language/ahk2.tmLanguage.json && js-yaml language/ahk2-output.tmLanguage.yaml > language/ahk2-output.tmLanguage.json",
+        "precompile:ts": "npm run clean:out",
+        "compile:ts": "tsc -b",
         "eslint": "npm run eslint:files -- src",
         "eslint:files": "eslint --max-warnings=0",
         "eslint:fix": "npm run eslint:files -- src --fix",
@@ -71,19 +67,20 @@
         "prepare": "git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
         "sort-package-json:fix": "sort-package-json",
-        "test": "npm run test-grammar && npm run test-unit && npm run test-e2e",
-        "pretest-e2e": "npm run compile-ts",
-        "test-e2e": "vscode-test",
-        "test-e2e:ci": "npm run test-e2e -- -i --fgrep @ignoreCI",
-        "pretest-grammar": "npm run compile-grammar",
-        "test-grammar": "vscode-tmgrammar-snap language/samples/*.{ahk1,ahk2}",
-        "pretest-unit": "npm run compile-ts",
-        "test-unit": "mocha",
-        "test:ci": "npm run test-grammar && npm run test-e2e:ci",
+        "test": "npm run test:grammar && npm run test:unit && npm run test:e2e",
+        "test:ci": "npm run test:grammar && npm run test:e2e:ci",
+        "pretest:e2e": "npm run compile:ts",
+        "test:e2e": "vscode-test",
+        "test:e2e:ci": "npm run test:e2e -- -i --fgrep @ignoreCI",
+        "pretest:grammar": "npm run compile:grammar",
+        "test:grammar": "vscode-tmgrammar-snap language/samples/*.{ahk1,ahk2}",
+        "pretest:unit": "npm run compile:ts",
+        "test:unit": "mocha",
         "validate": "npm run lint && npm run test && npm run package",
         "validate:ci": "npm run lint && npm run test:ci && npm run package",
+        "validate:deep": "cd ahk2 && npm run validate && cd .. && npm run validate",
         "validate:fix": "npm run lint:fix && npm run test && npm run package",
-        "vscode:prepublish": "npm run compile-grammar && npm run build && echo Packaging..."
+        "vscode:prepublish": "npm run compile:grammar && npm run build && echo Packaging..."
     },
     "contributes": {
         "breakpoints": [
@@ -174,7 +171,7 @@
             {
                 "command": "ahk++.addDocComment",
                 "title": "%ahk++.command.addDocComment%",
-                "enablement": "editorLangId == ahk || editorLangId == ahk2",
+                "enablement": "editorLangId == ahk2",
                 "category": "AHK++"
             },
             {
@@ -210,7 +207,7 @@
         ],
         "configuration": {
             "type": "object",
-            "title": "AutoHotkey Plus Plus",
+            "title": "AHK++ (AutoHotkey Plus Plus)",
             "properties": {
                 "AHK++.compiler": {
                     "type": "object",
@@ -1143,7 +1140,7 @@
         ]
     },
     "mocha": {
-        "spec": "out/**/*.test.js"
+        "spec": "out/src/**/*.test.js"
     },
     "dependencies": {
         "@vscode/debugadapter": "^1.57.0",
@@ -1163,7 +1160,7 @@
         "@types/glob": "^7.1.3",
         "@types/mocha": "^10.0.8",
         "@types/node": "^20.16.0",
-        "@types/vscode": "1.90.0",
+        "@types/vscode": "1.93.0",
         "@types/xml2js": "^0.4.11",
         "@vscode/test-cli": "^0.0.10",
         "@vscode/test-electron": "^2.3.10",
@@ -1185,7 +1182,7 @@
         "vscode-tmgrammar-test": "^0.1.1"
     },
     "engines": {
-        "vscode": "^1.90.0"
+        "vscode": "^1.93.0"
     },
     "icon": "icon.png",
     "galleryBanner": {

@@ -6,33 +6,35 @@
 
 ; todo Debug AHK with Params is untested for now
 
-; Export AHK Symbols should give ~20 lines for this
+;* Export AHK Symbols should give ~45 lines for this
 ; And open in an unsaved new editor group
 MyMsgBox(text) {
     MsgBox(text)
 }
 
-; Stop AHK Script should work after starting via Run AHK Script
+;* Stop AHK Script should work after starting via Run AHK Script
 ; Auto-closes MsgBox windows as well :)
 MyMsgBox("Hello world!")
 MyMsgBox("Hello again!")
 
-; Add Doc Comment should add and then go to doc comment
+;* Add Doc Comment should add and then go to doc comment
 ; todo Known issue with two args will be reported later
 AddDocComment(arg1, arg2) {
     ; do nothing
 }
 
-; Update File Version Info should update the file version info ;)
-; create block comment, don't save, put cursor at end of first line
-; update version only via quick pick
+;* Update File Version Info should update the file version info ;)
+; first, remove the ahk2exe version directive below
+; then, when running it creates block comment, doesn't save, puts cursor at end of first line
+; if block comment or directive exists, running updates version everywhere via quick pick
+;@Ahk2Exe-SetVersion 2
 
-; Switch AHK Version should switch and ignore the `Requires` directive
+;* Switch AHK Version should switch and ignore the `Requires` directive
 
 ; todo Select AHK Syntaxes is untested for now
 
 ; todo Set A_ScriptDir Here is untested for now
 
-; Set AHK v2 Interpreter should open quick pick with installed options
+;* Set AHK v2 Interpreter should open quick pick with installed options
 ; updates should reflect in workspace settings
 ; option should be present in status bar, bottom left
