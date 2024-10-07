@@ -37,7 +37,7 @@
 ### Developer changes
 
 -   Add true unit tests that don't require opening VS Code to run (`npm run test-unit`)
--   Move to new branch of ahk2-lsp with 100% thqby-compatible changes. All changes are submitted as PRs against thqby's repo. This makes improvments much easier in the future.
+-   Move to new branch of ahk2-lsp with 100% thqby-compatible changes. All changes are submitted as PRs against thqby's repo. This makes improvements much easier in the future.
 
 ## 6.1.1 - 2024-09-22 😤
 
@@ -174,7 +174,7 @@ Settings are now organized into flat objects for a better user experience. Unfor
 -   Switch AHK Version: Change between AHK v1 and v2 for the current file
 -   Select AHK Syntaxes: Select custom AHK v2 syntax files for advanced use-cases. PRs are welcomed if the default syntaxes aren't sufficient!
 -   Set A_ScriptDir Here: Set [`A_ScriptDir`](https://www.autohotkey.com/docs/v2/Variables.htm#ScriptDir) to the path of the current file. Only for AHK v2.
--   Set AHK v2 Interpreter: Open a quick pick to change the AHK v2 intepreter for all scripts.
+-   Set AHK v2 Interpreter: Open a quick pick to change the AHK v2 interpreter for all scripts.
 
 ### Other changes
 
@@ -216,7 +216,7 @@ Fixup new command names and IDs:
 -   Switch AHK Version (`ahk++.switchAhkVersion`): Change between v1 and v2 for the current file
 -   Select AHK Syntaxes (`ahk++.selectSyntaxes`): Select custom syntax files for advanced use-cases. PRs are welcomed if the default syntaxes aren't sufficient!
 -   Set A_ScriptDir Here (`ahk++.setAScriptDir`): Set [`A_ScriptDir`](https://www.autohotkey.com/docs/v2/Variables.htm#ScriptDir) to the path of the current file. Only for AHK v2.
--   Set AHK v2 Interpreter (`ahk++.setV2Interpreter`): Open a quick pick to change the AHK v2 intepreter for all scripts.
+-   Set AHK v2 Interpreter (`ahk++.setV2Interpreter`): Open a quick pick to change the AHK v2 interpreter for all scripts.
 
 </details>
 
@@ -588,17 +588,17 @@ This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you
 
 -   Enable IntelliSense as default.
 -   Fix switch format error.
--   fix variable detech fail.
+-   fix variable detect fail.
 
 ## 2.5.3 - 2020-09-22
 
--   Fix rename fail when unsave.
+-   Fix rename fail when un-save.
 -   Simple support variable detect.
--   Simple implement intellisence.
+-   Simple implement intellisense.
 
 ## 2.5.0 - 2020-09-21
 
--   Adaptation zeroplus debuger extension.
+-   Adaptation zero-plus debugger extension.
 -   Support rename method name.
 
 ## 2.4.5~2.4.16
@@ -618,25 +618,25 @@ This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you
 
 ## 2.4.2 - 2020-06-24
 
--   Support restart current programe.
+-   Support restart current program.
 -   Support go to label.
 -   Fix bugs.
 
 ## 2.4.1 - 2020-05-31
 
 -   Support config compiler path.
--   Show variable detail in debug evalute
+-   Show variable detail in debug evaluate
 
 ## 2.4.0 - 2020-05-30
 
--   Support get and modify variable in debug evalute
+-   Support get and modify variable in debug evaluate
 -   Support pause and continue run script.
 -   Support OutputDebug command.
--   Support run unsave ahk script.
+-   Support run unsaved ahk script.
 
 ## 2.3.4 - 2020-04-15
 
--   Suport change variable value when debug, contribute by @zero-plusplus.
+-   Support change variable value when debug, contribute by @zero-plusplus.
 
 ## 2.3.1 - 2020-04-12
 
@@ -645,7 +645,7 @@ This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you
 ## 2.3.0 - 2020-04-11
 
 -   Variable view support complex variable value, contribute by @zero-plusplus.
--   Enhance method detecher.
+-   Enhance method detecter.
 
 ## 2.2.2 - 2020-03-27
 
@@ -653,13 +653,13 @@ This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you
 
 ## 2.2.0 - 2020-03-25
 
--   Support change defualt ahk execute path.
+-   Support change default ahk execute path.
 -   Support simple debug.
 
 ## 2.1.6 - 2020-03-23
 
 -   Find definition in whole workspace.
--   Try go to include script in workspce.
+-   Try go to include script in workspace.
 
 ## 2.1.2 - 2020-03-22
 
@@ -671,7 +671,7 @@ This is "The Kyklish Release" because Kyklish wrote most of this code. Thank you
 
 ## 2.0.3 - 2020-03-10
 
--   Fix detecher if and while block as methods.
+-   Fix detecter if and while block as methods.
 -   Support go to method definition in same file.
 
 ## 2.0.2 - 2019-11-27
