@@ -2,13 +2,14 @@
 
 ## 6.2.0 - unreleased 🫡
 
--   Update thqby's extension from 2.4.9 to 2.5.2, adding new features and bugfixes
+-   Update thqby's extension from 2.4.9 to 2.5.3, adding new features and bugfixes
 
 ### New features
 
 -   Watch files for changes, improving `#Includes` support ([thqby #564](https://github.com/thqby/vscode-autohotkey2-lsp/issues/564))
 -   "Update File Version Info" now updates all `;@ahk2exe` directives as well ([thqby #565](https://github.com/thqby/vscode-autohotkey2-lsp/issues/565))
 -   Context menu items organized into AHK++ submenu ([thqby #570](https://github.com/thqby/vscode-autohotkey2-lsp/issues/570))
+-   Support formatter directives in v2 files
 
 ### Fixes
 
@@ -28,6 +29,7 @@
 ### Developer changes
 
 -   Add true unit tests that don't require opening VS Code to run (`npm run test-unit`)
+-   Move to new branch of ahk2-lsp with 100% thqby-compatible changes. All changes are submitted as PRs against thqby's repo. This makes improvments much easier in the future.
 
 ## 6.1.1 - 2024-09-22 😤
 
