@@ -3,7 +3,6 @@
 <!-- todo failing tests
 - set ahk v2 interpreter command not found
 - librarySuggestions not working for local lib without restart (create issue)
-- formatter not respecting brace style
 -->
 
 ## 6.3.0 - unreleased 🧪
