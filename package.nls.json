@@ -24,7 +24,7 @@
     "ahk++.config.v2.file.interpreterPath": "Path to the `AutoHotkey.exe` executable file for AHK v2.",
     "ahk++.config.v2.file.exclude": "⚠️ Not yet supported, ref [issue #488](https://github.com/mark-wiemer-org/ahkpp/issues/488).\n\nGlob patterns for excluding files and folders when scanning AHK files.",
     "ahk++.config.v2.file.maxScanDepth": "Depth of folders to scan for IntelliSense. Negative values mean infinite depth.",
-    "ahk++.config.v2.librarySuggestions": "Which libraries to suggest functions from, if any.",
+    "ahk++.config.v2.librarySuggestions": "Which libraries to suggest functions from, if any. In case of issues, restart your IDE.",
     "ahk++.config.v2.symbolFoldingFromOpenBrace": "Fold parameter lists separately from definitions.",
     "ahk++.config.v2.syntaxes": "Path to the ahk2.json, ahk2.d.ahk, and *.snippet.json files used by IntelliSense.",
     "ahk++.config.v2.warn.callWithoutParentheses": "Display warnings for each function or method call without parentheses. Changes take effect after restart.",
