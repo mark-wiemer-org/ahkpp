@@ -82,6 +82,7 @@
         "test:unit": "mocha",
         "validate": "npm run lint && npm run test && npm run package",
         "validate:ci": "npm run lint && npm run test:ci && npm run package",
+        "validate:deep": "cd ahk2 && npm run validate && cd .. && npm run validate",
         "validate:fix": "npm run lint:fix && npm run test && npm run package",
         "vscode:prepublish": "npm run compile:grammar && npm run build && echo Packaging..."
     },
