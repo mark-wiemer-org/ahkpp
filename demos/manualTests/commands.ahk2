@@ -24,8 +24,10 @@ AddDocComment(arg1, arg2) {
 }
 
 ;* Update File Version Info should update the file version info ;)
-; create block comment, don't save, put cursor at end of first line
-; update version only via quick pick
+; first, remove the ahk2exe version directive below
+; then, when running it creates block comment, doesn't save, puts cursor at end of first line
+; if block comment or directive exists, running updates version everywhere via quick pick
+;@Ahk2Exe-SetVersion 2
 
 ;* Switch AHK Version should switch and ignore the `Requires` directive
 

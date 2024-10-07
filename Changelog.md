@@ -10,40 +10,8 @@
 -   Watch files for changes, improving `#Includes` support ([thqby #564](https://github.com/thqby/vscode-autohotkey2-lsp/issues/564))
 -   "Update File Version Info" now updates all `;@ahk2exe` directives as well ([thqby #565](https://github.com/thqby/vscode-autohotkey2-lsp/issues/565))
 -   Context menu items organized into AHK++ submenu ([thqby #570](https://github.com/thqby/vscode-autohotkey2-lsp/issues/570))
--   Support formatter directives in v2 files
-    -   Directive names are snake_case, like `array_style` and `brace_style`, for compatibility with thqby's extension
-    ```ahk
-    ;* No directive, default settings, preserves brace location
-    list := [{ name: 1, age: 2
-    }, { name: 2, age: 3
-    }]
-    ;@format array_style: expand, object_style: expand
-    list := [
-        {
-            name: 1,
-            age: 2
-        },
-        {
-            name: 2,
-            age: 3
-        }
-    ]
-    ;@format array_style: collapse, object_style: expand
-    list := [{
-        name: 1,
-        age: 2
-    }, {
-        name: 2,
-        age: 3
-    }]
-    ;@format array_style: expand, object_style: collapse
-    list := [
-        { name: 1, age: 2 },
-        { name: 2, age: 3 }
-    ]
-    ;@format array_style: collapse, object_style: collapse
-    list := [{ name: 1, age: 2 }, { name: 2, age: 3 }]
-    ```
+-   Support `;@format` formatter directives in v2 files
+    -   Directive names are `array_style` and `brace_style` for compatibility with thqby's extension
 
 ### Fixes
 
