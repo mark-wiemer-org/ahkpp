@@ -147,7 +147,7 @@ suite('Internal formatter', () => {
 suite('External formatter', () => {
     // test external formatter a few times to make sure the connection is working
     // advanced tests are for internal formatter only
-    // TODO note these tests only support editor settings, not extension settings
+    //* These tests only support editor settings, not extension settings
     const externalFormatTests: FormatTest[] = [
         { filenameRoot: '25-multiline-string' },
         {
