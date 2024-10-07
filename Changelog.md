@@ -25,7 +25,6 @@
 -   Fix "Update File Version Info" when placed after directive ([thqby #563](https://github.com/thqby/vscode-autohotkey2-lsp/issues/563))
 -   Fix hover provider for `this` in classes ([thqby #571](https://github.com/thqby/vscode-autohotkey2-lsp/issues/571))
 -   Fix formatting inside conditional function definition ([thqby #574](https://github.com/thqby/vscode-autohotkey2-lsp/issues/574))
--   Disallow switching `.ahk2` files to AHK v1 and vice versa ([thqby #576](https://github.com/thqby/vscode-autohotkey2-lsp/issues/576))
 -   Fix other unreported bugs in AHK v2 support. These changes weren't fully documented, see the diff or open a discussion for details.
 
 ### Developer changes
