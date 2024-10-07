@@ -207,7 +207,7 @@
         ],
         "configuration": {
             "type": "object",
-            "title": "AutoHotkey Plus Plus",
+            "title": "AHK++ (AutoHotkey Plus Plus)",
             "properties": {
                 "AHK++.compiler": {
                     "type": "object",
