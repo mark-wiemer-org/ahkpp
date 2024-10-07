@@ -1,13 +1,6 @@
 # Changelog
 
-<!-- todo failing tests
-- set ahk v2 interpreter command not found
-- librarySuggestions not working for local lib without restart (create issue)
--->
-
-## 6.3.0 - unreleased 🧪
-
-> 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)! We're skipping 6.2.0 per [VS Code recommendations](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#prerelease-extensions:~:text=So%2C%20we%20recommend%20that%20extensions%20use)
+## 6.2.0 - 2024-10-07 🫡
 
 -   Update thqby's extension from 2.4.9 to 2.5.3, adding new features and bugfixes
 -   Rename to `AHK++ (AutoHotkey Plus Plus)` to provide a clear short name while retaining previous brand
@@ -18,6 +11,39 @@
 -   "Update File Version Info" now updates all `;@ahk2exe` directives as well ([thqby #565](https://github.com/thqby/vscode-autohotkey2-lsp/issues/565))
 -   Context menu items organized into AHK++ submenu ([thqby #570](https://github.com/thqby/vscode-autohotkey2-lsp/issues/570))
 -   Support formatter directives in v2 files
+    -   Directive names are snake_case, like `array_style` and `brace_style`, for compatibility with thqby's extension
+    ```ahk
+    ;* No directive, default settings, preserves brace location
+    list := [{ name: 1, age: 2
+    }, { name: 2, age: 3
+    }]
+    ;@format array_style: expand, object_style: expand
+    list := [
+        {
+            name: 1,
+            age: 2
+        },
+        {
+            name: 2,
+            age: 3
+        }
+    ]
+    ;@format array_style: collapse, object_style: expand
+    list := [{
+        name: 1,
+        age: 2
+    }, {
+        name: 2,
+        age: 3
+    }]
+    ;@format array_style: expand, object_style: collapse
+    list := [
+        { name: 1, age: 2 },
+        { name: 2, age: 3 }
+    ]
+    ;@format array_style: collapse, object_style: collapse
+    list := [{ name: 1, age: 2 }, { name: 2, age: 3 }]
+    ```
 
 ### Fixes
 
