@@ -6,9 +6,9 @@
 - formatter not respecting brace style
 -->
 
-## 6.2.0 - unreleased 🧪
+## 6.3.0 - unreleased 🧪
 
-> 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)!
+> 🧪 means this is a [pre-release](https://code.visualstudio.com/updates/v1_63#_pre-release-extensions)! We're skipping 6.2.0 per [VS Code recommendations](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#prerelease-extensions:~:text=So%2C%20we%20recommend%20that%20extensions%20use)
 
 -   Update thqby's extension from 2.4.9 to 2.5.3, adding new features and bugfixes
 
