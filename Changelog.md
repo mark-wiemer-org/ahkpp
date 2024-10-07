@@ -169,7 +169,7 @@ Settings are now organized into flat objects for a better user experience. Unfor
 -   Run AHK++ Diagnostic: Effectively restart the AHK v2 features of the app.
 -   Export AHK Symbols: Export application functions and classes to a new file. Only for AHK v2.
 -   Stop AHK Script (`Ctrl + F6`): Stop an AHK script of user choice ran via `Run AHK Script` or any of the `Debug AHK ...` commands. If only one script is running, stop that without asking for confirmation.
--   Add Doc Comment: Add a function header comment for the current function
+-   Add Doc Comment: Add a function header comment for the current function. Only for AHK v2.
 -   Update File Version Info: Add or update a file header comment
 -   Switch AHK Version: Change between AHK v1 and v2 for the current file
 -   Select AHK Syntaxes: Select custom AHK v2 syntax files for advanced use-cases. PRs are welcomed if the default syntaxes aren't sufficient!
