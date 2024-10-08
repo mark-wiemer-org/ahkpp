@@ -14,25 +14,24 @@ jobs:
       - uses: actions/setup-node@v4
       - run: npm ci
       - run: npm run package
-      - name: Get package version
-        uses: stevenbenitez/get-package-version-action@v1
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           # Generated via https://open-vsx.org/user-settings/tokens
           # Saved locally as "CI VS Code Open VSX publish token"
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
-          extensionFile: "test-${{ steps.get-package-version.outputs.version }}.vsix"
+          extensionFile: "ahkpp.vsix"
           dryRun: true
           # preRelease: true
           skipDuplicate: true
-      # - name: Publish to Visual Studio Marketplace
-      #   uses: HaaLeo/publish-vscode-extension@v1
-      #   with:
-      #     # https://github.com/mark-wiemer-org/ahkpp/settings/secrets/actions
-      #     # https://dev.azure.com/markwiemer/_usersSettings/tokens
-      #     # Saved locally as "CI VS Code Marketplace Publish Token"
-      #     pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
-      #     registryUrl: https://marketplace.visualstudio.com
-      #     # preRelease: true
-      #    skipDuplicate: true
+      - name: Publish to Visual Studio Marketplace
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          # https://github.com/mark-wiemer-org/ahkpp/settings/secrets/actions
+          # https://dev.azure.com/markwiemer/_usersSettings/tokens
+          # Saved locally as "CI VS Code Marketplace Publish Token"
+          pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
+          extensionFile: "ahkpp.vsix"
+          registryUrl: https://marketplace.visualstudio.com
+          # preRelease: true
+          skipDuplicate: true
