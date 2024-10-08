@@ -20,7 +20,7 @@ jobs:
           # Generated via https://open-vsx.org/user-settings/tokens
           # Saved locally as "CI VS Code Open VSX publish token"
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
-          extensionFile: "ahkpp.vsix"
+          extensionFile: 'ahkpp.vsix'
           # dryRun: true
           # preRelease: true
           skipDuplicate: true
@@ -31,7 +31,7 @@ jobs:
           # https://dev.azure.com/markwiemer/_usersSettings/tokens
           # Saved locally as "CI VS Code Marketplace Publish Token"
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
-          extensionFile: "ahkpp.vsix"
+          extensionFile: 'ahkpp.vsix'
           registryUrl: https://marketplace.visualstudio.com
           # dryRun: true
           # preRelease: true
