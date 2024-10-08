@@ -13,16 +13,17 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - run: npm ci
+      - run: npm run package
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           # Generated via https://open-vsx.org/user-settings/tokens
           # Saved locally as "CI VS Code Open VSX publish token"
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
+          extensionFile: "test-6.2.1.vsix"
           dryRun: true
           # preRelease: true
           skipDuplicate: true
-      - run: npm run package
       # - name: Publish to Visual Studio Marketplace
       #   uses: HaaLeo/publish-vscode-extension@v1
       #   with:
