@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.2.1 - 2024-10-07 📚
+
+-   Restore readme to marketplaces (lost due to [auto-publish error](https://github.com/mark-wiemer-org/ahkpp/actions/runs/11225795502/job/31205122158))
+
+### Developer changes
+
+-   Update some dependencies to reduce risk of publishing errors in the future
+
 ## 6.2.0 - 2024-10-07 🫡
 
 -   Update thqby's extension from 2.4.9 to 2.5.3, adding new features and bugfixes
