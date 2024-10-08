@@ -21,7 +21,7 @@ jobs:
           # Saved locally as "CI VS Code Open VSX publish token"
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
           extensionFile: "ahkpp.vsix"
-          dryRun: true
+          # dryRun: true
           # preRelease: true
           skipDuplicate: true
       - name: Publish to Visual Studio Marketplace
@@ -33,5 +33,6 @@ jobs:
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
           extensionFile: "ahkpp.vsix"
           registryUrl: https://marketplace.visualstudio.com
+          # dryRun: true
           # preRelease: true
           skipDuplicate: true
