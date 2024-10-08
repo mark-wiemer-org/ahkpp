@@ -43,7 +43,7 @@ Unless otherwise specified, commit messages don't matter.
 1. Tag the release
     1. e.g. `git checkout main && git pull && git tag v1.2.3 && git push origin v1.2.3`
     1. [Create a new GitHub release for this tag](https://github.com/mark-wiemer-org/ahkpp/tags)
-        1. Release title: Same as in [Changelog.md](../Changelog.md)
+        1. Release title: Same as in [changelog.md](../changelog.md)
         1. Description: Changelog entry, excluding the heading for this version
         1. Attach binary
         1. Publish release

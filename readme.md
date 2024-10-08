@@ -26,7 +26,7 @@ AHK++ 6 now incorporates [AutoHotkey v2 Language Support by thqby](https://marke
 -   Rich IntelliSense support with snippets, hover text, and suggestions
 -   Formatting files with many customized options
 
-For all changes, including breaking changes, see [the changelog](./Changelog.md)
+For all changes, including breaking changes, see [the changelog](./changelog.md)
 
 As always, please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose)
 
@@ -34,7 +34,7 @@ As always, please [🐛 report any issues](https://github.com/mark-wiemer-org/ah
 
 ### ⛓️‍💥 Breaking changes
 
-When adding all the new settings, VS Code's setting UX became overwhelming. Settings are now organized into flat objects, which should improve UX and reduce the need for breaking changes in the future! See [the changelog](./Changelog.md) for details.
+When adding all the new settings, VS Code's setting UX became overwhelming. Settings are now organized into flat objects, which should improve UX and reduce the need for breaking changes in the future! See [the changelog](./changelog.md) for details.
 
 ---
 
