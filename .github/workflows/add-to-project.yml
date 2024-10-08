@@ -15,7 +15,7 @@ jobs:
     name: Add issue or PR to project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@v1
+      - uses: actions/add-to-project@v1.0.2
         with:
           # https://github.com/settings/tokens
           # https://github.com/mark-wiemer-org/ahkpp/settings/secrets/actions
