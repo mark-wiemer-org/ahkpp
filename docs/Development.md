@@ -36,6 +36,7 @@ Unless otherwise specified, commit messages don't matter.
     1. Open the context menu (right-click).
     1. Select `Install Extension VSIX`.
     1. Reload the window. (`F1` -> Developer: Reload Window)
+1. Validate that the vsix includes the readme, license, and changelog visible in the IDE's extension view ([#537](https://github.com/mark-wiemer-org/ahkpp/issues/537))
 1. Ensure all tests pass, including manual ones on the new changes.
 
 ### Publishing
