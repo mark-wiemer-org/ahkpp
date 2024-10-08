@@ -51,7 +51,7 @@
         "build:dev": "node src/build.mjs && cd ahk2 && npm run build",
         "clean:all": "npm run clean:dist && npm run clean:language && npm run clean:out",
         "clean:dist": "del-cli dist",
-        "clean:language": "del-cli language/*.tmLanguage.json",
+        "clean:language": "del-cli \"language/*.tmLanguage.json\"",
         "clean:out": "del-cli out",
         "compile:grammar": "js-yaml language/ahk.tmLanguage.yaml > language/ahk.tmLanguage.json && js-yaml language/ahk2.tmLanguage.yaml > language/ahk2.tmLanguage.json && js-yaml language/ahk2-output.tmLanguage.yaml > language/ahk2-output.tmLanguage.json",
         "precompile:ts": "npm run clean:out",
