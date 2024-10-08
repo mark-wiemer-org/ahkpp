@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.2.2 - 2024-10-07 🤏
+
+-   Reduce extension size by ~1000x (yes, really) ([#533](https://github.com/mark-wiemer-org/ahkpp/issues/533))
+
 ## 6.2.1 - 2024-10-07 📚
 
 -   Restore readme to marketplaces (lost due to [auto-publish error](https://github.com/mark-wiemer-org/ahkpp/actions/runs/11225795502/job/31205122158))
