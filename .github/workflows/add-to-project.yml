@@ -1,6 +1,6 @@
 # Move issues and pull requests to the project
 
-name: Add new issue or pull request to project
+name: Add to project
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ on:
 
 jobs:
   add-to-project:
-    name: Add issue to project
+    name: Add issue or PR to project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/add-to-project@v1
