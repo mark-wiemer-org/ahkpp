@@ -1,6 +1,6 @@
 # Move issues and pull requests to the project
 
-name: Project management
+name: Add new issue or pull request to project
 
 on:
   pull_request:
