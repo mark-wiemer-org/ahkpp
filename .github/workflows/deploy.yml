@@ -22,6 +22,7 @@ jobs:
           dryRun: true
           # preRelease: true
           skipDuplicate: true
+      - run: npm run package
       # - name: Publish to Visual Studio Marketplace
       #   uses: HaaLeo/publish-vscode-extension@v1
       #   with:
