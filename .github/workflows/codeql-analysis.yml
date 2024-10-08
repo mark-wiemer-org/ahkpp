@@ -28,9 +28,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Initializes the CodeQL tools for scanning.
+      # https://github.com/github/codeql-action#supported-versions-of-the-codeql-action
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:

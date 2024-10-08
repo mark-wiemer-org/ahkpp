@@ -1,6 +1,6 @@
 # Move issues and pull requests to the project
 
-name: Project management
+name: Add new issue or pull request to project
 
 on:
   pull_request:
@@ -15,7 +15,7 @@ jobs:
     name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@v0.3.0
+      - uses: actions/add-to-project@v1
         with:
           # https://github.com/settings/tokens
           # https://github.com/mark-wiemer-org/ahkpp/settings/secrets/actions
