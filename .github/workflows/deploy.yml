@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - '*'
+  workflow_dispatch:
 
 name: Deploy Extension
 jobs:
@@ -12,19 +13,19 @@ jobs:
       - uses: actions/checkout@v3.3.0
       - uses: actions/setup-node@v3.6.0
       - run: npm ci
-      - name: Publish to Open VSX Registry
-        uses: HaaLeo/publish-vscode-extension@v1
-        with:
-          # Generated via https://open-vsx.org/user-settings/tokens
-          # Saved locally as "CI VS Code Open VSX publish token"
-          pat: ${{ secrets.OPEN_VSX_TOKEN }}
-          # preRelease: true
-      - name: Publish to Visual Studio Marketplace
-        uses: HaaLeo/publish-vscode-extension@v1
-        with:
-          # https://github.com/mark-wiemer-org/ahkpp/settings/secrets/actions
-          # https://dev.azure.com/markwiemer/_usersSettings/tokens
-          # Saved locally as "CI VS Code Marketplace Publish Token"
-          pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
-          registryUrl: https://marketplace.visualstudio.com
-          # preRelease: true
+      # - name: Publish to Open VSX Registry
+      #   uses: HaaLeo/publish-vscode-extension@v1
+      #   with:
+      #     # Generated via https://open-vsx.org/user-settings/tokens
+      #     # Saved locally as "CI VS Code Open VSX publish token"
+      #     pat: ${{ secrets.OPEN_VSX_TOKEN }}
+      #     # preRelease: true
+      # - name: Publish to Visual Studio Marketplace
+      #   uses: HaaLeo/publish-vscode-extension@v1
+      #   with:
+      #     # https://github.com/mark-wiemer-org/ahkpp/settings/secrets/actions
+      #     # https://dev.azure.com/markwiemer/_usersSettings/tokens
+      #     # Saved locally as "CI VS Code Marketplace Publish Token"
+      #     pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
+      #     registryUrl: https://marketplace.visualstudio.com
+      #     # preRelease: true
