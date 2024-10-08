@@ -25,7 +25,7 @@
         "type": "git",
         "url": "https://github.com/mark-wiemer-org/ahkpp.git"
     },
-    "license": "See license.txt",
+    "license": "See license.md",
     "publisher": "mark-wiemer",
     "main": "./dist/extension",
     "files": [
@@ -41,7 +41,7 @@
         "language/*.svg",
         "dist/extension.js",
         "icon.png",
-        "license.txt",
+        "license.md",
         "package.nls.*",
         "changelog.md",
         "readme.md"
