@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.2.3 - 2024-10-08 📖
+
+-   Restore readme to marketplaces once again ([#537](https://github.com/mark-wiemer-org/ahkpp/issues/537))
+-   Link to external licenses for better context
+
+### Developer changes
+
+-   Update workflows to have consistent filenames and workflow names
+-   Update actions in workflows to latest stable versions
+
 ## 6.2.2 - 2024-10-07 🤏
 
 -   Reduce extension size on marketplaces by ~100x (yes, really) ([#533](https://github.com/mark-wiemer-org/ahkpp/issues/533))
