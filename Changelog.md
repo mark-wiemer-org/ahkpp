@@ -2,7 +2,7 @@
 
 ## 6.2.2 - 2024-10-07 🤏
 
--   Reduce extension size by ~100x (yes, really) ([#533](https://github.com/mark-wiemer-org/ahkpp/issues/533))
+-   Reduce extension size on marketplaces by ~100x (yes, really) ([#533](https://github.com/mark-wiemer-org/ahkpp/issues/533))
 
 ## 6.2.1 - 2024-10-07 📚
 
