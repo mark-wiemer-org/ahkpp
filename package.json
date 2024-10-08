@@ -63,7 +63,7 @@
         "format:fix": "prettier --write .",
         "lint": "npm run format && npm run eslint && npm run sort-package-json",
         "lint:fix": "npm run format:fix && npm run eslint:fix && npm run sort-package-json:fix",
-        "package": "vsce package",
+        "package": "vsce package -o ahkpp.vsix",
         "prepare": "git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
         "sort-package-json:fix": "sort-package-json",
