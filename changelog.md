@@ -205,7 +205,7 @@ Settings are now organized into flat objects for a better user experience. Unfor
 -   Simplify launch configurations
 -   Improve manual tests and add manual tests for new AHK v2 capabilities
 -   Add [full v2 integration docs](docs/FullV2Integration.md)
--   Clarify [license](license.txt): even more open-source than before!
+-   Clarify [license](license.md): even more open-source than before!
 
 ### 💚 Thank you!
 
