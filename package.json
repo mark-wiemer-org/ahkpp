@@ -456,7 +456,7 @@
                         "type": "string"
                     }
                 },
-                "AHK++.v2.exclude": {
+                "AHK++.exclude": {
                     "scope": "window",
                     "type": "array",
                     "default": [],
@@ -464,7 +464,7 @@
                         "type": "string"
                     },
                     "uniqueItems": true,
-                    "markdownDescription": "%ahk++.config.v2.file.exclude%"
+                    "markdownDescription": "%ahk++.config.exclude%"
                 },
                 "AHK++.v2.file": {
                     "type": "object",
