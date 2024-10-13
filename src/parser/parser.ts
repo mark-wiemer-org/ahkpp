@@ -12,6 +12,34 @@ export interface BuildScriptOptions {
     maximumParseLength?: number;
 }
 
+export function pathsToBuild(rootPath: string, paths: string[] = []) {
+    if (!rootPath) {
+        return;
+    }
+    if (fs.statSync(rootPath).isDirectory()) {
+        fs.readdir(rootPath, (err, files) => {
+            if (err) {
+                Out.log(err);
+                return;
+            }
+            for (const file of files) {
+                if (file.match(/(^\.|out|target|node_modules)/)) {
+                    Out.debug('Ignoring ' + file);
+                    continue;
+                }
+                pathsToBuild(rootPath + '/' + file, paths);
+            }
+        });
+    } else if (rootPath.match(/\b(ahk|ah1|ahk1|ext)$/i)) {
+        Out.debug('Building ' + rootPath);
+        paths.push(rootPath);
+    } else {
+        Out.debug('Ignoring ' + rootPath);
+    }
+    return paths;
+}
+
+/** Parses v1 files */
 export class Parser {
     private static documentCache = new Map<string, Script>();
 
@@ -20,26 +48,10 @@ export class Parser {
      * @param buildPath
      */
     public static async buildByPath(buildPath: string) {
-        if (!buildPath) {
-            return;
-        }
-        if (fs.statSync(buildPath).isDirectory()) {
-            fs.readdir(buildPath, (err, files) => {
-                if (err) {
-                    Out.log(err);
-                    return;
-                }
-                for (const file of files) {
-                    if (file.match(/(^\.|out|target|node_modules)/)) {
-                        continue;
-                    }
-                    this.buildByPath(buildPath + '/' + file);
-                }
-            });
-        } else if (buildPath.match(/\b(ahk|ext)$/i)) {
-            Out.debug('Building ' + buildPath);
+        const paths = pathsToBuild(buildPath);
+        for (const path of paths) {
             const document = await vscode.workspace.openTextDocument(
-                vscode.Uri.file(buildPath),
+                vscode.Uri.file(path),
             );
             this.buildScript(document);
         }
