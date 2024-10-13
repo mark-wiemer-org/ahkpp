@@ -1,9 +1,9 @@
 import { ConfigKey, Global } from '../common/global';
-import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
-import { Out } from '../common/out';
 import { Script, Method, Ref, Label, Block, Variable } from './model';
+import { pathsToBuild } from './parser.utils';
+import { Out } from '../common/out';
 
 export interface BuildScriptOptions {
     /** Defaults to false. If true, short-circuits when document is in cache. */
@@ -12,6 +12,7 @@ export interface BuildScriptOptions {
     maximumParseLength?: number;
 }
 
+/** Parses v1 files */
 export class Parser {
     private static documentCache = new Map<string, Script>();
 
@@ -20,25 +21,18 @@ export class Parser {
      * @param buildPath
      */
     public static async buildByPath(buildPath: string) {
-        if (!buildPath) {
-            return;
-        }
-        if (fs.statSync(buildPath).isDirectory()) {
-            fs.readdir(buildPath, (err, files) => {
-                if (err) {
-                    Out.log(err);
-                    return;
-                }
-                for (const file of files) {
-                    if (file.match(/(^\.|out|target|node_modules)/)) {
-                        continue;
-                    }
-                    this.buildByPath(buildPath + '/' + file);
-                }
-            });
-        } else if (buildPath.match(/\b(ahk|ext)$/i)) {
+        const excludeConfig = Global.getConfig<string[]>(ConfigKey.exclude);
+        const paths = await pathsToBuild(
+            buildPath,
+            [],
+            excludeConfig,
+            Out.debug,
+        );
+        Out.log(`Building ${paths.length} files`);
+        for (const path of paths) {
+            Out.log(`Building ${path}`);
             const document = await vscode.workspace.openTextDocument(
-                vscode.Uri.file(buildPath),
+                vscode.Uri.file(path),
             );
             this.buildScript(document);
         }

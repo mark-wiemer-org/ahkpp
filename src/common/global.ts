@@ -1,13 +1,18 @@
 import * as vscode from 'vscode';
 
+export const configPrefix = 'AHK++';
+
 export class Global {
     private static statusBarItem: vscode.StatusBarItem;
 
     /** Gets config value from VS Code */
+    // todo move out of class
     public static getConfig<T>(key: ConfigKey): T | undefined {
         return (
+            // older versions of AHK++ used `ahk++` lowercase
+            // todo add deprecation warning for lowercase config vars
             vscode.workspace.getConfiguration('ahk++').get<T>(key) ??
-            vscode.workspace.getConfiguration('AHK++').get<T>(key)
+            vscode.workspace.getConfiguration(configPrefix).get<T>(key)
         );
     }
 
@@ -29,19 +34,19 @@ export class Global {
 /** Defined in package.json */
 // Ref "Settings UI is overwhelming for extensions with lots of settings"
 // https://github.com/microsoft/vscode/issues/70589
-// todo de-dupe with ahk2/**/config.ts
 export enum ConfigKey {
     allowedNumberOfEmptyLines = 'v1.formatter.allowedNumberOfEmptyLines',
     compileBaseFileV1 = 'v1.file.compileBaseFile',
     compileBaseFileV2 = 'v2.file.compileBaseFile',
     compileIcon = 'compiler.compileIcon',
     compilerPath = 'compiler.compilerPath',
-    interpreterPathV1 = 'v1.file.interpreterPath',
-    interpreterPathV2 = 'v2.file.interpreterPath',
+    exclude = 'exclude',
     helpPathV1 = 'v1.file.helpPath',
     helpPathV2 = 'v2.file.helpPath',
     indentCodeAfterIfDirective = 'v1.formatter.indentCodeAfterIfDirective',
     indentCodeAfterLabel = 'v1.formatter.indentCodeAfterLabel',
+    interpreterPathV1 = 'v1.file.interpreterPath',
+    interpreterPathV2 = 'v2.file.interpreterPath',
     maximumParseLength = 'v1.intellisense.maximumParseLength',
     preserveIndent = 'v1.formatter.preserveIndent',
     showOutput = 'general.showOutput',

@@ -2,6 +2,7 @@
 import { defineConfig } from '@vscode/test-cli';
 export default defineConfig({
     files: ['out/src/**/*.e2e.js'],
+    workspaceFolder: 'e2e',
     // https://mochajs.org/#command-line-usage
     // https://github.com/mochajs/mocha/tree/main/example/config
     mocha: {

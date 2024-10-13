@@ -9,12 +9,19 @@
             "name": "Launch Extension",
             "type": "extensionHost",
             "request": "launch",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-            "preLaunchTask": "npm: build:dev", // :dev for sourcemaps
-            "env": {
-                "VSCODE_AHK_SERVER_PATH": "", // default path works for debug as well
-                "SYNTAXES_PATH": "" // default path works for debug as well
-            }
+            "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+            "preLaunchTask": "npm: build:dev" // :dev for sourcemaps
+        },
+        {
+            "name": "Launch Tests",
+            "type": "extensionHost",
+            "request": "launch",
+            "preLaunchTask": "npm: pretest:e2e",
+            "args": [
+                "--disable-extensions",
+                "--extensionDevelopmentPath=${workspaceFolder}"
+            ],
+            "testConfiguration": "${workspaceFolder}/.vscode-test.mjs"
         }
     ]
 }

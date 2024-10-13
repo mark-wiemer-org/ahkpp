@@ -51,7 +51,7 @@
         "build": "node src/build.mjs --mode=production && cd ahk2 && npm run build",
         "build:ahk1": "node src/build.mjs --mode=production",
         "build:dev": "node src/build.mjs && cd ahk2 && npm run build",
-        "clean:all": "npm run clean:dist && npm run clean:language && npm run clean:out",
+        "clean": "npm run clean:dist && npm run clean:language && npm run clean:out",
         "clean:dist": "del-cli dist",
         "clean:language": "del-cli \"language/*.tmLanguage.json\"",
         "clean:out": "del-cli out",
@@ -65,13 +65,14 @@
         "format:fix": "prettier --write .",
         "lint": "npm run format && npm run eslint && npm run sort-package-json",
         "lint:fix": "npm run format:fix && npm run eslint:fix && npm run sort-package-json:fix",
-        "package": "vsce package -o ahkpp.vsix --allow-unused-files-pattern",
+        "package": "vsce package --allow-unused-files-pattern",
+        "package:ci": "npm run package -- -o ahkpp.vsix",
         "prepare": "git submodule update --init --recursive && cd ahk2 && npm install",
         "sort-package-json": "sort-package-json --check",
         "sort-package-json:fix": "sort-package-json",
         "test": "npm run test:grammar && npm run test:unit && npm run test:e2e",
         "test:ci": "npm run test:grammar && npm run test:e2e:ci",
-        "pretest:e2e": "npm run compile:ts",
+        "pretest:e2e": "npm run vscode:prepublish && npm run compile:ts",
         "test:e2e": "vscode-test",
         "test:e2e:ci": "npm run test:e2e -- -i --fgrep @ignoreCI",
         "pretest:grammar": "npm run compile:grammar",
@@ -455,7 +456,7 @@
                         "type": "string"
                     }
                 },
-                "AHK++.v2.exclude": {
+                "AHK++.exclude": {
                     "scope": "window",
                     "type": "array",
                     "default": [],
@@ -463,7 +464,7 @@
                         "type": "string"
                     },
                     "uniqueItems": true,
-                    "markdownDescription": "%ahk++.config.v2.file.exclude%"
+                    "markdownDescription": "%ahk++.config.exclude%"
                 },
                 "AHK++.v2.file": {
                     "type": "object",
@@ -1156,18 +1157,17 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.9.0",
-        "@types/chai": "^4.3.5",
         "@types/eslint__js": "^8.42.3",
         "@types/fs-extra": "^9.0.7",
         "@types/glob": "^7.1.3",
         "@types/mocha": "^10.0.8",
         "@types/node": "^20.16.0",
+        "@types/sinon": "^17.0.3",
         "@types/vscode": "1.93.0",
         "@types/xml2js": "^0.4.11",
         "@vscode/test-cli": "^0.0.10",
         "@vscode/test-electron": "^2.3.10",
         "@vscode/vsce": "^3.1.1",
-        "chai": "^4.3.7",
         "del-cli": "^6.0.0",
         "esbuild": "0.24.0",
         "eslint": "^9.9.0",
@@ -1176,7 +1176,7 @@
         "js-yaml": "^4.1.0",
         "mocha": "^10.0.0",
         "prettier": "3.3.3",
-        "sinon": "^18.0.0",
+        "sinon": "^18.0.1",
         "sort-package-json": "^1.57.0",
         "source-map-support": "^0.5.19",
         "typescript": "5.5.4",

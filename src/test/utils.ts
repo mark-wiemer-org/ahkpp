@@ -42,6 +42,6 @@ export const closePanel = async (): Promise<void> => {
 export const updateConfig = async (section: string, value: unknown) => {
     await vscode.workspace
         .getConfiguration('AHK++')
-        .update(section, value, true);
-    await sleep(80);
+        .update(section, value, false);
+    await sleep(1500); // todo tests are flaky even at 1_000ms
 };
