@@ -1,13 +1,17 @@
 import * as vscode from 'vscode';
 
+export const configPrefix = 'AHK++';
+
 export class Global {
     private static statusBarItem: vscode.StatusBarItem;
 
     /** Gets config value from VS Code */
     public static getConfig<T>(key: ConfigKey): T | undefined {
         return (
+            // older vesrions of AHK++ used `ahk++` lowercase
+            // todo add deprecation warning for lowercase config vars
             vscode.workspace.getConfiguration('ahk++').get<T>(key) ??
-            vscode.workspace.getConfiguration('AHK++').get<T>(key)
+            vscode.workspace.getConfiguration(configPrefix).get<T>(key)
         );
     }
 
