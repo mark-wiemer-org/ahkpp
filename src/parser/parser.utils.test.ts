@@ -9,6 +9,10 @@ const rootPath = path.join(__dirname, '..', '..', '..');
 const mockDirName = 'e2e';
 const mockPath = path.join(rootPath, mockDirName);
 
+/**
+ * Keys corresponding to arrays are seen as files.
+ * Keys corresponding to objects are seen as directories.
+ */
 const mockDirStructure = {
     [mockDirName]: {
         'main.ahk': [],
@@ -23,40 +27,22 @@ const mockDirStructure = {
         },
     },
 };
-const createMockDir = (
-    path: string,
-    structure: Record<string, object | string[]>,
-): Dir => ({
-    path,
-    close: async () => {},
-    closeSync: () => {},
-    read: async () => null,
-    readSync: () => null,
-    async *[Symbol.asyncIterator]() {
-        for (const key of Object.keys(structure)) {
-            yield createMockDirent(key, structure[key], path);
-        }
-    },
-});
 
-function createMockDirent(
-    name: string,
-    value: object | string[],
-    parentPath: string,
-): Dirent {
-    return {
+const createMockDir = (structure: Record<string, object | string[]>): Dir =>
+    ({
+        async *[Symbol.asyncIterator]() {
+            for (const key of Object.keys(structure)) {
+                yield createMockDirent(key, structure[key]);
+            }
+        },
+    }) as Dir;
+
+const createMockDirent = (name: string, value: object | string[]): Dirent =>
+    ({
         name,
         isDirectory: () => typeof value === 'object' && !Array.isArray(value),
         isFile: () => Array.isArray(value),
-        isBlockDevice: () => false,
-        isCharacterDevice: () => false,
-        isSymbolicLink: () => false,
-        isFIFO: () => false,
-        isSocket: () => false,
-        parentPath,
-        path: `${parentPath}/${name}`,
-    } as Dirent;
-}
+    }) as Dirent;
 
 sinon
     .stub(promises, 'opendir')
@@ -75,10 +61,7 @@ sinon
             }
         }
 
-        return createMockDir(
-            path,
-            currentDir as Record<string, object | string[]>,
-        );
+        return createMockDir(currentDir as Record<string, object | string[]>);
     });
 
 suite.only('pathsToBuild', () => {
