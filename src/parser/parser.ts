@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
 import { Script, Method, Ref, Label, Block, Variable } from './model';
 import { pathsToBuild } from './parser.utils';
-import { Out } from 'src/common/out';
+import { Out } from '../common/out';
 
 export interface BuildScriptOptions {
     /** Defaults to false. If true, short-circuits when document is in cache. */

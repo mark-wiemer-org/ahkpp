@@ -44,7 +44,7 @@ suite('general.showOutput @ignoreCI', () => {
     });
 });
 
-suite.only('exclude', () => {
+suite('exclude', () => {
     // todo can only run one test at a time as changes take effect after restart
     test.skip('no exclusions', async () => {
         await vscode.workspace
@@ -91,7 +91,7 @@ suite.only('exclude', () => {
         );
         await sleep(100);
         editor.selection = new vscode.Selection(0, 0, 0, 'MyExclu'.length);
-        await sleep(2_000);
+        await sleep(100);
 
         // Get completion items
         const completionItems =

@@ -64,7 +64,7 @@ sinon
         return createMockDir(currentDir as Record<string, object | string[]>);
     });
 
-suite.only('pathsToBuild', () => {
+suite('pathsToBuild', () => {
     after(() => {
         sinon.restore();
     });
