@@ -7,6 +7,8 @@
     -   One setting works for both v1 and v2
     -   v2 will exclude excluded files from suggestions even if they're opened in the IDE (different than thqby's extension)
     -   v1 no longer automatically ignores files with `out`, `target`, and `node_modules` in their name
+-   Fixup output channel names: "AHK++ (v1)" and "AHK++ (v2)" instead of "AHK" and "AHK++" respectively
+-   Fix duplicate output channels
 
 ## 6.2.3 - 2024-10-08 📖
 
