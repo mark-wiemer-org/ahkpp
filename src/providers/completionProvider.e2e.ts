@@ -374,11 +374,7 @@ suite.only('exclude config', () => {
                 doc.uri,
                 editor.selection.active,
             );
-        // console.log(completionItems?.items);
-        assert.isFalse(
-            completionItems?.items
-                .map((i) => i.label)
-                .includes('MyExcludedFunc'),
-        );
+        const labels = completionItems?.items.map((i) => i.label);
+        assert.isFalse(labels.includes('MyExcludedFunc'));
     });
 });
