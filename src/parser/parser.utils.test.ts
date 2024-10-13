@@ -6,9 +6,10 @@ import { Dir, Dirent, promises } from 'fs';
 import path from 'path';
 
 const rootPath = path.join(__dirname, '..', '..', '..');
+const mockDirName = 'e2e';
 
 const mockDirStructure = {
-    e2e: {
+    [mockDirName]: {
         'main.ahk': [],
         'main.ah1': [],
         'main.ext': [],
@@ -90,17 +91,32 @@ suite.only('pathsToBuild', () => {
         expected: Awaited<ReturnType<typeof pathsToBuild>>,
     ][] = [
         [
-            'e2e',
-            [path.join(rootPath, 'e2e'), []],
+            'no exclusions',
+            [path.join(rootPath, mockDirName), [], []],
             [
-                'e2e/main.ahk',
-                'e2e/main.ah1',
-                'e2e/main.ext',
-                'e2e/sub/sub.ahk',
-                'e2e/sub/sub.ah1',
-                'e2e/sub/sub.ext',
-            ].map((e) => path.join(rootPath, e)),
+                'main.ahk',
+                'main.ah1',
+                'main.ext',
+                'sub/sub.ahk',
+                'sub/sub.ah1',
+                'sub/sub.ext',
+            ].map((e) => path.join(rootPath, mockDirName, e)),
         ],
+        [
+            'exclude .ext',
+            [path.join(rootPath, mockDirName), [], ['*.ext']],
+            ['main.ahk', 'main.ah1', 'sub/sub.ahk', 'sub/sub.ah1'].map((e) =>
+                path.join(rootPath, mockDirName, e),
+            ),
+        ],
+        [
+            'exclude sub',
+            [path.join(rootPath, mockDirName), [], ['sub/*'], console.log],
+            ['main.ahk', 'main.ah1', 'main.ext'].map((e) =>
+                path.join(rootPath, mockDirName, e),
+            ),
+        ],
+        ['exclude all', [path.join(rootPath, mockDirName), [], ['*']], []],
     ];
     tests.forEach(([name, args, expected]) =>
         test(name, async () => {

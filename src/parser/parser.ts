@@ -21,7 +21,13 @@ export class Parser {
      * @param buildPath
      */
     public static async buildByPath(buildPath: string) {
-        const paths = await pathsToBuild(buildPath, [], Out.debug, Out.log);
+        const excludeConfig = Global.getConfig<string[]>(ConfigKey.exclude);
+        const paths = await pathsToBuild(
+            buildPath,
+            [],
+            excludeConfig,
+            Out.debug,
+        );
         Out.log(`Building ${paths.length} files`);
         for (const path of paths) {
             Out.log(`Building ${path}`);

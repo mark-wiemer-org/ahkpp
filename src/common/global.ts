@@ -6,6 +6,7 @@ export class Global {
     private static statusBarItem: vscode.StatusBarItem;
 
     /** Gets config value from VS Code */
+    // todo move out of class
     public static getConfig<T>(key: ConfigKey): T | undefined {
         return (
             // older vesrions of AHK++ used `ahk++` lowercase
@@ -39,6 +40,7 @@ export enum ConfigKey {
     compileBaseFileV2 = 'v2.file.compileBaseFile',
     compileIcon = 'compiler.compileIcon',
     compilerPath = 'compiler.compilerPath',
+    exclude = 'exclude',
     helpPathV1 = 'v1.file.helpPath',
     helpPathV2 = 'v2.file.helpPath',
     indentCodeAfterIfDirective = 'v1.formatter.indentCodeAfterIfDirective',

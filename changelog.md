@@ -4,6 +4,7 @@
 
 -   Add exclude setting ([#488](https://github.com/mark-wiemer-org/ahkpp/issues/488))
     -   Changed `v2.exclude` setting to `exclude`
+    -   One setting works for both v1 and v2
     -   v2 will exclude excluded files from suggestions even if they're opened in the IDE (different than thqby's extension)
     -   v1 no longer automatically ignores files with `out`, `target`, and `node_modules` in their name
 
