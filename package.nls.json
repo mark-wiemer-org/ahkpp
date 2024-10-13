@@ -17,7 +17,7 @@
     "ahk++.config.v2.actionWhenV1Detected": "Action when v1 script is detected",
     "ahk++.config.v2.commentTagRegex": "The regular expression for custom symbols to appear in the breadcrumb and elsewhere. Default matches any line that starts with `;;`. Changes take effect after restart.",
     "ahk++.config.v2.completionCommitCharacters": "Characters which commit auto-completion",
-    "ahk++.config.v2.completeFunctionCalls": "Whether to automatically add parenetheses when calling a function",
+    "ahk++.config.v2.completeFunctionCalls": "Whether to automatically add parentheses when calling a function",
     "ahk++.config.v2.debugConfiguration": "The [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) to use when debugging",
     "ahk++.config.v2.diagnostics.classNonDynamicMemberCheck": "Check whether non-dynamic members of a class exist",
     "ahk++.config.v2.diagnostics.paramsCheck": "Check that the function call has the correct number of arguments",
