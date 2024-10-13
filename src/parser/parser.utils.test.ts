@@ -7,6 +7,7 @@ import path from 'path';
 
 const rootPath = path.join(__dirname, '..', '..', '..');
 const mockDirName = 'e2e';
+const mockPath = path.join(rootPath, mockDirName);
 
 const mockDirStructure = {
     [mockDirName]: {
@@ -92,7 +93,7 @@ suite.only('pathsToBuild', () => {
     ][] = [
         [
             'no exclusions',
-            [path.join(rootPath, mockDirName), [], []],
+            [mockPath, [], []],
             [
                 'main.ahk',
                 'main.ah1',
@@ -100,28 +101,27 @@ suite.only('pathsToBuild', () => {
                 'sub/sub.ahk',
                 'sub/sub.ah1',
                 'sub/sub.ext',
-            ].map((e) => path.join(rootPath, mockDirName, e)),
+            ],
         ],
         [
             'exclude .ext',
-            [path.join(rootPath, mockDirName), [], ['*.ext']],
-            ['main.ahk', 'main.ah1', 'sub/sub.ahk', 'sub/sub.ah1'].map((e) =>
-                path.join(rootPath, mockDirName, e),
-            ),
+            [mockPath, [], ['*.ext']],
+            ['main.ahk', 'main.ah1', 'sub/sub.ahk', 'sub/sub.ah1'],
         ],
         [
             'exclude sub',
-            [path.join(rootPath, mockDirName), [], ['sub/*'], console.log],
-            ['main.ahk', 'main.ah1', 'main.ext'].map((e) =>
-                path.join(rootPath, mockDirName, e),
-            ),
+            [mockPath, [], ['sub/*']],
+            ['main.ahk', 'main.ah1', 'main.ext'],
         ],
-        ['exclude all', [path.join(rootPath, mockDirName), [], ['*']], []],
+        ['exclude all', [mockPath, [], ['*']], []],
     ];
-    tests.forEach(([name, args, expected]) =>
+    tests.forEach(([name, args, relativeExpected]) =>
         test(name, async () => {
             const result = await pathsToBuild(...args);
-            assert.deepStrictEqual(result, expected);
+            const absoluteExpected = relativeExpected.map((e) =>
+                path.join(mockPath, e),
+            );
+            assert.deepStrictEqual(result, absoluteExpected);
         }),
     );
 });
