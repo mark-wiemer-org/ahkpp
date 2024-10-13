@@ -1,42 +1,15 @@
 import { ConfigKey, Global } from '../common/global';
-import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { CodeUtil } from '../common/codeUtil';
-import { Out } from '../common/out';
 import { Script, Method, Ref, Label, Block, Variable } from './model';
+import { pathsToBuild } from './parser.utils';
+import { Out } from 'src/common/out';
 
 export interface BuildScriptOptions {
     /** Defaults to false. If true, short-circuits when document is in cache. */
     usingCache?: boolean;
     /** Lines to parse. Defaults to extension setting. -1 for unlimited parsing. 0 for no parsing. */
     maximumParseLength?: number;
-}
-
-export function pathsToBuild(rootPath: string, paths: string[] = []) {
-    if (!rootPath) {
-        return;
-    }
-    if (fs.statSync(rootPath).isDirectory()) {
-        fs.readdir(rootPath, (err, files) => {
-            if (err) {
-                Out.log(err);
-                return;
-            }
-            for (const file of files) {
-                if (file.match(/(^\.|out|target|node_modules)/)) {
-                    Out.debug('Ignoring ' + file);
-                    continue;
-                }
-                pathsToBuild(rootPath + '/' + file, paths);
-            }
-        });
-    } else if (rootPath.match(/\b(ahk|ah1|ahk1|ext)$/i)) {
-        Out.debug('Building ' + rootPath);
-        paths.push(rootPath);
-    } else {
-        Out.debug('Ignoring ' + rootPath);
-    }
-    return paths;
 }
 
 /** Parses v1 files */
@@ -48,8 +21,10 @@ export class Parser {
      * @param buildPath
      */
     public static async buildByPath(buildPath: string) {
-        const paths = pathsToBuild(buildPath);
+        const paths = await pathsToBuild(buildPath, [], Out.debug, Out.log);
+        Out.log(`Building ${paths.length} files`);
         for (const path of paths) {
+            Out.log(`Building ${path}`);
             const document = await vscode.workspace.openTextDocument(
                 vscode.Uri.file(path),
             );

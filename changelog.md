@@ -1,5 +1,12 @@
 # Changelog
 
+## 6.3.0 - unreleased 🕳️
+
+-   Add exclude setting ([#488](https://github.com/mark-wiemer-org/ahkpp/issues/488))
+    -   Changed `v2.exclude` setting to `exclude`
+    -   v2 will exclude excluded files from suggestions even if they're opened in the IDE (different than thqby's extension)
+    -   v1 no longer automatically ignores files with `out`, `target`, and `node_modules` in their name
+
 ## 6.2.3 - 2024-10-08 📖
 
 -   Restore readme to marketplaces once again ([#537](https://github.com/mark-wiemer-org/ahkpp/issues/537))

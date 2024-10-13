@@ -4,8 +4,8 @@ import * as vscode from 'vscode';
 export class Out {
     private static outputChannel: vscode.OutputChannel;
 
-    public static debug(value: unknown) {
-        this.log(value, false);
+    public static debug(value: Error | string) {
+        Out.log(value, false);
     }
 
     /**
@@ -13,7 +13,7 @@ export class Out {
      * Prepends all logs with `new Date().toISOString()`.
      * @param value The value to log
      */
-    public static log(value: unknown, focus = true) {
+    public static log(value: Error | string, focus = true) {
         if (value instanceof Error) {
             console.trace(value);
             value = value.message;
