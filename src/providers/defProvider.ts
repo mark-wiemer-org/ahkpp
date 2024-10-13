@@ -110,8 +110,7 @@ export class DefProvider implements vscode.DefinitionProvider {
             return this.tryGetFileLink(
                 document,
                 position,
-                // TODO deprecated
-                vscode.workspace.rootPath,
+                vscode.workspace.workspaceFolders?.[0].uri.fsPath,
             );
         } else {
             return undefined;

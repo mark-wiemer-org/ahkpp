@@ -21,7 +21,9 @@ import { activate as activateV2 } from '../ahk2/client/src/extension';
 export function activate(context: vscode.ExtensionContext) {
     (async () => {
         Global.updateStatusBarItems('Indexing AutoHotkey workspace...');
-        await Parser.buildByPath(vscode.workspace.rootPath);
+        await Parser.buildByPath(
+            vscode.workspace.workspaceFolders?.[0].uri.fsPath,
+        );
         Global.updateStatusBarItems('Indexed AutoHotkey workspace :)');
         Global.hide();
     })();
