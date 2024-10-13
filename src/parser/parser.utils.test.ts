@@ -88,12 +88,12 @@ suite.only('pathsToBuild', () => {
 
     const tests: [
         name: string,
-        args: Parameters<typeof pathsToBuild>,
+        exclusions: string[],
         expected: Awaited<ReturnType<typeof pathsToBuild>>,
     ][] = [
         [
             'no exclusions',
-            [mockPath, [], []],
+            [],
             [
                 'main.ahk',
                 'main.ah1',
@@ -105,19 +105,15 @@ suite.only('pathsToBuild', () => {
         ],
         [
             'exclude .ext',
-            [mockPath, [], ['*.ext']],
+            ['*.ext'],
             ['main.ahk', 'main.ah1', 'sub/sub.ahk', 'sub/sub.ah1'],
         ],
-        [
-            'exclude sub',
-            [mockPath, [], ['sub/*']],
-            ['main.ahk', 'main.ah1', 'main.ext'],
-        ],
-        ['exclude all', [mockPath, [], ['*']], []],
+        ['exclude sub', ['sub/*'], ['main.ahk', 'main.ah1', 'main.ext']],
+        ['exclude all', ['*'], []],
     ];
-    tests.forEach(([name, args, relativeExpected]) =>
+    tests.forEach(([name, exclusions, relativeExpected]) =>
         test(name, async () => {
-            const result = await pathsToBuild(...args);
+            const result = await pathsToBuild(mockPath, [], exclusions);
             const absoluteExpected = relativeExpected.map((e) =>
                 path.join(mockPath, e),
             );
