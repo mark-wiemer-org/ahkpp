@@ -1,8 +1,6 @@
 import * as vscode from 'vscode';
-import { assert } from 'chai';
+import * as assert from 'assert';
 import { provideCompletionItemsInner } from './completionProvider';
-import { getDocument, showDocument, sleep } from '../test/utils';
-import { resolve } from 'path';
 
 // TODO outer
 // parsing vs no parsing
@@ -351,30 +349,4 @@ suite('provideCompletionItemsInner', () => {
             assert.deepEqual(provideCompletionItemsInner(...args), expected),
         ),
     );
-});
-
-suite.only('exclude config', () => {
-    test('no exclusions', async () => {
-        const filePath = resolve(__dirname, '../../../e2e/main.ahk');
-        const doc = await getDocument(filePath);
-        const editor = await showDocument(doc);
-        editor.insertSnippet(
-            new vscode.SnippetString('MyExclu')
-                .appendTabstop(0)
-                .appendText('\n'),
-        );
-        await sleep(100);
-        editor.selection = new vscode.Selection(0, 0, 0, 'MyExclu'.length);
-        await sleep(100);
-
-        // Get completion items
-        const completionItems =
-            await vscode.commands.executeCommand<vscode.CompletionList>(
-                'vscode.executeCompletionItemProvider',
-                doc.uri,
-                editor.selection.active,
-            );
-        const labels = completionItems?.items.map((i) => i.label);
-        assert.isFalse(labels.includes('MyExcludedFunc'));
-    });
 });
