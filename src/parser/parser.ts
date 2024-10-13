@@ -37,6 +37,7 @@ export class Parser {
                 }
             });
         } else if (buildPath.match(/\b(ahk|ext)$/i)) {
+            console.log('Building ' + buildPath);
             const document = await vscode.workspace.openTextDocument(
                 vscode.Uri.file(buildPath),
             );
