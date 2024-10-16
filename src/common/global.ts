@@ -61,3 +61,6 @@ export enum LanguageId {
     ahk1 = 'ahk',
     ahk2 = 'ahk2',
 }
+
+/** Defined in package.json */
+export type ShowOutput = 'always' | 'never';

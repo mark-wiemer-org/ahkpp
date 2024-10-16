@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { ProviderResult } from 'vscode';
-import { Parser } from './parser/parser';
+import { clearCache, Parser } from './parser/parser';
 import { RunnerService } from './service/runnerService';
 import { DebugSession } from './debugger/debugSession';
 import { DefProvider } from './providers/defProvider';
@@ -10,7 +10,7 @@ import { SymbolProvider } from './providers/symbolProvider';
 import { FileManager } from './common/fileManager';
 import { AhkHoverProvider } from './providers/ahkHoverProvider';
 import { RefProvider } from './providers/refProvider';
-import { Global } from './common/global';
+import { ConfigKey, configPrefix, Global } from './common/global';
 import { AhkRenameProvider } from './providers/ahkRenameProvider';
 import { SignatureProvider } from './providers/signatureProvider';
 import { CompletionProvider } from './providers/completionProvider';
@@ -83,6 +83,16 @@ export function activate(context: vscode.ExtensionContext) {
             '.',
         ),
     );
+
+    vscode.workspace.onDidChangeConfiguration(async (e) => {
+        if (!e.affectsConfiguration(`${configPrefix}.${ConfigKey.exclude}`))
+            return;
+
+        clearCache();
+        await Parser.buildByPath(
+            vscode.workspace.workspaceFolders?.[0].uri.fsPath,
+        );
+    });
 
     activateV2(context);
 }

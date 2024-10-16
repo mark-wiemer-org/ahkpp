@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { configPrefix } from '../common/global';
 
 /**
  * Shortcut for `vscode.workspace.openTextDocument(Uri.file(fileName))`
@@ -39,9 +40,9 @@ export const closePanel = async (): Promise<void> => {
 };
 
 /** Update the global AHK++ setting */
-export const updateConfig = async (section: string, value: unknown) => {
+export const updateConfig = async <T>(section: string, value: T) => {
     await vscode.workspace
-        .getConfiguration('AHK++')
+        .getConfiguration(configPrefix)
         .update(section, value, false);
     await sleep(1500); // todo tests are flaky even at 1_000ms
 };

@@ -10,6 +10,7 @@ import {
     updateConfig,
 } from './utils';
 import { resolve } from 'path';
+import { ConfigKey, ShowOutput } from '../common/global';
 
 const rootPath = path.join(__dirname, '..', '..', '..');
 
@@ -18,14 +19,14 @@ const samplesParentPath = path.join(rootPath, 'src/test/samples');
 
 // CI does not have AHK installed
 suite('general.showOutput @ignoreCI', () => {
-    const before = async (show: 'always' | 'never') => {
-        await updateConfig('general', { showOutput: show });
+    const before = async (show: ShowOutput) => {
+        await updateConfig<ShowOutput>(ConfigKey.showOutput, show);
         const filePath = path.join(samplesParentPath, 'ahk2.ahk2');
         const doc = await getDocument(filePath);
         await showDocument(doc);
     };
 
-    const runTests: [name: string, show: 'always' | 'never'][] = [
+    const runTests: [name: string, show: ShowOutput][] = [
         ['always + run', 'always'],
         ['never + run', 'never'],
     ];
@@ -44,63 +45,50 @@ suite('general.showOutput @ignoreCI', () => {
     });
 });
 
-suite('exclude', () => {
-    // todo can only run one test at a time as changes take effect after restart
-    test.skip('no exclusions', async () => {
-        await vscode.workspace
-            .getConfiguration('AHK++')
-            .update('exclude', [], vscode.ConfigurationTarget.Workspace);
-        const filePath = resolve(rootPath, './e2e/main.ahk');
-        const doc = await getDocument(filePath);
-        const editor = await showDocument(doc);
-        editor.insertSnippet(
-            new vscode.SnippetString('MyExclu')
-                .appendTabstop(0)
-                .appendText('\n'),
-        );
-        await sleep(100);
-        editor.selection = new vscode.Selection(0, 0, 0, 'MyExclu'.length);
-        await sleep(100);
+suite.only('exclude', () => {
+    const tests: [
+        name: string,
+        version: 1 | 2,
+        exclude: string[],
+        expected: boolean,
+    ][] = [
+        ['no exclusions', 1, [], true],
+        ['no exclusions', 2, [], true],
+        ['exclusions', 1, ['excluded.ahk'], false],
+        // ['exclusions', 2, ['excluded.ahk'], false], // todo support v2 without reloading
+    ];
 
-        // Get completion items
-        const completionItems =
-            await vscode.commands.executeCommand<vscode.CompletionList>(
-                'vscode.executeCompletionItemProvider',
-                doc.uri,
-                editor.selection.active,
+    tests.forEach(([name, version, exclude, expected]) => {
+        test(name, async () => {
+            const snippetText = 'MyExclu';
+            const funcName = 'MyExcludedFunc';
+            await updateConfig<string[]>(ConfigKey.exclude, exclude);
+            const filePath = resolve(rootPath, `./e2e/main.ahk${version}`);
+            const doc = await getDocument(filePath);
+            const editor = await showDocument(doc);
+            editor.insertSnippet(
+                new vscode.SnippetString(snippetText)
+                    .appendTabstop(0)
+                    .appendText('\n'),
             );
-        const labels = completionItems?.items.map((i) => i.label);
-        assert.strictEqual(labels.includes('MyExcludedFunc'), true);
-    });
+            await sleep(100);
+            editor.selection = new vscode.Selection(
+                0,
+                0,
+                0,
+                snippetText.length,
+            );
+            await sleep(100);
 
-    test('exclusions', async () => {
-        await vscode.workspace
-            .getConfiguration('AHK++')
-            .update(
-                'exclude',
-                ['excluded.ahk'],
-                vscode.ConfigurationTarget.Workspace,
-            );
-        const filePath = resolve(rootPath, './e2e/main.ahk');
-        const doc = await getDocument(filePath);
-        const editor = await showDocument(doc);
-        editor.insertSnippet(
-            new vscode.SnippetString('MyExclu')
-                .appendTabstop(0)
-                .appendText('\n'),
-        );
-        await sleep(100);
-        editor.selection = new vscode.Selection(0, 0, 0, 'MyExclu'.length);
-        await sleep(100);
-
-        // Get completion items
-        const completionItems =
-            await vscode.commands.executeCommand<vscode.CompletionList>(
-                'vscode.executeCompletionItemProvider',
-                doc.uri,
-                editor.selection.active,
-            );
-        const labels = completionItems?.items.map((i) => i.label);
-        assert.strictEqual(labels.includes('MyExcludedFunc'), false);
+            // Get completion items
+            const completionItems =
+                await vscode.commands.executeCommand<vscode.CompletionList>(
+                    'vscode.executeCompletionItemProvider',
+                    doc.uri,
+                    editor.selection.active,
+                );
+            const labels = completionItems?.items.map((i) => i.label);
+            assert.strictEqual(labels.includes(funcName), expected);
+        });
     });
 });
