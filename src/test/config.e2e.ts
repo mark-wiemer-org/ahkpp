@@ -20,7 +20,9 @@ const samplesParentPath = path.join(rootPath, 'src/test/samples');
 // CI does not have AHK installed
 suite('general.showOutput @ignoreCI', () => {
     const before = async (show: ShowOutput) => {
-        await updateConfig<ShowOutput>(ConfigKey.showOutput, show);
+        await updateConfig<{ showOutput: ShowOutput }>(ConfigKey.general, {
+            showOutput: show,
+        });
         const filePath = path.join(samplesParentPath, 'ahk2.ahk2');
         const doc = await getDocument(filePath);
         await showDocument(doc);
@@ -45,24 +47,31 @@ suite('general.showOutput @ignoreCI', () => {
     });
 });
 
-suite.only('exclude', () => {
+suite('exclude', () => {
+    /**
+     * These tests run in a specific order to update the config correctly
+     * Config does not update on v2 for speed
+     */
     const tests: [
         name: string,
         version: 1 | 2,
         exclude: string[],
         expected: boolean,
     ][] = [
-        ['no exclusions', 1, [], true],
-        ['no exclusions', 2, [], true],
-        ['exclusions', 1, ['excluded.ahk'], false],
-        // ['exclusions', 2, ['excluded.ahk'], false], // todo support v2 without reloading
+        ['v1 no exclusions', 1, [], true],
+        ['v2 no exclusions', 2, [], true],
+        ['v1 exclusions', 1, ['excluded.ahk'], false],
+        ['v2 exclusions', 2, ['excluded.ahk'], false],
+        ['back to v1 no exclusions', 1, [], true],
+        ['back to v2 no exclusions', 2, [], true],
     ];
 
     tests.forEach(([name, version, exclude, expected]) => {
         test(name, async () => {
             const snippetText = 'MyExclu';
             const funcName = 'MyExcludedFunc';
-            await updateConfig<string[]>(ConfigKey.exclude, exclude);
+            if (version === 1)
+                await updateConfig<string[]>(ConfigKey.exclude, exclude);
             const filePath = resolve(rootPath, `./e2e/main.ahk${version}`);
             const doc = await getDocument(filePath);
             const editor = await showDocument(doc);
