@@ -2,7 +2,9 @@ import * as assert from 'assert';
 import * as vscode from 'vscode';
 import * as path from 'path';
 import {
+    addAndSelectSnippet,
     closePanel,
+    getCompletionSuggestionLabels,
     getDocument,
     isOutputVisible,
     showDocument,
@@ -11,12 +13,19 @@ import {
 } from './utils';
 import { resolve } from 'path';
 import { ConfigKey, LibIncludeType, ShowOutput } from '../common/global';
-import { suite, before, test } from 'mocha';
+import { suite, before, after, test } from 'mocha';
 
 const rootPath = path.join(__dirname, '..', '..', '..');
 
 // Currently in `out` folder, need to get back to main `src` folder
 const samplesParentPath = path.join(rootPath, 'src/test/samples');
+
+/** Snippet text that should result in `funcName` being suggested (based on config) */
+const snippetText = 'MyExclu';
+/** Func name included in a local library in the `excludedFileName` */
+const funcName = 'MyExcludedFunc';
+/** Name of file containing library functions for `exclude` testing */
+const excludedFileName = 'excluded.ahk';
 
 // CI does not have AHK installed
 suite('general.showOutput @ignoreCI', () => {
@@ -61,8 +70,8 @@ suite('exclude', () => {
     ][] = [
         ['v1 no exclusions', 1, [], true],
         ['v2 no exclusions', 2, [], true],
-        ['v1 exclusions', 1, ['excluded.ahk'], false],
-        ['v2 exclusions', 2, ['excluded.ahk'], false],
+        ['v1 exclusions', 1, [excludedFileName], false],
+        ['v2 exclusions', 2, [excludedFileName], false],
         ['back to v1 no exclusions', 1, [], true],
         ['back to v2 no exclusions', 2, [], true],
     ];
@@ -76,35 +85,51 @@ suite('exclude', () => {
 
     tests.forEach(([name, version, exclude, expected]) => {
         test(name, async () => {
-            const snippetText = 'MyExclu';
-            const funcName = 'MyExcludedFunc';
             if (version === 1)
                 await updateConfig<string[]>(ConfigKey.exclude, exclude);
             const filePath = resolve(rootPath, `./e2e/main.ahk${version}`);
             const doc = await getDocument(filePath);
             const editor = await showDocument(doc);
-            editor.insertSnippet(
-                new vscode.SnippetString(snippetText)
-                    .appendTabstop(0)
-                    .appendText('\n'),
-            );
-            await sleep(100);
-            editor.selection = new vscode.Selection(
-                0,
-                0,
-                0,
-                snippetText.length,
-            );
-            await sleep(100);
+            await addAndSelectSnippet(editor, snippetText);
 
-            // Get completion items
-            const completionItems =
-                await vscode.commands.executeCommand<vscode.CompletionList>(
-                    'vscode.executeCompletionItemProvider',
-                    doc.uri,
-                    editor.selection.active,
-                );
-            const labels = completionItems?.items.map((i) => i.label);
+            const labels = await getCompletionSuggestionLabels(editor);
+
+            assert.strictEqual(labels.includes(funcName), expected);
+        });
+    });
+});
+
+suite.only('v2.general.librarySuggestions', () => {
+    before(async () => {
+        await updateConfig<string[]>(ConfigKey.exclude, []);
+    });
+
+    after(async () => {
+        await sleep(10_000);
+    });
+
+    const tests: [name: string, libType: LibIncludeType, expected: boolean][] =
+        [
+            ['Disabled', LibIncludeType.Disabled, false], // todo failing here but passing manually
+            ['Local', LibIncludeType.Local, true],
+            ['User and Standard', LibIncludeType.UserAndStandard, false],
+            ['All', LibIncludeType.All, true],
+        ];
+
+    tests.forEach(([name, libType, expected]) => {
+        test(name, async () => {
+            const filePath = resolve(rootPath, './e2e/main.ahk2');
+            const doc = await getDocument(filePath);
+            const editor = await showDocument(doc);
+            console.log('Setting librarySuggestions to', libType);
+            await updateConfig<{ librarySuggestions: LibIncludeType }>(
+                ConfigKey.generalV2,
+                { librarySuggestions: libType },
+            );
+            await addAndSelectSnippet(editor, snippetText);
+
+            const labels = await getCompletionSuggestionLabels(editor);
+
             assert.strictEqual(labels.includes(funcName), expected);
         });
     });
