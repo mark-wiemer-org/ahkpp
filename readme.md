@@ -163,6 +163,7 @@ This extension relies heavily on open-source code. A huge thank you to all these
 -   [AutoHotkey v2 definition files by GroggyOtter](https://github.com/GroggyOtter/ahkv2_definition_rewrite)
 -   [AHK version selection by Lexikos](https://github.com/Lexikos/vscode-auto-select): The core code for automatically switching AHK versions
 -   [AutoHotkey by stef-levesque](https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-autohotkey): AutoHotkey Plus is a fork of stef-levesque's original AutoHotkey extension, which provided the original grammar and snippets for AHK
+-   People like you: Thank you for opening issues, offering suggestions, and providing information to the AHK community :)
 
 ## Links
 
