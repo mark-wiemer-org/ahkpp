@@ -100,8 +100,13 @@ suite('exclude', () => {
 });
 
 suite.only('v2.general.librarySuggestions', () => {
+    let editor: vscode.TextEditor;
     before(async () => {
         await updateConfig<string[]>(ConfigKey.exclude, []);
+        const filePath = resolve(rootPath, './e2e/main.ahk2');
+        const doc = await getDocument(filePath);
+        editor = await showDocument(doc);
+        await sleep(1000);
     });
 
     after(async () => {
@@ -110,7 +115,7 @@ suite.only('v2.general.librarySuggestions', () => {
 
     const tests: [name: string, libType: LibIncludeType, expected: boolean][] =
         [
-            ['Disabled', LibIncludeType.Disabled, false], // todo failing here but passing manually
+            ['Disabled', LibIncludeType.Disabled, false],
             ['Local', LibIncludeType.Local, true],
             ['User and Standard', LibIncludeType.UserAndStandard, false],
             ['All', LibIncludeType.All, true],
@@ -118,9 +123,6 @@ suite.only('v2.general.librarySuggestions', () => {
 
     tests.forEach(([name, libType, expected]) => {
         test(name, async () => {
-            const filePath = resolve(rootPath, './e2e/main.ahk2');
-            const doc = await getDocument(filePath);
-            const editor = await showDocument(doc);
             console.log('Setting librarySuggestions to', libType);
             await updateConfig<{ librarySuggestions: LibIncludeType }>(
                 ConfigKey.generalV2,
