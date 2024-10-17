@@ -2,6 +2,8 @@
 
 ## 6.3.0 - unreleased 🕳️
 
+-   Rename extension to `AHK++ (AutoHotkey Plus Plus)` to provide a clear short name while retaining previous brand
+    -   In 6.2.0, only the settings were renamed. This release renames the extension display name on registries as well.
 -   Add exclude setting ([#488](https://github.com/mark-wiemer-org/ahkpp/issues/488))
     -   Excluded files are not included in IntelliSense completion suggestions, even when they're added via `#include`
     -   Changed `v2.exclude` setting to `exclude`
@@ -37,7 +39,6 @@
 ## 6.2.0 - 2024-10-07 🫡
 
 -   Update thqby's extension from 2.4.9 to 2.5.3, adding new features and bugfixes
--   Rename to `AHK++ (AutoHotkey Plus Plus)` to provide a clear short name while retaining previous brand
 
 ### New features
 
@@ -65,6 +66,14 @@
 
 -   Add true unit tests that don't require opening VS Code to run (`npm run test-unit`)
 -   Move to new branch of ahk2-lsp with 100% thqby-compatible changes. All changes are submitted as PRs against thqby's repo. This makes improvements much easier in the future.
+
+### Other notes
+
+This changelog incorrectly included this entry:
+
+-   Rename to `AHK++ (AutoHotkey Plus Plus)` to provide a clear short name while retaining previous brand
+
+Although the settings name changed, the extension name did not change until 6.3.0
 
 ## 6.1.1 - 2024-09-22 😤
 
