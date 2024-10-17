@@ -13,7 +13,7 @@ import {
 } from './utils';
 import { resolve } from 'path';
 import { ConfigKey, LibIncludeType, ShowOutput } from '../common/global';
-import { suite, before, after, test } from 'mocha';
+import { suite, before, test } from 'mocha';
 
 const rootPath = path.join(__dirname, '..', '..', '..');
 
@@ -109,10 +109,6 @@ suite.only('v2.general.librarySuggestions', () => {
         await sleep(1000);
     });
 
-    after(async () => {
-        await sleep(10_000);
-    });
-
     const tests: [name: string, libType: LibIncludeType, expected: boolean][] =
         [
             ['Disabled', LibIncludeType.Disabled, false],
@@ -123,7 +119,6 @@ suite.only('v2.general.librarySuggestions', () => {
 
     tests.forEach(([name, libType, expected]) => {
         test(name, async () => {
-            console.log('Setting librarySuggestions to', libType);
             await updateConfig<{ librarySuggestions: LibIncludeType }>(
                 ConfigKey.generalV2,
                 { librarySuggestions: libType },
