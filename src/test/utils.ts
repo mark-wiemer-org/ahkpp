@@ -40,9 +40,43 @@ export const closePanel = async (): Promise<void> => {
 };
 
 /** Update the global AHK++ setting */
-export const updateConfig = async <T>(section: string, value: T) => {
+export const updateConfig = async <T>(
+    section: string,
+    value: T,
+): Promise<void> => {
     await vscode.workspace
         .getConfiguration(configPrefix)
         .update(section, value, false);
     await sleep(1500); // todo tests are flaky even at 1_000ms
+};
+
+/**
+ * Adds the provided snippetText at the current selection of the editor
+ * and adds a newline to minimize syntax errors.
+ * Waits after selecting so callers don't have to.
+ */
+export const addAndSelectSnippet = async (
+    editor: vscode.TextEditor,
+    snippetText: string,
+): Promise<void> => {
+    editor.insertSnippet(
+        new vscode.SnippetString(snippetText).appendTabstop(0).appendText('\n'),
+    );
+    await sleep(100);
+    editor.selection = new vscode.Selection(0, 0, 0, snippetText.length);
+    await sleep(100);
+};
+
+/** Returns the labels of the completion suggestions for the current editor at its current position */
+export const getCompletionSuggestionLabels = async (
+    editor: vscode.TextEditor,
+): Promise<(string | vscode.CompletionItemLabel)[]> => {
+    const completionItems =
+        await vscode.commands.executeCommand<vscode.CompletionList>(
+            'vscode.executeCompletionItemProvider',
+            editor.document.uri,
+            editor.selection.active,
+        );
+    const labels = completionItems?.items.map((i) => i.label);
+    return labels;
 };
