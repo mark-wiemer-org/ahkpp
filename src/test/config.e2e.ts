@@ -88,14 +88,14 @@ suite('exclude', () => {
                     .appendTabstop(0)
                     .appendText('\n'),
             );
-            await sleep(100);
+            await sleep(1_000);
             editor.selection = new vscode.Selection(
                 0,
                 0,
                 0,
                 snippetText.length,
             );
-            await sleep(100);
+            await sleep(1_000);
 
             // Get completion items
             const completionItems =
@@ -104,6 +104,7 @@ suite('exclude', () => {
                     doc.uri,
                     editor.selection.active,
                 );
+            await sleep(1_000);
             const labels = completionItems?.items.map((i) => i.label);
             assert.strictEqual(labels.includes(funcName), expected);
         });

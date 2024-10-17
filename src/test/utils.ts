@@ -44,5 +44,5 @@ export const updateConfig = async <T>(section: string, value: T) => {
     await vscode.workspace
         .getConfiguration(configPrefix)
         .update(section, value, false);
-    await sleep(1500); // todo tests are flaky even at 1_000ms
+    await sleep(2_500); // todo tests are flaky even at 1_000ms
 };
