@@ -159,9 +159,11 @@ This extension relies heavily on open-source code. A huge thank you to all these
 
 -   [AutoHotkey Plus by cweijan](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-autohotkey-plus): AHK++ is a fork of AutoHotkey Plus by cweijan (Weijan Chen)
 -   [Contributions to AHK++ by kyklish](https://github.com/mark-wiemer-org/ahkpp/commits/main?author=kyklish): Greatly improved formatting and snippets by both fixing bugs and adding features
--   [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp): The source of the v2 grammar and other great contributions
--   [Lexikos/vscode-auto-select](https://github.com/Lexikos/vscode-auto-select): The core code for automatically switching AHK versions
+-   [AutoHotkey v2 Language Support extension by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp): The source of the v2 grammar and other great contributions
+-   [AutoHotkey v2 definition files by GroggyOtter](https://github.com/GroggyOtter/ahkv2_definition_rewrite)
+-   [AHK version selection by Lexikos](https://github.com/Lexikos/vscode-auto-select): The core code for automatically switching AHK versions
 -   [AutoHotkey by stef-levesque](https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-autohotkey): AutoHotkey Plus is a fork of stef-levesque's original AutoHotkey extension, which provided the original grammar and snippets for AHK
+-   People like you: Thank you for opening issues, offering suggestions, and providing information to the AHK community :)
 
 ## Links
 
