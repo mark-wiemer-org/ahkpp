@@ -42,6 +42,7 @@ export enum ConfigKey {
     compilerPath = 'compiler.compilerPath',
     exclude = 'exclude',
     general = 'general',
+    generalV2 = 'v2.general',
     helpPathV1 = 'v1.file.helpPath',
     helpPathV2 = 'v2.file.helpPath',
     indentCodeAfterIfDirective = 'v1.formatter.indentCodeAfterIfDirective',

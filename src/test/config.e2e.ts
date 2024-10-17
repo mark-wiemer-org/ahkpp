@@ -69,7 +69,7 @@ suite('exclude', () => {
 
     before(async () => {
         await updateConfig<{ librarySuggestions: LibIncludeType }>(
-            ConfigKey.general,
+            ConfigKey.generalV2,
             { librarySuggestions: LibIncludeType.All },
         );
     });
