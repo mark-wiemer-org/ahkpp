@@ -5,6 +5,15 @@ import { Script, Method, Ref, Label, Block, Variable } from './model';
 import { pathsToBuild } from './parser.utils';
 import { Out } from '../common/out';
 
+const startBlockComment = / *\/\*/;
+const endBlockComment = / *\*\//;
+const documentCache = new Map<string, Script>();
+
+export const clearCache = () => {
+    Out.debug('Clearing cache');
+    documentCache.clear();
+};
+
 export interface BuildScriptOptions {
     /** Defaults to false. If true, short-circuits when document is in cache. */
     usingCache?: boolean;
@@ -14,10 +23,8 @@ export interface BuildScriptOptions {
 
 /** Parses v1 files */
 export class Parser {
-    private static documentCache = new Map<string, Script>();
-
     /**
-     * load method list by path
+     * Load method list by path
      * @param buildPath
      */
     public static async buildByPath(buildPath: string) {
@@ -46,8 +53,8 @@ export class Parser {
         document: vscode.TextDocument,
         options: BuildScriptOptions = {},
     ): Promise<Script> {
-        if (options.usingCache && this.documentCache.get(document.uri.path)) {
-            return this.documentCache.get(document.uri.path);
+        if (options.usingCache && documentCache.get(document.uri.path)) {
+            return documentCache.get(document.uri.path);
         }
 
         const maxParseLength =
@@ -128,7 +135,7 @@ export class Parser {
             }
         }
         const script: Script = { methods, labels, refs, variables, blocks };
-        this.documentCache.set(document.uri.path, script);
+        documentCache.set(document.uri.path, script);
         return script;
     }
 
@@ -137,14 +144,13 @@ export class Parser {
         name: string,
     ) {
         name = name.toLowerCase();
-        for (const method of this.documentCache.get(document.uri.path)
-            .methods) {
+        for (const method of documentCache.get(document.uri.path).methods) {
             if (method.name.toLowerCase() === name) {
                 return method;
             }
         }
-        for (const filePath of this.documentCache.keys()) {
-            for (const method of this.documentCache.get(filePath).methods) {
+        for (const filePath of documentCache.keys()) {
+            for (const method of documentCache.get(filePath).methods) {
                 if (method.name.toLowerCase() === name) {
                     return method;
                 }
@@ -155,8 +161,8 @@ export class Parser {
 
     public static async getAllMethod(): Promise<Method[]> {
         const methods = [];
-        for (const filePath of this.documentCache.keys()) {
-            for (const method of this.documentCache.get(filePath).methods) {
+        for (const filePath of documentCache.keys()) {
+            for (const method of documentCache.get(filePath).methods) {
                 methods.push(method);
             }
         }
@@ -168,13 +174,13 @@ export class Parser {
         name: string,
     ) {
         name = name.toLowerCase();
-        for (const label of this.documentCache.get(document.uri.path).labels) {
+        for (const label of documentCache.get(document.uri.path).labels) {
             if (label.name.toLowerCase() === name) {
                 return label;
             }
         }
-        for (const filePath of this.documentCache.keys()) {
-            for (const label of this.documentCache.get(filePath).labels) {
+        for (const filePath of documentCache.keys()) {
+            for (const label of documentCache.get(filePath).labels) {
                 if (label.name.toLowerCase() === name) {
                     return label;
                 }
@@ -186,8 +192,8 @@ export class Parser {
     public static getAllRefByName(name: string): Ref[] {
         const refs = [];
         name = name.toLowerCase();
-        for (const filePath of this.documentCache.keys()) {
-            const document = this.documentCache.get(filePath);
+        for (const filePath of documentCache.keys()) {
+            const document = documentCache.get(filePath);
             for (const ref of document.refs) {
                 if (ref.name.toLowerCase() === name) {
                     refs.push(ref);
@@ -388,6 +394,3 @@ export class Parser {
         }
     }
 }
-
-const startBlockComment = / *\/\*/;
-const endBlockComment = / *\*\//;

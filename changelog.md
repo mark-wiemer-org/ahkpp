@@ -3,10 +3,12 @@
 ## 6.3.0 - unreleased 🕳️
 
 -   Add exclude setting ([#488](https://github.com/mark-wiemer-org/ahkpp/issues/488))
+    -   Excluded files are not included in IntelliSense completion suggestions, even when they're added via `#include`
     -   Changed `v2.exclude` setting to `exclude`
     -   One setting works for both v1 and v2
+    -   Changes to this setting take effect immediately, no need to restart your IDE (different than thqby's extension)
     -   v2 will exclude excluded files from suggestions even if they're opened in the IDE (different than thqby's extension)
-    -   v1 no longer automatically ignores files with `out`, `target`, and `node_modules` in their name
+    -   v1 no longer automatically ignores files with `out`, `target`, or `node_modules` in their name
 -   Fixup output channel names: "AHK++ (v1)" and "AHK++ (v2)" instead of "AHK" and "AHK++" respectively
 -   Fix duplicate output channels
 

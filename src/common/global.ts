@@ -41,6 +41,8 @@ export enum ConfigKey {
     compileIcon = 'compiler.compileIcon',
     compilerPath = 'compiler.compilerPath',
     exclude = 'exclude',
+    general = 'general',
+    generalV2 = 'v2.general',
     helpPathV1 = 'v1.file.helpPath',
     helpPathV2 = 'v2.file.helpPath',
     indentCodeAfterIfDirective = 'v1.formatter.indentCodeAfterIfDirective',
@@ -60,4 +62,14 @@ export enum ConfigKey {
 export enum LanguageId {
     ahk1 = 'ahk',
     ahk2 = 'ahk2',
+}
+
+/** Defined in package.json */
+export type ShowOutput = 'always' | 'never';
+
+export enum LibIncludeType {
+    Disabled = 'Off',
+    Local = 'Local',
+    UserAndStandard = 'User and Standard',
+    All = 'All',
 }
