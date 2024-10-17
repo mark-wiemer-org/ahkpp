@@ -13,7 +13,7 @@
 
 AHK++ is available for: [VS Code](https://code.visualstudio.com) | [Theia IDE](https://theia-ide.org) | [VSCodium](https://vscodium.com) | ...any other IDE that supports \*.vsix extensions
 
-Install from a marketplace: [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus) | [Open VSX Registry](https://open-vsx.org/extension/mark-wiemer/vscode-autohotkey-plus-plus)
+Download from a trusted source: [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus) | [Open VSX Registry](https://open-vsx.org/extension/mark-wiemer/vscode-autohotkey-plus-plus) | [GitHub releases](https://github.com/mark-wiemer-org/ahkpp/releases)
 
 ## AHK v2 full support is here! 🥂
 
