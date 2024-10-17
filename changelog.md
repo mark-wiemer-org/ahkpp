@@ -4,6 +4,7 @@
 
 -   Rename extension to `AHK++ (AutoHotkey Plus Plus)` to provide a clear short name while retaining previous brand
     -   In 6.2.0, only the settings were renamed. This release renames the extension display name on registries as well.
+-   Rewrite AHK v2 hover tips using [GroggyOtter](https://github.com/GroggyOtter/ahkv2_definition_rewrite)'s syntaxes ([#521](https://github.com/mark-wiemer-org/ahkpp/issues/521))
 -   Add exclude setting ([#488](https://github.com/mark-wiemer-org/ahkpp/issues/488))
     -   Excluded files are not included in IntelliSense completion suggestions, even when they're added via `#include`
     -   Changed `v2.exclude` setting to `exclude`
