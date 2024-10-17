@@ -68,7 +68,7 @@ export enum LanguageId {
 export type ShowOutput = 'always' | 'never';
 
 export enum LibIncludeType {
-    Disabled = 'Off',
+    Disabled = 'Disabled',
     Local = 'Local',
     UserAndStandard = 'User and Standard',
     All = 'All',
