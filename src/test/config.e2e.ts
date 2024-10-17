@@ -11,6 +11,7 @@ import {
 } from './utils';
 import { resolve } from 'path';
 import { ConfigKey, LibIncludeType, ShowOutput } from '../common/global';
+import { suite, before, test } from 'mocha';
 
 const rootPath = path.join(__dirname, '..', '..', '..');
 
