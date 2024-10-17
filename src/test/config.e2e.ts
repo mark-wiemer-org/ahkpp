@@ -10,7 +10,7 @@ import {
     updateConfig,
 } from './utils';
 import { resolve } from 'path';
-import { ConfigKey, ShowOutput } from '../common/global';
+import { ConfigKey, LibIncludeType, ShowOutput } from '../common/global';
 
 const rootPath = path.join(__dirname, '..', '..', '..');
 
@@ -65,6 +65,13 @@ suite('exclude', () => {
         ['back to v1 no exclusions', 1, [], true],
         ['back to v2 no exclusions', 2, [], true],
     ];
+
+    before(async () => {
+        await updateConfig<{ librarySuggestions: LibIncludeType }>(
+            ConfigKey.general,
+            { librarySuggestions: LibIncludeType.All },
+        );
+    });
 
     tests.forEach(([name, version, exclude, expected]) => {
         test(name, async () => {

@@ -65,3 +65,10 @@ export enum LanguageId {
 
 /** Defined in package.json */
 export type ShowOutput = 'always' | 'never';
+
+export enum LibIncludeType {
+    Disabled = 'Off',
+    Local = 'Local',
+    UserAndStandard = 'User and Standard',
+    All = 'All',
+}
