@@ -1075,7 +1075,7 @@ suite.only('internalFormat', () => {
         indentCodeAfterLabel: true,
         indentCodeAfterIfDirective: true,
         preserveIndent: false,
-        trimExtraSpaces: true,
+        trimExtraSpaces: false,
     };
 
     const formatTests: FormatTest[] = [
@@ -1103,7 +1103,10 @@ suite.only('internalFormat', () => {
             options: { trimExtraSpaces: false },
         },
         { filenameRoot: '188-one-command-code-in-text' },
-        { filenameRoot: '189-space-at-end-of-line' },
+        {
+            filenameRoot: '189-space-at-end-of-line',
+            options: { trimExtraSpaces: true },
+        },
         {
             filenameRoot: '192-preserve-indent-true',
             options: { preserveIndent: true },
@@ -1120,6 +1123,8 @@ suite.only('internalFormat', () => {
         { filenameRoot: '290-ifmsgbox' },
         { filenameRoot: '291-single-line-comment' },
         { filenameRoot: '316-if-object-continuation-section' },
+        //* 411 should pass with default settings!
+        { filenameRoot: '411-extra-spaces-in-string' },
         { filenameRoot: '429-single-line-hotkey' },
         { filenameRoot: '432-label-inside-code-block' },
         {
@@ -1164,7 +1169,7 @@ suite.only('internalFormat', () => {
     ];
 
     formatTests.forEach((formatTest) => {
-        test(`${formatTest.filenameRoot} internal format`, async () => {
+        test(`${formatTest.filenameRoot}`, async () => {
             // Arrange
             const inFilePath = path.join(
                 filesParentPath,

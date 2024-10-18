@@ -67,7 +67,7 @@ Collapse me!
 ; Function calls (with a space before parens)
 foo()
 bar ()
-baz () ; multiple spaces
+baz  () ; multiple spaces
 
 ; SUBROUTINES
 

@@ -15,7 +15,7 @@
     "ahk++.config.general.showOutput": "Automatically show output view when running a script. View can always be toggled with F1 > 'View: Toggle Output' (`Ctrl+Shift+U`)",
     "ahk++.config.general.showOutput.always": "Always open the output view when running a script",
     "ahk++.config.general.showOutput.never": "Never automatically show the output view",
-    "ahk++.config.v1.formatter.trimExtraSpaces": "Trim extra spaces between words",
+    "ahk++.config.v1.formatter.trimExtraSpaces": "Trim extra spaces between words and symbols",
     "ahk++.config.v2.actionWhenV1Detected": "Action when v1 script is detected",
     "ahk++.config.v2.commentTagRegex": "The regular expression for custom symbols to appear in the breadcrumb and elsewhere. Default matches any line that starts with `;;`. Changes take effect after restart.",
     "ahk++.config.v2.completionCommitCharacters": "Characters which commit auto-completion",
