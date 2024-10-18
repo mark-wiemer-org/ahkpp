@@ -343,7 +343,7 @@
                         "trimExtraSpaces": {
                             "type": "boolean",
                             "default": true,
-                            "description": "Trim extra spaces between words."
+                            "description": "%ahk++.config.v1.formatter.trimExtraSpaces%"
                         }
                     },
                     "default": {
