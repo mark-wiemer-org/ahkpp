@@ -1,6 +1,6 @@
 # Changelog
 
-## 6.3.0 - unreleased 🕳️
+## 6.3.0 - 2024-10-19 🕳️
 
 ### New features
 
