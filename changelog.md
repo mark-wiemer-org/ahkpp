@@ -15,9 +15,10 @@
 
 ### Fixes
 
+-   Fix v1 formatter removing extra spaces in strings ([#411](https://github.com/mark-wiemer-org/ahkpp/issues/411))
+-   Fix v2 formatter moving closing brackets/braces when `arrayStyle` or `objectStyle` were set to "none" (the default) ([#499](https://github.com/mark-wiemer-org/ahkpp/issues/499))
 -   Fixup output channel names: "AHK++ (v1)" and "AHK++ (v2)" instead of "AHK" and "AHK++" respectively
--   Fix duplicate output channels
--   Fix formatter removing extra spaces in v1 strings ([#411](https://github.com/mark-wiemer-org/ahkpp/issues/411))
+-   Fix duplicate output channels (the "AHK" channel used to be created twice)
 
 ### Other
 

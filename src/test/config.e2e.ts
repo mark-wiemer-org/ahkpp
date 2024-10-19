@@ -85,11 +85,13 @@ suite('exclude', () => {
 
     tests.forEach(([name, version, exclude, expected]) => {
         test(name, async () => {
-            if (version === 1)
+            if (version === 1) {
                 await updateConfig<string[]>(ConfigKey.exclude, exclude);
+            }
             const filePath = resolve(rootPath, `./e2e/main.ahk${version}`);
             const doc = await getDocument(filePath);
             const editor = await showDocument(doc);
+            await sleep(1_000); // todo only these tests are extra flaky
             await addAndSelectSnippet(editor, snippetText);
 
             const labels = await getCompletionSuggestionLabels(editor);
@@ -99,14 +101,14 @@ suite('exclude', () => {
     });
 });
 
-suite.only('v2.general.librarySuggestions', () => {
+suite('v2.general.librarySuggestions', () => {
     let editor: vscode.TextEditor;
     before(async () => {
         await updateConfig<string[]>(ConfigKey.exclude, []);
         const filePath = resolve(rootPath, './e2e/main.ahk2');
         const doc = await getDocument(filePath);
         editor = await showDocument(doc);
-        await sleep(1000);
+        await sleep(1_000);
     });
 
     const tests: [name: string, libType: LibIncludeType, expected: boolean][] =

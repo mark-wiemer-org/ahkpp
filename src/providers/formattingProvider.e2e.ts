@@ -1,6 +1,6 @@
 import { getDocument, showDocument } from '../test/utils';
 import * as assert from 'assert';
-import * as fs from 'fs-extra';
+import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { FormatProvider } from './formattingProvider';
