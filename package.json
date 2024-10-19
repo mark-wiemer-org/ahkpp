@@ -342,8 +342,8 @@
                         },
                         "trimExtraSpaces": {
                             "type": "boolean",
-                            "default": true,
-                            "description": "Trim extra spaces between words."
+                            "default": false,
+                            "description": "%ahk++.config.v1.formatter.trimExtraSpaces%"
                         }
                     },
                     "default": {
@@ -351,7 +351,7 @@
                         "indentCodeAfterIfDirective": true,
                         "indentCodeAfterLabel": true,
                         "preserveIndent": false,
-                        "trimExtraSpaces": true
+                        "trimExtraSpaces": false
                     },
                     "additionalProperties": {
                         "type": "string"

@@ -2,8 +2,8 @@
 
 ## 6.3.0 - unreleased 🕳️
 
--   Rename extension to `AHK++ (AutoHotkey Plus Plus)` to provide a clear short name while retaining previous brand
-    -   In 6.2.0, only the settings were renamed. This release renames the extension display name on registries as well.
+### New features
+
 -   Rewrite AutoHotkey v2 definition files using [GroggyOtter](https://github.com/GroggyOtter/ahkv2_definition_rewrite)'s syntaxes ([#521](https://github.com/mark-wiemer-org/ahkpp/issues/521))
 -   Add exclude setting ([#488](https://github.com/mark-wiemer-org/ahkpp/issues/488))
     -   Excluded files are not included in IntelliSense completion suggestions, even when they're added via `#include`
@@ -12,8 +12,17 @@
     -   Changes to this setting take effect immediately, no need to restart your IDE (different than thqby's extension)
     -   v2 will exclude excluded files from suggestions even if they're opened in the IDE (different than thqby's extension)
     -   v1 no longer automatically ignores files with `out`, `target`, or `node_modules` in their name
+
+### Fixes
+
 -   Fixup output channel names: "AHK++ (v1)" and "AHK++ (v2)" instead of "AHK" and "AHK++" respectively
 -   Fix duplicate output channels
+-   Fix formatter removing extra spaces in v1 strings ([#411](https://github.com/mark-wiemer-org/ahkpp/issues/411))
+
+### Other
+
+-   Rename extension to `AHK++ (AutoHotkey Plus Plus)` to provide a clear short name while retaining previous brand
+    -   In 6.2.0, only the settings were renamed. This release renames the extension display name on registries as well.
 
 ## 6.2.3 - 2024-10-08 📖
 
