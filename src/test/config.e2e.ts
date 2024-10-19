@@ -81,16 +81,17 @@ suite('exclude', () => {
             ConfigKey.generalV2,
             { librarySuggestions: LibIncludeType.All },
         );
-        await sleep(1_000); // todo only these tests are extra flaky
     });
 
     tests.forEach(([name, version, exclude, expected]) => {
         test(name, async () => {
-            if (version === 1)
+            if (version === 1) {
                 await updateConfig<string[]>(ConfigKey.exclude, exclude);
+            }
             const filePath = resolve(rootPath, `./e2e/main.ahk${version}`);
             const doc = await getDocument(filePath);
             const editor = await showDocument(doc);
+            await sleep(1_000); // todo only these tests are extra flaky
             await addAndSelectSnippet(editor, snippetText);
 
             const labels = await getCompletionSuggestionLabels(editor);
