@@ -35,9 +35,9 @@ export class Parser {
             excludeConfig,
             Out.debug,
         );
-        Out.log(`Building ${paths.length} files`);
+        Out.debug(`Building ${paths.length} files`);
         for (const path of paths) {
-            Out.log(`Building ${path}`);
+            Out.debug(`Building ${path}`);
             const document = await vscode.workspace.openTextDocument(
                 vscode.Uri.file(path),
             );
