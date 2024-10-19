@@ -19,7 +19,7 @@ import {
     removeEmptyLines,
     trimExtraSpaces,
 } from './formattingProvider.utils';
-import * as fs from 'fs-extra';
+import * as fs from 'fs';
 import * as path from 'path';
 import { FormatOptions } from './formattingProvider.types';
 
@@ -1049,7 +1049,7 @@ interface FormatTest {
     options?: Partial<FormatOptions>;
 }
 
-suite.only('internalFormat', () => {
+suite('internalFormat', () => {
     // Currently in `out` folder, need to get back to main `src` folder
     const filesParentPath = path.join(
         __dirname, // ./out/src/providers
@@ -1064,8 +1064,8 @@ suite.only('internalFormat', () => {
     const inFilenameSuffix = '.in.ahk';
     const outFilenameSuffix = '.out.ahk';
 
-    const fileToString = (path: string): string =>
-        fs.readFileSync(path).toString();
+    const fileToString = (filePath: string): string =>
+        fs.readFileSync(filePath).toString();
 
     /** Default formatting options, meant to match default extension settings */
     const defaultOptions = {

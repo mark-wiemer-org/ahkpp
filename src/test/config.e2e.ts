@@ -99,7 +99,7 @@ suite('exclude', () => {
     });
 });
 
-suite.only('v2.general.librarySuggestions', () => {
+suite('v2.general.librarySuggestions', () => {
     let editor: vscode.TextEditor;
     before(async () => {
         await updateConfig<string[]>(ConfigKey.exclude, []);
