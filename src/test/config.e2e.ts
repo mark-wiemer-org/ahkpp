@@ -81,6 +81,7 @@ suite('exclude', () => {
             ConfigKey.generalV2,
             { librarySuggestions: LibIncludeType.All },
         );
+        await sleep(1_000); // todo only these tests are extra flaky
     });
 
     tests.forEach(([name, version, exclude, expected]) => {
@@ -106,7 +107,7 @@ suite('v2.general.librarySuggestions', () => {
         const filePath = resolve(rootPath, './e2e/main.ahk2');
         const doc = await getDocument(filePath);
         editor = await showDocument(doc);
-        await sleep(1000);
+        await sleep(1_000);
     });
 
     const tests: [name: string, libType: LibIncludeType, expected: boolean][] =
