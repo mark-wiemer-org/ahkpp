@@ -97,7 +97,10 @@ export class DefProvider implements vscode.DefinitionProvider {
         }
         const parent = workFolder
             ? workFolder
-            : document.uri.path.substr(0, document.uri.path.lastIndexOf('/'));
+            : document.uri.path.substring(
+                  0,
+                  document.uri.path.lastIndexOf('/'),
+              );
         const targetPath = vscode.Uri.file(
             includeMatch[0]
                 .trim()
