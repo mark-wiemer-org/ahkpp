@@ -4,6 +4,10 @@ import * as vscode from 'vscode';
 export class Out {
     private static outputChannel: vscode.OutputChannel;
 
+    /**
+     * Logs the given value without focusing the output view.
+     * Prepends all logs with `new Date().toISOString()`.
+     */
     public static debug(value: Error | string) {
         Out.log(value, false);
     }
@@ -12,6 +16,7 @@ export class Out {
      * Logs the given value. Traces errors to console before logging.
      * Prepends all logs with `new Date().toISOString()`.
      * @param value The value to log
+     * @param focus whether to focus the output view. Defaults to true.
      */
     public static log(value: Error | string, focus = true) {
         if (value instanceof Error) {
