@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
 import { existsSync } from 'fs';
+import { Out } from '../common/out';
 
 export class DefProvider implements vscode.DefinitionProvider {
     public async provideDefinition(
@@ -85,13 +86,23 @@ export class DefProvider implements vscode.DefinitionProvider {
         return null;
     }
 
+    /**
+     * If the position is on an `#Include` line,
+     * returns a Location at the beginning of the included file.
+     * Otherwise returns undefined.
+     */
     public async tryGetFileLink(
         document: vscode.TextDocument,
         position: vscode.Position,
         workFolder?: string,
     ): Promise<vscode.Location> | undefined {
+        const funcName = 'tryGetFileLink';
         const { text } = document.lineAt(position.line);
-        const includeMatch = text.match(/(?<=#include).+?\.(ahk|ext)\b/i);
+        Out.debug(`${funcName} text: ${text}`);
+        const includeMatch = text.match(
+            /(?<=#include).+?\.(ahk|ahk1|ah1|ext)\b/i,
+        );
+        Out.debug(`${funcName} includeMatch: ${includeMatch?.[0]}`);
         if (!includeMatch) {
             return undefined;
         }
