@@ -90,7 +90,7 @@ export class DefProvider implements vscode.DefinitionProvider {
      * If the position is on an `#Include` line,
      * returns a Location at the beginning of the included file.
      * Otherwise returns undefined.
-     * However, it's unclear if this ever worked.
+     ** Only works with relative paths.
      */
     async tryGetFileLink(
         document: vscode.TextDocument,
@@ -99,15 +99,12 @@ export class DefProvider implements vscode.DefinitionProvider {
         /** @example /c:/path/to/file.ahk */
         const docPath = document.uri.path;
         const { text } = document.lineAt(position.line);
-        const includeMatch = text.match(
-            /#include\s*,?\s*(.+?\.(ahk|ahk1|ah1|ext))\b/i,
-        );
-        if (!includeMatch) {
-            return undefined;
-        }
+        const includedFile = includedFilename(text);
+        if (!includedFile) return;
+
         /** @example c:/path/to */
         const parentGoodPath = docPath.substring(1, docPath.lastIndexOf('/'));
-        const expandedPath = includeMatch[1]
+        const expandedPath = includedFile
             .trim()
             .replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parentGoodPath)
             .replace(/(%A_LineFile%)/, docPath);
@@ -121,3 +118,11 @@ export class DefProvider implements vscode.DefinitionProvider {
             : undefined;
     }
 }
+
+/**
+ * @example includedFilename('#include , a b.ahk') === 'a b.ahk'
+ * @example includedFilename('#include path/to/file.ahk') === 'path/to/file.ahk'
+ * @example includedFilename('include , a b.ahk') === undefined
+ */
+export const includedFilename = (line: string): string | undefined =>
+    line.match(/#include\s*,?\s*(.+?\.(ahk|ahk1|ah1|ext))\b/i)?.[1];
