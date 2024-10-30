@@ -100,7 +100,7 @@ export class DefProvider implements vscode.DefinitionProvider {
         const docPath = document.uri.path;
         const { text } = document.lineAt(position.line);
         const includeMatch = text.match(
-            /#include\s*?,?\s*([^\s]+?\.(ahk|ahk1|ah1|ext))\b/i,
+            /#include\s*,?\s*(.+?\.(ahk|ahk1|ah1|ext))\b/i,
         );
         if (!includeMatch) {
             return undefined;
