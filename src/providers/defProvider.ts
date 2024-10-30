@@ -92,11 +92,11 @@ export class DefProvider implements vscode.DefinitionProvider {
      * Otherwise returns undefined.
      * However, it's unclear if this ever worked.
      */
-    public async tryGetFileLink(
+    async tryGetFileLink(
         document: vscode.TextDocument,
         position: vscode.Position,
-        workFolder?: string,
     ): Promise<vscode.Location> | undefined {
+        const docPath = document.uri.path;
         const funcName = 'tryGetFileLink';
         const { text } = document.lineAt(position.line);
         Out.debug(`${funcName} text: ${text}`);
@@ -107,25 +107,15 @@ export class DefProvider implements vscode.DefinitionProvider {
         if (!includeMatch) {
             return undefined;
         }
-        const parent =
-            workFolder ||
-            document.uri.path.substring(0, document.uri.path.lastIndexOf('/'));
+        const parent = docPath.substring(0, docPath.lastIndexOf('/'));
         const targetPath = vscode.Uri.file(
             includeMatch[0]
                 .trim()
                 .replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parent)
-                .replace(/(%A_LineFile%)/, document.uri.path),
+                .replace(/(%A_LineFile%)/, docPath),
         );
-        if (existsSync(targetPath.fsPath)) {
-            return new vscode.Location(targetPath, new vscode.Position(0, 0));
-        } else if (workFolder) {
-            return this.tryGetFileLink(
-                document,
-                position,
-                vscode.workspace.workspaceFolders?.[0].uri.fsPath,
-            );
-        } else {
-            return undefined;
-        }
+        return existsSync(targetPath.fsPath)
+            ? new vscode.Location(targetPath, new vscode.Position(0, 0))
+            : undefined;
     }
 }
