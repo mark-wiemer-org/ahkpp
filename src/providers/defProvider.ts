@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
 import { existsSync } from 'fs';
-import { Out } from '../common/out';
+import { join } from 'path';
 
 export class DefProvider implements vscode.DefinitionProvider {
     public async provideDefinition(
@@ -96,26 +96,28 @@ export class DefProvider implements vscode.DefinitionProvider {
         document: vscode.TextDocument,
         position: vscode.Position,
     ): Promise<vscode.Location> | undefined {
+        /** @example /c:/path/to/file.ahk */
         const docPath = document.uri.path;
-        const funcName = 'tryGetFileLink';
         const { text } = document.lineAt(position.line);
-        Out.debug(`${funcName} text: ${text}`);
         const includeMatch = text.match(
             /(?<=#include).+?\.(ahk|ahk1|ah1|ext)\b/i,
         );
-        Out.debug(`${funcName} includeMatch: ${includeMatch?.[0]}`);
         if (!includeMatch) {
             return undefined;
         }
-        const parent = docPath.substring(0, docPath.lastIndexOf('/'));
-        const targetPath = vscode.Uri.file(
-            includeMatch[0]
-                .trim()
-                .replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parent)
-                .replace(/(%A_LineFile%)/, docPath),
-        );
-        return existsSync(targetPath.fsPath)
-            ? new vscode.Location(targetPath, new vscode.Position(0, 0))
+        /** @example c:/path/to */
+        const parentGoodPath = docPath.substring(1, docPath.lastIndexOf('/'));
+        const expandedPath = includeMatch[0]
+            .trim()
+            .replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parentGoodPath)
+            .replace(/(%A_LineFile%)/, docPath);
+        /** @example c:/path/to/included.ahk */
+        const resolvedPath = join(parentGoodPath, expandedPath);
+        return existsSync(resolvedPath)
+            ? new vscode.Location(
+                  vscode.Uri.file(resolvedPath),
+                  new vscode.Position(0, 0),
+              )
             : undefined;
     }
 }
