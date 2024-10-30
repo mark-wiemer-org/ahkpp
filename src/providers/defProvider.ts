@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
 import { existsSync } from 'fs';
 import { join } from 'path';
+import { includedFilename } from './defProvider.utils';
 
 export class DefProvider implements vscode.DefinitionProvider {
     public async provideDefinition(
@@ -118,11 +119,3 @@ export class DefProvider implements vscode.DefinitionProvider {
             : undefined;
     }
 }
-
-/**
- * @example includedFilename('#include , a b.ahk') === 'a b.ahk'
- * @example includedFilename('#include path/to/file.ahk') === 'path/to/file.ahk'
- * @example includedFilename('include , a b.ahk') === undefined
- */
-export const includedFilename = (line: string): string | undefined =>
-    line.match(/#include\s*,?\s*(.+?\.(ahk|ahk1|ah1|ext))\b/i)?.[1];

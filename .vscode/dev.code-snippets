@@ -26,7 +26,7 @@
             "        name: string,",
             "        args: Parameters<typeof $1>,",
             "        expected: ReturnType<typeof $1>,",
-            "    ][] = [$0];",
+            "    ][] = [[$0]];",
 
             "    tests.forEach(([name, args, expected]) =>",
             "        test(name, () => assert.strictEqual($1(...args), expected)),",
