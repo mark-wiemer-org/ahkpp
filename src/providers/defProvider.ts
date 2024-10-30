@@ -90,6 +90,7 @@ export class DefProvider implements vscode.DefinitionProvider {
      * If the position is on an `#Include` line,
      * returns a Location at the beginning of the included file.
      * Otherwise returns undefined.
+     * However, it's unclear if this ever worked.
      */
     public async tryGetFileLink(
         document: vscode.TextDocument,
