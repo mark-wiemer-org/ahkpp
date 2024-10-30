@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
 import { existsSync } from 'fs';
 import { join } from 'path';
+import { Out } from 'src/common/out';
 
 export class DefProvider implements vscode.DefinitionProvider {
     public async provideDefinition(
@@ -100,11 +101,12 @@ export class DefProvider implements vscode.DefinitionProvider {
         const docPath = document.uri.path;
         const { text } = document.lineAt(position.line);
         const includeMatch = text.match(
-            /(?<=#include).+?\.(ahk|ahk1|ah1|ext)\b/i,
+            /(?<=#include) *?,? *(.+?\.(ahk|ahk1|ah1|ext))\b/i,
         );
         if (!includeMatch) {
             return undefined;
         }
+        Out.debug(includeMatch?.[1]);
         /** @example c:/path/to */
         const parentGoodPath = docPath.substring(1, docPath.lastIndexOf('/'));
         const expandedPath = includeMatch[0]
