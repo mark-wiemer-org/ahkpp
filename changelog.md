@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.4.0 - unreleased
+
+### New features
+
+-   Hovering over an included filename now provides a link to that document in your IDE
+
 ## 6.3.0 - 2024-10-19 🕳️
 
 ### New features
