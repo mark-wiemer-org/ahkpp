@@ -1,12 +1,12 @@
 import { suite, test } from 'mocha';
 import assert from 'assert';
-import { includedFilename } from './defProvider.utils';
+import { includedPath } from './defProvider.utils';
 
-suite('includedFilename', () => {
+suite('includedPath', () => {
     const tests: [
         name: string,
-        args: Parameters<typeof includedFilename>,
-        expected: ReturnType<typeof includedFilename>,
+        args: Parameters<typeof includedPath>,
+        expected: ReturnType<typeof includedPath>,
     ][] = [
         ['comma', ['#include , a b.ahk'], 'a b.ahk'],
         ['no hash', ['include , a b.ahk'], undefined],
@@ -20,8 +20,6 @@ suite('includedFilename', () => {
         ['ext', ['#include a.ext'], 'a.ext'],
     ];
     tests.forEach(([name, args, expected]) =>
-        test(name, () =>
-            assert.strictEqual(includedFilename(...args), expected),
-        ),
+        test(name, () => assert.strictEqual(includedPath(...args), expected)),
     );
 });
