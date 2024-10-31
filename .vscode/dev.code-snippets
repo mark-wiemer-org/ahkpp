@@ -21,7 +21,7 @@
         "scope": "javascript,typescript",
         "prefix": "suite",
         "body": [
-            "suite('$1', () => {",
+            "suite($1.name, () => {",
             "    const tests: [",
             "        name: string,",
             "        args: Parameters<typeof $1>,",
