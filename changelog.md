@@ -4,7 +4,7 @@
 
 ### New features
 
--   Hovering over an included filename now provides a link to that document in your IDE
+-   Hovering over a filename in an `#include` directive now provides a link to that document in your IDE
 
 ## 6.3.0 - 2024-10-19 🕳️
 
