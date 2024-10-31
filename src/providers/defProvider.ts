@@ -1,8 +1,7 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
 import { existsSync } from 'fs';
-import { join } from 'path';
-import { includedPath } from './defProvider.utils';
+import { getIncludedPath, resolvePath } from './defProvider.utils';
 
 export class DefProvider implements vscode.DefinitionProvider {
     public async provideDefinition(
@@ -100,17 +99,11 @@ export class DefProvider implements vscode.DefinitionProvider {
         /** @example '/c:/path/to/file.ahk' */
         const docPath = document.uri.path;
         const { text } = document.lineAt(position.line);
-        const includedStr = includedPath(text);
-        if (!includedStr) return;
+        const includedPath = getIncludedPath(text);
+        if (!includedPath) return;
 
-        /** @example 'c:/path/to' */
-        const parentGoodPath = docPath.substring(1, docPath.lastIndexOf('/'));
-        const expandedPath = includedStr
-            .trim()
-            .replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parentGoodPath)
-            .replace(/(%A_LineFile%)/, docPath);
         /** @example 'c:/path/to/included.ahk' */
-        const resolvedPath = join(parentGoodPath, expandedPath);
+        const resolvedPath = resolvePath(docPath, includedPath);
         return existsSync(resolvedPath)
             ? new vscode.Location(
                   vscode.Uri.file(resolvedPath),
