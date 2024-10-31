@@ -1,6 +1,6 @@
 import { suite, test } from 'mocha';
 import assert from 'assert';
-import { getIncludedPath, resolvePath } from './defProvider.utils';
+import { getIncludedPath, resolveIncludedPath } from './defProvider.utils';
 
 suite(getIncludedPath.name, () => {
     const tests: [
@@ -21,6 +21,12 @@ suite(getIncludedPath.name, () => {
         ['preceding whitespace', ['   #include a.ahk'], 'a.ahk'],
         ['directory', ['#include a'], 'a'],
         ['non-whitespace preceding char', [';#include a'], undefined],
+        ['escaped `;` with whitespace', ['#include a `;b.ahk'], 'a `;b.ahk'],
+        ['escaped `;` without whitespace', ['#include a`;b.ahk'], 'a`;b.ahk'],
+        ['unescaped `;` without whitespace', ['#include a;b.ahk'], 'a;b.ahk'],
+        ['unescaped `;` with whitespace', ['#include a ;b.ahk'], 'a'],
+        ['unescaped valid `%`', ['#include %A_ScriptDir%'], '%A_ScriptDir%'],
+        ['unescaped `<` and `>`', ['#include <foo>'], '<foo>'],
     ];
     tests.forEach(([name, args, expected]) =>
         test(name, () =>
@@ -29,11 +35,11 @@ suite(getIncludedPath.name, () => {
     );
 });
 
-suite(resolvePath.name, () => {
+suite(resolveIncludedPath.name, () => {
     const tests: [
         name: string,
-        args: Parameters<typeof resolvePath>,
-        expected: ReturnType<typeof resolvePath>,
+        args: Parameters<typeof resolveIncludedPath>,
+        expected: ReturnType<typeof resolveIncludedPath>,
     ][] = [
         ['relative file', ['/c:/main.ahk', 'a.ahk'], 'c:\\a.ahk'],
         ['absolute file', ['/c:/users/main.ahk', 'd:/b.ahk'], 'd:\\b.ahk'],
@@ -41,6 +47,11 @@ suite(resolvePath.name, () => {
         ['with double dot', ['/c:/users/main.ahk', '../d.ahk'], 'c:\\d.ahk'],
     ];
     tests.forEach(([name, args, expected]) =>
-        test(name, () => assert.strictEqual(resolvePath(...args), expected)),
+        test(name, () =>
+            assert.strictEqual(
+                resolveIncludedPath(args[0], `#include ${args[1]}`),
+                expected,
+            ),
+        ),
     );
 });

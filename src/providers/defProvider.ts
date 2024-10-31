@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
-import { getIncludedPath, resolvePath } from './defProvider.utils';
+import { resolveIncludedPath } from './defProvider.utils';
 import { Out } from 'src/common/out';
 import { stat } from 'fs/promises';
 
@@ -91,10 +91,14 @@ export class DefProvider implements vscode.DefinitionProvider {
 //* Utilities requiring the vscode API
 
 /**
- * If the position is on an `#Include` line,
+ * If the position is on an `#Include` line
+ * and the included path is an existing file,
  * returns a Location at the beginning of the included file.
+ *
  * Otherwise returns undefined.
- ** Currently only works with relative paths.
+ *
+ ** Currently assumes the working directory is the script path and
+ * does not respect previous `#include dir` directives
  */
 async function tryGetFileLink(
     document: vscode.TextDocument,
@@ -103,11 +107,8 @@ async function tryGetFileLink(
     /** @example '/c:/path/to/file.ahk' */
     const docPath = document.uri.path;
     const { text } = document.lineAt(position.line);
-    const includedPath = getIncludedPath(text);
-    if (!includedPath) return;
-
     /** @example 'c:/path/to/included.ahk' */
-    const resolvedPath = resolvePath(docPath, includedPath);
+    const resolvedPath = resolveIncludedPath(docPath, text);
     Out.debug(`resolvedPath: ${resolvedPath}`);
     const fsStat = await stat(resolvedPath);
     return fsStat.isFile()
