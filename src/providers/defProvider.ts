@@ -1,14 +1,15 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
-import { existsSync } from 'fs';
 import { getIncludedPath, resolvePath } from './defProvider.utils';
+import { Out } from 'src/common/out';
+import { stat } from 'fs/promises';
 
 export class DefProvider implements vscode.DefinitionProvider {
     public async provideDefinition(
         document: vscode.TextDocument,
         position: vscode.Position,
     ): Promise<vscode.Location | vscode.Location[] | vscode.LocationLink[]> {
-        const fileLink = await this.tryGetFileLink(document, position);
+        const fileLink = await tryGetFileLink(document, position);
         if (fileLink) {
             return fileLink;
         }
@@ -85,30 +86,34 @@ export class DefProvider implements vscode.DefinitionProvider {
 
         return null;
     }
+}
 
-    /**
-     * If the position is on an `#Include` line,
-     * returns a Location at the beginning of the included file.
-     * Otherwise returns undefined.
-     ** Only works with relative paths.
-     */
-    async tryGetFileLink(
-        document: vscode.TextDocument,
-        position: vscode.Position,
-    ): Promise<vscode.Location> | undefined {
-        /** @example '/c:/path/to/file.ahk' */
-        const docPath = document.uri.path;
-        const { text } = document.lineAt(position.line);
-        const includedPath = getIncludedPath(text);
-        if (!includedPath) return;
+//* Utilities requiring the vscode API
 
-        /** @example 'c:/path/to/included.ahk' */
-        const resolvedPath = resolvePath(docPath, includedPath);
-        return existsSync(resolvedPath)
-            ? new vscode.Location(
-                  vscode.Uri.file(resolvedPath),
-                  new vscode.Position(0, 0),
-              )
-            : undefined;
-    }
+/**
+ * If the position is on an `#Include` line,
+ * returns a Location at the beginning of the included file.
+ * Otherwise returns undefined.
+ ** Currently only works with relative paths.
+ */
+async function tryGetFileLink(
+    document: vscode.TextDocument,
+    position: vscode.Position,
+): Promise<vscode.Location> | undefined {
+    /** @example '/c:/path/to/file.ahk' */
+    const docPath = document.uri.path;
+    const { text } = document.lineAt(position.line);
+    const includedPath = getIncludedPath(text);
+    if (!includedPath) return;
+
+    /** @example 'c:/path/to/included.ahk' */
+    const resolvedPath = resolvePath(docPath, includedPath);
+    Out.debug(`resolvedPath: ${resolvedPath}`);
+    const fsStat = await stat(resolvedPath);
+    return fsStat.isFile()
+        ? new vscode.Location(
+              vscode.Uri.file(resolvedPath),
+              new vscode.Position(0, 0),
+          )
+        : undefined;
 }
