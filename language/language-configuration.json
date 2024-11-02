@@ -1,3 +1,5 @@
+// ahk2 language configuration from thqby
+// used under GNU LGPL v3
 {
     "comments": {
         "lineComment": ";",
@@ -38,6 +40,12 @@
         ["'", "'"],
         ["%", "%"]
     ],
+    "folding": {
+        "markers": {
+            "start": "^\\s*;\\s*@region\\b",
+            "end": "^\\s*;\\s*@endregion\\b"
+        }
+    },
     "indentationRules": {
         "increaseIndentPattern": "^((?!;).)*(\\{[^}\"'`]*|\\([^)\"'`]*|\\[[^\\]\"'`]*)$",
         "decreaseIndentPattern": "^((?!.*?/\\*).*\\*/)?\\s*[\\])}].*$",

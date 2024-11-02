@@ -1004,7 +1004,7 @@
                     ".ah2",
                     ".ahk2"
                 ],
-                "configuration": "./language/ahk2.configuration.json",
+                "configuration": "./language/language-configuration.json",
                 "icon": {
                     "dark": "./language/autohotkey2.svg",
                     "light": "./language/autohotkey2.svg"
