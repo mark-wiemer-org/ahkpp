@@ -1,13 +1,15 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
-import { existsSync } from 'fs';
+import { resolveIncludedPath } from './defProvider.utils';
+import { Out } from 'src/common/out';
+import { stat } from 'fs/promises';
 
 export class DefProvider implements vscode.DefinitionProvider {
     public async provideDefinition(
         document: vscode.TextDocument,
         position: vscode.Position,
     ): Promise<vscode.Location | vscode.Location[] | vscode.LocationLink[]> {
-        const fileLink = await this.tryGetFileLink(document, position);
+        const fileLink = await tryGetFileLink(document, position);
         if (fileLink) {
             return fileLink;
         }
@@ -84,36 +86,35 @@ export class DefProvider implements vscode.DefinitionProvider {
 
         return null;
     }
+}
 
-    public async tryGetFileLink(
-        document: vscode.TextDocument,
-        position: vscode.Position,
-        workFolder?: string,
-    ): Promise<vscode.Location> | undefined {
-        const { text } = document.lineAt(position.line);
-        const includeMatch = text.match(/(?<=#include).+?\.(ahk|ext)\b/i);
-        if (!includeMatch) {
-            return undefined;
-        }
-        const parent = workFolder
-            ? workFolder
-            : document.uri.path.substr(0, document.uri.path.lastIndexOf('/'));
-        const targetPath = vscode.Uri.file(
-            includeMatch[0]
-                .trim()
-                .replace(/(%A_ScriptDir%|%A_WorkingDir%)/, parent)
-                .replace(/(%A_LineFile%)/, document.uri.path),
-        );
-        if (existsSync(targetPath.fsPath)) {
-            return new vscode.Location(targetPath, new vscode.Position(0, 0));
-        } else if (workFolder) {
-            return this.tryGetFileLink(
-                document,
-                position,
-                vscode.workspace.workspaceFolders?.[0].uri.fsPath,
-            );
-        } else {
-            return undefined;
-        }
-    }
+//* Utilities requiring the vscode API
+
+/**
+ * If the position is on an `#Include` line
+ * and the included path is an existing file,
+ * returns a Location at the beginning of the included file.
+ *
+ * Otherwise returns undefined.
+ *
+ ** Currently assumes the working directory is the script path and
+ * does not respect previous `#include dir` directives
+ */
+async function tryGetFileLink(
+    document: vscode.TextDocument,
+    position: vscode.Position,
+): Promise<vscode.Location> | undefined {
+    /** @example '/c:/path/to/file.ahk' */
+    const docPath = document.uri.path;
+    const { text } = document.lineAt(position.line);
+    /** @example 'c:/path/to/included.ahk' */
+    const resolvedPath = resolveIncludedPath(docPath, text);
+    Out.debug(`resolvedPath: ${resolvedPath}`);
+    const fsStat = await stat(resolvedPath);
+    return fsStat.isFile()
+        ? new vscode.Location(
+              vscode.Uri.file(resolvedPath),
+              new vscode.Position(0, 0),
+          )
+        : undefined;
 }

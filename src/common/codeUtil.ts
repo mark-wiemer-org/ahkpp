@@ -20,10 +20,10 @@ export class CodeUtil {
     }
 
     /**
-     * Concats an array and an item or array of items. Impure, @see array is modified
+     * Concats an array and an item or array of items. Impure, `array` is modified
      * @param array The initial array
      * @param items Either an item to add to the end of the array,
-     * or another array to concat to the end of @see array
+     * or another array to concat to the end of `array`
      */
     public static join(array: unknown[], items: unknown) {
         if (!array || !items) {
@@ -54,7 +54,6 @@ export class CodeUtil {
 }
 
 /** Whether the current active text editor is for an AHK v1 file */
-// todo use LSP for all v2 functionality
 export const isV1 = (): boolean =>
     vscode.window.activeTextEditor?.document.languageId === LanguageId.ahk1;
 

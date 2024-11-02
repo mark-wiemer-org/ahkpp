@@ -53,6 +53,7 @@ export class Parser {
         document: vscode.TextDocument,
         options: BuildScriptOptions = {},
     ): Promise<Script> {
+        const funcName = 'buildScript';
         if (options.usingCache && documentCache.get(document.uri.path)) {
             return documentCache.get(document.uri.path);
         }
@@ -135,22 +136,32 @@ export class Parser {
             }
         }
         const script: Script = { methods, labels, refs, variables, blocks };
+        Out.debug(`${funcName} document.uri.path: ${document.uri.path}`);
+        Out.debug(`${funcName} script: ${JSON.stringify(script)}`);
         documentCache.set(document.uri.path, script);
         return script;
     }
 
+    /**
+     * Finds the best reference to the method.
+     * If a method of this name exists in the current file, returns that method.
+     * Otherwise, searches through document cache to find the matching method.
+     * Matches are not case-sensitive and only need to match method name.
+     */
     public static async getMethodByName(
         document: vscode.TextDocument,
         name: string,
+        localCache = documentCache,
     ) {
         name = name.toLowerCase();
-        for (const method of documentCache.get(document.uri.path).methods) {
+        for (const method of localCache.get(document.uri.path).methods) {
             if (method.name.toLowerCase() === name) {
                 return method;
             }
         }
-        for (const filePath of documentCache.keys()) {
-            for (const method of documentCache.get(filePath).methods) {
+        // todo this should prioritize included files first.
+        for (const filePath of localCache.keys()) {
+            for (const method of localCache.get(filePath).methods) {
                 if (method.name.toLowerCase() === name) {
                     return method;
                 }
