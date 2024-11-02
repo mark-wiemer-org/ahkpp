@@ -2,9 +2,17 @@
 
 ## 6.4.0 - unreleased
 
+-   Update thqby's extension from 2.5.3 to 2.5.4, adding new bugfixes
+
 ### New features
 
 -   Hovering over a filename in an `#include` directive now provides a link to that document in your IDE
+
+### Bugfixes
+
+-   Improve "go to definition" in v2 files ([thqby #610](https://github.com/thqby/vscode-autohotkey2-lsp/issues/610))
+-   Improve environment variables when debugging via IDE for parity with running outside of IDE ([thqby #615](https://github.com/thqby/vscode-autohotkey2-lsp/issues/615))
+-   Add hover tip for `switch` keyword in v2 files ([thqby #623](https://github.com/thqby/vscode-autohotkey2-lsp/issues/623))
 
 ## 6.3.0 - 2024-10-19 🕳️
 
