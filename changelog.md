@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.5.0 - unreleased
+
+-   Add setting: AHK++.general > enableV2LanguageServer ([#493](https://github.com/mark-wiemer-org/ahkpp/issues/493))
+    -   Turning this off will disable functionality provided by thqby's extension
+    -   Some tooltips and warnings may not appear in AHK v2 scripts
+    <!-- todo can no longer run or debug scripts lol that's a problem -->
+    -   `true` by default, not a breaking change
+
 ## 6.4.0 - 2024-11-02 🗳️
 
 ### New features
