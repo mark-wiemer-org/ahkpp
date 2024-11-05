@@ -94,7 +94,7 @@ export function activate(context: vscode.ExtensionContext) {
         );
     });
 
-    activateV2(context);
+    if (Global.getConfig(ConfigKey.enableV2LanguageServer)) activateV2(context);
 }
 
 class InlineDebugAdapterFactory

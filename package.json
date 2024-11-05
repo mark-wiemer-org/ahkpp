@@ -245,6 +245,11 @@
                 "AHK++.general": {
                     "type": "object",
                     "properties": {
+                        "enableV2LanguageServer": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "%ahk++.config.general.enableV2LanguageServer%"
+                        },
                         "showOutput": {
                             "type": "string",
                             "enum": [
@@ -260,6 +265,7 @@
                         }
                     },
                     "default": {
+                        "enableV2LanguageServer": true,
                         "showOutput": "always"
                     },
                     "additionalProperties": {

@@ -40,6 +40,7 @@ export enum ConfigKey {
     compileBaseFileV2 = 'v2.file.compileBaseFile',
     compileIcon = 'compiler.compileIcon',
     compilerPath = 'compiler.compilerPath',
+    enableV2LanguageServer = 'general.enableV2LanguageServer',
     exclude = 'exclude',
     general = 'general',
     generalV2 = 'v2.general',

@@ -12,6 +12,7 @@
     "ahk++.command.stop": "Stop AHK Script",
     "ahk++.command.updateVersionInfo": "Update File Version Info",
     "ahk++.config.exclude": "[Glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) for excluding files and folders from completion suggestions. Applies even when files are opened.",
+    "ahk++.config.general.enableV2LanguageServer": "Enable the AHK v2 language server for advanced language support. AHK v2 scripts can still be ran and debugged regardless of this setting. Changes take effect after restart.",
     "ahk++.config.general.showOutput": "Automatically show output view when running a script. View can always be toggled with F1 > 'View: Toggle Output' (`Ctrl+Shift+U`)",
     "ahk++.config.general.showOutput.always": "Always open the output view when running a script",
     "ahk++.config.general.showOutput.never": "Never automatically show the output view",
