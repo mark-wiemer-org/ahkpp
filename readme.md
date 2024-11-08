@@ -19,7 +19,7 @@ Download from a trusted source: [Visual Studio Marketplace](https://marketplace.
 
 ## AHK v2 full support is here! 🥂
 
-AHK++ 6 now incorporates [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp), meaning full AHK v2 support:
+AHK++ 6 now incorporates [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp), providing full AHK v2 support, including:
 
 -   Running, debugging, and stopping v1 and v2 scripts without changing settings
 -   Full syntax highlighting for v2 scripts
