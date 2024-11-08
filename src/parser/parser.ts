@@ -54,8 +54,9 @@ export class Parser {
         options: BuildScriptOptions = {},
     ): Promise<Script> {
         const funcName = 'buildScript';
-        if (options.usingCache && documentCache.get(document.uri.path)) {
-            return documentCache.get(document.uri.path);
+        const cachedDocument = documentCache.get(document.uri.path);
+        if (options.usingCache && cachedDocument) {
+            return cachedDocument;
         }
 
         const maxParseLength =

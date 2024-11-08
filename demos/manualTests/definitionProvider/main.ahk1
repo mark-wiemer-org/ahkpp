@@ -1,0 +1,10 @@
+#NoEnv
+#SingleInstance, Force
+SendMode, Input
+SetBatchLines, -1
+SetWorkingDir, %A_ScriptDir%
+
+#Include ./included.ahk1
+
+;* Should be able to ctrl+click to jump to `included.ahk1` 
+MyDefProviderFunc()
