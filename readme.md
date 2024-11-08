@@ -143,7 +143,7 @@ Formatter directives instruct the formatter to behave a certain way on sections 
     ;@AHK++AlignAssignmentOff
     ```
 
-## Acknowledgements
+## 💚 Acknowledgements
 
 This extension relies heavily on open-source code. A huge thank you to all these open-source contributors who made the extension what it is today!
 
