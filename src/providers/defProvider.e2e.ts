@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { tryGetFileLink } from './defProvider';
 
-suite.only(tryGetFileLink.name, () => {
+suite(tryGetFileLink.name, () => {
     const tests: [
         name: string,
         args: Parameters<typeof tryGetFileLink>,
