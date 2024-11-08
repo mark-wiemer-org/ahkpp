@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { Parser } from '../parser/parser';
 import { resolveIncludedPath } from './defProvider.utils';
-import { Out } from 'src/common/out';
+import { Out } from '../common/out';
 import { stat } from 'fs/promises';
 
 export class DefProvider implements vscode.DefinitionProvider {
@@ -13,8 +13,12 @@ export class DefProvider implements vscode.DefinitionProvider {
     > {
         const funcName = 'provideDefinition';
         Out.debug(funcName);
-        const fileLink = await tryGetFileLink(document, position);
+
+        const docPath = document.uri.path;
+        const { text } = document.lineAt(position.line);
+        const fileLink = await tryGetFileLink(docPath, text);
         if (fileLink) {
+            Out.debug(`${funcName} returning fileLink`);
             return fileLink;
         }
         Out.debug(`${funcName} after tryGetFileLink`);
@@ -22,7 +26,7 @@ export class DefProvider implements vscode.DefinitionProvider {
         const word = document.getText(
             document.getWordRangeAtPosition(position),
         );
-        Out.debug(`${funcName} word ${word}`);
+        Out.debug(`${funcName} word: ${word}`);
 
         // get method
         if (
@@ -30,9 +34,9 @@ export class DefProvider implements vscode.DefinitionProvider {
                 document.lineAt(position.line).text,
             )
         ) {
-            Out.debug(`${funcName} calling getMethodByName for word ${word}`);
+            Out.debug(`${funcName} calling getMethodByName for word: ${word}`);
             const method = await Parser.getMethodByName(document, word);
-            Out.debug(`${funcName} method.name ${method?.name}`);
+            Out.debug(`${funcName} method.name: ${method?.name}`);
             if (method) {
                 return new vscode.Location(
                     vscode.Uri.parse(method.uriString),
@@ -108,15 +112,13 @@ export class DefProvider implements vscode.DefinitionProvider {
  ** Currently assumes the working directory is the script path and
  * does not respect previous `#include dir` directives
  */
-async function tryGetFileLink(
-    document: vscode.TextDocument,
-    position: vscode.Position,
+export async function tryGetFileLink(
+    /** @example '/c:/path/to/file.ahk' */
+    docPath: string,
+    text: string,
 ): Promise<vscode.Location | undefined> {
     const funcName = 'tryGetFileLink';
-    /** @example '/c:/path/to/file.ahk' */
-    const docPath = document.uri.path;
-    const { text } = document.lineAt(position.line);
-    Out.debug(`${funcName} text: ${text}`);
+    Out.debug(`${funcName}('${docPath}', '${text}')`);
 
     /** @example 'c:/path/to/included.ahk' */
     const resolvedPath = resolveIncludedPath(docPath, text);
@@ -124,6 +126,8 @@ async function tryGetFileLink(
     if (!resolvedPath) return undefined;
 
     const fsStat = await stat(resolvedPath);
+    const isFile = fsStat.isFile();
+    Out.debug(`${funcName} isFile: ${isFile}`);
     return fsStat.isFile()
         ? new vscode.Location(
               vscode.Uri.file(resolvedPath),
