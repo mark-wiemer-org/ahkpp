@@ -7,17 +7,19 @@
     <div>Formatting (customizable!)</div>
     <div>Quick help</div>
     <div>...and more</div>
+    <br />
+    <div><a href="docs/Troubleshooting.md">Troubleshooting</a> | <a href="https://github.com/mark-wiemer-org/ahkpp/issues/new/choose">Open a bug</a> | <a href="https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus&ssr=false#review-details">Leave a review</a></div>
 </div>
 
 ## Install
 
-AHK++ is available for: [VS Code](https://code.visualstudio.com) | [Theia IDE](https://theia-ide.org) | [VSCodium](https://vscodium.com) | ...any other IDE that supports \*.vsix extensions
+AHK++ is available for: [VS Code](https://code.visualstudio.com) | [Theia IDE](https://theia-ide.org) | [VSCodium](https://vscodium.com) | [any other IDE that supports \*.vsix extensions](https://github.com/mark-wiemer-org/ahkpp/releases)
 
 Download from a trusted source: [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus) | [Open VSX Registry](https://open-vsx.org/extension/mark-wiemer/vscode-autohotkey-plus-plus) | [GitHub releases](https://github.com/mark-wiemer-org/ahkpp/releases)
 
 ## AHK v2 full support is here! 🥂
 
-AHK++ 6 now incorporates [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp), meaning full AHK v2 support:
+AHK++ 6 incorporates [AutoHotkey v2 Language Support by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp), providing full support for AHK v2, including:
 
 -   Running, debugging, and stopping v1 and v2 scripts without changing settings
 -   Full syntax highlighting for v2 scripts
@@ -26,15 +28,11 @@ AHK++ 6 now incorporates [AutoHotkey v2 Language Support by thqby](https://marke
 -   Rich IntelliSense support with snippets, hover text, and suggestions
 -   Formatting files with many customized options
 
-For all changes, including breaking changes, see [the changelog](./changelog.md)
+For all changes, including breaking changes, see [the changelog](./changelog.md#600---2024-09-01-)
 
 As always, please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose)
 
 💚 Special thanks again to [thqby](https://github.com/thqby), as this would not have been possible without thqby's open-source [AutoHotkey v2 Language Support](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp)!
-
-### ⛓️‍💥 Breaking changes
-
-When adding all the new settings, VS Code's setting UX became overwhelming. Settings are now organized into flat objects, which should improve UX and reduce the need for breaking changes in the future! See [the changelog](./changelog.md) for details.
 
 ---
 
@@ -70,15 +68,7 @@ With AHK++, you can compile, debug, and run your scripts with keyboard shortcuts
 
 This extension provides basic debugging functions. If you need more debugging functions (such as conditional breakpoints), you can add an additional extension: [Install vscode-autohotkey-debug](https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug).
 
-## Language Features
-
-### IntelliSense
-
-Supports IntelliSense for variables and functions.
-
-### Function symbol
-
-1. You can add a comment to the function using a semicolon on the line above the function declaration
+## Language features
 
 ### Go to definition
 
@@ -127,7 +117,7 @@ Supports standard VS Code formatting with a few options.
 
 ![Code Format](image/codeFormat.jpg)
 
-#### Formatter Directives
+#### Formatter directives
 
 Formatter directives instruct the formatter to behave a certain way on sections of code.
 
@@ -153,13 +143,13 @@ Formatter directives instruct the formatter to behave a certain way on sections 
     ;@AHK++AlignAssignmentOff
     ```
 
-## Credits
+## 💚 Acknowledgements
 
-This extension relies heavily on open-source code. A huge thank you to all these open-source participants who made the extension what it is today!
+This extension relies heavily on open-source code. A huge thank you to all these open-source contributors who made the extension what it is today!
 
 -   [AutoHotkey Plus by cweijan](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-autohotkey-plus): AHK++ is a fork of AutoHotkey Plus by cweijan (Weijan Chen)
--   [Contributions to AHK++ by kyklish](https://github.com/mark-wiemer-org/ahkpp/commits/main?author=kyklish): Greatly improved formatting and snippets by both fixing bugs and adding features
 -   [AutoHotkey v2 Language Support extension by thqby](https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp): The source of the v2 grammar and other great contributions
+-   [Contributions to AHK++ by kyklish](https://github.com/mark-wiemer-org/ahkpp/commits/main?author=kyklish): Greatly improved formatting and snippets by both fixing bugs and adding features
 -   [AutoHotkey v2 definition files by GroggyOtter](https://github.com/GroggyOtter/ahkv2_definition_rewrite)
 -   [AHK version selection by Lexikos](https://github.com/Lexikos/vscode-auto-select): The core code for automatically switching AHK versions
 -   [AutoHotkey by stef-levesque](https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-autohotkey): AutoHotkey Plus is a fork of stef-levesque's original AutoHotkey extension, which provided the original grammar and snippets for AHK
@@ -167,5 +157,5 @@ This extension relies heavily on open-source code. A huge thank you to all these
 
 ## Links
 
--   [GitHub](https://github.com/mark-wiemer-org/ahkpp): View code, file bugs, and join discussions
--   [Reviews](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus&ssr=false#review-details): Help others discover AHK++ by leaving a review
+-   [GitHub repo](https://github.com/mark-wiemer-org/ahkpp): View code, file bugs, and join discussions
+-   [Reviews on VS Marketplace](https://marketplace.visualstudio.com/items?itemName=mark-wiemer.vscode-autohotkey-plus-plus&ssr=false#review-details): Help others discover AHK++ by leaving a review
