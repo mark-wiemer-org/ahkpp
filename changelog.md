@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.4.1 - unreleased 🛠️
+
+-   Fix go to definition in AHK v1 files ([#559](https://github.com/mark-wiemer-org/ahkpp/issues/559))
+
 ## 6.4.0 - 2024-11-02 🗳️
 
 ### New features
