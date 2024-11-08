@@ -8,15 +8,21 @@ export class DefProvider implements vscode.DefinitionProvider {
     public async provideDefinition(
         document: vscode.TextDocument,
         position: vscode.Position,
-    ): Promise<vscode.Location | vscode.Location[] | vscode.LocationLink[]> {
+    ): Promise<
+        vscode.Location | vscode.Location[] | vscode.LocationLink[] | null
+    > {
+        const funcName = 'provideDefinition';
+        Out.debug(funcName);
         const fileLink = await tryGetFileLink(document, position);
         if (fileLink) {
             return fileLink;
         }
+        Out.debug(`${funcName} after tryGetFileLink`);
 
         const word = document.getText(
             document.getWordRangeAtPosition(position),
         );
+        Out.debug(`${funcName} word ${word}`);
 
         // get method
         if (
@@ -24,7 +30,9 @@ export class DefProvider implements vscode.DefinitionProvider {
                 document.lineAt(position.line).text,
             )
         ) {
+            Out.debug(`${funcName} calling getMethodByName for word ${word}`);
             const method = await Parser.getMethodByName(document, word);
+            Out.debug(`${funcName} method.name ${method?.name}`);
             if (method) {
                 return new vscode.Location(
                     vscode.Uri.parse(method.uriString),
@@ -103,13 +111,18 @@ export class DefProvider implements vscode.DefinitionProvider {
 async function tryGetFileLink(
     document: vscode.TextDocument,
     position: vscode.Position,
-): Promise<vscode.Location> | undefined {
+): Promise<vscode.Location | undefined> {
+    const funcName = 'tryGetFileLink';
     /** @example '/c:/path/to/file.ahk' */
     const docPath = document.uri.path;
     const { text } = document.lineAt(position.line);
+    Out.debug(`${funcName} text: ${text}`);
+
     /** @example 'c:/path/to/included.ahk' */
     const resolvedPath = resolveIncludedPath(docPath, text);
-    Out.debug(`resolvedPath: ${resolvedPath}`);
+    Out.debug(`${funcName} resolvedPath: ${resolvedPath}`);
+    if (!resolvedPath) return undefined;
+
     const fsStat = await stat(resolvedPath);
     return fsStat.isFile()
         ? new vscode.Location(
