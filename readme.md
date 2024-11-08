@@ -28,7 +28,7 @@ AHK++ 6 incorporates [AutoHotkey v2 Language Support by thqby](https://marketpla
 -   Rich IntelliSense support with snippets, hover text, and suggestions
 -   Formatting files with many customized options
 
-For all changes, including breaking changes, see [the changelog](./changelog.md)
+For all changes, including breaking changes, see [the changelog](./changelog.md#600---2024-09-01-)
 
 As always, please [🐛 report any issues](https://github.com/mark-wiemer-org/ahkpp/issues/new/choose)
 
