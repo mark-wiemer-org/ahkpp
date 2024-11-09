@@ -1,7 +1,7 @@
 {
     "name": "vscode-autohotkey-plus-plus",
     "displayName": "AHK++ (AutoHotkey Plus Plus)",
-    "version": "6.4.0",
+    "version": "6.4.1",
     "description": "AutoHotkey v1 and v2 language support for Visual Studio Code: IntelliSense, debugging, formatting, and more!",
     "categories": [
         "Debuggers",

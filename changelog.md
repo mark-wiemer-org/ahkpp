@@ -1,6 +1,6 @@
 # Changelog
 
-## 6.4.1 - unreleased 🛠️
+## 6.4.1 - 2024-11-09 🛠️
 
 ### Known issues
 
