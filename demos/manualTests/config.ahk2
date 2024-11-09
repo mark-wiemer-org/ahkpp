@@ -25,6 +25,17 @@ y := 1
 ; todo Class Non Dynamic Member Check is untested for now
 ; todo Params Check is untested for now
 
+;** V2: File (AHK++.v2.file)
+;* interpreterPath
+; Setting to an invalid path and restarting the extension host should:
+; - not show an error message on startup
+; - add msg to output channel: Ctrl+Shift+U -> AHK++ (v2) -> "Couldn't resolve AHK v2 interpreter"
+; - show "Select AHK v2 Interpreter" in status bar
+; - show error message when trying to run a script
+; - log error message in AHK++ (v1) when trying to debug a script
+; - update when user confirms quick pick via error message
+; - successfully run a script when user confirms quick pick
+
 ;** V2: Formatter tested in other files :)
 
 ;** V2: General (AHK++.v2.general)
