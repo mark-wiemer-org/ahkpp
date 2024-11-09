@@ -2,8 +2,12 @@
 
 ## 6.4.1 - unreleased 🛠️
 
--   Fix go to definition in AHK v1 files ([#559](https://github.com/mark-wiemer-org/ahkpp/issues/559))
 -   Add [troubleshooting guide](docs/Troubleshooting.md)
+-   Fix go to definition in AHK v1 files ([#559](https://github.com/mark-wiemer-org/ahkpp/issues/559))
+-   Remove unnecessary error message "Couldn't resolve AHK v2 interpreter" ([#493](https://github.com/mark-wiemer-org/ahkpp/issues/493))
+    -   This has been moved to a console log visible in the AHK++ (v2) output channel
+    -   A similar error message will still appear when attempting to debug with an unrecognized interpreter path
+    -   See the new [troubleshooting guide](docs/Troubleshooting.md) for details
 
 ## 6.4.0 - 2024-11-02 🗳️
 
