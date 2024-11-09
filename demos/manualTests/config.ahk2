@@ -33,7 +33,7 @@ y := 1
 ; - show "Select AHK v2 Interpreter" in status bar
 ; - show error message when trying to run a script
 ; - log error message in AHK++ (v1) when trying to debug a script
-; - update when user confirms quick pick via error message
+; - persist settings when user confirms quick pick via error message
 ; - successfully run a script when user confirms quick pick
 
 ;** V2: Formatter tested in other files :)
