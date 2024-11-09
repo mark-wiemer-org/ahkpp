@@ -101,6 +101,7 @@ export class DebugDispatcher extends EventEmitter {
         const programName = getFileNameOnly(args.program);
 
         if (!existsSync(runtime)) {
+            // Exact text is referenced in docs, update docs when updating this value
             Out.log(`AutoHotkey execute bin not found: ${runtime}`);
             this.end();
             return;
