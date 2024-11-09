@@ -14,4 +14,4 @@ Once installed, you should see an info message prompting you to restart extensio
 
 Finally, you can manage which version of an extension you have installed from the extensions view:
 
-![extensions view showing restart extensions, update, and other buttons](manageExtensionVersion.png)
+![extensions view showing restart extensions, update, and other buttons](../image/manageExtensionVersion.png)
