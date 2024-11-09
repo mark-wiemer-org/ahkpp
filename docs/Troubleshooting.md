@@ -1,6 +1,20 @@
-# Troubleshooting
+# Troubleshooting guide
 
 If AHK++ isn't behaving as you expect, here are some things you can try.
+
+## AHK v2: Validate your interpreter
+
+For AHK v2, the language server may not behave correctly if it fails to identify a valid path to an interpreter like `AutoHotkey.exe`. The status bar at the bottom left of your IDE should show the current interpreter or an option to "Select AHK v2 Interpreter".
+
+Currently, AHK++ does not support the Windows Store edition of AHK v2, but there are plans to support it by the end of 2024, ref [#496](https://github.com/mark-wiemer-org/ahkpp/issues/496).
+
+Interpreter found:
+
+![AHK v2 interpreter version and path](../image/ahkV2InterpreterAndPath.png)
+
+Interpreter not found:
+
+![Select AHK v2 Interpreter in status bar](../image/selectAHKV2Interpreter.png)
 
 ## Restart extensions
 

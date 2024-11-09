@@ -8,6 +8,8 @@ labels: bug
 assignees: mark-wiemer
 ---
 
+For troubleshooting assistance, refer to the [troubleshooting guide](../../docs/Troubleshooting.md)
+
 ## Description
 
 A clear and concise description of what the bug is.
