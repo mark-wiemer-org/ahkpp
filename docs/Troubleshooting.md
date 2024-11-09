@@ -1,4 +1,4 @@
-# Troubleshooting
+# Troubleshooting guide
 
 If AHK++ isn't behaving as you expect, here are some things you can try.
 
