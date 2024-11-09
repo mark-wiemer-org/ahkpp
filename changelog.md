@@ -8,8 +8,8 @@
     -   This has been moved to a console log visible in the AHK++ (v2) output channel
     -   A similar error message will still appear when attempting to debug with an unrecognized interpreter path
     -   See the new [troubleshooting guide](docs/Troubleshooting.md) for details
--   Fix quick pick not working for "... does not exist" error message on run AHK v2 script
-    > Note: this fix copies your config into your workspace settings. If you don't like this, please manually enter the path via the settings, and don't use the quick pick. Learn more at the linked PR
+-   Fix quick pick for "... does not exist" error message on run AHK v2 script ([PR #569](https://github.com/mark-wiemer-org/ahkpp/issues/569))
+    > Note: this fix copies your config into your workspace settings. If you don't like this, please manually enter the path via the settings, and don't use the quick pick. Learn more at [PR #569](https://github.com/mark-wiemer-org/ahkpp/issues/569).
 
 ## 6.4.0 - 2024-11-02 🗳️
 
