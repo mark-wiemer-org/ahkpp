@@ -6,6 +6,7 @@ ahk2
 .@vscode/test-electron/
 .vscode-test/
 dist
+e2e
 node_modules
 out
 
@@ -16,4 +17,3 @@ language/*.tmLanguage.json
 *.log
 *.txt
 *.vsix
-

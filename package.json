@@ -1163,7 +1163,7 @@
         "@types/mocha": "^10.0.8",
         "@types/node": "^20.16.0",
         "@types/sinon": "^17.0.3",
-        "@types/vscode": "1.93.0",
+        "@types/vscode": "1.68.0",
         "@types/xml2js": "^0.4.11",
         "@vscode/test-cli": "^0.0.10",
         "@vscode/test-electron": "^2.3.10",
@@ -1183,7 +1183,7 @@
         "vscode-tmgrammar-test": "^0.1.1"
     },
     "engines": {
-        "vscode": "^1.93.0"
+        "vscode": "^1.68.0"
     },
     "icon": "icon.png",
     "galleryBanner": {
