@@ -4,24 +4,16 @@
 
 ;** AHK++.exclude tested via automated tests :)
 ; set AHK++.v2.general > librarySuggestions to All
-; set exclude to "excluded.ahk"
+; set AHK++.exclude to "excluded.ahk"
 ; see whether MyExcludedFunc is suggested (Ctrl+Space)
 MyExclu
 
 ;** AHK++.general
-;* showOutput
-; always: shows on start
-; never: never shows
-; works only for running scripts
-; running: output is in the Output view
-
-; always
-; never
-y := 1
+;* showOutput (tested via e2e tests)
 
 ; todo Completion Commit Characters (AHK++.v2.completionCommitCharacters) is untested for now
 
-;** V2: Diagnostics (AHK++.v2.diagnostics)
+; todo ** V2: Diagnostics (AHK++.v2.diagnostics)
 ; todo Class Non Dynamic Member Check is untested for now
 ; todo Params Check is untested for now
 
