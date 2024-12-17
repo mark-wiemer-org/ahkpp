@@ -8,14 +8,14 @@
 
 ;* Export AHK Symbols should give ~45 lines for this
 ; And open in an unsaved new editor group
-MyMsgBox(text) {
+MyCommandMsgBox(text) {
     MsgBox(text)
 }
 
 ;* Stop AHK Script should work after starting via Run AHK Script
 ; Auto-closes MsgBox windows as well :)
-MyMsgBox("Hello world!")
-MyMsgBox("Hello again!")
+MyCommandMsgBox("Hello world!")
+MyCommandMsgBox("Hello again!")
 
 ;* Add Doc Comment should add and then go to doc comment
 ; todo Known issue with two args will be reported later
